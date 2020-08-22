@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Solution summary for Docker dropping connections after 15 min</title>
+    <link>https://forum.mesg.com/t/solution-summary-for-docker-dropping-connections-after-15-min/246</link>
+    <description>Hey guys,
+
+I would like to summarize the problem we had with dropped TCP connection and the solution we implemented for other developers with the same problem.
+
+## Problem
+Most system, drop idle TCP connections after 2h, but Docker (maybe Swarm) actually [drops them after only 15 min](https://success.docker.com/article/ipvs-connection-timeout-issue).
+Services or Clients that open connection to Core without frequent activity get their connections dropped after 15 min.
+The first issue we had was to know that the connection actually dropped. The server was getting an error around 2h after the drop but clients were never getting any errors except when clients wanted to use the connection. The error returned on the server was also not really explicit: `transport is closing`.
+
+## Solution
+
+We then find out about keep alive gRPC options. The full config is available [here](https://github.com/grpc/grpc-go/blob/master/keepalive/keepalive.go).
+
+```
+type ServerParameters struct {
+	// After a duration of this time if the server doesn&#39;t see any activity it
+	// pings the client to see if the transport is still alive.
+	Time time.Duration // The current default value is 2 hours.
+```
+
+As you see, the default value for `ServerParameters.Time` is 2h, way higher than the Docker&#39;s 15 min.
+
+Changing `ServerParameters.Time` to 1 min solves the problem by making the server pinging clients every minute and thus preventing Docker to drop the connection.
+
+In short: `ServerParameters.Time &lt; Docker idle connection config (15 min)`
+
+## Going further
+
+We also wanted Clients to continuously ping the server to get an error when the connection dropped instead of waiting for an actual use of the connection to get the error.
+
+The keep alive options that gRPC provides also have a configuration for Client:
+
+```
+type ClientParameters struct {
+	// After a duration of this time if the client doesn&#39;t see any activity it
+	// pings the server to see if the transport is still alive.
+	Time time.Duration // The current default value is infinity.
+```
+
+By default  `ClientParameters.Time` is set to never ping the server, we started by setting it to also 1 min (same as server).
+
+Clients were actively pinging the Server every minute but also the Server was pinging the Clients every minute (one ping in each direction every minute). This is not a normal behavior. Only one should ping and the other respond, not both all the time.
+Setting the config to 2 min resolves this problem. The server was pinging every minute, the client only reply to the pings. If the connection drop, then Clients ping the Server after 2 min and get an error.
+
+In short: `ClientParameters.Time &gt; ServerParameters.Time`.
+
+---
+
+More problematic, after around 8 min, Clients were getting again the `transport is closing` error! After running the Clients with `GODEBUG=http2debug=2`, we saw that the actual HTTP2 error was `GOAWAY - ENHANCE_YOUR_CALM - too_many_pings`.
+
+This error was caused by `EnforcementPolicy.MinTime` gRPC configuration set by default to 5min:
+
+```
+# EnforcementPolicy is used to set keepalive enforcement policy on the
+# server-side. Server will close connection with a client that violates this
+# policy.
+type EnforcementPolicy struct {
+	// MinTime is the minimum amount of time a client should wait before sending
+	// a keepalive ping.
+	MinTime time.Duration // The current default value is 5 minutes.
+```
+
+Clients should not ping the Server more often that this option. Setting `ClientParameters.Time` to same value as `EnforcementPolicy.MinTime` (5 min) solves the issue.
+
+In short: `ClientParameters.Time &gt;= EnforcementPolicy.MinTime`
+
+## Summary
+
+```
+ServerParameters.Time &lt; Docker idle connection config (15 min)
+ClientParameters.Time &gt; ServerParameters.Time
+ClientParameters.Time &gt;= EnforcementPolicy.MinTime
+```
+
+Here is the properties and values used:
+
+| Property | Default | Value used for solution
+|---|---|---|---|
+| `ServerParameters.Time` | 2h | 1 min
+| `EnforcementPolicy.MinTime` | 5 min | 5 min
+| `ClientParameters.Time` | Infinity | 5 min</description>
+    
+    <lastBuildDate>Sat, 18 May 2019 04:47:00 +0000</lastBuildDate>
+    <category>Development</category>
+    <atom:link href="https://forum.mesg.com/t/solution-summary-for-docker-dropping-connections-after-15-min/246.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Solution summary for Docker dropping connections after 15 min</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>Just a reply to mark this as solved</p>
+          <p><a href="https://forum.mesg.com/t/solution-summary-for-docker-dropping-connections-after-15-min/246/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/solution-summary-for-docker-dropping-connections-after-15-min/246/2</link>
+        <pubDate>Sat, 18 May 2019 04:47:00 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-246-2</guid>
+        <source url="https://forum.mesg.com/t/solution-summary-for-docker-dropping-connections-after-15-min/246.rss">Solution summary for Docker dropping connections after 15 min</source>
+      </item>
+      <item>
+        <title>Solution summary for Docker dropping connections after 15 min</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Hey guys,</p>
+<p>I would like to summarize the problem we had with dropped TCP connection and the solution we implemented for other developers with the same problem.</p>
+<h2>Problem</h2>
+<p>Most system, drop idle TCP connections after 2h, but Docker (maybe Swarm) actually <a href="https://success.docker.com/article/ipvs-connection-timeout-issue" rel="nofollow noopener">drops them after only 15 min</a>.<br>
+Services or Clients that open connection to Core without frequent activity get their connections dropped after 15 min.<br>
+The first issue we had was to know that the connection actually dropped. The server was getting an error around 2h after the drop but clients were never getting any errors except when clients wanted to use the connection. The error returned on the server was also not really explicit: <code>transport is closing</code>.</p>
+<h2>Solution</h2>
+<p>We then find out about keep alive gRPC options. The full config is available <a href="https://github.com/grpc/grpc-go/blob/master/keepalive/keepalive.go" rel="nofollow noopener">here</a>.</p>
+<pre><code class="lang-auto">type ServerParameters struct {
+	// After a duration of this time if the server doesn't see any activity it
+	// pings the client to see if the transport is still alive.
+	Time time.Duration // The current default value is 2 hours.
+</code></pre>
+<p>As you see, the default value for <code>ServerParameters.Time</code> is 2h, way higher than the Docker’s 15 min.</p>
+<p>Changing <code>ServerParameters.Time</code> to 1 min solves the problem by making the server pinging clients every minute and thus preventing Docker to drop the connection.</p>
+<p>In short: <code>ServerParameters.Time &lt; Docker idle connection config (15 min)</code></p>
+<h2>Going further</h2>
+<p>We also wanted Clients to continuously ping the server to get an error when the connection dropped instead of waiting for an actual use of the connection to get the error.</p>
+<p>The keep alive options that gRPC provides also have a configuration for Client:</p>
+<pre><code class="lang-auto">type ClientParameters struct {
+	// After a duration of this time if the client doesn't see any activity it
+	// pings the server to see if the transport is still alive.
+	Time time.Duration // The current default value is infinity.
+</code></pre>
+<p>By default  <code>ClientParameters.Time</code> is set to never ping the server, we started by setting it to also 1 min (same as server).</p>
+<p>Clients were actively pinging the Server every minute but also the Server was pinging the Clients every minute (one ping in each direction every minute). This is not a normal behavior. Only one should ping and the other respond, not both all the time.<br>
+Setting the config to 2 min resolves this problem. The server was pinging every minute, the client only reply to the pings. If the connection drop, then Clients ping the Server after 2 min and get an error.</p>
+<p>In short: <code>ClientParameters.Time &gt; ServerParameters.Time</code>.</p>
+<hr>
+<p>More problematic, after around 8 min, Clients were getting again the <code>transport is closing</code> error! After running the Clients with <code>GODEBUG=http2debug=2</code>, we saw that the actual HTTP2 error was <code>GOAWAY - ENHANCE_YOUR_CALM - too_many_pings</code>.</p>
+<p>This error was caused by <code>EnforcementPolicy.MinTime</code> gRPC configuration set by default to 5min:</p>
+<pre><code class="lang-auto"># EnforcementPolicy is used to set keepalive enforcement policy on the
+# server-side. Server will close connection with a client that violates this
+# policy.
+type EnforcementPolicy struct {
+	// MinTime is the minimum amount of time a client should wait before sending
+	// a keepalive ping.
+	MinTime time.Duration // The current default value is 5 minutes.
+</code></pre>
+<p>Clients should not ping the Server more often that this option. Setting <code>ClientParameters.Time</code> to same value as <code>EnforcementPolicy.MinTime</code> (5 min) solves the issue.</p>
+<p>In short: <code>ClientParameters.Time &gt;= EnforcementPolicy.MinTime</code></p>
+<h2>Summary</h2>
+<pre><code class="lang-auto">ServerParameters.Time &lt; Docker idle connection config (15 min)
+ClientParameters.Time &gt; ServerParameters.Time
+ClientParameters.Time &gt;= EnforcementPolicy.MinTime
+</code></pre>
+<p>Here is the properties and values used:</p>
+<div class="md-table">
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Default</th>
+<th>Value used for solution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ServerParameters.Time</code></td>
+<td>2h</td>
+<td>1 min</td>
+</tr>
+<tr>
+<td><code>EnforcementPolicy.MinTime</code></td>
+<td>5 min</td>
+<td>5 min</td>
+</tr>
+<tr>
+<td><code>ClientParameters.Time</code></td>
+<td>Infinity</td>
+<td>5 min</td>
+</tr>
+</tbody>
+</table>
+</div>
+          <p><a href="https://forum.mesg.com/t/solution-summary-for-docker-dropping-connections-after-15-min/246/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/solution-summary-for-docker-dropping-connections-after-15-min/246/1</link>
+        <pubDate>Tue, 05 Feb 2019 04:46:02 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-246-1</guid>
+        <source url="https://forum.mesg.com/t/solution-summary-for-docker-dropping-connections-after-15-min/246.rss">Solution summary for Docker dropping connections after 15 min</source>
+      </item>
+  </channel>
+</rss>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Milestone v0.7</title>
+    <link>https://forum.mesg.com/t/milestone-v0-7/190</link>
+    <description>**Tag :** [v0.7](https://forum.mesg.com/tags/v0-7)
+**Due date:** 15 January 2019
+
+# Main features
+
+- [ ] @krhubert https://forum.mesg.com/t/support-deployments-from-tarball-urls/59 
+- [\*] @krhubert  https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126
+- [ ] https://forum.mesg.com/t/go-libraries/191
+
+# Bugs
+
+- [ ] @krhubert [interface/grpc/core: ListenTask gets canceled](https://github.com/mesg-foundation/core/issues/549)
+- [\*] @krhubert [Fix race condition in submit result #671](https://github.com/mesg-foundation/core/issues/671)
+- [ ] @krhubert Implement same fix of ListenTask from ListenEvent and ListenResult in CLI commands.</description>
+    
+    <lastBuildDate>Wed, 30 Jan 2019 08:00:05 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/milestone-v0-7/190.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Milestone v0.7</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Released</p>
+<aside class="onebox githubpullrequest">
+  <header class="source">
+      <a href="https://github.com/mesg-foundation/core/pull/711" target="_blank" rel="nofollow noopener">github.com/mesg-foundation/core</a>
+  </header>
+  <article class="onebox-body">
+      <a href="https://github.com/NicolasMahe" target="_blank" rel="nofollow noopener">
+    <img alt="NicolasMahe" src="https://forum.mesg.com/uploads/default/original/1X/26944398294eb78d5fcd9c0ac79f47a8ba160661.jpeg" class="thumbnail onebox-avatar" width="90" height="90">
+  </a>
+
+<h4>
+  <a href="https://github.com/mesg-foundation/core/pull/711" target="_blank" rel="nofollow noopener">Release v0.7</a>
+</h4>
+
+<div class="date">
+  by <a href="https://github.com/NicolasMahe" target="_blank" rel="nofollow noopener">NicolasMahe</a>
+  on <a href="https://github.com/mesg-foundation/core/pull/711" target="_blank" rel="nofollow noopener">10:06AM - 16 Jan 19 UTC</a>
+</div>
+
+<div class="github-commit-stats">
+  <strong>197 commits</strong>
+  changed <strong>2424 files</strong>
+  with <strong>2183 additions</strong>
+  and <strong>859676 deletions</strong>.
+</div>
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+
+          <p><a href="https://forum.mesg.com/t/milestone-v0-7/190/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/milestone-v0-7/190/2</link>
+        <pubDate>Wed, 30 Jan 2019 08:00:05 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-190-2</guid>
+        <source url="https://forum.mesg.com/t/milestone-v0-7/190.rss">Milestone v0.7</source>
+      </item>
+      <item>
+        <title>Milestone v0.7</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p><strong>Tag :</strong> <a href="https://forum.mesg.com/tags/v0-7">v0.7</a><br>
+<strong>Due date:</strong> 15 January 2019</p>
+<h1>Main features</h1>
+<ul>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> <a class="mention" href="/u/krhubert">@krhubert</a> <a href="https://forum.mesg.com/t/support-deployments-from-tarball-urls/59" class="inline-onebox">Support deployments from tarball urls</a>
+</li>
+<li>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> <a class="mention" href="/u/krhubert">@krhubert</a>  <a href="https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126" class="inline-onebox">Add more detailed data in the mesg.yml</a>
+</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> <a href="https://forum.mesg.com/t/go-libraries/191" class="inline-onebox">Go libraries</a>
+</li>
+</ul>
+<h1>Bugs</h1>
+<ul>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> <a class="mention" href="/u/krhubert">@krhubert</a> <a href="https://github.com/mesg-foundation/core/issues/549" rel="nofollow noopener">interface/grpc/core: ListenTask gets canceled</a>
+</li>
+<li>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> <a class="mention" href="/u/krhubert">@krhubert</a> <a href="https://github.com/mesg-foundation/core/issues/671" rel="nofollow noopener">Fix race condition in submit result #671</a>
+</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> <a class="mention" href="/u/krhubert">@krhubert</a> Implement same fix of ListenTask from ListenEvent and ListenResult in CLI commands.</li>
+</ul>
+          <p><a href="https://forum.mesg.com/t/milestone-v0-7/190/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/milestone-v0-7/190/1</link>
+        <pubDate>Fri, 11 Jan 2019 05:17:24 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-190-1</guid>
+        <source url="https://forum.mesg.com/t/milestone-v0-7/190.rss">Milestone v0.7</source>
+      </item>
+  </channel>
+</rss>

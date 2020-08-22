@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Introduction to MESG – Chapter 0/1</title>
+    <link>https://forum.mesg.com/t/introduction-to-mesg-chapter-0-1/114</link>
+    <description>*If you’re already familiar with MESG, you can jump into the Building a Blog tutorial (very soon), right away!*
+
+![](/uploads/default/original/1X/1afa8424e90e097150c3e399ce8bada2a586a3f2.jpeg)
+
+&gt; With MESG, you can build applications that easily connect any technologies together, including any blockchains or Web APIs. Imagine the possibilities of any technology connecting to anything else with data through a decentralized network.
+There has never been a solution quite like this before.
+
+### Introduction to MESG
+
+Since the early days of computers, we never had a fixed definition about how services should communicate with each other through the network.
+
+This negative adoption from the past even limits us with today&#39;s microservices methodology. Microservices bring a great value to software ecosystem by proposing how services should be kept small and be dedicated. But it is still lacking on the reusability side because, it doesn&#39;t bring a standard for how services should communicate with each other through the network.
+
+So far, we haven&#39;t had a chance to create reusable services that doesn&#39;t necessarily require some modifications on their network layers. A service needs to be refactored to be compatible with just an another communication protocol adopted in the product where it&#39;s being used.
+
+Assume that you already have some functional services that you’ve created before for your previous products. Let’s say that some of these services expose their functionality to network via *http endpoints* and some others maybe use *gRPC* , *JSON-RPC* , *GraphQL* or even a custom communication protocol over *TCP* .
+
+To be able to use these services together in a new product, you must create an environment to support their **varying** network communication protocols or refactor them to force a single standard and build a messaging protocol on top of that.
+
+Meanwhile, you have to figure out how to solve service discovery, load balancing and security problems to run and scale your services seamlessly.
+
+*Instead of just focusing on the features that actually matters for your product, dealing with things that aren’t related is a big waste of development hours!*
+
+![](/uploads/default/original/1X/653a655fc40f318e979700f4881099eac11fa31d.jpeg)
+
+*Quoted from Morpheus*
+
+So, why not to define a standardized communication protocol where it opens up the opportunity to create reusable services?
+
+MESG solves this problem by creating an emerging standard for services and introduces **workflows** for defining how data should flow between the services.
+
+Alongside creating a well-defined network communication protocol for services, MESG even lets your services to run in a decentralized way and manages network, service discovery, load balancing and security natively with the power of container technology.
+
+MESG’s [*Core*](https://github.com/mesg-foundation/core) is responsible for running services &amp;amp; workflows in a decentralized way. It runs as a daemon and it can be deployed to any peer in the network for enabling decentralization. Even Core itself consists of a bunch system **services** which enables the possibility of its own decentralization in the network.
+
+_Reusable services aren’t a myth anymore thanks to MESG! You can check out the existing ones on service [market](https://github.com/mesg-foundation/awesome), even create yours for other’s use and earn some MESG tokens on the way! Shh… We’ll talk about blockchains later…_
+
+![image|372x338](upload://f46UEp7aXaHqSSjCGkd5iBQxmtZ.jpeg) 
+
+*An amazed Doge*
+
+*If we had had this standardization and service market from the beginning of the internet, we wouldn’t have needed to create services from scratch. Reusing services that easy surely could’ve moved humanity forward for decades by preventing all development hours to be wasted!*
+
+*Check out* [*mesg.com*](http://mesg.com) *and the* [*documentation*](https://docs.mesg.com/) *on the website for getting to know more about MESG!*
+
+### Services
+
+Services are small, focused programs that implements target functionalities. To expose these functionalities to the network for other’s use, their capabilities needed to be defined in a standard format.
+
+MESG introduces [ *mesg.yml* ](https://docs.mesg.com/guide/service/service-file.html) to exactly meet this need. In this configuration file, you can define the schema of tasks that your service is capable of executing and the type of events that your service may emit. You can also specify dependencies, data volumes, scalability properties, network configurations and other primitives that describe how your service should run.
+
+MESG adopts event-orientation from its roots. Services’ tasks and events are specially designed with asynchrony first in mind. This fits well with the asynchronous world of services. It lets you to easily create reactive applications that connect any services by using workflows.
+
+Think of tasks as a superset set of RPCs, but MESG is event-oriented, which means a task&#39;s outputs emit asynchronously once its execution is finished.
+
+Events are a new concept that MESG introduces to the service world. They&#39;re very handy to broadcast bits of data that can be useful for other services in the network depending on your application logic. Events can be emitted inside services as part of their business logic and handled by workflows. Task executions, on the other hand, are performed by workflows on services and their outputs again, are handled by workflows.
+As you see, services can be only connected through workflows and they&#39;re not aware of each other.
+
+_Let&#39;s examine the _webhook_ and _discord_ services to get some ideas:_
+
+In the *webhook* service’s *mesg.yml* file, we have the [ *request* ](https://github.com/mesg-foundation/service-webhook/blob/master/mesg.yml#L3-L12) *event* definition with *data* and *headers* payload.
+The *request* event is emitted on every post call to the */webhook* endpoint while the headers and body of each http request is used as its data. You can check the corresponding http [handler](https://github.com/mesg-foundation/service-webhook/blob/a807ebb/index.js#L21-L27) to see it in code. 
+
+In the *discord* service’s *mesg.yml* file, we have the [ *send* ](https://github.com/mesg-foundation/service-discord-invitation/blob/b043c95/mesg.yml#L3-L24) *task* that takes an *email* and a *sendgridAPIKey* as its input data. It has two different outputs as *success* and *error* . If sending invitation is successful it’ll emit the *success* output with *code* and *message* output data otherwise *error* output with an error *message* . You can see how easy its [implementation](https://github.com/mesg-foundation/service-discord-invitation/blob/02f9894/index.js#L4-L9) is in code.
+
+Check the *discord-invites* workflow shared in the *Workflow* section below to see these services in action.
+
+### Workflows
+
+One of the visions of MESG is to allow people, even non-programmers to create applications without writing a single line of code. This is possible with workflows by connecting pre-created services in the market. It’s also possible to create workflows easily via a user interface where you connect data dots from various services to describe the flow in between them.
+
+Workflows can be considered as configurations that describe how data should flow between services.
+
+Basically, workflows are used to define conditions for executing some tasks. These conditions could depend on different task outputs and events from various services. Services are metaphorically connected with each other through workflows. 
+
+You can define patterns to match with task outputs and events from various services that your application needs, manipulate their payload and meta-data and execute a chain of tasks from multiple services in the network by using this data as task inputs.
+
+Workflows supports advanced data manipulation, filtering and parallel/serial task executions.
+
+![image|400x267](upload://gjDuU1VzEphoAJCvQUwBFFZ9nim.jpeg) 
+*Workflows are like circuit lines that transfer data between circuit components but it&#39;s for services*
+
+_Let’s see how a basic workflow looks like over **discord-invites** workflow:_
+https://gist.github.com/ilgooz/a0e1e5802bf004f342fe9f25d26eb284
+
+This workflow shares discord invites to people by sending emails. We use *webhook* and *discord* services in this workflow. You can read about them in Services section above to know exactly how they work.
+
+Let’s see the *when* section of sample workflow. Every declaration about listening results, events and executing tasks should be made under *when* . On behalf of that, there are some other sections in workflow definition format to declare a name to workflow *(name)* , its description *(description)* , map of service names &amp;amp; their ID *(services)* and some constants *(configuration)* . 
+
+For this *discord-invites* workflow, there is a definition to listen for [ *request* ](https://github.com/mesg-foundation/service-webhook/blob/641eb07/mesg.yml#L3-L12) *events* on the *webhook* service. So, when this event is received, we access its data with special *$event.data* variable and access to pre-defined configs in workflow with *$configs* variable to specify task inputs in the *map* section. Each field in map corresponds to a field of task’s inputs. In this case we’re mapping data to set email address and SendGrid API key as input data of the [ *send* ](https://github.com/mesg-foundation/service-discord-invitation/blob/b043c95/mesg.yml#L3-L24) *task* on *discord* service.
+
+In conclusion, when a *request* event is received, *send* task will be executed with the dynamically-received email address from the *request* event’s data and statically defined SendGrid API key config. This flow will be circulated on every *request* event until workflow is deleted from Core.
+
+You can also execute multiple tasks in series or parallel by adding more named executions under the [ *execute* ](https://gist.github.com/ilgooz/a0e1e5802bf004f342fe9f25d26eb284#file-discord-invites-yml-L19) *section* . It’s even possible to make executions which depend on each other by using the special *dependsOn (very soon) section* on each execution. Accessing the props of root event/result and inheriting task outputs from parent executions are also supported.
+
+*Check out the* [ *Quick Start* ](https://docs.mesg.com/guide/start-here/quick-start-guide.html) *guide to run Core on your machine, deploy &amp;amp; start webhook and discord services and run discord-invites workflow just in seconds!*
+
+*Continue on Building a Blog tutorial (very soon) to see MESG in the real world!*
+
+*Please be aware that some features talked in this blog post may not be fully implemented yet. Stay tuned and follow the latest development via the* [ *forum* ](https://forum.mesg.com/) *.*</description>
+    
+    <lastBuildDate>Fri, 16 Nov 2018 08:49:29 +0000</lastBuildDate>
+    <category>General Discussion</category>
+    <atom:link href="https://forum.mesg.com/t/introduction-to-mesg-chapter-0-1/114.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Introduction to MESG – Chapter 0/1</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>This article has been officialy published on Medium:<br>
+<aside class="onebox whitelistedgeneric">
+  <header class="source">
+      <img src="https://forum.mesg.com/uploads/default/original/1X/8c7390150cd0078e967a18c7663581b9b334d239.png" class="site-icon" width="" height="">
+      <a href="https://medium.com/@ilgooz/mesg-in-the-real-world-building-a-blog-chapter-0-1-dfb51960be33" target="_blank" title="07:45AM - 16 November 2018" rel="nofollow noopener">Medium – 16 Nov 18</a>
+  </header>
+  <article class="onebox-body">
+    <img src="https://forum.mesg.com/uploads/default/original/1X/55035730023ab504f443dc02feb566ecf49e494f.jpeg" class="thumbnail" width="" height="">
+
+<h3><a href="https://medium.com/@ilgooz/mesg-in-the-real-world-building-a-blog-chapter-0-1-dfb51960be33" target="_blank" rel="nofollow noopener">Introduction to MESG – İlker Göktuğ Öztürk – Medium</a></h3>
+
+<p>If you’re already familiar with MESG, you can jump into the Building a Blog tutorial (very soon), right away!</p>
+
+  <p><span class="label1">Reading time: 7 min read</span>
+    </p>
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+</p>
+<p>Good job <a class="mention" href="/u/ilgooz">@ilgooz</a></p>
+          <p><a href="https://forum.mesg.com/t/introduction-to-mesg-chapter-0-1/114/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/introduction-to-mesg-chapter-0-1/114/4</link>
+        <pubDate>Fri, 16 Nov 2018 08:49:29 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-114-4</guid>
+        <source url="https://forum.mesg.com/t/introduction-to-mesg-chapter-0-1/114.rss">Introduction to MESG – Chapter 0/1</source>
+      </item>
+      <item>
+        <title>Introduction to MESG – Chapter 0/1</title>
+        <dc:creator><![CDATA[tom]]></dc:creator>
+        <description><![CDATA[
+            <p>This is a detailed yet concise introduction to MESG <a class="mention" href="/u/ilgooz">@ilgooz</a> !</p>
+          <p><a href="https://forum.mesg.com/t/introduction-to-mesg-chapter-0-1/114/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/introduction-to-mesg-chapter-0-1/114/3</link>
+        <pubDate>Tue, 13 Nov 2018 17:38:58 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-114-3</guid>
+        <source url="https://forum.mesg.com/t/introduction-to-mesg-chapter-0-1/114.rss">Introduction to MESG – Chapter 0/1</source>
+      </item>
+      <item>
+        <title>Introduction to MESG – Chapter 0/1</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Really good article <a class="mention" href="/u/ilgooz">@ilgooz</a> <img src="https://forum.mesg.com/images/emoji/twitter/+1.png?v=6" title=":+1:" class="emoji" alt=":+1:"></p>
+          <p><a href="https://forum.mesg.com/t/introduction-to-mesg-chapter-0-1/114/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/introduction-to-mesg-chapter-0-1/114/2</link>
+        <pubDate>Mon, 12 Nov 2018 04:01:12 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-114-2</guid>
+        <source url="https://forum.mesg.com/t/introduction-to-mesg-chapter-0-1/114.rss">Introduction to MESG – Chapter 0/1</source>
+      </item>
+      <item>
+        <title>Introduction to MESG – Chapter 0/1</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p><em>If you’re already familiar with MESG, you can jump into the Building a Blog tutorial (very soon), right away!</em></p>
+<p><img src="https://forum.mesg.com/uploads/default/original/1X/1afa8424e90e097150c3e399ce8bada2a586a3f2.jpeg" alt width="" height=""></p>
+<blockquote>
+<p>With MESG, you can build applications that easily connect any technologies together, including any blockchains or Web APIs. Imagine the possibilities of any technology connecting to anything else with data through a decentralized network.<br>
+There has never been a solution quite like this before.</p>
+</blockquote>
+<h3>Introduction to MESG</h3>
+<p>Since the early days of computers, we never had a fixed definition about how services should communicate with each other through the network.</p>
+<p>This negative adoption from the past even limits us with today’s microservices methodology. Microservices bring a great value to software ecosystem by proposing how services should be kept small and be dedicated. But it is still lacking on the reusability side because, it doesn’t bring a standard for how services should communicate with each other through the network.</p>
+<p>So far, we haven’t had a chance to create reusable services that doesn’t necessarily require some modifications on their network layers. A service needs to be refactored to be compatible with just an another communication protocol adopted in the product where it’s being used.</p>
+<p>Assume that you already have some functional services that you’ve created before for your previous products. Let’s say that some of these services expose their functionality to network via <em>http endpoints</em> and some others maybe use <em>gRPC</em> , <em>JSON-RPC</em> , <em>GraphQL</em> or even a custom communication protocol over <em>TCP</em> .</p>
+<p>To be able to use these services together in a new product, you must create an environment to support their <strong>varying</strong> network communication protocols or refactor them to force a single standard and build a messaging protocol on top of that.</p>
+<p>Meanwhile, you have to figure out how to solve service discovery, load balancing and security problems to run and scale your services seamlessly.</p>
+<p><em>Instead of just focusing on the features that actually matters for your product, dealing with things that aren’t related is a big waste of development hours!</em></p>
+<p><img src="https://forum.mesg.com/uploads/default/original/1X/653a655fc40f318e979700f4881099eac11fa31d.jpeg" alt width="" height=""></p>
+<p><em>Quoted from Morpheus</em></p>
+<p>So, why not to define a standardized communication protocol where it opens up the opportunity to create reusable services?</p>
+<p>MESG solves this problem by creating an emerging standard for services and introduces <strong>workflows</strong> for defining how data should flow between the services.</p>
+<p>Alongside creating a well-defined network communication protocol for services, MESG even lets your services to run in a decentralized way and manages network, service discovery, load balancing and security natively with the power of container technology.</p>
+<p>MESG’s <a href="https://github.com/mesg-foundation/core" rel="nofollow noopener"><em>Core</em></a> is responsible for running services &amp; workflows in a decentralized way. It runs as a daemon and it can be deployed to any peer in the network for enabling decentralization. Even Core itself consists of a bunch system <strong>services</strong> which enables the possibility of its own decentralization in the network.</p>
+<p><em>Reusable services aren’t a myth anymore thanks to MESG! You can check out the existing ones on service <a href="https://github.com/mesg-foundation/awesome" rel="nofollow noopener">market</a>, even create yours for other’s use and earn some MESG tokens on the way! Shh… We’ll talk about blockchains later…</em></p>
+<p><img src="https://forum.mesg.com/uploads/default/original/1X/699796f3b023d44d72029b6af992d12ba797b533.jpeg" alt="image" width="372" height="338"></p>
+<p><em>An amazed Doge</em></p>
+<p><em>If we had had this standardization and service market from the beginning of the internet, we wouldn’t have needed to create services from scratch. Reusing services that easy surely could’ve moved humanity forward for decades by preventing all development hours to be wasted!</em></p>
+<p><em>Check out</em> <a href="http://mesg.com" rel="nofollow noopener"><em>mesg.com</em></a> <em>and the</em> <a href="https://docs.mesg.com/" rel="nofollow noopener"><em>documentation</em></a> <em>on the website for getting to know more about MESG!</em></p>
+<h3>Services</h3>
+<p>Services are small, focused programs that implements target functionalities. To expose these functionalities to the network for other’s use, their capabilities needed to be defined in a standard format.</p>
+<p>MESG introduces <a href="https://docs.mesg.com/guide/service/service-file.html" rel="nofollow noopener"> <em>mesg.yml</em> </a> to exactly meet this need. In this configuration file, you can define the schema of tasks that your service is capable of executing and the type of events that your service may emit. You can also specify dependencies, data volumes, scalability properties, network configurations and other primitives that describe how your service should run.</p>
+<p>MESG adopts event-orientation from its roots. Services’ tasks and events are specially designed with asynchrony first in mind. This fits well with the asynchronous world of services. It lets you to easily create reactive applications that connect any services by using workflows.</p>
+<p>Think of tasks as a superset set of RPCs, but MESG is event-oriented, which means a task’s outputs emit asynchronously once its execution is finished.</p>
+<p>Events are a new concept that MESG introduces to the service world. They’re very handy to broadcast bits of data that can be useful for other services in the network depending on your application logic. Events can be emitted inside services as part of their business logic and handled by workflows. Task executions, on the other hand, are performed by workflows on services and their outputs again, are handled by workflows.<br>
+As you see, services can be only connected through workflows and they’re not aware of each other.</p>
+<p><em>Let’s examine the <em>webhook</em> and <em>discord</em> services to get some ideas:</em></p>
+<p>In the <em>webhook</em> service’s <em>mesg.yml</em> file, we have the <a href="https://github.com/mesg-foundation/service-webhook/blob/master/mesg.yml#L3-L12" rel="nofollow noopener"> <em>request</em> </a> <em>event</em> definition with <em>data</em> and <em>headers</em> payload.<br>
+The <em>request</em> event is emitted on every post call to the <em>/webhook</em> endpoint while the headers and body of each http request is used as its data. You can check the corresponding http <a href="https://github.com/mesg-foundation/service-webhook/blob/a807ebb/index.js#L21-L27" rel="nofollow noopener">handler</a> to see it in code.</p>
+<p>In the <em>discord</em> service’s <em>mesg.yml</em> file, we have the <a href="https://github.com/mesg-foundation/service-discord-invitation/blob/b043c95/mesg.yml#L3-L24" rel="nofollow noopener"> <em>send</em> </a> <em>task</em> that takes an <em>email</em> and a <em>sendgridAPIKey</em> as its input data. It has two different outputs as <em>success</em> and <em>error</em> . If sending invitation is successful it’ll emit the <em>success</em> output with <em>code</em> and <em>message</em> output data otherwise <em>error</em> output with an error <em>message</em> . You can see how easy its <a href="https://github.com/mesg-foundation/service-discord-invitation/blob/02f9894/index.js#L4-L9" rel="nofollow noopener">implementation</a> is in code.</p>
+<p>Check the <em>discord-invites</em> workflow shared in the <em>Workflow</em> section below to see these services in action.</p>
+<h3>Workflows</h3>
+<p>One of the visions of MESG is to allow people, even non-programmers to create applications without writing a single line of code. This is possible with workflows by connecting pre-created services in the market. It’s also possible to create workflows easily via a user interface where you connect data dots from various services to describe the flow in between them.</p>
+<p>Workflows can be considered as configurations that describe how data should flow between services.</p>
+<p>Basically, workflows are used to define conditions for executing some tasks. These conditions could depend on different task outputs and events from various services. Services are metaphorically connected with each other through workflows.</p>
+<p>You can define patterns to match with task outputs and events from various services that your application needs, manipulate their payload and meta-data and execute a chain of tasks from multiple services in the network by using this data as task inputs.</p>
+<p>Workflows supports advanced data manipulation, filtering and parallel/serial task executions.</p>
+<p><img src="https://forum.mesg.com/uploads/default/original/1X/725b0bf9740ec375916a5828006413ed7382a2f6.jpeg" alt="image" width="400" height="267"><br>
+<em>Workflows are like circuit lines that transfer data between circuit components but it’s for services</em></p>
+<p><em>Let’s see how a basic workflow looks like over <strong>discord-invites</strong> workflow:</em><br>
+<aside class="onebox githubgist">
+  <header class="source">
+      <a href="https://gist.github.com/ilgooz/a0e1e5802bf004f342fe9f25d26eb284" target="_blank" rel="nofollow noopener">gist.github.com</a>
+  </header>
+  <article class="onebox-body">
+    <h4><a href="https://gist.github.com/ilgooz/a0e1e5802bf004f342fe9f25d26eb284" target="_blank" rel="nofollow noopener">https://gist.github.com/ilgooz/a0e1e5802bf004f342fe9f25d26eb284</a></h4>
+<h5>discord-invites.yml</h5>
+<pre><code class="YAML">name: discord-invites
+
+description: |
+  Send discord invites to your fellows.
+
+  curl -d "email=your@email.com" -XPOST http://localhost:3000/webhook
+
+services:
+  webhook: 4f7891f77a6333787075e95b6d3d73ad50b5d1e9
+  discord: 1daf16ca98322024824f307a9e11c88e0aba55e2</code></pre>
+This file has been truncated. <a href="https://gist.github.com/ilgooz/a0e1e5802bf004f342fe9f25d26eb284" target="_blank" rel="nofollow noopener">show original</a>
+
+<p>
+</p>
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+</p>
+<p>This workflow shares discord invites to people by sending emails. We use <em>webhook</em> and <em>discord</em> services in this workflow. You can read about them in Services section above to know exactly how they work.</p>
+<p>Let’s see the <em>when</em> section of sample workflow. Every declaration about listening results, events and executing tasks should be made under <em>when</em> . On behalf of that, there are some other sections in workflow definition format to declare a name to workflow <em>(name)</em> , its description <em>(description)</em> , map of service names &amp; their ID <em>(services)</em> and some constants <em>(configuration)</em> .</p>
+<p>For this <em>discord-invites</em> workflow, there is a definition to listen for <a href="https://github.com/mesg-foundation/service-webhook/blob/641eb07/mesg.yml#L3-L12" rel="nofollow noopener"> <em>request</em> </a> <em>events</em> on the <em>webhook</em> service. So, when this event is received, we access its data with special <em>$event.data</em> variable and access to pre-defined configs in workflow with <em>$configs</em> variable to specify task inputs in the <em>map</em> section. Each field in map corresponds to a field of task’s inputs. In this case we’re mapping data to set email address and SendGrid API key as input data of the <a href="https://github.com/mesg-foundation/service-discord-invitation/blob/b043c95/mesg.yml#L3-L24" rel="nofollow noopener"> <em>send</em> </a> <em>task</em> on <em>discord</em> service.</p>
+<p>In conclusion, when a <em>request</em> event is received, <em>send</em> task will be executed with the dynamically-received email address from the <em>request</em> event’s data and statically defined SendGrid API key config. This flow will be circulated on every <em>request</em> event until workflow is deleted from Core.</p>
+<p>You can also execute multiple tasks in series or parallel by adding more named executions under the <a href="https://gist.github.com/ilgooz/a0e1e5802bf004f342fe9f25d26eb284#file-discord-invites-yml-L19" rel="nofollow noopener"> <em>execute</em> </a> <em>section</em> . It’s even possible to make executions which depend on each other by using the special <em>dependsOn (very soon) section</em> on each execution. Accessing the props of root event/result and inheriting task outputs from parent executions are also supported.</p>
+<p><em>Check out the</em> <a href="https://docs.mesg.com/guide/start-here/quick-start-guide.html" rel="nofollow noopener"> <em>Quick Start</em> </a> <em>guide to run Core on your machine, deploy &amp; start webhook and discord services and run discord-invites workflow just in seconds!</em></p>
+<p><em>Continue on Building a Blog tutorial (very soon) to see MESG in the real world!</em></p>
+<p><em>Please be aware that some features talked in this blog post may not be fully implemented yet. Stay tuned and follow the latest development via the</em> <a href="https://forum.mesg.com/"> <em>forum</em> </a> <em>.</em></p>
+          <p><a href="https://forum.mesg.com/t/introduction-to-mesg-chapter-0-1/114/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/introduction-to-mesg-chapter-0-1/114/1</link>
+        <pubDate>Fri, 09 Nov 2018 15:15:48 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-114-1</guid>
+        <source url="https://forum.mesg.com/t/introduction-to-mesg-chapter-0-1/114.rss">Introduction to MESG – Chapter 0/1</source>
+      </item>
+  </channel>
+</rss>

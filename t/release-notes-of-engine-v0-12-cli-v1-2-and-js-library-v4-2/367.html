@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <title>Release Notes of Engine v0.12, CLI v1.2 and JS library v4.2 - News - MESG Community</title>
+    <meta name="description" content="Improved dynamically-typed data on the gRPC APIs!
+The dynamically-typed data system used for event data and task inputs and outputs has been significantly improved. 
+Before, it was using a JSON encoded string that wasn’t&amp;hellip;">
+    <meta name="generator" content="Discourse 2.5.0.beta5 - https://github.com/discourse/discourse version 00aab498297cba8f977c1e0eb17b7d38ff06cc68">
+<link rel="icon" type="image/png" href="../../uploads/default/optimized/1X/9f11b6ddfa02bffdbec79487592a0573a0236cb5_2_32x32.png">
+<link rel="apple-touch-icon" type="image/png" href="../../uploads/default/optimized/1X/53630361a40ad76e1733dd0b0f486e9ae2f4f4d6_2_180x180.png">
+<meta name="theme-color" content="#491e8c">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+<link rel="canonical" href="367.html" />
+<script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","url":"https://forum.mesg.com","potentialAction":{"@type":"SearchAction","target":"https://forum.mesg.com/search?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
+<link rel="search" type="application/opensearchdescription+xml" href="../../opensearch.xml" title="MESG Community Search">
+
+      <link href="../../stylesheets/desktop_3_52e3411e87658e862890db7bd06899cf49ad5f59.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop" data-theme-id="7"/>
+      <link href="../../stylesheets/desktop_theme_7_bf4f2d3d8a71e6ee907065be9a79df3d849bd29c.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop_theme" data-theme-id="7"/>
+    
+    <meta id="data-ga-universal-analytics" data-tracking-code="UA-117583862-1" data-json="{&quot;cookieDomain&quot;:&quot;auto&quot;}" data-auto-link-domains="">
+
+<link rel="preload" href="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js" as="script">
+<script src="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js"></script>
+
+
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of &#39;Release Notes of Engine v0.12, CLI v1.2 and JS library v4.2&#39;" href="367.rss" />
+    <meta property="og:site_name" content="MESG Community" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://forum.mesg.com/uploads/default/optimized/1X/4c85fd3e328055dfc28880dfb17250dd725e781d_2_1024x529.gif" />
+<meta property="og:image" content="https://forum.mesg.com/uploads/default/optimized/1X/4c85fd3e328055dfc28880dfb17250dd725e781d_2_1024x529.gif" />
+<meta property="og:url" content="https://forum.mesg.com/t/release-notes-of-engine-v0-12-cli-v1-2-and-js-library-v4-2/367" />
+<meta name="twitter:url" content="https://forum.mesg.com/t/release-notes-of-engine-v0-12-cli-v1-2-and-js-library-v4-2/367" />
+<meta property="og:title" content="Release Notes of Engine v0.12, CLI v1.2 and JS library v4.2" />
+<meta name="twitter:title" content="Release Notes of Engine v0.12, CLI v1.2 and JS library v4.2" />
+<meta property="og:description" content="Improved dynamically-typed data on the gRPC APIs! The dynamically-typed data system used for event data and task inputs and outputs has been significantly improved.  Before, it was using a JSON encoded string that wasn’t efficient or able to be typed. Now, it uses Google’s Protobuf Struct and a modified JSON encoder that specifies types.  Proto Here is the diff of the Event’s proto file:  // Event represents a single event ran in Engine. message Event {   // Hash is a unique hash to identify an ..." />
+<meta name="twitter:description" content="Improved dynamically-typed data on the gRPC APIs! The dynamically-typed data system used for event data and task inputs and outputs has been significantly improved.  Before, it was using a JSON encoded string that wasn’t efficient or able to be typed. Now, it uses Google’s Protobuf Struct and a modified JSON encoder that specifies types.  Proto Here is the diff of the Event’s proto file:  // Event represents a single event ran in Engine. message Event {   // Hash is a unique hash to identify an ..." />
+<meta name="twitter:label1" value="Reading time" />
+<meta name="twitter:data1" value="1 mins 🕑" />
+<meta name="twitter:label2" value="Likes" />
+<meta name="twitter:data2" value="1 ❤" />
+<meta property="article:published_time" content="2019-08-08T08:36:47+00:00" />
+<meta property="og:ignore_canonical" content="true" />
+
+
+
+    
+  </head>
+  <body class="crawler">
+    
+    <header>
+      <a href="../../index.html">
+          <img src="../../uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png" alt="MESG Community" id="site-logo" style="max-width: 150px;">
+      </a>
+    </header>
+    <div id="main-outlet" class="wrap">
+        <div id="topic-title">
+    <h1>
+      <a href="367.html">Release Notes of Engine v0.12, CLI v1.2 and JS library v4.2</a>
+    </h1>
+
+      <div class="topic-category" itemscope itemtype="http://schema.org/BreadcrumbList">
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../c/news.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #0088CC'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>News</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="1" />
+          </span>
+      </div>
+
+      <div class="topic-category">
+        <div class='discourse-tags list-tags'>
+            <a href='../../tag/release.html' class='discourse-tag' rel="tag">release</a>
+        </div>
+      </div>
+  </div>
+
+  
+
+
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="367.html">
+
+            <link itemprop="image" href="../../uploads/default/original/1X/4c85fd3e328055dfc28880dfb17250dd725e781d.gif">
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2019-08-08T08:36:47Z' class='post-time'>
+                August 8, 2019,  8:36am
+              </time>
+              <meta itemprop='dateModified' content='2019-08-08T08:36:47Z'>
+          <span itemprop='position'>#1</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <h1>Improved dynamically-typed data on the gRPC APIs!</h1>
+<p>The dynamically-typed data system used for event data and task inputs and outputs has been significantly improved.</p>
+<p>Before, it was using a JSON encoded string that wasn’t efficient or able to be typed. Now, it uses <a href="https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.Struct" rel="nofollow noopener">Google’s Protobuf Struct</a> and a modified JSON encoder that specifies types.</p>
+<h2>Proto</h2>
+<p>Here is the diff of the <a href="https://github.com/mesg-foundation/engine/pull/1192/files#diff-427929cecc38eb2b912e5e527342fb43" rel="nofollow noopener">Event’s proto file</a>:</p>
+<pre><code class="lang-diff">// Event represents a single event ran in Engine.
+message Event {
+  // Hash is a unique hash to identify an event.
+  string hash = 1;
+
+  // instanceHash is the hash of an instance that can precede an execution.
+  string instanceHash = 2;
+
+  // key is the key of the event.
+  string key = 3;
+
+  // data is the data for the event.
+-  string data = 4;
++  google.protobuf.Struct data = 4;
+}
+</code></pre>
+<h2>mesg-js</h2>
+<p>The <code>mesg-js</code> library has been updated to be compatible with these modifications.</p>
+<h3>Service</h3>
+<p>The service-side API remains the same. The modifications are internal but some TypeScripts have been renamed and/or modified.</p>
+<h3>Application</h3>
+<p>The application side now exposes new encode and decode helper functions (respectively <code>encodeData</code> and <code>decodeData</code>) to replace the <code>JSON.stringify</code> and <code>JSON.parse</code> functions.</p>
+<p><strong>Decode</strong></p>
+<pre><code class="lang-diff">mesg.listenEvent({
+  filter: {
+    instanceHash: 'EVENT_INSTANCE_HASH',
+    key: 'EVENT_KEY' // optional
+  }
+})
+.on('data', (event) =&gt; {
+- const data = JSON.parse(event.data) 
++ const data = mesg.decodeData(event.data)x
+  console.log('an event received:', event.key, data)
+})
+</code></pre>
+<p><strong>Encode</strong></p>
+<pre><code class="lang-diff">const execution = await mesg.executeTask({
+  instanceHash: 'TASK_INSTANCE_HASH',
+  taskKey: 'TASK_KEY',
+-  inputs: JSON.stringify({ key: 'INPUT_DATA' }),
++  inputs: mesg.encodeData({ key: 'INPUT_DATA' }),
+  tags: ['ASSOCIATE_TAG'] // optional
+})
+</code></pre>
+<h2>CLI</h2>
+<p>The CLI was also updated to be compatible with this breaking change. Various fixes and improvements have also been done, like the limitation of the source code’s service size to 10MB. Make sure to add to the <code>.mesgignore</code> file to the dependencies (like a <code>.dockerignore</code>) <img src="../../images/emoji/twitter/wink.png%3Fv=9" title=":wink:" class="emoji" alt=":wink:"></p>
+<h1>Experimental feature: Workflow engine</h1>
+<p>This release contains the first experimental version of the workflow engine <img src="../../images/emoji/twitter/confetti_ball.png%3Fv=9" title=":confetti_ball:" class="emoji" alt=":confetti_ball:"><br>
+The workflow engine can automatically execute any services’ tasks when it matches with any other services’ events or tasks. Check the following video:</p>
+<p><img src="../../uploads/default/original/1X/4c85fd3e328055dfc28880dfb17250dd725e781d.gif" alt="workflow" data-base62-sha1="aUXmdwi9O3lp20ZryHYWRFHzmoZ" width="690" height="356"></p>
+<hr>
+<p>View the complete changelogs:</p>
+<ul>
+<li><a href="https://github.com/mesg-foundation/engine/blob/master/CHANGELOG.md" rel="nofollow noopener">Engine</a></li>
+<li><a href="https://github.com/mesg-foundation/mesg-js/blob/master/CHANGELOG.md" rel="nofollow noopener">mesg-js</a></li>
+<li><a href="https://github.com/mesg-foundation/cli/blob/master/CHANGELOG.md" rel="nofollow noopener">CLI</a></li>
+</ul>
+<p>To update the Engine and the CLI, follow the <a href="https://docs.mesg.com/guide/installation.html" rel="nofollow noopener">installation process on the documentation </a></p>
+        </div>
+
+        <meta itemprop='headline' content='Release Notes of Engine v0.12, CLI v1.2 and JS library v4.2'>
+          <meta itemprop='keywords' content='release'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="1" />
+           <span class='post-likes'>1 Like</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+
+
+
+
+
+
+    </div>
+    <footer class="container wrap">
+      <nav class='crawler-nav'>
+        <ul>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../index.html' itemprop="url">Home </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../categories.html' itemprop="url">Categories </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../guidelines.html' itemprop="url">FAQ/Guidelines </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../tos.html' itemprop="url">Terms of Service </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../privacy.html' itemprop="url">Privacy Policy </a>
+          </span>
+        </li>
+        </ul>
+      </nav>
+      <p class='powered-by-link'>Powered by <a href="https://www.discourse.org">Discourse</a>, best viewed with JavaScript enabled</p>
+    </footer>
+    
+    
+  </body>
+  
+</html>

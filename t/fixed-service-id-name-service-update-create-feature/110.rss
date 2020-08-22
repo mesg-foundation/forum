@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Fixed Service ID/Name &amp; Service Update, Create Feature</title>
+    <link>https://forum.mesg.com/t/fixed-service-id-name-service-update-create-feature/110</link>
+    <description>Related with [#275](https://github.com/mesg-foundation/core/issues/275), [#558](https://github.com/mesg-foundation/core/issues/558).
+
+Currently, there is no way of updating existent services with a command like:
+`mesg-core update --source SERVICE_PATH SERVICE_ID`
+
+Because of this limitation, when there is a new version of a service, we required to re-deploy it and get a new service id to use. If this service has some data volumes attached to it, that volumes will also be freshly created and there will be no access to previous data. This is a totally expected behavior because service id is new so its data volumes are also should be newly created.
+
+My suggestion is to have this new `update` feature to update a service&#39;s source **only** and have the same service id for it. This way, other props of service will stay the same like its data volumes. This is an expected behaviour when `update` command is used. 
+Also, we may have other service props other than data volumes that we may want to keep as the same even if the source code is changed and be able to update them by using different flags with `update` command.
+
+Note that, to make `update` work, we need to have static unique ids for services like @Anthony pointed. This means, deploying services with the same source code will result with different uuids.
+
+Maybe we should also combine `deploy` &amp; `start` as `create`. Or we can keep the `deploy` and use it optionally for creating a service directly from an image next to deploying from source:
+```
+// both are the same
+
+$ mesg-core service create SERVICE_HASH
+// response: 13010331-50ce-4d29-bd2b-917379a5662a
+
+$ mesg-core service create SERVICE_SOURCE_PATH
+// response: 13010331-50ce-4d29-bd2b-917379a5662a
+```
+
+`create` can also have an optional unique name to be used as alias to service uuid:
+```
+$ mesg-core service create --name hello-world SERVICE_HASH
+// response: 13010331-50ce-4d29-bd2b-917379a5662a
+```
+
+use optionally set unique names with `dev` command under the hood. needed for solving issue #275:
+```
+// hello-world and randomly created 13010331-50ce-4d29-bd2b-917379a5662a can be
+// used to access to services from mesg applications.
+
+$ mesg-core service create --name hello-world SERVICE_HASH
+// response: 13010331-50ce-4d29-bd2b-917379a5662a
+
+$ mesg-core service dev --name hello-world SERVICE_SOURCE_PATH
+// active logs...
+// .....
+```
+
+
+--
+@Anthony could you please give details about the `bind` method of yours that you mentioned in the issue #558 for solving the nonpermanent data volumes problem?</description>
+    
+    <lastBuildDate>Tue, 11 Dec 2018 08:14:41 +0000</lastBuildDate>
+    <category>Development</category>
+    <atom:link href="https://forum.mesg.com/t/fixed-service-id-name-service-update-create-feature/110.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Fixed Service ID/Name &amp; Service Update, Create Feature</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>This proposal has been released in v0.5.</p>
+          <p><a href="https://forum.mesg.com/t/fixed-service-id-name-service-update-create-feature/110/5">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/fixed-service-id-name-service-update-create-feature/110/5</link>
+        <pubDate>Tue, 11 Dec 2018 08:14:41 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-110-5</guid>
+        <source url="https://forum.mesg.com/t/fixed-service-id-name-service-update-create-feature/110.rss">Fixed Service ID/Name &amp; Service Update, Create Feature</source>
+      </item>
+      <item>
+        <title>Fixed Service ID/Name &amp; Service Update, Create Feature</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>This start to be implemented in the PR <a href="https://github.com/mesg-foundation/core/pull/583">https://github.com/mesg-foundation/core/pull/583</a></p>
+          <p><a href="https://forum.mesg.com/t/fixed-service-id-name-service-update-create-feature/110/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/fixed-service-id-name-service-update-create-feature/110/4</link>
+        <pubDate>Mon, 26 Nov 2018 14:48:22 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-110-4</guid>
+        <source url="https://forum.mesg.com/t/fixed-service-id-name-service-update-create-feature/110.rss">Fixed Service ID/Name &amp; Service Update, Create Feature</source>
+      </item>
+      <item>
+        <title>Fixed Service ID/Name &amp; Service Update, Create Feature</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>I totally agree with Anthony on Alias.</p>
+<p>I suggest that <strong>alias</strong> should not be generated but set manually by service developer in <code>mesg.yml</code> files.<br>
+If <strong>alias</strong> is missing, an error should be throw. This is not a retro compatible feature.</p>
+<p>That way, we could have nice alias like <code>ethereum-erc20</code>.</p>
+<p>I really like to set an <strong>alias</strong> in the <code>mesg.yml</code> file that app developer can use without having to update the service id all the time <img src="https://forum.mesg.com/images/emoji/twitter/+1.png?v=6" title=":+1:" class="emoji" alt=":+1:"></p>
+<hr>
+<p>About the docker’s volume topic:<br>
+I suggest that we bind all volumes to the host (like before) using the <code>.mesg</code> folder with combinaison of the alias.</p>
+          <p><a href="https://forum.mesg.com/t/fixed-service-id-name-service-update-create-feature/110/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/fixed-service-id-name-service-update-create-feature/110/3</link>
+        <pubDate>Thu, 08 Nov 2018 11:32:46 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-110-3</guid>
+        <source url="https://forum.mesg.com/t/fixed-service-id-name-service-update-create-feature/110.rss">Fixed Service ID/Name &amp; Service Update, Create Feature</source>
+      </item>
+      <item>
+        <title>Fixed Service ID/Name &amp; Service Update, Create Feature</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>I think this is just a subset of the problem. We could also talk about the fact that every time we are using the command <code>dev</code> (with some updates on the service) we have a different ID so we need to update the ID in the application or any commands that we are using and this is really error prone.</p>
+<p>For the <code>update</code> command I think it’s not really good I really want to have something without any update, just append only.</p>
+<p>The way I see it is the following:</p>
+<ul>
+<li>Each service has it’s own unique ID (defined in the mesg.yml and why not created with a <code>service create</code> command) eg: (ethereum-mainnet-3148feqheq or even just an UUID or similar)</li>
+<li>This Id will always be the same</li>
+<li>This alias will have multiple versions</li>
+<li>Each version is a deployed version of what we have right now (so the different updates for the service)</li>
+</ul>
+<p>We will have something like:<br>
+Alias: ethereum-mainnet-3148feqheq<br>
+versions:</p>
+<ul>
+<li>31urbib31rib31u4113434</li>
+<li>13ouh431uo4h13uh4314</li>
+<li>314j31bk4hbj34jhv42tjhv</li>
+</ul>
+<p>This way we can access to any deployed versions of the service but we can also access to the service ID/alias that will be the latest deployed version and we can base any naming on this ID/alias (this would solve the problem with volumes, the name of the volume will be constant over time).</p>
+<p>To summarize, this ID/alias system is a name service on top of the services and we can resolve either the alias or the version based on the hash.</p>
+<p>This way we don’t have any update but instead only append (and delete).</p>
+<p>For the bind option it’s an option from the container (<a href="https://github.com/mesg-foundation/core/blob/f099449d73c96435d323cba5178c91b98e12760b/container/service_options.go#L38-L41">https://github.com/mesg-foundation/core/blob/f099449d73c96435d323cba5178c91b98e12760b/container/service_options.go#L38-L41</a>) that use either the path on the host (if the bind option is true) or a name for the volume (based on the ID) so if we can bind these volumes we just need to store them but the we will not have any name based on the ID for the docker volume and so solve this problem of volumes deleted for every modification (because the volume is binded to the host)</p>
+          <p><a href="https://forum.mesg.com/t/fixed-service-id-name-service-update-create-feature/110/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/fixed-service-id-name-service-update-create-feature/110/2</link>
+        <pubDate>Wed, 31 Oct 2018 21:14:14 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-110-2</guid>
+        <source url="https://forum.mesg.com/t/fixed-service-id-name-service-update-create-feature/110.rss">Fixed Service ID/Name &amp; Service Update, Create Feature</source>
+      </item>
+      <item>
+        <title>Fixed Service ID/Name &amp; Service Update, Create Feature</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>Related with <a href="https://github.com/mesg-foundation/core/issues/275">#275</a>, <a href="https://github.com/mesg-foundation/core/issues/558">#558</a>.</p>
+<p>Currently, there is no way of updating existent services with a command like:<br>
+<code>mesg-core update --source SERVICE_PATH SERVICE_ID</code></p>
+<p>Because of this limitation, when there is a new version of a service, we required to re-deploy it and get a new service id to use. If this service has some data volumes attached to it, that volumes will also be freshly created and there will be no access to previous data. This is a totally expected behavior because service id is new so its data volumes are also should be newly created.</p>
+<p>My suggestion is to have this new <code>update</code> feature to update a service’s source <strong>only</strong> and have the same service id for it. This way, other props of service will stay the same like its data volumes. This is an expected behaviour when <code>update</code> command is used.<br>
+Also, we may have other service props other than data volumes that we may want to keep as the same even if the source code is changed and be able to update them by using different flags with <code>update</code> command.</p>
+<p>Note that, to make <code>update</code> work, we need to have static unique ids for services like <a class="mention" href="/u/anthony">@Anthony</a> pointed. This means, deploying services with the same source code will result with different uuids.</p>
+<p>Maybe we should also combine <code>deploy</code> &amp; <code>start</code> as <code>create</code>. Or we can keep the <code>deploy</code> and use it optionally for creating a service directly from an image next to deploying from source:</p>
+<pre><code class="lang-auto">// both are the same
+
+$ mesg-core service create SERVICE_HASH
+// response: 13010331-50ce-4d29-bd2b-917379a5662a
+
+$ mesg-core service create SERVICE_SOURCE_PATH
+// response: 13010331-50ce-4d29-bd2b-917379a5662a
+</code></pre>
+<p><code>create</code> can also have an optional unique name to be used as alias to service uuid:</p>
+<pre><code class="lang-auto">$ mesg-core service create --name hello-world SERVICE_HASH
+// response: 13010331-50ce-4d29-bd2b-917379a5662a
+</code></pre>
+<p>use optionally set unique names with <code>dev</code> command under the hood. needed for solving issue <span class="hashtag">#275:</span></p>
+<pre><code class="lang-auto">// hello-world and randomly created 13010331-50ce-4d29-bd2b-917379a5662a can be
+// used to access to services from mesg applications.
+
+$ mesg-core service create --name hello-world SERVICE_HASH
+// response: 13010331-50ce-4d29-bd2b-917379a5662a
+
+$ mesg-core service dev --name hello-world SERVICE_SOURCE_PATH
+// active logs...
+// .....
+</code></pre>
+<p>–<br>
+<a class="mention" href="/u/anthony">@Anthony</a> could you please give details about the <code>bind</code> method of yours that you mentioned in the issue <span class="hashtag">#558</span> for solving the nonpermanent data volumes problem?</p>
+          <p><a href="https://forum.mesg.com/t/fixed-service-id-name-service-update-create-feature/110/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/fixed-service-id-name-service-update-create-feature/110/1</link>
+        <pubDate>Tue, 30 Oct 2018 20:12:42 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-110-1</guid>
+        <source url="https://forum.mesg.com/t/fixed-service-id-name-service-update-create-feature/110.rss">Fixed Service ID/Name &amp; Service Update, Create Feature</source>
+      </item>
+  </channel>
+</rss>

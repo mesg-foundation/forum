@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Important: Watching core dev categories + plugin</title>
+    <link>https://forum.mesg.com/t/important-watching-core-dev-categories-plugin/31</link>
+    <description>Hi, All,
+
+As we are looking to get staff more and more used to using Discourse as the primary place for technical discussion, we want to ensure that call staff are *Watching* the `Development` and `Core` categories. This will ensure they receive notifications and emails for all topics posted there.
+
+This can be done by clicking on the category, and then clicking on (in the top-right):
+
+![29%20AM|51x45](upload://yEfOAC7PYlAXQSDf1vBvX9DWYjk.png) 
+
+and then clicking on:
+
+![34%20AM|574x85](upload://qnzB8q8EL4aBvyR3nR7Ase095WO.png) 
+
+This will mark them as watching.
+
+Also, you may want to install [this plugin](https://github.com/amical/discourse-watch-category) which allows us to create a group for specific people (e.g. staff and core devs) and it marks everyone in that groups is watching these categories automatically.
+
+@Anthony - can you ask all staff to watch these categories and install the plugin?</description>
+    
+    <lastBuildDate>Wed, 19 Sep 2018 11:06:07 +0000</lastBuildDate>
+    <category>General Discussion</category>
+    <atom:link href="https://forum.mesg.com/t/important-watching-core-dev-categories-plugin/31.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Important: Watching core dev categories + plugin</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            
+          <p><a href="https://forum.mesg.com/t/important-watching-core-dev-categories-plugin/31/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/important-watching-core-dev-categories-plugin/31/4</link>
+        <pubDate>Thu, 13 Dec 2018 11:40:45 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-31-4</guid>
+        <source url="https://forum.mesg.com/t/important-watching-core-dev-categories-plugin/31.rss">Important: Watching core dev categories + plugin</source>
+      </item>
+      <item>
+        <title>Important: Watching core dev categories + plugin</title>
+        <dc:creator><![CDATA[jonobacon]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote no-group" data-post="2" data-topic="31">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/nicolas/40/10_1.png" class="avatar"> Nicolas:</div>
+<blockquote>
+<p>I added the plugin <img src="https://forum.mesg.com/images/emoji/twitter/+1.png?v=6" title=":+1:" class="emoji" alt=":+1:"></p>
+</blockquote>
+</aside>
+<p>Great stuff. Thanks <a class="mention" href="/u/nicolas">@Nicolas</a>. Now if you can ensure all team members are added to the group follow the core dev category. This should help.</p>
+          <p><a href="https://forum.mesg.com/t/important-watching-core-dev-categories-plugin/31/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/important-watching-core-dev-categories-plugin/31/3</link>
+        <pubDate>Wed, 19 Sep 2018 11:06:07 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-31-3</guid>
+        <source url="https://forum.mesg.com/t/important-watching-core-dev-categories-plugin/31.rss">Important: Watching core dev categories + plugin</source>
+      </item>
+      <item>
+        <title>Important: Watching core dev categories + plugin</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>I added the plugin <img src="https://forum.mesg.com/images/emoji/twitter/+1.png?v=6" title=":+1:" class="emoji" alt=":+1:"></p>
+          <p><a href="https://forum.mesg.com/t/important-watching-core-dev-categories-plugin/31/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/important-watching-core-dev-categories-plugin/31/2</link>
+        <pubDate>Tue, 18 Sep 2018 11:43:19 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-31-2</guid>
+        <source url="https://forum.mesg.com/t/important-watching-core-dev-categories-plugin/31.rss">Important: Watching core dev categories + plugin</source>
+      </item>
+      <item>
+        <title>Important: Watching core dev categories + plugin</title>
+        <dc:creator><![CDATA[jonobacon]]></dc:creator>
+        <description><![CDATA[
+            <p>Hi, All,</p>
+<p>As we are looking to get staff more and more used to using Discourse as the primary place for technical discussion, we want to ensure that call staff are <em>Watching</em> the <code>Development</code> and <code>Core</code> categories. This will ensure they receive notifications and emails for all topics posted there.</p>
+<p>This can be done by clicking on the category, and then clicking on (in the top-right):</p>
+<p><img src="https://forum.mesg.com/uploads/default/original/1X/f2d6d41e60812042abc48ba0c329d9a2b212555e.png" alt="29%20AM" width="51" height="45"></p>
+<p>and then clicking on:</p>
+<p><img src="https://forum.mesg.com/uploads/default/original/1X/b8e2b834a2c2a508b11af6a9d2dc13a35ac3104a.png" alt="34%20AM" width="574" height="85"></p>
+<p>This will mark them as watching.</p>
+<p>Also, you may want to install <a href="https://github.com/amical/discourse-watch-category" rel="nofollow noopener">this plugin</a> which allows us to create a group for specific people (e.g. staff and core devs) and it marks everyone in that groups is watching these categories automatically.</p>
+<p><a class="mention" href="/u/anthony">@Anthony</a> - can you ask all staff to watch these categories and install the plugin?</p>
+          <p><a href="https://forum.mesg.com/t/important-watching-core-dev-categories-plugin/31/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/important-watching-core-dev-categories-plugin/31/1</link>
+        <pubDate>Tue, 04 Sep 2018 16:20:14 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-31-1</guid>
+        <source url="https://forum.mesg.com/t/important-watching-core-dev-categories-plugin/31.rss">Important: Watching core dev categories + plugin</source>
+      </item>
+  </channel>
+</rss>

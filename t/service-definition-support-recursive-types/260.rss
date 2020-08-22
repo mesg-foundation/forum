@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Service definition: support recursive types</title>
+    <link>https://forum.mesg.com/t/service-definition-support-recursive-types/260</link>
+    <description>We need to support recursive types in order to have type definitions on child fields of an `object` type where child fields referring to its parental type.
+
+This is the current syntax that doesn&#39;t support recursive types. Please see comments in the yml below:
+```
+events:
+  query:
+    data:
+      fields:
+        repeated: true
+        type: Object
+        object: # field
+          name:
+            type: String
+          fields: # fields is actually type &#39;fields&#39; *recursive*
+            type: Any
+          args:
+            type: Object
+            repeated: true
+            object:
+              name:
+                type: String
+              value:
+                type: String
+```
+
+I&#39;m thinking about having a syntax like below to support recursive types:
+
+```
+events:
+  query:
+    data:
+      fields:
+        name: fields
+        repeated: true
+        type: Object
+        object:
+          name:
+            type: String
+          fields: +fields
+          args:
+            type: Object
+            repeated: true
+            object:
+              name:
+                type: String
+              value:
+                type: String
+```
+
+So with the syntax above, we&#39;re introducing a new key called `name` in the parameter type while also supporting special values in field values to identify **named values** by checking for `+` sign.</description>
+    
+    <lastBuildDate>Tue, 26 Feb 2019 07:49:44 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/service-definition-support-recursive-types/260.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Service definition: support recursive types</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>By nested, I was talking about having recursively nested types. Not nested types by itself. I think, there is value having recursively nested types because otherwise, child fields are never typed.</p>
+<p>The syntax you provide for the yml parser won’t work because it’s an infinite loop and since yml parsers generates a static output from yml syntax, it’s not possible for them to generate an output for recursive definitions.</p>
+<p>So if we want to have this feature, we need to do it on our side with a new syntax to let devs to define recursive types virtually.</p>
+          <p><a href="https://forum.mesg.com/t/service-definition-support-recursive-types/260/6">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/service-definition-support-recursive-types/260/6</link>
+        <pubDate>Tue, 26 Feb 2019 07:49:44 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-260-6</guid>
+        <source url="https://forum.mesg.com/t/service-definition-support-recursive-types/260.rss">Service definition: support recursive types</source>
+      </item>
+      <item>
+        <title>Service definition: support recursive types</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>I don’t see the recursion here. You talk about the nested and this is done with the type object already</p>
+<pre><code class="lang-auto">nested1:
+  type: Object
+  object:
+    nested2:
+      type: Object
+      object:
+        ...
+</code></pre>
+<p>You can add different level of nested like that so you are not limited to the root. Of course you have to define all the nested but I don’t really see the value of having an unlimited nested.</p>
+<p>This might also help, I’m not 100% sure of the syntax but using the yaml variables but I think here you will have some issues when parsing this (kind of infinite loop)</p>
+<pre><code class="lang-auto">nested1: &amp;nested
+  type: Object
+  object:
+    &lt;&lt;: *nested
+</code></pre>
+          <p><a href="https://forum.mesg.com/t/service-definition-support-recursive-types/260/5">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/service-definition-support-recursive-types/260/5</link>
+        <pubDate>Tue, 26 Feb 2019 07:21:27 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-260-5</guid>
+        <source url="https://forum.mesg.com/t/service-definition-support-recursive-types/260.rss">Service definition: support recursive types</source>
+      </item>
+      <item>
+        <title>Service definition: support recursive types</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>I’ve a real world need for this please check fields section in <a href="https://github.com/ilgooz/service-graphql/blob/master/mesg.yml#L17" rel="nofollow noopener">service-graphql</a>.</p>
+<p><code>query</code> event is emitted with wanted fields on every GraphQL Query request. A query request looks like below:</p>
+<pre><code class="lang-auto"> { services { sid, owner, versions { hash }  } }
+</code></pre>
+<p>As you can see, in this example, a query is consist of nested objects(fields) and every field might have child fields. And nesting level for each field is unknown, in other words, it’s dynamic.</p>
+<p>We need to implement this proposal in order to have -nested- typed  query fields. Otherwise we’re going to end up having typed fields for only one(root) level.</p>
+<p>I don’t see any reason to not implement this, I think implementation wouldn’t be complicated, we just need to wrap the current logic inside a recursive func.</p>
+          <p><a href="https://forum.mesg.com/t/service-definition-support-recursive-types/260/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/service-definition-support-recursive-types/260/4</link>
+        <pubDate>Mon, 25 Feb 2019 11:38:51 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-260-4</guid>
+        <source url="https://forum.mesg.com/t/service-definition-support-recursive-types/260.rss">Service definition: support recursive types</source>
+      </item>
+      <item>
+        <title>Service definition: support recursive types</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>I’m not a big fan of that, I don’t think we should support recursive data, it makes things really complicated and data are never really recursive you can always define the schema and if it’s really recursive it makes more sense to me to call this task multiple time, having a loop on the outputs.</p>
+<p>Same as Nico, I would like to see a concrete use case of that to convince me <img src="https://forum.mesg.com/images/emoji/twitter/slight_smile.png?v=6" title=":slight_smile:" class="emoji" alt=":slight_smile:"></p>
+          <p><a href="https://forum.mesg.com/t/service-definition-support-recursive-types/260/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/service-definition-support-recursive-types/260/3</link>
+        <pubDate>Mon, 25 Feb 2019 09:36:39 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-260-3</guid>
+        <source url="https://forum.mesg.com/t/service-definition-support-recursive-types/260.rss">Service definition: support recursive types</source>
+      </item>
+      <item>
+        <title>Service definition: support recursive types</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>I don’t see the necessity for this feature. Could you provide an concrete example?</p>
+          <p><a href="https://forum.mesg.com/t/service-definition-support-recursive-types/260/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/service-definition-support-recursive-types/260/2</link>
+        <pubDate>Thu, 21 Feb 2019 04:42:48 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-260-2</guid>
+        <source url="https://forum.mesg.com/t/service-definition-support-recursive-types/260.rss">Service definition: support recursive types</source>
+      </item>
+      <item>
+        <title>Service definition: support recursive types</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>We need to support recursive types in order to have type definitions on child fields of an <code>object</code> type where child fields referring to its parental type.</p>
+<p>This is the current syntax that doesn’t support recursive types. Please see comments in the yml below:</p>
+<pre><code class="lang-auto">events:
+  query:
+    data:
+      fields:
+        repeated: true
+        type: Object
+        object: # field
+          name:
+            type: String
+          fields: # fields is actually type 'fields' *recursive*
+            type: Any
+          args:
+            type: Object
+            repeated: true
+            object:
+              name:
+                type: String
+              value:
+                type: String
+</code></pre>
+<p>I’m thinking about having a syntax like below to support recursive types:</p>
+<pre><code class="lang-auto">events:
+  query:
+    data:
+      fields:
+        name: fields
+        repeated: true
+        type: Object
+        object:
+          name:
+            type: String
+          fields: +fields
+          args:
+            type: Object
+            repeated: true
+            object:
+              name:
+                type: String
+              value:
+                type: String
+</code></pre>
+<p>So with the syntax above, we’re introducing a new key called <code>name</code> in the parameter type while also supporting special values in field values to identify <strong>named values</strong> by checking for <code>+</code> sign.</p>
+          <p><a href="https://forum.mesg.com/t/service-definition-support-recursive-types/260/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/service-definition-support-recursive-types/260/1</link>
+        <pubDate>Tue, 19 Feb 2019 18:56:11 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-260-1</guid>
+        <source url="https://forum.mesg.com/t/service-definition-support-recursive-types/260.rss">Service definition: support recursive types</source>
+      </item>
+  </channel>
+</rss>

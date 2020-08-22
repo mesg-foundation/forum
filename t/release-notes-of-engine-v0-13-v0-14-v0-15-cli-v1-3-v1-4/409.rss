@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Release Notes of Engine v0.13, v0.14 &amp; v0.15 + CLI v1.3, v1.4</title>
+    <link>https://forum.mesg.com/t/release-notes-of-engine-v0-13-v0-14-v0-15-cli-v1-3-v1-4/409</link>
+    <description>We&#39;ve been very busy for the past two months working on two new major features of the Engine: Orchestrator and Network. That&#39;s why these release notes group together MESG Engine v0.13 to v0.15!
+
+# Release of MESG Orchestrator to build apps using processes
+
+We officially released the first public version of [Orchestrator](https://mesg.com/mesg-orchestrator) :confetti_ball: :champagne:  
+
+MESG Orchestrator is an event-driven task-orchestration system that manages the connections between the events and tasks of services by following the steps described by processes.
+
+It lets you build and run complex applications by describing their business logic, then the Engine executes them for you.
+
+Processes are an evolution of Applications, as they are managed by the Engine, and will be distributed on the upcoming decentralized network.
+
+You can read more about Orchestrator and Processes in the [documentation](https://docs.mesg.com/guide/process/).
+
+## Process super quick start
+
+Create a new file `process.yml` on your computer and copy the following content:
+```yml
+key: erc20-notification
+steps:
+  - type: trigger
+    instance:
+      src: https://github.com/mesg-foundation/service-ethereum-erc20
+      env:
+        - PROVIDER_ENDPOINT=$(env:PROVIDER_ENDPOINT)
+    eventKey: transfer
+  - type: task
+    instance:
+      src: ./convert
+    taskKey: address
+  - type: filter
+    conditions:
+      contractAddress: &quot;0x420167d87d35c3a249b32ef6225872fbd9ab85d2&quot;
+  - type: task
+    instance: 
+      src: ./convert
+    taskKey: email
+  - type: task
+    instance:
+      src: https://github.com/mesg-foundation/service-email-sendgrid
+      env:
+        - SENDGRID_API_KEY=$(env:SENDGRID_API_KEY)
+    taskKey: send
+```
+
+Then, execute the following command to compile, start and log the activity of the process:
+```
+mesg-cli process:dev PATH_TO_THE_PROCESS_FILE --env PROVIDER_ENDPOINT=YOUR_INFURA_URL --env SENDGRID_API_KEY=YOUR_SENDGRID_API_KEY
+```
+
+:confetti_ball: Congrats! You created your first MESG Process! :confetti_ball:
+
+# Beta version of the decentralized network
+
+We are working hard on the decentralized network and are making good progress! The services are now decentralized by running on [Tendermint](https://tendermint.com) with ownership management features!
+
+In the next version of the Engine, we plan to release our first public testnet!
+
+To test it before the public release, clone the [engine repo](https://github.com/mesg-foundation/engine) and run the `dev` script with the flag `--validator` and `--genesis-account`:
+```bash
+git clone https://github.com/mesg-foundation/engine
+cd engine
+./dev --validator --genesis_validator
+```
+
+After the Engine is started, you should see a new block every 10 seconds!
+
+# Switch to [gogo protobuf](https://github.com/gogo/protobuf)
+
+The gRPC API is now using [gogo protobuf](https://github.com/gogo/protobuf) to compile the proto file to Go. The main reason is the customization of the proto that gogo proto offers over the official [Google version](https://github.com/protocolbuffers/protobuf).
+This has the side effect of breaking the reflection of the gRPC API. You now need to explicitly pass the proto files when using a gRPC client.
+You may also need to download [`gogo.proto`](https://github.com/gogo/protobuf/blob/master/gogoproto/gogo.proto) and save it locally in `./gogo/protobuf/gogoproto` to allow your gRPC client to access the new features that gogo offers.
+
+# Minor versioning
+
+The CLI is now checking for the latest matching minor version of the Engine when running:
+```bash
+mesg-cli daemon:start
+```
+Of course you can disable this system by using the `--no-pull` flag:
+```bash
+mesg-cli daemon:start --no-pull
+```
+
+# Changelogs
+
+Follow the links below to see the complete changelogs:
+* [Engine ](https://github.com/mesg-foundation/engine/blob/master/CHANGELOG.md)
+* [mesg-js](https://github.com/mesg-foundation/mesg-js/blob/master/CHANGELOG.md)
+* [CLI](https://github.com/mesg-foundation/cli/blob/master/CHANGELOG.md)
+
+To update the Engine and the CLI, follow the [installation process on the documentation](https://docs.mesg.com/guide/installation.html).</description>
+    
+    <lastBuildDate>Mon, 30 Sep 2019 08:48:55 +0000</lastBuildDate>
+    <category>News</category>
+    <atom:link href="https://forum.mesg.com/t/release-notes-of-engine-v0-13-v0-14-v0-15-cli-v1-3-v1-4/409.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Release Notes of Engine v0.13, v0.14 &amp; v0.15 + CLI v1.3, v1.4</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>We’ve been very busy for the past two months working on two new major features of the Engine: Orchestrator and Network. That’s why these release notes group together MESG Engine v0.13 to v0.15!</p>
+<h1>Release of MESG Orchestrator to build apps using processes</h1>
+<p>We officially released the first public version of <a href="https://mesg.com/mesg-orchestrator" rel="nofollow noopener">Orchestrator</a> <img src="https://forum.mesg.com/images/emoji/twitter/confetti_ball.png?v=9" title=":confetti_ball:" class="emoji" alt=":confetti_ball:"> <img src="https://forum.mesg.com/images/emoji/twitter/champagne.png?v=9" title=":champagne:" class="emoji" alt=":champagne:"></p>
+<p>MESG Orchestrator is an event-driven task-orchestration system that manages the connections between the events and tasks of services by following the steps described by processes.</p>
+<p>It lets you build and run complex applications by describing their business logic, then the Engine executes them for you.</p>
+<p>Processes are an evolution of Applications, as they are managed by the Engine, and will be distributed on the upcoming decentralized network.</p>
+<p>You can read more about Orchestrator and Processes in the <a href="https://docs.mesg.com/guide/process/" rel="nofollow noopener">documentation</a>.</p>
+<h2>Process super quick start</h2>
+<p>Create a new file <code>process.yml</code> on your computer and copy the following content:</p>
+<pre><code class="lang-auto">key: erc20-notification
+steps:
+  - type: trigger
+    instance:
+      src: https://github.com/mesg-foundation/service-ethereum-erc20
+      env:
+        - PROVIDER_ENDPOINT=$(env:PROVIDER_ENDPOINT)
+    eventKey: transfer
+  - type: task
+    instance:
+      src: ./convert
+    taskKey: address
+  - type: filter
+    conditions:
+      contractAddress: "0x420167d87d35c3a249b32ef6225872fbd9ab85d2"
+  - type: task
+    instance: 
+      src: ./convert
+    taskKey: email
+  - type: task
+    instance:
+      src: https://github.com/mesg-foundation/service-email-sendgrid
+      env:
+        - SENDGRID_API_KEY=$(env:SENDGRID_API_KEY)
+    taskKey: send
+</code></pre>
+<p>Then, execute the following command to compile, start and log the activity of the process:</p>
+<pre><code class="lang-auto">mesg-cli process:dev PATH_TO_THE_PROCESS_FILE --env PROVIDER_ENDPOINT=YOUR_INFURA_URL --env SENDGRID_API_KEY=YOUR_SENDGRID_API_KEY
+</code></pre>
+<p><img src="https://forum.mesg.com/images/emoji/twitter/confetti_ball.png?v=9" title=":confetti_ball:" class="emoji" alt=":confetti_ball:"> Congrats! You created your first MESG Process! <img src="https://forum.mesg.com/images/emoji/twitter/confetti_ball.png?v=9" title=":confetti_ball:" class="emoji" alt=":confetti_ball:"></p>
+<h1>Beta version of the decentralized network</h1>
+<p>We are working hard on the decentralized network and are making good progress! The services are now decentralized by running on <a href="https://tendermint.com" rel="nofollow noopener">Tendermint</a> with ownership management features!</p>
+<p>In the next version of the Engine, we plan to release our first public testnet!</p>
+<p>To test it before the public release, clone the <a href="https://github.com/mesg-foundation/engine" rel="nofollow noopener">engine repo</a> and run the <code>dev</code> script with the flag <code>--validator</code> and <code>--genesis-account</code>:</p>
+<pre><code class="lang-bash">git clone https://github.com/mesg-foundation/engine
+cd engine
+./dev --validator --genesis_validator
+</code></pre>
+<p>After the Engine is started, you should see a new block every 10 seconds!</p>
+<h1>Switch to <a href="https://github.com/gogo/protobuf" rel="nofollow noopener">gogo protobuf</a>
+</h1>
+<p>The gRPC API is now using <a href="https://github.com/gogo/protobuf" rel="nofollow noopener">gogo protobuf</a> to compile the proto file to Go. The main reason is the customization of the proto that gogo proto offers over the official <a href="https://github.com/protocolbuffers/protobuf" rel="nofollow noopener">Google version</a>.<br>
+This has the side effect of breaking the reflection of the gRPC API. You now need to explicitly pass the proto files when using a gRPC client.<br>
+You may also need to download <a href="https://github.com/gogo/protobuf/blob/master/gogoproto/gogo.proto" rel="nofollow noopener"><code>gogo.proto</code></a> and save it locally in <code>./gogo/protobuf/gogoproto</code> to allow your gRPC client to access the new features that gogo offers.</p>
+<h1>Minor versioning</h1>
+<p>The CLI is now checking for the latest matching minor version of the Engine when running:</p>
+<pre><code class="lang-bash">mesg-cli daemon:start
+</code></pre>
+<p>Of course you can disable this system by using the <code>--no-pull</code> flag:</p>
+<pre><code class="lang-bash">mesg-cli daemon:start --no-pull
+</code></pre>
+<h1>Changelogs</h1>
+<p>Follow the links below to see the complete changelogs:</p>
+<ul>
+<li><a href="https://github.com/mesg-foundation/engine/blob/master/CHANGELOG.md" rel="nofollow noopener">Engine </a></li>
+<li><a href="https://github.com/mesg-foundation/mesg-js/blob/master/CHANGELOG.md" rel="nofollow noopener">mesg-js</a></li>
+<li><a href="https://github.com/mesg-foundation/cli/blob/master/CHANGELOG.md" rel="nofollow noopener">CLI</a></li>
+</ul>
+<p>To update the Engine and the CLI, follow the <a href="https://docs.mesg.com/guide/installation.html" rel="nofollow noopener">installation process on the documentation</a>.</p>
+          <p><a href="https://forum.mesg.com/t/release-notes-of-engine-v0-13-v0-14-v0-15-cli-v1-3-v1-4/409/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/release-notes-of-engine-v0-13-v0-14-v0-15-cli-v1-3-v1-4/409/1</link>
+        <pubDate>Mon, 30 Sep 2019 08:04:45 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-409-1</guid>
+        <source url="https://forum.mesg.com/t/release-notes-of-engine-v0-13-v0-14-v0-15-cli-v1-3-v1-4/409.rss">Release Notes of Engine v0.13, v0.14 &amp; v0.15 + CLI v1.3, v1.4</source>
+      </item>
+  </channel>
+</rss>

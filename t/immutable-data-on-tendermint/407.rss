@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Immutable data on Tendermint</title>
+    <link>https://forum.mesg.com/t/immutable-data-on-tendermint/407</link>
+    <description>Hey guys, I would like to discuss about implementing immutable data all across the decentralized databases.
+
+After some discussion with @Anthony, we are thinking about implementing a more immutable system on all data that are on the decentralized databases. The data itself should never be updated or deleted but an other data that reference the first can change its behavior (the new data also cannot be updated).
+
+It will also make the calculation of hash simpler by remove exception. Basically, all the data of a resource should be used to calculate the hash. If one the data is updated, then the hash is different and the resource is broken!
+
+For example, the ownership system has been done this way to prevent the edition of service. Instead of having one owner in the service struct, the engine is using the ownership db to get the owner of this service. It will allow to change the owner without updating service. Moreover, it allow to implement a multi-owner system without having to change any data structure (this is a very important argument to not break the decentralized network)!
+
+In my opinion, one exception should be implemented. It&#39;s concerning the &quot;deletion&quot; of resource.
+I don&#39;t think having to reference the resource in a &quot;deletion&quot; store is good and practical.
+I suggest to add to any resource that can be delete/deprecated/disabled a boolean parameter that will flag the resource as deleted/deprecated/disabled/etc only when it can happen maximum once.
+This &quot;deleted&quot; parameter is not used for the hash calculation.
+
+@core what do you think about such a system? 
+
+I would like to give a few case as example so we can agree on practical situation:
+
+1. [the service deprecation system](https://github.com/mesg-foundation/engine/issues/1377)
+
+This system will allow__only once__ a service to become deprecated and it will stay like this forever. In this case, is to simply add a parameter `deprecated` in the service struct that is omitted from hash calculation.
+
+2. [list of nodes that run instances](https://forum.mesg.com/t/instance-on-the-network/406)
+
+The current proposal suggests to use a new dedicated store where each entry is referencing the instance hash and the node address. I think if we already agree with the beginning of this proposal, this is ok.
+But it doesn&#39;t say how a node can unregister itself. Should it remove its entry from the store? Should it update it by setting a `removed` bool parameter to `true`? Should a new store act as removed node?
+
+For this case, I suggest the node unregisters itself by setting an `unregistered` param to true in this new store of nodes that runs instances.
+
+3. Execution
+
+Execution is the resource that is and will be updated the most. It has many state: Created, InProgress, Executed, Validated, Failed and should implement a retry system.
+
+Currently, all those data are in one resource that is being updated when needed.
+
+By applying the immutable system, the execution should be splitted in many 3 resources: `Execution`, `ExecutionResult` and `ExecutionValidation`:
+- `Execution`
+  - `ParentHash`
+  - `EventHash`
+  - `InstanceHash`
+  - `TaskKey`
+  - `Inputs`
+  - `Executor`
+  - `Validators` (for the future task validation system)
+  - `Tags`
+  - `ProcessHash`
+  - `StepID`
+(almost all of current Execution except `Outputs`, `error` and `Status`).
+- `ExecutionResult`
+  - `ExecutionHash`
+  - `Outputs`
+  - `Error`
+- `ExecutionValidation` (for the future task validation system)
+  - `ExecutionResultHash`
+  - `IsValid`
+  - `Validator`
+
+It will even be easier to check for write authorization and with the retry system, we will see that one `Execution` has many `ExecutionResult`. With the validation system, many `ExecutionValidation` for one `ExecutionResult`.</description>
+    
+    <lastBuildDate>Mon, 30 Sep 2019 05:08:50 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/immutable-data-on-tendermint/407.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Immutable data on Tendermint</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <blockquote>
+<p>The data itself should never be updated</p>
+</blockquote>
+<p>We can’t update data right now.</p>
+<blockquote>
+<p>or deleted but an other data that reference the first can change its behavior</p>
+</blockquote>
+<p>What is the reason to not delete the data?</p>
+<blockquote>
+<p>It will also make the calculation of hash simpler by remove exception.</p>
+</blockquote>
+<p>What exeption you are taking about and how the hash calucation become simpler?</p>
+<blockquote>
+<p>I suggest to add to any resource that can be delete/deprecated/disabled a boolean parameter that will flag the resource as       deleted/deprecated/disabled/etc only when it can happen maximum once.</p>
+</blockquote>
+<p>I not sure about that. That is related with question about deleting the data.</p>
+<blockquote>
+<p>By applying the immutable system, the execution should be splitted in many 3 resources: Execution, ExecutionResult and           ExecutionValidation:</p>
+</blockquote>
+<p>We don’t caluclate result in the hash. We don’t know how it should look like in the future so I wound’t rush with it so much.</p>
+          <p><a href="https://forum.mesg.com/t/immutable-data-on-tendermint/407/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/immutable-data-on-tendermint/407/2</link>
+        <pubDate>Mon, 30 Sep 2019 05:08:50 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-407-2</guid>
+        <source url="https://forum.mesg.com/t/immutable-data-on-tendermint/407.rss">Immutable data on Tendermint</source>
+      </item>
+      <item>
+        <title>Immutable data on Tendermint</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Hey guys, I would like to discuss about implementing immutable data all across the decentralized databases.</p>
+<p>After some discussion with <a class="mention" href="/u/anthony">@Anthony</a>, we are thinking about implementing a more immutable system on all data that are on the decentralized databases. The data itself should never be updated or deleted but an other data that reference the first can change its behavior (the new data also cannot be updated).</p>
+<p>It will also make the calculation of hash simpler by remove exception. Basically, all the data of a resource should be used to calculate the hash. If one the data is updated, then the hash is different and the resource is broken!</p>
+<p>For example, the ownership system has been done this way to prevent the edition of service. Instead of having one owner in the service struct, the engine is using the ownership db to get the owner of this service. It will allow to change the owner without updating service. Moreover, it allow to implement a multi-owner system without having to change any data structure (this is a very important argument to not break the decentralized network)!</p>
+<p>In my opinion, one exception should be implemented. It’s concerning the “deletion” of resource.<br>
+I don’t think having to reference the resource in a “deletion” store is good and practical.<br>
+I suggest to add to any resource that can be delete/deprecated/disabled a boolean parameter that will flag the resource as deleted/deprecated/disabled/etc only when it can happen maximum once.<br>
+This “deleted” parameter is not used for the hash calculation.</p>
+<p><a class="mention-group" href="/groups/core">@core</a> what do you think about such a system?</p>
+<p>I would like to give a few case as example so we can agree on practical situation:</p>
+<ol>
+<li><a href="https://github.com/mesg-foundation/engine/issues/1377" rel="nofollow noopener">the service deprecation system</a></li>
+</ol>
+<p>This system will allow__only once__ a service to become deprecated and it will stay like this forever. In this case, is to simply add a parameter <code>deprecated</code> in the service struct that is omitted from hash calculation.</p>
+<ol start="2">
+<li><a href="https://forum.mesg.com/t/instance-on-the-network/406">list of nodes that run instances</a></li>
+</ol>
+<p>The current proposal suggests to use a new dedicated store where each entry is referencing the instance hash and the node address. I think if we already agree with the beginning of this proposal, this is ok.<br>
+But it doesn’t say how a node can unregister itself. Should it remove its entry from the store? Should it update it by setting a <code>removed</code> bool parameter to <code>true</code>? Should a new store act as removed node?</p>
+<p>For this case, I suggest the node unregisters itself by setting an <code>unregistered</code> param to true in this new store of nodes that runs instances.</p>
+<ol start="3">
+<li>Execution</li>
+</ol>
+<p>Execution is the resource that is and will be updated the most. It has many state: Created, InProgress, Executed, Validated, Failed and should implement a retry system.</p>
+<p>Currently, all those data are in one resource that is being updated when needed.</p>
+<p>By applying the immutable system, the execution should be splitted in many 3 resources: <code>Execution</code>, <code>ExecutionResult</code> and <code>ExecutionValidation</code>:</p>
+<ul>
+<li>
+<code>Execution</code>
+<ul>
+<li><code>ParentHash</code></li>
+<li><code>EventHash</code></li>
+<li><code>InstanceHash</code></li>
+<li><code>TaskKey</code></li>
+<li><code>Inputs</code></li>
+<li><code>Executor</code></li>
+<li>
+<code>Validators</code> (for the future task validation system)</li>
+<li><code>Tags</code></li>
+<li><code>ProcessHash</code></li>
+<li>
+<code>StepID</code><br>
+(almost all of current Execution except <code>Outputs</code>, <code>error</code> and <code>Status</code>).</li>
+</ul>
+</li>
+<li>
+<code>ExecutionResult</code>
+<ul>
+<li><code>ExecutionHash</code></li>
+<li><code>Outputs</code></li>
+<li><code>Error</code></li>
+</ul>
+</li>
+<li>
+<code>ExecutionValidation</code> (for the future task validation system)
+<ul>
+<li><code>ExecutionResultHash</code></li>
+<li><code>IsValid</code></li>
+<li><code>Validator</code></li>
+</ul>
+</li>
+</ul>
+<p>It will even be easier to check for write authorization and with the retry system, we will see that one <code>Execution</code> has many <code>ExecutionResult</code>. With the validation system, many <code>ExecutionValidation</code> for one <code>ExecutionResult</code>.</p>
+          <p><a href="https://forum.mesg.com/t/immutable-data-on-tendermint/407/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/immutable-data-on-tendermint/407/1</link>
+        <pubDate>Sun, 29 Sep 2019 11:13:24 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-407-1</guid>
+        <source url="https://forum.mesg.com/t/immutable-data-on-tendermint/407.rss">Immutable data on Tendermint</source>
+      </item>
+  </channel>
+</rss>

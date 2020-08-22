@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Mesg-core logs showing old services</title>
+    <link>https://forum.mesg.com/t/mesg-core-logs-showing-old-services/97</link>
+    <description>Hi there !
+
+I used to work with the previous version of **mesg-core**, which used to have the ID of the MESG services formatted like **v1_...**. I lately updated the version to 0.3.0, where the format of these ID&#39;s changed.
+
+I cleaned all my services many times during development and even cleared on Docker (from Portainer) since I ran into many issues with it. This morning I ran a mesg-core logs and was confused to find this in the logs :
+
+    (...) span.kind=server system=grpc time=&quot;2018-10-18T11:54:17Z&quot; level=error msg=&quot;finished streaming call with code Unknown&quot; error=&quot;context canceled&quot; grpc.code=Unknown grpc.method=ListenResult grpc.service=api.Core grpc.start_time=&quot;2018-10-18T11:49:38Z&quot; grpc.time_ms=279820.2 span.kind=server system=grpc time=&quot;2018-10-18T11:54:20Z&quot; level=warning msg=&quot;Database services: Could not decode service \&quot;v1_0fdee4505e6d9452357035d5a7b289b2\&quot;&quot; service=v1_0fdee4505e6d9452357035d5a7b289b2 time=&quot;2018-10-18T11:54:20Z&quot; level=warning msg=&quot;Database services: Could not decode service \&quot;v1_1c9ee0a234e6b2ecfe6dbf26de6d8c1d\&quot;&quot; service=v1_1c9ee0a234e6b2ecfe6dbf26de6d8c1d time=&quot;2018-10-18T11:54:20Z&quot; level=warning msg=&quot;Database services: Could not decode service \&quot;v1_2f33c6a6967981d1d2499b449c2c9620\&quot;&quot; service=v1_2f33c6a6967981d1d2499b449c2c9620 time=&quot;2018-10-18T11:54:20Z&quot; level=warning msg=&quot;Database services: Could not decode service \&quot;v1_8aa3b4d0aa543dcc3a61c0975b48d8f6\&quot;&quot; (...)
+
+I updated prior to yesterday and, as can be seen, it looks like the core is still trying to decode service from the old version (and all my services use latest version of mesg-js in that case).
+
+I find it weird so that&#39;s why I came to report.
+
+Cheers guys</description>
+    
+    <lastBuildDate>Mon, 22 Oct 2018 08:15:59 +0000</lastBuildDate>
+    <category>Support</category>
+    <atom:link href="https://forum.mesg.com/t/mesg-core-logs-showing-old-services/97.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Mesg-core logs showing old services</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>Hi <a class="mention" href="/u/romain-gsr">@romain-gsr</a>,</p>
+<p>Yes services kept under <code>~/.mesg/database</code> and it’s safe to hard delete it in the current version of core but this may change in future. Deleting the database should solve the problem that you’re facing with.</p>
+<p>It’d be really helpful if you can provide further information about which cli command or mesg client are you using while getting this error to do a complete investigation. <img src="https://forum.mesg.com/images/emoji/twitter/slight_smile.png?v=6" title=":slight_smile:" class="emoji" alt=":slight_smile:"></p>
+<p>Cheers.</p>
+          <p><a href="https://forum.mesg.com/t/mesg-core-logs-showing-old-services/97/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mesg-core-logs-showing-old-services/97/4</link>
+        <pubDate>Mon, 22 Oct 2018 08:15:59 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-97-4</guid>
+        <source url="https://forum.mesg.com/t/mesg-core-logs-showing-old-services/97.rss">Mesg-core logs showing old services</source>
+      </item>
+      <item>
+        <title>Mesg-core logs showing old services</title>
+        <dc:creator><![CDATA[romain-gsr]]></dc:creator>
+        <description><![CDATA[
+            <p>Hi <a class="mention" href="/u/ilgooz">@ilgooz</a> !</p>
+<p>Yes, as I mentioned I cleaned all my services  and redeployed many times (also going so far as to clean Docker instances, containers and networks), but I was unaware of the <code>~/.mesg/database</code> and that might be actually where they keep being referenced. Is there a way to clean it up ?</p>
+<p>Cheers</p>
+          <p><a href="https://forum.mesg.com/t/mesg-core-logs-showing-old-services/97/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mesg-core-logs-showing-old-services/97/3</link>
+        <pubDate>Mon, 22 Oct 2018 06:04:38 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-97-3</guid>
+        <source url="https://forum.mesg.com/t/mesg-core-logs-showing-old-services/97.rss">Mesg-core logs showing old services</source>
+      </item>
+      <item>
+        <title>Mesg-core logs showing old services</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>Hi <a class="mention" href="/u/romain-gsr">@romain-gsr</a>!</p>
+<p>Yes, we changed the service encoding to json while we also removed this <em>v1</em> prefix from the service ids. This is why your services with the old <em>v1</em> prefix cannot be decoded anymore, this was a breaking change.</p>
+<p>As I see from your logs, you still have some services with the old encoding format saved in your <code>~/.mesg/database</code> and your application client trying to listen results from one of these services.</p>
+<p>Have you tried redeploying your service and use the new id you get from the deployment in your application client? This way core shouldn’t need to try decoding old services from your database.</p>
+<p>Cheers.</p>
+          <p><a href="https://forum.mesg.com/t/mesg-core-logs-showing-old-services/97/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mesg-core-logs-showing-old-services/97/2</link>
+        <pubDate>Fri, 19 Oct 2018 05:25:13 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-97-2</guid>
+        <source url="https://forum.mesg.com/t/mesg-core-logs-showing-old-services/97.rss">Mesg-core logs showing old services</source>
+      </item>
+      <item>
+        <title>Mesg-core logs showing old services</title>
+        <dc:creator><![CDATA[romain-gsr]]></dc:creator>
+        <description><![CDATA[
+            <p>Hi there !</p>
+<p>I used to work with the previous version of <strong>mesg-core</strong>, which used to have the ID of the MESG services formatted like <strong>v1_…</strong>. I lately updated the version to 0.3.0, where the format of these ID’s changed.</p>
+<p>I cleaned all my services many times during development and even cleared on Docker (from Portainer) since I ran into many issues with it. This morning I ran a mesg-core logs and was confused to find this in the logs :</p>
+<pre><code>(...) span.kind=server system=grpc time="2018-10-18T11:54:17Z" level=error msg="finished streaming call with code Unknown" error="context canceled" grpc.code=Unknown grpc.method=ListenResult grpc.service=api.Core grpc.start_time="2018-10-18T11:49:38Z" grpc.time_ms=279820.2 span.kind=server system=grpc time="2018-10-18T11:54:20Z" level=warning msg="Database services: Could not decode service \"v1_0fdee4505e6d9452357035d5a7b289b2\"" service=v1_0fdee4505e6d9452357035d5a7b289b2 time="2018-10-18T11:54:20Z" level=warning msg="Database services: Could not decode service \"v1_1c9ee0a234e6b2ecfe6dbf26de6d8c1d\"" service=v1_1c9ee0a234e6b2ecfe6dbf26de6d8c1d time="2018-10-18T11:54:20Z" level=warning msg="Database services: Could not decode service \"v1_2f33c6a6967981d1d2499b449c2c9620\"" service=v1_2f33c6a6967981d1d2499b449c2c9620 time="2018-10-18T11:54:20Z" level=warning msg="Database services: Could not decode service \"v1_8aa3b4d0aa543dcc3a61c0975b48d8f6\"" (...)
+</code></pre>
+<p>I updated prior to yesterday and, as can be seen, it looks like the core is still trying to decode service from the old version (and all my services use latest version of mesg-js in that case).</p>
+<p>I find it weird so that’s why I came to report.</p>
+<p>Cheers guys</p>
+          <p><a href="https://forum.mesg.com/t/mesg-core-logs-showing-old-services/97/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mesg-core-logs-showing-old-services/97/1</link>
+        <pubDate>Fri, 19 Oct 2018 04:43:26 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-97-1</guid>
+        <source url="https://forum.mesg.com/t/mesg-core-logs-showing-old-services/97.rss">Mesg-core logs showing old services</source>
+      </item>
+  </channel>
+</rss>

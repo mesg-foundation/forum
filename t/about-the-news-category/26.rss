@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>About the News category</title>
+    <link>https://forum.mesg.com/t/about-the-news-category/26</link>
+    <description>Find out what&#39;s new at MESG. Find out about new releases, events we are attending, new hires, and meet our growing community that make it all possible :clap::clap:</description>
+    
+    <lastBuildDate>Sat, 05 Jan 2019 09:53:55 +0000</lastBuildDate>
+    <category>News</category>
+    <atom:link href="https://forum.mesg.com/t/about-the-news-category/26.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>About the News category</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Find out what’s new at MESG. Find out about new releases, events we are attending, new hires, and meet our growing community that make it all possible <img src="https://forum.mesg.com/images/emoji/twitter/clap.png?v=6" title=":clap:" class="emoji" alt=":clap:"><img src="https://forum.mesg.com/images/emoji/twitter/clap.png?v=6" title=":clap:" class="emoji" alt=":clap:"></p>
+          <p><a href="https://forum.mesg.com/t/about-the-news-category/26/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/about-the-news-category/26/1</link>
+        <pubDate>Thu, 30 Aug 2018 05:45:27 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-26-1</guid>
+        <source url="https://forum.mesg.com/t/about-the-news-category/26.rss">About the News category</source>
+      </item>
+  </channel>
+</rss>

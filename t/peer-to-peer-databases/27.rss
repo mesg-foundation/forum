@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Peer to peer databases</title>
+    <link>https://forum.mesg.com/t/peer-to-peer-databases/27</link>
+    <description>This thread is about aggregation of existing decentralized database systems that we could use in MESG or at least that are good to know :)
+
+Feel free to add the one you know.</description>
+    
+    <lastBuildDate>Thu, 30 Aug 2018 14:20:36 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/peer-to-peer-databases/27.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Peer to peer databases</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>Just discovered today <a href="https://github.com/orbitdb/orbit-db">https://github.com/orbitdb/orbit-db</a> that is based on IPFS and using IPFS pubsub system.</p>
+<p>Also <a href="https://www.bigchaindb.com/">BigchainDB</a> that is apparently using mongodb replication based on <a href="https://github.com/tendermint/tendermint">Tendermint</a> consensus.</p>
+          <p><a href="https://forum.mesg.com/t/peer-to-peer-databases/27/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/peer-to-peer-databases/27/2</link>
+        <pubDate>Thu, 30 Aug 2018 14:20:36 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-27-2</guid>
+        <source url="https://forum.mesg.com/t/peer-to-peer-databases/27.rss">Peer to peer databases</source>
+      </item>
+      <item>
+        <title>Peer to peer databases</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>This thread is about aggregation of existing decentralized database systems that we could use in MESG or at least that are good to know <img src="https://discourse-cdn-sjc2.com/standard10/images/emoji/twitter/slight_smile.png?v=6" title=":slight_smile:" class="emoji" alt=":slight_smile:"></p>
+<p>Feel free to add the one you know.</p>
+          <p><a href="https://forum.mesg.com/t/peer-to-peer-databases/27/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/peer-to-peer-databases/27/1</link>
+        <pubDate>Thu, 30 Aug 2018 14:14:25 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-27-1</guid>
+        <source url="https://forum.mesg.com/t/peer-to-peer-databases/27.rss">Peer to peer databases</source>
+      </item>
+  </channel>
+</rss>

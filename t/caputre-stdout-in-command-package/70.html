@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <title>Caputre Stdout in command package - Engine - MESG Community</title>
+    <meta name="description" content="vs 
+
+ 
+Following the discussion Caputre Stdout vs Passing os.Stdout as io.Writer to struct. 
+Capture Stdout is completly safe (check out https://github.com/golang/go/blob/master/src/testing/example.go#L71) and we can &amp;hellip;">
+    <meta name="generator" content="Discourse 2.5.0.beta5 - https://github.com/discourse/discourse version 00aab498297cba8f977c1e0eb17b7d38ff06cc68">
+<link rel="icon" type="image/png" href="../../uploads/default/optimized/1X/9f11b6ddfa02bffdbec79487592a0573a0236cb5_2_32x32.png">
+<link rel="apple-touch-icon" type="image/png" href="../../uploads/default/optimized/1X/53630361a40ad76e1733dd0b0f486e9ae2f4f4d6_2_180x180.png">
+<meta name="theme-color" content="#491e8c">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+<link rel="canonical" href="70.html" />
+<script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","url":"https://forum.mesg.com","potentialAction":{"@type":"SearchAction","target":"https://forum.mesg.com/search?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
+<link rel="search" type="application/opensearchdescription+xml" href="../../opensearch.xml" title="MESG Community Search">
+
+      <link href="../../stylesheets/desktop_3_52e3411e87658e862890db7bd06899cf49ad5f59.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop" data-theme-id="7"/>
+      <link href="../../stylesheets/desktop_theme_7_bf4f2d3d8a71e6ee907065be9a79df3d849bd29c.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop_theme" data-theme-id="7"/>
+    
+    <meta id="data-ga-universal-analytics" data-tracking-code="UA-117583862-1" data-json="{&quot;cookieDomain&quot;:&quot;auto&quot;}" data-auto-link-domains="">
+
+<link rel="preload" href="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js" as="script">
+<script src="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js"></script>
+
+
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of &#39;Caputre Stdout in command package&#39;" href="70.rss" />
+    <meta property="og:site_name" content="MESG Community" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://forum.mesg.com/uploads/default/original/1X/fbad366fb822efa0b76a87890c7ac7261cda9346.jpeg" />
+<meta property="og:image" content="https://forum.mesg.com/uploads/default/original/1X/fbad366fb822efa0b76a87890c7ac7261cda9346.jpeg" />
+<meta property="og:url" content="https://forum.mesg.com/t/caputre-stdout-in-command-package/70" />
+<meta name="twitter:url" content="https://forum.mesg.com/t/caputre-stdout-in-command-package/70" />
+<meta property="og:title" content="Caputre Stdout in command package" />
+<meta name="twitter:title" content="Caputre Stdout in command package" />
+<meta property="og:description" content="vs     Following the discussion Caputre Stdout vs Passing os.Stdout as io.Writer to struct.  Capture Stdout is completly safe (check out https://github.com/golang/go/blob/master/src/testing/example.go#L71) and we can integrate easily without modify andy Cmd structs." />
+<meta name="twitter:description" content="vs     Following the discussion Caputre Stdout vs Passing os.Stdout as io.Writer to struct.  Capture Stdout is completly safe (check out https://github.com/golang/go/blob/master/src/testing/example.go#L71) and we can integrate easily without modify andy Cmd structs." />
+<meta name="twitter:label1" value="Reading time" />
+<meta name="twitter:data1" value="1 mins 🕑" />
+<meta name="twitter:label2" value="Likes" />
+<meta name="twitter:data2" value="1 ❤" />
+<meta property="article:published_time" content="2018-10-01T09:55:08+00:00" />
+<meta property="og:ignore_canonical" content="true" />
+
+
+
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"QAPage","name":"Caputre Stdout in command package","mainEntity":{"@type":"Question","name":"Caputre Stdout in command package","text":"<a href="https://forum.mesg.com/t/caputre-stdout-in-command-package/\&quot;https://github.com/krhubert\&quot;" target=\"_blank\" rel=\"nofollow noopener\">\n\n[krhubert]\n\n<\/a>\n\n<a href="https://forum.mesg.com/t/caputre-stdout-in-command-package/\&quot;https://github.com/mesg-foundation/core/pull/501\&quot;" target=\"_blank\" rel=\"nofollow noopener\">Add unit test for commands flags<\/a>\n\nby <a href="https://forum.mesg.com/t/caputre-stdout-in-command-package/\&quot;https://github.com/krhubert\&quot;" target=\"_blank\" rel=\"nofollow noopener\">krhubert<\/a>\n\non <a href="https://forum.mesg.com/t/caputre-stdout-in-command-package/\&quot;https://github.com/mesg-foundation/core/pull/501\&quot;" target=\"_blank\" rel=\"nofollow noopener\">01:11PM - 25 Sep 18 UTC<\/a>\n\n4 commits\n\nchanged 12 files\n\nwith 312 additions\n\nand 13 deletions.\n\nvs\n\n<a href="https://forum.mesg.com/t/caputre-stdout-in-command-package/\&quot;https://github.com/ilgooz\&quot;" target=\"_blank\" rel=\"nofollow noopener\">\n\n[ilgooz]\n\n<\/a>\n\n<a href="https://forum.mesg.com/t/caputre-stdout-in-command-package/\&quot;https://github.com/mesg-foundation/core/pull/499\&quot;" target=\"_blank\" rel=\"nofollow noopener\">extend ListServices api to filter by running servi&hellip;<\/a>","upvoteCount":1,"answerCount":1,"dateCreated":"2018-10-01T09:55:08.154Z","author":{"@type":"Person","name":""},"acceptedAnswer":{"@type":"Answer","text":"Agree with solution 1 of hubert\n\nLet’s vote\n\n<a href="https://forum.mesg.com/t/caputre-stdout-in-command-package/\&quot;/t/caputre-stdout-in-command-package/70/3\&quot;">poll<\/a>","upvoteCount":0,"dateCreated":"2018-10-02T08:16:54.946Z","url":"https://forum.mesg.com/t/caputre-stdout-in-command-package/70/3","author":{"@type":"Person","name":"Nicolas"}}}}</script>
+  </head>
+  <body class="crawler">
+    
+    <header>
+      <a href="../../index.html">
+          <img src="../../uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png" alt="MESG Community" id="site-logo" style="max-width: 150px;">
+      </a>
+    </header>
+    <div id="main-outlet" class="wrap">
+        <div id="topic-title">
+    <h1>
+      <a href="70.html">Caputre Stdout in command package</a>
+    </h1>
+
+      <div class="topic-category" itemscope itemtype="http://schema.org/BreadcrumbList">
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../c/development.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #AB9364'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Development</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="1" />
+          </span>
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../c/development/engine.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #AB9364'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Engine</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="2" />
+          </span>
+      </div>
+
+  </div>
+
+  
+
+
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/krhubert.html'><span itemprop='name'>krhubert</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="70.html">
+
+            <link itemprop="image" href="../../uploads/default/original/1X/fbad366fb822efa0b76a87890c7ac7261cda9346.jpeg">
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-10-01T09:55:08Z'>
+              <time itemprop='dateModified' datetime='2018-10-02T15:23:29Z' class='post-time'>
+                October 2, 2018,  3:23pm
+              </time>
+          <span itemprop='position'>#1</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p><aside class="onebox githubpullrequest">
+  <header class="source">
+      <a href="https://github.com/mesg-foundation/core/pull/501" target="_blank" rel="nofollow noopener">github.com/mesg-foundation/core</a>
+  </header>
+  <article class="onebox-body">
+      <a href="https://github.com/krhubert" target="_blank" rel="nofollow noopener">
+    <img alt="krhubert" src="../../uploads/default/original/1X/fbad366fb822efa0b76a87890c7ac7261cda9346.jpeg" class="thumbnail onebox-avatar" width="90" height="90">
+  </a>
+
+<h4>
+  <a href="https://github.com/mesg-foundation/core/pull/501" target="_blank" rel="nofollow noopener">Add unit test for commands flags</a>
+</h4>
+
+<div class="date">
+  by <a href="https://github.com/krhubert" target="_blank" rel="nofollow noopener">krhubert</a>
+  on <a href="https://github.com/mesg-foundation/core/pull/501" target="_blank" rel="nofollow noopener">01:11PM - 25 Sep 18 UTC</a>
+</div>
+
+<div class="github-commit-stats">
+  <strong>4 commits</strong>
+  changed <strong>12 files</strong>
+  with <strong>312 additions</strong>
+  and <strong>13 deletions</strong>.
+</div>
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+<br>
+vs<br>
+<aside class="onebox githubpullrequest">
+  <header class="source">
+      <a href="https://github.com/mesg-foundation/core/pull/499" target="_blank" rel="nofollow noopener">github.com/mesg-foundation/core</a>
+  </header>
+  <article class="onebox-body">
+      <a href="https://github.com/ilgooz" target="_blank" rel="nofollow noopener">
+    <img alt="ilgooz" src="../../uploads/default/original/1X/7fb45344ee4f8365376c724b482f1b36dfb6ace7.png" class="thumbnail onebox-avatar" width="90" height="90">
+  </a>
+
+<h4>
+  <a href="https://github.com/mesg-foundation/core/pull/499" target="_blank" rel="nofollow noopener">extend ListServices api to filter by running services, closes #496</a>
+</h4>
+
+<div class="date">
+  by <a href="https://github.com/ilgooz" target="_blank" rel="nofollow noopener">ilgooz</a>
+  on <a href="https://github.com/mesg-foundation/core/pull/499" target="_blank" rel="nofollow noopener">08:39AM - 25 Sep 18 UTC</a>
+</div>
+
+<div class="github-commit-stats">
+  <strong>20 commits</strong>
+  changed <strong>14 files</strong>
+  with <strong>326 additions</strong>
+  and <strong>144 deletions</strong>.
+</div>
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+</p>
+<p>Following the discussion Caputre Stdout vs Passing os.Stdout as io.Writer to struct.</p>
+<p>Capture Stdout is completly safe (check out <a href="https://github.com/golang/go/blob/master/src/testing/example.go#L71" rel="nofollow noopener">https://github.com/golang/go/blob/master/src/testing/example.go#L71</a>) and we can integrate easily without modify andy Cmd structs.</p>
+        </div>
+
+        <meta itemprop='headline' content='Caputre Stdout in command package'>
+          <meta itemprop='keywords' content=''>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="1" />
+           <span class='post-likes'>1 Like</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/krhubert.html'><span itemprop='name'>krhubert</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="70.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-10-02T08:05:20Z' class='post-time'>
+                October 2, 2018,  8:05am
+              </time>
+              <meta itemprop='dateModified' content='2018-10-02T08:05:20Z'>
+          <span itemprop='position'>#2</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>So there are two approaches to testing stdout of our cli.</p>
+<ol>
+<li>Capture <code>os.Stdout</code> like <a href="https://github.com/mesg-foundation/core/pull/501/files#diff-52180ffe0b5b5195619396e8ad919784R20">here</a>
+</li>
+<li>Pass <code>io.Writer</code> to Cmd struct and replace default <code>os.Stdout</code> with custom <code>io.Writer</code> in tests <a href="https://github.com/mesg-foundation/core/pull/499/files#diff-77e48e504b88c467c2ac6250cbfb27d8R21">here</a>
+</li>
+</ol>
+<p>As far as we don’t need other writing options as Stdout/Stderr we should keep our code simple and go with 1st option.<br>
+Maybe in the feature, there will be a need for passing <code>io.Writer</code> directly to Cmd struct then we will go with 2nd solution (maybe then only <code>baseCmd</code> will keep stdout/err writer, will see)</p>
+        </div>
+
+        <meta itemprop='headline' content='Caputre Stdout in command package'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="70.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-10-02T08:16:54Z'>
+              <time itemprop='dateModified' datetime='2018-10-02T15:23:39Z' class='post-time'>
+                October 2, 2018,  3:23pm
+              </time>
+          <span itemprop='position'>#3</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Agree with solution 1 of hubert</p>
+<p>Let’s vote</p>
+<div class="poll" data-poll-status="open" data-poll-type="regular" data-poll-name="poll">
+<div>
+<div class="poll-container">
+<ul>
+<li data-poll-option-id="dfb92cf85ad5861807eedcd79ddca017">Use and capture os.Stdout</li>
+<li data-poll-option-id="5cc6dff6203a0912b7ff2f8bb98620a2">Pass io.Writer</li>
+</ul>
+</div>
+<div class="poll-info">
+<p>
+<span class="info-number">0</span>
+<span class="info-label">voters</span>
+</p>
+</div>
+</div>
+</div>
+        </div>
+
+        <meta itemprop='headline' content='Caputre Stdout in command package'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="70.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-10-02T08:23:10Z'>
+              <time itemprop='dateModified' datetime='2018-10-02T08:28:58Z' class='post-time'>
+                October 2, 2018,  8:28am
+              </time>
+          <span itemprop='position'>#4</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>I like having an abstraction and avoid changing the globals <em>(os.Stdout)</em>, my vote is on passing the <em>io.Writer</em>. <img src="../../images/emoji/twitter/slight_smile.png%3Fv=6" title=":slight_smile:" class="emoji" alt=":slight_smile:"></p>
+        </div>
+
+        <meta itemprop='headline' content='Caputre Stdout in command package'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="70.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-10-02T09:13:03Z' class='post-time'>
+                October 2, 2018,  9:13am
+              </time>
+              <meta itemprop='dateModified' content='2018-10-02T09:13:03Z'>
+          <span itemprop='position'>#5</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>I would usually be ok to pass the writer as reference and this would do the job but in the case of the stderr stdout we will/might not be able to pass it everywhere. We might use some libraries (like aurora, the one for the spinner, and stuff like that) that are not compatible with passing the stdout/err and these one cannot be tested in the end.</p>
+<p>Mapping the stderr/out will at least catch everything and at the same time make the code easier and we can still use fmt and packages like that without any problems. If we have the writer in the struct somewhere we have to make sure that new developers use it and there is no way to enforce that so developers will just use the simplicity of fmt and this will be for nothing in the end.</p>
+<p>So my vote is on the capture of the std. Especially for this case where we are only on the command and we want to access the stdout/err. Any other writers that we might need can definitely be given as dependency.</p>
+        </div>
+
+        <meta itemprop='headline' content='Caputre Stdout in command package'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+
+
+
+
+
+
+    </div>
+    <footer class="container wrap">
+      <nav class='crawler-nav'>
+        <ul>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../index.html' itemprop="url">Home </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../categories.html' itemprop="url">Categories </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../guidelines.html' itemprop="url">FAQ/Guidelines </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../tos.html' itemprop="url">Terms of Service </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../privacy.html' itemprop="url">Privacy Policy </a>
+          </span>
+        </li>
+        </ul>
+      </nav>
+      <p class='powered-by-link'>Powered by <a href="https://www.discourse.org">Discourse</a>, best viewed with JavaScript enabled</p>
+    </footer>
+    
+    
+  </body>
+  
+</html>

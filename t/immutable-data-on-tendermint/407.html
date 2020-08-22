@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <title>Immutable data on Tendermint - Engine - MESG Community</title>
+    <meta name="description" content="Hey guys, I would like to discuss about implementing immutable data all across the decentralized databases. 
+After some discussion with @Anthony, we are thinking about implementing a more immutable system on all data tha&amp;hellip;">
+    <meta name="generator" content="Discourse 2.5.0.beta5 - https://github.com/discourse/discourse version 00aab498297cba8f977c1e0eb17b7d38ff06cc68">
+<link rel="icon" type="image/png" href="../../uploads/default/optimized/1X/9f11b6ddfa02bffdbec79487592a0573a0236cb5_2_32x32.png">
+<link rel="apple-touch-icon" type="image/png" href="../../uploads/default/optimized/1X/53630361a40ad76e1733dd0b0f486e9ae2f4f4d6_2_180x180.png">
+<meta name="theme-color" content="#491e8c">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+<link rel="canonical" href="407.html" />
+<script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","url":"https://forum.mesg.com","potentialAction":{"@type":"SearchAction","target":"https://forum.mesg.com/search?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
+<link rel="search" type="application/opensearchdescription+xml" href="../../opensearch.xml" title="MESG Community Search">
+
+      <link href="../../stylesheets/desktop_3_52e3411e87658e862890db7bd06899cf49ad5f59.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop" data-theme-id="7"/>
+      <link href="../../stylesheets/desktop_theme_7_bf4f2d3d8a71e6ee907065be9a79df3d849bd29c.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop_theme" data-theme-id="7"/>
+    
+    <meta id="data-ga-universal-analytics" data-tracking-code="UA-117583862-1" data-json="{&quot;cookieDomain&quot;:&quot;auto&quot;}" data-auto-link-domains="">
+
+<link rel="preload" href="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js" as="script">
+<script src="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js"></script>
+
+
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of &#39;Immutable data on Tendermint&#39;" href="407.rss" />
+    <meta property="og:site_name" content="MESG Community" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:url" content="https://forum.mesg.com/t/immutable-data-on-tendermint/407" />
+<meta name="twitter:url" content="https://forum.mesg.com/t/immutable-data-on-tendermint/407" />
+<meta property="og:title" content="Immutable data on Tendermint" />
+<meta name="twitter:title" content="Immutable data on Tendermint" />
+<meta property="og:description" content="Hey guys, I would like to discuss about implementing immutable data all across the decentralized databases.  After some discussion with @Anthony, we are thinking about implementing a more immutable system on all data that are on the decentralized databases. The data itself should never be updated or deleted but an other data that reference the first can change its behavior (the new data also cannot be updated).  It will also make the calculation of hash simpler by remove exception. Basically, al..." />
+<meta name="twitter:description" content="Hey guys, I would like to discuss about implementing immutable data all across the decentralized databases.  After some discussion with @Anthony, we are thinking about implementing a more immutable system on all data that are on the decentralized databases. The data itself should never be updated or deleted but an other data that reference the first can change its behavior (the new data also cannot be updated).  It will also make the calculation of hash simpler by remove exception. Basically, al..." />
+<meta property="article:published_time" content="2019-09-29T11:13:24+00:00" />
+<meta property="og:ignore_canonical" content="true" />
+
+
+
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"QAPage","name":"Immutable data on Tendermint","mainEntity":{"@type":"Question","name":"Immutable data on Tendermint","text":"Hey guys, I would like to discuss about implementing immutable data all across the decentralized databases.\n\nAfter some discussion with <a class=\"mention\" href="https://forum.mesg.com/t/immutable-data-on-tendermint/\&quot;/u/anthony\&quot;">@Anthony<\/a>, we are thinking about implementing a more immutable system on all data that are on the decentralized databases. The data itself should never be updated or&hellip;","upvoteCount":0,"answerCount":0,"dateCreated":"2019-09-29T11:13:23.963Z","author":{"@type":"Person","name":"Nicolas"}}}</script>
+  </head>
+  <body class="crawler">
+    
+    <header>
+      <a href="../../index.html">
+          <img src="../../uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png" alt="MESG Community" id="site-logo" style="max-width: 150px;">
+      </a>
+    </header>
+    <div id="main-outlet" class="wrap">
+        <div id="topic-title">
+    <h1>
+      <a href="407.html">Immutable data on Tendermint</a>
+    </h1>
+
+      <div class="topic-category" itemscope itemtype="http://schema.org/BreadcrumbList">
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../c/development.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #AB9364'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Development</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="1" />
+          </span>
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../c/development/engine.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #AB9364'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Engine</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="2" />
+          </span>
+      </div>
+
+      <div class="topic-category">
+        <div class='discourse-tags list-tags'>
+            <a href='../../tag/proposal.html' class='discourse-tag' rel="tag">proposal</a>
+        </div>
+      </div>
+  </div>
+
+  
+
+
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="407.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2019-09-29T11:13:24Z' class='post-time'>
+                September 29, 2019, 11:13am
+              </time>
+              <meta itemprop='dateModified' content='2019-09-29T11:13:24Z'>
+          <span itemprop='position'>#1</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Hey guys, I would like to discuss about implementing immutable data all across the decentralized databases.</p>
+<p>After some discussion with <a class="mention" href="../../u/anthony.html">@Anthony</a>, we are thinking about implementing a more immutable system on all data that are on the decentralized databases. The data itself should never be updated or deleted but an other data that reference the first can change its behavior (the new data also cannot be updated).</p>
+<p>It will also make the calculation of hash simpler by remove exception. Basically, all the data of a resource should be used to calculate the hash. If one the data is updated, then the hash is different and the resource is broken!</p>
+<p>For example, the ownership system has been done this way to prevent the edition of service. Instead of having one owner in the service struct, the engine is using the ownership db to get the owner of this service. It will allow to change the owner without updating service. Moreover, it allow to implement a multi-owner system without having to change any data structure (this is a very important argument to not break the decentralized network)!</p>
+<p>In my opinion, one exception should be implemented. It’s concerning the “deletion” of resource.<br>
+I don’t think having to reference the resource in a “deletion” store is good and practical.<br>
+I suggest to add to any resource that can be delete/deprecated/disabled a boolean parameter that will flag the resource as deleted/deprecated/disabled/etc only when it can happen maximum once.<br>
+This “deleted” parameter is not used for the hash calculation.</p>
+<p><a class="mention-group" href="../../groups/core.html">@core</a> what do you think about such a system?</p>
+<p>I would like to give a few case as example so we can agree on practical situation:</p>
+<ol>
+<li><a href="https://github.com/mesg-foundation/engine/issues/1377" rel="nofollow noopener">the service deprecation system</a></li>
+</ol>
+<p>This system will allow__only once__ a service to become deprecated and it will stay like this forever. In this case, is to simply add a parameter <code>deprecated</code> in the service struct that is omitted from hash calculation.</p>
+<ol start="2">
+<li><a href="../instance-on-the-network/406.html">list of nodes that run instances</a></li>
+</ol>
+<p>The current proposal suggests to use a new dedicated store where each entry is referencing the instance hash and the node address. I think if we already agree with the beginning of this proposal, this is ok.<br>
+But it doesn’t say how a node can unregister itself. Should it remove its entry from the store? Should it update it by setting a <code>removed</code> bool parameter to <code>true</code>? Should a new store act as removed node?</p>
+<p>For this case, I suggest the node unregisters itself by setting an <code>unregistered</code> param to true in this new store of nodes that runs instances.</p>
+<ol start="3">
+<li>Execution</li>
+</ol>
+<p>Execution is the resource that is and will be updated the most. It has many state: Created, InProgress, Executed, Validated, Failed and should implement a retry system.</p>
+<p>Currently, all those data are in one resource that is being updated when needed.</p>
+<p>By applying the immutable system, the execution should be splitted in many 3 resources: <code>Execution</code>, <code>ExecutionResult</code> and <code>ExecutionValidation</code>:</p>
+<ul>
+<li>
+<code>Execution</code>
+<ul>
+<li><code>ParentHash</code></li>
+<li><code>EventHash</code></li>
+<li><code>InstanceHash</code></li>
+<li><code>TaskKey</code></li>
+<li><code>Inputs</code></li>
+<li><code>Executor</code></li>
+<li>
+<code>Validators</code> (for the future task validation system)</li>
+<li><code>Tags</code></li>
+<li><code>ProcessHash</code></li>
+<li>
+<code>StepID</code><br>
+(almost all of current Execution except <code>Outputs</code>, <code>error</code> and <code>Status</code>).</li>
+</ul>
+</li>
+<li>
+<code>ExecutionResult</code>
+<ul>
+<li><code>ExecutionHash</code></li>
+<li><code>Outputs</code></li>
+<li><code>Error</code></li>
+</ul>
+</li>
+<li>
+<code>ExecutionValidation</code> (for the future task validation system)
+<ul>
+<li><code>ExecutionResultHash</code></li>
+<li><code>IsValid</code></li>
+<li><code>Validator</code></li>
+</ul>
+</li>
+</ul>
+<p>It will even be easier to check for write authorization and with the retry system, we will see that one <code>Execution</code> has many <code>ExecutionResult</code>. With the validation system, many <code>ExecutionValidation</code> for one <code>ExecutionResult</code>.</p>
+        </div>
+
+        <meta itemprop='headline' content='Immutable data on Tendermint'>
+          <meta itemprop='keywords' content='proposal'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/krhubert.html'><span itemprop='name'>krhubert</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="407.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2019-09-30T05:08:50Z' class='post-time'>
+                September 30, 2019,  5:08am
+              </time>
+              <meta itemprop='dateModified' content='2019-09-30T05:08:50Z'>
+          <span itemprop='position'>#2</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <blockquote>
+<p>The data itself should never be updated</p>
+</blockquote>
+<p>We can’t update data right now.</p>
+<blockquote>
+<p>or deleted but an other data that reference the first can change its behavior</p>
+</blockquote>
+<p>What is the reason to not delete the data?</p>
+<blockquote>
+<p>It will also make the calculation of hash simpler by remove exception.</p>
+</blockquote>
+<p>What exeption you are taking about and how the hash calucation become simpler?</p>
+<blockquote>
+<p>I suggest to add to any resource that can be delete/deprecated/disabled a boolean parameter that will flag the resource as       deleted/deprecated/disabled/etc only when it can happen maximum once.</p>
+</blockquote>
+<p>I not sure about that. That is related with question about deleting the data.</p>
+<blockquote>
+<p>By applying the immutable system, the execution should be splitted in many 3 resources: Execution, ExecutionResult and           ExecutionValidation:</p>
+</blockquote>
+<p>We don’t caluclate result in the hash. We don’t know how it should look like in the future so I wound’t rush with it so much.</p>
+        </div>
+
+        <meta itemprop='headline' content='Immutable data on Tendermint'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+
+
+
+
+
+
+    </div>
+    <footer class="container wrap">
+      <nav class='crawler-nav'>
+        <ul>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../index.html' itemprop="url">Home </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../categories.html' itemprop="url">Categories </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../guidelines.html' itemprop="url">FAQ/Guidelines </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../tos.html' itemprop="url">Terms of Service </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../privacy.html' itemprop="url">Privacy Policy </a>
+          </span>
+        </li>
+        </ul>
+      </nav>
+      <p class='powered-by-link'>Powered by <a href="https://www.discourse.org">Discourse</a>, best viewed with JavaScript enabled</p>
+    </footer>
+    
+    
+  </body>
+  
+</html>

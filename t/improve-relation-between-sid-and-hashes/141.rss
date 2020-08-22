@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Improve relation between SID and Hashes</title>
+    <link>https://forum.mesg.com/t/improve-relation-between-sid-and-hashes/141</link>
+    <description>After a conversation with @Anthony about the relation between SID and Hashes that we would like to have, we decided a few things.
+
+# Relation between SID and Hashes
+
+The relation between SID and Hashes should keep track of all hashes referenced by the SID and preserve the order of addition. So basically, in the database, SID should reference an array of hash.
+
+# Service Deployment
+
+Deploying a service with an existing SID will **not** delete existing services but only append the new service&#39;s hash to the associated SID array of hashes. Like this, it keeps existing services with the order of deployment.
+
+# Return a service from a SID
+
+When a service needs to be returned from a SID, the most recent deployed service will be returned.
+
+# Prevent concurrent run of services with same ID
+
+Because of volumes, services with the same SID cannot run at the same time. The function service start have to prevent this behavior and fail with a explicit error for the user.
+
+# Delete a SID
+
+When users want to delete a service with a hash, the hash is removed from the SID&#39;s array of hashes as well as the corresponding service.
+When users want to delete a service with a SID, the last deployed service&#39;s hash is removed from the SID&#39;s array of hashes as well as the corresponding service.
+
+In both case, if there is no more element in the SID&#39;s array of hashes, then the SID&#39;s array of hashes must be remove from the database.
+
+---
+
+@krhubert @ilgooz @Anthony what do you think about this? do you have feedback?</description>
+    
+    <lastBuildDate>Thu, 13 Dec 2018 11:47:25 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/improve-relation-between-sid-and-hashes/141.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Improve relation between SID and Hashes</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Note from a conversation on the Chat:</p>
+<p>SID is also used for generating the name of the volume.<br>
+Maybe it’s not the best solution and makes things more complicated (like what happen if 2 services with the same SID runs at the same time with the same volumes?).</p>
+<p><a class="mention" href="/u/ilgooz">@ilgooz</a> suggested to add a developer defined key to the volumes. Eg:</p>
+<pre><code class="lang-auto">volumes:
+  - very-unique-volume:/var/lib
+</code></pre>
+          <p><a href="https://forum.mesg.com/t/improve-relation-between-sid-and-hashes/141/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/improve-relation-between-sid-and-hashes/141/4</link>
+        <pubDate>Thu, 13 Dec 2018 11:47:25 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-141-4</guid>
+        <source url="https://forum.mesg.com/t/improve-relation-between-sid-and-hashes/141.rss">Improve relation between SID and Hashes</source>
+      </item>
+      <item>
+        <title>Improve relation between SID and Hashes</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>Ok for me but still need some discussion about:</p>
+<h3>Prevent concurrent run of services with same ID</h3>
+<p>Not sure this is really necessary, again responsibility of the developer.<br>
+Agree with <a class="mention" href="/u/ilgooz">@ilgooz</a>, we can return the list of service ids/hash that are running like that when the developer run a new service (s)he can then see the list of similar services that are running and if (s)he don’t want to run to (s)he can stop it.<br>
+Let’s not enforce anything here but just provide the informations to revert if needed.</p>
+<h3>Delete a SID</h3>
+<p>I’m not really agree with the part “When users want to delete a service with a SID, the last deployed service’s hash is removed”. If I compare with shared pointers, has_many relationships in a database or any linked resources. When an attached resource is delete then fine but when the resource that attach everything is deleted then everything is deleted.<br>
+So here when the sid is deleted all the attached hash should be deleted. This is a “risky” operation and that’s the responsibility of the developer. If they do mistakes they can re-deploy it.</p>
+<p>Other than that it’s good</p>
+          <p><a href="https://forum.mesg.com/t/improve-relation-between-sid-and-hashes/141/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/improve-relation-between-sid-and-hashes/141/3</link>
+        <pubDate>Thu, 13 Dec 2018 09:58:02 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-141-3</guid>
+        <source url="https://forum.mesg.com/t/improve-relation-between-sid-and-hashes/141.rss">Improve relation between SID and Hashes</source>
+      </item>
+      <item>
+        <title>Improve relation between SID and Hashes</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <ul>
+<li>
+<p><a href="https://github.com/mesg-foundation/core/blob/2cd3fa0/protobuf/coreapi/api.proto#L208" rel="nofollow noopener">Start</a> &amp; Stop service APIs should reply with the hash to indicate which version of the service started or stopped otherwise it’s ambiguous. (we can also return the sid, can be useful when start/stop made with the hash.)</p>
+</li>
+<li>
+<p>Running a service with different hashes at the same is needed in real world apps. Think about blue/green deployments where you still need to run the service with the previous version until all reaming tasks complete. (volume issue is an another topic, it shouldn’t limit running a service’s multiple versions at the same time.)</p>
+</li>
+<li>
+<p>[feature idea]: introduce a lock file to workflows to lock versions of services.</p>
+</li>
+</ul>
+<p>other than these lgtm. <img src="https://forum.mesg.com/images/emoji/twitter/+1.png?v=6" title=":+1:" class="emoji" alt=":+1:"></p>
+          <p><a href="https://forum.mesg.com/t/improve-relation-between-sid-and-hashes/141/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/improve-relation-between-sid-and-hashes/141/2</link>
+        <pubDate>Thu, 13 Dec 2018 09:33:40 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-141-2</guid>
+        <source url="https://forum.mesg.com/t/improve-relation-between-sid-and-hashes/141.rss">Improve relation between SID and Hashes</source>
+      </item>
+      <item>
+        <title>Improve relation between SID and Hashes</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>After a conversation with <a class="mention" href="/u/anthony">@Anthony</a> about the relation between SID and Hashes that we would like to have, we decided a few things.</p>
+<h1>Relation between SID and Hashes</h1>
+<p>The relation between SID and Hashes should keep track of all hashes referenced by the SID and preserve the order of addition. So basically, in the database, SID should reference an array of hash.</p>
+<h1>Service Deployment</h1>
+<p>Deploying a service with an existing SID will <strong>not</strong> delete existing services but only append the new service’s hash to the associated SID array of hashes. Like this, it keeps existing services with the order of deployment.</p>
+<h1>Return a service from a SID</h1>
+<p>When a service needs to be returned from a SID, the most recent deployed service will be returned.</p>
+<h1>Prevent concurrent run of services with same ID</h1>
+<p>Because of volumes, services with the same SID cannot run at the same time. The function service start have to prevent this behavior and fail with a explicit error for the user.</p>
+<h1>Delete a SID</h1>
+<p>When users want to delete a service with a hash, the hash is removed from the SID’s array of hashes as well as the corresponding service.<br>
+When users want to delete a service with a SID, the last deployed service’s hash is removed from the SID’s array of hashes as well as the corresponding service.</p>
+<p>In both case, if there is no more element in the SID’s array of hashes, then the SID’s array of hashes must be remove from the database.</p>
+<hr>
+<p><a class="mention" href="/u/krhubert">@krhubert</a> <a class="mention" href="/u/ilgooz">@ilgooz</a> <a class="mention" href="/u/anthony">@Anthony</a> what do you think about this? do you have feedback?</p>
+          <p><a href="https://forum.mesg.com/t/improve-relation-between-sid-and-hashes/141/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/improve-relation-between-sid-and-hashes/141/1</link>
+        <pubDate>Thu, 13 Dec 2018 09:02:12 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-141-1</guid>
+        <source url="https://forum.mesg.com/t/improve-relation-between-sid-and-hashes/141.rss">Improve relation between SID and Hashes</source>
+      </item>
+  </channel>
+</rss>

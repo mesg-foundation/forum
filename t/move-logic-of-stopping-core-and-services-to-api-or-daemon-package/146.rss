@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Move logic of stopping core and services to api or daemon package</title>
+    <link>https://forum.mesg.com/t/move-logic-of-stopping-core-and-services-to-api-or-daemon-package/146</link>
+    <description>From https://github.com/mesg-foundation/core/issues/576
+
+Now, when stopping the core (command `mesg-core stop`), the CLI manually load and stop services before stopping the core.
+This logic should be move in `API` or `daemon` package.
+
+Concerned source code:
+https://github.com/mesg-foundation/core/blob/a5a1dc6fb4640a2a43366be0fcf59191c36794fb/commands/provider/core_provider.go#L34-L72
+
+
+----
+
+Reply from @Anthony
+
+I would vote for the daemon package to run this logic but it can rely to a `stopAllServices` from the API
+
+
+----
+
+Reply from @krhubert
+
+That would be good start, but for now we are listing services from the database.
+
+Maybe we should add label to each container and just create a function `container.StopService(filter/label)`
+
+And in daemon - container.StopService(&quot;mesg-label&quot;)
+
+Because overall we don&#39;t need to list service from a database, but rather from current stat of docker containers.</description>
+    
+    <lastBuildDate>Thu, 26 Dec 2019 02:44:40 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/move-logic-of-stopping-core-and-services-to-api-or-daemon-package/146.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Move logic of stopping core and services to api or daemon package</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>The engine is now responsible of shutting down all the services when we shutdown the daemon <a href="https://github.com/mesg-foundation/engine/blob/5fc8601c1de2edd06fd0549dc76f07aca91ef881/core/main.go#L209">https://github.com/mesg-foundation/engine/blob/5fc8601c1de2edd06fd0549dc76f07aca91ef881/core/main.go#L209</a></p>
+          <p><a href="https://forum.mesg.com/t/move-logic-of-stopping-core-and-services-to-api-or-daemon-package/146/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/move-logic-of-stopping-core-and-services-to-api-or-daemon-package/146/2</link>
+        <pubDate>Thu, 26 Dec 2019 02:44:40 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-146-2</guid>
+        <source url="https://forum.mesg.com/t/move-logic-of-stopping-core-and-services-to-api-or-daemon-package/146.rss">Move logic of stopping core and services to api or daemon package</source>
+      </item>
+      <item>
+        <title>Move logic of stopping core and services to api or daemon package</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>From <a href="https://github.com/mesg-foundation/core/issues/576" rel="nofollow noopener">https://github.com/mesg-foundation/core/issues/576</a></p>
+<p>Now, when stopping the core (command <code>mesg-core stop</code>), the CLI manually load and stop services before stopping the core.<br>
+This logic should be move in <code>API</code> or <code>daemon</code> package.</p>
+<p>Concerned source code:<br>
+<aside class="onebox githubblob">
+  <header class="source">
+      <a href="https://github.com/mesg-foundation/core/blob/a5a1dc6fb4640a2a43366be0fcf59191c36794fb/commands/provider/core_provider.go#L34-L72" target="_blank" rel="nofollow noopener">github.com</a>
+  </header>
+  <article class="onebox-body">
+    <h4><a href="https://github.com/mesg-foundation/core/blob/a5a1dc6fb4640a2a43366be0fcf59191c36794fb/commands/provider/core_provider.go#L34-L72" target="_blank" rel="nofollow noopener">mesg-foundation/core/blob/a5a1dc6fb4640a2a43366be0fcf59191c36794fb/commands/provider/core_provider.go#L34-L72</a></h4>
+<pre class="onebox"><code class="lang-go"><ol class="start lines" start="34" style="counter-reset: li-counter 33 ;">
+<li>func (p *CoreProvider) Stop() error {</li>
+<li>	ids, err := service.ListRunning()</li>
+<li>	if err != nil {</li>
+<li>		return err</li>
+<li>	}</li>
+<li>
+</li>
+<li>	var (</li>
+<li>		idsLen = len(ids)</li>
+<li>		errC   = make(chan error, idsLen)</li>
+<li>		wg     sync.WaitGroup</li>
+<li>	)</li>
+<li>
+</li>
+<li>	wg.Add(idsLen)</li>
+<li>	for _, id := range ids {</li>
+<li>		go func(id string) {</li>
+<li>			defer wg.Done()</li>
+<li>			_, err := p.client.StopService(context.Background(), &amp;coreapi.StopServiceRequest{</li>
+<li>				ServiceID: id,</li>
+<li>			})</li>
+<li>			if err != nil {</li>
+</ol></code></pre>
+
+  This file has been truncated. <a href="https://github.com/mesg-foundation/core/blob/a5a1dc6fb4640a2a43366be0fcf59191c36794fb/commands/provider/core_provider.go#L34-L72" target="_blank" rel="nofollow noopener">show original</a>
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+</p>
+<hr>
+<p>Reply from <a class="mention" href="/u/anthony">@Anthony</a></p>
+<p>I would vote for the daemon package to run this logic but it can rely to a <code>stopAllServices</code> from the API</p>
+<hr>
+<p>Reply from <a class="mention" href="/u/krhubert">@krhubert</a></p>
+<p>That would be good start, but for now we are listing services from the database.</p>
+<p>Maybe we should add label to each container and just create a function <code>container.StopService(filter/label)</code></p>
+<p>And in daemon - container.StopService(“mesg-label”)</p>
+<p>Because overall we don’t need to list service from a database, but rather from current stat of docker containers.</p>
+          <p><a href="https://forum.mesg.com/t/move-logic-of-stopping-core-and-services-to-api-or-daemon-package/146/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/move-logic-of-stopping-core-and-services-to-api-or-daemon-package/146/1</link>
+        <pubDate>Thu, 13 Dec 2018 11:03:02 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-146-1</guid>
+        <source url="https://forum.mesg.com/t/move-logic-of-stopping-core-and-services-to-api-or-daemon-package/146.rss">Move logic of stopping core and services to api or daemon package</source>
+      </item>
+  </channel>
+</rss>

@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Collect stats from core</title>
+    <link>https://forum.mesg.com/t/collect-stats-from-core/48</link>
+    <description>Since we&#39;re rapidly developing core, it&#39;d be really helpful to collect some stats from it. That way, we can know that how many people are using mesg and what their specs are. This can help us to how much we should carry about being backwards compatible in this period and can give us a nice overall idea about our users.
+
+We should be only collecting stats that doesn&#39;t reveal anything private from devs perspective. For example we can collect running services count but not their names. Also allowing us to collecting stats should be an optional thing and devs can choose to give perms on core&#39;s installation time.
+
+Stats to collect (please extend this list with your preference)
+* [ ] installation count (ilgooz)
+* [ ] core&#39;s version (ilgooz)
+* [ ] core&#39;s running state to measure active core count and total running hours (ilgooz)
+* [ ] deployed, running services count (ilgooz)
+* [ ] os stats (ilgooz)</description>
+    
+    <lastBuildDate>Thu, 04 Apr 2019 08:33:27 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/collect-stats-from-core/48.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Collect stats from core</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>I saw the same thing with Ganache:<br>
+<img src="https://forum.mesg.com/uploads/default/original/1X/ec42c18ca88a0f8dc1f8ab84aa9479bdd84f1f36.jpeg" alt="image" width="690" height="479"></p>
+          <p><a href="https://forum.mesg.com/t/collect-stats-from-core/48/14">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/collect-stats-from-core/48/14</link>
+        <pubDate>Thu, 04 Apr 2019 08:33:27 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-48-14</guid>
+        <source url="https://forum.mesg.com/t/collect-stats-from-core/48.rss">Collect stats from core</source>
+      </item>
+      <item>
+        <title>Collect stats from core</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>FYI Docker collect some statistics by default and i’m not sure I ever activate this on my own. We could collect the same kind of statistics.</p>
+<p><img src="https://forum.mesg.com/uploads/default/original/1X/856e177f3b6f8a4a5b8f38378682eedd4ae324c2.png" alt="45%20pm" width="690" height="184"></p>
+          <p><a href="https://forum.mesg.com/t/collect-stats-from-core/48/13">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/collect-stats-from-core/48/13</link>
+        <pubDate>Thu, 28 Mar 2019 09:14:25 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-48-13</guid>
+        <source url="https://forum.mesg.com/t/collect-stats-from-core/48.rss">Collect stats from core</source>
+      </item>
+      <item>
+        <title>Collect stats from core</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="10" data-topic="48">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/letter_avatar_proxy/v2/letter/w/0ea827/40.png" class="avatar"> wayne:</div>
+<blockquote>
+<p>I really can’t think of a more important KPI for MESG anyway.</p>
+</blockquote>
+</aside>
+<p><a href="https://help.github.com/articles/getting-the-download-count-for-your-releases/" class="onebox" target="_blank" rel="nofollow noopener">https://help.github.com/articles/getting-the-download-count-for-your-releases/</a></p>
+<p>I guess this site may use api from github so you can trust it. Or you can download the data directly from github api</p>
+          <p><a href="https://forum.mesg.com/t/collect-stats-from-core/48/12">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/collect-stats-from-core/48/12</link>
+        <pubDate>Sun, 17 Feb 2019 18:05:42 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-48-12</guid>
+        <source url="https://forum.mesg.com/t/collect-stats-from-core/48.rss">Collect stats from core</source>
+      </item>
+      <item>
+        <title>Collect stats from core</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>You can have the number of downloads in tools like this one <a href="http://www.somsubhra.com/github-release-stats/?username=mesg-foundation&amp;repository=core" rel="nofollow noopener">http://www.somsubhra.com/github-release-stats/?username=mesg-foundation&amp;repository=core</a></p>
+<p>I’m not sure how precise are theses numbers, I tried one time to download and it was not counted, maybe it’s unique download or maybe it was a cache system but it’s at least this. For now we are at ~350 downloads for all versions.</p>
+          <p><a href="https://forum.mesg.com/t/collect-stats-from-core/48/11">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/collect-stats-from-core/48/11</link>
+        <pubDate>Tue, 12 Feb 2019 12:09:50 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-48-11</guid>
+        <source url="https://forum.mesg.com/t/collect-stats-from-core/48.rss">Collect stats from core</source>
+      </item>
+      <item>
+        <title>Collect stats from core</title>
+        <dc:creator><![CDATA[wayne]]></dc:creator>
+        <description><![CDATA[
+            <p>OK then, backing up from Core to the general project… Maybe we can start with more basic stats, e.g. daily downloads of the software.</p>
+<p>I really can’t think of a more important KPI for MESG anyway.</p>
+<p>Commits/week?  Issues opened and closed per week?  What else do we know that we can show investors, that we don’t need permission to collect? (Don’t need a dozen stats, 3-5 plenty right now.)</p>
+          <p><a href="https://forum.mesg.com/t/collect-stats-from-core/48/10">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/collect-stats-from-core/48/10</link>
+        <pubDate>Tue, 12 Feb 2019 11:53:17 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-48-10</guid>
+        <source url="https://forum.mesg.com/t/collect-stats-from-core/48.rss">Collect stats from core</source>
+      </item>
+      <item>
+        <title>Collect stats from core</title>
+        <dc:creator><![CDATA[Adriaan]]></dc:creator>
+        <description><![CDATA[
+            <p>Is there a point in the “onboarding” process where the user has to agree to Terms and Conditions? <a class="mention" href="/u/nicolas">@Nicolas</a> do you mean the text should be included there?</p>
+          <p><a href="https://forum.mesg.com/t/collect-stats-from-core/48/9">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/collect-stats-from-core/48/9</link>
+        <pubDate>Tue, 12 Feb 2019 09:47:26 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-48-9</guid>
+        <source url="https://forum.mesg.com/t/collect-stats-from-core/48.rss">Collect stats from core</source>
+      </item>
+      <item>
+        <title>Collect stats from core</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>As discussed, the problem here is not the technical implementation but the legal one.</p>
+<p>We need to ask the consent of the user.</p>
+<p><a class="mention" href="/u/wayne">@wayne</a> if you could find example and prepare a short text to ask for consent that’s will help us a lot in order to implement this feature <img src="https://forum.mesg.com/images/emoji/twitter/+1.png?v=6" title=":+1:" class="emoji" alt=":+1:"></p>
+          <p><a href="https://forum.mesg.com/t/collect-stats-from-core/48/8">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/collect-stats-from-core/48/8</link>
+        <pubDate>Tue, 12 Feb 2019 09:30:47 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-48-8</guid>
+        <source url="https://forum.mesg.com/t/collect-stats-from-core/48.rss">Collect stats from core</source>
+      </item>
+      <item>
+        <title>Collect stats from core</title>
+        <dc:creator><![CDATA[wayne]]></dc:creator>
+        <description><![CDATA[
+            <p>Hey all, was this metrics collection/tracking ever implemented?</p>
+<p>If not, then we should kick it off, beginning with 2 or 3 key indicators, and expanding from there.</p>
+<p>I will ask Adriaan to make a card for this. To whom should it be assigned?</p>
+          <p><a href="https://forum.mesg.com/t/collect-stats-from-core/48/7">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/collect-stats-from-core/48/7</link>
+        <pubDate>Tue, 12 Feb 2019 07:36:00 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-48-7</guid>
+        <source url="https://forum.mesg.com/t/collect-stats-from-core/48.rss">Collect stats from core</source>
+      </item>
+      <item>
+        <title>Collect stats from core</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>Another thing that we could do is to have the metrics on each apis like that we can really see what features people are using. We will be able to track their application activity and also service activity.</p>
+<p>I’m pretty sure we can find an easy way to integrate that with the groc api with a kind of middleware to inject.</p>
+          <p><a href="https://forum.mesg.com/t/collect-stats-from-core/48/6">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/collect-stats-from-core/48/6</link>
+        <pubDate>Thu, 04 Oct 2018 04:03:59 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-48-6</guid>
+        <source url="https://forum.mesg.com/t/collect-stats-from-core/48.rss">Collect stats from core</source>
+      </item>
+      <item>
+        <title>Collect stats from core</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>As a start, I’d really like to have the stats described in the first post and I really like the idea of collecting stats from cli commands as <a class="mention" href="/u/anthony">@Anthony</a> pointed.</p>
+<p>We can also think about the usage scenarios of core, services and application to guess what stats we might also get interested in to collect. <img src="https://forum.mesg.com/images/emoji/twitter/slight_smile.png?v=6" title=":slight_smile:" class="emoji" alt=":slight_smile:"></p>
+          <p><a href="https://forum.mesg.com/t/collect-stats-from-core/48/5">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/collect-stats-from-core/48/5</link>
+        <pubDate>Wed, 03 Oct 2018 16:57:29 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-48-5</guid>
+        <source url="https://forum.mesg.com/t/collect-stats-from-core/48.rss">Collect stats from core</source>
+      </item>
+      <item>
+        <title>Collect stats from core</title>
+        <dc:creator><![CDATA[jonobacon]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="3" data-topic="48">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/anthony/40/7_1.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p><a class="mention" href="/u/jonobacon">@jonobacon</a> any suggestions on that ?</p>
+</blockquote>
+</aside>
+<p>I am not an expert on the legal side of things, but I would be very careful about any phone home functionality without the user expressly opting in. I am not sure what the GDPR implications for something such as this are.</p>
+<p>In terms of tracking core usage, we can obviously count the number of downloads, but I wonder if there is a way for core to update a manifest of some sort (e.g. like how Ubuntu syncs it’s local package list with the master list in the package archive). This way we can track the number of syncs happening for this manifest on a daily basis. Obviously, you would need to make sure this works in an offline setting too.</p>
+<p>Thoughts?</p>
+          <p><a href="https://forum.mesg.com/t/collect-stats-from-core/48/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/collect-stats-from-core/48/4</link>
+        <pubDate>Wed, 03 Oct 2018 16:43:22 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-48-4</guid>
+        <source url="https://forum.mesg.com/t/collect-stats-from-core/48.rss">Collect stats from core</source>
+      </item>
+      <item>
+        <title>Collect stats from core</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>I think the stats from <a class="mention" href="/u/ilgooz">@ilgooz</a> are pretty good.<br>
+I think that the total running hours will be kind of hard and moreover not really sure that this can be legally nice to do. I would recommend more the number of time that they use each commands from the CLI.</p>
+<pre><code class="lang-auto">mesg-core start / stop / logs
+mesg-core service ls / deploy / start / dev ...
+</code></pre>
+<p>This way we can really see what are the most used features and maybe we can see where the documentation is not clear enough from that, example, users in general use more the commands <code>deploy / start / logs</code> than the <code>dev</code> this probably means that they might not even know about the <code>dev</code> command because it’s not clear enough in the documentation.</p>
+<p>We could for every single command executed send the a new metric with:</p>
+<ul>
+<li>the name of the command</li>
+<li>the arguments of the command (not sure this is really nice, what about privacy ? Someone who execute a task and give the private key of its ethereum address for example. I think it would be bad except if we can kind of obfuscate that)</li>
+<li>the host os</li>
+<li>the execution time</li>
+<li>the core version</li>
+</ul>
+<p>After there is just one point I’m worried about is on the legal part, especially now with all these GDPR and things like this, I’m not sure it’s legally easy to collect these kind of data or maybe just a big warning on the user when they decide to activate the stats but there is probably some legal stuff to do for that.</p>
+<p><a class="mention" href="/u/jonobacon">@jonobacon</a> any  suggestions on that ?</p>
+          <p><a href="https://forum.mesg.com/t/collect-stats-from-core/48/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/collect-stats-from-core/48/3</link>
+        <pubDate>Tue, 02 Oct 2018 15:37:47 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-48-3</guid>
+        <source url="https://forum.mesg.com/t/collect-stats-from-core/48.rss">Collect stats from core</source>
+      </item>
+      <item>
+        <title>Collect stats from core</title>
+        <dc:creator><![CDATA[jonobacon]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote no-group" data-post="1" data-topic="48">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/ilgooz/40/8_1.png" class="avatar"> ilgooz:</div>
+<blockquote>
+<p>We should be only collecting stats that doesn’t reveal anything private from devs perspective. For example we can collect running services count but not their names. Also allowing us to collecting stats should be an optional thing and devs can choose to give perms on core’s installation time.</p>
+</blockquote>
+</aside>
+<p>Agreed. Particularly agree that this should be opt-in. When I have seen organizations default  to gathering stats without permission it can erode trust.</p>
+<p>What kind of stats are you most interested in collecting? This might help us explore the best options here.</p>
+          <p><a href="https://forum.mesg.com/t/collect-stats-from-core/48/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/collect-stats-from-core/48/2</link>
+        <pubDate>Wed, 19 Sep 2018 12:19:05 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-48-2</guid>
+        <source url="https://forum.mesg.com/t/collect-stats-from-core/48.rss">Collect stats from core</source>
+      </item>
+      <item>
+        <title>Collect stats from core</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>Since we’re rapidly developing core, it’d be really helpful to collect some stats from it. That way, we can know that how many people are using mesg and what their specs are. This can help us to how much we should carry about being backwards compatible in this period and can give us a nice overall idea about our users.</p>
+<p>We should be only collecting stats that doesn’t reveal anything private from devs perspective. For example we can collect running services count but not their names. Also allowing us to collecting stats should be an optional thing and devs can choose to give perms on core’s installation time.</p>
+<p>Stats to collect (please extend this list with your preference)</p>
+<ul>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> installation count (ilgooz)</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> core’s version (ilgooz)</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> core’s running state to measure active core count and total running hours (ilgooz)</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> deployed, running services count (ilgooz)</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> os stats (ilgooz)</li>
+</ul>
+          <p><a href="https://forum.mesg.com/t/collect-stats-from-core/48/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/collect-stats-from-core/48/1</link>
+        <pubDate>Wed, 19 Sep 2018 10:29:16 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-48-1</guid>
+        <source url="https://forum.mesg.com/t/collect-stats-from-core/48.rss">Collect stats from core</source>
+      </item>
+  </channel>
+</rss>

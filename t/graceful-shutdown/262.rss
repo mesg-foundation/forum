@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Graceful shutdown</title>
+    <link>https://forum.mesg.com/t/graceful-shutdown/262</link>
+    <description>[original discussion](https://github.com/mesg-foundation/core/pull/790#discussion_r260682525)
+
+## Flow
+* Received `&lt;-xsignal.WaitForInterrupt()`.
+
+* Close listener with `listener.Close()` to stop _Accepting_ new application/service connections.
+
+* Disable `ExecuteTask()` API by immediately returning every request with &quot;shutting down&quot; error. This way, already connected services cannot receive new execution requests with `ListenTask()`. (This error can be applied to incoming `ListenResult()`, `ListenEvent()` &amp; `ListenTask()` requests for convenience.)
+
+* Call `stopRunningServices()` to send shutdown signals to running services. So, connected services will gracefully shutdown by finishing ongoing tasks and sending `SubmitResult()`s to Core.
+
+* Drain _pubsub_ queue by sending results for open `ListenResult()` streams. So, applications will receive their last results. Relevant [lines](https://github.com/mesg-foundation/core/blob/master/api/listen_result.go#L97-L122).
+
+* Call `service.Close()` afterwards to close all connections for all clients.</description>
+    
+    <lastBuildDate>Mon, 11 Mar 2019 07:25:51 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/graceful-shutdown/262.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Graceful shutdown</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p><a href="https://github.com/mesg-foundation/core/pull/790#discussion_r260682525" rel="nofollow noopener">original discussion</a></p>
+<h2>Flow</h2>
+<ul>
+<li>
+<p>Received <code>&lt;-xsignal.WaitForInterrupt()</code>.</p>
+</li>
+<li>
+<p>Close listener with <code>listener.Close()</code> to stop <em>Accepting</em> new application/service connections.</p>
+</li>
+<li>
+<p>Disable <code>ExecuteTask()</code> API by immediately returning every request with “shutting down” error. This way, already connected services cannot receive new execution requests with <code>ListenTask()</code>. (This error can be applied to incoming <code>ListenResult()</code>, <code>ListenEvent()</code> &amp; <code>ListenTask()</code> requests for convenience.)</p>
+</li>
+<li>
+<p>Call <code>stopRunningServices()</code> to send shutdown signals to running services. So, connected services will gracefully shutdown by finishing ongoing tasks and sending <code>SubmitResult()</code>s to Core.</p>
+</li>
+<li>
+<p>Drain <em>pubsub</em> queue by sending results for open <code>ListenResult()</code> streams. So, applications will receive their last results. Relevant <a href="https://github.com/mesg-foundation/core/blob/master/api/listen_result.go#L97-L122" rel="nofollow noopener">lines</a>.</p>
+</li>
+<li>
+<p>Call <code>service.Close()</code> afterwards to close all connections for all clients.</p>
+</li>
+</ul>
+          <p><a href="https://forum.mesg.com/t/graceful-shutdown/262/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/graceful-shutdown/262/1</link>
+        <pubDate>Mon, 11 Mar 2019 07:25:51 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-262-1</guid>
+        <source url="https://forum.mesg.com/t/graceful-shutdown/262.rss">Graceful shutdown</source>
+      </item>
+  </channel>
+</rss>

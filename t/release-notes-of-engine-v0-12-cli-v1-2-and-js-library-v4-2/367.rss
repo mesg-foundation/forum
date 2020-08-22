@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Release Notes of Engine v0.12, CLI v1.2 and JS library v4.2</title>
+    <link>https://forum.mesg.com/t/release-notes-of-engine-v0-12-cli-v1-2-and-js-library-v4-2/367</link>
+    <description># Improved dynamically-typed data on the gRPC APIs!
+
+The dynamically-typed data system used for event data and task inputs and outputs has been significantly improved.
+
+Before, it was using a JSON encoded string that wasn&#39;t efficient or able to be typed. Now, it uses [Google&#39;s Protobuf Struct](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.Struct) and a modified JSON encoder that specifies types.
+
+## Proto
+
+Here is the diff of the [Event&#39;s proto file](https://github.com/mesg-foundation/engine/pull/1192/files#diff-427929cecc38eb2b912e5e527342fb43):
+```diff
+// Event represents a single event ran in Engine.
+message Event {
+  // Hash is a unique hash to identify an event.
+  string hash = 1;
+
+  // instanceHash is the hash of an instance that can precede an execution.
+  string instanceHash = 2;
+
+  // key is the key of the event.
+  string key = 3;
+
+  // data is the data for the event.
+-  string data = 4;
++  google.protobuf.Struct data = 4;
+}
+```
+
+## mesg-js
+
+The `mesg-js` library has been updated to be compatible with these modifications.
+
+### Service
+
+The service-side API remains the same. The modifications are internal but some TypeScripts have been renamed and/or modified.
+
+### Application 
+The application side now exposes new encode and decode helper functions (respectively `encodeData` and `decodeData`) to replace the `JSON.stringify` and `JSON.parse` functions.
+
+__Decode__
+```diff
+mesg.listenEvent({
+  filter: {
+    instanceHash: &#39;EVENT_INSTANCE_HASH&#39;,
+    key: &#39;EVENT_KEY&#39; // optional
+  }
+})
+.on(&#39;data&#39;, (event) =&gt; {
+- const data = JSON.parse(event.data) 
++ const data = mesg.decodeData(event.data)x
+  console.log(&#39;an event received:&#39;, event.key, data)
+})
+```
+
+__Encode__
+```diff
+const execution = await mesg.executeTask({
+  instanceHash: &#39;TASK_INSTANCE_HASH&#39;,
+  taskKey: &#39;TASK_KEY&#39;,
+-  inputs: JSON.stringify({ key: &#39;INPUT_DATA&#39; }),
++  inputs: mesg.encodeData({ key: &#39;INPUT_DATA&#39; }),
+  tags: [&#39;ASSOCIATE_TAG&#39;] // optional
+})
+```
+
+## CLI
+
+The CLI was also updated to be compatible with this breaking change. Various fixes and improvements have also been done, like the limitation of the source code&#39;s service size to 10MB. Make sure to add to the `.mesgignore` file to the dependencies (like a `.dockerignore`) ;)
+
+# Experimental feature: Workflow engine
+
+This release contains the first experimental version of the workflow engine :confetti_ball: 
+The workflow engine can automatically execute any services&#39; tasks when it matches with any other services&#39; events or tasks. Check the following video:
+
+![workflow|690x356](upload://aUXmdwi9O3lp20ZryHYWRFHzmoZ.gif) 
+
+----
+
+View the complete changelogs:
+- [Engine](https://github.com/mesg-foundation/engine/blob/master/CHANGELOG.md)
+- [mesg-js](https://github.com/mesg-foundation/mesg-js/blob/master/CHANGELOG.md)
+- [CLI](https://github.com/mesg-foundation/cli/blob/master/CHANGELOG.md)
+
+To update the Engine and the CLI, follow the [installation process on the documentation ](https://docs.mesg.com/guide/installation.html)</description>
+    
+    <lastBuildDate>Thu, 08 Aug 2019 08:36:47 +0000</lastBuildDate>
+    <category>News</category>
+    <atom:link href="https://forum.mesg.com/t/release-notes-of-engine-v0-12-cli-v1-2-and-js-library-v4-2/367.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Release Notes of Engine v0.12, CLI v1.2 and JS library v4.2</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <h1>Improved dynamically-typed data on the gRPC APIs!</h1>
+<p>The dynamically-typed data system used for event data and task inputs and outputs has been significantly improved.</p>
+<p>Before, it was using a JSON encoded string that wasn’t efficient or able to be typed. Now, it uses <a href="https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.Struct" rel="nofollow noopener">Google’s Protobuf Struct</a> and a modified JSON encoder that specifies types.</p>
+<h2>Proto</h2>
+<p>Here is the diff of the <a href="https://github.com/mesg-foundation/engine/pull/1192/files#diff-427929cecc38eb2b912e5e527342fb43" rel="nofollow noopener">Event’s proto file</a>:</p>
+<pre><code class="lang-diff">// Event represents a single event ran in Engine.
+message Event {
+  // Hash is a unique hash to identify an event.
+  string hash = 1;
+
+  // instanceHash is the hash of an instance that can precede an execution.
+  string instanceHash = 2;
+
+  // key is the key of the event.
+  string key = 3;
+
+  // data is the data for the event.
+-  string data = 4;
++  google.protobuf.Struct data = 4;
+}
+</code></pre>
+<h2>mesg-js</h2>
+<p>The <code>mesg-js</code> library has been updated to be compatible with these modifications.</p>
+<h3>Service</h3>
+<p>The service-side API remains the same. The modifications are internal but some TypeScripts have been renamed and/or modified.</p>
+<h3>Application</h3>
+<p>The application side now exposes new encode and decode helper functions (respectively <code>encodeData</code> and <code>decodeData</code>) to replace the <code>JSON.stringify</code> and <code>JSON.parse</code> functions.</p>
+<p><strong>Decode</strong></p>
+<pre><code class="lang-diff">mesg.listenEvent({
+  filter: {
+    instanceHash: 'EVENT_INSTANCE_HASH',
+    key: 'EVENT_KEY' // optional
+  }
+})
+.on('data', (event) =&gt; {
+- const data = JSON.parse(event.data) 
++ const data = mesg.decodeData(event.data)x
+  console.log('an event received:', event.key, data)
+})
+</code></pre>
+<p><strong>Encode</strong></p>
+<pre><code class="lang-diff">const execution = await mesg.executeTask({
+  instanceHash: 'TASK_INSTANCE_HASH',
+  taskKey: 'TASK_KEY',
+-  inputs: JSON.stringify({ key: 'INPUT_DATA' }),
++  inputs: mesg.encodeData({ key: 'INPUT_DATA' }),
+  tags: ['ASSOCIATE_TAG'] // optional
+})
+</code></pre>
+<h2>CLI</h2>
+<p>The CLI was also updated to be compatible with this breaking change. Various fixes and improvements have also been done, like the limitation of the source code’s service size to 10MB. Make sure to add to the <code>.mesgignore</code> file to the dependencies (like a <code>.dockerignore</code>) <img src="https://forum.mesg.com/images/emoji/twitter/wink.png?v=9" title=":wink:" class="emoji" alt=":wink:"></p>
+<h1>Experimental feature: Workflow engine</h1>
+<p>This release contains the first experimental version of the workflow engine <img src="https://forum.mesg.com/images/emoji/twitter/confetti_ball.png?v=9" title=":confetti_ball:" class="emoji" alt=":confetti_ball:"><br>
+The workflow engine can automatically execute any services’ tasks when it matches with any other services’ events or tasks. Check the following video:</p>
+<p><img src="https://forum.mesg.com/uploads/default/original/1X/4c85fd3e328055dfc28880dfb17250dd725e781d.gif" alt="workflow" data-base62-sha1="aUXmdwi9O3lp20ZryHYWRFHzmoZ" width="690" height="356"></p>
+<hr>
+<p>View the complete changelogs:</p>
+<ul>
+<li><a href="https://github.com/mesg-foundation/engine/blob/master/CHANGELOG.md" rel="nofollow noopener">Engine</a></li>
+<li><a href="https://github.com/mesg-foundation/mesg-js/blob/master/CHANGELOG.md" rel="nofollow noopener">mesg-js</a></li>
+<li><a href="https://github.com/mesg-foundation/cli/blob/master/CHANGELOG.md" rel="nofollow noopener">CLI</a></li>
+</ul>
+<p>To update the Engine and the CLI, follow the <a href="https://docs.mesg.com/guide/installation.html" rel="nofollow noopener">installation process on the documentation </a></p>
+          <p><a href="https://forum.mesg.com/t/release-notes-of-engine-v0-12-cli-v1-2-and-js-library-v4-2/367/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/release-notes-of-engine-v0-12-cli-v1-2-and-js-library-v4-2/367/1</link>
+        <pubDate>Thu, 08 Aug 2019 08:36:47 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-367-1</guid>
+        <source url="https://forum.mesg.com/t/release-notes-of-engine-v0-12-cli-v1-2-and-js-library-v4-2/367.rss">Release Notes of Engine v0.12, CLI v1.2 and JS library v4.2</source>
+      </item>
+  </channel>
+</rss>

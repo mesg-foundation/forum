@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <title>The Import Cycle Between API &amp; SystemServices Packages - Development - MESG Community</title>
+    <meta name="description" content="As we experimented, we have this incoming import cycle issue* between api and systemservices, systemservices/* packages. We currently use methods from api package inside system services and because of this, we’re not all&amp;hellip;">
+    <meta name="generator" content="Discourse 2.5.0.beta5 - https://github.com/discourse/discourse version 00aab498297cba8f977c1e0eb17b7d38ff06cc68">
+<link rel="icon" type="image/png" href="../../../uploads/default/optimized/1X/9f11b6ddfa02bffdbec79487592a0573a0236cb5_2_32x32.png">
+<link rel="apple-touch-icon" type="image/png" href="../../../uploads/default/optimized/1X/53630361a40ad76e1733dd0b0f486e9ae2f4f4d6_2_180x180.png">
+<meta name="theme-color" content="#491e8c">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+<link rel="canonical" href="../105.html" />
+<script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","url":"https://forum.mesg.com","potentialAction":{"@type":"SearchAction","target":"https://forum.mesg.com/search?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
+<link rel="search" type="application/opensearchdescription+xml" href="../../../opensearch.xml" title="MESG Community Search">
+
+      <link href="../../../stylesheets/desktop_3_52e3411e87658e862890db7bd06899cf49ad5f59.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop" data-theme-id="7"/>
+      <link href="../../../stylesheets/desktop_theme_7_bf4f2d3d8a71e6ee907065be9a79df3d849bd29c.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop_theme" data-theme-id="7"/>
+    
+    <meta id="data-ga-universal-analytics" data-tracking-code="UA-117583862-1" data-json="{&quot;cookieDomain&quot;:&quot;auto&quot;}" data-auto-link-domains="">
+
+<link rel="preload" href="../../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js" as="script">
+<script src="../../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js"></script>
+
+
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of &#39;The Import Cycle Between API &amp; SystemServices Packages&#39;" href="../105.rss" />
+    <meta property="og:site_name" content="MESG Community" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://forum.mesg.com/uploads/default/original/1X/76fb3f8235512843e6937e2c04a4813dd39ddf15.jpeg" />
+<meta property="og:image" content="https://forum.mesg.com/uploads/default/original/1X/76fb3f8235512843e6937e2c04a4813dd39ddf15.jpeg" />
+<meta property="og:url" content="https://forum.mesg.com/t/the-import-cycle-between-api-systemservices-packages/105/9" />
+<meta name="twitter:url" content="https://forum.mesg.com/t/the-import-cycle-between-api-systemservices-packages/105/9" />
+<meta property="og:title" content="The Import Cycle Between API &amp; SystemServices Packages" />
+<meta name="twitter:title" content="The Import Cycle Between API &amp; SystemServices Packages" />
+<meta property="og:description" content="I also like the mapping of parameter proposed by @krhubert.  One system service must not depend on another system service by its implementation in core. Eg @ilgooz’s example  If a system service needs to delegate to another system service (or any service), it should be done by the future service composition.  API package should delegate to system service a maximum of logic (not go package in the core, but the actual service itself).  But if API needs to always execute something from service A an..." />
+<meta name="twitter:description" content="I also like the mapping of parameter proposed by @krhubert.  One system service must not depend on another system service by its implementation in core. Eg @ilgooz’s example  If a system service needs to delegate to another system service (or any service), it should be done by the future service composition.  API package should delegate to system service a maximum of logic (not go package in the core, but the actual service itself).  But if API needs to always execute something from service A an..." />
+<meta property="article:published_time" content="2018-10-31T21:43:11+00:00" />
+<meta property="og:ignore_canonical" content="true" />
+
+
+
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"QAPage","name":"The Import Cycle Between API & SystemServices Packages","mainEntity":{"@type":"Question","name":"The Import Cycle Between API & SystemServices Packages","text":"As we experimented, we have this incoming import cycle issue* between api and systemservices, systemservices/* packages. We currently use methods from api package inside system services and because of this, we’re not allowed to call methods of systemservices inside api pkg.\n\nI’m not sure if this is &hellip;","upvoteCount":0,"answerCount":1,"dateCreated":"2018-10-22T14:29:11.967Z","author":{"@type":"Person","name":"İlker"},"acceptedAnswer":{"@type":"Answer","text":"Service composition is something really different. In that context, I agree that service dependency rules may differ.\n\nFor the core/api pkg part, I think you’re in favor about composing system services inside the core/api pkg instead of doing this in the intergace/grpc pkg. That’s also ok to me. The&hellip;","upvoteCount":0,"dateCreated":"2018-11-01T05:46:26.823Z","url":"https://forum.mesg.com/t/the-import-cycle-between-api-systemservices-packages/105/10","author":{"@type":"Person","name":"ilgooz"}}}}</script>
+  </head>
+  <body class="crawler">
+    
+    <header>
+      <a href="../../../index.html">
+          <img src="../../../uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png" alt="MESG Community" id="site-logo" style="max-width: 150px;">
+      </a>
+    </header>
+    <div id="main-outlet" class="wrap">
+        <div id="topic-title">
+    <h1>
+      <a href="../105.html">The Import Cycle Between API &amp; SystemServices Packages</a>
+    </h1>
+
+      <div class="topic-category" itemscope itemtype="http://schema.org/BreadcrumbList">
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../../c/development.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #AB9364'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Development</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="1" />
+          </span>
+      </div>
+
+      <div class="topic-category">
+        <div class='discourse-tags list-tags'>
+            <a href='../../../tag/brainstorming.html' class='discourse-tag' rel="tag">brainstorming</a>
+        </div>
+      </div>
+  </div>
+
+  
+
+
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="../105.html">
+
+            <link itemprop="image" href="../../../uploads/default/original/1X/76fb3f8235512843e6937e2c04a4813dd39ddf15.jpeg">
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-10-22T14:29:12Z'>
+              <time itemprop='dateModified' datetime='2018-11-01T15:23:59Z' class='post-time'>
+                November 1, 2018,  3:23pm
+              </time>
+          <span itemprop='position'>#1</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>As we experimented, we have this incoming import cycle issue* between <em>api</em> and <em>systemservices</em>, <em>systemservices/*</em> packages. We currently use methods from api package inside system services and because of this, we’re not allowed to call methods of systemservices inside api pkg.</p>
+<p>I’m not sure if this is an actual issue? It shows us that either we have a design issue or we don’t have a design issue and calling system services inside api pkg is not right anyway.</p>
+<p>As I’m experimenting, I think that this is not an issue and we shouldn’t call methods of system services packages inside api package <strong>at this point</strong>.</p>
+<p><strong>Here is the reason why:</strong><br>
+The idea behind of having api pkg is to have a single point of entry for accessing functionalities that core provides by combining low level internal packages. So it’s the api package that where we should interact with core, not the other internal packages. The api package is meant to be a wrapper for functionalities of core with a high level api.</p>
+<p>To me, having the systemservices manager and its siblings <em>(systemservices/*)</em> shares the same idea with the existence of api package. We should treat systemservices like how we treat api package. <em>systemservices/*</em> packages are the wrappers around system services, like the api package being wrapper for internal pkgs of core. Remember when we talk about splitting parts of api pkg into smallar pkgs under <em>api/*</em>? It is the similar idea of having <em>systemservices/*</em>. So <em>api</em> pkg and system services pkgs are in the same level.</p>
+<p>The idea of having system services is splitting core to smaller services in the first place. And this causes the same effect on api package. We required to move some methods of api package to different system services. Of course, splitting the whole core/api package into smaller system services may not be possible because at least for now we required keeping some logic like deploying services inside the core itself.</p>
+<p><strong>I’d like to give an example over <em>Workflow System Service</em>:</strong><br>
+Let’s say that we’re not going to implement this workflow feature as a separate service but embed it in the core. In this case we were probably create an internal package called <em>core/workflow</em>, have some implementation there and expose this functionality with <em>core/api</em> package. This way <em>intergace/grpc/core</em> pkg can call methods like <em>CreateWorkflow()</em> from api package and expose this feature to network.</p>
+<p>As a system service point of view, first, we’re going to have a mesg service as equlivent of <em>core/workflow</em>. Second, we’re going to have a high level wrapper for it under <em>systemservice/workflow</em> and this is the equlivent of code that we put under <em>core/api</em> for workflow. In this case, as third and last,  <em>intergace/grpc/core</em> pkg will call the <em>CreateWorkflow()</em> method from <em>systemservice/workflow</em>.</p>
+<p>Please note that it’s totally ok for system services pkgs calling methods from <em>core/api</em> because it’s the native part of core that we do service deploying and listening tasks etc. So calling api pkg inside <em>systemservices</em> is a valid approach. In future, if we can make it possible splitting all the parts from api package to different services then we can directly use the api package as a place where we connect all the system services together and expose them as high level features of core like we do today. But since we’re not able to do it in once, I think, it’s acceptable for now to have this two headed dragon. <img src="../../../images/emoji/twitter/slight_smile.png%3Fv=6" title=":slight_smile:" class="emoji" alt=":slight_smile:"></p>
+<p>As a proposition, I think we can rename the <em>api</em> package to something called like <em>native</em> and create a new <em>api</em> package to call methods from <em>native</em> and <em>systemservices</em>. System services pkgs will call the methods from <em>native</em> pkg anymore, not the api. By time, we’ll move all the logic from <em>native</em> pkg as system services and <em>native</em> pkg will get deleted.</p>
+<p>This is just a perspective that we can think about it. Let’s have a starting point from here to discuss and see how system services and core will evolve together.</p>
+        </div>
+
+        <meta itemprop='headline' content='The Import Cycle Between API &amp; SystemServices Packages'>
+          <meta itemprop='keywords' content='brainstorming'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../../u/krhubert.html'><span itemprop='name'>krhubert</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="../105.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-10-22T15:09:12Z' class='post-time'>
+                October 22, 2018,  3:09pm
+              </time>
+              <meta itemprop='dateModified' content='2018-10-22T15:09:12Z'>
+          <span itemprop='position'>#2</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Why not remove API from system service?</p>
+<p>I’ve previously written about removing API from system service (move deploy to separate package). In this solution, system service deploys &amp; start services.</p>
+<p>Also, we can remove API package from resolver and keep it only for data mapping.</p>
+<p>Simple and easy, no need to create 2 APIs.</p>
+        </div>
+
+        <meta itemprop='headline' content='The Import Cycle Between API &amp; SystemServices Packages'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="../105.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-10-22T15:17:06Z' class='post-time'>
+                October 22, 2018,  3:17pm
+              </time>
+              <meta itemprop='dateModified' content='2018-10-22T15:17:06Z'>
+          <span itemprop='position'>#3</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Yes, yours is a really simple solution. But I’m actually not directly aiming to solve that problem. I’m more talking about in the architectural side about the direction of core and system services.</p>
+<p>We must have a solid philosophy between the composition of core, splitting core to system services and the area where we do this transition by time. Otherwise we can even more complicate stuff by doing small workarounds.</p>
+        </div>
+
+        <meta itemprop='headline' content='The Import Cycle Between API &amp; SystemServices Packages'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../../u/krhubert.html'><span itemprop='name'>krhubert</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="../105.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-10-22T15:28:48Z' class='post-time'>
+                October 22, 2018,  3:28pm
+              </time>
+              <meta itemprop='dateModified' content='2018-10-22T15:28:48Z'>
+          <span itemprop='position'>#4</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>It’s not workarounds, it is the solution.</p>
+<p>In that case, you will have</p>
+<p>API - which uses the deployer<br>
+system services - which uses the deployer</p>
+<p>and in that system services will be something to manage services (not to manage tasks on services). I wanted to split them from the beginning, but as for now, system services use API pbm as we have right now, occurred. With the usage of deployer, you don’t need to change anything in API and split them into two.</p>
+<p>And you propose to create abstract API on API, how many layers API of should be there? I think one API is enough and I have never seen API on API. It involves matters like open multiple sockets for listing for two APIs.</p>
+<p>Also if <code>native</code> package shouldn’t be exposed via port then it just a package with general purpose which doesn’t tell anything about its responsibility.</p>
+        </div>
+
+        <meta itemprop='headline' content='The Import Cycle Between API &amp; SystemServices Packages'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="../105.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-10-23T04:50:20Z' class='post-time'>
+                October 23, 2018,  4:50am
+              </time>
+              <meta itemprop='dateModified' content='2018-10-23T04:50:20Z'>
+          <span itemprop='position'>#5</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>I like the idea of removing the <code>api</code> from the <code>systemservices</code> package. If we want to do that there is more than the the deployer to change because we use the api for 3 things</p>
+<ul>
+<li>Deploy the services</li>
+<li>Start the services</li>
+<li>Give the api to the different systemservices instances</li>
+</ul>
+<p>The deployer is “easy” to fix but what about the start and the <code>listen</code> and <code>execute</code> that the services will do ?</p>
+<p>The approach of another layer of abstraction seems something doable but I can’t really understand the part with the workflow and if it’s hard to understand already it’s not really a good sign for clarity of the code <img src="../../../images/emoji/twitter/stuck_out_tongue.png%3Fv=6" title=":stuck_out_tongue:" class="emoji" alt=":stuck_out_tongue:"><br>
+The part to have the <code>low level</code> api (I prefer over native) and <code>high level</code> api where the high level api will call the low level api AND the system services if needed and the system services will use only the low level api.<br>
+This might work but I think we will face the same problem. Let’s imagine that one systemservice wants to execute something that is done by another systemservice, then we have the same problem eg: calling a task through the network with the resolver.</p>
+<p>I will put one more idea.</p>
+<p>The idea is to totally remove the api from systemservices<br>
+For the deployment AND starting of the services we can extract this to the <code>core/main</code> itself and the systemservices doesn’t have the responsibility anymore to “create” these system services. It is just a map/list of systemservices with their instances.</p>
+<p>For the different system services instances (that needs the api to listen and execute tasks) we can try to use the low level packages that we already have and bypass the api for that. We will loose some checks from the api but these are more verifications for user’s mistakes so it might be ok inside the core to bypass this.</p>
+<ul>
+<li>tasks execution is handled by the <code>execution</code> package</li>
+<li>event/result listening is handled by the <code>pubsub</code> package</li>
+</ul>
+<p>With this we don’t use the <code>api</code> package anymore inside systemservices.</p>
+<p>What do you think about that guys? Is there some stuff I’m missing?</p>
+        </div>
+
+        <meta itemprop='headline' content='The Import Cycle Between API &amp; SystemServices Packages'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../../u/krhubert.html'><span itemprop='name'>krhubert</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="../105.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-10-23T06:33:02Z'>
+              <time itemprop='dateModified' datetime='2018-10-23T06:48:21Z' class='post-time'>
+                October 23, 2018,  6:48am
+              </time>
+          <span itemprop='position'>#6</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <aside class="quote group-team" data-post="5" data-topic="105">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../../user_avatar/forum.mesg.com/anthony/40/7_1.png" class="avatar"> Anthony:</div>
+<blockquote>
+<ul>
+<li>Deploy the services</li>
+<li>Start the services</li>
+<li>Give the api to the different systemservices instances</li>
+</ul>
+</blockquote>
+</aside>
+<p>As you said, deployer is easy<br>
+Start - <a href="https://github.com/mesg-foundation/core/blob/dev/api/start.go">https://github.com/mesg-foundation/core/blob/dev/api/start.go</a> - it’s super easy to remove as well<br>
+About systemservices instances, I’ve already talked about it - “we can remove API package from resolver and keep it only for data mapping”</p>
+<aside class="quote group-team" data-post="5" data-topic="105">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../../user_avatar/forum.mesg.com/anthony/40/7_1.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>For the deployment AND starting of the services we can extract this to the <code>core/main</code> itself and the systemservices doesn’t have the responsibility anymore to “create” these system services. It is just a map/list of systemservices with their instances.</p>
+</blockquote>
+</aside>
+<p>In that case, it’s just slice of services and we don’t need a package for it (append should be enough :))<br>
+I don’t like the idea of moving it to the main package, because main func should be as small as possible.</p>
+<p>So</p>
+<pre><code class="lang-auto">ss, err := systemservices.Init(config.SystemServicesPath) // deploy &amp; start services
+r := ss.Resolver() // get resolve instance for data mapping (could be skipped if someone want to
+resp, err := api.ExecuteAndListen(r.AddPeersInput([]string{"8.8.8.8"})) // execute api call anywhere
+err := r.AddPeersOutput(resp) // map output data 
+
+// same as above but for Resolver
+resp, err := api.ExecuteAndListen(r.ResolveInput("serviceID...."))
+peerAddress, err := r.ReesolveOutput(resp)
+</code></pre>
+        </div>
+
+        <meta itemprop='headline' content='The Import Cycle Between API &amp; SystemServices Packages'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="1" />
+           <span class='post-likes'>1 Like</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="../105.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-10-25T18:10:36Z' class='post-time'>
+                October 25, 2018,  6:10pm
+              </time>
+              <meta itemprop='dateModified' content='2018-10-25T18:10:36Z'>
+          <span itemprop='position'>#7</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>I like the idea of mapping just the parameters. I think this should solve the issue. Would like to have more feedbacks but this looks like the solution to go with.</p>
+        </div>
+
+        <meta itemprop='headline' content='The Import Cycle Between API &amp; SystemServices Packages'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="../105.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-10-28T17:06:15Z'>
+              <time itemprop='dateModified' datetime='2018-10-28T17:17:45Z' class='post-time'>
+                October 28, 2018,  5:17pm
+              </time>
+          <span itemprop='position'>#8</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>I don’t agree on using <em>systemservices</em> pkg just as a mapper for <em>core/api</em> pkg. To me, systemservices should provide a high level api like an application instead of tightly coupling with the <em>core/api</em> package. It should be a logicfull package for interacting with system services. To me, turning systemservices to a logicless mapper is just a workaround in favor of <em>core/api</em> pkg, not a solution. It’s hard to use it that way and it’s low level, doesn’t reflect the idea in the first system services proposal. We can have 10s of different ways of solving import cycle problem but doing it this way kills the philosophy of how we should compose system services together in core.</p>
+<p>The idea of having system services is to remove all the logic inside <em>core</em> as much as possible and split it to separate system services. In future, we want to use <em>core</em> only as a proxy for system services, as a place where they are all composed together. Like a mesg application that composes mesg services.</p>
+<p><em>core/api</em> pkg actually is just going to be an another system service by its own when we extract it from core. Even if we can’t completely remove it from core because of the possible complexity, it should be treated as one. At first, the purpose of having <em>core/api</em> pkg was to compose all the features of core in a single pkg with a high level api. But since we’re adopting system services now, <em>core/api</em> doesn’t need to wrap all the features. It has to have the <strong>most basic</strong> parts about services, other features should be splitted to different system services, like network, workflow and etc.</p>
+<p>I think all system services should have access <em>(able to import)</em> to <em>core/api</em> pkg because, it provides the <strong>most basic</strong> features for services but not vice versa. And if a system service wants use an another system service to complete it’s tasks, it shouldn’t call that system service inside itself. That can be handled in the parent caller. This is the way how we should compose system services. The only case where a system service can directly access to another one is, the case when a dependent system service provides some low level functionalities like <em>core/api</em> pkg does. In this case, <em>core/api</em> pkg doesn’t even need to make calls to other system services. Because it shouldn’t be aware of them, it’s just a dependency. I’ve explained the similar thing in the first post as well. If we need to call <em>systemservices</em> inside <em>core/api</em> pkg, this would lead to a bad design.</p>
+<p>Here is an another explanation about why we actually don’t need to call <em>(import)</em> system services inside <em>core/api</em>:</p>
+<p>See <a href="https://github.com/mesg-foundation/core/blob/feature/wss-vm/interface/grpc/core/create_workflow.go#L9-L16">CreateWorkflow</a> gRPC API. Normally all the gRPC APIs calls methods from <em>core/api</em>. But in this case, creating a workflow is made by a dedicated system service. So the only thing we need to do is calling the <em>Create</em> method from the workflow system service and it’s done. So actually, we don’t only need to use <em>core/api</em> as a high level api bus anymore, we split the logic to different services and we call their wrappers to have a high level api for using them. If we required to call multiple system system services to complete a task, we can do it as well. But as I explained above, we should do it in the parent caller, in this case a gRPC handler. We should compose the data we got from different services and response it to user. We can even flow data from different system services, compose it and response to user. And as I explained before, some system services need to be able to call other system services -like calling <em>core/api</em>- to use them like dependencies, like go packages but as a service. The system services being used as a dependency, shouldn’t be aware of caller system services. This would lead to a bad design and it’s cycling.</p>
+<p>My question is, what is the actual reason of calling <em>systemservices</em> inside <em>core/api</em> package? Can you provide a real world example? We can directly use system services apis from gRPC handlers like we do for <em>CreateWorkflow</em>.</p>
+<p>And if we adopt that method we required to do mapping for other apis that <em>core/api</em> provides. Like the one used <a href="https://github.com/mesg-foundation/core/blob/9af696a/systemservices/workflow/workflow.go#L74">here</a> by workflow system service. Which is not elegant to do.</p>
+<p>The import cycle problem shows us that we shouldn’t call system services from <em>core/api</em> pkg at all, because it’s not needed and not proper. Think <em>core/api</em> package as a monolithic system service where we expose the <strong>most basic</strong> functionalities like deploying, starting services and listening events, result and executing tasks. <em>core/api</em> pkg doesn’t need to call other system services, only the rest of the system services wants to call <em>core/api</em> to communicate with other system services. So actually, there is no an import cycle problem. This is just how the design it is. In future, we’re going to split api package to it’s own system services, or to a one system service or keep it in the core as the native functionality. But the rest of the system services will depend on it.</p>
+<p>My intention while starting this discussion was to show that to you guys. If this doesn’t make sense, I’ll be fine going with mapper idea but I don’t think it is the right way to go. If I’m missing something please lighten me. I’m giving this advices because I heavily worked on this feature and already implemented an actual system service.</p>
+        </div>
+
+        <meta itemprop='headline' content='The Import Cycle Between API &amp; SystemServices Packages'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="../105.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-10-31T21:43:11Z' class='post-time'>
+                October 31, 2018,  9:43pm
+              </time>
+              <meta itemprop='dateModified' content='2018-10-31T21:43:11Z'>
+          <span itemprop='position'>#9</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>I also like the mapping of parameter proposed by <a class="mention" href="../../../u/krhubert.html">@krhubert</a>.</p>
+<p>One system service must <strong>not</strong> depend on another system service by its implementation <strong>in core</strong>. Eg <a class="mention" href="../../../u/ilgooz.html">@ilgooz</a>’s <a href="https://github.com/mesg-foundation/core/blob/9af696a/systemservices/workflow/workflow.go#L74">example</a></p>
+<p>If a system service needs to delegate to another system service (or any service), it should be done by the future <a href="../../service-composition/22.html">service composition</a>.</p>
+<p>API package should delegate to system service a maximum of logic (not go package in the core, but the actual service itself).<br>
+But if API needs to <strong>always</strong> execute something from service A and then from service B, it’s also fine. But again, the Core’s implementation (in core’s go package) of a system service should not depend on another system service.</p>
+<p><a class="mention" href="../../../u/ilgooz.html">@ilgooz</a> you implementation is not wrong but not in accordance with the vision of the Core. We need to explain more so you guys can implement stuff faster <img src="../../../images/emoji/twitter/wink.png%3Fv=6" title=":wink:" class="emoji" alt=":wink:"></p>
+        </div>
+
+        <meta itemprop='headline' content='The Import Cycle Between API &amp; SystemServices Packages'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="../105.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-11-01T05:46:26Z'>
+              <time itemprop='dateModified' datetime='2018-11-08T10:23:38Z' class='post-time'>
+                November 8, 2018, 10:23am
+              </time>
+          <span itemprop='position'>#10</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Service composition is something really different. In that context, I agree that service dependency rules may differ.</p>
+<p>For the <em>core/api</em> pkg part, I think you’re in favor about composing system services inside the <em>core/api</em> pkg instead of doing this in the <em>intergace/grpc</em> pkg. That’s also ok to me. The original idea in the first post to rename the current <em>core/api</em> pkg as <em>core/api/native</em> and put any api that generated from system service’s composition under <em>core/api</em>. <a class="mention" href="../../../u/nicolas.html">@Nicolas</a> I’m not sure what do you think about that.</p>
+<p>Even with mapping, system services and <em>core/api</em> still are depending on each other but indirectly. I think this is a design issue. I’d rather to have the <em>native</em> pkg proposed in the first post to overcome this.</p>
+<p>Anyways, I’ll not push anymore on this. As a reminder, if you prefer to keep the current version of <em>core/api</em> pkg as it is and have all the system services composed there, there are other ways of solving this import cycle problem without going low level in syntax with mapping. We can still maintain the original high level syntax in the first proposal. One way of doing is to have an interface like below that each system service’s wrapper can accept it in their <em>New()</em> func:</p>
+<pre><code class="lang-auto">
+type Executor interface {
+   ExecuteAndListen(serviceID, task string, inputs map[string]interface{}) (*execution.Execution, error)
+}
+
+</code></pre>
+<p>I don’t like much this solution either, it’s just another hack but here it is.</p>
+<p>I think nobody likes having both <em>core/api/native</em> and <em>core/api</em> pkgs to solve import cycle problem except me so, I’m eliminating this idea. To finalize the discussion about having high/low level apis in the wrappers I’m putting a poll below so, we can proceed much master on open PRs.</p>
+<div class="poll" data-poll-status="open" data-poll-type="regular" data-poll-name="poll">
+<div>
+<div class="poll-container">
+<ul>
+<li data-poll-option-id="57fa11c610d877d40d73587bcb389926">Use mapping and have low level api in system service’s wrappers.</li>
+<li data-poll-option-id="bb3cf8b06b4d9b30efc39a4b0f29d146">Adopt another method, maybe interfaces <em>(Executor)</em> to be able to use methods of <em>core/api</em> still in the wrappers to provide a high level api without the import cycle problem.</li>
+</ul>
+</div>
+<div class="poll-info">
+<p>
+<span class="info-number">0</span>
+<span class="info-label">voters</span>
+</p>
+</div>
+</div>
+</div>
+        </div>
+
+        <meta itemprop='headline' content='The Import Cycle Between API &amp; SystemServices Packages'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+
+
+
+
+
+
+    </div>
+    <footer class="container wrap">
+      <nav class='crawler-nav'>
+        <ul>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../../index.html' itemprop="url">Home </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../../categories.html' itemprop="url">Categories </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../../guidelines.html' itemprop="url">FAQ/Guidelines </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../../tos.html' itemprop="url">Terms of Service </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../../privacy.html' itemprop="url">Privacy Policy </a>
+          </span>
+        </li>
+        </ul>
+      </nav>
+      <p class='powered-by-link'>Powered by <a href="https://www.discourse.org">Discourse</a>, best viewed with JavaScript enabled</p>
+    </footer>
+    
+    
+  </body>
+  
+</html>

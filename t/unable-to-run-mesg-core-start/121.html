@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <title>Unable to run &quot;mesg-core start&quot; - Support - MESG Community</title>
+    <meta name="description" content="Error Message: 
+2018/11/18 10:07:06 Error response from daemon: could not choose an IP address to advertise since this system has multiple addresses on interface wlo1 (2405:204:9521:8f9e:31e1:b99f:f531:ffdd a nd 2405:204&amp;hellip;">
+    <meta name="generator" content="Discourse 2.5.0.beta5 - https://github.com/discourse/discourse version 00aab498297cba8f977c1e0eb17b7d38ff06cc68">
+<link rel="icon" type="image/png" href="../../uploads/default/optimized/1X/9f11b6ddfa02bffdbec79487592a0573a0236cb5_2_32x32.png">
+<link rel="apple-touch-icon" type="image/png" href="../../uploads/default/optimized/1X/53630361a40ad76e1733dd0b0f486e9ae2f4f4d6_2_180x180.png">
+<meta name="theme-color" content="#491e8c">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+<link rel="canonical" href="121.html" />
+<script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","url":"https://forum.mesg.com","potentialAction":{"@type":"SearchAction","target":"https://forum.mesg.com/search?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
+<link rel="search" type="application/opensearchdescription+xml" href="../../opensearch.xml" title="MESG Community Search">
+
+      <link href="../../stylesheets/desktop_3_52e3411e87658e862890db7bd06899cf49ad5f59.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop" data-theme-id="7"/>
+      <link href="../../stylesheets/desktop_theme_7_bf4f2d3d8a71e6ee907065be9a79df3d849bd29c.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop_theme" data-theme-id="7"/>
+    
+    <meta id="data-ga-universal-analytics" data-tracking-code="UA-117583862-1" data-json="{&quot;cookieDomain&quot;:&quot;auto&quot;}" data-auto-link-domains="">
+
+<link rel="preload" href="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js" as="script">
+<script src="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js"></script>
+
+
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of &#39;Unable to run &quot;mesg-core start&quot;&#39;" href="121.rss" />
+    <meta property="og:site_name" content="MESG Community" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:url" content="https://forum.mesg.com/t/unable-to-run-mesg-core-start/121" />
+<meta name="twitter:url" content="https://forum.mesg.com/t/unable-to-run-mesg-core-start/121" />
+<meta property="og:title" content="Unable to run &quot;mesg-core start&quot;" />
+<meta name="twitter:title" content="Unable to run &quot;mesg-core start&quot;" />
+<meta property="og:description" content="Error Message:  2018/11/18 10:07:06 Error response from daemon: could not choose an IP address to advertise since this system has multiple addresses on interface wlo1 (2405:204:9521:8f9e:31e1:b99f:f531:ffdd a nd 2405:204:9521:8f9e:a40a:26a0:94c:9101)  I understand from this is mesg tries to initialize docker but is unable to choose from the multiple IPs. Has anyone faced a similar issue? Can you give pointers to resolve this?" />
+<meta name="twitter:description" content="Error Message:  2018/11/18 10:07:06 Error response from daemon: could not choose an IP address to advertise since this system has multiple addresses on interface wlo1 (2405:204:9521:8f9e:31e1:b99f:f531:ffdd a nd 2405:204:9521:8f9e:a40a:26a0:94c:9101)  I understand from this is mesg tries to initialize docker but is unable to choose from the multiple IPs. Has anyone faced a similar issue? Can you give pointers to resolve this?" />
+<meta name="twitter:label1" value="Reading time" />
+<meta name="twitter:data1" value="1 mins 🕑" />
+<meta name="twitter:label2" value="Likes" />
+<meta name="twitter:data2" value="5 ❤" />
+<meta property="article:published_time" content="2018-11-18T04:42:38+00:00" />
+<meta property="og:ignore_canonical" content="true" />
+
+
+
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"QAPage","name":"Unable to run \"mesg-core start\"","mainEntity":{"@type":"Question","name":"Unable to run \"mesg-core start\"","text":"Error Message:\n\n2018/11/18 10:07:06 Error response from daemon: could not choose an IP address to advertise since this system has multiple addresses on interface wlo1 (2405:204:9521:8f9e:31e1:b99f:f531:ffdd a nd 2405:204:9521:8f9e:a40a:26a0:94c:9101)\n\nI understand from this is mesg tries to initiali&hellip;","upvoteCount":2,"answerCount":1,"dateCreated":"2018-11-18T04:42:38.292Z","author":{"@type":"Person","name":"Vijay Krishnavanshi"},"acceptedAnswer":{"@type":"Answer","text":"Could you create an issue on the <a href="https://forum.mesg.com/t/unable-to-run-mesg-core-start/\&quot;https://github.com/mesg-foundation/core/issues/new\&quot;">Github<\/a> and share\n\nmesg-core version (mesg-core --version)\n\ndocker image (docker image ls | grep mesg/core)\n\ndocker version (docker --version)\n\nenvironment (uname -a)\n\nany relevant informations (screenshot or whatever)\n\nI cannot reproduce this issue and this is the first&hellip;","upvoteCount":0,"dateCreated":"2018-11-18T12:46:52.865Z","url":"https://forum.mesg.com/t/unable-to-run-mesg-core-start/121/8","author":{"@type":"Person","name":"Anthony"}}}}</script>
+  </head>
+  <body class="crawler">
+    
+    <header>
+      <a href="../../index.html">
+          <img src="../../uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png" alt="MESG Community" id="site-logo" style="max-width: 150px;">
+      </a>
+    </header>
+    <div id="main-outlet" class="wrap">
+        <div id="topic-title">
+    <h1>
+      <a href="121.html">Unable to run &quot;mesg-core start&quot;</a>
+    </h1>
+
+      <div class="topic-category" itemscope itemtype="http://schema.org/BreadcrumbList">
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../c/support.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #12A89D'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Support</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="1" />
+          </span>
+      </div>
+
+      <div class="topic-category">
+        <div class='discourse-tags list-tags'>
+            <a href='../../tag/network.html' class='discourse-tag' rel="tag">network</a>
+        </div>
+      </div>
+  </div>
+
+  
+
+
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/vijaykrishnavanshi.html'><span itemprop='name'>vijaykrishnavanshi</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="121.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-11-18T04:42:38Z' class='post-time'>
+                November 18, 2018,  4:42am
+              </time>
+              <meta itemprop='dateModified' content='2018-11-18T04:42:38Z'>
+          <span itemprop='position'>#1</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Error Message:<br>
+<code>2018/11/18 10:07:06 Error response from daemon: could not choose an IP address to advertise since this system has multiple addresses on interface wlo1 (2405:204:9521:8f9e:31e1:b99f:f531:ffdd a nd 2405:204:9521:8f9e:a40a:26a0:94c:9101)</code></p>
+<p>I understand from this is mesg tries to initialize docker but is unable to choose from the multiple IPs. Has anyone faced a similar issue? Can you give pointers to resolve this?</p>
+        </div>
+
+        <meta itemprop='headline' content='Unable to run &quot;mesg-core start&quot;'>
+          <meta itemprop='keywords' content='network'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="2" />
+           <span class='post-likes'>2 Likes</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="121.html">
+
+            <link itemprop="image" href="../../uploads/default/original/1X/e9026401f8a379e473924906ae355ac25ba8da55.png">
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-11-18T05:20:11Z'>
+              <time itemprop='dateModified' datetime='2018-11-18T11:54:32Z' class='post-time'>
+                November 18, 2018, 11:54am
+              </time>
+          <span itemprop='position'>#2</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Hello,</p>
+<p>This looks really similar to this issue</p>
+<aside class="onebox githubissue">
+  <header class="source">
+      <a href="https://github.com/mesg-foundation/core/issues/213" target="_blank" rel="nofollow noopener">github.com/mesg-foundation/core</a>
+  </header>
+  <article class="onebox-body">
+    <a href="https://github.com/antho1404" rel="nofollow noopener">
+<img src="../../uploads/default/original/1X/e9026401f8a379e473924906ae355ac25ba8da55.png" class="thumbnail onebox-avatar" width="" height="">
+</a>
+
+<h4><a href="https://github.com/mesg-foundation/core/issues/213" target="_blank" rel="nofollow noopener">Issue: Cannot start MESG Core on Digital Ocean with Docker image</a></h4>
+
+<div class="date" style="margin-top:10px;">
+	<div class="user" style="margin-top:10px;">
+	opened by <a href="https://github.com/antho1404" target="_blank" rel="nofollow noopener">antho1404</a>
+	on <a href="https://github.com/mesg-foundation/core/issues/213" target="_blank" rel="nofollow noopener">2018-06-13</a>
+	</div>
+	<div class="user">
+	closed by <a href="https://github.com/ilgooz" target="_blank" rel="nofollow noopener">ilgooz</a>
+	on <a href="https://github.com/mesg-foundation/core/issues/213" target="_blank" rel="nofollow noopener">2018-12-04</a>
+	</div>
+</div>
+
+<pre class="content" style="white-space: pre-wrap;">When using Digital Ocean and the built in docker image we have an error when running MESG Core.
+Error response from daemon:...</pre>
+
+<div class="labels">
+ 	<span style="display:inline-block;margin-top:2px;background-color: #B8B8B8;padding: 2px;border-radius: 4px;color: #fff;margin-left: 3px;">bug</span>
+</div>
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+
+<p>This is because mesg-core is initializing docker swarm but you computer exposes two different ip addresses so you have to manually select the one you want to expose with the following command</p>
+<pre><code class="lang-auto">docker swarm init --advertise-addr xxx.xxx.xxx.xxx
+</code></pre>
+<p>This should solve the problem.</p>
+        </div>
+
+        <meta itemprop='headline' content='Unable to run &quot;mesg-core start&quot;'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="2" />
+           <span class='post-likes'>2 Likes</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/vijaykrishnavanshi.html'><span itemprop='name'>vijaykrishnavanshi</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="121.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-11-18T10:35:38Z'>
+              <time itemprop='dateModified' datetime='2018-11-18T10:36:46Z' class='post-time'>
+                November 18, 2018, 10:36am
+              </time>
+          <span itemprop='position'>#3</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Thanks <a class="mention" href="../../u/anthony.html">@Anthony</a><br>
+The above issue is resolved but I get another issue that I am unable to get past.<br>
+My guess is it is something related to working of mesg-core start command. I looked up 50052 port and it is not already used.<br>
+<code>Error response from daemon: rpc error: code = InvalidArgument desc = port '50052' is already in use by service 'core' (l08ypvbd16znurzv9lq9vt91r) as an ingress port</code></p>
+        </div>
+
+        <meta itemprop='headline' content='Unable to run &quot;mesg-core start&quot;'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="121.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-11-18T11:20:56Z'>
+              <time itemprop='dateModified' datetime='2018-11-18T11:54:33Z' class='post-time'>
+                November 18, 2018, 11:54am
+              </time>
+          <span itemprop='position'>#4</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>This is probably related to the previous error, the core is probably running already inside docker but not correctly. This port is exposed by mesg-core.<br>
+Try to stop and start the mesg-core again.<br>
+<code>mesg-core stop</code> and <code>mesg-core start</code> again.</p>
+<p>If this doesn’t work for any reason you can force the stop with <code>docker service rm core</code> and then start it again.</p>
+        </div>
+
+        <meta itemprop='headline' content='Unable to run &quot;mesg-core start&quot;'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/vijaykrishnavanshi.html'><span itemprop='name'>vijaykrishnavanshi</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="121.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-11-18T11:49:18Z' class='post-time'>
+                November 18, 2018, 11:49am
+              </time>
+              <meta itemprop='dateModified' content='2018-11-18T11:49:18Z'>
+          <span itemprop='position'>#5</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>This is the error I am getting on running this.<br>
+<code>mkdir /var/lib/docker: permission denied</code></p>
+        </div>
+
+        <meta itemprop='headline' content='Unable to run &quot;mesg-core start&quot;'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="121.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-11-18T12:36:52Z' class='post-time'>
+                November 18, 2018, 12:36pm
+              </time>
+              <meta itemprop='dateModified' content='2018-11-18T12:36:52Z'>
+          <span itemprop='position'>#6</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>This doesn’t seems related to mesg-core and if your docker is correctly installed there is no reason to touch this kind of folder.</p>
+<p>If the core is running now it’s usable without anything else to do. You can start to <a href="https://docs.mesg.com/guide/service/what-is-a-service.html#receiving-tasks">create your services</a> and <a href="https://docs.mesg.com/guide/application/what-is-an-application.html">create your application</a>.</p>
+<p>Why and where do you need this <code>mkdir</code> for ?</p>
+        </div>
+
+        <meta itemprop='headline' content='Unable to run &quot;mesg-core start&quot;'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="1" />
+           <span class='post-likes'>1 Like</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/vijaykrishnavanshi.html'><span itemprop='name'>vijaykrishnavanshi</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="121.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-11-18T12:38:41Z'>
+              <time itemprop='dateModified' datetime='2018-11-18T12:38:54Z' class='post-time'>
+                November 18, 2018, 12:38pm
+              </time>
+          <span itemprop='position'>#7</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>This is the error that I get on starting the mesg-core using the command <code>mesg-core start</code> so I am not able to understand where is this being used/needed?</p>
+        </div>
+
+        <meta itemprop='headline' content='Unable to run &quot;mesg-core start&quot;'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="121.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-11-18T12:46:52Z'>
+              <time itemprop='dateModified' datetime='2019-01-28T05:21:49Z' class='post-time'>
+                January 28, 2019,  5:21am
+              </time>
+          <span itemprop='position'>#8</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Could you create an issue on the <a href="https://github.com/mesg-foundation/core/issues/new">Github</a> and share</p>
+<ul>
+<li>mesg-core version (<code>mesg-core --version</code>)</li>
+<li>docker image (<code>docker image ls | grep mesg/core</code>)</li>
+<li>docker version (<code>docker --version</code>)</li>
+<li>environment (<code>uname -a</code>)</li>
+<li>any relevant informations (screenshot or whatever)</li>
+</ul>
+<p>I cannot reproduce this issue and this is the first time I see this issue.</p>
+<p>Thanks</p>
+        </div>
+
+        <meta itemprop='headline' content='Unable to run &quot;mesg-core start&quot;'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/vijaykrishnavanshi.html'><span itemprop='name'>vijaykrishnavanshi</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="121.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-11-18T12:54:15Z' class='post-time'>
+                November 18, 2018, 12:54pm
+              </time>
+              <meta itemprop='dateModified' content='2018-11-18T12:54:15Z'>
+          <span itemprop='position'>#9</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Okay Cool. Will do it in sometime from now.<br>
+Thanks</p>
+        </div>
+
+        <meta itemprop='headline' content='Unable to run &quot;mesg-core start&quot;'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+
+
+
+
+
+
+    </div>
+    <footer class="container wrap">
+      <nav class='crawler-nav'>
+        <ul>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../index.html' itemprop="url">Home </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../categories.html' itemprop="url">Categories </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../guidelines.html' itemprop="url">FAQ/Guidelines </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../tos.html' itemprop="url">Terms of Service </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../privacy.html' itemprop="url">Privacy Policy </a>
+          </span>
+        </li>
+        </ul>
+      </nav>
+      <p class='powered-by-link'>Powered by <a href="https://www.discourse.org">Discourse</a>, best viewed with JavaScript enabled</p>
+    </footer>
+    
+    
+  </body>
+  
+</html>

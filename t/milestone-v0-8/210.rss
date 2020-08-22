@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Milestone v0.8</title>
+    <link>https://forum.mesg.com/t/milestone-v0-8/210</link>
+    <description>**Tag :** [v0.8](https://forum.mesg.com/tags/v0-8)
+**Due date:** 25 January 2019
+**GitHub:** https://github.com/mesg-foundation/core/milestone/7
+
+# Main features
+
+- [\*] @krhubert https://forum.mesg.com/t/support-deployments-from-tarball-urls/59
+- [\*] @Nicolas https://forum.mesg.com/t/go-libraries/191
+
+# Bugs
+
+- [\*] @krhubert [interface/grpc/core: ListenTask gets canceled](https://github.com/mesg-foundation/core/issues/549)
+- [\*] @krhubert Implement same fix of ListenTask from ListenEvent and ListenResult in CLI commands.
+- [ ] @krhubert [add omitempty flag to generate same hash even if struct change](https://github.com/mesg-foundation/core/issues/718) / https://forum.mesg.com/t/replace-structhash-with-json-encoding/216
+- [ ] https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211
+
+# Test
+
+- [ ] [Improve test for deploy](https://github.com/mesg-foundation/core/issues/723)</description>
+    
+    <lastBuildDate>Wed, 30 Jan 2019 07:39:09 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/milestone-v0-8/210.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Milestone v0.8</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Released</p>
+<aside class="onebox githubpullrequest">
+  <header class="source">
+      <a href="https://github.com/mesg-foundation/core/pull/754" target="_blank" rel="nofollow noopener">github.com/mesg-foundation/core</a>
+  </header>
+  <article class="onebox-body">
+      <a href="https://github.com/NicolasMahe" target="_blank" rel="nofollow noopener">
+    <img alt="NicolasMahe" src="https://forum.mesg.com/uploads/default/original/1X/26944398294eb78d5fcd9c0ac79f47a8ba160661.jpeg" class="thumbnail onebox-avatar" width="90" height="90">
+  </a>
+
+<h4>
+  <a href="https://github.com/mesg-foundation/core/pull/754" target="_blank" rel="nofollow noopener">Release v0.8</a>
+</h4>
+
+<div class="date">
+  by <a href="https://github.com/NicolasMahe" target="_blank" rel="nofollow noopener">NicolasMahe</a>
+  on <a href="https://github.com/mesg-foundation/core/pull/754" target="_blank" rel="nofollow noopener">03:32AM - 30 Jan 19 UTC</a>
+</div>
+
+<div class="github-commit-stats">
+  <strong>68 commits</strong>
+  changed <strong>591 files</strong>
+  with <strong>312 additions</strong>
+  and <strong>377544 deletions</strong>.
+</div>
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+
+          <p><a href="https://forum.mesg.com/t/milestone-v0-8/210/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/milestone-v0-8/210/2</link>
+        <pubDate>Wed, 30 Jan 2019 07:39:09 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-210-2</guid>
+        <source url="https://forum.mesg.com/t/milestone-v0-8/210.rss">Milestone v0.8</source>
+      </item>
+      <item>
+        <title>Milestone v0.8</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p><strong>Tag :</strong> <a href="https://forum.mesg.com/tags/v0-8">v0.8</a><br>
+<strong>Due date:</strong> 25 January 2019<br>
+<strong>GitHub:</strong> <a href="https://github.com/mesg-foundation/core/milestone/7" rel="nofollow noopener">https://github.com/mesg-foundation/core/milestone/7</a></p>
+<h1>Main features</h1>
+<ul>
+<li>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> <a class="mention" href="/u/krhubert">@krhubert</a> <a href="https://forum.mesg.com/t/support-deployments-from-tarball-urls/59" class="inline-onebox">Support deployments from tarball urls</a>
+</li>
+<li>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> <a class="mention" href="/u/nicolas">@Nicolas</a> <a href="https://forum.mesg.com/t/go-libraries/191" class="inline-onebox">Go libraries</a>
+</li>
+</ul>
+<h1>Bugs</h1>
+<ul>
+<li>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> <a class="mention" href="/u/krhubert">@krhubert</a> <a href="https://github.com/mesg-foundation/core/issues/549" rel="nofollow noopener">interface/grpc/core: ListenTask gets canceled</a>
+</li>
+<li>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> <a class="mention" href="/u/krhubert">@krhubert</a> Implement same fix of ListenTask from ListenEvent and ListenResult in CLI commands.</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> <a class="mention" href="/u/krhubert">@krhubert</a> <a href="https://github.com/mesg-foundation/core/issues/718" rel="nofollow noopener">add omitempty flag to generate same hash even if struct change</a> / <a href="https://forum.mesg.com/t/replace-structhash-with-json-encoding/216" class="inline-onebox">Replace structhash with json encoding</a>
+</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> <a href="https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211" class="inline-onebox">Service's hash are different from downloaded tarball and remote git</a>
+</li>
+</ul>
+<h1>Test</h1>
+<ul>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> <a href="https://github.com/mesg-foundation/core/issues/723" rel="nofollow noopener">Improve test for deploy</a>
+</li>
+</ul>
+          <p><a href="https://forum.mesg.com/t/milestone-v0-8/210/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/milestone-v0-8/210/1</link>
+        <pubDate>Mon, 21 Jan 2019 07:12:50 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-210-1</guid>
+        <source url="https://forum.mesg.com/t/milestone-v0-8/210.rss">Milestone v0.8</source>
+      </item>
+  </channel>
+</rss>

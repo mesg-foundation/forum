@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Go back to version 0.X.X</title>
+    <link>https://forum.mesg.com/t/go-back-to-version-0-x-x/63</link>
+    <description>As discussed during the meeting, we need to go back to v0.X.X to be able to break stuff without having to change the Major version.</description>
+    
+    <lastBuildDate>Thu, 13 Dec 2018 08:16:49 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/go-back-to-version-0-x-x/63.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Go back to version 0.X.X</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            
+          <p><a href="https://forum.mesg.com/t/go-back-to-version-0-x-x/63/5">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/go-back-to-version-0-x-x/63/5</link>
+        <pubDate>Sat, 05 Jan 2019 09:35:57 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-63-5</guid>
+        <source url="https://forum.mesg.com/t/go-back-to-version-0-x-x/63.rss">Go back to version 0.X.X</source>
+      </item>
+      <item>
+        <title>Go back to version 0.X.X</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>It has been done. Resolving this topic.</p>
+          <p><a href="https://forum.mesg.com/t/go-back-to-version-0-x-x/63/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/go-back-to-version-0-x-x/63/4</link>
+        <pubDate>Thu, 13 Dec 2018 08:16:49 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-63-4</guid>
+        <source url="https://forum.mesg.com/t/go-back-to-version-0-x-x/63.rss">Go back to version 0.X.X</source>
+      </item>
+      <item>
+        <title>Go back to version 0.X.X</title>
+        <dc:creator><![CDATA[jonobacon]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote no-group" data-post="1" data-topic="63" data-full="true">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/nicolas/40/10_1.png" class="avatar"> Nicolas:</div>
+<blockquote>
+<p>As discussed during the meeting, we need to go back to v0.X.X to be able to break stuff without having to change the Major version.</p>
+</blockquote>
+</aside>
+<p>Makes sense. Is there any particular upgrade path with this versioning scheme?</p>
+          <p><a href="https://forum.mesg.com/t/go-back-to-version-0-x-x/63/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/go-back-to-version-0-x-x/63/3</link>
+        <pubDate>Tue, 25 Sep 2018 04:35:47 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-63-3</guid>
+        <source url="https://forum.mesg.com/t/go-back-to-version-0-x-x/63.rss">Go back to version 0.X.X</source>
+      </item>
+      <item>
+        <title>Go back to version 0.X.X</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            
+          <p><a href="https://forum.mesg.com/t/go-back-to-version-0-x-x/63/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/go-back-to-version-0-x-x/63/2</link>
+        <pubDate>Tue, 25 Sep 2018 03:17:58 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-63-2</guid>
+        <source url="https://forum.mesg.com/t/go-back-to-version-0-x-x/63.rss">Go back to version 0.X.X</source>
+      </item>
+      <item>
+        <title>Go back to version 0.X.X</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>As discussed during the meeting, we need to go back to v0.X.X to be able to break stuff without having to change the Major version.</p>
+          <p><a href="https://forum.mesg.com/t/go-back-to-version-0-x-x/63/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/go-back-to-version-0-x-x/63/1</link>
+        <pubDate>Tue, 25 Sep 2018 03:17:55 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-63-1</guid>
+        <source url="https://forum.mesg.com/t/go-back-to-version-0-x-x/63.rss">Go back to version 0.X.X</source>
+      </item>
+  </channel>
+</rss>

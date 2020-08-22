@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Keep Pull Requests Small</title>
+    <link>https://forum.mesg.com/t/keep-pull-requests-small/33</link>
+    <description>reviewing a big PR is always hard and we easily miss track of what is removed or changed. I propose to  **strictly**  not allowing PR&#39;s bigger than  **~500**  lines. changes on generated files and updates on vendor should be done in separate commits and not count inside the line limitation.</description>
+    
+    <lastBuildDate>Tue, 02 Oct 2018 15:40:37 +0000</lastBuildDate>
+    <category>Development</category>
+    <atom:link href="https://forum.mesg.com/t/keep-pull-requests-small/33.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Keep Pull Requests Small</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>I couldn’t agree more, it’s always good to keep the developments as simple as possible and too many modifications in a single PR leads to a lot of potential issues and mistakes</p>
+          <p><a href="https://forum.mesg.com/t/keep-pull-requests-small/33/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/keep-pull-requests-small/33/3</link>
+        <pubDate>Tue, 02 Oct 2018 15:40:37 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-33-3</guid>
+        <source url="https://forum.mesg.com/t/keep-pull-requests-small/33.rss">Keep Pull Requests Small</source>
+      </item>
+      <item>
+        <title>Keep Pull Requests Small</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Totally agree! Let’s keep PR for one feature only.</p>
+          <p><a href="https://forum.mesg.com/t/keep-pull-requests-small/33/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/keep-pull-requests-small/33/2</link>
+        <pubDate>Mon, 17 Sep 2018 10:27:43 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-33-2</guid>
+        <source url="https://forum.mesg.com/t/keep-pull-requests-small/33.rss">Keep Pull Requests Small</source>
+      </item>
+      <item>
+        <title>Keep Pull Requests Small</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>reviewing a big PR is always hard and we easily miss track of what is removed or changed. I propose to  <strong>strictly</strong>  not allowing PR’s bigger than  <strong>~500</strong>  lines. changes on generated files and updates on vendor should be done in separate commits and not count inside the line limitation.</p>
+          <p><a href="https://forum.mesg.com/t/keep-pull-requests-small/33/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/keep-pull-requests-small/33/1</link>
+        <pubDate>Fri, 14 Sep 2018 08:14:51 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-33-1</guid>
+        <source url="https://forum.mesg.com/t/keep-pull-requests-small/33.rss">Keep Pull Requests Small</source>
+      </item>
+  </channel>
+</rss>

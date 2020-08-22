@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Bind core volume to host</title>
+    <link>https://forum.mesg.com/t/bind-core-volume-to-host/46</link>
+    <description>We should set back the volume of the core to bind on the host.
+It will be useful when the core is not running inside Docker.</description>
+    
+    <lastBuildDate>Wed, 19 Sep 2018 10:12:42 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/bind-core-volume-to-host/46.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Bind core volume to host</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            
+          <p><a href="https://forum.mesg.com/t/bind-core-volume-to-host/46/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/bind-core-volume-to-host/46/4</link>
+        <pubDate>Mon, 24 Sep 2018 08:02:13 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-46-4</guid>
+        <source url="https://forum.mesg.com/t/bind-core-volume-to-host/46.rss">Bind core volume to host</source>
+      </item>
+      <item>
+        <title>Bind core volume to host</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Done in PR <a href="https://github.com/mesg-foundation/core/pull/477">https://github.com/mesg-foundation/core/pull/477</a></p>
+          <p><a href="https://forum.mesg.com/t/bind-core-volume-to-host/46/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/bind-core-volume-to-host/46/2</link>
+        <pubDate>Wed, 19 Sep 2018 10:12:42 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-46-2</guid>
+        <source url="https://forum.mesg.com/t/bind-core-volume-to-host/46.rss">Bind core volume to host</source>
+      </item>
+      <item>
+        <title>Bind core volume to host</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>We should set back the volume of the core to bind on the host.<br>
+It will be useful when the core is not running inside Docker.</p>
+          <p><a href="https://forum.mesg.com/t/bind-core-volume-to-host/46/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/bind-core-volume-to-host/46/1</link>
+        <pubDate>Wed, 19 Sep 2018 08:10:01 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-46-1</guid>
+        <source url="https://forum.mesg.com/t/bind-core-volume-to-host/46.rss">Bind core volume to host</source>
+      </item>
+  </channel>
+</rss>

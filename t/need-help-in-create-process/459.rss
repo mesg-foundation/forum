@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Need help in create process</title>
+    <link>https://forum.mesg.com/t/need-help-in-create-process/459</link>
+    <description>Hello,
+I am just starting learning here, but I get some errors when creating a process. I used this tutorial: https://docs.mesg.com/guide/process/process-file.html#steps
+
+when I do the first step, I just copy-paste it, compile done but when I want to create![mes|575x173](upload://mNYtZN47fHm5tTXnGHdwDgzvZE4.png) 
+this is the error : Error: Unexpected token m in JSON at position 0
+
+and even when I try to copy-paste this example : https://docs.mesg.com/guide/process/process-file.html#example-5
+I get this error : 
+ **›   Error: env variable PROVIDER_ENDPOINT must be set**
+
+I hope someone helps me to find solution to create a safe process.
+Thanks</description>
+    
+    <lastBuildDate>Tue, 03 Dec 2019 14:37:47 +0000</lastBuildDate>
+    <category>Support</category>
+    <atom:link href="https://forum.mesg.com/t/need-help-in-create-process/459.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Need help in create process</title>
+        <dc:creator><![CDATA[L-KH]]></dc:creator>
+        <description><![CDATA[
+            <p>Hello,<br>
+Thank you so much for your time. but still the same problem apear even i take the code from your tutorial.<br>
+I just think problem is from google cloud with docker !! I will try later to install it in my own vm linux machine.<br>
+thank you</p>
+          <p><a href="https://forum.mesg.com/t/need-help-in-create-process/459/7">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/need-help-in-create-process/459/7</link>
+        <pubDate>Tue, 03 Dec 2019 14:37:47 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-459-7</guid>
+        <source url="https://forum.mesg.com/t/need-help-in-create-process/459.rss">Need help in create process</source>
+      </item>
+      <item>
+        <title>Need help in create process</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>The whole orchestrator system and the processes are based on <a href="https://docs.mesg.com/guide/service/">MESG services</a>. The <code>instanceHash</code> in the example is the instance of a service that is running, but you need to have this service running, and then you can use the instanceHash of the service and replace it in your process file.<br>
+Or, you can use the <a href="https://docs.mesg.com/guide/process/process-file.html#instance-resolution">instance resolution</a> and have your service automatically deployed, started, and injected in your process file.</p>
+<p>Have a look at our tutorial about the processes <a href="https://blog.mesg.com/create-a-process-to-receive-an-email-when-an-erc20-transfer-occurs/">https://blog.mesg.com/create-a-process-to-receive-an-email-when-an-erc20-transfer-occurs/</a>, this is a real example, the documentation examples are examples of specific usage of each feature of the processes.</p>
+          <p><a href="https://forum.mesg.com/t/need-help-in-create-process/459/6">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/need-help-in-create-process/459/6</link>
+        <pubDate>Tue, 03 Dec 2019 03:08:15 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-459-6</guid>
+        <source url="https://forum.mesg.com/t/need-help-in-create-process/459.rss">Need help in create process</source>
+      </item>
+      <item>
+        <title>Need help in create process</title>
+        <dc:creator><![CDATA[L-KH]]></dc:creator>
+        <description><![CDATA[
+            <p>HEllo,<br>
+thank you for your support.<br>
+Its really weird because mesg-cli is already started !! i didn’t understand well about instance/src solution . but my process file was just copy paste of the examples here<br>
+<img src="https://forum.mesg.com/uploads/default/original/1X/06b4cc9d4a4856d03e9a36754b74afe5fd40f017.png" alt="prb" data-base62-sha1="XkdYKUOHHjdSxNGNVaZejXwC0L" width="690" height="277"><br>
+as I said file is just copy paste because i just want to know how it work and how create my first process.</p>
+<ul>
+<li>i use here google cloud machine !! is this could supose problem with docker-ce ?</li>
+</ul>
+          <p><a href="https://forum.mesg.com/t/need-help-in-create-process/459/5">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/need-help-in-create-process/459/5</link>
+        <pubDate>Mon, 02 Dec 2019 21:52:53 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-459-5</guid>
+        <source url="https://forum.mesg.com/t/need-help-in-create-process/459.rss">Need help in create process</source>
+      </item>
+      <item>
+        <title>Need help in create process</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>Your error <code>Error: 14 UNAVAILABLE: DNS resolution failed</code> might come from 2 problems:</p>
+<ul>
+<li>Your MESG engine is not running and you can run it with <code>mesg-cli daemon:start</code>
+</li>
+<li>One of the service you try to use is unreachable, maybe a typo in an url in your <code>instance/src</code> value.</li>
+</ul>
+<p>I could help you more if you share your process file.</p>
+          <p><a href="https://forum.mesg.com/t/need-help-in-create-process/459/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/need-help-in-create-process/459/4</link>
+        <pubDate>Mon, 02 Dec 2019 03:22:12 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-459-4</guid>
+        <source url="https://forum.mesg.com/t/need-help-in-create-process/459.rss">Need help in create process</source>
+      </item>
+      <item>
+        <title>Need help in create process</title>
+        <dc:creator><![CDATA[L-KH]]></dc:creator>
+        <description><![CDATA[
+            <p>Thank you so much, that was really very helpfull. about .ts extention I just find it here <a href="https://docs.mesg.com/cli/commands/process.html#mesg-cli-process-detail-process-hash" rel="nofollow noopener">https://docs.mesg.com/cli/commands/process.html#mesg-cli-process-detail-process-hash</a><br>
+so i thought that process is a .ts extention.<br>
+I tried to compile and its done now. but again in create I get error "  Error: 14 UNAVAILABLE: DNS resolution failed "<br>
+I didn’t try the email sender because I don"t have SendGreed API . but I just want to try to compile and create my first process.<br>
+Thank you</p>
+          <p><a href="https://forum.mesg.com/t/need-help-in-create-process/459/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/need-help-in-create-process/459/3</link>
+        <pubDate>Sun, 01 Dec 2019 10:52:23 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-459-3</guid>
+        <source url="https://forum.mesg.com/t/need-help-in-create-process/459.rss">Need help in create process</source>
+      </item>
+      <item>
+        <title>Need help in create process</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>Hello <a class="mention" href="/u/l-kh">@L-KH</a>, it seems that your process file is not valid. First, I see that you have <code>myfirstprocess.ts</code>. The file should be a JSON.</p>
+<p>With the processes, you need to <a href="https://docs.mesg.com/cli/commands/process.html#mesg-cli-process-compile-process-file">compile</a> and then <a href="https://docs.mesg.com/cli/commands/process.html#mesg-cli-process-create-definition">create</a> them. The process file is a <code>yaml</code>, and the result of the compilation is a <code>JSON</code>.</p>
+<p>You can use the following command to compile and create at the same time</p>
+<pre><code class="lang-auto">mesg-cli process:create "$(mesg-cli process:compile YOUR_PROCESS_FILE.YML)"
+</code></pre>
+<p>Also, if you are developing with it, I highly recommend using the <a href="https://docs.mesg.com/cli/commands/process.html#mesg-cli-process-dev-process">dev command</a> that will compile, deploy, display the logs, and clean up when you exit your process.</p>
+<pre><code class="lang-auto">mesg-cli process:dev YOUR_PROCESS_FILE.YML
+</code></pre>
+<p>Could you check that your process file is a valid yaml. The documentation display some <code>...</code> that shouldn’t be part of the file.</p>
+<hr>
+<p>The error <code>env variable PROVIDER_ENDPOINT must be set</code> is normal, this is because your process requires an env variable so you can fix this by appending the flag <code>--env PROVIDER_ENDPOINT=your_provider_endpoint</code> and this will solve your issue.</p>
+<hr>
+<p>We just released a tutorial about the processes. I recommend you to have a look at it <a href="https://blog.mesg.com/create-a-process-to-receive-an-email-when-an-erc20-transfer-occurs/">https://blog.mesg.com/create-a-process-to-receive-an-email-when-an-erc20-transfer-occurs/</a>.</p>
+<p>I hope I was able to help <img src="https://forum.mesg.com/images/emoji/twitter/wink.png?v=9" title=":wink:" class="emoji" alt=":wink:"><br>
+Let me know if you have more issues</p>
+          <p><a href="https://forum.mesg.com/t/need-help-in-create-process/459/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/need-help-in-create-process/459/2</link>
+        <pubDate>Sun, 01 Dec 2019 05:38:19 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-459-2</guid>
+        <source url="https://forum.mesg.com/t/need-help-in-create-process/459.rss">Need help in create process</source>
+      </item>
+      <item>
+        <title>Need help in create process</title>
+        <dc:creator><![CDATA[L-KH]]></dc:creator>
+        <description><![CDATA[
+            <p>Hello,<br>
+I am just starting learning here, but I get some errors when creating a process. I used this tutorial: <a href="https://docs.mesg.com/guide/process/process-file.html#steps" rel="nofollow noopener">https://docs.mesg.com/guide/process/process-file.html#steps</a></p>
+<p>when I do the first step, I just copy-paste it, compile done but when I want to create<img src="https://forum.mesg.com/uploads/default/original/1X/9fd608bcf286e370c68ddc48468295f522e0a2a0.png" alt="mes" data-base62-sha1="mNYtZN47fHm5tTXnGHdwDgzvZE4" width="575" height="173"><br>
+this is the error : Error: Unexpected token m in JSON at position 0</p>
+<p>and even when I try to copy-paste this example : <a href="https://docs.mesg.com/guide/process/process-file.html#example-5" rel="nofollow noopener">https://docs.mesg.com/guide/process/process-file.html#example-5</a><br>
+I get this error :<br>
+<strong>›   Error: env variable PROVIDER_ENDPOINT must be set</strong></p>
+<p>I hope someone helps me to find solution to create a safe process.<br>
+Thanks</p>
+          <p><a href="https://forum.mesg.com/t/need-help-in-create-process/459/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/need-help-in-create-process/459/1</link>
+        <pubDate>Fri, 29 Nov 2019 14:08:14 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-459-1</guid>
+        <source url="https://forum.mesg.com/t/need-help-in-create-process/459.rss">Need help in create process</source>
+      </item>
+  </channel>
+</rss>

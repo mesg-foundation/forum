@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>MESG Core v0.9.1 Release Notes</title>
+    <link>https://forum.mesg.com/t/mesg-core-v0-9-1-release-notes/293</link>
+    <description>This small release fixes a few bugs and is the last release of the current implementation of the CLI.
+
+- Use dedicated IPFS node instead of IPFS gateway
+- Improve generation of service&#39;s readme file
+- Better error when parsing service definition
+- Fix links to docs
+
+The CLI is being redeveloped using JavaScript in order to be much more reusable for future application. You can follow its development by watching its [GitHub repo mesg-foundation/cli](https://github.com/mesg-foundation/cli).
+
+----
+
+For the complete changelog, refer to [Github ](https://github.com/mesg-foundation/core/releases/tag/v0.9.1).
+
+To update to v0.9.1, follow the [installation process on the documentation ](https://docs.mesg.com/guide/installation.html#automatic-installation)</description>
+    
+    <lastBuildDate>Wed, 29 May 2019 10:06:07 +0000</lastBuildDate>
+    <category>News</category>
+    <atom:link href="https://forum.mesg.com/t/mesg-core-v0-9-1-release-notes/293.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>MESG Core v0.9.1 Release Notes</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>This small release fixes a few bugs and is the last release of the current implementation of the CLI.</p>
+<ul>
+<li>Use dedicated IPFS node instead of IPFS gateway</li>
+<li>Improve generation of service’s readme file</li>
+<li>Better error when parsing service definition</li>
+<li>Fix links to docs</li>
+</ul>
+<p>The CLI is being redeveloped using JavaScript in order to be much more reusable for future application. You can follow its development by watching its <a href="https://github.com/mesg-foundation/cli" rel="nofollow noopener">GitHub repo mesg-foundation/cli</a>.</p>
+<hr>
+<p>For the complete changelog, refer to <a href="https://github.com/mesg-foundation/core/releases/tag/v0.9.1" rel="nofollow noopener">Github </a>.</p>
+<p>To update to v0.9.1, follow the <a href="https://docs.mesg.com/guide/installation.html#automatic-installation" rel="nofollow noopener">installation process on the documentation </a></p>
+          <p><a href="https://forum.mesg.com/t/mesg-core-v0-9-1-release-notes/293/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mesg-core-v0-9-1-release-notes/293/1</link>
+        <pubDate>Wed, 29 May 2019 10:06:07 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-293-1</guid>
+        <source url="https://forum.mesg.com/t/mesg-core-v0-9-1-release-notes/293.rss">MESG Core v0.9.1 Release Notes</source>
+      </item>
+  </channel>
+</rss>

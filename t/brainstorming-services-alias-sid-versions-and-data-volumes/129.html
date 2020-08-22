@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <title>Brainstorming Service&#39;s Alias/SID/Versions and Data Volumes - Engine - MESG Community</title>
+    <meta name="description" content="Alias/SID/Versions
+
+
+1 - How to solve versioning problem for service? Think about the first reason why we wanted to have service aliases. We wanted to identify services with a unique name. This way we wouldn’t need to ch&amp;hellip;">
+    <meta name="generator" content="Discourse 2.5.0.beta5 - https://github.com/discourse/discourse version 00aab498297cba8f977c1e0eb17b7d38ff06cc68">
+<link rel="icon" type="image/png" href="../../uploads/default/optimized/1X/9f11b6ddfa02bffdbec79487592a0573a0236cb5_2_32x32.png">
+<link rel="apple-touch-icon" type="image/png" href="../../uploads/default/optimized/1X/53630361a40ad76e1733dd0b0f486e9ae2f4f4d6_2_180x180.png">
+<meta name="theme-color" content="#491e8c">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+<link rel="canonical" href="129.html" />
+<script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","url":"https://forum.mesg.com","potentialAction":{"@type":"SearchAction","target":"https://forum.mesg.com/search?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
+<link rel="search" type="application/opensearchdescription+xml" href="../../opensearch.xml" title="MESG Community Search">
+
+      <link href="../../stylesheets/desktop_3_52e3411e87658e862890db7bd06899cf49ad5f59.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop" data-theme-id="7"/>
+      <link href="../../stylesheets/desktop_theme_7_bf4f2d3d8a71e6ee907065be9a79df3d849bd29c.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop_theme" data-theme-id="7"/>
+    
+    <meta id="data-ga-universal-analytics" data-tracking-code="UA-117583862-1" data-json="{&quot;cookieDomain&quot;:&quot;auto&quot;}" data-auto-link-domains="">
+
+<link rel="preload" href="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js" as="script">
+<script src="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js"></script>
+
+
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of &#39;Brainstorming Service&#39;s Alias/SID/Versions and Data Volumes&#39;" href="129.rss" />
+    <meta property="og:site_name" content="MESG Community" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:url" content="https://forum.mesg.com/t/brainstorming-services-alias-sid-versions-and-data-volumes/129" />
+<meta name="twitter:url" content="https://forum.mesg.com/t/brainstorming-services-alias-sid-versions-and-data-volumes/129" />
+<meta property="og:title" content="Brainstorming Service&#39;s Alias/SID/Versions and Data Volumes" />
+<meta name="twitter:title" content="Brainstorming Service&#39;s Alias/SID/Versions and Data Volumes" />
+<meta property="og:description" content="Alias/SID/Versions   1 - How to solve versioning problem for service? Think about the first reason why we wanted to have service aliases. We wanted to identify services with a unique name. This way we wouldn’t need to change service hash in the workflow everytime there is change on the service. But we didn’t talk about versioning a lot. We said that we could use service’s hash for versioning. But there is a catch. We can only use the latest version of a service if we just use its alias in the wo..." />
+<meta name="twitter:description" content="Alias/SID/Versions   1 - How to solve versioning problem for service? Think about the first reason why we wanted to have service aliases. We wanted to identify services with a unique name. This way we wouldn’t need to change service hash in the workflow everytime there is change on the service. But we didn’t talk about versioning a lot. We said that we could use service’s hash for versioning. But there is a catch. We can only use the latest version of a service if we just use its alias in the wo..." />
+<meta name="twitter:label1" value="Reading time" />
+<meta name="twitter:data1" value="4 mins 🕑" />
+<meta name="twitter:label2" value="Likes" />
+<meta name="twitter:data2" value="2 ❤" />
+<meta property="article:published_time" content="2018-12-05T07:45:54+00:00" />
+<meta property="og:ignore_canonical" content="true" />
+
+
+
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"QAPage","name":"Brainstorming Service's Alias/SID/Versions and Data Volumes","mainEntity":{"@type":"Question","name":"Brainstorming Service's Alias/SID/Versions and Data Volumes","text":"Alias/SID/Versions\n\n1 - How to solve versioning problem for service? Think about the first reason why we wanted to have service aliases. We wanted to identify services with a unique name. This way we wouldn’t need to change service hash in the workflow everytime there is change on the service. But &hellip;","upvoteCount":0,"answerCount":1,"dateCreated":"2018-12-05T07:45:53.868Z","author":{"@type":"Person","name":"İlker"},"acceptedAnswer":{"@type":"Answer","text":"This proposal has been released in Core v0.5.","upvoteCount":0,"dateCreated":"2018-12-11T08:13:51.292Z","url":"https://forum.mesg.com/t/brainstorming-services-alias-sid-versions-and-data-volumes/129/12","author":{"@type":"Person","name":"Nicolas"}}}}</script>
+  </head>
+  <body class="crawler">
+    
+    <header>
+      <a href="../../index.html">
+          <img src="../../uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png" alt="MESG Community" id="site-logo" style="max-width: 150px;">
+      </a>
+    </header>
+    <div id="main-outlet" class="wrap">
+        <div id="topic-title">
+    <h1>
+      <a href="129.html">Brainstorming Service&#39;s Alias/SID/Versions and Data Volumes</a>
+    </h1>
+
+      <div class="topic-category" itemscope itemtype="http://schema.org/BreadcrumbList">
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../c/development.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #AB9364'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Development</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="1" />
+          </span>
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../c/development/engine.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #AB9364'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Engine</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="2" />
+          </span>
+      </div>
+
+      <div class="topic-category">
+        <div class='discourse-tags list-tags'>
+            <a href='../../tag/proposal.html' class='discourse-tag' rel="tag">proposal</a>
+        </div>
+      </div>
+  </div>
+
+  
+
+
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="129.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-12-05T07:45:54Z'>
+              <time itemprop='dateModified' datetime='2018-12-11T08:13:28Z' class='post-time'>
+                December 11, 2018,  8:13am
+              </time>
+          <span itemprop='position'>#1</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <h2>Alias/SID/Versions</h2>
+<ul>
+<li>
+<p>1 - How to solve versioning problem for service? Think about the first reason why we wanted to have service aliases. We wanted to identify services with a unique name. This way we wouldn’t need to change service hash in the workflow everytime there is change on the service. But we didn’t talk about versioning a lot. We said that we could use service’s hash for versioning. But there is a catch. We can only use the latest version of a service if we just use its alias in the workflow. As a second, we can only use a specific version of a service if we use its alias and service hash together in the workflow. We don’t have a way of allowing to use a range of service’s version. Like semver provides. Because of that, any minor change on the service, again will lead us to update service’s hash in the workflow. Or when we use alias alone, any major change on the service can broke the workflow. The question is how to solve versioning problem?</p>
+</li>
+<li>
+<p>2 - What is the difference between SID and Alias, what problems they solve? How they solve the versioning problem? Can their names be changed after they pushed to network?</p>
+</li>
+</ul>
+<h2>Data Volumes</h2>
+<ul>
+<li>
+<p>3 - Currently we use aliases to identify a volume. Running same services’ different versions at the same time will end up using the same volumes because aliases are the same for both of them. Do you think that this is proper?</p>
+</li>
+<li>
+<p>4 - Running a service’s two different versions at the same on a peer is a valid approach (remember Blue/Green Deployments). Do you think that different services or same service with different versions running at the same time should be able to access to the same volume? Multiple services writing data to the same volume is error prone. Do you think that we should disallow attaching same data volume to multiple services that are running <em>at the same time</em> (not in deploy time, on start time)?</p>
+</li>
+<li>
+<p>5 - How to use same data volume when service’s alias/SID/version changed? This is a valid approach. A new service or an existing service but with a new version should be able to use an old data volume. Do you think that we should provide the opportunity of reusable data volumes? A data volume might not be used by a service anymore, in this case should it be a valid thing to attach existent volumes to a new service or to the same service with a different version? Otherwise devs will need to do data migration for a new volume. This doesn’t make sense in the real world.</p>
+</li>
+<li>
+<p>6 - Do we have a plan for having decentralised data volumes in future? If so, does it makes sense to identify them with their own unique names which can be defined in the mesg.yml?</p>
+</li>
+<li>
+<p>7 - What is the relationship between service’s alias/SID/version and data volumes? Do you think that volumes <em>must</em> be strictly related with their service’s alias/SID/version? If so, why?</p>
+</li>
+<li>
+<p>8 - After you answered the questions above, do you think that somehow automatically managing the relationship between services and volumes are possible? Is it our concern or devs’? Should volumes have their unique names separately defined in the mesg.yml? This way, it’s possible to manage them separately without a need of relationship between service’s alias/SID/version.</p>
+</li>
+</ul>
+        </div>
+
+        <meta itemprop='headline' content='Brainstorming Service&#39;s Alias/SID/Versions and Data Volumes'>
+          <meta itemprop='keywords' content='proposal'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="129.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-12-05T08:29:24Z' class='post-time'>
+                December 5, 2018,  8:29am
+              </time>
+              <meta itemprop='dateModified' content='2018-12-05T08:29:24Z'>
+          <span itemprop='position'>#2</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>First of all, let’s be clear on the vocabulary:<br>
+<strong>Hash</strong>: I would like everyone to use Hash instead ID. Hash is generated from the source code and the <code>mesg.yml</code> so it changed every time a modification is done on the service.<br>
+<strong>SID</strong> (stand for Service ID): a string chosen by the developer and set in the <code>mesg.yml</code>. SID should be as unique as possible and stay the same as long as the service has the same behaviour and use the same data/volume.<br>
+<strong>Alias</strong>: a very user-friendly string for LOCAL USAGE ONLY. I would recommend that the user set the alias when deploying a service.</p>
+<ul>
+<li>
+<p>1 - Versioning is super complicated when it comes to running application. I would suggest to not create a versioning system that has too much automation because it will have limitation.</p>
+</li>
+<li>
+<p>2 - SID is the unique service id, it the way to identify for sure a service (even when service’s source code change), it should stay the same during the service lifetime. Alias is a feature for local development of application. SID cannot be changed after a push on the network because its part of the <code>mesg.yml</code>. Alias can be change because it’s a local config.</p>
+</li>
+<li>
+<p>3 - No</p>
+</li>
+<li>
+<p>4 - No, they should not access the same volume at the same time.</p>
+</li>
+<li>
+<p>5 - As long as SID stay the same, the new version will use the same volume as the old version. But the 2 versions cannot run at the same time.</p>
+</li>
+<li>
+<p>6 - No we don’t have plan for decentralized data volume</p>
+</li>
+<li>
+<p>7 - I think volume should be only and strictly link to SID.</p>
+</li>
+<li>
+<p>8 - Yes i think it’s possible</p>
+</li>
+</ul>
+        </div>
+
+        <meta itemprop='headline' content='Brainstorming Service&#39;s Alias/SID/Versions and Data Volumes'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="1" />
+           <span class='post-likes'>1 Like</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="129.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-12-05T09:01:11Z'>
+              <time itemprop='dateModified' datetime='2018-12-05T09:29:32Z' class='post-time'>
+                December 5, 2018,  9:29am
+              </time>
+          <span itemprop='position'>#3</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p><a class="mention" href="../../u/nicolas.html">@Nicolas</a></p>
+<ul>
+<li>
+<p>1- &amp; 2- In that case SID should only be updated when there is a major change. Otherwise changing SID for minor updates will require updates on Workflows as well. But still, not versioning minor changes removes some flexibility because Workflows may want to really use a specific version of a service and may don’t want to have the minor changes. Because changes may introduce side effects or even a new bug. To avoid these we need to provide the ability of using a fixed version of service otherwise every change on service but with the <strong>same</strong> SID can open a security issue for Workflow users because it’s controlled by service’s author. We can use service’s HASH here but it’s hard to keep track which version range it points to in the UX side.</p>
+</li>
+<li>
+<p>2- cont’d: Having both Alias and SID a bit too much. Isn’t it possible to use SID for local development too? If not why?</p>
+</li>
+<li>
+<p>7- I don’t agree because I think, It’s a valid thing to completely change SID and want to keep the same data volume. Think about Gmail and Inbox as MESG services. The’ve different names but one is created to replace other. It feels better to have the ability of using volumes in totally different services. But of course, <strong>not at the same time</strong>.</p>
+</li>
+<li>
+<p>8- Regarding to question 7, it is not possible to automatically manage volumes for services.</p>
+</li>
+</ul>
+<p><strong><em>Note 1:</em></strong><br>
+<a class="mention" href="../../u/nicolas.html">@Nicolas</a> btw, it’d be nice if you extend your previous message and give some Alias and SID examples by keeping versioning in mind. So we can see how they look like.</p>
+<p><strong><em>Note 2:</em></strong><br>
+I think having both SID and semver could be a solution for versioning services:<br>
+<code>com.mesg.http-server:1.2.1</code>.</p>
+<p>This way it can be used by workflows with this syntax:<br>
+<code>com.mesg.http-server:*</code>,<br>
+<code>com.mesg.http-server:^1.2.1</code>.</p>
+<p><strong><em>Note 3:</em></strong><br>
+By keeping <em>“managing volumes automatically cannot be done by strictly linking them to services”</em> in mind, we should also give unique names to volumes in the mesg.yml. This solves the data volume issue, gives the responsibility to devs and provides the most flexibility. This way, each data volume can be used by any other services but not at the same time.</p>
+        </div>
+
+        <meta itemprop='headline' content='Brainstorming Service&#39;s Alias/SID/Versions and Data Volumes'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="2" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="129.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-12-05T09:31:11Z'>
+              <time itemprop='dateModified' datetime='2018-12-05T09:51:40Z' class='post-time'>
+                December 5, 2018,  9:51am
+              </time>
+          <span itemprop='position'>#4</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <aside class="quote group-team" data-post="3" data-topic="129">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/ilgooz/40/46_1.png" class="avatar"> ilgooz:</div>
+<blockquote>
+<p><em><strong>Note 3:</strong></em><br>
+By keeping <em>“managing volumes automatically cannot be done by strictly linking them to services”</em> in mind, we should also give unique names to volumes in the mesg.yml. This solves the data volume issue, gives the responsibility to devs and provides the most flexibility. This way, each data volume can be used by any other services but not at the same time.</p>
+</blockquote>
+</aside>
+<p>This is a very big security issue. Services should never be able to access other services volume. Only when it’s update of the same service, then the volume is accessible.</p>
+<hr>
+<pre><code class="lang-auto">name: "Bitcoin Service"
+sid: "com.mesg.service.bitcoin.v1"
+repository: "https://github.com/mesg-foundation/service-bitcoin"
+</code></pre>
+<pre><code class="lang-auto">$ mesg-core deploy https://github.com/mesg-foundation/service-bitcoin --alias bitcoin
+hash: hash1
+</code></pre>
+<pre><code class="lang-auto">SID com.mesg.service.bitcoin.v1 -&gt; hash1
+alias bitcoin -&gt; hash1
+volumes com.mesg.service.bitcoin.v1 -&gt; service with hash1
+</code></pre>
+<p>Then the user can either use the hash, SID or alias to use the service.</p>
+<hr>
+<p>In case of small update (same volume):</p>
+<pre><code class="lang-auto">name: "Bitcoin Service"
+sid: "com.mesg.service.bitcoin.v1" // same same
+repository: "https://github.com/mesg-foundation/service-bitcoin"
+</code></pre>
+<pre><code class="lang-auto">$ mesg-core deploy https://github.com/mesg-foundation/service-bitcoin --alias bitcoin
+A service already use the SID. Do you want to remove the previous service with hash "hash1"? [y/N] y
+hash: hash2 // different hash
+</code></pre>
+<pre><code class="lang-auto">SID com.mesg.service.bitcoin.v1 -&gt; hash2
+alias bitcoin -&gt; hash2
+volumes com.mesg.service.bitcoin.v1 -&gt; service with hash2
+</code></pre>
+<hr>
+<p>In case of BIG update (different volume):</p>
+<pre><code class="lang-auto">name: "Bitcoin Service"
+sid: "com.mesg.service.bitcoin.v2" // different
+repository: "https://github.com/mesg-foundation/service-bitcoin"
+</code></pre>
+<pre><code class="lang-auto">$ mesg-core deploy https://github.com/mesg-foundation/service-bitcoin --alias bitcoin
+A service already use the alias "bitcoin". Do you want to steal the alias for this service? [y/N] y
+hash: hash3 // different hash
+</code></pre>
+<pre><code class="lang-auto">SID com.mesg.service.bitcoin.v1 -&gt; hash2
+SID com.mesg.service.bitcoin.v2 -&gt; hash3
+alias bitcoin -&gt; hash3
+volumes com.mesg.service.bitcoin.v1 -&gt; service with hash2
+volumes com.mesg.service.bitcoin.v2 -&gt; service with hash3
+</code></pre>
+<hr>
+<p>the alias in this system is not really useful. SID can be enough.</p>
+        </div>
+
+        <meta itemprop='headline' content='Brainstorming Service&#39;s Alias/SID/Versions and Data Volumes'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="129.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-12-05T09:59:02Z' class='post-time'>
+                December 5, 2018,  9:59am
+              </time>
+              <meta itemprop='dateModified' content='2018-12-05T09:59:02Z'>
+          <span itemprop='position'>#5</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <aside class="quote group-team" data-post="4" data-topic="129">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/nicolas/40/10_1.png" class="avatar"> Nicolas:</div>
+<blockquote>
+<p>This is a very big security issue. Services should never be able to access other services volume. Only when it’s update of the same service, then the volume is accessible.</p>
+</blockquote>
+</aside>
+<p><a class="mention" href="../../u/nicolas.html">@Nicolas</a> can you give a bit more explanation about how please? Since devs will have their private keys, they can use it to access their services/volumes and attach their own volumes to their own services. If a dev shouldn’t have access to a volume in the network, isn’t it the responsibility of private keys? Because we use private keys for authorization.</p>
+        </div>
+
+        <meta itemprop='headline' content='Brainstorming Service&#39;s Alias/SID/Versions and Data Volumes'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="129.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-12-05T10:33:48Z' class='post-time'>
+                December 5, 2018, 10:33am
+              </time>
+              <meta itemprop='dateModified' content='2018-12-05T10:33:48Z'>
+          <span itemprop='position'>#6</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Do you mean to calculate the volume key with SID or DID + a new volume ID?</p>
+        </div>
+
+        <meta itemprop='headline' content='Brainstorming Service&#39;s Alias/SID/Versions and Data Volumes'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="129.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-12-05T10:45:01Z' class='post-time'>
+                December 5, 2018, 10:45am
+              </time>
+              <meta itemprop='dateModified' content='2018-12-05T10:45:01Z'>
+          <span itemprop='position'>#7</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>I’m not sure but should be something like that:<br>
+<em>Company/Organization/User ID + a new <strong>uniquely chosen</strong> volume ID in the yml</em> (What is a DID?).</p>
+<p>Actually this is about how we integrate private keys in the network to identify service/volumes. It’s surely doable. I don’t know if want to introduce organizations etc. for services and volumes but authorization for volumes should be possible without them too. For example we can add some kind of cryptologic value as a prefix to SID or volume names that only can be generated by the devs who has the private keys.</p>
+<p>I don’t have enough research about the topic for now but this should be doable.</p>
+        </div>
+
+        <meta itemprop='headline' content='Brainstorming Service&#39;s Alias/SID/Versions and Data Volumes'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="129.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-12-05T10:46:23Z'>
+              <time itemprop='dateModified' datetime='2018-12-05T10:46:33Z' class='post-time'>
+                December 5, 2018, 10:46am
+              </time>
+          <span itemprop='position'>#8</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Yes that’s doable. But let’s focus on the current problem <img src="../../images/emoji/twitter/wink.png%3Fv=6" title=":wink:" class="emoji" alt=":wink:"></p>
+<p>DID: Developer ID</p>
+        </div>
+
+        <meta itemprop='headline' content='Brainstorming Service&#39;s Alias/SID/Versions and Data Volumes'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="129.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-12-05T10:47:21Z' class='post-time'>
+                December 5, 2018, 10:47am
+              </time>
+              <meta itemprop='dateModified' content='2018-12-05T10:47:21Z'>
+          <span itemprop='position'>#9</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>So, in this context I think <strong>Note 3</strong> does not lead to a security problem where private keys are correctly used.</p>
+        </div>
+
+        <meta itemprop='headline' content='Brainstorming Service&#39;s Alias/SID/Versions and Data Volumes'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="129.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-12-05T10:53:06Z' class='post-time'>
+                December 5, 2018, 10:53am
+              </time>
+              <meta itemprop='dateModified' content='2018-12-05T10:53:06Z'>
+          <span itemprop='position'>#10</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <aside class="quote group-team" data-post="3" data-topic="129">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/ilgooz/40/46_1.png" class="avatar"> ilgooz:</div>
+<blockquote>
+<p>1- &amp; 2- In that case SID should only be updated when there is a major change. Otherwise changing SID for minor updates will require updates on Workflows as well. But still, not versioning minor changes removes some flexibility because Workflows may want to really use a specific version of a service and may don’t want to have the minor changes. Because changes may introduce side effects or even a new bug. To avoid these we need to provide the ability of using a fixed version of service otherwise every change on service but with the <strong>same</strong> SID can open a security issue for Workflow users because it’s controlled by service’s author. We can use service’s HASH here but it’s hard to keep track which version range it points to in the UX side.</p>
+</blockquote>
+</aside>
+<p>Exactly as you said, if the workflow/app want to use a specific version, then it has to use the Hash.<br>
+The thing is with a Semver version based system, a lot of developer doesn’t respect (or know) the logic. And again, the best is to specify a x.y.z version, so in our case, it’s the same as Hash.</p>
+        </div>
+
+        <meta itemprop='headline' content='Brainstorming Service&#39;s Alias/SID/Versions and Data Volumes'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="1" />
+           <span class='post-likes'>1 Like</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="129.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-12-05T11:09:31Z'>
+              <time itemprop='dateModified' datetime='2018-12-05T11:48:31Z' class='post-time'>
+                December 5, 2018, 11:48am
+              </time>
+          <span itemprop='position'>#11</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>In this context, I’m ok with only having SID without semver. This is surely something that we can easily improve in future if we feel that we need to. Adding semver later on doesn’t lead to an architectural change on SID or anything, so it’s ok.</p>
+<p>One small advantage of having semver next to SID is, this will make SID to be constant because version will be defined within another prop. With a separate version prop, it’s easier to identify services because SID will stay as the same and another version of the service will not look like a totally different service.</p>
+<p>But still we can provide the same feeling by encouraging devs using a SID naming notation like this: <code>com.mesg.service.http-server.v1</code> (version at the end(as <a class="mention" href="../../u/nicolas.html">@Nicolas</a> suggested before)). And we can even add a rule for this.</p>
+<p><em>Btw, in Workflows, services will look like:</em><br>
+<code>com.mesg.service.http-server.v1</code> &gt; always the latest version of v1<br>
+<code>com.mesg.service.http-server.v1:HASH</code> &gt; specific version of v1</p>
+        </div>
+
+        <meta itemprop='headline' content='Brainstorming Service&#39;s Alias/SID/Versions and Data Volumes'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="129.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-12-11T08:13:51Z'>
+              <time itemprop='dateModified' datetime='2018-12-11T08:37:30Z' class='post-time'>
+                December 11, 2018,  8:37am
+              </time>
+          <span itemprop='position'>#12</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>This proposal has been released in Core v0.5.</p>
+        </div>
+
+        <meta itemprop='headline' content='Brainstorming Service&#39;s Alias/SID/Versions and Data Volumes'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+
+
+
+
+
+
+    </div>
+    <footer class="container wrap">
+      <nav class='crawler-nav'>
+        <ul>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../index.html' itemprop="url">Home </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../categories.html' itemprop="url">Categories </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../guidelines.html' itemprop="url">FAQ/Guidelines </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../tos.html' itemprop="url">Terms of Service </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../privacy.html' itemprop="url">Privacy Policy </a>
+          </span>
+        </li>
+        </ul>
+      </nav>
+      <p class='powered-by-link'>Powered by <a href="https://www.discourse.org">Discourse</a>, best viewed with JavaScript enabled</p>
+    </footer>
+    
+    
+  </body>
+  
+</html>

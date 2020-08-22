@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <title>Service&#39;s hash are different from downloaded tarball and remote git - Engine - MESG Community</title>
+    <meta name="description" content="Service’s hash are different from downloaded tarball and remote git. 
+But if I download the tarball manually and deploy it, the hash is the same as git.">
+    <meta name="generator" content="Discourse 2.5.0.beta5 - https://github.com/discourse/discourse version 00aab498297cba8f977c1e0eb17b7d38ff06cc68">
+<link rel="icon" type="image/png" href="../../uploads/default/optimized/1X/9f11b6ddfa02bffdbec79487592a0573a0236cb5_2_32x32.png">
+<link rel="apple-touch-icon" type="image/png" href="../../uploads/default/optimized/1X/53630361a40ad76e1733dd0b0f486e9ae2f4f4d6_2_180x180.png">
+<meta name="theme-color" content="#491e8c">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+<link rel="canonical" href="211.html" />
+<script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","url":"https://forum.mesg.com","potentialAction":{"@type":"SearchAction","target":"https://forum.mesg.com/search?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
+<link rel="search" type="application/opensearchdescription+xml" href="../../opensearch.xml" title="MESG Community Search">
+
+      <link href="../../stylesheets/desktop_3_52e3411e87658e862890db7bd06899cf49ad5f59.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop" data-theme-id="7"/>
+      <link href="../../stylesheets/desktop_theme_7_bf4f2d3d8a71e6ee907065be9a79df3d849bd29c.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop_theme" data-theme-id="7"/>
+    
+    <meta id="data-ga-universal-analytics" data-tracking-code="UA-117583862-1" data-json="{&quot;cookieDomain&quot;:&quot;auto&quot;}" data-auto-link-domains="">
+
+<link rel="preload" href="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js" as="script">
+<script src="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js"></script>
+
+
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of &#39;Service&#39;s hash are different from downloaded tarball and remote git&#39;" href="211.rss" />
+    <meta property="og:site_name" content="MESG Community" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:url" content="https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211" />
+<meta name="twitter:url" content="https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211" />
+<meta property="og:title" content="Service&#39;s hash are different from downloaded tarball and remote git" />
+<meta name="twitter:title" content="Service&#39;s hash are different from downloaded tarball and remote git" />
+<meta property="og:description" content="Service’s hash are different from downloaded tarball and remote git.  But if I download the tarball manually and deploy it, the hash is the same as git." />
+<meta name="twitter:description" content="Service’s hash are different from downloaded tarball and remote git.  But if I download the tarball manually and deploy it, the hash is the same as git." />
+<meta property="article:published_time" content="2019-01-21T07:16:31+00:00" />
+<meta property="og:ignore_canonical" content="true" />
+
+
+
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"QAPage","name":"Service's hash are different from downloaded tarball and remote git","mainEntity":{"@type":"Question","name":"Service's hash are different from downloaded tarball and remote git","text":"Service’s hash are different from downloaded tarball and remote git.\n\nBut if I download the tarball manually and deploy it, the hash is the same as git.","upvoteCount":0,"answerCount":1,"dateCreated":"2019-01-21T07:16:31.727Z","author":{"@type":"Person","name":"Nicolas"},"acceptedAnswer":{"@type":"Answer","text":"Just to summarize.\n\nThis has been fixed/implemented here <a href="https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/\&quot;https://github.com/mesg-foundation/core/pull/731\&quot;" rel=\"nofollow noopener\">https://github.com/mesg-foundation/core/pull/731<\/a>\n\nRemove all .git folder (as files are not deterministic inside)\n\nCompute the hash by hashing all the files in the service\n\nHash permission in the file and ignore all the rest (modtime not support&hellip;","upvoteCount":0,"dateCreated":"2019-03-15T10:15:19.809Z","url":"https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211/12","author":{"@type":"Person","name":"Anthony"}}}}</script>
+  </head>
+  <body class="crawler">
+    
+    <header>
+      <a href="../../index.html">
+          <img src="../../uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png" alt="MESG Community" id="site-logo" style="max-width: 150px;">
+      </a>
+    </header>
+    <div id="main-outlet" class="wrap">
+        <div id="topic-title">
+    <h1>
+      <a href="211.html">Service&#39;s hash are different from downloaded tarball and remote git</a>
+    </h1>
+
+      <div class="topic-category" itemscope itemtype="http://schema.org/BreadcrumbList">
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../c/development.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #AB9364'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Development</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="1" />
+          </span>
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../c/development/engine.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #AB9364'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Engine</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="2" />
+          </span>
+      </div>
+
+      <div class="topic-category">
+        <div class='discourse-tags list-tags'>
+            <a href='../../tag/v0-9.html' class='discourse-tag' rel="tag">v0-9</a>
+        </div>
+      </div>
+  </div>
+
+  
+
+
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="211.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2019-01-21T07:16:31Z'>
+              <time itemprop='dateModified' datetime='2019-01-30T07:39:44Z' class='post-time'>
+                January 30, 2019,  7:39am
+              </time>
+          <span itemprop='position'>#1</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Service’s hash are different from downloaded tarball and remote git.</p>
+<p>But if I download the tarball manually and deploy it, the hash is the same as git.</p>
+        </div>
+
+        <meta itemprop='headline' content='Service&#39;s hash are different from downloaded tarball and remote git'>
+          <meta itemprop='keywords' content='v0-9'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+            <div class='crawler-linkback-list' itemscope itemtype='http://schema.org/ItemList'>
+                  <div itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+                    <a href="../milestone-v0-8/210.html" itemprop='item'>
+                      <meta itemprop='url' content='https://forum.mesg.com/t/milestone-v0-8/210'>
+                      <meta itemprop='position' content='1'>
+                      <span itemprop='name'>Milestone v0.8</span>
+                    </a>
+                  </div>
+                  <div itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+                    <a href="../services-hash/261.html" itemprop='item'>
+                      <meta itemprop='url' content='https://forum.mesg.com/t/services-hash/261'>
+                      <meta itemprop='position' content='2'>
+                      <span itemprop='name'>Service&#39;s hash</span>
+                    </a>
+                  </div>
+            </div>
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/krhubert.html'><span itemprop='name'>krhubert</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="211.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2019-01-21T13:29:26Z'>
+              <time itemprop='dateModified' datetime='2019-01-22T05:02:48Z' class='post-time'>
+                January 22, 2019,  5:02am
+              </time>
+          <span itemprop='position'>#2</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <h1>local tarball</h1>
+<pre><code class="lang-auto">➜  mesg-foundation-service-ethereum-e76695f git:(dev) ✗ docker build -t local_tarball_eth .
+Sending build context to Docker daemon  246.8kB
+...
+Successfully tagged local_tarball_eth:latest
+➜  mesg-foundation-service-ethereum-e76695f git:(dev) ✗ docker images local_tarball_eth
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+local_tarball_eth   latest              24a0da1565ce        3 hours ago         846MB
+</code></pre>
+<h1>local git</h1>
+<pre><code class="lang-auto">➜  service-ethereum docker build -t local_git_eth .                               
+Sending build context to Docker daemon  246.8kB
+...
+Successfully tagged local_git_eth:latest
+➜  service-ethereum docker images local_git_eth    
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+local_git_eth       latest              9de6e95f4278        3 hours ago         846MB
+</code></pre>
+<p>So different hash is due to docker build (don’t know why exactly) and the Image id is changed in service struct.</p>
+<p>To be the most compatible what what we get from docker we can use code from<br>
+<aside class="onebox githubblob">
+  <header class="source">
+      <a href="https://github.com/docker/cli/blob/master/cli/command/image/build.go#L190" target="_blank" rel="nofollow noopener">github.com</a>
+  </header>
+  <article class="onebox-body">
+    <h4><a href="https://github.com/docker/cli/blob/master/cli/command/image/build.go#L190" target="_blank" rel="nofollow noopener">docker/cli/blob/master/cli/command/image/build.go#L190</a></h4>
+<pre class="onebox"><code class="lang-go"><ol class="start lines" start="180" style="counter-reset: li-counter 179 ;">
+<li>// WriteProgress formats progress information from a ProgressReader.</li>
+<li>func (out *lastProgressOutput) WriteProgress(prog progress.Progress) error {</li>
+<li>	if !prog.LastUpdate {</li>
+<li>		return nil</li>
+<li>	}</li>
+<li>
+</li>
+<li>	return out.output.WriteProgress(prog)</li>
+<li>}</li>
+<li>
+</li>
+<li>// nolint: gocyclo</li>
+<li class="selected">func runBuild(dockerCli command.Cli, options buildOptions) error {</li>
+<li>	buildkitEnabled, err := command.BuildKitEnabled(dockerCli.ServerInfo())</li>
+<li>	if err != nil {</li>
+<li>		return err</li>
+<li>	}</li>
+<li>	if buildkitEnabled {</li>
+<li>		return runBuildBuildKit(dockerCli, options)</li>
+<li>	}</li>
+<li>
+</li>
+<li>	var (</li>
+<li>		buildCtx      io.ReadCloser</li>
+</ol></code></pre>
+
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+</p>
+        </div>
+
+        <meta itemprop='headline' content='Service&#39;s hash are different from downloaded tarball and remote git'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="211.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2019-01-22T04:37:56Z'>
+              <time itemprop='dateModified' datetime='2019-01-22T05:01:47Z' class='post-time'>
+                January 22, 2019,  5:01am
+              </time>
+          <span itemprop='position'>#3</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Here are the result of my different tests:</p>
+<p>I add to the <code>.dockerignore</code> of this service both <code>.git</code> and <code>.DS_Store</code>. So it should not be polluted by automatically created files.</p>
+<h3>Deploy remote tarball</h3>
+<pre><code class="lang-auto">➜  core git:(dev) ✗ ./dev-cli service deploy https://api.github.com/repos/mesg-foundation/service-ethereum/tarball/master
+✔ Service deployed with hash: d8f01d6f7a7193b8c7d7b6d943c97b195e9fc409
+</code></pre>
+<h3>Deploy remote git</h3>
+<pre><code class="lang-auto">➜  core git:(dev) ✗ ./dev-cli service deploy https://github.com/mesg-foundation/service-ethereum/
+✔ Service deployed with hash: 9c1b8b7efd90b72a0027e8a107cbaf1b4019e918
+</code></pre>
+<h3>Deploy local dir</h3>
+<pre><code class="lang-auto">➜  core git:(dev) ✗ ./dev-cli service deploy /Users/nico/Developments/MESG/services/service-ethereum
+✔ Service deployed with hash: 9c1b8b7efd90b72a0027e8a107cbaf1b4019e918
+</code></pre>
+<h3>Manually download tarball, extract it and deploy:</h3>
+<pre><code class="lang-auto">➜  core git:(dev) ✗ ./dev-cli service deploy /Users/nico/service-ethereum/mesg-foundation-service-ethereum-8bf6d06
+✔ Service deployed with hash: 9c1b8b7efd90b72a0027e8a107cbaf1b4019e918
+</code></pre>
+<hr>
+<p>As you can see, all deployment except remote tar provide the same hash except remote tarball!</p>
+<p>I had to fight with automatically created files, so maybe the ubuntu is automatically adding file when untar the archive?</p>
+        </div>
+
+        <meta itemprop='headline' content='Service&#39;s hash are different from downloaded tarball and remote git'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="211.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2019-01-22T10:09:54Z'>
+              <time itemprop='dateModified' datetime='2019-01-22T10:16:50Z' class='post-time'>
+                January 22, 2019, 10:16am
+              </time>
+          <span itemprop='position'>#4</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p><a class="mention" href="../../u/krhubert.html">@krhubert</a> plan:</p>
+<h3>1) need constant hash</h3>
+<p>To do so, the core will download / clone the service in a temp folder, check the <code>mesg.yml</code>, send to docker from the local temp folder.</p>
+<p>If the calculated hash are still not the same, we need to check for:</p>
+<ul>
+<li>automatically generated files (eg <code>.DS_Store</code>, <code>.git</code>)</li>
+<li>creation / update datetime of files</li>
+<li>modification on file permission</li>
+<li>anything else…</li>
+</ul>
+<p>If no solution is find, then we need to calculate the hash of the service ourselve. Let’s open this discussion later if needed.</p>
+<h3>2) use docker build logic</h3>
+<p>docker is compatible with git repo (with tag and branch) and multiple archive type.<br>
+Doc: <a href="https://docs.docker.com/v17.12/edge/engine/reference/commandline/build/#git-repositories" rel="nofollow noopener">https://docs.docker.com/v17.12/edge/engine/reference/commandline/build/#git-repositories</a><br>
+Source: <a href="https://github.com/docker/cli/blob/master/cli/command/image/build.go#L190" rel="nofollow noopener">https://github.com/docker/cli/blob/master/cli/command/image/build.go#L190</a></p>
+<h3>3) if there is only 1 directory and enter it</h3>
+<p>to be compatible with archive from github</p>
+<h3>4) support git repo url without <code>.git</code> suffix only if it’s compatible with <span class="hashtag">#tag</span> and <span class="hashtag">#branch</span>
+</h3>
+<p>otherwise, no support for git repo url with <code>.git</code>.</p>
+        </div>
+
+        <meta itemprop='headline' content='Service&#39;s hash are different from downloaded tarball and remote git'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="211.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2019-01-24T04:00:09Z' class='post-time'>
+                January 24, 2019,  4:00am
+              </time>
+              <meta itemprop='dateModified' content='2019-01-24T04:00:09Z'>
+          <span itemprop='position'>#5</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Docker hash system is <strong>NOT DETERMINISTIC</strong>.<br>
+Same computer, same source, use <code>--no-cache</code> flag:</p>
+<pre><code class="lang-auto">$ docker build https://github.com/mesg-foundation/service-ethereum.git --no-cache
+Successfully built a9279453897b
+</code></pre>
+<pre><code class="lang-auto">$ docker build https://github.com/mesg-foundation/service-ethereum.git --no-cache
+Successfully built ab77935bbf48
+</code></pre>
+<p>To fix this issue, we are going to create a hash based on the service source, more specifically on the archive the core receive in the <code>service.New</code> function.<br>
+<aside class="onebox githubblob">
+  <header class="source">
+      <a href="https://github.com/mesg-foundation/core/blob/master/service/service.go#L93-L126" target="_blank" rel="nofollow noopener">github.com</a>
+  </header>
+  <article class="onebox-body">
+    <h4><a href="https://github.com/mesg-foundation/core/blob/master/service/service.go#L93-L126" target="_blank" rel="nofollow noopener">mesg-foundation/core/blob/master/service/service.go#L93-L126</a></h4>
+<pre class="onebox"><code class="lang-go"><ol class="start lines" start="93" style="counter-reset: li-counter 92 ;">
+<li>func New(tarball io.Reader, env map[string]string, options ...Option) (*Service, error) {</li>
+<li>	s := &amp;Service{}</li>
+<li>
+</li>
+<li>	defer s.closeStatus()</li>
+<li>
+</li>
+<li>	if err := s.setOptions(options...); err != nil {</li>
+<li>		return nil, err</li>
+<li>	}</li>
+<li>	if err := s.saveContext(tarball); err != nil {</li>
+<li>		return nil, err</li>
+<li>	}</li>
+<li>	defer s.removeTempDir()</li>
+<li>
+</li>
+<li>	def, err := importer.From(s.tempPath)</li>
+<li>	if err != nil {</li>
+<li>		return nil, err</li>
+<li>	}</li>
+<li>
+</li>
+<li>	s.injectDefinition(def)</li>
+<li>
+</li>
+</ol></code></pre>
+
+  This file has been truncated. <a href="https://github.com/mesg-foundation/core/blob/master/service/service.go#L93-L126" target="_blank" rel="nofollow noopener">show original</a>
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+</p>
+<p>Because the source contains the <code>mesg.yml</code>, we can also remove the hash calculation from the Service struct to only rely on the source hash!</p>
+<p>I will create a small POC of this solution.</p>
+        </div>
+
+        <meta itemprop='headline' content='Service&#39;s hash are different from downloaded tarball and remote git'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="211.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2019-01-25T08:39:31Z' class='post-time'>
+                January 25, 2019,  8:39am
+              </time>
+              <meta itemprop='dateModified' content='2019-01-25T08:39:31Z'>
+          <span itemprop='position'>#6</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>POC: <a href="https://github.com/mesg-foundation/core/pull/731" rel="nofollow noopener">https://github.com/mesg-foundation/core/pull/731</a></p>
+        </div>
+
+        <meta itemprop='headline' content='Service&#39;s hash are different from downloaded tarball and remote git'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="211.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2019-02-01T08:43:37Z'>
+              <time itemprop='dateModified' datetime='2019-02-01T08:43:45Z' class='post-time'>
+                February 1, 2019,  8:43am
+              </time>
+          <span itemprop='position'>#7</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p><a href="https://github.com/mesg-foundation/core/pull/731#discussion_r250472435" rel="nofollow noopener">From hubert’s comment</a></p>
+<blockquote>
+<p>It won’t be deterministic here because tarball could be (un)compressed with diffrent algorithms.<br>
+Also tarball may have  <code>.git</code>  directory which will be removed when deploying.</p>
+</blockquote>
+<p>Do we all agree to continue with the implementation of this <a href="https://github.com/mesg-foundation/core/pull/731" rel="nofollow noopener">PR</a>, hash calculated from the archive?<br>
+Or should it be calculated from the files?</p>
+        </div>
+
+        <meta itemprop='headline' content='Service&#39;s hash are different from downloaded tarball and remote git'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/krhubert.html'><span itemprop='name'>krhubert</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="211.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2019-02-01T08:48:06Z' class='post-time'>
+                February 1, 2019,  8:48am
+              </time>
+              <meta itemprop='dateModified' content='2019-02-01T08:48:06Z'>
+          <span itemprop='position'>#8</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>It should be calculated from archive but if archive then it should be only uncompressed to get the same results.</p>
+<p>So the PR is good, but need to fix the compression, but we can do this in different PR.</p>
+        </div>
+
+        <meta itemprop='headline' content='Service&#39;s hash are different from downloaded tarball and remote git'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="211.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2019-02-01T09:08:57Z' class='post-time'>
+                February 1, 2019,  9:08am
+              </time>
+              <meta itemprop='dateModified' content='2019-02-01T09:08:57Z'>
+          <span itemprop='position'>#9</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <aside class="quote group-team" data-post="8" data-topic="211">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/krhubert/40/9_2.png" class="avatar"> krhubert:</div>
+<blockquote>
+<p>it should be only uncompressed to get the same results.</p>
+</blockquote>
+</aside>
+<p>or it should use the same compression all the time? gzip for instance?</p>
+        </div>
+
+        <meta itemprop='headline' content='Service&#39;s hash are different from downloaded tarball and remote git'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/krhubert.html'><span itemprop='name'>krhubert</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="211.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2019-02-01T09:13:24Z' class='post-time'>
+                February 1, 2019,  9:13am
+              </time>
+              <meta itemprop='dateModified' content='2019-02-01T09:13:24Z'>
+          <span itemprop='position'>#10</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>yes, but it’s harder because you have to uncompress all types (bz, xz) and then compress it back to gzip, but we can do this as well (for example before sending to docker)</p>
+        </div>
+
+        <meta itemprop='headline' content='Service&#39;s hash are different from downloaded tarball and remote git'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="211.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2019-02-01T10:05:07Z' class='post-time'>
+                February 1, 2019, 10:05am
+              </time>
+              <meta itemprop='dateModified' content='2019-02-01T10:05:07Z'>
+          <span itemprop='position'>#11</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>why not just supporting only <em>tar.gz</em> for now? it’s also widely used.</p>
+        </div>
+
+        <meta itemprop='headline' content='Service&#39;s hash are different from downloaded tarball and remote git'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="211.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2019-03-15T10:15:19Z'>
+              <time itemprop='dateModified' datetime='2019-03-15T10:15:24Z' class='post-time'>
+                March 15, 2019, 10:15am
+              </time>
+          <span itemprop='position'>#12</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Just to summarize.<br>
+This has been fixed/implemented here <a href="https://github.com/mesg-foundation/core/pull/731" rel="nofollow noopener">https://github.com/mesg-foundation/core/pull/731</a></p>
+<ul>
+<li>Remove all <code>.git</code> folder (as files are not deterministic inside)</li>
+<li>Compute the hash by hashing all the files in the service</li>
+<li>Hash permission in the file and ignore all the rest (modtime not supported by git)</li>
+</ul>
+        </div>
+
+        <meta itemprop='headline' content='Service&#39;s hash are different from downloaded tarball and remote git'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+
+
+
+
+
+
+    </div>
+    <footer class="container wrap">
+      <nav class='crawler-nav'>
+        <ul>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../index.html' itemprop="url">Home </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../categories.html' itemprop="url">Categories </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../guidelines.html' itemprop="url">FAQ/Guidelines </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../tos.html' itemprop="url">Terms of Service </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../privacy.html' itemprop="url">Privacy Policy </a>
+          </span>
+        </li>
+        </ul>
+      </nav>
+      <p class='powered-by-link'>Powered by <a href="https://www.discourse.org">Discourse</a>, best viewed with JavaScript enabled</p>
+    </footer>
+    
+    
+  </body>
+  
+</html>

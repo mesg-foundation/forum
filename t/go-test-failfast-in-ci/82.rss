@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Go test -failfast in CI</title>
+    <link>https://forum.mesg.com/t/go-test-failfast-in-ci/82</link>
+    <description>Should we put it?
+
+Pros:
+  - faster notification about test failing
+
+Cons:
+  - limited knowleage to only first failing test (not all)
+
+[poll type=regular public=true]
+* add `-failfast` falg
+* keep it as it is
+[/poll]</description>
+    
+    <lastBuildDate>Thu, 04 Oct 2018 11:01:51 +0000</lastBuildDate>
+    <category>Development</category>
+    <atom:link href="https://forum.mesg.com/t/go-test-failfast-in-ci/82.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Go test -failfast in CI</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>I prefer to let the execution of tests after a failed one to see if there are other test that failed.<br>
+Also, because the test takes so much time to execute, I prefer to execute all of them rather than having to relaunch the test a bunch of time.</p>
+          <p><a href="https://forum.mesg.com/t/go-test-failfast-in-ci/82/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/go-test-failfast-in-ci/82/3</link>
+        <pubDate>Thu, 04 Oct 2018 11:01:51 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-82-3</guid>
+        <source url="https://forum.mesg.com/t/go-test-failfast-in-ci/82.rss">Go test -failfast in CI</source>
+      </item>
+      <item>
+        <title>Go test -failfast in CI</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>I’ll go with keeping the current one because I’m afraid that we can miss to catch some failing tests that are rarely happening. And CI test will run as the timeout we set at top so it should be fine.</p>
+          <p><a href="https://forum.mesg.com/t/go-test-failfast-in-ci/82/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/go-test-failfast-in-ci/82/2</link>
+        <pubDate>Thu, 04 Oct 2018 06:49:13 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-82-2</guid>
+        <source url="https://forum.mesg.com/t/go-test-failfast-in-ci/82.rss">Go test -failfast in CI</source>
+      </item>
+      <item>
+        <title>Go test -failfast in CI</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <p>Should we put it?</p>
+<p>Pros:</p>
+<ul>
+<li>faster notification about test failing</li>
+</ul>
+<p>Cons:</p>
+<ul>
+<li>limited knowleage to only first failing test (not all)</li>
+</ul>
+<div class="poll" data-poll-status="open" data-poll-type="regular" data-poll-public="true" data-poll-name="poll">
+<div>
+<div class="poll-container">
+<ul>
+<li data-poll-option-id="6b29965222184a6564bc4f38f31f889a">add <code>-failfast</code> falg</li>
+<li data-poll-option-id="5ada9762a11ed1b51f5f1c4df1dbd1fa">keep it as it is</li>
+</ul>
+</div>
+<div class="poll-info">
+<p>
+<span class="info-number">0</span>
+<span class="info-label">voters</span>
+</p>
+</div>
+</div>
+</div>
+          <p><a href="https://forum.mesg.com/t/go-test-failfast-in-ci/82/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/go-test-failfast-in-ci/82/1</link>
+        <pubDate>Thu, 04 Oct 2018 06:45:00 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-82-1</guid>
+        <source url="https://forum.mesg.com/t/go-test-failfast-in-ci/82.rss">Go test -failfast in CI</source>
+      </item>
+  </channel>
+</rss>

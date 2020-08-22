@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Acknowledgement system on stream</title>
+    <link>https://forum.mesg.com/t/acknowledgement-system-on-stream/172</link>
+    <description>Opened streams don&#39;t mean the core is actually ready to post message to them. That&#39;s why sometimes clients expect to get message from streams but they are actually empty.
+
+For example, in the following implementation of `ListenResult`, a lot of stuff is done before the listener (`ln`) is actually created and ready to receive message.
+
+https://github.com/mesg-foundation/core/blob/85edf1fd53630682a93810154a7796154add575b/interface/grpc/core/listen_result.go#L11-L21
+
+One suggestion that could solve it is to add an acknowledgement system:
+- core send a `ready` message when the client open a stream. client wait for this message to continue. if it doesn&#39;t receive a message because a certain timeout, it should return an error.
+- core send a `closed` message just before the core do a &quot;graceful&quot; close of the stream. if the client doesn&#39;t receive this message and the stream has closed, it retries the connection.
+
+It seems that gRPC metadata is a perfect solutions for this system: https://github.com/grpc/grpc-go/blob/master/Documentation/grpc-metadata.md
+
+I created a proof of concept that implement the `ready` message by using gRPC header in around 10 lines of code for both server and client implementation:
+https://github.com/mesg-foundation/core/pull/674
+
+Server:
+```go
+func (s *Server) ListenResult(request *coreapi.ListenResultRequest, stream coreapi.Core_ListenResultServer) error {
+	// Do stuff
+
+ 	// send header to confirm to client that the server is ready
+	if err := stream.SendHeader(metadata.Pairs(&quot;status&quot;, &quot;ready&quot;)); err != nil {
+		return err
+	}
+
+	// send message to stream
+}
+```
+
+Client:
+```go
+// ServiceListenResults returns a channel with event results streaming..
+func (p *ServiceProvider) ServiceListenResults(id, taskFilter, outputFilter string, tagFilters []string) (chan *coreapi.ResultData, chan error, error) {
+	// create stream
+
+	// wait for server to return its ready
+	meta, err := stream.Header()
+	if err != nil {
+		return nil, nil, err
+	}
+	statuses := meta.Get(&quot;status&quot;)
+	println(&quot;header status&quot;, statuses[len(statuses)-1])
+
+	// read stream
+}
+```
+
+@ilgooz @Anthony @krhubert what do you think about it?</description>
+    
+    <lastBuildDate>Sun, 06 Jan 2019 12:15:20 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/acknowledgement-system-on-stream/172.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Acknowledgement system on stream</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>I’m in favor of ack system. Because in the client side, once the listening request is made, it’s an expected behavior to get stream (event/result/task) data being produced right after func is returned.</p>
+          <p><a href="https://forum.mesg.com/t/acknowledgement-system-on-stream/172/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/acknowledgement-system-on-stream/172/4</link>
+        <pubDate>Sun, 06 Jan 2019 12:06:25 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-172-4</guid>
+        <source url="https://forum.mesg.com/t/acknowledgement-system-on-stream/172.rss">Acknowledgement system on stream</source>
+      </item>
+      <item>
+        <title>Acknowledgement system on stream</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Implemented here:<br>
+<aside class="onebox githubpullrequest">
+  <header class="source">
+      <a href="https://github.com/mesg-foundation/core/pull/677" target="_blank" rel="nofollow noopener">github.com/mesg-foundation/core</a>
+  </header>
+  <article class="onebox-body">
+      <a href="https://github.com/NicolasMahe" target="_blank" rel="nofollow noopener">
+    <img alt="NicolasMahe" src="https://forum.mesg.com/uploads/default/original/1X/26944398294eb78d5fcd9c0ac79f47a8ba160661.jpeg" class="thumbnail onebox-avatar" width="90" height="90">
+  </a>
+
+<h4>
+  <a href="https://github.com/mesg-foundation/core/pull/677" target="_blank" rel="nofollow noopener">Stream acknowledgement</a>
+</h4>
+
+<div class="date">
+  by <a href="https://github.com/NicolasMahe" target="_blank" rel="nofollow noopener">NicolasMahe</a>
+  on <a href="https://github.com/mesg-foundation/core/pull/677" target="_blank" rel="nofollow noopener">09:22AM - 05 Jan 19 UTC</a>
+</div>
+
+<div class="github-commit-stats">
+  <strong>4 commits</strong>
+  changed <strong>7 files</strong>
+  with <strong>47 additions</strong>
+  and <strong>6 deletions</strong>.
+</div>
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+</p>
+          <p><a href="https://forum.mesg.com/t/acknowledgement-system-on-stream/172/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/acknowledgement-system-on-stream/172/3</link>
+        <pubDate>Sat, 05 Jan 2019 09:23:08 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-172-3</guid>
+        <source url="https://forum.mesg.com/t/acknowledgement-system-on-stream/172.rss">Acknowledgement system on stream</source>
+      </item>
+      <item>
+        <title>Acknowledgement system on stream</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>After speaking with <a class="mention" href="/u/krhubert">@krhubert</a>, the acknowledgement system is something good to implement but should not be used for fixing the issue of “when we need to execute a task and listen for its result”.<br>
+To solve this problem, we could introduce a new very simple gRPC API that return a result of a <code>executionID</code>, see <a href="https://forum.mesg.com/t/get-result-api/174" class="inline-onebox">Get result api</a></p>
+          <p><a href="https://forum.mesg.com/t/acknowledgement-system-on-stream/172/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/acknowledgement-system-on-stream/172/2</link>
+        <pubDate>Fri, 04 Jan 2019 10:21:10 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-172-2</guid>
+        <source url="https://forum.mesg.com/t/acknowledgement-system-on-stream/172.rss">Acknowledgement system on stream</source>
+      </item>
+      <item>
+        <title>Acknowledgement system on stream</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Opened streams don’t mean the core is actually ready to post message to them. That’s why sometimes clients expect to get message from streams but they are actually empty.</p>
+<p>For example, in the following implementation of <code>ListenResult</code>, a lot of stuff is done before the listener (<code>ln</code>) is actually created and ready to receive message.</p>
+<aside class="onebox githubblob">
+  <header class="source">
+      <a href="https://github.com/mesg-foundation/core/blob/85edf1fd53630682a93810154a7796154add575b/interface/grpc/core/listen_result.go#L11-L21" target="_blank" rel="nofollow noopener">github.com</a>
+  </header>
+  <article class="onebox-body">
+    <h4><a href="https://github.com/mesg-foundation/core/blob/85edf1fd53630682a93810154a7796154add575b/interface/grpc/core/listen_result.go#L11-L21" target="_blank" rel="nofollow noopener">mesg-foundation/core/blob/85edf1fd53630682a93810154a7796154add575b/interface/grpc/core/listen_result.go#L11-L21</a></h4>
+<pre class="onebox"><code class="lang-go"><ol class="start lines" start="11" style="counter-reset: li-counter 10 ;">
+<li>func (s *Server) ListenResult(request *coreapi.ListenResultRequest, stream coreapi.Core_ListenResultServer) error {</li>
+<li>	ln, err := s.api.ListenResult(request.ServiceID,</li>
+<li>		api.ListenResultTaskFilter(request.TaskFilter),</li>
+<li>		api.ListenResultOutputFilter(request.OutputFilter),</li>
+<li>		api.ListenResultTagFilters(request.TagFilters))</li>
+<li>	if err != nil {</li>
+<li>		return err</li>
+<li>	}</li>
+<li>	defer ln.Close()</li>
+<li>
+</li>
+<li>	ctx := stream.Context()</li>
+</ol></code></pre>
+
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+
+<p>One suggestion that could solve it is to add an acknowledgement system:</p>
+<ul>
+<li>core send a <code>ready</code> message when the client open a stream. client wait for this message to continue. if it doesn’t receive a message because a certain timeout, it should return an error.</li>
+<li>core send a <code>closed</code> message just before the core do a “graceful” close of the stream. if the client doesn’t receive this message and the stream has closed, it retries the connection.</li>
+</ul>
+<p>It seems that gRPC metadata is a perfect solutions for this system: <a href="https://github.com/grpc/grpc-go/blob/master/Documentation/grpc-metadata.md" rel="nofollow noopener">https://github.com/grpc/grpc-go/blob/master/Documentation/grpc-metadata.md</a></p>
+<p>I created a proof of concept that implement the <code>ready</code> message by using gRPC header in around 10 lines of code for both server and client implementation:<br>
+<aside class="onebox githubpullrequest">
+  <header class="source">
+      <a href="https://github.com/mesg-foundation/core/pull/674" target="_blank" rel="nofollow noopener">github.com/mesg-foundation/core</a>
+  </header>
+  <article class="onebox-body">
+      <a href="https://github.com/NicolasMahe" target="_blank" rel="nofollow noopener">
+    <img alt="NicolasMahe" src="https://forum.mesg.com/uploads/default/original/1X/26944398294eb78d5fcd9c0ac79f47a8ba160661.jpeg" class="thumbnail onebox-avatar" width="90" height="90">
+  </a>
+
+<h4>
+  <a href="https://github.com/mesg-foundation/core/pull/674" target="_blank" rel="nofollow noopener">[POC] grpc metadata</a>
+</h4>
+
+<div class="date">
+  by <a href="https://github.com/NicolasMahe" target="_blank" rel="nofollow noopener">NicolasMahe</a>
+  on <a href="https://github.com/mesg-foundation/core/pull/674" target="_blank" rel="nofollow noopener">06:12AM - 04 Jan 19 UTC</a>
+</div>
+
+<div class="github-commit-stats">
+  <strong>1 commits</strong>
+  changed <strong>4 files</strong>
+  with <strong>21 additions</strong>
+  and <strong>6 deletions</strong>.
+</div>
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+</p>
+<p>Server:</p>
+<pre><code class="lang-auto">func (s *Server) ListenResult(request *coreapi.ListenResultRequest, stream coreapi.Core_ListenResultServer) error {
+	// Do stuff
+
+ 	// send header to confirm to client that the server is ready
+	if err := stream.SendHeader(metadata.Pairs("status", "ready")); err != nil {
+		return err
+	}
+
+	// send message to stream
+}
+</code></pre>
+<p>Client:</p>
+<pre><code class="lang-auto">// ServiceListenResults returns a channel with event results streaming..
+func (p *ServiceProvider) ServiceListenResults(id, taskFilter, outputFilter string, tagFilters []string) (chan *coreapi.ResultData, chan error, error) {
+	// create stream
+
+	// wait for server to return its ready
+	meta, err := stream.Header()
+	if err != nil {
+		return nil, nil, err
+	}
+	statuses := meta.Get("status")
+	println("header status", statuses[len(statuses)-1])
+
+	// read stream
+}
+</code></pre>
+<p><a class="mention" href="/u/ilgooz">@ilgooz</a> <a class="mention" href="/u/anthony">@Anthony</a> <a class="mention" href="/u/krhubert">@krhubert</a> what do you think about it?</p>
+          <p><a href="https://forum.mesg.com/t/acknowledgement-system-on-stream/172/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/acknowledgement-system-on-stream/172/1</link>
+        <pubDate>Fri, 04 Jan 2019 07:58:05 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-172-1</guid>
+        <source url="https://forum.mesg.com/t/acknowledgement-system-on-stream/172.rss">Acknowledgement system on stream</source>
+      </item>
+  </channel>
+</rss>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Create Mac Developer Cert</title>
+    <link>https://forum.mesg.com/t/create-mac-developer-cert/219</link>
+    <description>We need this cert in order to enable automatic updates for the electron app on Mac.
+
+Some useful links:
+
+* https://help.apple.com/xcode/mac/current/#/dev3a05256b8
+* https://github.com/iffy/electron-updater-example</description>
+    
+    <lastBuildDate>Tue, 22 Jan 2019 20:22:10 +0000</lastBuildDate>
+    <category>Development</category>
+    <atom:link href="https://forum.mesg.com/t/create-mac-developer-cert/219.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Create Mac Developer Cert</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <p>As I remeber the cost of this cert is about $100 per year.</p>
+<p>Also if you don’t want this image on windows you need to buy cert for sign windwos app on usb device.</p>
+<p><img src="https://forum.mesg.com/uploads/default/original/1X/b872bf782d35d0cc367a779636b8bd70078ad86f.jpeg" alt="image" width="690" height="449"></p>
+          <p><a href="https://forum.mesg.com/t/create-mac-developer-cert/219/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/create-mac-developer-cert/219/3</link>
+        <pubDate>Tue, 22 Jan 2019 20:22:10 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-219-3</guid>
+        <source url="https://forum.mesg.com/t/create-mac-developer-cert/219.rss">Create Mac Developer Cert</source>
+      </item>
+      <item>
+        <title>Create Mac Developer Cert</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            
+          <p><a href="https://forum.mesg.com/t/create-mac-developer-cert/219/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/create-mac-developer-cert/219/2</link>
+        <pubDate>Tue, 22 Jan 2019 09:43:05 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-219-2</guid>
+        <source url="https://forum.mesg.com/t/create-mac-developer-cert/219.rss">Create Mac Developer Cert</source>
+      </item>
+      <item>
+        <title>Create Mac Developer Cert</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>We need this cert in order to enable automatic updates for the electron app on Mac.</p>
+<p>Some useful links:</p>
+<ul>
+<li><a href="https://help.apple.com/xcode/mac/current/#/dev3a05256b8" rel="nofollow noopener">https://help.apple.com/xcode/mac/current/#/dev3a05256b8</a></li>
+<li><a href="https://github.com/iffy/electron-updater-example" rel="nofollow noopener">https://github.com/iffy/electron-updater-example</a></li>
+</ul>
+          <p><a href="https://forum.mesg.com/t/create-mac-developer-cert/219/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/create-mac-developer-cert/219/1</link>
+        <pubDate>Tue, 22 Jan 2019 09:42:55 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-219-1</guid>
+        <source url="https://forum.mesg.com/t/create-mac-developer-cert/219.rss">Create Mac Developer Cert</source>
+      </item>
+  </channel>
+</rss>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Analytics tool for ERC20 transfers</title>
+    <link>https://forum.mesg.com/t/analytics-tool-for-erc20-transfers/209</link>
+    <description>## Concept
+
+We need to have a tool to monitor the different transfers on ERC20 on Ethereum and provide some kind of graphs that display all the informations needed.
+
+## Business implication
+- For ICO they could be able to monitor the volume they are doing during their ICO
+- Can extract patterns looking at the graphs, like when there is a high volume of transfer (meaning that it might be a bot)
+- Connecting some AI system to be able to predict the future transfers and predict the price
+- Expand to ERC721 and have a tool to monitor how your ERC721 is performing
+
+## Material
+
+Here is a proof of concept using `Influxdb` and `Grafana`.
+The MESG application that runs all that is present [here](https://github.com/antho1404/application-erc20-analytics)
+You can test it here http://erc20-analytics.demo.mesg.com:3000/ with the following credentials:
+login: `test`
+password: `test`
+
+![26%20am|690x389](upload://vzcqVLJHWFutAdQc1N3Bq8qyC4n.png)</description>
+    
+    <lastBuildDate>Fri, 01 Feb 2019 02:33:39 +0000</lastBuildDate>
+    <category>Proof of Concept</category>
+    <atom:link href="https://forum.mesg.com/t/analytics-tool-for-erc20-transfers/209.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Analytics tool for ERC20 transfers</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <h2>Concept</h2>
+<p>We need to have a tool to monitor the different transfers on ERC20 on Ethereum and provide some kind of graphs that display all the informations needed.</p>
+<h2>Business implication</h2>
+<ul>
+<li>For ICO they could be able to monitor the volume they are doing during their ICO</li>
+<li>Can extract patterns looking at the graphs, like when there is a high volume of transfer (meaning that it might be a bot)</li>
+<li>Connecting some AI system to be able to predict the future transfers and predict the price</li>
+<li>Expand to ERC721 and have a tool to monitor how your ERC721 is performing</li>
+</ul>
+<h2>Material</h2>
+<p>Here is a proof of concept using <code>Influxdb</code> and <code>Grafana</code>.<br>
+The MESG application that runs all that is present <a href="https://github.com/antho1404/application-erc20-analytics" rel="nofollow noopener">here</a><br>
+You can test it here <a href="http://erc20-analytics.demo.mesg.com:3000/" rel="nofollow noopener">http://erc20-analytics.demo.mesg.com:3000/</a> with the following credentials:<br>
+login: <code>test</code><br>
+password: <code>test</code></p>
+<p><img src="https://forum.mesg.com/uploads/default/original/1X/dd3e09715411d90152680d614d77abd9bce19a37.png" alt="26%20am" width="690" height="389"></p>
+          <p><a href="https://forum.mesg.com/t/analytics-tool-for-erc20-transfers/209/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/analytics-tool-for-erc20-transfers/209/1</link>
+        <pubDate>Mon, 21 Jan 2019 04:45:43 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-209-1</guid>
+        <source url="https://forum.mesg.com/t/analytics-tool-for-erc20-transfers/209.rss">Analytics tool for ERC20 transfers</source>
+      </item>
+  </channel>
+</rss>

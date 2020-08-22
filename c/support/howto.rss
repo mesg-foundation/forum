@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:discourse="http://www.discourse.org/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>How to - MESG Community</title>
+    <link>https://forum.mesg.com/c/support/howto</link>
+    <description>Topics in the &#39;How to&#39; category This category is where we will post HOWTOs, hacks, and other short guides for doing interesting things with MESG.</description>
+    
+      <lastBuildDate>Thu, 20 Sep 2018 08:50:15 +0000</lastBuildDate>
+      <atom:link href="https://forum.mesg.com/c/support/howto.rss" rel="self" type="application/rss+xml" />
+        <item>
+          <title>Welcome to our How to archive</title>
+          <dc:creator><![CDATA[jonobacon]]></dc:creator>
+          <category>How to</category>
+          <description><![CDATA[
+            <p>This category is where we will post HOWTOs, hacks, and other short guides for doing interesting things with MESG.</p>
+<p><strong>Please note</strong>: this is only a category that MESG staff can currently post to, but everyone can read. If you would like to contribute a hack. Please send a direct message to <a class="mention-group" href="/groups/team">@team</a>, <a class="mention" href="/u/anthony">@Anthony</a>, <a class="mention" href="/u/nicolas">@Nicolas</a>, or <a class="mention" href="/u/will">@will</a> and they will review and add it.</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://forum.mesg.com/t/welcome-to-our-how-to-archive/56">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/welcome-to-our-how-to-archive/56</link>
+          <pubDate>Thu, 20 Sep 2018 08:50:15 +0000</pubDate>
+          <discourse:topicPinned>Yes</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-56</guid>
+          <source url="https://forum.mesg.com/t/welcome-to-our-how-to-archive/56.rss">Welcome to our How to archive</source>
+        </item>
+  </channel>
+</rss>

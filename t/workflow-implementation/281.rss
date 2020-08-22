@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Workflow implementation</title>
+    <link>https://forum.mesg.com/t/workflow-implementation/281</link>
+    <description># Goal
+
+Trigger tasks based on some constraints.
+
+We can implement these constraints in multiple steps:
+
+- React to one event
+- React to one result
+- React to one event filtered based on its data
+- React to one result filtered based on its data
+- React to multiple events
+- React to multiple results
+
+The current limit for this implementation:
+
+- Execution graph
+- React to one event only
+- React to one result only
+- No data transformation
+
+## Specifications
+
+The initial workflow is a simplification of the final workflow, we will first implement a [Tree Graph](https://en.wikipedia.org/wiki/Tree_(graph_theory)) of execution instead of a [Directed Acyclic Graph](https://en.wikipedia.org/wiki/Directed_acyclic_graph) and later on maybe a [Directed Graph](https://en.wikipedia.org/wiki/Directed_graph).
+
+The Tree implementation is possible thanks to the `parentHash` in the execution structure that references the previous execution.
+
+Every new execution will create a new execution data that points to the previous one (the result that permits to trigger this execution).
+
+For now, we limit the concept to **one event start the workflow** and the workflow can contain **multiple chains of results**.
+
+Here is an example:
+
+[mermaid]
+graph LR
+A[serviceA#eventX] --&gt;C(serviceB#task1)
+C --&gt; D[serviceC#task2]
+C --&gt; E[serviceD#task3]
+C --&gt; F[serviceE#task4]
+D --&gt; G[serviceF#task5]
+[/mermaid]
+
+The workflow is responsible for creating this execution graph and have the following logic:
+For every event/result, fetch the workflow definition that matches this event/result. Resolve the inputs (for now no processing just passing data into input), create the execution with the link of the previous execution if exists.
+
+## Implementation
+
+The workflow engine will be its own package that runs as a job in its own thread and will listen to all events coming from the api.
+
+- Listen to events
+- Match workflows
+- Fetch previous execution based on the event data
+- Iterate on every 
+- Create a new execution with the data of the event and the previous executionHash
+
+The workflow **only listens to events**. It is not directly linked to the end of a task. In order to react from a result we need to create a system event that `SubmitResult` can emit and that the workflow will listen.
+
+The user will have the possibility to connect to a result of execution but this should be &quot;compiled&quot; into events.
+
+```go
+type Task struct {
+  serviceHash string // this needs to be the hash not sid, this will be resolved by the workflow importer when we have an importer
+  taskKey string
+}
+type Trigger struct {
+  serviceHash string
+  eventKey string // executionFinished to have a result of an execution
+  filter Predicate // we can start with a simple map eg: `{ taskKey: &quot;xxx&quot; }`
+}
+type Workflow struct {
+  trigger Trigger
+  tasks []Task
+}
+```
+
+Example of that based on the first graph:
+```yaml
+workflowA:
+  trigger:
+    serviceHash: serviceA
+    eventKey: &quot;eventX&quot;
+  tasks:
+      - serviceHash: serviceB
+        taskKey: &quot;task1&quot;
+      - serviceHash: serviceC
+        taskKey: &quot;task2&quot;
+      - serviceHash: serviceF
+        taskKey: &quot;task5&quot;
+workflowB:
+  trigger:
+    serviceHash: serviceB
+    eventKey: &quot;executionFinished&quot;
+    filter: { taskKey: &quot;task1&quot; }
+  tasks:
+    - serviceHash: serviceD
+      taskKey: task3
+workflowC:
+  trigger:
+    serviceHash: serviceB
+    eventKey: &quot;executionFinished&quot;
+    filter: { taskKey: &quot;task1&quot; }
+  tasks:
+    - serviceHash: serviceE
+      taskKey: task4
+```
+
+This way we create our tree which is composed of multiple workflows and will be correct by construction.
+
+One of the limitations here is that we cannot access the data of &quot;eventX&quot; from &quot;workflowB&quot; and &quot;workflowC&quot; but we have a workaround to create a task at the end of &quot;workflowA&quot; that aggregate all the data needed for &quot;workflowB&quot; and &quot;workflowC&quot;, this way the new workflow will have all the data.
+
+For now, workflows need to be hardcoded when the core starts (creating system workflow) and will be available for users on a different feature.</description>
+    
+    <lastBuildDate>Tue, 25 Jun 2019 06:35:46 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/workflow-implementation/281.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Workflow implementation</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <p>Drafts:</p>
+<ul>
+<li><a href="https://github.com/mesg-foundation/engine/pull/1049" rel="nofollow noopener">https://github.com/mesg-foundation/engine/pull/1049</a></li>
+<li><a href="https://github.com/mesg-foundation/engine/pull/1056" rel="nofollow noopener">https://github.com/mesg-foundation/engine/pull/1056</a></li>
+<li><a href="https://github.com/mesg-foundation/engine/pull/1048" rel="nofollow noopener">https://github.com/mesg-foundation/engine/pull/1048</a></li>
+</ul>
+          <p><a href="https://forum.mesg.com/t/workflow-implementation/281/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/workflow-implementation/281/2</link>
+        <pubDate>Tue, 25 Jun 2019 06:35:46 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-281-2</guid>
+        <source url="https://forum.mesg.com/t/workflow-implementation/281.rss">Workflow implementation</source>
+      </item>
+      <item>
+        <title>Workflow implementation</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <h1>Goal</h1>
+<p>Trigger tasks based on some constraints.</p>
+<p>We can implement these constraints in multiple steps:</p>
+<ul>
+<li>React to one event</li>
+<li>React to one result</li>
+<li>React to one event filtered based on its data</li>
+<li>React to one result filtered based on its data</li>
+<li>React to multiple events</li>
+<li>React to multiple results</li>
+</ul>
+<p>The current limit for this implementation:</p>
+<ul>
+<li>Execution graph</li>
+<li>React to one event only</li>
+<li>React to one result only</li>
+<li>No data transformation</li>
+</ul>
+<h2>Specifications</h2>
+<p>The initial workflow is a simplification of the final workflow, we will first implement a <a href="https://en.wikipedia.org/wiki/Tree_(graph_theory)" rel="nofollow noopener">Tree Graph</a> of execution instead of a <a href="https://en.wikipedia.org/wiki/Directed_acyclic_graph" rel="nofollow noopener">Directed Acyclic Graph</a> and later on maybe a <a href="https://en.wikipedia.org/wiki/Directed_graph" rel="nofollow noopener">Directed Graph</a>.</p>
+<p>The Tree implementation is possible thanks to the <code>parentHash</code> in the execution structure that references the previous execution.</p>
+<p>Every new execution will create a new execution data that points to the previous one (the result that permits to trigger this execution).</p>
+<p>For now, we limit the concept to <strong>one event start the workflow</strong> and the workflow can contain <strong>multiple chains of results</strong>.</p>
+<p>Here is an example:</p>
+<div class="mermaid">
+
+graph LR
+A[serviceA#eventX] --&gt;C(serviceB#task1)
+C --&gt; D[serviceC#task2]
+C --&gt; E[serviceD#task3]
+C --&gt; F[serviceE#task4]
+D --&gt; G[serviceF#task5]
+
+</div>
+
+<p>The workflow is responsible for creating this execution graph and have the following logic:<br>
+For every event/result, fetch the workflow definition that matches this event/result. Resolve the inputs (for now no processing just passing data into input), create the execution with the link of the previous execution if exists.</p>
+<h2>Implementation</h2>
+<p>The workflow engine will be its own package that runs as a job in its own thread and will listen to all events coming from the api.</p>
+<ul>
+<li>Listen to events</li>
+<li>Match workflows</li>
+<li>Fetch previous execution based on the event data</li>
+<li>Iterate on every</li>
+<li>Create a new execution with the data of the event and the previous executionHash</li>
+</ul>
+<p>The workflow <strong>only listens to events</strong>. It is not directly linked to the end of a task. In order to react from a result we need to create a system event that <code>SubmitResult</code> can emit and that the workflow will listen.</p>
+<p>The user will have the possibility to connect to a result of execution but this should be “compiled” into events.</p>
+<pre><code class="lang-auto">type Task struct {
+  serviceHash string // this needs to be the hash not sid, this will be resolved by the workflow importer when we have an importer
+  taskKey string
+}
+type Trigger struct {
+  serviceHash string
+  eventKey string // executionFinished to have a result of an execution
+  filter Predicate // we can start with a simple map eg: `{ taskKey: "xxx" }`
+}
+type Workflow struct {
+  trigger Trigger
+  tasks []Task
+}
+</code></pre>
+<p>Example of that based on the first graph:</p>
+<pre><code class="lang-auto">workflowA:
+  trigger:
+    serviceHash: serviceA
+    eventKey: "eventX"
+  tasks:
+      - serviceHash: serviceB
+        taskKey: "task1"
+      - serviceHash: serviceC
+        taskKey: "task2"
+      - serviceHash: serviceF
+        taskKey: "task5"
+workflowB:
+  trigger:
+    serviceHash: serviceB
+    eventKey: "executionFinished"
+    filter: { taskKey: "task1" }
+  tasks:
+    - serviceHash: serviceD
+      taskKey: task3
+workflowC:
+  trigger:
+    serviceHash: serviceB
+    eventKey: "executionFinished"
+    filter: { taskKey: "task1" }
+  tasks:
+    - serviceHash: serviceE
+      taskKey: task4
+</code></pre>
+<p>This way we create our tree which is composed of multiple workflows and will be correct by construction.</p>
+<p>One of the limitations here is that we cannot access the data of “eventX” from “workflowB” and “workflowC” but we have a workaround to create a task at the end of “workflowA” that aggregate all the data needed for “workflowB” and “workflowC”, this way the new workflow will have all the data.</p>
+<p>For now, workflows need to be hardcoded when the core starts (creating system workflow) and will be available for users on a different feature.</p>
+          <p><a href="https://forum.mesg.com/t/workflow-implementation/281/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/workflow-implementation/281/1</link>
+        <pubDate>Thu, 16 May 2019 12:26:37 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-281-1</guid>
+        <source url="https://forum.mesg.com/t/workflow-implementation/281.rss">Workflow implementation</source>
+      </item>
+  </channel>
+</rss>

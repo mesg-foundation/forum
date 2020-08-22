@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>MESG Engine v0.10, JS CLI and JS library v3.0.0 Release Notes</title>
+    <link>https://forum.mesg.com/t/mesg-engine-v0-10-js-cli-and-js-library-v3-0-0-release-notes/317</link>
+    <description># Renaming Core to Engine
+
+Following the introduction of the [MESG SDK](https://mesg.com/mesg-sdk), we are renaming MESG Core to MESG Engine to better describe what the software does and how it fits within the SDK.
+
+The CLI has also been extracted to a dedicated repository. See the New CLI section.
+
+# Service task output simplification
+
+This newest version of the Engine includes a massive simplification for service development!
+
+Services can now define a single output per task (containing many parameters) rather than many outputs per task.
+
+We found that most services implemented one success output and one error output, with the success output returning the result of the execution and the error output returning the error message. Services implementing more than two outputs can be easily converted to two outputs by combining the outputs&#39; data into one payload.
+
+This improves the executions&#39; state machine by letting the Engine know which output is the expected one, and enables the retry system when executions fail. This is very important when the decentralized network is implemented so unexpected execution errors can be tolerated!
+
+I encourage you to check out our [latest Product Update](https://medium.com/mesg/mesg-product-update-c937a4f4f624) to learn more about the roadmap, and why this feature is so important.
+
+Here is a diff of a task definition:
+```diff
+tasks:
+  send:
+    inputs:
+      from:
+        type: String
+      to:
+        type: String
+      subject:
+        type: String
+      text:
+        type: String
+    outputs:
+-     success:
+-       data:
+-         status:
+-           type: Number
+-     error:
+-       data:
+-         message:
+-           type: String
++     status:
++       type: Number
+```
+
+This simplification also makes the implementation of tasks much easier.
+
+We&#39;ve updated the [mesg-js](https://github.com/mesg-foundation/mesg-js) library to catch errors and send outputs to the Engine so your services don&#39;t have to. If the task throw any error, the lib will catch it and send it to the Engine.
+
+Let&#39;s take a look at the implementation diff of this task in JavaScript using mesg-js:
+```diff
+- const send = async (inputs, outputs) =&gt; {
++ const send = async (inputs) =&gt; {
+- try {
+  const result = await sendgrid.send(inputs)
+- return outputs.success({
+-   status: result[0].statusCode
+- })
++ return {
++   status: result[0].statusCode
++ }
+- } catch (error) {
+-   return outputs.failure({
+-     message: error.toString()
+-   })
+- }
+}
+```
+
+:confetti_ball: That&#39;s 50% fewer lines of code for this simple task! :confetti_ball:
+
+# New CLI
+
+We are also releasing v1 of a new CLI in Javascript.
+
+We&#39;ve created a new CLI for two reasons:
+- To separate the CLI from the Engine repository
+We were struggling with keeping the cli and the engine implementation as separate as possible because both were developed in Go and used many packages in common.
+- To use Javascript
+Javascript is a massively-used language across many ecosystems and is known by almost every developer. We want to build tools that the community can easily contribute to and extend as they see fit. Also, we plan to create User Interfaces to manage MESG Engine with ease. There are a lot of tools to create powerful and flexible UIs using Javascript that can reuse the CLI source code.
+
+You can install it by running the following command:
+```bash
+npm install -g mesg-cli
+```
+
+You can also checkout its github repo: [mesg-foundation/cli](https://github.com/mesg-foundation/cli).
+
+We had some issues during the release process of the CLI and had to release it under v1.0.4. So don&#39;t worry about missing any updates, because there weren&#39;t any :upside_down_face:
+
+https://tenor.com/view/fail-penguin-ice-gif-4895737
+
+----
+
+For the complete changelog of the MESG Engine, refer to [the changelog on Github](https://github.com/mesg-foundation/engine/blob/dev/CHANGELOG.md#v0101).
+
+For the complete changelog of mesg-js library, refer to [the changelog on Github](https://github.com/mesg-foundation/mesg-js/blob/master/CHANGELOG.md).
+
+To update to v0.10, follow the [installation process on the documentation ](https://docs.mesg.com/guide/installation.html)</description>
+    
+    <lastBuildDate>Wed, 19 Jun 2019 04:06:45 +0000</lastBuildDate>
+    <category>News</category>
+    <atom:link href="https://forum.mesg.com/t/mesg-engine-v0-10-js-cli-and-js-library-v3-0-0-release-notes/317.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>MESG Engine v0.10, JS CLI and JS library v3.0.0 Release Notes</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <h1>Renaming Core to Engine</h1>
+<p>Following the introduction of the <a href="https://mesg.com/mesg-sdk" rel="nofollow noopener">MESG SDK</a>, we are renaming MESG Core to MESG Engine to better describe what the software does and how it fits within the SDK.</p>
+<p>The CLI has also been extracted to a dedicated repository. See the New CLI section.</p>
+<h1>Service task output simplification</h1>
+<p>This newest version of the Engine includes a massive simplification for service development!</p>
+<p>Services can now define a single output per task (containing many parameters) rather than many outputs per task.</p>
+<p>We found that most services implemented one success output and one error output, with the success output returning the result of the execution and the error output returning the error message. Services implementing more than two outputs can be easily converted to two outputs by combining the outputs’ data into one payload.</p>
+<p>This improves the executions’ state machine by letting the Engine know which output is the expected one, and enables the retry system when executions fail. This is very important when the decentralized network is implemented so unexpected execution errors can be tolerated!</p>
+<p>I encourage you to check out our <a href="https://medium.com/mesg/mesg-product-update-c937a4f4f624" rel="nofollow noopener">latest Product Update</a> to learn more about the roadmap, and why this feature is so important.</p>
+<p>Here is a diff of a task definition:</p>
+<pre><code class="lang-diff">tasks:
+  send:
+    inputs:
+      from:
+        type: String
+      to:
+        type: String
+      subject:
+        type: String
+      text:
+        type: String
+    outputs:
+-     success:
+-       data:
+-         status:
+-           type: Number
+-     error:
+-       data:
+-         message:
+-           type: String
++     status:
++       type: Number
+</code></pre>
+<p>This simplification also makes the implementation of tasks much easier.</p>
+<p>We’ve updated the <a href="https://github.com/mesg-foundation/mesg-js" rel="nofollow noopener">mesg-js</a> library to catch errors and send outputs to the Engine so your services don’t have to. If the task throw any error, the lib will catch it and send it to the Engine.</p>
+<p>Let’s take a look at the implementation diff of this task in JavaScript using mesg-js:</p>
+<pre><code class="lang-diff">- const send = async (inputs, outputs) =&gt; {
++ const send = async (inputs) =&gt; {
+- try {
+  const result = await sendgrid.send(inputs)
+- return outputs.success({
+-   status: result[0].statusCode
+- })
++ return {
++   status: result[0].statusCode
++ }
+- } catch (error) {
+-   return outputs.failure({
+-     message: error.toString()
+-   })
+- }
+}
+</code></pre>
+<p><img src="https://forum.mesg.com/images/emoji/twitter/confetti_ball.png?v=9" title=":confetti_ball:" class="emoji" alt=":confetti_ball:"> That’s 50% fewer lines of code for this simple task! <img src="https://forum.mesg.com/images/emoji/twitter/confetti_ball.png?v=9" title=":confetti_ball:" class="emoji" alt=":confetti_ball:"></p>
+<h1>New CLI</h1>
+<p>We are also releasing v1 of a new CLI in Javascript.</p>
+<p>We’ve created a new CLI for two reasons:</p>
+<ul>
+<li>To separate the CLI from the Engine repository<br>
+We were struggling with keeping the cli and the engine implementation as separate as possible because both were developed in Go and used many packages in common.</li>
+<li>To use Javascript<br>
+Javascript is a massively-used language across many ecosystems and is known by almost every developer. We want to build tools that the community can easily contribute to and extend as they see fit. Also, we plan to create User Interfaces to manage MESG Engine with ease. There are a lot of tools to create powerful and flexible UIs using Javascript that can reuse the CLI source code.</li>
+</ul>
+<p>You can install it by running the following command:</p>
+<pre><code class="lang-bash">npm install -g mesg-cli
+</code></pre>
+<p>You can also checkout its github repo: <a href="https://github.com/mesg-foundation/cli" rel="nofollow noopener">mesg-foundation/cli</a>.</p>
+<p>We had some issues during the release process of the CLI and had to release it under v1.0.4. So don’t worry about missing any updates, because there weren’t any <img src="https://forum.mesg.com/images/emoji/twitter/upside_down_face.png?v=9" title=":upside_down_face:" class="emoji" alt=":upside_down_face:"></p>
+<p><iframe src="https://tenor.com/embed/4895737?playertype=card" width="498" height="277" scrolling="no" frameborder="0" seamless="seamless" sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-presentation"></iframe>
+</p>
+<hr>
+<p>For the complete changelog of the MESG Engine, refer to <a href="https://github.com/mesg-foundation/engine/blob/dev/CHANGELOG.md#v0101" rel="nofollow noopener">the changelog on Github</a>.</p>
+<p>For the complete changelog of mesg-js library, refer to <a href="https://github.com/mesg-foundation/mesg-js/blob/master/CHANGELOG.md" rel="nofollow noopener">the changelog on Github</a>.</p>
+<p>To update to v0.10, follow the <a href="https://docs.mesg.com/guide/installation.html" rel="nofollow noopener">installation process on the documentation </a></p>
+          <p><a href="https://forum.mesg.com/t/mesg-engine-v0-10-js-cli-and-js-library-v3-0-0-release-notes/317/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mesg-engine-v0-10-js-cli-and-js-library-v3-0-0-release-notes/317/1</link>
+        <pubDate>Wed, 19 Jun 2019 03:57:57 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-317-1</guid>
+        <source url="https://forum.mesg.com/t/mesg-engine-v0-10-js-cli-and-js-library-v3-0-0-release-notes/317.rss">MESG Engine v0.10, JS CLI and JS library v3.0.0 Release Notes</source>
+      </item>
+  </channel>
+</rss>

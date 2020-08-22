@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <title>Test of MESG Services - Development - MESG Community</title>
+    <meta name="description" content="It will be really useful to have an integrate way to execute test on MESG services. 
+I was thinking about a command mesg-core service test that run tests against the service. 
+I think we have two approaches on testing: 
+I&amp;hellip;">
+    <meta name="generator" content="Discourse 2.5.0.beta5 - https://github.com/discourse/discourse version 00aab498297cba8f977c1e0eb17b7d38ff06cc68">
+<link rel="icon" type="image/png" href="../../uploads/default/optimized/1X/9f11b6ddfa02bffdbec79487592a0573a0236cb5_2_32x32.png">
+<link rel="apple-touch-icon" type="image/png" href="../../uploads/default/optimized/1X/53630361a40ad76e1733dd0b0f486e9ae2f4f4d6_2_180x180.png">
+<meta name="theme-color" content="#491e8c">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+<link rel="canonical" href="78.html" />
+<script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","url":"https://forum.mesg.com","potentialAction":{"@type":"SearchAction","target":"https://forum.mesg.com/search?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
+<link rel="search" type="application/opensearchdescription+xml" href="../../opensearch.xml" title="MESG Community Search">
+
+      <link href="../../stylesheets/desktop_3_52e3411e87658e862890db7bd06899cf49ad5f59.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop" data-theme-id="7"/>
+      <link href="../../stylesheets/desktop_theme_7_bf4f2d3d8a71e6ee907065be9a79df3d849bd29c.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop_theme" data-theme-id="7"/>
+    
+    <meta id="data-ga-universal-analytics" data-tracking-code="UA-117583862-1" data-json="{&quot;cookieDomain&quot;:&quot;auto&quot;}" data-auto-link-domains="">
+
+<link rel="preload" href="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js" as="script">
+<script src="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js"></script>
+
+
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of &#39;Test of MESG Services&#39;" href="78.rss" />
+    <meta property="og:site_name" content="MESG Community" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:url" content="https://forum.mesg.com/t/test-of-mesg-services/78" />
+<meta name="twitter:url" content="https://forum.mesg.com/t/test-of-mesg-services/78" />
+<meta property="og:title" content="Test of MESG Services" />
+<meta name="twitter:title" content="Test of MESG Services" />
+<meta property="og:description" content="It will be really useful to have an integrate way to execute test on MESG services.  I was thinking about a command mesg-core service test that run tests against the service.  I think we have two approaches on testing:  Integration test Advantage:   language agnostic. we provide a way test services in any language because of the design of MESG. It could be based on a test.yml file that describe the tests as a list of tasks with inputs and expected outputs. test communication with core  Disadvant..." />
+<meta name="twitter:description" content="It will be really useful to have an integrate way to execute test on MESG services.  I was thinking about a command mesg-core service test that run tests against the service.  I think we have two approaches on testing:  Integration test Advantage:   language agnostic. we provide a way test services in any language because of the design of MESG. It could be based on a test.yml file that describe the tests as a list of tasks with inputs and expected outputs. test communication with core  Disadvant..." />
+<meta name="twitter:label1" value="Reading time" />
+<meta name="twitter:data1" value="2 mins 🕑" />
+<meta name="twitter:label2" value="Likes" />
+<meta name="twitter:data2" value="2 ❤" />
+<meta property="article:published_time" content="2018-10-03T10:44:42+00:00" />
+<meta property="og:ignore_canonical" content="true" />
+
+
+
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"QAPage","name":"Test of MESG Services","mainEntity":{"@type":"Question","name":"Test of MESG Services","text":"It will be really useful to have an integrate way to execute test on MESG services.\n\nI was thinking about a command mesg-core service test that run tests against the service.\n\nI think we have two approaches on testing:\n\nIntegration test\n\nAdvantage:\n\nlanguage agnostic. we provide a way test services &hellip;","upvoteCount":1,"answerCount":1,"dateCreated":"2018-10-03T10:44:41.888Z","author":{"@type":"Person","name":"Nicolas"},"acceptedAnswer":{"@type":"Answer","text":"Let’s not do anything about tests.\n\nIf a developer of a service want to do unit tests on its service, (s)he choose how to do their unit test based on the framework they prefer.\n\nIf they want to do integration tests, they can also use the test framework they like and they will just need to communicat&hellip;","upvoteCount":0,"dateCreated":"2019-12-26T03:04:54.964Z","url":"https://forum.mesg.com/t/test-of-mesg-services/78/5","author":{"@type":"Person","name":"Anthony"}}}}</script>
+  </head>
+  <body class="crawler">
+    
+    <header>
+      <a href="../../index.html">
+          <img src="../../uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png" alt="MESG Community" id="site-logo" style="max-width: 150px;">
+      </a>
+    </header>
+    <div id="main-outlet" class="wrap">
+        <div id="topic-title">
+    <h1>
+      <a href="78.html">Test of MESG Services</a>
+    </h1>
+
+      <div class="topic-category" itemscope itemtype="http://schema.org/BreadcrumbList">
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../c/development.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #AB9364'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Development</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="1" />
+          </span>
+      </div>
+
+  </div>
+
+  
+
+
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="78.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-10-03T10:44:42Z'>
+              <time itemprop='dateModified' datetime='2018-10-03T11:47:19Z' class='post-time'>
+                October 3, 2018, 11:47am
+              </time>
+          <span itemprop='position'>#1</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>It will be really useful to have an integrate way to execute test on MESG services.</p>
+<p>I was thinking about a command <code>mesg-core service test</code> that run tests against the service.</p>
+<p>I think we have two approaches on testing:</p>
+<h1>Integration test</h1>
+<p>Advantage:</p>
+<ul>
+<li>language agnostic. we provide a way test services in any language because of the design of MESG. It could be based on a <code>test.yml</code> file that describe the tests as a list of tasks with inputs and expected outputs.</li>
+<li>test communication with core</li>
+</ul>
+<p>Disadvantage:</p>
+<ul>
+<li>no way to force a service to emit an event without introducing some kind of hack</li>
+<li>could introduce a <code>MESG_IS_TESTING</code> env variable
+<ul>
+<li>tell the service to not really execute the task (<strong>only valid in some special case, eg: Ethereum Transaction</strong>)</li>
+<li>force to emit event</li>
+<li>the main problem is the service logic/behavior could completely change during test</li>
+</ul>
+</li>
+<li>slow</li>
+<li>the coverage of test could be very limited because of the technology the service connect
+<ul>
+<li>could not be sure all type of events will be emitted</li>
+<li>could possibly not execute all task because of security (private keys) and duplication of data, etc…</li>
+</ul>
+</li>
+</ul>
+<h1>Unit test</h1>
+<p>Advantage:</p>
+<ul>
+<li>fast to execute</li>
+<li>test written by the developer</li>
+<li>can inject mock in service when testing</li>
+</ul>
+<p>Disadvantage:</p>
+<ul>
+<li>language specific: so we cannot offer a way to unit test in every language
+<ul>
+<li>but we could provide test helpers in <code>go-service</code> and <code>mesg-js</code> libraries (see end of post for <code>mesgtest</code> package)</li>
+</ul>
+</li>
+<li>no test communication with core</li>
+</ul>
+<hr>
+<h1><code>MESGTEST</code></h1>
+<p><a class="mention" href="../../u/ilgooz.html">@ilgooz</a> already create a package <code>mesgtest</code> in the <code>go-service</code> library<br>
+<aside class="onebox whitelistedgeneric">
+  <header class="source">
+      <a href="https://godoc.org/github.com/mesg-foundation/go-service/mesgtest" target="_blank">godoc.org</a>
+  </header>
+  <article class="onebox-body">
+    
+
+<h3><a href="https://godoc.org/github.com/mesg-foundation/go-service/mesgtest" target="_blank">Package mesgtest</a></h3>
+
+<p>Package mesgtest is a testing package for MESG service.</p>
+
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+</p>
+<p>Code for testing of the log task:</p>
+<pre><code class="lang-auto">_, execution, err := server.Execute("log", data)
+assert.Nil(t, err)
+assert.Equal(t, "success", execution.Key()) 
+</code></pre>
+<p><a href="https://github.com/mesg-foundation/go-service/blob/master/examples/logger/logger/logger_test.go">source</a></p>
+<p><a class="mention-group" href="../../groups/core.html">@core</a> I would like to have your feedback on:</p>
+<ul>
+<li>Do we really want to offer an integrated way to do unit test if the service is using our library (<code>go-service</code> and <code>mesg-js</code>) ?</li>
+<li>If so, how should we proceed in order to have the minimal logic to implement in order to accept unit test?
+<ul>
+<li>Bypass gRPC or create a gRPC server?</li>
+</ul>
+</li>
+<li>How could we execute language specific unit test from the command <code>service test</code>?
+<ul>
+<li>
+<a class="mention" href="../../u/anthony.html">@Anthony</a> was suggesting to accept a custom command in the <code>mesg.yml</code> to use for test instead of the default in the Dockerfile of the service( eg in <code>mesg.yml</code>: <code>test-command: "go test ./..."</code>)</li>
+</ul>
+</li>
+</ul>
+        </div>
+
+        <meta itemprop='headline' content='Test of MESG Services'>
+          <meta itemprop='keywords' content=''>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="1" />
+           <span class='post-likes'>1 Like</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="78.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-10-03T12:42:20Z' class='post-time'>
+                October 3, 2018, 12:42pm
+              </time>
+              <meta itemprop='dateModified' content='2018-10-03T12:42:20Z'>
+          <span itemprop='position'>#2</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <h1>Ideas About Unit Testing</h1>
+<p>In Nodejs it’s very easy &amp; natural to modify methods of imported packages by using stubs. Please check <a href="https://sinonjs.org/releases/v6.3.4/stubs/">sinon</a>. So, it’s not required to provide a testing package for Nodejs. But it’s nice to have because it’s a bit odd to force devs to stub our gRPC calls.</p>
+<p>Since Go is statically typed, it is not possible to modify methods of imported packages. So the same thing with the Nodejs case is not possible here.</p>
+<p>There are several options while unit testing a package that uses <em>go-service</em> or <em>go-application</em>.</p>
+<h2>Options</h2>
+<h3>not an option</h3>
+<p>Sample case:</p>
+<p>Providing a package level interface for mocking methods of <em>go-application</em> is not an option, here is why:</p>
+<pre><code class="lang-auto">func (a *Application) Close() error
+func (a *Application) WhenEvent(serviceID string, conditions ...EventCondition) *EventEmitter
+func (a *Application) WhenResult(serviceID string, conditions ...ResultCondition) *ResultEmitter
+</code></pre>
+<p>The methods above are the public api of <em>go-application</em> package and it’s not possible to have a <em>ApplicationInterface</em> for them like below:</p>
+<pre><code class="lang-auto">type ApplicationInterface interface {
+   Close() error
+   WhenEvent(serviceID string, conditions ...EventCondition) *EventEmitter
+   WhenResult(serviceID string, conditions ...ResultCondition) *ResultEmitter
+}
+</code></pre>
+<p>The reason why it’s not possible is because <em>EventEmitter</em> and <em>ResultEmitter</em> types has un-exported fields and they cannot be properly initialized from outside of the package context.</p>
+<p>One way to avoid this limitation is to make every public package api to return or accept an interface but I don’t like this approach because it’s not natural to have interfaces all the time just for testing.</p>
+<h3>network level option</h3>
+<p>Packages that deals with IO (like <em>go-application</em>) gets a custom <em>net.Conn</em> in the initialization time. And it can be used to fake an actual network connection in testing. <em>mesgtest</em> does the same thing and provides some extra functionalities for faking calls. Most network programs tested by this approach.</p>
+<h3>interface level option</h3>
+<p>Packages that deals with IO (like <em>go-application</em>) gets a custom interface to deal with network. This is very similar to <em>network level option</em> but as a difference, network methods are being mocked instead of faking in the network layer. <em>mesgtest</em> package can adopt both <em>network</em> and <em>interface</em> level options under the hood.</p>
+<h2>Which Option to Chose?</h2>
+<p>Regardless of which option we chose, I think it’s better to provide a package like <em>mesgtest</em> to devs. Otherwise we’ll require devs to create their own testing utilities <em>(just another implementation of <em>mesgtest</em>)</em> and this is not something that they should deal with.</p>
+<p>Because they’ll be required to create mocks for our gRPC calls which they even shouldn’t be aware of. Also if we don’t provide a testing package, community can end-up creating a bunch of different ones which is not good to me because not everybody going to provide the best solution and this will create a bad noise.</p>
+        </div>
+
+        <meta itemprop='headline' content='Test of MESG Services'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="78.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-10-04T04:41:45Z' class='post-time'>
+                October 4, 2018,  4:41am
+              </time>
+              <meta itemprop='dateModified' content='2018-10-04T04:41:45Z'>
+          <span itemprop='position'>#3</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>I would definitely not do anything about the testing without a lot of feedbacks for that. For my part the only thing that we can do is let the user create their own tests and decide if they do unit/integration test.</p>
+<h2>For unit test</h2>
+<p>They use the framework they want and they is no link with MESG and we give the possibility in the <code>mesg.yml</code> to add your test command that can be executed by the CLI/Core.</p>
+<h2>For integration tests</h2>
+<p>The only thing that we could do is to create a test service that will emit some events that developers can connect to and some tasks like <strong>assertBool</strong>, <strong>assertContains</strong>…<br>
+With that developers can connect test events to trigger their task using MESG application (and later on workflow) and also assert their results using the MESG test service and the <strong>assert</strong>* tasks.</p>
+<p>The unit test part is quite easy and brings a lot of value and the integration is something additional that developers decide to use or not but the good point is that it’s something totally independent from the Core so we have a big flexibility.</p>
+        </div>
+
+        <meta itemprop='headline' content='Test of MESG Services'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="1" />
+           <span class='post-likes'>1 Like</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="78.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-10-05T03:44:51Z' class='post-time'>
+                October 5, 2018,  3:44am
+              </time>
+              <meta itemprop='dateModified' content='2018-10-05T03:44:51Z'>
+          <span itemprop='position'>#4</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>I really like <a class="mention" href="../../u/anthony.html">@Anthony</a> suggest about the Integration test: just create special task.</p>
+        </div>
+
+        <meta itemprop='headline' content='Test of MESG Services'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="78.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2019-12-26T03:04:54Z'>
+              <time itemprop='dateModified' datetime='2019-12-26T03:04:57Z' class='post-time'>
+                December 26, 2019,  3:04am
+              </time>
+          <span itemprop='position'>#5</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Let’s not do anything about tests.<br>
+If a developer of a service want to do unit tests on its service, (s)he choose how to do their unit test based on the framework they prefer.<br>
+If they want to do integration tests, they can also use the test framework they like and they will just need to communicate with the engine API.</p>
+<p>You can find an example of integration tests here <a href="https://github.com/Roms1383/mesg-pusher/">https://github.com/Roms1383/mesg-pusher/</a></p>
+<ul>
+<li>integration tests: <a href="https://github.com/Roms1383/mesg-pusher/blob/master/index.test.js">https://github.com/Roms1383/mesg-pusher/blob/master/index.test.js</a>
+</li>
+<li>unit tests: <a href="https://github.com/Roms1383/mesg-pusher/blob/master/tasks/trigger.spec.js">https://github.com/Roms1383/mesg-pusher/blob/master/tasks/trigger.spec.js</a>
+</li>
+</ul>
+<p>This way anyone can use the test frameworks they like with the CI/CD they want and without having to learn about another test framework</p>
+        </div>
+
+        <meta itemprop='headline' content='Test of MESG Services'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+
+
+
+
+
+
+    </div>
+    <footer class="container wrap">
+      <nav class='crawler-nav'>
+        <ul>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../index.html' itemprop="url">Home </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../categories.html' itemprop="url">Categories </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../guidelines.html' itemprop="url">FAQ/Guidelines </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../tos.html' itemprop="url">Terms of Service </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../privacy.html' itemprop="url">Privacy Policy </a>
+          </span>
+        </li>
+        </ul>
+      </nav>
+      <p class='powered-by-link'>Powered by <a href="https://www.discourse.org">Discourse</a>, best viewed with JavaScript enabled</p>
+    </footer>
+    
+    
+  </body>
+  
+</html>

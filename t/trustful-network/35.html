@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <title>Trustful Network - Engine - MESG Community</title>
+    <meta name="description" content="In order to continue to implement the trustfull network, we need to do the following: 
+
+
+ move protobuf files to a dedicated folder https://github.com/mesg-foundation/core/pull/472
+
+
+ implement system service plugin (htt&amp;hellip;">
+    <meta name="generator" content="Discourse 2.5.0.beta5 - https://github.com/discourse/discourse version 00aab498297cba8f977c1e0eb17b7d38ff06cc68">
+<link rel="icon" type="image/png" href="../../uploads/default/optimized/1X/9f11b6ddfa02bffdbec79487592a0573a0236cb5_2_32x32.png">
+<link rel="apple-touch-icon" type="image/png" href="../../uploads/default/optimized/1X/53630361a40ad76e1733dd0b0f486e9ae2f4f4d6_2_180x180.png">
+<meta name="theme-color" content="#491e8c">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+<link rel="canonical" href="35.html" />
+<script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","url":"https://forum.mesg.com","potentialAction":{"@type":"SearchAction","target":"https://forum.mesg.com/search?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
+<link rel="search" type="application/opensearchdescription+xml" href="../../opensearch.xml" title="MESG Community Search">
+
+      <link href="../../stylesheets/desktop_3_52e3411e87658e862890db7bd06899cf49ad5f59.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop" data-theme-id="7"/>
+      <link href="../../stylesheets/desktop_theme_7_bf4f2d3d8a71e6ee907065be9a79df3d849bd29c.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop_theme" data-theme-id="7"/>
+    
+    <meta id="data-ga-universal-analytics" data-tracking-code="UA-117583862-1" data-json="{&quot;cookieDomain&quot;:&quot;auto&quot;}" data-auto-link-domains="">
+
+<link rel="preload" href="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js" as="script">
+<script src="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js"></script>
+
+
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of &#39;Trustful Network&#39;" href="35.rss" />
+    <meta property="og:site_name" content="MESG Community" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:url" content="https://forum.mesg.com/t/trustful-network/35" />
+<meta name="twitter:url" content="https://forum.mesg.com/t/trustful-network/35" />
+<meta property="og:title" content="Trustful Network" />
+<meta name="twitter:title" content="Trustful Network" />
+<meta property="og:description" content="In order to continue to implement the trustfull network, we need to do the following:     move protobuf files to a dedicated folder https://github.com/mesg-foundation/core/pull/472    implement system service plugin ([Plugin system] Use MESG service to develop MESG core)   move system service to core repo (https://github.com/mesg-foundation/service-system-resolver)   merge to branch dev   implement network feature for api:    execute task   listen event   listen result   get service detail     r..." />
+<meta name="twitter:description" content="In order to continue to implement the trustfull network, we need to do the following:     move protobuf files to a dedicated folder https://github.com/mesg-foundation/core/pull/472    implement system service plugin ([Plugin system] Use MESG service to develop MESG core)   move system service to core repo (https://github.com/mesg-foundation/service-system-resolver)   merge to branch dev   implement network feature for api:    execute task   listen event   listen result   get service detail     r..." />
+<meta name="twitter:label1" value="Reading time" />
+<meta name="twitter:data1" value="1 mins 🕑" />
+<meta name="twitter:label2" value="Likes" />
+<meta name="twitter:data2" value="9 ❤" />
+<meta property="article:published_time" content="2018-09-17T11:14:33+00:00" />
+<meta property="og:ignore_canonical" content="true" />
+
+
+
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"QAPage","name":"Trustful Network","mainEntity":{"@type":"Question","name":"Trustful Network","text":"In order to continue to implement the trustfull network, we need to do the following:\n\nmove protobuf files to a dedicated folder <a href="https://forum.mesg.com/t/trustful-network/\&quot;https://github.com/mesg-foundation/core/pull/472\&quot;" rel=\"nofollow noopener\">https://github.com/mesg-foundation/core/pull/472<\/a>\n\nimplement system service plugin (<a href="https://forum.mesg.com/t/trustful-network/\&quot;https://forum.mesg.com/t/use-mesg-service-to-build-mesg-core/23\&quot;" class=\"inline-onebox\">[Plugin system] Use MESG service to develop MESG core<\/a>)\n\nmove system service to cor&hellip;","upvoteCount":2,"answerCount":1,"dateCreated":"2018-09-17T11:14:33.853Z","author":{"@type":"Person","name":"Nicolas"},"acceptedAnswer":{"@type":"Answer","text":"MESG now runs on its own network based on tendermint","upvoteCount":0,"dateCreated":"2019-12-26T03:08:22.601Z","url":"https://forum.mesg.com/t/trustful-network/35/11","author":{"@type":"Person","name":"Anthony"}}}}</script>
+  </head>
+  <body class="crawler">
+    
+    <header>
+      <a href="../../index.html">
+          <img src="../../uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png" alt="MESG Community" id="site-logo" style="max-width: 150px;">
+      </a>
+    </header>
+    <div id="main-outlet" class="wrap">
+        <div id="topic-title">
+    <h1>
+      <a href="35.html">Trustful Network</a>
+    </h1>
+
+      <div class="topic-category" itemscope itemtype="http://schema.org/BreadcrumbList">
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../c/development.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #AB9364'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Development</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="1" />
+          </span>
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../c/development/engine.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #AB9364'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Engine</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="2" />
+          </span>
+      </div>
+
+      <div class="topic-category">
+        <div class='discourse-tags list-tags'>
+            <a href='../../tag/network.html' class='discourse-tag' rel="tag">network</a>
+        </div>
+      </div>
+  </div>
+
+  
+
+
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="35.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-09-17T11:14:33Z'>
+              <time itemprop='dateModified' datetime='2019-05-18T04:36:57Z' class='post-time'>
+                May 18, 2019,  4:36am
+              </time>
+          <span itemprop='position'>#1</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>In order to continue to implement the trustfull network, we need to do the following:</p>
+<ul>
+<li>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> move protobuf files to a dedicated folder <a href="https://github.com/mesg-foundation/core/pull/472" rel="nofollow noopener">https://github.com/mesg-foundation/core/pull/472</a>
+</li>
+<li>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> implement system service plugin (<a href="../use-mesg-service-to-build-mesg-core/23.html" class="inline-onebox">[Plugin system] Use MESG service to develop MESG core</a>)</li>
+<li>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> move system service to core repo (<a href="https://github.com/mesg-foundation/service-system-resolver" rel="nofollow noopener">https://github.com/mesg-foundation/service-system-resolver</a>)</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> merge to branch dev</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> implement network feature for api:
+<ul>
+<li>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> execute task</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> listen event</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> listen result</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> get service detail</li>
+</ul>
+</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> remove core dependency for docker: <a href="https://github.com/mesg-foundation/core/pull/470" rel="nofollow noopener">https://github.com/mesg-foundation/core/pull/470</a>
+</li>
+</ul>
+        </div>
+
+        <meta itemprop='headline' content='Trustful Network'>
+          <meta itemprop='keywords' content='network'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="2" />
+           <span class='post-likes'>2 Likes</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="35.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-09-19T08:03:05Z' class='post-time'>
+                September 19, 2018,  8:03am
+              </time>
+              <meta itemprop='dateModified' content='2018-09-19T08:03:05Z'>
+          <span itemprop='position'>#2</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>It’s hard to remove docker for the core because we sandbox the communication between services and core using a docker networks (mesg-shared). Also the only reason now to remove docker is just to run multiple instances but this can easily be done with docker (just need to add the docker service name as a configuration and that’s it).</p>
+<p>Right now I don’t think we have any real reason to remove docker and it will complicate things a lot for the development. Let’s just make sure that we can be flexible and fast on the development and we can improve this later if we need to.</p>
+<p>What do you think ?</p>
+        </div>
+
+        <meta itemprop='headline' content='Trustful Network'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="2" />
+           <span class='post-likes'>2 Likes</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="35.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-09-19T08:17:11Z' class='post-time'>
+                September 19, 2018,  8:17am
+              </time>
+              <meta itemprop='dateModified' content='2018-09-19T08:17:11Z'>
+          <span itemprop='position'>#3</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>I agree with you.<br>
+Until we have a really good working network and really want to bundle Core in a binary, we should keep core in docker.</p>
+        </div>
+
+        <meta itemprop='headline' content='Trustful Network'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="35.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-09-21T07:44:11Z' class='post-time'>
+                September 21, 2018,  7:44am
+              </time>
+              <meta itemprop='dateModified' content='2018-09-21T07:44:11Z'>
+          <span itemprop='position'>#4</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>lets create a flow diagram for trustful network. this will make it easier to understand and we can put its improved version to docs in future.</p>
+        </div>
+
+        <meta itemprop='headline' content='Trustful Network'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="1" />
+           <span class='post-likes'>1 Like</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="35.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-09-21T13:29:36Z' class='post-time'>
+                September 21, 2018,  1:29pm
+              </time>
+              <meta itemprop='dateModified' content='2018-09-21T13:29:36Z'>
+          <span itemprop='position'>#5</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Really good idea to document that through schemas.</p>
+<p>I see 2 kind of schema that can help</p>
+<p>Sequence diagram <a href="https://en.wikipedia.org/wiki/Sequence_diagram">https://en.wikipedia.org/wiki/Sequence_diagram</a></p>
+<p>This one shows the communication between the different actors, here the application, the multiple core and the different resolvers</p>
+<p>Activity diagram <a href="https://en.m.wikipedia.org/wiki/Activity_diagram">https://en.m.wikipedia.org/wiki/Activity_diagram</a></p>
+<p>This one is more about the logic for the process. If we don’t have the service then we call the resolver then we delegate to the core returned by the resolver etc…</p>
+        </div>
+
+        <meta itemprop='headline' content='Trustful Network'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="1" />
+           <span class='post-likes'>1 Like</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="35.html">
+
+            <link itemprop="image" href="../../uploads/default/original/1X/639f131d80d28f168b304815f9694942744dfb87.png">
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-09-21T13:30:34Z' class='post-time'>
+                September 21, 2018,  1:30pm
+              </time>
+              <meta itemprop='dateModified' content='2018-09-21T13:30:34Z'>
+          <span itemprop='position'>#6</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>I started working on diagrams. I’m thinking that we can have 4 different diagrams to show different aspects of trustful network.</p>
+<h3>Diagram Ideas</h3>
+<ul>
+<li>demonstrate task executions.</li>
+<li>demonstrate task execution with =&gt;3 core in the network.</li>
+<li>demonstrate feeding resolvers with peers.</li>
+<li>demonstrate validating task results.</li>
+</ul>
+<p>I’m currently working on <em>demonstrate task executions</em> diagram, it’s still in progress. Please check it out to give some early feedbacks. <img src="../../images/emoji/twitter/slight_smile.png%3Fv=6" title=":slight_smile:" class="emoji" alt=":slight_smile:"></p>
+<p><img src="../../uploads/default/original/1X/639f131d80d28f168b304815f9694942744dfb87.png" alt="26" width="690" height="408"></p>
+        </div>
+
+        <meta itemprop='headline' content='Trustful Network'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="1" />
+           <span class='post-likes'>1 Like</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="35.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-09-21T13:50:32Z' class='post-time'>
+                September 21, 2018,  1:50pm
+              </time>
+              <meta itemprop='dateModified' content='2018-09-21T13:50:32Z'>
+          <span itemprop='position'>#7</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p><a class="mention" href="../../u/anthony.html">@Anthony</a> So maybe, we can use flowcharts in the website to give a more visual view in the higher level and use UML diagrams in the technical docs to provide a much more explanatory view. What are your thoughts?</p>
+        </div>
+
+        <meta itemprop='headline' content='Trustful Network'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="35.html">
+
+            <link itemprop="image" href="../../uploads/default/original/1X/0b00fd079c71a7636f126947e9d55b4ef7332c5e.jpeg">
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-09-24T04:38:44Z'>
+              <time itemprop='dateModified' datetime='2018-09-24T04:38:59Z' class='post-time'>
+                September 24, 2018,  4:38am
+              </time>
+          <span itemprop='position'>#8</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p><a class="mention" href="../../u/ilgooz.html">@ilgooz</a> 100% agree to put some schemas on the documentation, that will be really helpful for people to understand I think. I’m not sure this one is so necessary for the user but we could have a technical documentation for the developers and put that on the wiki or in the <code>docs</code> folder but not display it on the website. That would be really nice to have more documentation and not only for user but also for the core developers.</p>
+<p>I worked on an activity diagram to explain the process when we execute a task that goes through the core then if the core doesn’t run the service, call the resolver to find the core where we need to delegate the task and then call the task on the other core then send back the result to the application.</p>
+<p><img src="../../uploads/default/original/1X/0b00fd079c71a7636f126947e9d55b4ef7332c5e.jpeg" alt="Core%20resolver" width="689" height="500"><br>
+<a href="https://www.draw.io/?lightbox=1&amp;highlight=0000ff&amp;edit=_blank&amp;layers=1&amp;nav=1&amp;title=Core%20resolver#R5Vttc5s4EP41%2FtiMQYDtj3Xe7mZ6N53m5q79qIAMusjII%2BTavl9%2FkpF4kcDBCeAkzZeiZUHLs8%2BuVit3Aq7X%2B3sGN8kfNEJk4k6j%2FQTcTFzXcRZT8Y%2BUHHLJzFeCmOFIKZWCB%2FwfUkKttsURymqKnFLC8aYuDGmaopDXZJAxuqurrSipz7qBMbIEDyEktvQfHPFEf9d0Wt74DeE4UVPP9fc9wvApZnSbqvkmLlgd%2F%2FLba6jfpfSzBEZ0VxGB2wm4ZpTy%2FGq9v0ZEYqthy5%2B7a7lb2M1Qyrs8MJuhIFzMVs4iiOB8Dj6pN%2FyEZKuw%2BBPxHWVPEzcg4pXLRyauYnmlvoAfNGrZDq8JTMVomfA1EUJHXIYJJtEXeKBbaVHGBUJ6tBQjxpX7haVgeYQOSePkqEBHDgh8RGRZ4HtNCWXiVkqPE2ac0SekhQL26fGvuKPdKC1aYUIqmspBQk5TfgfXmEjW%2Fo1YBFOoxMrGuRo2zQMJjlMhCwX0iBX4VH2hwUWMo31FpHxzj%2BgacXYQKuruTNFEhZGnhruSk3NNyaRCR3%2BuhFDFQVy8uZjsm4gbmMbCd2fMNmuYzDXmgkR8fgo5Wko3ZVX6iYvKV5aiIyk7EtS1CPp5syE4hBzTtCMlLdrZrmoNjOd9d6jjUoHPCZqcFZxwVg25EzDZqNzuUbjl0rt%2FwezJBqYWFa6BTwI3Um%2B9j2V%2Bv1oRugsTgdnVhtEQZcLQ5S7BHD1sYCgVd0KtgNGC6Blk3ZMh4Ho1Us4aUHVcG1WvB1D9eQuqR6ZNf7%2F5MKh6ixFhtUwFFszXlCHnTQSzvhvUc2Mvwd2eiTtM15SKrdn6zcV2OBxQZnkJRaKUUkPKeEJjmkJyW0qNRb7iyn8R5wflSrjlVIjKN3yhdKP08jnlRN3jQZEso1sWqsdUDAj%2BxEg%2FdpIFn6ZXKiYYImLB%2BVmf%2F4SPv1IsLCtV6GqViTlf5w%2FP8kcChUlWoZYh9hPLj77rK2FFKMSZzIJ9ZixwEnvwbHHiNJVChfBVC4FdFfdJ%2B2MG%2Byy3LdV6VsjusDTpqI7SSGuEBGYZDnOhUrlA9Mzs6PGnzS48L1rEd8JDRWEjYydrCKa9LoHrudI3tjyGuvMqdc%2BbGszJzX1xfWuvffCooINWIvy267fTcWtUGs6YlYbelVfQ%2FYayLeHvGE63TsemQmQoOD3fgvMGERRD3rDofBiIAfAbIA6Ggdgy1V7jBYMpEV%2F8pupj4A5QH3cFbWFhdIfTaCLbg6yBmTssTKok2PfEXO%2BcXNu4Vx6IuMB2woPIDSFvdcM7hrmeIEbF2TLVzsly82zXpxdMDp5ZoY2ZHEBgAXQvd17vM%2F79c4jpgBGJ6XWuZD8s3petFGyey0QAbHQvlwgC75KJwP1IiSA4CbTRLBm1aW6hbMH4RjuEuqCu9DiU7dUeR0tp0LnF0RVHx967pvQdQ9nQbF2MBCWwl6ZLACngYofvE93PE4MfcnDl6%2BFXxLD4OHl4fDPtD%2FmFjXyeC8du1PlGHeg4p1tvz%2Bi%2FuvcG7AONS%2FCi1v4tm7vVDrBT7wCrHnHZ%2Fu2RLbpevkSgeiP22V8OdOd432P%2BvXJdiXYxMoO9zA5lQvhRzRwDZQfQlB5aqouXnnrpeNYH6kX5Z9QbuQ3qKYM2Zx6N2cXeL8OkIYnRy7phEcMLDGIAgxi5XRYxbIYZL3LMirZHhtn7rcEY9jbPBDtyxmvZQ%2Fe%2Fegy7nI%2FskUtVi%2FqQp%2BbClp9F9O5Cf9jd46Vc6IzswsGO5hsSrnE8bnZqWhLu2VuHlnn62gr4w24RfxHi6fP2GvHmgxCv%2BB2BIoRvlgw9Ea%2FYJBrzvJB4Ylj%2BuD9XL%2F8HBbj9Hw%3D%3D" rel="nofollow noopener">schema source</a></p>
+        </div>
+
+        <meta itemprop='headline' content='Trustful Network'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="1" />
+           <span class='post-likes'>1 Like</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="35.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-09-28T07:11:59Z' class='post-time'>
+                September 28, 2018,  7:11am
+              </time>
+              <meta itemprop='dateModified' content='2018-09-28T07:11:59Z'>
+          <span itemprop='position'>#9</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>It may be useful to have a look to this <a href="https://github.com/hashicorp/consul">https://github.com/hashicorp/consul</a> (<a href="https://www.consul.io/">https://www.consul.io/</a>) or this <a href="https://github.com/stvp/dht">https://github.com/stvp/dht</a></p>
+        </div>
+
+        <meta itemprop='headline' content='Trustful Network'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="35.html">
+
+            <link itemprop="image" href="../../uploads/default/original/1X/109009ec37d81c90b2dde4dc48f60bc2b6bbd221.png">
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-10-01T10:21:04Z' class='post-time'>
+                October 1, 2018, 10:21am
+              </time>
+              <meta itemprop='dateModified' content='2018-10-01T10:21:04Z'>
+          <span itemprop='position'>#10</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Just putting some network lib links:<br>
+<aside class="onebox whitelistedgeneric">
+  <header class="source">
+      <img src="https://github.githubassets.com/favicons/favicon.svg" class="site-icon" width="32" height="32">
+      <a href="https://github.com/libp2p/go-libp2p" target="_blank">GitHub</a>
+  </header>
+  <article class="onebox-body">
+    <img src="../../uploads/default/original/1X/109009ec37d81c90b2dde4dc48f60bc2b6bbd221.png" class="thumbnail" width="" height="">
+
+<h3><a href="https://github.com/libp2p/go-libp2p" target="_blank">libp2p/go-libp2p</a></h3>
+
+<p>libp2p implementation in Go. Contribute to libp2p/go-libp2p development by creating an account on GitHub.</p>
+
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+<br>
+<aside class="onebox whitelistedgeneric">
+  <header class="source">
+      <img src="https://github.githubassets.com/favicons/favicon.svg" class="site-icon" width="32" height="32">
+      <a href="https://github.com/meshbird/meshbird" target="_blank">GitHub</a>
+  </header>
+  <article class="onebox-body">
+    <img src="../../uploads/default/original/1X/9d970c1b6e65a11f9bbba0513a83affd3bc3b0fd.png" class="thumbnail" width="" height="">
+
+<h3><a href="https://github.com/meshbird/meshbird" target="_blank">meshbird/meshbird</a></h3>
+
+<p>Distributed private networking. Contribute to meshbird/meshbird development by creating an account on GitHub.</p>
+
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+</p>
+        </div>
+
+        <meta itemprop='headline' content='Trustful Network'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="1" />
+           <span class='post-likes'>1 Like</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="35.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2019-12-26T03:08:22Z'>
+              <time itemprop='dateModified' datetime='2019-12-26T03:08:24Z' class='post-time'>
+                December 26, 2019,  3:08am
+              </time>
+          <span itemprop='position'>#11</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>MESG now runs on its own network based on tendermint</p>
+        </div>
+
+        <meta itemprop='headline' content='Trustful Network'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+
+
+
+
+
+
+    </div>
+    <footer class="container wrap">
+      <nav class='crawler-nav'>
+        <ul>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../index.html' itemprop="url">Home </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../categories.html' itemprop="url">Categories </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../guidelines.html' itemprop="url">FAQ/Guidelines </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../tos.html' itemprop="url">Terms of Service </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../privacy.html' itemprop="url">Privacy Policy </a>
+          </span>
+        </li>
+        </ul>
+      </nav>
+      <p class='powered-by-link'>Powered by <a href="https://www.discourse.org">Discourse</a>, best viewed with JavaScript enabled</p>
+    </footer>
+    
+    
+  </body>
+  
+</html>

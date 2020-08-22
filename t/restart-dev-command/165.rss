@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Restart dev command</title>
+    <link>https://forum.mesg.com/t/restart-dev-command/165</link>
+    <description>Right now every time we want to restart a service we are working on it takes up to 30s because of the following sequence:
+1- stop the service
+2 - remove the service
+3 - restart the dev command
+4 - deploy the service
+5 - start the service
+
+I think this could be optimized with a **restart instruction** that directly start from step 4 and in parallel stop and remove the service.
+
+This can be done in different ways:
+- A &quot;press r to restart&quot; feature
+- A watch mode on the files with debounce and auto restart 
+- A watch mode with question asked &quot;Service updated do you want to restart ?&quot;</description>
+    
+    <lastBuildDate>Thu, 26 Dec 2019 02:35:39 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/restart-dev-command/165.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Restart dev command</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>We could also have an option <code>--watch</code> that will watch all the files in the service (except the ones in the .mesgignore and reload automatically)</p>
+          <p><a href="https://forum.mesg.com/t/restart-dev-command/165/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/restart-dev-command/165/3</link>
+        <pubDate>Thu, 26 Dec 2019 02:35:39 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-165-3</guid>
+        <source url="https://forum.mesg.com/t/restart-dev-command/165.rss">Restart dev command</source>
+      </item>
+      <item>
+        <title>Restart dev command</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>I suggest to go with:</p>
+<ul>
+<li>A “press r to restart” feature<br>
+But with a message always displayed at the bottom on the cli that says: <code>Press "r" to refresh the service</code>.</li>
+</ul>
+          <p><a href="https://forum.mesg.com/t/restart-dev-command/165/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/restart-dev-command/165/2</link>
+        <pubDate>Sat, 29 Dec 2018 07:06:10 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-165-2</guid>
+        <source url="https://forum.mesg.com/t/restart-dev-command/165.rss">Restart dev command</source>
+      </item>
+      <item>
+        <title>Restart dev command</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>Right now every time we want to restart a service we are working on it takes up to 30s because of the following sequence:<br>
+1- stop the service<br>
+2 - remove the service<br>
+3 - restart the dev command<br>
+4 - deploy the service<br>
+5 - start the service</p>
+<p>I think this could be optimized with a <strong>restart instruction</strong> that directly start from step 4 and in parallel stop and remove the service.</p>
+<p>This can be done in different ways:</p>
+<ul>
+<li>A “press r to restart” feature</li>
+<li>A watch mode on the files with debounce and auto restart</li>
+<li>A watch mode with question asked “Service updated do you want to restart ?”</li>
+</ul>
+          <p><a href="https://forum.mesg.com/t/restart-dev-command/165/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/restart-dev-command/165/1</link>
+        <pubDate>Sat, 29 Dec 2018 06:43:16 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-165-1</guid>
+        <source url="https://forum.mesg.com/t/restart-dev-command/165.rss">Restart dev command</source>
+      </item>
+  </channel>
+</rss>

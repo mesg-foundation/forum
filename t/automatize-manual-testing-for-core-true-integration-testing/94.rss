@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Automatize Manual Testing for Core (True Integration Testing)</title>
+    <link>https://forum.mesg.com/t/automatize-manual-testing-for-core-true-integration-testing/94</link>
+    <description># Problem
+
+When we do add a new feature or do a small/big refactoring in the core, we always required to do some manual testing. Otherwise it&#39;s really easy to miss newly introduced bugs to the system. Existent unit or integration tests may not powerful enough to help us to catch these bugs. We need to integration test core from outside of the core to be aware of these kind of bugs which is what we do with manual testing by spinning up _dev-core_ and using _dev-cli_ to cross test the behaviours of these two and see if they act as expected.
+
+## Bad Adoptions
+Currently, we have some integration tests that are actually **not integration tests**. They seem like they are but not fully. They don&#39;t test the actual integration behaviour. The integration tests we have are running inside the core itself and they don&#39;t directly interact with core through the _gRPC_ server.
+
+Lets bring up a sample to examine:
+
+[TestExecute](https://github.com/mesg-foundation/core/blob/60f36ed33c1b85b7c21b9a53251e7172ad71ec54/interface/grpc/core/execute_test.go#L13-L36) is not a real integration test. Yes, the testing service is really started but it&#39;s tasks never get executed. The actual reason of why the service is started here  is because there is a _RUNNING_ status check on services and to not get failed by this, services must be exists on Docker. 
+
+We&#39;re only able to test a small portion of task execution process in this test by checking the generated _execution id_.
+
+Like within this example, all the other integration tests that starts services doesn’t really carry about them. And they can’t too because services are not able to connect to gRPC server to get task execution requests, get events and submit task results because our tests doesn’t run in a container and not in the same network with the containers that are running the services. Also for the same limitation, we don’t have any tests that requires listening results and listening events in _grpc/core_ pkg.
+
+**Side note**:
+Other than previous example, the rest of the integration tests inside core are testing very simple cases like [this one](https://github.com/mesg-foundation/core/blob/dev/service/stop_integration_test.go#L12-L27) does. Which they are not needed as integration tests because we only need to test the application logic. So unit tests are enough for testing all the internal packages except _container_.
+
+## Correct Way of Creating Integration Tests
+
+I first thought creating integration tests by using yaml files for simplicity where we can have table tests for testing various scenarios. But using yaml files for testing can quickly get out of control and limit us because we might need to deploy and start a few services in a row and assert some service ids, input/output datas by executing tasks and so on. To accomplish these kind of stuff with yaml test files, we need to introduce comparison and variable primitives which is too much work and another thing that requires us to maintain. So, this is a no.
+
+We can use Go for integration testing and have a flexibility of a programming language. Still, it’s always better to have table tests as much us possible to not duplicate logic between similar tests and test lots of scenarios at once.
+
+We can place our integration test under a package called _integration_, inside core’s root. And we can have _integration/grpc_ &amp; _integration/cli_ subfolders for testing gRPC API and CLI separetely.
+
+Please see [feature/integration](https://github.com/mesg-foundation/core/tree/feature/integration) branch to get insights from the first implementation of new integration tests. I think this is a good start, we can add more tests by time. Note that integration tests are living under the _integration_ folder and they should be run by _./run-integration_. Also, it&#39;s not required to have integration tests under the core repo because it only interacts with core through network and uses cli binary to test cli.
+
+**Side notes**:
+* We should be adding tests for each cli command including the ones about daemon.
+* We don&#39;t need to add tests for **service gRPC API** directly because we use real services and they use this API to interact with core. This way we also test if core is starting services correctly inside containers and giving the right service id as env variable to service&#39;s containers. So having integration tests for **core gRPC API** is enough.
+
+## Proposal
+* Lets get rid of all the integration tests inside the internal packages and create equivalent ones inside new _integration_ folder.
+
+* Lets have the integration tests in the most higher _(gRPC server, cli)_ level and this way we&#39;ll also eliminate doing manual tests after each change on core. Also inc integration tests coverage by adding more tests by time.
+
+* Lets only keep the integration tests we currently have for container pkg and do unit testing for the rest of the core as suggested before. By having dedicated integration tests for container, we can easily keep track of bugs in container pkg in the low level, otherwise debugging bugs caught from the higher level integration tests can get time consuming.
+
+## Links
+
+* related topic: https://forum.mesg.com/t/merge-logic-of-unit-and-integration-test/85
+* see docker/docker example for integration testing. see the _integration_ and _integration-cli_ packages: https://github.com/moby/moby/</description>
+    
+    <lastBuildDate>Thu, 26 Dec 2019 02:55:34 +0000</lastBuildDate>
+    <category>Development</category>
+    <atom:link href="https://forum.mesg.com/t/automatize-manual-testing-for-core-true-integration-testing/94.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Automatize Manual Testing for Core (True Integration Testing)</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>We now have true e2e tests <a href="https://github.com/mesg-foundation/engine/tree/dev/e2e">https://github.com/mesg-foundation/engine/tree/dev/e2e</a></p>
+          <p><a href="https://forum.mesg.com/t/automatize-manual-testing-for-core-true-integration-testing/94/7">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/automatize-manual-testing-for-core-true-integration-testing/94/7</link>
+        <pubDate>Thu, 26 Dec 2019 02:55:34 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-94-7</guid>
+        <source url="https://forum.mesg.com/t/automatize-manual-testing-for-core-true-integration-testing/94.rss">Automatize Manual Testing for Core (True Integration Testing)</source>
+      </item>
+      <item>
+        <title>Automatize Manual Testing for Core (True Integration Testing)</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p><a class="mention-group" href="/groups/core">@core</a> team this discussion needs further feedbacks.</p>
+          <p><a href="https://forum.mesg.com/t/automatize-manual-testing-for-core-true-integration-testing/94/6">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/automatize-manual-testing-for-core-true-integration-testing/94/6</link>
+        <pubDate>Wed, 31 Oct 2018 11:18:50 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-94-6</guid>
+        <source url="https://forum.mesg.com/t/automatize-manual-testing-for-core-true-integration-testing/94.rss">Automatize Manual Testing for Core (True Integration Testing)</source>
+      </item>
+      <item>
+        <title>Automatize Manual Testing for Core (True Integration Testing)</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>Thank you for the feedbacks! <a class="mention" href="/u/krhubert">@krhubert</a></p>
+<p>Tests are not features that we need to discuss about having them or not, they are a requirement. They are not the goals but the tools that helps us to get more closer to our actual goals. And having them shouldn’t be delayed otherwise it’s a technical depth.  Having these tests also helps us for skipping manual tests that we do after each change we make in core. Manual testing and having uncaught bugs are more expensive than spending time while creating tests.</p>
+<p>Unit tests are in the bottom of testing pyramid, all testing methodologies has their own advantages. Non of them is a great solution alone but having all of them actually solves the testing problem of a product. For the same reason we cannot only have unit tests for <em>commands</em> package, it is not enough by itself. We have to test the binary to see everything works well together and make sure we cover everything that might be skipped by unit tests.</p>
+<p>I don’t understand why do you think that having these integration tests complicates things. I thought they help us to skip manual testing part and we can make sure that our product (gRPC API, cli) works as expected in the end users’ perspective.</p>
+<p>I also understand this part: <code>We can save a lot of time by refactoring the code rather than writing a ton of integration tests.</code> What is the link between having tests and refactoring core? They’re totally different subjects.</p>
+<p>Also these kind of integration tests are not something that will be updated very often because they’re in the top of testing pyramid and doesn’t test the implementation details that changes a lot. It applies in the most higher level, in other means we mostly only need to update these tests when we have breaking changes.</p>
+          <p><a href="https://forum.mesg.com/t/automatize-manual-testing-for-core-true-integration-testing/94/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/automatize-manual-testing-for-core-true-integration-testing/94/4</link>
+        <pubDate>Tue, 16 Oct 2018 14:28:57 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-94-4</guid>
+        <source url="https://forum.mesg.com/t/automatize-manual-testing-for-core-true-integration-testing/94.rss">Automatize Manual Testing for Core (True Integration Testing)</source>
+      </item>
+      <item>
+        <title>Automatize Manual Testing for Core (True Integration Testing)</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <p>About the tests.</p>
+<p>We should more focus on writing good unit test and refactor existing code, then create more integration tests which are slow (which will lead to refactoring tests because slow tests are bad).</p>
+<p>We can save a lot of time by refactoring the code rather than writing a ton of integration tests.</p>
+<p>Moreover, the project is in the early stage to come up with such a solution as it adds more complexity to the project. It may happen (sooner than later) then we will need it, but for now let’s focus on features. Having more features will help us understand the nature of the tests we will need.</p>
+<p>The code you pushed to GitHub (cli tests) seem to me like e2e tests (rather than integration). Also testing cli output could be done in <code>commands</code> package with unit tests.</p>
+<p>So to sum up - you took an effort and prepared this proposal which is great, but first, we need to focus on simplifying what we have and then the time will come for more integration tests.</p>
+          <p><a href="https://forum.mesg.com/t/automatize-manual-testing-for-core-true-integration-testing/94/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/automatize-manual-testing-for-core-true-integration-testing/94/3</link>
+        <pubDate>Tue, 16 Oct 2018 13:56:50 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-94-3</guid>
+        <source url="https://forum.mesg.com/t/automatize-manual-testing-for-core-true-integration-testing/94.rss">Automatize Manual Testing for Core (True Integration Testing)</source>
+      </item>
+      <item>
+        <title>Automatize Manual Testing for Core (True Integration Testing)</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <h1>Problem</h1>
+<p>When we do add a new feature or do a small/big refactoring in the core, we always required to do some manual testing. Otherwise it’s really easy to miss newly introduced bugs to the system. Existent unit or integration tests may not powerful enough to help us to catch these bugs. We need to integration test core from outside of the core to be aware of these kind of bugs which is what we do with manual testing by spinning up <em>dev-core</em> and using <em>dev-cli</em> to cross test the behaviours of these two and see if they act as expected.</p>
+<h2>Bad Adoptions</h2>
+<p>Currently, we have some integration tests that are actually <strong>not integration tests</strong>. They seem like they are but not fully. They don’t test the actual integration behaviour. The integration tests we have are running inside the core itself and they don’t directly interact with core through the <em>gRPC</em> server.</p>
+<p>Lets bring up a sample to examine:</p>
+<p><a href="https://github.com/mesg-foundation/core/blob/60f36ed33c1b85b7c21b9a53251e7172ad71ec54/interface/grpc/core/execute_test.go#L13-L36">TestExecute</a> is not a real integration test. Yes, the testing service is really started but it’s tasks never get executed. The actual reason of why the service is started here  is because there is a <em>RUNNING</em> status check on services and to not get failed by this, services must be exists on Docker.</p>
+<p>We’re only able to test a small portion of task execution process in this test by checking the generated <em>execution id</em>.</p>
+<p>Like within this example, all the other integration tests that starts services doesn’t really carry about them. And they can’t too because services are not able to connect to gRPC server to get task execution requests, get events and submit task results because our tests doesn’t run in a container and not in the same network with the containers that are running the services. Also for the same limitation, we don’t have any tests that requires listening results and listening events in <em>grpc/core</em> pkg.</p>
+<p><strong>Side note</strong>:<br>
+Other than previous example, the rest of the integration tests inside core are testing very simple cases like <a href="https://github.com/mesg-foundation/core/blob/dev/service/stop_integration_test.go#L12-L27">this one</a> does. Which they are not needed as integration tests because we only need to test the application logic. So unit tests are enough for testing all the internal packages except <em>container</em>.</p>
+<h2>Correct Way of Creating Integration Tests</h2>
+<p>I first thought creating integration tests by using yaml files for simplicity where we can have table tests for testing various scenarios. But using yaml files for testing can quickly get out of control and limit us because we might need to deploy and start a few services in a row and assert some service ids, input/output datas by executing tasks and so on. To accomplish these kind of stuff with yaml test files, we need to introduce comparison and variable primitives which is too much work and another thing that requires us to maintain. So, this is a no.</p>
+<p>We can use Go for integration testing and have a flexibility of a programming language. Still, it’s always better to have table tests as much us possible to not duplicate logic between similar tests and test lots of scenarios at once.</p>
+<p>We can place our integration test under a package called <em>integration</em>, inside core’s root. And we can have <em>integration/grpc</em> &amp; <em>integration/cli</em> subfolders for testing gRPC API and CLI separetely.</p>
+<p>Please see <a href="https://github.com/mesg-foundation/core/tree/feature/integration">feature/integration</a> branch to get insights from the first implementation of new integration tests. I think this is a good start, we can add more tests by time. Note that integration tests are living under the <em>integration</em> folder and they should be run by <em>./run-integration</em>. Also, it’s not required to have integration tests under the core repo because it only interacts with core through network and uses cli binary to test cli.</p>
+<p><strong>Side notes</strong>:</p>
+<ul>
+<li>We should be adding tests for each cli command including the ones about daemon.</li>
+<li>We don’t need to add tests for <strong>service gRPC API</strong> directly because we use real services and they use this API to interact with core. This way we also test if core is starting services correctly inside containers and giving the right service id as env variable to service’s containers. So having integration tests for <strong>core gRPC API</strong> is enough.</li>
+</ul>
+<h2>Proposal</h2>
+<ul>
+<li>
+<p>Lets get rid of all the integration tests inside the internal packages and create equivalent ones inside new <em>integration</em> folder.</p>
+</li>
+<li>
+<p>Lets have the integration tests in the most higher <em>(gRPC server, cli)</em> level and this way we’ll also eliminate doing manual tests after each change on core. Also inc integration tests coverage by adding more tests by time.</p>
+</li>
+<li>
+<p>Lets only keep the integration tests we currently have for container pkg and do unit testing for the rest of the core as suggested before. By having dedicated integration tests for container, we can easily keep track of bugs in container pkg in the low level, otherwise debugging bugs caught from the higher level integration tests can get time consuming.</p>
+</li>
+</ul>
+<h2>Links</h2>
+<ul>
+<li>related topic: <a href="https://forum.mesg.com/t/merge-logic-of-unit-and-integration-test/85">Merge logic of unit and integration test</a>
+</li>
+<li>see docker/docker example for integration testing. see the <em>integration</em> and <em>integration-cli</em> packages: <a href="https://github.com/moby/moby/">https://github.com/moby/moby/</a>
+</li>
+</ul>
+          <p><a href="https://forum.mesg.com/t/automatize-manual-testing-for-core-true-integration-testing/94/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/automatize-manual-testing-for-core-true-integration-testing/94/1</link>
+        <pubDate>Mon, 15 Oct 2018 15:40:39 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-94-1</guid>
+        <source url="https://forum.mesg.com/t/automatize-manual-testing-for-core-true-integration-testing/94.rss">Automatize Manual Testing for Core (True Integration Testing)</source>
+      </item>
+  </channel>
+</rss>

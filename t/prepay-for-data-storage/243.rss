@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Prepay for data storage</title>
+    <link>https://forum.mesg.com/t/prepay-for-data-storage/243</link>
+    <description>## Concept
+
+File hosting is an important part of a business and nowadays new solutions are emerging based on blockchain/decentralized technologies. One of the problem of these new technologies are the usability of it because it often requires to buy token in order to use the technology.
+Few technologies can be used that way:
+- [Sia](https://sia.tech)
+- [Storj](https://storj.io)
+- [Filecoin](https://filecoin.io)
+
+The goal is to help the adoption of these projects by providing a way to pay in fiat to store a file for a certain period of time or even having some subscription to make sure the file is always stored.
+
+We could connect a payment gateway like Stripe that accepts payment either direct payment or subscriptions and when the payment is marked as done on Stripe, only at this time the file is uploaded for a certain period of time (based on the price you paid). If a subscription model is in place we could have this workflow created every x period of time.
+
+## Business implication
+
+- Use new storage systems
+- Easy adoption
+- Cheaper price for hosting
+- More reliable/secure hosting
+- Censorship resistant hosting
+
+## Workflow
+
+![image|690x215](upload://5crhbkefJxctGlLEOCtFCACqSSj.png)</description>
+    
+    <lastBuildDate>Fri, 01 Feb 2019 05:47:45 +0000</lastBuildDate>
+    <category>Proof of Concept</category>
+    <atom:link href="https://forum.mesg.com/t/prepay-for-data-storage/243.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Prepay for data storage</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <h2>Concept</h2>
+<p>File hosting is an important part of a business and nowadays new solutions are emerging based on blockchain/decentralized technologies. One of the problem of these new technologies are the usability of it because it often requires to buy token in order to use the technology.<br>
+Few technologies can be used that way:</p>
+<ul>
+<li><a href="https://sia.tech" rel="nofollow noopener">Sia</a></li>
+<li><a href="https://storj.io" rel="nofollow noopener">Storj</a></li>
+<li><a href="https://filecoin.io" rel="nofollow noopener">Filecoin</a></li>
+</ul>
+<p>The goal is to help the adoption of these projects by providing a way to pay in fiat to store a file for a certain period of time or even having some subscription to make sure the file is always stored.</p>
+<p>We could connect a payment gateway like Stripe that accepts payment either direct payment or subscriptions and when the payment is marked as done on Stripe, only at this time the file is uploaded for a certain period of time (based on the price you paid). If a subscription model is in place we could have this workflow created every x period of time.</p>
+<h2>Business implication</h2>
+<ul>
+<li>Use new storage systems</li>
+<li>Easy adoption</li>
+<li>Cheaper price for hosting</li>
+<li>More reliable/secure hosting</li>
+<li>Censorship resistant hosting</li>
+</ul>
+<h2>Workflow</h2>
+<p><img src="https://forum.mesg.com/uploads/default/original/1X/2472dc5fad60d62441af79ba945cfe9e6887510f.png" alt="image" width="690" height="215"></p>
+          <p><a href="https://forum.mesg.com/t/prepay-for-data-storage/243/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/prepay-for-data-storage/243/1</link>
+        <pubDate>Fri, 01 Feb 2019 05:47:45 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-243-1</guid>
+        <source url="https://forum.mesg.com/t/prepay-for-data-storage/243.rss">Prepay for data storage</source>
+      </item>
+  </channel>
+</rss>

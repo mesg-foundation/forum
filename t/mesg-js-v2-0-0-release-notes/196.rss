@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>MESG-js v2.0.0 Release Notes</title>
+    <link>https://forum.mesg.com/t/mesg-js-v2-0-0-release-notes/196</link>
+    <description>A new version of the  `mesg-js`  library has been released:  `v2.0.0`.
+You can install it to your project with `npm i -S mesg-js@latest`
+
+With this release we completely changed the high level application APIs. We removed the _When-Then_ logic and now have much more flexible new 4 funcs.
+
+Added funcs are:
+* `listenEvent()`
+* `listenResult()`
+* `executeTask()`
+* `executeTaskAndWaitResult()`
+
+Please see the new application APIs [here](https://github.com/mesg-foundation/mesg-js#application). And check the updated [quick start tutorial](https://docs.mesg.com/guide/start-here/quick-start-guide.html#_4-create-the-application) to see these new APIs in action.
+
+With this release we also updated TS types to be more precise, introduced options to `application()` constructor to configure Core&#39;s endpoint and made some internal improvements.
+
+Happy coding... :)</description>
+    
+    <lastBuildDate>Wed, 16 Jan 2019 11:02:58 +0000</lastBuildDate>
+    <category>News</category>
+    <atom:link href="https://forum.mesg.com/t/mesg-js-v2-0-0-release-notes/196.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>MESG-js v2.0.0 Release Notes</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>A new version of the  <code>mesg-js</code>  library has been released:  <code>v2.0.0</code>.<br>
+You can install it to your project with <code>npm i -S mesg-js@latest</code></p>
+<p>With this release we completely changed the high level application APIs. We removed the <em>When-Then</em> logic and now have much more flexible new 4 funcs.</p>
+<p>Added funcs are:</p>
+<ul>
+<li><code>listenEvent()</code></li>
+<li><code>listenResult()</code></li>
+<li><code>executeTask()</code></li>
+<li><code>executeTaskAndWaitResult()</code></li>
+</ul>
+<p>Please see the new application APIs <a href="https://github.com/mesg-foundation/mesg-js#application" rel="nofollow noopener">here</a>. And check the updated <a href="https://docs.mesg.com/guide/start-here/quick-start-guide.html#_4-create-the-application" rel="nofollow noopener">quick start tutorial</a> to see these new APIs in action.</p>
+<p>With this release we also updated TS types to be more precise, introduced options to <code>application()</code> constructor to configure Core’s endpoint and made some internal improvements.</p>
+<p>Happy coding… <img src="https://forum.mesg.com/images/emoji/twitter/slight_smile.png?v=6" title=":slight_smile:" class="emoji" alt=":slight_smile:"></p>
+          <p><a href="https://forum.mesg.com/t/mesg-js-v2-0-0-release-notes/196/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mesg-js-v2-0-0-release-notes/196/1</link>
+        <pubDate>Wed, 16 Jan 2019 09:04:12 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-196-1</guid>
+        <source url="https://forum.mesg.com/t/mesg-js-v2-0-0-release-notes/196.rss">MESG-js v2.0.0 Release Notes</source>
+      </item>
+  </channel>
+</rss>

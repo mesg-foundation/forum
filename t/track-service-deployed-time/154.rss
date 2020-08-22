@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Track service deployed time</title>
+    <link>https://forum.mesg.com/t/track-service-deployed-time/154</link>
+    <description>From @krhubert https://github.com/mesg-foundation/core/issues/359
+
+What do you think of that? Should we track those values and display it?
+Also short description would be nice (what does the service do ...) for investigation/debugging. 
+
+
+---
+
+Reply from @ilgooz
+
+yes, we can show them with list command? like docker ps/service ls</description>
+    
+    <lastBuildDate>Thu, 13 Dec 2018 11:21:23 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/track-service-deployed-time/154.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Track service deployed time</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>From <a class="mention" href="/u/krhubert">@krhubert</a> <a href="https://github.com/mesg-foundation/core/issues/359" rel="nofollow noopener">https://github.com/mesg-foundation/core/issues/359</a></p>
+<p>What do you think of that? Should we track those values and display it?<br>
+Also short description would be nice (what does the service do …) for investigation/debugging.</p>
+<hr>
+<p>Reply from <a class="mention" href="/u/ilgooz">@ilgooz</a></p>
+<p>yes, we can show them with list command? like docker ps/service ls</p>
+          <p><a href="https://forum.mesg.com/t/track-service-deployed-time/154/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/track-service-deployed-time/154/1</link>
+        <pubDate>Thu, 13 Dec 2018 11:21:23 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-154-1</guid>
+        <source url="https://forum.mesg.com/t/track-service-deployed-time/154.rss">Track service deployed time</source>
+      </item>
+  </channel>
+</rss>

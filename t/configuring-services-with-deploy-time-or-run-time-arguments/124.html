@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <title>Configuring Services with Deploy-Time or Run-Time Arguments - Engine - MESG Community</title>
+    <meta name="description" content="There are two types of configurations related to configuring services. 
+1- Configuring service tasks/events, it’s public ports, data volumes etc. from the mesg.yml. (we have this feature). 
+2- Configuring service’s progr&amp;hellip;">
+    <meta name="generator" content="Discourse 2.5.0.beta5 - https://github.com/discourse/discourse version 00aab498297cba8f977c1e0eb17b7d38ff06cc68">
+<link rel="icon" type="image/png" href="../../uploads/default/optimized/1X/9f11b6ddfa02bffdbec79487592a0573a0236cb5_2_32x32.png">
+<link rel="apple-touch-icon" type="image/png" href="../../uploads/default/optimized/1X/53630361a40ad76e1733dd0b0f486e9ae2f4f4d6_2_180x180.png">
+<meta name="theme-color" content="#491e8c">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+<link rel="canonical" href="124.html" />
+<script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","url":"https://forum.mesg.com","potentialAction":{"@type":"SearchAction","target":"https://forum.mesg.com/search?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
+<link rel="search" type="application/opensearchdescription+xml" href="../../opensearch.xml" title="MESG Community Search">
+
+      <link href="../../stylesheets/desktop_3_52e3411e87658e862890db7bd06899cf49ad5f59.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop" data-theme-id="7"/>
+      <link href="../../stylesheets/desktop_theme_7_bf4f2d3d8a71e6ee907065be9a79df3d849bd29c.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop_theme" data-theme-id="7"/>
+    
+    <meta id="data-ga-universal-analytics" data-tracking-code="UA-117583862-1" data-json="{&quot;cookieDomain&quot;:&quot;auto&quot;}" data-auto-link-domains="">
+
+<link rel="preload" href="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js" as="script">
+<script src="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js"></script>
+
+
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of &#39;Configuring Services with Deploy-Time or Run-Time Arguments&#39;" href="124.rss" />
+    <meta property="og:site_name" content="MESG Community" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:url" content="https://forum.mesg.com/t/configuring-services-with-deploy-time-or-run-time-arguments/124" />
+<meta name="twitter:url" content="https://forum.mesg.com/t/configuring-services-with-deploy-time-or-run-time-arguments/124" />
+<meta property="og:title" content="Configuring Services with Deploy-Time or Run-Time Arguments" />
+<meta name="twitter:title" content="Configuring Services with Deploy-Time or Run-Time Arguments" />
+<meta property="og:description" content="There are two types of configurations related to configuring services.  1- Configuring service tasks/events, it’s public ports, data volumes etc. from the mesg.yml. (we have this feature).  2- Configuring service’s program with its own runtime cli flags. (we do this within the Dockerfile of service while running it.)  Currently, these two types of configurations can be only done by changing the source code of services. And we don’t support ability of somehow setting cli flags of service’s progra..." />
+<meta name="twitter:description" content="There are two types of configurations related to configuring services.  1- Configuring service tasks/events, it’s public ports, data volumes etc. from the mesg.yml. (we have this feature).  2- Configuring service’s program with its own runtime cli flags. (we do this within the Dockerfile of service while running it.)  Currently, these two types of configurations can be only done by changing the source code of services. And we don’t support ability of somehow setting cli flags of service’s progra..." />
+<meta name="twitter:label1" value="Reading time" />
+<meta name="twitter:data1" value="4 mins 🕑" />
+<meta name="twitter:label2" value="Likes" />
+<meta name="twitter:data2" value="7 ❤" />
+<meta property="article:published_time" content="2018-11-20T10:25:31+00:00" />
+<meta property="og:ignore_canonical" content="true" />
+
+
+
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"QAPage","name":"Configuring Services with Deploy-Time or Run-Time Arguments","mainEntity":{"@type":"Question","name":"Configuring Services with Deploy-Time or Run-Time Arguments","text":"There are two types of configurations related to configuring services.\n\n1- Configuring service tasks/events, it’s public ports, data volumes etc. from the mesg.yml. (we have this feature).\n\n2- Configuring service’s program with its own runtime cli flags. (we do this within the Dockerfile of service &hellip;","upvoteCount":2,"answerCount":1,"dateCreated":"2018-11-20T10:25:31.615Z","author":{"@type":"Person","name":"İlker"},"acceptedAnswer":{"@type":"Answer","text":"Topic solved by PR <a href="https://forum.mesg.com/t/configuring-services-with-deploy-time-or-run-time-arguments/\&quot;https://github.com/mesg-foundation/core/pull/641\&quot;" rel=\"nofollow noopener\">https://github.com/mesg-foundation/core/pull/641<\/a>","upvoteCount":0,"dateCreated":"2018-12-27T11:46:03.948Z","url":"https://forum.mesg.com/t/configuring-services-with-deploy-time-or-run-time-arguments/124/17","author":{"@type":"Person","name":"Nicolas"}}}}</script>
+  </head>
+  <body class="crawler">
+    
+    <header>
+      <a href="../../index.html">
+          <img src="../../uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png" alt="MESG Community" id="site-logo" style="max-width: 150px;">
+      </a>
+    </header>
+    <div id="main-outlet" class="wrap">
+        <div id="topic-title">
+    <h1>
+      <a href="124.html">Configuring Services with Deploy-Time or Run-Time Arguments</a>
+    </h1>
+
+      <div class="topic-category" itemscope itemtype="http://schema.org/BreadcrumbList">
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../c/development.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #AB9364'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Development</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="1" />
+          </span>
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../c/development/engine.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #AB9364'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Engine</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="2" />
+          </span>
+      </div>
+
+      <div class="topic-category">
+        <div class='discourse-tags list-tags'>
+            <a href='../../tag/v0-6.html' class='discourse-tag' rel="tag">v0-6</a>, 
+            <a href='../../tag/proposal.html' class='discourse-tag' rel="tag">proposal</a>, 
+            <a href='../../tag/todo.html' class='discourse-tag' rel="tag">todo</a>
+        </div>
+      </div>
+  </div>
+
+  
+
+
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="124.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-11-20T10:25:31Z'>
+              <time itemprop='dateModified' datetime='2018-12-14T03:30:10Z' class='post-time'>
+                December 14, 2018,  3:30am
+              </time>
+          <span itemprop='position'>#1</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>There are two types of configurations related to configuring services.</p>
+<p>1- Configuring service tasks/events, it’s public ports, data volumes etc. from the <em>mesg.yml</em>. (we have this feature).</p>
+<p>2- Configuring service’s program with its own runtime cli flags. (we do this within the <em>Dockerfile</em> of service while running it.)</p>
+<p>Currently, these two types of configurations can be only done by changing the source code of services. And we don’t support ability of somehow setting cli flags of service’s program within the <em>mesg.yml</em> file. Since <em>mesg.yml</em> is the place where we describe and configure services, I think, we should also support configuring runtime of service’s program inside of it too.</p>
+<p>Purpose if this proposal is to discuss both to support configuring services dynamically without changing their source code by using some kind of runtime or build-time arguments for MESG services. If we have this feature, as a second, we can support providing configurations to runtime of service’s program, this way program can be dynamically configured as well.</p>
+<p><em>Real world case about why this is needed:</em></p>
+<p>As a user, let’s say that I have a workflow file and I want to use <a href="https://github.com/ilgooz/service-http-server" rel="nofollow noopener">service-http-server</a> for serving a <em>vuejs app</em> and a <em>rest api</em> but from different ports. To do that, <em>service-http-server</em> should be configurable to set a port address without a need of changing its source code because, I don’t want to fork it and create two different branches to setup different ports. I want to have the full power of reusable services by passing configurations dynamically.</p>
+<p>So, for this case, I need to be able to both configure <a href="https://github.com/ilgooz/service-http-server/blob/1cc53b0/mesg.yml#L61" rel="nofollow noopener">this part in the yml</a> file and <a href="https://github.com/ilgooz/service-http-server/blob/975b713/Dockerfile#L5" rel="nofollow noopener">this flag in the Dockerfile</a> dynamically.</p>
+<p><em>Check the sample mesg.yml and Dockerfile below for see this proposal in actual code:</em><br>
+<em>- Note that, to configure service’s program dynamically from the mesg.yml, I followed the pattern of using build args of Docker. Every arg provided while deploying/starting MESG services also directly mapped to Docker’s build time args</em></p>
+<p><em>command:</em></p>
+<pre><code class="lang-auto">$ mesg-core service deploy --arg serverAddr=2300 https://github.com/ilgooz/service-http-server
+// outputs a SERVICE_ID
+
+// or
+
+$ mesg-core service start --arg serverAddr=2300 SERVICE_ID
+// outputs an ANOTHER_SERVICE_ID
+</code></pre>
+<p><em>mesg.yml:</em></p>
+<pre><code class="lang-auto">...
+name: ...
+description: ...
+env:
+  # we can also support env vars that will be accessed by service's program on runtime
+  # as next to configuring service's program with Docker's build time args.
+  AN_ENV_VAR: 123
+configuration:
+  ports:
+    - $serverAddr
+...
+</code></pre>
+<p><em>Dockerfile:</em></p>
+<pre><code class="lang-auto">CMD website --serverAddr $serverAddr
+</code></pre>
+<p>We discussed on Discord and kinda agreed on providing runtime arguments to MESG services with the <em>service start/deploy</em> command and they can be accessed with <em>$</em> sign in the <em>yml</em> file. Every argument should be also mapped to Docker’s build time arguments. But of course, every change on args <strong>must</strong> cause service to get a <strong>different service id</strong>.</p>
+<p>By having this configuration features, we can also support giving configurations for services in the workflow files easily like this:<br>
+<em>sample workflow.yml</em>:</p>
+<pre><code class="lang-auto">...
+services:
+  website:
+    id: https://github.com/ilgooz/service-http-server/
+    args:
+      serverAddr: 2300
+
+  restapi:
+    repo: https://github.com/ilgooz/service-http-server/
+    args:
+      serverAddr: 3300
+
+when:
+  ...
+</code></pre>
+        </div>
+
+        <meta itemprop='headline' content='Configuring Services with Deploy-Time or Run-Time Arguments'>
+          <meta itemprop='keywords' content='v0-6, proposal, todo'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="2" />
+           <span class='post-likes'>2 Likes</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+            <div class='crawler-linkback-list' itemscope itemtype='http://schema.org/ItemList'>
+                  <div itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+                    <a href="../introducing-workflow-files/95/10.html" itemprop='item'>
+                      <meta itemprop='url' content='https://forum.mesg.com/t/introducing-workflow-files/95/10'>
+                      <meta itemprop='position' content='4'>
+                      <span itemprop='name'>Introducing Workflow Files</span>
+                    </a>
+                  </div>
+                  <div itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+                    <a href="../milestone-v0-6/134.html" itemprop='item'>
+                      <meta itemprop='url' content='https://forum.mesg.com/t/milestone-v0-6/134'>
+                      <meta itemprop='position' content='5'>
+                      <span itemprop='name'>Milestone v0.6</span>
+                    </a>
+                  </div>
+            </div>
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="124.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-11-27T05:31:30Z' class='post-time'>
+                November 27, 2018,  5:31am
+              </time>
+              <meta itemprop='dateModified' content='2018-11-27T05:31:30Z'>
+          <span itemprop='position'>#2</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>I really like the idea, just to have something else to thing about why not using the structure of the yaml as key.<br>
+In you case it would be something like</p>
+<pre><code class="lang-auto">mesg-core service deploy --configuration.ports.0 2300 https://....
+</code></pre>
+<p>We could like that override any configuration of a service and not only the one that the developer allowed and because it will be a new hash we shouldn’t have any issue because that the responsibility of the user who configures it.<br>
+This could help for many things like using a different alias for a service that we deploy like <code>mesg-core service deploy --alias xxx ...</code></p>
+<p>It’s not really sexy interface when you have to go really nested but that might be really flexible</p>
+        </div>
+
+        <meta itemprop='headline' content='Configuring Services with Deploy-Time or Run-Time Arguments'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="124.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-11-27T05:47:11Z' class='post-time'>
+                November 27, 2018,  5:47am
+              </time>
+              <meta itemprop='dateModified' content='2018-11-27T05:47:11Z'>
+          <span itemprop='position'>#3</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Good summary of the problem <a class="mention" href="../../u/ilgooz.html">@ilgooz</a> <img src="../../images/emoji/twitter/+1.png%3Fv=6" title=":+1:" class="emoji" alt=":+1:"></p>
+<p>My suggestion on this system are:</p>
+<ul>
+<li>Add a new key to the mesg.yml to explicitly define the name and default value of the configuration that the service is compatible with. Because the key <code>configuration</code> is already used for configuring the service’s container, with need another name (or change it to <code>container</code>?). It could be “variable”, “userConfig”, “argument” (suggestion accepted <img src="../../images/emoji/twitter/wink.png%3Fv=6" title=":wink:" class="emoji" alt=":wink:"> ).<br>
+It should look like:</li>
+</ul>
+<pre><code class="lang-auto">name: ...
+description: ...
+variable:
+  myVariable: 123
+# variable name: default value
+</code></pre>
+<p>With this knowledge, the core could check that the a user’s config is defined by the service.</p>
+<ul>
+<li>Make mesg.yml configurable by using yaml variable if possible, otherwise we can use a template system like <code>$variable</code> (<a class="mention" href="../../u/ilgooz.html">@ilgooz</a> suggestion) or <code>{{variable}}</code>.</li>
+</ul>
+<pre><code class="lang-auto">configuration:
+  ports:
+    - *myVariable
+    - $myVariable
+    - {{myVariable}}
+</code></pre>
+<ul>
+<li>
+<p>Inject config as env variable in the service (or use Docker’s <a href="https://docs.docker.com/engine/swarm/secrets/#about-secrets">secret</a> or <a href="https://docs.docker.com/engine/swarm/configs/">config</a>) so the service’s app can also access the config</p>
+</li>
+<li>
+<p><strong>Do not inject config in Dockerfile</strong>. The Dockerfile should be as generic as possible.</p>
+</li>
+<li>
+<p>Accept user’s config <strong>only</strong> in the deploy command. As the user’s config must change the service ID, deploy command is the right place.</p>
+</li>
+</ul>
+        </div>
+
+        <meta itemprop='headline' content='Configuring Services with Deploy-Time or Run-Time Arguments'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="124.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-11-27T05:53:51Z'>
+              <time itemprop='dateModified' datetime='2018-11-27T06:08:02Z' class='post-time'>
+                November 27, 2018,  6:08am
+              </time>
+          <span itemprop='position'>#4</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <aside class="quote group-team" data-post="2" data-topic="124">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/anthony/40/7_1.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>I really like the idea, just to have something else to thing about why not using the structure of the yaml as key.<br>
+In you case it would be something like</p>
+<pre><code class="lang-auto">mesg-core service deploy --configuration.ports.0 2300 https://....
+</code></pre>
+</blockquote>
+</aside>
+<p>I don’t think it’s a good idea.</p>
+<p>We don’t want users to be able to re-configure everything in the <code>mesg.yml</code>. I think it will allow malicious use of a service and it doesn’t solve the problem of passing configuration to the service’s application.<br>
+If users want to change so much a mesg.yml, they can download the source and change it themself.</p>
+<p>But I suggest to allow basic override of some variables, like the future <code>alias</code>, maybe even <code>name</code> and <code>description</code>, but that’s it. Only “cosmetic” stuff should be customizable without the approval of the service developer.</p>
+        </div>
+
+        <meta itemprop='headline' content='Configuring Services with Deploy-Time or Run-Time Arguments'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="1" />
+           <span class='post-likes'>1 Like</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="124.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-11-27T06:02:45Z' class='post-time'>
+                November 27, 2018,  6:02am
+              </time>
+              <meta itemprop='dateModified' content='2018-11-27T06:02:45Z'>
+          <span itemprop='position'>#5</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Also, if the <code>mesg.yml</code> is compatible with a template system, we could imagine future advance configuration of a service.<br>
+For example, the <a href="https://github.com/mesg-foundation/service-ethereum">service-ethereum</a> has 2 version of the <code>mesg.yml</code>:<br>
+Master’s version:<br>
+<aside class="onebox githubblob">
+  <header class="source">
+      <a href="https://github.com/mesg-foundation/service-ethereum/blob/master/mesg.yml" target="_blank">github.com</a>
+  </header>
+  <article class="onebox-body">
+    <h4><a href="https://github.com/mesg-foundation/service-ethereum/blob/master/mesg.yml" target="_blank">mesg-foundation/service-ethereum/blob/master/mesg.yml</a></h4>
+<pre><code class="lang-yml">name: "Ethereum"
+description: "Ethereum Service to interact with any Smart Contract"
+tasks:
+  executeSmartContractMethod:
+    name: "Execute a Smart Contract Method"
+    description: "This task executes a method on any Smart Contract"
+    inputs:
+      methodAbi: &amp;methodAbiParam
+        name: "Method ABI"
+        description: "The ABI of the method to execute. Only pass the ABI of the method and NOT all the Smart Contract's ABI."
+        type: Object
+      inputs: &amp;inputsParam
+        name: "Inputs"
+        description: "The inputs to use during the execution of the method. Pass an Object with parameter's name as key and parameter's value as value."
+        type: Object
+      contractAddress: &amp;contractAddressParam
+        name: "Contract address"
+        description: "The address of the contract"
+        type: String
+      privateKey: &amp;privateKeyInput
+</code></pre>
+
+  This file has been truncated. <a href="https://github.com/mesg-foundation/service-ethereum/blob/master/mesg.yml" target="_blank">show original</a>
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+<br>
+And, RSK version:<br>
+<aside class="onebox githubblob">
+  <header class="source">
+      <a href="https://github.com/mesg-foundation/service-ethereum/blob/rsk/regtest/mesg.yml" target="_blank">github.com</a>
+  </header>
+  <article class="onebox-body">
+    <h4><a href="https://github.com/mesg-foundation/service-ethereum/blob/rsk/regtest/mesg.yml" target="_blank">mesg-foundation/service-ethereum/blob/rsk/regtest/mesg.yml</a></h4>
+<pre><code class="lang-yml">name: "Ethereum"
+description: "Ethereum Service to interact with any Smart Contract"
+dependencies:
+# the dependency has to build manually:
+# open a terminal in service-ethereum/rsk
+# execute: docker build -t regtest -f Dockerfile.RegTest .
+  rskclient:
+    image: regtest
+    volumes:
+      - /var/lib/rsk
+    ports:
+      - 4444:4444
+      - 30305:30305
+tasks:
+  executeSmartContractMethod:
+    name: "Execute a Smart Contract Method"
+    description: "This task executes a method on any Smart Contract"
+    inputs:
+      methodAbi: &amp;methodAbiParam
+        name: "Method ABI"
+</code></pre>
+
+  This file has been truncated. <a href="https://github.com/mesg-foundation/service-ethereum/blob/rsk/regtest/mesg.yml" target="_blank">show original</a>
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+</p>
+<p>As you see, the block dependencies is only present in the RSK version. If we have a template system, we could have only 1 version of the <code>mesg.yml</code> that render different version based on config:</p>
+<pre><code class="lang-auto">name: "Ethereum"
+description: "Ethereum Service to interact with any Smart Contract"
+dependencies:
+{{ if myVariable == "rsk" }}
+  rskclient:
+    image: regtest
+    volumes:
+      - /var/lib/rsk
+    ports:
+      - 4444:4444
+      - 30305:30305
+{{ endif }}
+</code></pre>
+<p>Again, this is not something to implement in priority, let’s just keep it in mind what a template system could do on <code>mesg.yml</code>.</p>
+        </div>
+
+        <meta itemprop='headline' content='Configuring Services with Deploy-Time or Run-Time Arguments'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/krhubert.html'><span itemprop='name'>krhubert</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="124.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-11-27T08:01:37Z' class='post-time'>
+                November 27, 2018,  8:01am
+              </time>
+              <meta itemprop='dateModified' content='2018-11-27T08:01:37Z'>
+          <span itemprop='position'>#6</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <blockquote>
+<p>2- Configuring service’s program with its own runtime cli flags. (we do this within the  <em>Dockerfile</em>  of service while running it.)</p>
+</blockquote>
+<p>I don’t like it as cli is not user-friendly for complex types like hash map etc</p>
+<blockquote>
+<p>1- Configuring service tasks/events, it’s public ports, data volumes etc. from the  <em>mesg.yml</em> . (we have this feature).</p>
+</blockquote>
+<p>I like it more but it will be hard to manage,even with template system.</p>
+<p>Imagine someone has configs for <code>dev</code>, <code>staging</code>, <code>preprod</code>, <code>prod</code>, <code>test</code> and it rather standard environment and there are more complex ones. In that case, mesg.yml will become one big template. Also sometimes one doesn’t want to show prod config for devs…</p>
+<p>So I like the idea of having config separated from mesg.yml. In that case you create for example<br>
+config.dev, config.staging, config.prod, config etc…</p>
+        </div>
+
+        <meta itemprop='headline' content='Configuring Services with Deploy-Time or Run-Time Arguments'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="124.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-11-27T11:23:04Z'>
+              <time itemprop='dateModified' datetime='2018-11-27T11:23:19Z' class='post-time'>
+                November 27, 2018, 11:23am
+              </time>
+          <span itemprop='position'>#7</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>I think, having a template system built-in introduces too much complexity and final yaml file becomes to invalid which causes to a poor UX when yaml editors are used.</p>
+<p>But users still can use a template engine to dynamically create <em>mesg.yml</em> files depending on their logic. And they can have multiple yml files in their repo with different names. We just need to provide the possibility of accepting custom names for yml files with a flag in the <em>deploy</em> command. e.g.:</p>
+<pre><code class="lang-auto">mesg-core service deploy --definition mesg-dev.yml /path/to/service
+</code></pre>
+        </div>
+
+        <meta itemprop='headline' content='Configuring Services with Deploy-Time or Run-Time Arguments'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="124.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-12-06T16:57:55Z' class='post-time'>
+                December 6, 2018,  4:57pm
+              </time>
+              <meta itemprop='dateModified' content='2018-12-06T16:57:55Z'>
+          <span itemprop='position'>#8</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Just got some random thoughts around that.</p>
+<p>I like the idea of having having multiple <code>mesg.yml</code>, I would suggest to get some inspiration from docker-compose where by default it’s <code>docker-compose.yml</code> but you can <strong>override</strong> by giving another file. So for the case of the service ethereum (which is one really complex one) we can have a “basic” mesg.yml file and one just for the dependencies and running it like that<br>
+<code>mesg-core service deploy --file mesg.yml --file testnet.yml ...</code></p>
+<p>Also passing arguments is a good solution, for smaller needs, and this would be similar to the docker build arguments (and could use the docker build arguments) and would be used like that<br>
+<code>mesg-core service deploy --args argX=1234 ...</code><br>
+This argument would be passed to the docker build and also replaced in the mesg.yml.</p>
+<p>Of course this can be combined with<br>
+<code>mesg-core service deploy --file mesg.yml --file testnet.yml --args privateKey=xxx ...</code></p>
+<p>I think args are more important because they can cover way more features (eg: the image for the ethereum node or the volume etc…) so this might be enough and also the good point is that these arguments can also be injected in the docker build.</p>
+        </div>
+
+        <meta itemprop='headline' content='Configuring Services with Deploy-Time or Run-Time Arguments'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="2" />
+           <span class='post-likes'>2 Likes</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="124.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-12-11T10:25:52Z'>
+              <time itemprop='dateModified' datetime='2018-12-14T03:30:26Z' class='post-time'>
+                December 14, 2018,  3:30am
+              </time>
+          <span itemprop='position'>#9</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <h1>Summary of first iteration</h1>
+<p>Allow user to pass user configuration to the service.</p>
+<h2>Update mesg.yml</h2>
+<p>Add <code>environment</code> to <code>configuration</code> in <code>mesg.yml</code>. (So environment will also be available in dependencies).</p>
+<pre><code class="lang-auto">configuration:
+  env:
+    - key: AN_ENV_VAR_FOR_SERVICE
+      name: "Set the endpoint of blablabla...." // user friendly name. Optional
+      value: 123 // Developer defined value, eg: default value.
+dependencies:
+  depA:
+    env:
+      - key: AN_OTHER_ENV_VAR_FOR_DEP_A
+        name: "Set the endpoint of blablabla...." // user friendly name. Optional
+        value: 123 // Developer defined value, eg: default value.
+</code></pre>
+<p>Env can be a new struct (it’s too different from the <code>parameter</code> struct).</p>
+<h2>Pass flag to deploy command</h2>
+<p>Allow user to pass <code>env</code> flag to override environment (only for configuration, <strong>NOT for dependencies</strong>).</p>
+<pre><code class="lang-auto">mesg-core service deploy SERVER_URL/PATH --env AN_ENV_VAR=yolo
+</code></pre>
+<h2>Save env variable</h2>
+<p>The modification of ENV must change the service’s hash. So adding them to the service structure will at the same time both save them in the db and change the service hash.<br>
+Also, I think it’s best to not override the value in the <code>configuration.env</code> struct. <a class="mention" href="../../u/krhubert.html">@krhubert</a> implement it by adding a <code>EnvValue</code> in the dependency struct (like the <code>env</code> def). I’m fine with this.</p>
+<h2>Inject it in the service’s container</h2>
+<p>Inject the env as env in the container. Make sure that “MESG” env override developer env.<br>
+Only the service dependency should accept the user’s env, not any other dependencies.</p>
+        </div>
+
+        <meta itemprop='headline' content='Configuring Services with Deploy-Time or Run-Time Arguments'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+            <div class='crawler-linkback-list' itemscope itemtype='http://schema.org/ItemList'>
+                  <div itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+                    <a href="../env-definition-as-object/162.html" itemprop='item'>
+                      <meta itemprop='url' content='https://forum.mesg.com/t/env-definition-as-object/162'>
+                      <meta itemprop='position' content='1'>
+                      <span itemprop='name'>Env definition as object</span>
+                    </a>
+                  </div>
+            </div>
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+              assigned krhubert 
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="124.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-12-11T11:24:36Z' class='post-time'>
+                December 11, 2018, 11:24am
+              </time>
+              <meta itemprop='dateModified' content='2018-12-11T11:24:36Z'>
+          <span itemprop='position'>#10</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          
+        </div>
+
+        <meta itemprop='headline' content='Configuring Services with Deploy-Time or Run-Time Arguments'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="124.html">
+
+            <link itemprop="image" href="../../uploads/default/original/1X/fbad366fb822efa0b76a87890c7ac7261cda9346.jpeg">
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-12-14T04:34:11Z' class='post-time'>
+                December 14, 2018,  4:34am
+              </time>
+              <meta itemprop='dateModified' content='2018-12-14T04:34:11Z'>
+          <span itemprop='position'>#11</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>I suggested in the pull request something more traditional<br>
+<aside class="onebox githubpullrequest">
+  <header class="source">
+      <a href="https://github.com/mesg-foundation/core/pull/641#issuecomment-447021549" target="_blank" rel="nofollow noopener">github.com/mesg-foundation/core</a>
+  </header>
+  <article class="onebox-body">
+      <a href="https://github.com/krhubert" target="_blank" rel="nofollow noopener">
+    <img alt="krhubert" src="../../uploads/default/original/1X/fbad366fb822efa0b76a87890c7ac7261cda9346.jpeg" class="thumbnail onebox-avatar" width="90" height="90">
+  </a>
+
+<h4>
+  <a href="https://github.com/mesg-foundation/core/pull/641" target="_blank" rel="nofollow noopener">Configure services with envs</a>
+</h4>
+
+<div class="date">
+  by <a href="https://github.com/krhubert" target="_blank" rel="nofollow noopener">krhubert</a>
+  on <a href="https://github.com/mesg-foundation/core/pull/641" target="_blank" rel="nofollow noopener">03:12PM - 12 Dec 18 UTC</a>
+</div>
+
+<div class="github-commit-stats">
+  <strong>14 commits</strong>
+  changed <strong>36 files</strong>
+  with <strong>498 additions</strong>
+  and <strong>262 deletions</strong>.
+</div>
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+</p>
+<pre><code class="lang-auto">env:
+  - XXX=YYY
+</code></pre>
+<p>docker compose style <a href="https://docs.docker.com/compose/environment-variables/" rel="nofollow noopener">https://docs.docker.com/compose/environment-variables/</a></p>
+<p>This is kind of traditional and also really easy to use a file based on that and include variables and stuff like that.</p>
+        </div>
+
+        <meta itemprop='headline' content='Configuring Services with Deploy-Time or Run-Time Arguments'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="124.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-12-14T10:16:03Z' class='post-time'>
+                December 14, 2018, 10:16am
+              </time>
+              <meta itemprop='dateModified' content='2018-12-14T10:16:03Z'>
+          <span itemprop='position'>#12</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>As said by <a class="mention" href="../../u/anthony.html">@Anthony</a>, we could start by a very simple definition of env in the mesg.yml, and in a future PR, improving the system by allowing both key=value and full struct (for advance use) in the mesg.yml.</p>
+<p><a class="mention" href="../../u/krhubert.html">@krhubert</a> what do you think?</p>
+        </div>
+
+        <meta itemprop='headline' content='Configuring Services with Deploy-Time or Run-Time Arguments'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="124.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-12-19T14:13:33Z' class='post-time'>
+                December 19, 2018,  2:13pm
+              </time>
+              <meta itemprop='dateModified' content='2018-12-19T14:13:33Z'>
+          <span itemprop='position'>#13</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>I’ve created a tutorial (in draft) about this feature, we can publish it after a new release! <a href="https://medium.com/@ilgooz/configuring-mesg-services-in-the-deploy-time-b61b6d56eb2f" rel="nofollow noopener">https://medium.com/@ilgooz/configuring-mesg-services-in-the-deploy-time-b61b6d56eb2f</a></p>
+        </div>
+
+        <meta itemprop='headline' content='Configuring Services with Deploy-Time or Run-Time Arguments'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="2" />
+           <span class='post-likes'>2 Likes</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="124.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-12-20T06:08:25Z' class='post-time'>
+                December 20, 2018,  6:08am
+              </time>
+              <meta itemprop='dateModified' content='2018-12-20T06:08:25Z'>
+          <span itemprop='position'>#14</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Very good initiative <img src="../../images/emoji/twitter/slight_smile.png%3Fv=6" title=":slight_smile:" class="emoji" alt=":slight_smile:"> <img src="../../images/emoji/twitter/+1.png%3Fv=6" title=":+1:" class="emoji" alt=":+1:"></p>
+        </div>
+
+        <meta itemprop='headline' content='Configuring Services with Deploy-Time or Run-Time Arguments'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="124.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-12-20T10:16:05Z'>
+              <time itemprop='dateModified' datetime='2018-12-27T11:33:03Z' class='post-time'>
+                December 27, 2018, 11:33am
+              </time>
+          <span itemprop='position'>#15</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p><a class="mention" href="../../u/nicolas.html">@Nicolas</a> <a href="https://github.com/mesg-foundation/core/pull/641#issuecomment-448915107" rel="nofollow noopener">suggested</a> on the related PR:<br>
+To do in other PRs:</p>
+<ul>
+<li>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> env are accept in dependencies in mesg.yml but not passed to dependencies’ container -&gt; Done in PR <a href="https://github.com/mesg-foundation/core/pull/666" rel="nofollow noopener">https://github.com/mesg-foundation/core/pull/666</a>
+</li>
+<li>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> env in mesg.yml are a array of string. it could be good to also accept an array of object -&gt; Move to <a href="../env-definition-as-object/162.html" class="inline-onebox">Env definition as object</a>
+</li>
+</ul>
+        </div>
+
+        <meta itemprop='headline' content='Configuring Services with Deploy-Time or Run-Time Arguments'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="124.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-12-27T10:57:27Z' class='post-time'>
+                December 27, 2018, 10:57am
+              </time>
+              <meta itemprop='dateModified' content='2018-12-27T10:57:27Z'>
+          <span itemprop='position'>#16</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <aside class="quote group-team" data-post="15" data-topic="124">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/ilgooz/40/46_1.png" class="avatar"> ilgooz:</div>
+<blockquote>
+<ul>
+<li>env are accept in dependencies in mesg.yml but not passed to dependencies’ container</li>
+</ul>
+</blockquote>
+</aside>
+<p>Done in <a href="https://github.com/mesg-foundation/core/pull/666" rel="nofollow noopener">https://github.com/mesg-foundation/core/pull/666</a></p>
+        </div>
+
+        <meta itemprop='headline' content='Configuring Services with Deploy-Time or Run-Time Arguments'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="124.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-12-27T11:46:03Z'>
+              <time itemprop='dateModified' datetime='2018-12-27T11:46:08Z' class='post-time'>
+                December 27, 2018, 11:46am
+              </time>
+          <span itemprop='position'>#17</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Topic solved by PR <a href="https://github.com/mesg-foundation/core/pull/641" rel="nofollow noopener">https://github.com/mesg-foundation/core/pull/641</a></p>
+        </div>
+
+        <meta itemprop='headline' content='Configuring Services with Deploy-Time or Run-Time Arguments'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+              unassigned krhubert 
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="124.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2019-01-05T09:36:10Z' class='post-time'>
+                January 5, 2019,  9:36am
+              </time>
+              <meta itemprop='dateModified' content='2019-01-05T09:36:10Z'>
+          <span itemprop='position'>#18</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          
+        </div>
+
+        <meta itemprop='headline' content='Configuring Services with Deploy-Time or Run-Time Arguments'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+
+
+
+
+
+
+    </div>
+    <footer class="container wrap">
+      <nav class='crawler-nav'>
+        <ul>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../index.html' itemprop="url">Home </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../categories.html' itemprop="url">Categories </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../guidelines.html' itemprop="url">FAQ/Guidelines </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../tos.html' itemprop="url">Terms of Service </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../privacy.html' itemprop="url">Privacy Policy </a>
+          </span>
+        </li>
+        </ul>
+      </nav>
+      <p class='powered-by-link'>Powered by <a href="https://www.discourse.org">Discourse</a>, best viewed with JavaScript enabled</p>
+    </footer>
+    
+    
+  </body>
+  
+</html>

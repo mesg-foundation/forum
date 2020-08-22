@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Caputre Stdout in command package</title>
+    <link>https://forum.mesg.com/t/caputre-stdout-in-command-package/70</link>
+    <description>https://github.com/mesg-foundation/core/pull/501
+vs
+https://github.com/mesg-foundation/core/pull/499
+ 
+Following the discussion Caputre Stdout vs Passing os.Stdout as io.Writer to struct.
+
+Capture Stdout is completly safe (check out https://github.com/golang/go/blob/master/src/testing/example.go#L71) and we can integrate easily without modify andy Cmd structs.</description>
+    
+    <lastBuildDate>Tue, 02 Oct 2018 09:13:03 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/caputre-stdout-in-command-package/70.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Caputre Stdout in command package</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>I would usually be ok to pass the writer as reference and this would do the job but in the case of the stderr stdout we will/might not be able to pass it everywhere. We might use some libraries (like aurora, the one for the spinner, and stuff like that) that are not compatible with passing the stdout/err and these one cannot be tested in the end.</p>
+<p>Mapping the stderr/out will at least catch everything and at the same time make the code easier and we can still use fmt and packages like that without any problems. If we have the writer in the struct somewhere we have to make sure that new developers use it and there is no way to enforce that so developers will just use the simplicity of fmt and this will be for nothing in the end.</p>
+<p>So my vote is on the capture of the std. Especially for this case where we are only on the command and we want to access the stdout/err. Any other writers that we might need can definitely be given as dependency.</p>
+          <p><a href="https://forum.mesg.com/t/caputre-stdout-in-command-package/70/5">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/caputre-stdout-in-command-package/70/5</link>
+        <pubDate>Tue, 02 Oct 2018 09:13:03 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-70-5</guid>
+        <source url="https://forum.mesg.com/t/caputre-stdout-in-command-package/70.rss">Caputre Stdout in command package</source>
+      </item>
+      <item>
+        <title>Caputre Stdout in command package</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>I like having an abstraction and avoid changing the globals <em>(os.Stdout)</em>, my vote is on passing the <em>io.Writer</em>. <img src="https://forum.mesg.com/images/emoji/twitter/slight_smile.png?v=6" title=":slight_smile:" class="emoji" alt=":slight_smile:"></p>
+          <p><a href="https://forum.mesg.com/t/caputre-stdout-in-command-package/70/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/caputre-stdout-in-command-package/70/4</link>
+        <pubDate>Tue, 02 Oct 2018 08:23:10 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-70-4</guid>
+        <source url="https://forum.mesg.com/t/caputre-stdout-in-command-package/70.rss">Caputre Stdout in command package</source>
+      </item>
+      <item>
+        <title>Caputre Stdout in command package</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Agree with solution 1 of hubert</p>
+<p>Let’s vote</p>
+<div class="poll" data-poll-status="open" data-poll-type="regular" data-poll-name="poll">
+<div>
+<div class="poll-container">
+<ul>
+<li data-poll-option-id="dfb92cf85ad5861807eedcd79ddca017">Use and capture os.Stdout</li>
+<li data-poll-option-id="5cc6dff6203a0912b7ff2f8bb98620a2">Pass io.Writer</li>
+</ul>
+</div>
+<div class="poll-info">
+<p>
+<span class="info-number">0</span>
+<span class="info-label">voters</span>
+</p>
+</div>
+</div>
+</div>
+          <p><a href="https://forum.mesg.com/t/caputre-stdout-in-command-package/70/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/caputre-stdout-in-command-package/70/3</link>
+        <pubDate>Tue, 02 Oct 2018 08:16:54 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-70-3</guid>
+        <source url="https://forum.mesg.com/t/caputre-stdout-in-command-package/70.rss">Caputre Stdout in command package</source>
+      </item>
+      <item>
+        <title>Caputre Stdout in command package</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <p>So there are two approaches to testing stdout of our cli.</p>
+<ol>
+<li>Capture <code>os.Stdout</code> like <a href="https://github.com/mesg-foundation/core/pull/501/files#diff-52180ffe0b5b5195619396e8ad919784R20">here</a>
+</li>
+<li>Pass <code>io.Writer</code> to Cmd struct and replace default <code>os.Stdout</code> with custom <code>io.Writer</code> in tests <a href="https://github.com/mesg-foundation/core/pull/499/files#diff-77e48e504b88c467c2ac6250cbfb27d8R21">here</a>
+</li>
+</ol>
+<p>As far as we don’t need other writing options as Stdout/Stderr we should keep our code simple and go with 1st option.<br>
+Maybe in the feature, there will be a need for passing <code>io.Writer</code> directly to Cmd struct then we will go with 2nd solution (maybe then only <code>baseCmd</code> will keep stdout/err writer, will see)</p>
+          <p><a href="https://forum.mesg.com/t/caputre-stdout-in-command-package/70/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/caputre-stdout-in-command-package/70/2</link>
+        <pubDate>Tue, 02 Oct 2018 08:05:20 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-70-2</guid>
+        <source url="https://forum.mesg.com/t/caputre-stdout-in-command-package/70.rss">Caputre Stdout in command package</source>
+      </item>
+      <item>
+        <title>Caputre Stdout in command package</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <p><aside class="onebox githubpullrequest">
+  <header class="source">
+      <a href="https://github.com/mesg-foundation/core/pull/501" target="_blank" rel="nofollow noopener">github.com/mesg-foundation/core</a>
+  </header>
+  <article class="onebox-body">
+      <a href="https://github.com/krhubert" target="_blank" rel="nofollow noopener">
+    <img alt="krhubert" src="https://forum.mesg.com/uploads/default/original/1X/fbad366fb822efa0b76a87890c7ac7261cda9346.jpeg" class="thumbnail onebox-avatar" width="90" height="90">
+  </a>
+
+<h4>
+  <a href="https://github.com/mesg-foundation/core/pull/501" target="_blank" rel="nofollow noopener">Add unit test for commands flags</a>
+</h4>
+
+<div class="date">
+  by <a href="https://github.com/krhubert" target="_blank" rel="nofollow noopener">krhubert</a>
+  on <a href="https://github.com/mesg-foundation/core/pull/501" target="_blank" rel="nofollow noopener">01:11PM - 25 Sep 18 UTC</a>
+</div>
+
+<div class="github-commit-stats">
+  <strong>4 commits</strong>
+  changed <strong>12 files</strong>
+  with <strong>312 additions</strong>
+  and <strong>13 deletions</strong>.
+</div>
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+<br>
+vs<br>
+<aside class="onebox githubpullrequest">
+  <header class="source">
+      <a href="https://github.com/mesg-foundation/core/pull/499" target="_blank" rel="nofollow noopener">github.com/mesg-foundation/core</a>
+  </header>
+  <article class="onebox-body">
+      <a href="https://github.com/ilgooz" target="_blank" rel="nofollow noopener">
+    <img alt="ilgooz" src="https://forum.mesg.com/uploads/default/original/1X/7fb45344ee4f8365376c724b482f1b36dfb6ace7.png" class="thumbnail onebox-avatar" width="90" height="90">
+  </a>
+
+<h4>
+  <a href="https://github.com/mesg-foundation/core/pull/499" target="_blank" rel="nofollow noopener">extend ListServices api to filter by running services, closes #496</a>
+</h4>
+
+<div class="date">
+  by <a href="https://github.com/ilgooz" target="_blank" rel="nofollow noopener">ilgooz</a>
+  on <a href="https://github.com/mesg-foundation/core/pull/499" target="_blank" rel="nofollow noopener">08:39AM - 25 Sep 18 UTC</a>
+</div>
+
+<div class="github-commit-stats">
+  <strong>20 commits</strong>
+  changed <strong>14 files</strong>
+  with <strong>326 additions</strong>
+  and <strong>144 deletions</strong>.
+</div>
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+</p>
+<p>Following the discussion Caputre Stdout vs Passing os.Stdout as io.Writer to struct.</p>
+<p>Capture Stdout is completly safe (check out <a href="https://github.com/golang/go/blob/master/src/testing/example.go#L71" rel="nofollow noopener">https://github.com/golang/go/blob/master/src/testing/example.go#L71</a>) and we can integrate easily without modify andy Cmd structs.</p>
+          <p><a href="https://forum.mesg.com/t/caputre-stdout-in-command-package/70/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/caputre-stdout-in-command-package/70/1</link>
+        <pubDate>Mon, 01 Oct 2018 09:55:08 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-70-1</guid>
+        <source url="https://forum.mesg.com/t/caputre-stdout-in-command-package/70.rss">Caputre Stdout in command package</source>
+      </item>
+  </channel>
+</rss>

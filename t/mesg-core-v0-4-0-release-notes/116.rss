@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>MESG Core v0.4.0 Release Notes</title>
+    <link>https://forum.mesg.com/t/mesg-core-v0-4-0-release-notes/116</link>
+    <description>## New features in Core v0.4.0
+
+### Call dependency of a MESG Service
+
+You can now access the dependencies of your service through the Network. This is really helpful if you want to integrate, for example, a database, a blockchain client or anything else you need to connect to that exposes a server.
+
+You can find an example in the [documentation](https://docs.mesg.com/guide/service/dockerize-the-service.html#add-a-configuration-and-dependencies). 
+
+### Executions stored in a database
+
+Each execution done by your application is now saved in a database. This considerably reduces the memory required by **mesg-core**, and is a step towards reaching decentralized functionality.
+
+For the complete changelog, refer to [Github ](https://github.com/mesg-foundation/core/releases/tag/v0.4.0). 
+
+To update to v0.4.0, follow the [installation process on the documentation](https://docs.mesg.com/guide/start-here/installation.html#automatic-installation)</description>
+    
+    <lastBuildDate>Mon, 12 Nov 2018 11:15:53 +0000</lastBuildDate>
+    <category>News</category>
+    <atom:link href="https://forum.mesg.com/t/mesg-core-v0-4-0-release-notes/116.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>MESG Core v0.4.0 Release Notes</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <h2>New features in Core v0.4.0</h2>
+<h3>Call dependency of a MESG Service</h3>
+<p>You can now access the dependencies of your service through the Network. This is really helpful if you want to integrate, for example, a database, a blockchain client or anything else you need to connect to that exposes a server.</p>
+<p>You can find an example in the <a href="https://docs.mesg.com/guide/service/dockerize-the-service.html#add-a-configuration-and-dependencies">documentation</a>.</p>
+<h3>Executions stored in a database</h3>
+<p>Each execution done by your application is now saved in a database. This considerably reduces the memory required by <strong>mesg-core</strong>, and is a step towards reaching decentralized functionality.</p>
+<p>For the complete changelog, refer to <a href="https://github.com/mesg-foundation/core/releases/tag/v0.4.0">Github </a>.</p>
+<p>To update to v0.4.0, follow the <a href="https://docs.mesg.com/guide/start-here/installation.html#automatic-installation">installation process on the documentation</a></p>
+          <p><a href="https://forum.mesg.com/t/mesg-core-v0-4-0-release-notes/116/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mesg-core-v0-4-0-release-notes/116/1</link>
+        <pubDate>Mon, 12 Nov 2018 04:04:52 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-116-1</guid>
+        <source url="https://forum.mesg.com/t/mesg-core-v0-4-0-release-notes/116.rss">MESG Core v0.4.0 Release Notes</source>
+      </item>
+  </channel>
+</rss>

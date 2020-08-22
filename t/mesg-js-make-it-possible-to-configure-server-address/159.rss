@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Mesg-js: make it possible to configure server address</title>
+    <link>https://forum.mesg.com/t/mesg-js-make-it-possible-to-configure-server-address/159</link>
+    <description>Currently it is only possible to configure Core address for _application()_ with the env vars. I think it would be nice to make  _application({addr})_ accept an options object, that way we can also configure it programatically.
+
+This is also useful to configure addr in browser env.</description>
+    
+    <lastBuildDate>Sun, 06 Jan 2019 16:18:01 +0000</lastBuildDate>
+    <category>Library JS</category>
+    <atom:link href="https://forum.mesg.com/t/mesg-js-make-it-possible-to-configure-server-address/159.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Mesg-js: make it possible to configure server address</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>solved by <a href="https://github.com/mesg-foundation/mesg-js/pull/48" rel="nofollow noopener">https://github.com/mesg-foundation/mesg-js/pull/48</a></p>
+          <p><a href="https://forum.mesg.com/t/mesg-js-make-it-possible-to-configure-server-address/159/5">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mesg-js-make-it-possible-to-configure-server-address/159/5</link>
+        <pubDate>Sun, 06 Jan 2019 16:18:01 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-159-5</guid>
+        <source url="https://forum.mesg.com/t/mesg-js-make-it-possible-to-configure-server-address/159.rss">Mesg-js: make it possible to configure server address</source>
+      </item>
+      <item>
+        <title>Mesg-js: make it possible to configure server address</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>If it only for default config and we need to maintain a file, I recommend to directly expose the gRPC generated code to user.</p>
+          <p><a href="https://forum.mesg.com/t/mesg-js-make-it-possible-to-configure-server-address/159/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mesg-js-make-it-possible-to-configure-server-address/159/4</link>
+        <pubDate>Thu, 27 Dec 2018 08:08:53 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-159-4</guid>
+        <source url="https://forum.mesg.com/t/mesg-js-make-it-possible-to-configure-server-address/159.rss">Mesg-js: make it possible to configure server address</source>
+      </item>
+      <item>
+        <title>Mesg-js: make it possible to configure server address</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>I think there is no much difference between to initialize gRPC client inside when <em>application()</em> is called or let consumers to do that. One small advantage of doing the initialization internally is, we can use the default ports when no option provided and open the connection right away. And with the Envoy, we can automatically connect to proxy server or Core server by detecting the environment when <em>options.host</em> isn’t provided. Other way, consumers always have to set the host and do their initialization.</p>
+          <p><a href="https://forum.mesg.com/t/mesg-js-make-it-possible-to-configure-server-address/159/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mesg-js-make-it-possible-to-configure-server-address/159/3</link>
+        <pubDate>Thu, 27 Dec 2018 07:23:14 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-159-3</guid>
+        <source url="https://forum.mesg.com/t/mesg-js-make-it-possible-to-configure-server-address/159.rss">Mesg-js: make it possible to configure server address</source>
+      </item>
+      <item>
+        <title>Mesg-js: make it possible to configure server address</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>I agree with you, the library should not rely on <code>env</code> variable but accept a config/option object.</p>
+<p>But, we the automatic generation of the core/application library, I think we should not create any wrapper and directly expose the generated code to the dev. If I’m not mistaken, the generated constructor already accept options as parameter.</p>
+          <p><a href="https://forum.mesg.com/t/mesg-js-make-it-possible-to-configure-server-address/159/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mesg-js-make-it-possible-to-configure-server-address/159/2</link>
+        <pubDate>Thu, 27 Dec 2018 04:09:52 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-159-2</guid>
+        <source url="https://forum.mesg.com/t/mesg-js-make-it-possible-to-configure-server-address/159.rss">Mesg-js: make it possible to configure server address</source>
+      </item>
+      <item>
+        <title>Mesg-js: make it possible to configure server address</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>Currently it is only possible to configure Core address for <em>application()</em> with the env vars. I think it would be nice to make  <em>application({addr})</em> accept an options object, that way we can also configure it programatically.</p>
+<p>This is also useful to configure addr in browser env.</p>
+          <p><a href="https://forum.mesg.com/t/mesg-js-make-it-possible-to-configure-server-address/159/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mesg-js-make-it-possible-to-configure-server-address/159/1</link>
+        <pubDate>Wed, 26 Dec 2018 19:08:52 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-159-1</guid>
+        <source url="https://forum.mesg.com/t/mesg-js-make-it-possible-to-configure-server-address/159.rss">Mesg-js: make it possible to configure server address</source>
+      </item>
+  </channel>
+</rss>

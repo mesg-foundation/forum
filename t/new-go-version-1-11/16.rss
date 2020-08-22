@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>New Go version 1.11</title>
+    <link>https://forum.mesg.com/t/new-go-version-1-11/16</link>
+    <description>Go just released a new version with few really interesting features that we might use for MESG. :tada: 
+https://golang.org/doc/go1.11
+
+### [WASM support](https://golang.org/doc/go1.11?ref=hvper.com#wasm)
+This is something to test but we might be able to embed the core directly in a browser. That would be interesting and opens a lot of possibilities
+
+### [Modules and versioning](https://golang.org/doc/go1.11?ref=hvper.com#modules)
+No more GOPATH and no more endless discussion about versioning. There is now an official support for versions.
+
+What do you think about all this ? Do you think we need to look at it for MESG ?</description>
+    
+    <lastBuildDate>Thu, 13 Dec 2018 08:18:59 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/new-go-version-1-11/16.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>New Go version 1.11</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Core use go 1.11 since this PR:<br>
+<aside class="onebox githubpullrequest">
+  <header class="source">
+      <a href="https://github.com/mesg-foundation/core/pull/611" target="_blank" rel="nofollow noopener">github.com/mesg-foundation/core</a>
+  </header>
+  <article class="onebox-body">
+      <a href="https://github.com/krhubert" target="_blank" rel="nofollow noopener">
+    <img alt="krhubert" src="https://forum.mesg.com/uploads/default/original/1X/fbad366fb822efa0b76a87890c7ac7261cda9346.jpeg" class="thumbnail onebox-avatar" width="90" height="90">
+  </a>
+
+<h4>
+  <a href="https://github.com/mesg-foundation/core/pull/611" target="_blank" rel="nofollow noopener">Switch to go1.11</a>
+</h4>
+
+<div class="date">
+  by <a href="https://github.com/krhubert" target="_blank" rel="nofollow noopener">krhubert</a>
+  on <a href="https://github.com/mesg-foundation/core/pull/611" target="_blank" rel="nofollow noopener">05:07PM - 01 Dec 18 UTC</a>
+</div>
+
+<div class="github-commit-stats">
+  <strong>4 commits</strong>
+  changed <strong>144 files</strong>
+  with <strong>519 additions</strong>
+  and <strong>111292 deletions</strong>.
+</div>
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+</p>
+          <p><a href="https://forum.mesg.com/t/new-go-version-1-11/16/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/new-go-version-1-11/16/3</link>
+        <pubDate>Thu, 13 Dec 2018 08:18:59 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-16-3</guid>
+        <source url="https://forum.mesg.com/t/new-go-version-1-11/16.rss">New Go version 1.11</source>
+      </item>
+      <item>
+        <title>New Go version 1.11</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <p>About WASM it would be really nice thing, but too much effort and in return too low value. It also opens new surface for attacker + unprevilage mesg installation on users browsers.</p>
+<p>About versioning of course we should take a look at this one.</p>
+          <p><a href="https://forum.mesg.com/t/new-go-version-1-11/16/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/new-go-version-1-11/16/2</link>
+        <pubDate>Thu, 30 Aug 2018 17:39:00 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-16-2</guid>
+        <source url="https://forum.mesg.com/t/new-go-version-1-11/16.rss">New Go version 1.11</source>
+      </item>
+      <item>
+        <title>New Go version 1.11</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>Go just released a new version with few really interesting features that we might use for MESG. <img src="https://discourse-cdn-sjc2.com/standard10/images/emoji/apple/tada.png?v=6" title=":tada:" class="emoji" alt=":tada:"><br>
+<a href="https://golang.org/doc/go1.11" class="onebox" target="_blank">https://golang.org/doc/go1.11</a></p>
+<h3><a href="https://golang.org/doc/go1.11?ref=hvper.com#wasm">WASM support</a></h3>
+<p>This is something to test but we might be able to embed the core directly in a browser. That would be interesting and opens a lot of possibilities</p>
+<h3><a href="https://golang.org/doc/go1.11?ref=hvper.com#modules">Modules and versioning</a></h3>
+<p>No more GOPATH and no more endless discussion about versioning. There is now an official support for versions.</p>
+<p>What do you think about all this ? Do you think we need to look at it for MESG ?</p>
+          <p><a href="https://forum.mesg.com/t/new-go-version-1-11/16/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/new-go-version-1-11/16/1</link>
+        <pubDate>Sun, 26 Aug 2018 03:17:07 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-16-1</guid>
+        <source url="https://forum.mesg.com/t/new-go-version-1-11/16.rss">New Go version 1.11</source>
+      </item>
+  </channel>
+</rss>

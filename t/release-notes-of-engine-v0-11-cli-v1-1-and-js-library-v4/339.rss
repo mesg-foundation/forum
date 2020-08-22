@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Release Notes of Engine v0.11, CLI v1.1 and JS library v4</title>
+    <link>https://forum.mesg.com/t/release-notes-of-engine-v0-11-cli-v1-1-and-js-library-v4/339</link>
+    <description># New Engine gRPC APIs
+
+This release introduces new gRPC APIs to replace the previous ones. These new APIs are resource oriented, follow the CRUD convention and identify each resource with a unique hash. 
+
+Each group of APIs (one per resource) implement the same subset of the functions: **get, list, update, delete** and **stream**:
+- **Get** returns one resource specified by its hash
+- **List** returns an array of resources matching the specified filter
+- **Update** modifies one resource specified by its hash
+- **Delete** removes one resource specified by its hash
+- **Stream** notifies any creation, update or deletion of the resources matching the specified filter
+
+It&#39;s now easier to know exactly what is going inside the Engine and how resources interact with each other.
+
+# Update of mesg-js
+
+The update of the Engine&#39;s APIs have consequently broken the internal logic of the `mesg-js` library. But don&#39;t worry, we&#39;ve kept as much as possible of the public API of the lib for easy updating.
+
+To update, run:
+```bash
+npm install mesg-js@4.1.0
+```
+
+### Service side
+The functions on the service side haven&#39;t changed. Only a few Typescript type names have been modified. In most cases, you should only update the library without changing the source code.
+
+### Application side
+The functions on the application side have changed a little bit.
+
+The parameters of `listenEvent` and `listenResult` now require a object `filter` that contains the actual criteria. All `serviceHash` have been replaced by `instanceHash` as it&#39;s the new way the Engine is starting services.
+
+```javascript
+mesg.listenEvent({
+  filter: {
+    instanceHash: &#39;EVENT_INSTANCE_HASH&#39;,
+    key: &#39;EVENT_KEY&#39; // optional
+  }
+})
+.on(&#39;data&#39;, (event) =&gt; {
+  console.log(&#39;an event received:&#39;, event.key, JSON.parse(event.data))
+})
+```
+
+The automatic resolution of `SID` has also been removed from the Engine and should now be done by the application. We added a helper function to do this easily:
+```javascript
+const instanceHash = await mesg.resolve(&#39;SID_OF_THE_SERVICE&#39;)
+```
+
+# Updated mesg-cli
+
+The same commands have been kept and the internal logic has been updated to make it work with the latest Engine version.
+To update the CLI, run:
+```bash
+npm install mesg-cli@1.1.0
+```
+
+# Internal changes in Engine
+
+### New Instance database
+
+A new resource has been introduced: Instance.
+
+An Instance is the living version of a Service. It makes it possible to start many Instances from the same Service as long as their environmental variables are different. Services are now only static definitions of events, tasks, configurations and dependencies. The service definition also contains the service&#39;s source code as an IPFS hash.
+
+You can still create, delete, list and get Services. But service subcommands: start, stop, logs, and execute now require an Instance Hash.
+
+### Chain of Executions
+
+The execution database has been transformed to prepare for the next big feature: Workflows.
+Executions can now reference previous executions, have improved state and better event integrations. These changes are also reflected in the gRPC APIs.
+
+### Introduction of SDK package
+
+The architecture of the Engine has been reorganized to implement an SDK package that should allow developers to integrate the Engine in a Go project on a much lower level than with the gRPC APIs. The package is divided into small packages per resource.
+
+----
+
+The complete changelog of the Engine can be found [on Github](https://github.com/mesg-foundation/engine/blob/dev/CHANGELOG.md#v0110).
+
+The complete changelog of mesg-js library can be found [on Github](https://github.com/mesg-foundation/mesg-js/blob/master/CHANGELOG.md).
+
+To update to Engine v0.11, follow the [installation process on the documentation ](https://docs.mesg.com/guide/installation.html)</description>
+    
+    <lastBuildDate>Tue, 09 Jul 2019 05:39:39 +0000</lastBuildDate>
+    <category>News</category>
+    <atom:link href="https://forum.mesg.com/t/release-notes-of-engine-v0-11-cli-v1-1-and-js-library-v4/339.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Release Notes of Engine v0.11, CLI v1.1 and JS library v4</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <h1>New Engine gRPC APIs</h1>
+<p>This release introduces new gRPC APIs to replace the previous ones. These new APIs are resource oriented, follow the CRUD convention and identify each resource with a unique hash.</p>
+<p>Each group of APIs (one per resource) implement the same subset of the functions: <strong>get, list, update, delete</strong> and <strong>stream</strong>:</p>
+<ul>
+<li>
+<strong>Get</strong> returns one resource specified by its hash</li>
+<li>
+<strong>List</strong> returns an array of resources matching the specified filter</li>
+<li>
+<strong>Update</strong> modifies one resource specified by its hash</li>
+<li>
+<strong>Delete</strong> removes one resource specified by its hash</li>
+<li>
+<strong>Stream</strong> notifies any creation, update or deletion of the resources matching the specified filter</li>
+</ul>
+<p>It’s now easier to know exactly what is going inside the Engine and how resources interact with each other.</p>
+<h1>Update of mesg-js</h1>
+<p>The update of the Engine’s APIs have consequently broken the internal logic of the <code>mesg-js</code> library. But don’t worry, we’ve kept as much as possible of the public API of the lib for easy updating.</p>
+<p>To update, run:</p>
+<pre><code class="lang-bash">npm install mesg-js@4.1.0
+</code></pre>
+<h3>Service side</h3>
+<p>The functions on the service side haven’t changed. Only a few Typescript type names have been modified. In most cases, you should only update the library without changing the source code.</p>
+<h3>Application side</h3>
+<p>The functions on the application side have changed a little bit.</p>
+<p>The parameters of <code>listenEvent</code> and <code>listenResult</code> now require a object <code>filter</code> that contains the actual criteria. All <code>serviceHash</code> have been replaced by <code>instanceHash</code> as it’s the new way the Engine is starting services.</p>
+<pre><code class="lang-javascript">mesg.listenEvent({
+  filter: {
+    instanceHash: 'EVENT_INSTANCE_HASH',
+    key: 'EVENT_KEY' // optional
+  }
+})
+.on('data', (event) =&gt; {
+  console.log('an event received:', event.key, JSON.parse(event.data))
+})
+</code></pre>
+<p>The automatic resolution of <code>SID</code> has also been removed from the Engine and should now be done by the application. We added a helper function to do this easily:</p>
+<pre><code class="lang-javascript">const instanceHash = await mesg.resolve('SID_OF_THE_SERVICE')
+</code></pre>
+<h1>Updated mesg-cli</h1>
+<p>The same commands have been kept and the internal logic has been updated to make it work with the latest Engine version.<br>
+To update the CLI, run:</p>
+<pre><code class="lang-bash">npm install mesg-cli@1.1.0
+</code></pre>
+<h1>Internal changes in Engine</h1>
+<h3>New Instance database</h3>
+<p>A new resource has been introduced: Instance.</p>
+<p>An Instance is the living version of a Service. It makes it possible to start many Instances from the same Service as long as their environmental variables are different. Services are now only static definitions of events, tasks, configurations and dependencies. The service definition also contains the service’s source code as an IPFS hash.</p>
+<p>You can still create, delete, list and get Services. But service subcommands: start, stop, logs, and execute now require an Instance Hash.</p>
+<h3>Chain of Executions</h3>
+<p>The execution database has been transformed to prepare for the next big feature: Workflows.<br>
+Executions can now reference previous executions, have improved state and better event integrations. These changes are also reflected in the gRPC APIs.</p>
+<h3>Introduction of SDK package</h3>
+<p>The architecture of the Engine has been reorganized to implement an SDK package that should allow developers to integrate the Engine in a Go project on a much lower level than with the gRPC APIs. The package is divided into small packages per resource.</p>
+<hr>
+<p>The complete changelog of the Engine can be found <a href="https://github.com/mesg-foundation/engine/blob/dev/CHANGELOG.md#v0110" rel="nofollow noopener">on Github</a>.</p>
+<p>The complete changelog of mesg-js library can be found <a href="https://github.com/mesg-foundation/mesg-js/blob/master/CHANGELOG.md" rel="nofollow noopener">on Github</a>.</p>
+<p>To update to Engine v0.11, follow the <a href="https://docs.mesg.com/guide/installation.html" rel="nofollow noopener">installation process on the documentation </a></p>
+          <p><a href="https://forum.mesg.com/t/release-notes-of-engine-v0-11-cli-v1-1-and-js-library-v4/339/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/release-notes-of-engine-v0-11-cli-v1-1-and-js-library-v4/339/1</link>
+        <pubDate>Tue, 09 Jul 2019 05:39:39 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-339-1</guid>
+        <source url="https://forum.mesg.com/t/release-notes-of-engine-v0-11-cli-v1-1-and-js-library-v4/339.rss">Release Notes of Engine v0.11, CLI v1.1 and JS library v4</source>
+      </item>
+  </channel>
+</rss>

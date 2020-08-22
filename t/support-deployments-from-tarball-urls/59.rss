@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Support deployments from tarball urls</title>
+    <link>https://forum.mesg.com/t/support-deployments-from-tarball-urls/59</link>
+    <description>suggested by /cc @Anthony  on Discord</description>
+    
+    <lastBuildDate>Thu, 17 Jan 2019 09:48:26 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/support-deployments-from-tarball-urls/59.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Support deployments from tarball urls</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            
+          <p><a href="https://forum.mesg.com/t/support-deployments-from-tarball-urls/59/9">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/support-deployments-from-tarball-urls/59/9</link>
+        <pubDate>Wed, 30 Jan 2019 09:35:42 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-59-9</guid>
+        <source url="https://forum.mesg.com/t/support-deployments-from-tarball-urls/59.rss">Support deployments from tarball urls</source>
+      </item>
+      <item>
+        <title>Support deployments from tarball urls</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>I agree with antho, but yes, it’s other PRs!</p>
+          <p><a href="https://forum.mesg.com/t/support-deployments-from-tarball-urls/59/8">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/support-deployments-from-tarball-urls/59/8</link>
+        <pubDate>Thu, 17 Jan 2019 09:48:26 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-59-8</guid>
+        <source url="https://forum.mesg.com/t/support-deployments-from-tarball-urls/59.rss">Support deployments from tarball urls</source>
+      </item>
+      <item>
+        <title>Support deployments from tarball urls</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>I would be ok to totally remove the git support in the core.<br>
+Doesn’t mean that we cannot do git at all, we could always have this delegated to the CLI that will either detect the URL and convert to get the tarball from github/gitlab or even just clone the repo locally and create a tarball of this. Like that the core is really just accepting a tarball or URL.</p>
+          <p><a href="https://forum.mesg.com/t/support-deployments-from-tarball-urls/59/7">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/support-deployments-from-tarball-urls/59/7</link>
+        <pubDate>Wed, 16 Jan 2019 13:49:59 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-59-7</guid>
+        <source url="https://forum.mesg.com/t/support-deployments-from-tarball-urls/59.rss">Support deployments from tarball urls</source>
+      </item>
+      <item>
+        <title>Support deployments from tarball urls</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <p>TODO in different PRs:</p>
+<ul>
+<li>more detailed error message then <code>Service is not valid</code>
+</li>
+<li>remove github feature for branch in url <code>#branch</code> as it’s not standard in git protocol</li>
+<li>remove git support at all?</li>
+</ul>
+          <p><a href="https://forum.mesg.com/t/support-deployments-from-tarball-urls/59/6">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/support-deployments-from-tarball-urls/59/6</link>
+        <pubDate>Wed, 16 Jan 2019 10:06:42 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-59-6</guid>
+        <source url="https://forum.mesg.com/t/support-deployments-from-tarball-urls/59.rss">Support deployments from tarball urls</source>
+      </item>
+      <item>
+        <title>Support deployments from tarball urls</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Implemented here <a href="https://github.com/mesg-foundation/core/pull/690" rel="nofollow noopener">https://github.com/mesg-foundation/core/pull/690</a></p>
+          <p><a href="https://forum.mesg.com/t/support-deployments-from-tarball-urls/59/5">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/support-deployments-from-tarball-urls/59/5</link>
+        <pubDate>Mon, 14 Jan 2019 14:30:08 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-59-5</guid>
+        <source url="https://forum.mesg.com/t/support-deployments-from-tarball-urls/59.rss">Support deployments from tarball urls</source>
+      </item>
+      <item>
+        <title>Support deployments from tarball urls</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            
+          <p><a href="https://forum.mesg.com/t/support-deployments-from-tarball-urls/59/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/support-deployments-from-tarball-urls/59/4</link>
+        <pubDate>Fri, 11 Jan 2019 05:04:57 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-59-4</guid>
+        <source url="https://forum.mesg.com/t/support-deployments-from-tarball-urls/59.rss">Support deployments from tarball urls</source>
+      </item>
+      <item>
+        <title>Support deployments from tarball urls</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>We need this functionality for the marketplace.</p>
+<p>The core should be compatible with url with http/https protocol that point to a tarball.</p>
+<p>Currently, urls with http/https are considered as a git repository.<br>
+If we can implement a <strong>VERY SIMPLE</strong> system that detect if it a git or a tar, then we can keep the git deployment.<br>
+Otherwise, we get rid of the git compatibility to only keep the tar.</p>
+<p><a class="mention" href="/u/krhubert">@krhubert</a> you are assigned to this task</p>
+          <p><a href="https://forum.mesg.com/t/support-deployments-from-tarball-urls/59/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/support-deployments-from-tarball-urls/59/3</link>
+        <pubDate>Fri, 11 Jan 2019 05:04:47 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-59-3</guid>
+        <source url="https://forum.mesg.com/t/support-deployments-from-tarball-urls/59.rss">Support deployments from tarball urls</source>
+      </item>
+      <item>
+        <title>Support deployments from tarball urls</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>suggested by /cc <a class="mention" href="/u/anthony">@Anthony</a>  on Discord</p>
+          <p><a href="https://forum.mesg.com/t/support-deployments-from-tarball-urls/59/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/support-deployments-from-tarball-urls/59/1</link>
+        <pubDate>Thu, 20 Sep 2018 12:02:21 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-59-1</guid>
+        <source url="https://forum.mesg.com/t/support-deployments-from-tarball-urls/59.rss">Support deployments from tarball urls</source>
+      </item>
+  </channel>
+</rss>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>MESG Product Update - Oct &#39;19</title>
+    <link>https://forum.mesg.com/t/mesg-product-update-oct-19/585</link>
+    <description>&lt;p&gt;We finally released v0.16 of the Engine! This version uses &lt;a href=&quot;http://cosmos.network/&quot;&gt;Cosmos&lt;/a&gt; and &lt;a href=&quot;https://tendermint.com/&quot;&gt;Tendermint&lt;/a&gt; to replicate the services across multiple Engines using a state machine built on a blockchain!&lt;/p&gt;
+&lt;hr&gt;
+&lt;small&gt;This is a companion discussion topic for the original entry at &lt;a href=&quot;https://blog.mesg.com/mesg-product-update-october-19/&quot;&gt;https://blog.mesg.com/mesg-product-update-october-19/&lt;/a&gt;&lt;/small&gt;</description>
+    
+    <lastBuildDate>Thu, 12 Dec 2019 11:44:21 +0000</lastBuildDate>
+    <category>Blog discussions</category>
+    <atom:link href="https://forum.mesg.com/t/mesg-product-update-oct-19/585.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>MESG Product Update - Oct &#39;19</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>We finally released v0.16 of the Engine! This version uses <a href="http://cosmos.network/">Cosmos</a> and <a href="https://tendermint.com/">Tendermint</a> to replicate the services across multiple Engines using a state machine built on a blockchain!</p>
+<hr>
+<small>This is a companion discussion topic for the original entry at <a href="https://blog.mesg.com/mesg-product-update-october-19/">https://blog.mesg.com/mesg-product-update-october-19/</a></small>
+          <p><a href="https://forum.mesg.com/t/mesg-product-update-oct-19/585/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mesg-product-update-oct-19/585/1</link>
+        <pubDate>Thu, 12 Dec 2019 11:44:21 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-585-1</guid>
+        <source url="https://forum.mesg.com/t/mesg-product-update-oct-19/585.rss">MESG Product Update - Oct &#39;19</source>
+      </item>
+  </channel>
+</rss>

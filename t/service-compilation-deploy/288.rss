@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Service compilation &amp; deploy</title>
+    <link>https://forum.mesg.com/t/service-compilation-deploy/288</link>
+    <description>The goal of this document is to explain the evolution of the deploy api and the introduction of the compilation of service.
+
+The idea is to have a single way to deploy / publish service to the Engine but also to the Marketplace.
+
+The Marketplace reveals that in order to deploy a service to another Engine, not only the source code but also the service definition are important and useful.
+
+Yes, the service definition is also (currently) contained in the source code as a mesg.yml file. But, in order to have a general purpose system and to fit in the long time vision of MESG, the source code should become optional (eg: pure workflow services), so services can be published / deployed / started with only a service definition.
+
+The current implementation of the Marketplace requires a JSON payload called manifest data containing:
+
+* The service&amp;rsquo;s definition. Not the mesg.yml version but the protobuf version exposed by the GetService API:
+  * The service&amp;rsquo;s hash is present (and not in the mesg.yml)
+* The service&amp;rsquo;s source code (as an IPFS hash)
+* The service&amp;rsquo;s documentation (currently the content of README.md)
+
+By keeping only the service&amp;rsquo;s definition and the service&amp;rsquo;s source code, any Engine should be able to run the specified service without any other required data from the User.
+
+Currently, to start a service, 2 steps / api calls are needed:
+
+* Deploy the service source code to the Engine by:
+  * Generating the service definition from the mesg.yml
+  * Calculating the service&amp;rsquo;s hash
+  * Building the docker image
+* Start the actual service based on the service&amp;rsquo;s hash (or the service&amp;rsquo;s sid) by:
+  * Creating the actual docker services and containers using the service definition, the hash and the build docker image
+
+To publish on the marketplace, 5 steps / api calls are required that:
+
+* Generates the service definition and hash from the mesg.yml (by calling the deploy api)
+* Get the service definition (by calling the getService api)
+* Publish the source on IPFS
+* Create the manifest data from the service definition and the IPFS hash
+* Finally, publish the manifest data to the marketplace
+
+## Service definition
+
+The service definition is a protobuf structure containing all necessary information to start a service on any Engine.
+
+- [] The only modification to do on the service definition is to add a link to the service&amp;rsquo;s source.
+
+The service definition is the compiled version of the current mesg.yml. The Engine should be only compatible with service definition and not with mesg.yml anymore.
+
+This gives a lot of flexibility to improve or even replace the mesg.yml. The service definition could be compiled from anything: HCL, syntactic analysis to generate it directly from source code, source code comments, GUI, etc…
+
+## Compile (path to source) -&amp;gt; service definition
+
+The most different function is the compilation of a service.
+
+This function compiles a service definition from local folder containing the service source.
+
+This function is very similar to the compilation of an Ethereum Smart Contract: the source code is transformed to an ABI (in our case, service definition) and to bytecode (in our case, the link to the archive containing the source code).
+
+This function should run completely independently from the Engine. A light software without internet and connection to an Engine should be able to compile a service.
+
+The steps of this function are:
+
+* Generates the service definition from the mesg.yml
+  * Validate the mesg.yml
+* Upload the source to IPFS
+* Injecting the source link to the service definition
+* Returning the service definition
+  * Could be returned as raw protobuf (byte / hex representation) or as JSON for readability
+
+## Deploy (service definition) -&gt; service hash
+
+This api is very similar to the current deploy api except that it takes as parameter directly the service definition (instead of the tar of the service source code ) and will returned the service hash.
+
+The steps of this api are:
+
+* Parse the service definition
+* Download the service source
+* Calculate the service hash from the service definition AND the source code
+* Save service definition in service DB (returns error if existing service definition)
+* Return the service hash
+
+## Note
+
+- The service hash is not calculated from the custom env anymore. This will come back with the introduction of the https://forum.mesg.com/t/instance-db/295. This has the consequence to allow only 1 service (same service definition) to run at a specific time even with different custom env variable.
+
+## Publish
+
+The current command `marketplace publish` will be drastically simplified by receiving directly the service definition containing most of the required information to publish on the current Marketplace running on Ethereum.
+
+The evolution of this function is that the future Marketplace will be directly integrated into the decentralized Service DB. I will not explain the details of this future function as we will implement it only when the decentralized Service DB is created. But basically, this future function will be able to publish on the whole network just based on the service definition generated by the Compile function.
+
+# Schema
+
+*In orange, step that are different than current implementation*
+
+## Deploy
+
+[mermaid]
+graph TD
+1[Parse the service definition] --&gt; 2
+2[Download the service source code] --&gt; 3
+3[Calculate the service hash] --&gt; 4
+4{Check existing hash in Service DB} -- if no exist --&gt; 5
+4 -- if exist --&gt; error
+5[Save service definition in service DB] --&gt; 6
+6[Return the service hash]
+error[return error]
+classDef diff fill:orange;
+class 1,2,3 diff;
+[/mermaid]
+
+# gRPC definition, server &amp; sdk
+
+This feature should not modify any existing gRPC definition, server or sdk functions but rather create new ones to start from a fresh and clean mind even if code duplication is necessary ;)
+
+## gRPC
+
+
+A new gRPC api should be created to introduce the beginning of the separation of the gRPC api by ressources.
+
+EDIT #1
+
+This new gRPC api should be created in `/protobuf/api/service.proto` and contain the following protobuf def:
+
+```
+syntax = &quot;proto3&quot;;
+
+import &quot;protobuf/definition/service.proto&quot;;
+
+package api;
+
+service Service {
+  rpc Create (definition.Service) returns (string) {}
+}
+```
+
+This api Service will only manage resources in Service DB and use a CRUD-like design.
+
+The current apis `Core.DeployService`, `Core.DeleteService`, `Core.ListServices`, `Core.GetService` will be &quot;duplicated&quot; to this new `service.proto` file and rename to a more CRUD-like style (eg: Create, Delete, List, Get) in another feature / PR.
+
+---
+
+EDIT of June 4th: I fix the service hash calculation. It should be calculated from the service definition and the source code.</description>
+    
+    <lastBuildDate>Tue, 04 Jun 2019 02:49:03 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/service-compilation-deploy/288.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Service compilation &amp; deploy</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>A small precision on the service hash calculation from <a href="https://forum.mesg.com/t/instance-db/295/6:">https://forum.mesg.com/t/instance-db/295/6:</a></p>
+<aside class="quote group-team" data-post="6" data-topic="295">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/nicolas/40/10_2.png" class="avatar"><a href="https://forum.mesg.com/t/instance-db/295/6">Instance DB</a>
+</div>
+<blockquote>
+<p><code>service hash = hash(definition, source files)</code><br>
+<code>instance hash = hash(service hash, env)</code></p>
+</blockquote>
+</aside>
+          <p><a href="https://forum.mesg.com/t/service-compilation-deploy/288/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/service-compilation-deploy/288/3</link>
+        <pubDate>Tue, 04 Jun 2019 02:49:03 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-288-3</guid>
+        <source url="https://forum.mesg.com/t/service-compilation-deploy/288.rss">Service compilation &amp; deploy</source>
+      </item>
+      <item>
+        <title>Service compilation &amp; deploy</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>The goal of this document is to explain the evolution of the deploy api and the introduction of the compilation of service.</p>
+<p>The idea is to have a single way to deploy / publish service to the Engine but also to the Marketplace.</p>
+<p>The Marketplace reveals that in order to deploy a service to another Engine, not only the source code but also the service definition are important and useful.</p>
+<p>Yes, the service definition is also (currently) contained in the source code as a mesg.yml file. But, in order to have a general purpose system and to fit in the long time vision of MESG, the source code should become optional (eg: pure workflow services), so services can be published / deployed / started with only a service definition.</p>
+<p>The current implementation of the Marketplace requires a JSON payload called manifest data containing:</p>
+<ul>
+<li>The service’s definition. Not the mesg.yml version but the protobuf version exposed by the GetService API:
+<ul>
+<li>The service’s hash is present (and not in the mesg.yml)</li>
+</ul>
+</li>
+<li>The service’s source code (as an IPFS hash)</li>
+<li>The service’s documentation (currently the content of README.md)</li>
+</ul>
+<p>By keeping only the service’s definition and the service’s source code, any Engine should be able to run the specified service without any other required data from the User.</p>
+<p>Currently, to start a service, 2 steps / api calls are needed:</p>
+<ul>
+<li>Deploy the service source code to the Engine by:
+<ul>
+<li>Generating the service definition from the mesg.yml</li>
+<li>Calculating the service’s hash</li>
+<li>Building the docker image</li>
+</ul>
+</li>
+<li>Start the actual service based on the service’s hash (or the service’s sid) by:
+<ul>
+<li>Creating the actual docker services and containers using the service definition, the hash and the build docker image</li>
+</ul>
+</li>
+</ul>
+<p>To publish on the marketplace, 5 steps / api calls are required that:</p>
+<ul>
+<li>Generates the service definition and hash from the mesg.yml (by calling the deploy api)</li>
+<li>Get the service definition (by calling the getService api)</li>
+<li>Publish the source on IPFS</li>
+<li>Create the manifest data from the service definition and the IPFS hash</li>
+<li>Finally, publish the manifest data to the marketplace</li>
+</ul>
+<h2>Service definition</h2>
+<p>The service definition is a protobuf structure containing all necessary information to start a service on any Engine.</p>
+<ul>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> The only modification to do on the service definition is to add a link to the service’s source.</li>
+</ul>
+<p>The service definition is the compiled version of the current mesg.yml. The Engine should be only compatible with service definition and not with mesg.yml anymore.</p>
+<p>This gives a lot of flexibility to improve or even replace the mesg.yml. The service definition could be compiled from anything: HCL, syntactic analysis to generate it directly from source code, source code comments, GUI, etc…</p>
+<h2>Compile (path to source) -&gt; service definition</h2>
+<p>The most different function is the compilation of a service.</p>
+<p>This function compiles a service definition from local folder containing the service source.</p>
+<p>This function is very similar to the compilation of an Ethereum Smart Contract: the source code is transformed to an ABI (in our case, service definition) and to bytecode (in our case, the link to the archive containing the source code).</p>
+<p>This function should run completely independently from the Engine. A light software without internet and connection to an Engine should be able to compile a service.</p>
+<p>The steps of this function are:</p>
+<ul>
+<li>Generates the service definition from the mesg.yml
+<ul>
+<li>Validate the mesg.yml</li>
+</ul>
+</li>
+<li>Upload the source to IPFS</li>
+<li>Injecting the source link to the service definition</li>
+<li>Returning the service definition
+<ul>
+<li>Could be returned as raw protobuf (byte / hex representation) or as JSON for readability</li>
+</ul>
+</li>
+</ul>
+<h2>Deploy (service definition) -&gt; service hash</h2>
+<p>This api is very similar to the current deploy api except that it takes as parameter directly the service definition (instead of the tar of the service source code ) and will returned the service hash.</p>
+<p>The steps of this api are:</p>
+<ul>
+<li>Parse the service definition</li>
+<li>Download the service source</li>
+<li>Calculate the service hash from the service definition AND the source code</li>
+<li>Save service definition in service DB (returns error if existing service definition)</li>
+<li>Return the service hash</li>
+</ul>
+<h2>Note</h2>
+<ul>
+<li>The service hash is not calculated from the custom env anymore. This will come back with the introduction of the <a href="https://forum.mesg.com/t/instance-db/295" class="inline-onebox">Instance DB</a>. This has the consequence to allow only 1 service (same service definition) to run at a specific time even with different custom env variable.</li>
+</ul>
+<h2>Publish</h2>
+<p>The current command <code>marketplace publish</code> will be drastically simplified by receiving directly the service definition containing most of the required information to publish on the current Marketplace running on Ethereum.</p>
+<p>The evolution of this function is that the future Marketplace will be directly integrated into the decentralized Service DB. I will not explain the details of this future function as we will implement it only when the decentralized Service DB is created. But basically, this future function will be able to publish on the whole network just based on the service definition generated by the Compile function.</p>
+<h1>Schema</h1>
+<p><em>In orange, step that are different than current implementation</em></p>
+<h2>Deploy</h2>
+<div class="mermaid">
+
+graph TD
+1[Parse the service definition] --&gt; 2
+2[Download the service source code] --&gt; 3
+3[Calculate the service hash] --&gt; 4
+4{Check existing hash in Service DB} -- if no exist --&gt; 5
+4 -- if exist --&gt; error
+5[Save service definition in service DB] --&gt; 6
+6[Return the service hash]
+error[return error]
+classDef diff fill:orange;
+class 1,2,3 diff;
+
+</div>
+
+<h1>gRPC definition, server &amp; sdk</h1>
+<p>This feature should not modify any existing gRPC definition, server or sdk functions but rather create new ones to start from a fresh and clean mind even if code duplication is necessary <img src="https://forum.mesg.com/images/emoji/twitter/wink.png?v=9" title=":wink:" class="emoji" alt=":wink:"></p>
+<h2>gRPC</h2>
+<p>A new gRPC api should be created to introduce the beginning of the separation of the gRPC api by ressources.</p>
+<p>EDIT <span class="hashtag">#1</span></p>
+<p>This new gRPC api should be created in <code>/protobuf/api/service.proto</code> and contain the following protobuf def:</p>
+<pre><code class="lang-auto">syntax = "proto3";
+
+import "protobuf/definition/service.proto";
+
+package api;
+
+service Service {
+  rpc Create (definition.Service) returns (string) {}
+}
+</code></pre>
+<p>This api Service will only manage resources in Service DB and use a CRUD-like design.</p>
+<p>The current apis <code>Core.DeployService</code>, <code>Core.DeleteService</code>, <code>Core.ListServices</code>, <code>Core.GetService</code> will be “duplicated” to this new <code>service.proto</code> file and rename to a more CRUD-like style (eg: Create, Delete, List, Get) in another feature / PR.</p>
+<hr>
+<p>EDIT of June 4th: I fix the service hash calculation. It should be calculated from the service definition and the source code.</p>
+          <p><a href="https://forum.mesg.com/t/service-compilation-deploy/288/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/service-compilation-deploy/288/1</link>
+        <pubDate>Thu, 23 May 2019 11:32:10 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-288-1</guid>
+        <source url="https://forum.mesg.com/t/service-compilation-deploy/288.rss">Service compilation &amp; deploy</source>
+      </item>
+  </channel>
+</rss>

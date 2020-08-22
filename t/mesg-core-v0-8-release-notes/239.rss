@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>MESG Core v0.8 Release Notes</title>
+    <link>https://forum.mesg.com/t/mesg-core-v0-8-release-notes/239</link>
+    <description># New features in Core v0.8
+
+## Deploy services from tarball
+
+Deployment from tarball is now possible. Enter the URL to the tarball in the commands `service dev` and `service deploy`.
+
+```
+mesg-core service deploy https://api.github.com/repos/mesg-foundation/service-ethereum/tarball/master
+```
+
+## Start and stop multiple services
+
+The commands `service start` and `service stop` now accept multiple SIDs or hashes as arguments
+
+```
+mesg-core service start com.mesg.ethereum com.mesg.ethereum.erc20
+mesg-core service stop com.mesg.ethereum com.mesg.ethereum.erc20
+```
+
+## Color in Core logs
+
+Core can be started with the flag `--log-force-colors` to force the colorization of its logs.
+
+```
+mesg-core start --log-force-colors
+```
+
+![image|690x100](upload://innKLBzzi80mnABs2hFUP5fjKJ2.png) 
+
+## Fixed stream disconnection after inactivity
+
+We finally fixed the automatic disconnection of a stream after a period of inactivity!
+
+----
+
+For the complete changelog, refer to [Github ](https://github.com/mesg-foundation/core/releases/tag/v0.8.0).
+
+To update to v0.8, follow the [installation process on the documentation ](https://docs.mesg.com/guide/start-here/installation.html#automatic-installation)</description>
+    
+    <lastBuildDate>Tue, 05 Feb 2019 11:14:12 +0000</lastBuildDate>
+    <category>News</category>
+    <atom:link href="https://forum.mesg.com/t/mesg-core-v0-8-release-notes/239.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>MESG Core v0.8 Release Notes</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <h1>New features in Core v0.8</h1>
+<h2>Deploy services from tarball</h2>
+<p>Deployment from tarball is now possible. Enter the URL to the tarball in the commands <code>service dev</code> and <code>service deploy</code>.</p>
+<pre><code class="lang-auto">mesg-core service deploy https://api.github.com/repos/mesg-foundation/service-ethereum/tarball/master
+</code></pre>
+<h2>Start and stop multiple services</h2>
+<p>The commands <code>service start</code> and <code>service stop</code> now accept multiple SIDs or hashes as arguments</p>
+<pre><code class="lang-auto">mesg-core service start com.mesg.ethereum com.mesg.ethereum.erc20
+mesg-core service stop com.mesg.ethereum com.mesg.ethereum.erc20
+</code></pre>
+<h2>Color in Core logs</h2>
+<p>Core can be started with the flag <code>--log-force-colors</code> to force the colorization of its logs.</p>
+<pre><code class="lang-auto">mesg-core start --log-force-colors
+</code></pre>
+<p><img src="https://forum.mesg.com/uploads/default/original/1X/80cbcca279311e8cecb0e708f94419ceb1482218.png" alt="image" width="690" height="100"></p>
+<h2>Fixed stream disconnection after inactivity</h2>
+<p>We finally fixed the automatic disconnection of a stream after a period of inactivity!</p>
+<hr>
+<p>For the complete changelog, refer to <a href="https://github.com/mesg-foundation/core/releases/tag/v0.8.0" rel="nofollow noopener">Github </a>.</p>
+<p>To update to v0.8, follow the <a href="https://docs.mesg.com/guide/start-here/installation.html#automatic-installation" rel="nofollow noopener">installation process on the documentation </a></p>
+          <p><a href="https://forum.mesg.com/t/mesg-core-v0-8-release-notes/239/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mesg-core-v0-8-release-notes/239/1</link>
+        <pubDate>Wed, 30 Jan 2019 07:53:39 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-239-1</guid>
+        <source url="https://forum.mesg.com/t/mesg-core-v0-8-release-notes/239.rss">MESG Core v0.8 Release Notes</source>
+      </item>
+  </channel>
+</rss>

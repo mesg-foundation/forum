@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>MESG Core v0.7 Release Notes</title>
+    <link>https://forum.mesg.com/t/mesg-core-v0-7-release-notes/197</link>
+    <description># New features in Core v0.7
+
+## Advance data definition in service definition
+
+Service&#39;s definition now accept 3 new ways to describe the service&#39;s data.
+
+### Array
+
+We introduce the parameter `repeated` to specify arrays.
+Each element of the array has the type define with the parameter `type`.
+
+```yaml
+tasks:
+  list:
+    outputs:
+      success:
+        data:
+          addresses:
+            type: String
+            repeated: true
+```
+```json
+{
+  &quot;addresses&quot;: [&quot;string1&quot;, &quot;string2&quot;, &quot;string3&quot;]
+}
+```
+
+### Nested Object
+
+Object definition can now be a lot more precise with the introduction of the parameter `object`.
+`object` parameter accept a map of keys / parameters.
+
+```yaml
+tasks: 
+  sign:
+    inputs:
+      transaction:
+        type: Object
+        object:
+          nonce:
+            type: Number
+          to:
+            type: String
+          value:
+            type: Number
+          gasLimit:
+            type: Number
+          gasPrice:
+            type: Number
+```
+```json
+{
+  &quot;transaction&quot;: {
+    &quot;nonce&quot;: 1,
+    &quot;to&quot;: &quot;0x1&quot;,
+    &quot;value&quot;: 1000000000,
+    &quot;gasLimit&quot;: 1000000,
+    &quot;gasPrice&quot;: 21000000
+  }
+}
+```
+
+### Any
+
+The type `Any` has been added to accept any type of data. No verification is done when using this type.
+
+```yaml
+tasks: 
+  exec:
+    inputs:
+      data:
+        type: Any
+```
+
+More info in the docs: https://docs.mesg.com/guide/service/service-file.html
+
+----
+
+For the complete changelog, refer to [Github ](https://github.com/mesg-foundation/core/releases/tag/v0.7.0).
+
+To update to v0.7, follow the [installation process on the documentation ](https://docs.mesg.com/guide/start-here/installation.html#automatic-installation)</description>
+    
+    <lastBuildDate>Wed, 30 Jan 2019 07:41:28 +0000</lastBuildDate>
+    <category>News</category>
+    <atom:link href="https://forum.mesg.com/t/mesg-core-v0-7-release-notes/197.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>MESG Core v0.7 Release Notes</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <h1>New features in Core v0.7</h1>
+<h2>Advance data definition in service definition</h2>
+<p>Service’s definition now accept 3 new ways to describe the service’s data.</p>
+<h3>Array</h3>
+<p>We introduce the parameter <code>repeated</code> to specify arrays.<br>
+Each element of the array has the type define with the parameter <code>type</code>.</p>
+<pre><code class="lang-auto">tasks:
+  list:
+    outputs:
+      success:
+        data:
+          addresses:
+            type: String
+            repeated: true
+</code></pre>
+<pre><code class="lang-json">{
+  "addresses": ["string1", "string2", "string3"]
+}
+</code></pre>
+<h3>Nested Object</h3>
+<p>Object definition can now be a lot more precise with the introduction of the parameter <code>object</code>.<br>
+<code>object</code> parameter accept a map of keys / parameters.</p>
+<pre><code class="lang-auto">tasks: 
+  sign:
+    inputs:
+      transaction:
+        type: Object
+        object:
+          nonce:
+            type: Number
+          to:
+            type: String
+          value:
+            type: Number
+          gasLimit:
+            type: Number
+          gasPrice:
+            type: Number
+</code></pre>
+<pre><code class="lang-json">{
+  "transaction": {
+    "nonce": 1,
+    "to": "0x1",
+    "value": 1000000000,
+    "gasLimit": 1000000,
+    "gasPrice": 21000000
+  }
+}
+</code></pre>
+<h3>Any</h3>
+<p>The type <code>Any</code> has been added to accept any type of data. No verification is done when using this type.</p>
+<pre><code class="lang-auto">tasks: 
+  exec:
+    inputs:
+      data:
+        type: Any
+</code></pre>
+<p>More info in the docs: <a href="https://docs.mesg.com/guide/service/service-file.html" rel="nofollow noopener">https://docs.mesg.com/guide/service/service-file.html</a></p>
+<hr>
+<p>For the complete changelog, refer to <a href="https://github.com/mesg-foundation/core/releases/tag/v0.7.0" rel="nofollow noopener">Github </a>.</p>
+<p>To update to v0.7, follow the <a href="https://docs.mesg.com/guide/start-here/installation.html#automatic-installation" rel="nofollow noopener">installation process on the documentation </a></p>
+          <p><a href="https://forum.mesg.com/t/mesg-core-v0-7-release-notes/197/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mesg-core-v0-7-release-notes/197/1</link>
+        <pubDate>Wed, 16 Jan 2019 11:21:00 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-197-1</guid>
+        <source url="https://forum.mesg.com/t/mesg-core-v0-7-release-notes/197.rss">MESG Core v0.7 Release Notes</source>
+      </item>
+  </channel>
+</rss>

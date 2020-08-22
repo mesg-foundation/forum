@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>MESG Core V0.3.0 Release Notes</title>
+    <link>https://forum.mesg.com/t/mesg-core-v0-3-0-release-notes/88</link>
+    <description>With this update, we are reverting Core’s version back to V0.3.0 in order to fall in line with traditional semantic versioning. Version 1 of MESG Core will not debut until we have ensured that the Core API does not require additional alterations.
+
+The V0.3.0 release will apply to MESG Core and will resolve bugs we’ve discovered in testing, in addition to the debut of new features.
+
+
+**New features in Core V0.3.0:**
+
+* **Multiple Cores running on the same computer.**
+Allowing multiple copies of MESG Core to run on the same computer is the first step in the implementation of the network. It increases flexibility in implementation by allowing the testing of the network without requiring the involvement of multiple computers.
+
+* **Configuration of the CLI’s output with --no-color and --no-spinner flags. Colorize JSON**
+We’ve created a better general user experience while using the CLI. Once servers start, apps can now automatically execute MESG-related functionalities using a CLI.
+
+![CLI%20Output|690x79](upload://oyDSDR1MwGDYRO77darNlGQQewN.png)
+
+* **Added required validations on Services’ task, event and output data**
+We’ve added more validations and tests for the development of Services. Each time you deploy a Service, you will receive feedback from Core, helping improve the development workflow of the Service.
+
+* **BREAKING CHANGE. Added support for .dockerignore, and removed support of .mesgignore**
+Please rename .mesgignore to .dockerignore as a solution to this breaking change. This was done in order to ensure easier adoption and increased compatibility between Docker and MESG.
+
+
+For a complete list of new, updated and removed features, refer to [Github](https://github.com/mesg-foundation/core/releases/tag/v0.3.0).</description>
+    
+    <lastBuildDate>Tue, 09 Oct 2018 13:33:24 +0000</lastBuildDate>
+    <category>News</category>
+    <atom:link href="https://forum.mesg.com/t/mesg-core-v0-3-0-release-notes/88.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>MESG Core V0.3.0 Release Notes</title>
+        <dc:creator><![CDATA[jonobacon]]></dc:creator>
+        <description><![CDATA[
+            
+          <p><a href="https://forum.mesg.com/t/mesg-core-v0-3-0-release-notes/88/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mesg-core-v0-3-0-release-notes/88/2</link>
+        <pubDate>Tue, 09 Oct 2018 14:18:25 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-88-2</guid>
+        <source url="https://forum.mesg.com/t/mesg-core-v0-3-0-release-notes/88.rss">MESG Core V0.3.0 Release Notes</source>
+      </item>
+      <item>
+        <title>MESG Core V0.3.0 Release Notes</title>
+        <dc:creator><![CDATA[will]]></dc:creator>
+        <description><![CDATA[
+            <p>With this update, we are reverting Core’s version back to V0.3.0 in order to fall in line with traditional semantic versioning. Version 1 of MESG Core will not debut until we have ensured that the Core API does not require additional alterations.</p>
+<p>The V0.3.0 release will apply to MESG Core and will resolve bugs we’ve discovered in testing, in addition to the debut of new features.</p>
+<p><strong>New features in Core V0.3.0:</strong></p>
+<ul>
+<li>
+<p><strong>Multiple Cores running on the same computer.</strong><br>
+Allowing multiple copies of MESG Core to run on the same computer is the first step in the implementation of the network. It increases flexibility in implementation by allowing the testing of the network without requiring the involvement of multiple computers.</p>
+</li>
+<li>
+<p><strong>Configuration of the CLI’s output with --no-color and --no-spinner flags. Colorize JSON</strong><br>
+We’ve created a better general user experience while using the CLI. Once servers start, apps can now automatically execute MESG-related functionalities using a CLI.</p>
+</li>
+</ul>
+<p><img src="https://forum.mesg.com/uploads/default/original/1X/ac1eb10bbf7b85be3c849d515637a3619801fa49.png" alt="CLI%20Output" width="690" height="79"></p>
+<ul>
+<li>
+<p><strong>Added required validations on Services’ task, event and output data</strong><br>
+We’ve added more validations and tests for the development of Services. Each time you deploy a Service, you will receive feedback from Core, helping improve the development workflow of the Service.</p>
+</li>
+<li>
+<p><strong>BREAKING CHANGE. Added support for .dockerignore, and removed support of .mesgignore</strong><br>
+Please rename .mesgignore to .dockerignore as a solution to this breaking change. This was done in order to ensure easier adoption and increased compatibility between Docker and MESG.</p>
+</li>
+</ul>
+<p>For a complete list of new, updated and removed features, refer to <a href="https://github.com/mesg-foundation/core/releases/tag/v0.3.0" rel="nofollow noopener">Github</a>.</p>
+          <p><a href="https://forum.mesg.com/t/mesg-core-v0-3-0-release-notes/88/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mesg-core-v0-3-0-release-notes/88/1</link>
+        <pubDate>Tue, 09 Oct 2018 09:08:41 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-88-1</guid>
+        <source url="https://forum.mesg.com/t/mesg-core-v0-3-0-release-notes/88.rss">MESG Core V0.3.0 Release Notes</source>
+      </item>
+  </channel>
+</rss>

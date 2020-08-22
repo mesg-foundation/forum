@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Service&#39;s hash</title>
+    <link>https://forum.mesg.com/t/services-hash/261</link>
+    <description>Related to
+- https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211
+- [PR #731](https://github.com/mesg-foundation/core/pull/731).
+
+In this topic, I would like to fix the different issues we have about the hash of a service and find solutions that can be implemented step-by-step.
+
+## The ultimate goal is to have:
+**1. same hash across any computer**
+This feature is really important for the future decentralized network. It will be the unique identifier used in order to dispatch executions across multiple Core. That&#39;s how the network will be able to know which service is running, on which core, and select the right Core to execute and verify executions.
+
+Requested by @krhubert: 
+**6. same hash even with different deployment method**
+The hash should be the same even if the service is deploy from different method: local dir, git repo or tar archive (including compression).
+
+## But the hash should change when:
+**2. source code change**
+means a potentially completely different service.
+
+**3. service definition change**
+means a potentially completely different service.
+
+**4. env variables change**
+could drastically change the behavior of a service (eg Ethereum with the different networks. same source code, but the data are completely different, thus the behavior of the service is also different).
+
+**5. dependencies change (OS version, apt-get, npm i, go mod, etc...)**
+this is more subtle but should also be taking into account: a different version of a dependency could also change drastically the behavior of the service.
+For instance, a package manager using semver could break when installing a new version that actually break the dependency. (But it should be fine when locking version or using having a &#39;lock&#39; file (eg: `package-lock.jso`)). Another example, running an `apt-get upgrade` can also install different version of system libraries.
+
+## Solutions
+
+#### - Docker image
+:x: #1, #4, #6
+:white_check_mark: #2, #3, #5
+Docker image hash are absolutely non-deterministic and change anytime a change type #2, #3, #5 occur. Even more, rebuild from the same source without docker cache or on another computer will create a different image hash.
+
+#### - Docker image + hash of env variables (current implementation)
+:x: #1, #6
+:white_check_mark: #2, #3, #4, #5
+In this improved version of the previous one, the env variables are taking into account so it solves #4. But goal #1 is still not met.
+
+#### - Checksum of source + hash of env variables
+:x: #5
+:white_check_mark: #1, #2, #3, #4, #6
+The [PR #731](https://github.com/mesg-foundation/core/pull/731) calculate the hash based on the source code, the env variables, and the service definition. It calculates the same hash across computer. BUT it doesn&#39;t take into account the dependencies change.
+
+#### Download already built docker image
+:x: #2, #3
+:white_check_mark: #1, #4, #5, #6
+Same way as Docker Hub is working, the developer build its image and publish it on a image repository.
+From @Anthony: Docker can also generate a tarball that is easy to distribute with the command `docker image save`. But the size of the image could be way higher than the source.
+User can simply download the already build image.
+The big problem is there is no way to guarantee the image is actually running the service&#39;s source code. A developer can publish an image that is not build with the same source code.
+One way to solve this will be to &quot;control&quot; the build process either by forcing to use the core or to use a public CI. In both case, there are many flaws and limitations.
+
+#### Deterministic image build + hash of env variables
+:white_check_mark: #1, #2, #3, #4, #5, #6
+The ultimate solution could be fixed by using another tool than Docker build to create the image in a deterministic way.
+I found out that it&#39;s possible but may require to use &quot;complicated&quot; tools and could take weeks to actually implement.
+- https://blog.bazel.build/2015/07/28/docker_build.html
+- https://github.com/openshift/source-to-image
+
+---
+
+- I would especially like to have your feedback on the prioritization of #5. I feel it&#39;s important but make the calculation of the hash dramatically more complicated.
+- Also please fix the proposed solutions if I made mistakes.</description>
+    
+    <lastBuildDate>Fri, 08 Mar 2019 04:34:42 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/services-hash/261.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Service&#39;s hash</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="14" data-topic="261">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/ilgooz/40/46_2.png" class="avatar"> ilgooz:</div>
+<blockquote>
+<ul>
+<li>Start command will receive env variables and service’s sid or hash to start a service. It’ll calculate a new hash by combining deploy time hash + env vars and then output it. <code>Start</code> name is a bit confusing so I think this is where the confusing comes in. Think it like <code>docker service create</code> command, it also creates a new hash for the service.</li>
+</ul>
+</blockquote>
+</aside>
+<p>I really don’t like the idea of changing the hash after the service is deployed. I think it will bring a lot of confusion…</p>
+          <p><a href="https://forum.mesg.com/t/services-hash/261/15">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/services-hash/261/15</link>
+        <pubDate>Fri, 08 Mar 2019 04:34:42 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-261-15</guid>
+        <source url="https://forum.mesg.com/t/services-hash/261.rss">Service&#39;s hash</source>
+      </item>
+      <item>
+        <title>Service&#39;s hash</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>No no, we’re still going to use service sid or hash to start it within the start command, like we always do.</p>
+<ul>
+<li>
+<p>Deploy command will calculate a simple hash over the tarball and output it.</p>
+</li>
+<li>
+<p>Start command will receive env variables and service’s sid or hash to start a service. It’ll calculate a new hash by combining deploy time hash +  env vars and then output it. <code>Start</code> name is a bit confusing so I think this is where the confusing comes in. Think it like <code>docker service create</code> command, it also creates a new hash for the service.</p>
+</li>
+</ul>
+<blockquote>
+<p>hash should always be the “source of truth” and unicity</p>
+</blockquote>
+<p>This is an another thing that where confusion also comes in. In my view, we don’t break this rule even if we move env vars to start command.</p>
+<p>The hash we create with the deploy command is no temporary. It’s service’s true hash. And it doesn’t need to be temporary anyway, we need it.</p>
+          <p><a href="https://forum.mesg.com/t/services-hash/261/14">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/services-hash/261/14</link>
+        <pubDate>Thu, 07 Mar 2019 12:18:40 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-261-14</guid>
+        <source url="https://forum.mesg.com/t/services-hash/261.rss">Service&#39;s hash</source>
+      </item>
+      <item>
+        <title>Service&#39;s hash</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="12" data-topic="261">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/ilgooz/40/46_2.png" class="avatar"> ilgooz:</div>
+<blockquote>
+<p>It is still possible to do this by setting env vars at start time. A new hash can be calculated by combining the service’s actual hash + env vars. Start command can output the new hash. By moving it to the start time we’ll not be complicating the hash calculating process for service itself anymore and we’ll be still able to get unique hashes as we do now but within the start command.</p>
+<p>I cannot see a problem about moving env vars to start time.</p>
+</blockquote>
+</aside>
+<p>So a “temporary” hash will be created during deploy? Otherwise how to start a service? Only by SID? In this case this is not a valid solution as the hash should always be the “source of truth” and unicity.</p>
+          <p><a href="https://forum.mesg.com/t/services-hash/261/13">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/services-hash/261/13</link>
+        <pubDate>Thu, 07 Mar 2019 11:52:57 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-261-13</guid>
+        <source url="https://forum.mesg.com/t/services-hash/261.rss">Service&#39;s hash</source>
+      </item>
+      <item>
+        <title>Service&#39;s hash</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="11" data-topic="261">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/nicolas/40/10_2.png" class="avatar"> Nicolas:</div>
+<blockquote>
+<p>Integrating the env into the hash calculation have the advantage of running the same service’s source code with different envs like running an ethereum mainnet service and also an ethereum testnet service as the same time. This is a totally find approach.</p>
+</blockquote>
+</aside>
+<p>It is still possible to do this by setting env vars at start time. A new hash can be calculated by combining the service’s actual hash + env vars. Start command can output the new hash. By moving it to the start time we’ll not be complicating the hash calculating process for service itself anymore and we’ll be still able to get unique hashes as we do now but within the start command.</p>
+<p>I cannot see a problem about moving env vars to start time.</p>
+          <p><a href="https://forum.mesg.com/t/services-hash/261/12">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/services-hash/261/12</link>
+        <pubDate>Thu, 07 Mar 2019 11:33:49 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-261-12</guid>
+        <source url="https://forum.mesg.com/t/services-hash/261.rss">Service&#39;s hash</source>
+      </item>
+      <item>
+        <title>Service&#39;s hash</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="10" data-topic="261">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/ilgooz/40/46_2.png" class="avatar"> ilgooz:</div>
+<blockquote>
+<p>We don’t need to include env variables to hash calculation. We actually, only aim to calculate hash from the source code itself. Overwriting env variables on deploy time does not change the service’s source code. So it’s hash shouldn’t change too.</p>
+</blockquote>
+</aside>
+<p>Integrating the env into the hash calculation have the advantage of running the same service’s source code with different envs like running an ethereum mainnet service and also an ethereum testnet service as the same time. This is a totally find approach.</p>
+<aside class="quote group-team" data-post="10" data-topic="261">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/ilgooz/40/46_2.png" class="avatar"> ilgooz:</div>
+<blockquote>
+<p>Also, we don’t <strong>publish</strong> the new service to marketplace with different env var values applied during the deploy time. So, the service doesn’t need to have different hash depending on the custom env var values.</p>
+</blockquote>
+</aside>
+<p>Yes you are right, but we could imagine an hash verification only if deployed without env, or a bit more complicated, verifying the hash before applying the custom env.</p>
+<aside class="quote group-team" data-post="10" data-topic="261">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/ilgooz/40/46_2.png" class="avatar"> ilgooz:</div>
+<blockquote>
+<p>I’d like to move deploy time env variables to the <strong>service start</strong> time and maybe generate a new hash by combining service’s actual hash + env variables to easily identify that service for stoping it later on and so on.</p>
+</blockquote>
+</aside>
+<p>This is the behavior of the command deploy. The command deploy is the one that actually create the service, so it creates the hash.<br>
+The command dev is compatible with env and should be use when testing different env.</p>
+<aside class="quote group-team" data-post="10" data-topic="261">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/ilgooz/40/46_2.png" class="avatar"> ilgooz:</div>
+<blockquote>
+<p>As you see it’s easier to provide env variables directly in the workflow. Workflow VM can apply this env variables to service on start time and save the unique service id or/and service hash calculated by combining the service’s hash + env variables in somewhere, to stop or delete it later on.</p>
+</blockquote>
+</aside>
+<p>We could replace the <code>sid</code> by the marketplace URL so the Core can download and deploy it automatically rather than manually by the user in advance.<br>
+Even if env variable are customizable, the Core could still check the service hash like I said in paragraph <span class="hashtag">#2</span>.</p>
+<aside class="quote group-team" data-post="10" data-topic="261">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/ilgooz/40/46_2.png" class="avatar"> ilgooz:</div>
+<blockquote>
+<p>checking the safety of that service is should be totally up to devs.</p>
+</blockquote>
+</aside>
+<p>i agree but anyway this cannot be automatic because the Core doesn’t know the hash to check with.</p>
+          <p><a href="https://forum.mesg.com/t/services-hash/261/11">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/services-hash/261/11</link>
+        <pubDate>Thu, 07 Mar 2019 10:29:31 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-261-11</guid>
+        <source url="https://forum.mesg.com/t/services-hash/261.rss">Service&#39;s hash</source>
+      </item>
+      <item>
+        <title>Service&#39;s hash</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>I’ll stick with the idea I put on the PR itself.</p>
+<p>For me:</p>
+<h3>Exports</h3>
+<p>It doesn’t matter if dependencies (exports) change between different deploys. Because locking versions correctly is totally developer’s job. If they don’t do it for some reason and service becomes to buggy than it’s a low quality service.</p>
+<h3>Env Vars</h3>
+<p>We don’t need to include env variables to hash calculation. We actually, only aim to calculate hash from the source code itself. Overwriting env variables on deploy time does not change the service’s source code. So it’s hash shouldn’t change too.</p>
+<p>Also, we don’t <strong>publish</strong> the new service to marketplace with different env var values applied during the deploy time. So, the service doesn’t need to have different hash depending on the custom env var values.</p>
+<p>I’d like to move deploy time env variables to the <strong>service start</strong> time and maybe generate a new hash by combining service’s actual hash + env variables to easily identify that service for stoping it later on and so on.</p>
+<p>With workflows, starting/depending on services will be like:</p>
+<pre><code class="lang-auto">services:
+  - graphql:
+      sid: sid-or-just-tarball-hash
+      env:
+        - SCHEMA=`...type Users {...}...`
+</code></pre>
+<p>As you see it’s easier to provide env variables directly in the workflow. Workflow VM can apply this env variables to service on start time and save the unique service id or/and service hash calculated by combining the service’s hash + env variables in somewhere, to stop or delete it later on.</p>
+<h1>Conclusion</h1>
+<p>By moving <strong>env vars</strong> to start time and leaving control of <strong>exports</strong> to developers, we can simply calculate hashes directly from the service’s tarball without creating special hash calculation techniques.</p>
+<p>On the marketplace publish time, devs can directly provide the tarball file or it’s URL for us to publish it to the marketplace. Or they can provide the source files locally on their computers and we can create a tarball, give a copy of it to the dev and then publish to marketplace.</p>
+<h1>Extra</h1>
+<h3>Supporting Git or different tarballs</h3>
+<p>I think, there is no need to force keeping the same hash while deploying a service via git or from different tarballs tarballs that generated during the service’s publish time. Devs should just be get used to using marketplace like npm, brew or any other pkg managers. If they want to use a service from an unknown source, we can still provide the functionality of deploying services from tarball urls and Git but, checking the safety of that service is should be totally up to devs.</p>
+<h3>Using Docker for getting hash</h3>
+<p>I don’t quite like to use a hash calculated by Docker. Because it’s hard to regenerate that hash from the source code later on. And it’s hard to test the service’s security and know what’s going on inside if we directly publish and use the Docker image to marketplace instead of rebuilding it from the source code on deploy time.</p>
+          <p><a href="https://forum.mesg.com/t/services-hash/261/10">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/services-hash/261/10</link>
+        <pubDate>Thu, 07 Mar 2019 09:30:31 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-261-10</guid>
+        <source url="https://forum.mesg.com/t/services-hash/261.rss">Service&#39;s hash</source>
+      </item>
+      <item>
+        <title>Service&#39;s hash</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="7" data-topic="261">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/nicolas/40/10_2.png" class="avatar"> Nicolas:</div>
+<blockquote>
+<p>We have to make sure that during the publishing of a service on the marketplace, the hash is calculated the same way as the command deploy.</p>
+</blockquote>
+</aside>
+<p><img src="https://forum.mesg.com/images/emoji/twitter/+1.png?v=6" title=":+1:" class="emoji" alt=":+1:"></p>
+<p>Deploying the service is a bit too much but agree that this could be a good way to validate this can be done the same way that the validation as proposed here (<a href="https://github.com/mesg-foundation/core/issues/191#issuecomment-465438396" rel="nofollow noopener">https://github.com/mesg-foundation/core/issues/191#issuecomment-465438396</a>). A deploy that doesn’t persist, but only simulate the deployment.</p>
+          <p><a href="https://forum.mesg.com/t/services-hash/261/9">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/services-hash/261/9</link>
+        <pubDate>Thu, 07 Mar 2019 07:54:30 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-261-9</guid>
+        <source url="https://forum.mesg.com/t/services-hash/261.rss">Service&#39;s hash</source>
+      </item>
+      <item>
+        <title>Service&#39;s hash</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Moreover, with the same hash in marketplace, the Core could check way easier if the service exist on the marketplace and check for purchase.<br>
+Currently, because the hash are different, only the command <code>service deploy</code> can check if the service is purchased.</p>
+          <p><a href="https://forum.mesg.com/t/services-hash/261/8">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/services-hash/261/8</link>
+        <pubDate>Thu, 07 Mar 2019 05:27:55 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-261-8</guid>
+        <source url="https://forum.mesg.com/t/services-hash/261.rss">Service&#39;s hash</source>
+      </item>
+      <item>
+        <title>Service&#39;s hash</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team quote-modified" data-post="6" data-topic="261">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/krhubert/40/9_2.png" class="avatar"> krhubert:</div>
+<blockquote>
+<blockquote>
+<p>Agree <img src="https://forum.mesg.com/images/emoji/twitter/+1.png?v=6" title=":+1:" class="emoji" alt=":+1:"> I would use the checksum of the tarball except if there is good reason to use the tarsum</p>
+</blockquote>
+<p>Ok, with current needs let’s go with a checksum of the tarball <img src="https://forum.mesg.com/images/emoji/twitter/+1.png?v=6" title=":+1:" class="emoji" alt=":+1:"></p>
+</blockquote>
+</aside>
+<p>I agree with you but let’s be careful with one thing:<br>
+I think it’s super important to have the same service’s hash saved in the marketplace and calculated locally when deploying a service, so we can actually enforce a verification of the 2 hashes.<br>
+We have to make sure that during the publishing of a service on the marketplace, the hash is calculated the same way as the command deploy.<br>
+Because the Core is “cleaning” the service before calculating the hash, if the CLI simply calculate the hash of the tar published on the marketplace, then it may be different (no deletion of <code>.git</code>, etc…).</p>
+<p>Here my suggestion is simply to deploy the service locally before publishing it, so the CLI can easily get the service’s hash. Also, if we change the calculation of the hash, the CLI will not need any update because it’s relaying on the Core to calculate it.<br>
+Do you agree with this? Do you see other way to do it?</p>
+          <p><a href="https://forum.mesg.com/t/services-hash/261/7">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/services-hash/261/7</link>
+        <pubDate>Thu, 07 Mar 2019 03:26:26 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-261-7</guid>
+        <source url="https://forum.mesg.com/t/services-hash/261.rss">Service&#39;s hash</source>
+      </item>
+      <item>
+        <title>Service&#39;s hash</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="5" data-topic="261">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/anthony/40/7_2.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>Agree <img src="https://forum.mesg.com/images/emoji/twitter/+1.png?v=6" title=":+1:" class="emoji" alt=":+1:"> I would use the checksum of the tarball except if there is good reason to use the tarsum</p>
+</blockquote>
+</aside>
+<p>Ok, with current needs let’s go with a checksum of the tarball <img src="https://forum.mesg.com/images/emoji/twitter/+1.png?v=6" title=":+1:" class="emoji" alt=":+1:"></p>
+          <p><a href="https://forum.mesg.com/t/services-hash/261/6">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/services-hash/261/6</link>
+        <pubDate>Wed, 06 Mar 2019 10:00:55 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-261-6</guid>
+        <source url="https://forum.mesg.com/t/services-hash/261.rss">Service&#39;s hash</source>
+      </item>
+      <item>
+        <title>Service&#39;s hash</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="4" data-topic="261">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/krhubert/40/9_2.png" class="avatar"> krhubert:</div>
+<blockquote>
+<p>So how we should treat deploy from git or a local directory (if the hash of the tarred directory will be different then it’s ok for you?). In that case, do we claim that we only support deploy for production from the marketplace, any other way of deploy is for dev|staging|on own responsibility?</p>
+</blockquote>
+</aside>
+<p>This is not highly critical but would be best to have the same hash all the time. As long as we import it the same way we do to export to the marketplace that should be fine. eg: remove .git, select unique folder and finally create tarball.</p>
+<p>The tarball should have the exact same files and so the exact same hash. If there is any changes on the git/directory like permissions or last update header then this is a different version and the tarball will be different.</p>
+<p>I don’t see any reason to try to have the same tarball if the headers changes except if i’m missing some knowledges about header and for example on linux there is an update on the files by the os (for example last_cache, last_read…)</p>
+<aside class="quote group-team" data-post="4" data-topic="261">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/krhubert/40/9_2.png" class="avatar"> krhubert:</div>
+<blockquote>
+<p>So maybe let’s use either checksum of tarball or use tarsum (as it provides <span class="hashtag">#6</span>) and we can back to the topic later when we start doing the network. Then we will have more requirements what we will need in implementation time.</p>
+</blockquote>
+</aside>
+<p>Agree <img src="https://forum.mesg.com/images/emoji/twitter/+1.png?v=6" title=":+1:" class="emoji" alt=":+1:"> I would use the checksum of the tarball except if there is good reason to use the tarsum</p>
+          <p><a href="https://forum.mesg.com/t/services-hash/261/5">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/services-hash/261/5</link>
+        <pubDate>Wed, 06 Mar 2019 08:29:36 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-261-5</guid>
+        <source url="https://forum.mesg.com/t/services-hash/261.rss">Service&#39;s hash</source>
+      </item>
+      <item>
+        <title>Service&#39;s hash</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="2" data-topic="261">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/anthony/40/7_2.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>For me the priority now is to manage the import (because we control the export with the marketplace). We need to make sure that one tarball received will always generate the exact same hash. If the tarball received is different then it’s ok to have a different hash in that case.</p>
+</blockquote>
+</aside>
+<p>So how we should treat deploy from git or a local directory (if the hash of the tarred directory will be different then it’s ok for you?). In that case, do we claim that we only support deploy for production from the marketplace, any other way of deploy is for dev|staging|on own responsibility?</p>
+<h4>note: docker image</h4>
+<p>If we are going to use docker image somehow then in the future we can’t replace docker container provider with a diffrent container system (or orchestrator like rocket, kubernetes, cloud providers etc…) easily. And I think we want to do this in a near feature so binding hash with docker is only temporary solution.</p>
+<h5>note: 5. dependencies change</h5>
+<p>Can we provide somehow the deterministic hash for this bullet? Using <code>apt-get upgrade</code> or <code>npm install</code> without lock file can result in different service. For this the only option is download something that is already built because I don’t see how any of another method can provide a deterministic hash, correct me if I’m wrong.</p>
+<p>I just wanted to put those notes here, but I don’t have a solution for them in mind.</p>
+<p><a class="mention" href="/u/nicolas">@Nicolas</a> pointed out good argument</p>
+<aside class="quote group-team" data-post="3" data-topic="261">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/nicolas/40/10_2.png" class="avatar"> Nicolas:</div>
+<blockquote>
+<p>The decentralized network is not implemented,</p>
+</blockquote>
+</aside>
+<p>So maybe let’s use either checksum of tarball or use tarsum (as it provides <span class="hashtag">#6</span>) and we can back to the topic later when we start doing the network. Then we will have more requirements what we will need in implementation time.</p>
+          <p><a href="https://forum.mesg.com/t/services-hash/261/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/services-hash/261/4</link>
+        <pubDate>Wed, 06 Mar 2019 06:45:23 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-261-4</guid>
+        <source url="https://forum.mesg.com/t/services-hash/261.rss">Service&#39;s hash</source>
+      </item>
+      <item>
+        <title>Service&#39;s hash</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="2" data-topic="261">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/anthony/40/7_2.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>Another way to have full deterministic hash even with docker is to save the docker image built with <code>docker image save</code> , this generates a tarball that we can <code>shasum</code> and distribute increasing considerably the size of the service but this image can then be imported into docker with exactly the same layers (apt-get, npm install etc… will be exactly the same)</p>
+</blockquote>
+</aside>
+<p>I will include it in solution “Download already built docker image”.</p>
+<aside class="quote group-team quote-modified" data-post="2" data-topic="261">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/anthony/40/7_2.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>Something I want clarification on here is what do we want to be deterministic (and I think there is confusion here).</p>
+<ul>
+<li>The hash of the service based on an “import”</li>
+<li>The artifacts generated for a service for an “export”</li>
+</ul>
+<p>For me the priority now is to manage the import (because we control the export with the marketplace). We need to make sure that one tarball received will always generate the exact same hash. If the tarball received is different then it’s ok to have a different hash in that case. And for this case only the <code>tarsum</code> of the tarball + env variable is sufficient.</p>
+</blockquote>
+</aside>
+<p>So, if I understand it correctly, you think goal <strong><span class="hashtag">#5</span> dependencies change (OS version, apt-get, npm i, go mod, etc…)</strong> is not a priority?</p>
+<p>If we reduced the service’s hash to just the checksum of the source, a lot of uniques properties of the hash will disappear. It will not accurately represent the service because there will be some many variable omitted.</p>
+<hr>
+<p>Updates:<br>
+Maybe it’s enough for now to go back to a “simple” checksum on the source and not using the actual Docker Image hash. The decentralized network is not implemented, so having not exactly the same running services across computer with the same hash is fine for now.<br>
+If we go with this direction, the <a href="https://github.com/mesg-foundation/core/pull/731" rel="nofollow noopener">PR 731</a> actually resolves the requirements + give a bit more flexibility by also implementing <strong>6. same hash even with different deployment method</strong>.</p>
+          <p><a href="https://forum.mesg.com/t/services-hash/261/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/services-hash/261/3</link>
+        <pubDate>Tue, 05 Mar 2019 11:46:40 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-261-3</guid>
+        <source url="https://forum.mesg.com/t/services-hash/261.rss">Service&#39;s hash</source>
+      </item>
+      <item>
+        <title>Service&#39;s hash</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>Another way to have full deterministic hash even with docker is to save the docker image built with <code>docker image save</code>, this generates a tarball that we can <code>shasum</code> and distribute increasing considerably the size of the service but this image can then be imported into docker with exactly the same layers (apt-get, npm install etc… will be exactly the same)</p>
+<p>Something I want clarification on here is what do we want to be deterministic (and I think there is confusion here).</p>
+<ul>
+<li>The hash of the service based on an “import”</li>
+<li>The artifacts generated for a service for an “export”</li>
+</ul>
+<p>I feel we are confusing this and that’s why this PR <a href="https://github.com/mesg-foundation/core/pull/731" rel="nofollow noopener">https://github.com/mesg-foundation/core/pull/731</a> is getting messy.</p>
+<p>For me the priority now is to manage the import (because we control the export with the marketplace). We need to make sure that one tarball received will always generate the exact same hash. If the tarball received is different then it’s ok to have a different hash in that case. And for this case only the <code>tarsum</code> of the tarball + env variable is sufficient.</p>
+<p>For the “export” part I agree it needs a lot more work with the solutions you described or the <code>save</code> / <code>import</code> from docker but this is a different step</p>
+          <p><a href="https://forum.mesg.com/t/services-hash/261/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/services-hash/261/2</link>
+        <pubDate>Tue, 05 Mar 2019 09:54:53 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-261-2</guid>
+        <source url="https://forum.mesg.com/t/services-hash/261.rss">Service&#39;s hash</source>
+      </item>
+      <item>
+        <title>Service&#39;s hash</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Related to</p>
+<ul>
+<li><a href="https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211" class="inline-onebox">Service's hash are different from downloaded tarball and remote git</a></li>
+<li>
+<a href="https://github.com/mesg-foundation/core/pull/731" rel="nofollow noopener">PR #731</a>.</li>
+</ul>
+<p>In this topic, I would like to fix the different issues we have about the hash of a service and find solutions that can be implemented step-by-step.</p>
+<h2>The ultimate goal is to have:</h2>
+<p><strong>1. same hash across any computer</strong><br>
+This feature is really important for the future decentralized network. It will be the unique identifier used in order to dispatch executions across multiple Core. That’s how the network will be able to know which service is running, on which core, and select the right Core to execute and verify executions.</p>
+<p>Requested by <a class="mention" href="/u/krhubert">@krhubert</a>:<br>
+<strong>6. same hash even with different deployment method</strong><br>
+The hash should be the same even if the service is deploy from different method: local dir, git repo or tar archive (including compression).</p>
+<h2>But the hash should change when:</h2>
+<p><strong>2. source code change</strong><br>
+means a potentially completely different service.</p>
+<p><strong>3. service definition change</strong><br>
+means a potentially completely different service.</p>
+<p><strong>4. env variables change</strong><br>
+could drastically change the behavior of a service (eg Ethereum with the different networks. same source code, but the data are completely different, thus the behavior of the service is also different).</p>
+<p><strong>5. dependencies change (OS version, apt-get, npm i, go mod, etc…)</strong><br>
+this is more subtle but should also be taking into account: a different version of a dependency could also change drastically the behavior of the service.<br>
+For instance, a package manager using semver could break when installing a new version that actually break the dependency. (But it should be fine when locking version or using having a ‘lock’ file (eg: <code>package-lock.jso</code>)). Another example, running an <code>apt-get upgrade</code> can also install different version of system libraries.</p>
+<h2>Solutions</h2>
+<h4>- Docker image</h4>
+<p><img src="https://forum.mesg.com/images/emoji/twitter/x.png?v=9" title=":x:" class="emoji" alt=":x:"> <span class="hashtag">#1</span>, <span class="hashtag">#4</span>, <span class="hashtag">#6</span><br>
+<img src="https://forum.mesg.com/images/emoji/twitter/white_check_mark.png?v=9" title=":white_check_mark:" class="emoji" alt=":white_check_mark:"> <span class="hashtag">#2</span>, <span class="hashtag">#3</span>, <span class="hashtag">#5</span><br>
+Docker image hash are absolutely non-deterministic and change anytime a change type <span class="hashtag">#2</span>, <span class="hashtag">#3</span>, <span class="hashtag">#5</span> occur. Even more, rebuild from the same source without docker cache or on another computer will create a different image hash.</p>
+<h4>- Docker image + hash of env variables (current implementation)</h4>
+<p><img src="https://forum.mesg.com/images/emoji/twitter/x.png?v=9" title=":x:" class="emoji" alt=":x:"> <span class="hashtag">#1</span>, <span class="hashtag">#6</span><br>
+<img src="https://forum.mesg.com/images/emoji/twitter/white_check_mark.png?v=9" title=":white_check_mark:" class="emoji" alt=":white_check_mark:"> <span class="hashtag">#2</span>, <span class="hashtag">#3</span>, <span class="hashtag">#4</span>, <span class="hashtag">#5</span><br>
+In this improved version of the previous one, the env variables are taking into account so it solves <span class="hashtag">#4</span>. But goal <span class="hashtag">#1</span> is still not met.</p>
+<h4>- Checksum of source + hash of env variables</h4>
+<p><img src="https://forum.mesg.com/images/emoji/twitter/x.png?v=9" title=":x:" class="emoji" alt=":x:"> <span class="hashtag">#5</span><br>
+<img src="https://forum.mesg.com/images/emoji/twitter/white_check_mark.png?v=9" title=":white_check_mark:" class="emoji" alt=":white_check_mark:"> <span class="hashtag">#1</span>, <span class="hashtag">#2</span>, <span class="hashtag">#3</span>, <span class="hashtag">#4</span>, <span class="hashtag">#6</span><br>
+The <a href="https://github.com/mesg-foundation/core/pull/731" rel="nofollow noopener">PR #731</a> calculate the hash based on the source code, the env variables, and the service definition. It calculates the same hash across computer. BUT it doesn’t take into account the dependencies change.</p>
+<h4>Download already built docker image</h4>
+<p><img src="https://forum.mesg.com/images/emoji/twitter/x.png?v=9" title=":x:" class="emoji" alt=":x:"> <span class="hashtag">#2</span>, <span class="hashtag">#3</span><br>
+<img src="https://forum.mesg.com/images/emoji/twitter/white_check_mark.png?v=9" title=":white_check_mark:" class="emoji" alt=":white_check_mark:"> <span class="hashtag">#1</span>, <span class="hashtag">#4</span>, <span class="hashtag">#5</span>, <span class="hashtag">#6</span><br>
+Same way as Docker Hub is working, the developer build its image and publish it on a image repository.<br>
+From <a class="mention" href="/u/anthony">@Anthony</a>: Docker can also generate a tarball that is easy to distribute with the command <code>docker image save</code>. But the size of the image could be way higher than the source.<br>
+User can simply download the already build image.<br>
+The big problem is there is no way to guarantee the image is actually running the service’s source code. A developer can publish an image that is not build with the same source code.<br>
+One way to solve this will be to “control” the build process either by forcing to use the core or to use a public CI. In both case, there are many flaws and limitations.</p>
+<h4>Deterministic image build + hash of env variables</h4>
+<p><img src="https://forum.mesg.com/images/emoji/twitter/white_check_mark.png?v=9" title=":white_check_mark:" class="emoji" alt=":white_check_mark:"> <span class="hashtag">#1</span>, <span class="hashtag">#2</span>, <span class="hashtag">#3</span>, <span class="hashtag">#4</span>, <span class="hashtag">#5</span>, <span class="hashtag">#6</span><br>
+The ultimate solution could be fixed by using another tool than Docker build to create the image in a deterministic way.<br>
+I found out that it’s possible but may require to use “complicated” tools and could take weeks to actually implement.</p>
+<ul>
+<li><a href="https://blog.bazel.build/2015/07/28/docker_build.html" rel="nofollow noopener">https://blog.bazel.build/2015/07/28/docker_build.html</a></li>
+<li><a href="https://github.com/openshift/source-to-image" rel="nofollow noopener">https://github.com/openshift/source-to-image</a></li>
+</ul>
+<hr>
+<ul>
+<li>I would especially like to have your feedback on the prioritization of <span class="hashtag">#5</span>. I feel it’s important but make the calculation of the hash dramatically more complicated.</li>
+<li>Also please fix the proposed solutions if I made mistakes.</li>
+</ul>
+          <p><a href="https://forum.mesg.com/t/services-hash/261/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/services-hash/261/1</link>
+        <pubDate>Tue, 05 Mar 2019 06:12:00 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-261-1</guid>
+        <source url="https://forum.mesg.com/t/services-hash/261.rss">Service&#39;s hash</source>
+      </item>
+  </channel>
+</rss>

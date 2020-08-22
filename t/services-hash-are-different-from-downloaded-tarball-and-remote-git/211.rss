@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Service&#39;s hash are different from downloaded tarball and remote git</title>
+    <link>https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211</link>
+    <description>Service&#39;s hash are different from downloaded tarball and remote git.
+
+But if I download the tarball manually and deploy it, the hash is the same as git.</description>
+    
+    <lastBuildDate>Fri, 15 Mar 2019 10:15:19 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Service&#39;s hash are different from downloaded tarball and remote git</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>Just to summarize.<br>
+This has been fixed/implemented here <a href="https://github.com/mesg-foundation/core/pull/731" rel="nofollow noopener">https://github.com/mesg-foundation/core/pull/731</a></p>
+<ul>
+<li>Remove all <code>.git</code> folder (as files are not deterministic inside)</li>
+<li>Compute the hash by hashing all the files in the service</li>
+<li>Hash permission in the file and ignore all the rest (modtime not supported by git)</li>
+</ul>
+          <p><a href="https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211/12">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211/12</link>
+        <pubDate>Fri, 15 Mar 2019 10:15:19 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-211-12</guid>
+        <source url="https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211.rss">Service&#39;s hash are different from downloaded tarball and remote git</source>
+      </item>
+      <item>
+        <title>Service&#39;s hash are different from downloaded tarball and remote git</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>why not just supporting only <em>tar.gz</em> for now? it’s also widely used.</p>
+          <p><a href="https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211/11">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211/11</link>
+        <pubDate>Fri, 01 Feb 2019 10:05:07 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-211-11</guid>
+        <source url="https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211.rss">Service&#39;s hash are different from downloaded tarball and remote git</source>
+      </item>
+      <item>
+        <title>Service&#39;s hash are different from downloaded tarball and remote git</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <p>yes, but it’s harder because you have to uncompress all types (bz, xz) and then compress it back to gzip, but we can do this as well (for example before sending to docker)</p>
+          <p><a href="https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211/10">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211/10</link>
+        <pubDate>Fri, 01 Feb 2019 09:13:24 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-211-10</guid>
+        <source url="https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211.rss">Service&#39;s hash are different from downloaded tarball and remote git</source>
+      </item>
+      <item>
+        <title>Service&#39;s hash are different from downloaded tarball and remote git</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="8" data-topic="211">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/krhubert/40/9_2.png" class="avatar"> krhubert:</div>
+<blockquote>
+<p>it should be only uncompressed to get the same results.</p>
+</blockquote>
+</aside>
+<p>or it should use the same compression all the time? gzip for instance?</p>
+          <p><a href="https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211/9">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211/9</link>
+        <pubDate>Fri, 01 Feb 2019 09:08:57 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-211-9</guid>
+        <source url="https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211.rss">Service&#39;s hash are different from downloaded tarball and remote git</source>
+      </item>
+      <item>
+        <title>Service&#39;s hash are different from downloaded tarball and remote git</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <p>It should be calculated from archive but if archive then it should be only uncompressed to get the same results.</p>
+<p>So the PR is good, but need to fix the compression, but we can do this in different PR.</p>
+          <p><a href="https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211/8">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211/8</link>
+        <pubDate>Fri, 01 Feb 2019 08:48:06 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-211-8</guid>
+        <source url="https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211.rss">Service&#39;s hash are different from downloaded tarball and remote git</source>
+      </item>
+      <item>
+        <title>Service&#39;s hash are different from downloaded tarball and remote git</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p><a href="https://github.com/mesg-foundation/core/pull/731#discussion_r250472435" rel="nofollow noopener">From hubert’s comment</a></p>
+<blockquote>
+<p>It won’t be deterministic here because tarball could be (un)compressed with diffrent algorithms.<br>
+Also tarball may have  <code>.git</code>  directory which will be removed when deploying.</p>
+</blockquote>
+<p>Do we all agree to continue with the implementation of this <a href="https://github.com/mesg-foundation/core/pull/731" rel="nofollow noopener">PR</a>, hash calculated from the archive?<br>
+Or should it be calculated from the files?</p>
+          <p><a href="https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211/7">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211/7</link>
+        <pubDate>Fri, 01 Feb 2019 08:43:37 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-211-7</guid>
+        <source url="https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211.rss">Service&#39;s hash are different from downloaded tarball and remote git</source>
+      </item>
+      <item>
+        <title>Service&#39;s hash are different from downloaded tarball and remote git</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>POC: <a href="https://github.com/mesg-foundation/core/pull/731" rel="nofollow noopener">https://github.com/mesg-foundation/core/pull/731</a></p>
+          <p><a href="https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211/6">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211/6</link>
+        <pubDate>Fri, 25 Jan 2019 08:39:31 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-211-6</guid>
+        <source url="https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211.rss">Service&#39;s hash are different from downloaded tarball and remote git</source>
+      </item>
+      <item>
+        <title>Service&#39;s hash are different from downloaded tarball and remote git</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Docker hash system is <strong>NOT DETERMINISTIC</strong>.<br>
+Same computer, same source, use <code>--no-cache</code> flag:</p>
+<pre><code class="lang-auto">$ docker build https://github.com/mesg-foundation/service-ethereum.git --no-cache
+Successfully built a9279453897b
+</code></pre>
+<pre><code class="lang-auto">$ docker build https://github.com/mesg-foundation/service-ethereum.git --no-cache
+Successfully built ab77935bbf48
+</code></pre>
+<p>To fix this issue, we are going to create a hash based on the service source, more specifically on the archive the core receive in the <code>service.New</code> function.<br>
+<aside class="onebox githubblob">
+  <header class="source">
+      <a href="https://github.com/mesg-foundation/core/blob/master/service/service.go#L93-L126" target="_blank" rel="nofollow noopener">github.com</a>
+  </header>
+  <article class="onebox-body">
+    <h4><a href="https://github.com/mesg-foundation/core/blob/master/service/service.go#L93-L126" target="_blank" rel="nofollow noopener">mesg-foundation/core/blob/master/service/service.go#L93-L126</a></h4>
+<pre class="onebox"><code class="lang-go"><ol class="start lines" start="93" style="counter-reset: li-counter 92 ;">
+<li>func New(tarball io.Reader, env map[string]string, options ...Option) (*Service, error) {</li>
+<li>	s := &amp;Service{}</li>
+<li>
+</li>
+<li>	defer s.closeStatus()</li>
+<li>
+</li>
+<li>	if err := s.setOptions(options...); err != nil {</li>
+<li>		return nil, err</li>
+<li>	}</li>
+<li>	if err := s.saveContext(tarball); err != nil {</li>
+<li>		return nil, err</li>
+<li>	}</li>
+<li>	defer s.removeTempDir()</li>
+<li>
+</li>
+<li>	def, err := importer.From(s.tempPath)</li>
+<li>	if err != nil {</li>
+<li>		return nil, err</li>
+<li>	}</li>
+<li>
+</li>
+<li>	s.injectDefinition(def)</li>
+<li>
+</li>
+</ol></code></pre>
+
+  This file has been truncated. <a href="https://github.com/mesg-foundation/core/blob/master/service/service.go#L93-L126" target="_blank" rel="nofollow noopener">show original</a>
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+</p>
+<p>Because the source contains the <code>mesg.yml</code>, we can also remove the hash calculation from the Service struct to only rely on the source hash!</p>
+<p>I will create a small POC of this solution.</p>
+          <p><a href="https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211/5">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211/5</link>
+        <pubDate>Thu, 24 Jan 2019 04:00:09 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-211-5</guid>
+        <source url="https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211.rss">Service&#39;s hash are different from downloaded tarball and remote git</source>
+      </item>
+      <item>
+        <title>Service&#39;s hash are different from downloaded tarball and remote git</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p><a class="mention" href="/u/krhubert">@krhubert</a> plan:</p>
+<h3>1) need constant hash</h3>
+<p>To do so, the core will download / clone the service in a temp folder, check the <code>mesg.yml</code>, send to docker from the local temp folder.</p>
+<p>If the calculated hash are still not the same, we need to check for:</p>
+<ul>
+<li>automatically generated files (eg <code>.DS_Store</code>, <code>.git</code>)</li>
+<li>creation / update datetime of files</li>
+<li>modification on file permission</li>
+<li>anything else…</li>
+</ul>
+<p>If no solution is find, then we need to calculate the hash of the service ourselve. Let’s open this discussion later if needed.</p>
+<h3>2) use docker build logic</h3>
+<p>docker is compatible with git repo (with tag and branch) and multiple archive type.<br>
+Doc: <a href="https://docs.docker.com/v17.12/edge/engine/reference/commandline/build/#git-repositories" rel="nofollow noopener">https://docs.docker.com/v17.12/edge/engine/reference/commandline/build/#git-repositories</a><br>
+Source: <a href="https://github.com/docker/cli/blob/master/cli/command/image/build.go#L190" rel="nofollow noopener">https://github.com/docker/cli/blob/master/cli/command/image/build.go#L190</a></p>
+<h3>3) if there is only 1 directory and enter it</h3>
+<p>to be compatible with archive from github</p>
+<h3>4) support git repo url without <code>.git</code> suffix only if it’s compatible with <span class="hashtag">#tag</span> and <span class="hashtag">#branch</span>
+</h3>
+<p>otherwise, no support for git repo url with <code>.git</code>.</p>
+          <p><a href="https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211/4</link>
+        <pubDate>Tue, 22 Jan 2019 10:09:54 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-211-4</guid>
+        <source url="https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211.rss">Service&#39;s hash are different from downloaded tarball and remote git</source>
+      </item>
+      <item>
+        <title>Service&#39;s hash are different from downloaded tarball and remote git</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Here are the result of my different tests:</p>
+<p>I add to the <code>.dockerignore</code> of this service both <code>.git</code> and <code>.DS_Store</code>. So it should not be polluted by automatically created files.</p>
+<h3>Deploy remote tarball</h3>
+<pre><code class="lang-auto">➜  core git:(dev) ✗ ./dev-cli service deploy https://api.github.com/repos/mesg-foundation/service-ethereum/tarball/master
+✔ Service deployed with hash: d8f01d6f7a7193b8c7d7b6d943c97b195e9fc409
+</code></pre>
+<h3>Deploy remote git</h3>
+<pre><code class="lang-auto">➜  core git:(dev) ✗ ./dev-cli service deploy https://github.com/mesg-foundation/service-ethereum/
+✔ Service deployed with hash: 9c1b8b7efd90b72a0027e8a107cbaf1b4019e918
+</code></pre>
+<h3>Deploy local dir</h3>
+<pre><code class="lang-auto">➜  core git:(dev) ✗ ./dev-cli service deploy /Users/nico/Developments/MESG/services/service-ethereum
+✔ Service deployed with hash: 9c1b8b7efd90b72a0027e8a107cbaf1b4019e918
+</code></pre>
+<h3>Manually download tarball, extract it and deploy:</h3>
+<pre><code class="lang-auto">➜  core git:(dev) ✗ ./dev-cli service deploy /Users/nico/service-ethereum/mesg-foundation-service-ethereum-8bf6d06
+✔ Service deployed with hash: 9c1b8b7efd90b72a0027e8a107cbaf1b4019e918
+</code></pre>
+<hr>
+<p>As you can see, all deployment except remote tar provide the same hash except remote tarball!</p>
+<p>I had to fight with automatically created files, so maybe the ubuntu is automatically adding file when untar the archive?</p>
+          <p><a href="https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211/3</link>
+        <pubDate>Tue, 22 Jan 2019 04:37:56 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-211-3</guid>
+        <source url="https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211.rss">Service&#39;s hash are different from downloaded tarball and remote git</source>
+      </item>
+      <item>
+        <title>Service&#39;s hash are different from downloaded tarball and remote git</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <h1>local tarball</h1>
+<pre><code class="lang-auto">➜  mesg-foundation-service-ethereum-e76695f git:(dev) ✗ docker build -t local_tarball_eth .
+Sending build context to Docker daemon  246.8kB
+...
+Successfully tagged local_tarball_eth:latest
+➜  mesg-foundation-service-ethereum-e76695f git:(dev) ✗ docker images local_tarball_eth
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+local_tarball_eth   latest              24a0da1565ce        3 hours ago         846MB
+</code></pre>
+<h1>local git</h1>
+<pre><code class="lang-auto">➜  service-ethereum docker build -t local_git_eth .                               
+Sending build context to Docker daemon  246.8kB
+...
+Successfully tagged local_git_eth:latest
+➜  service-ethereum docker images local_git_eth    
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+local_git_eth       latest              9de6e95f4278        3 hours ago         846MB
+</code></pre>
+<p>So different hash is due to docker build (don’t know why exactly) and the Image id is changed in service struct.</p>
+<p>To be the most compatible what what we get from docker we can use code from<br>
+<aside class="onebox githubblob">
+  <header class="source">
+      <a href="https://github.com/docker/cli/blob/master/cli/command/image/build.go#L190" target="_blank" rel="nofollow noopener">github.com</a>
+  </header>
+  <article class="onebox-body">
+    <h4><a href="https://github.com/docker/cli/blob/master/cli/command/image/build.go#L190" target="_blank" rel="nofollow noopener">docker/cli/blob/master/cli/command/image/build.go#L190</a></h4>
+<pre class="onebox"><code class="lang-go"><ol class="start lines" start="180" style="counter-reset: li-counter 179 ;">
+<li>// WriteProgress formats progress information from a ProgressReader.</li>
+<li>func (out *lastProgressOutput) WriteProgress(prog progress.Progress) error {</li>
+<li>	if !prog.LastUpdate {</li>
+<li>		return nil</li>
+<li>	}</li>
+<li>
+</li>
+<li>	return out.output.WriteProgress(prog)</li>
+<li>}</li>
+<li>
+</li>
+<li>// nolint: gocyclo</li>
+<li class="selected">func runBuild(dockerCli command.Cli, options buildOptions) error {</li>
+<li>	buildkitEnabled, err := command.BuildKitEnabled(dockerCli.ServerInfo())</li>
+<li>	if err != nil {</li>
+<li>		return err</li>
+<li>	}</li>
+<li>	if buildkitEnabled {</li>
+<li>		return runBuildBuildKit(dockerCli, options)</li>
+<li>	}</li>
+<li>
+</li>
+<li>	var (</li>
+<li>		buildCtx      io.ReadCloser</li>
+</ol></code></pre>
+
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+</p>
+          <p><a href="https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211/2</link>
+        <pubDate>Mon, 21 Jan 2019 13:29:26 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-211-2</guid>
+        <source url="https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211.rss">Service&#39;s hash are different from downloaded tarball and remote git</source>
+      </item>
+      <item>
+        <title>Service&#39;s hash are different from downloaded tarball and remote git</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Service’s hash are different from downloaded tarball and remote git.</p>
+<p>But if I download the tarball manually and deploy it, the hash is the same as git.</p>
+          <p><a href="https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211/1</link>
+        <pubDate>Mon, 21 Jan 2019 07:16:31 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-211-1</guid>
+        <source url="https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211.rss">Service&#39;s hash are different from downloaded tarball and remote git</source>
+      </item>
+  </channel>
+</rss>

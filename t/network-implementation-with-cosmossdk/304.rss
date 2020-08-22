@@ -1,0 +1,879 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Network implementation with CosmosSDK</title>
+    <link>https://forum.mesg.com/t/network-implementation-with-cosmossdk/304</link>
+    <description>## Goal
+
+Decentralization of the different resources managed by the Engine:
+- **Services** (to create this marketplace of services in our own network)
+- **Instances** (to be able to delegate execution to specific nodes)
+- **Executions** (to process executions on the network)
+
+In order to distribute these resources, we need to make sure that every change of state is replicated on the network and verified by each node of the network before broadcasting it.
+
+For that, we will use CosmosSDK &amp; Tendermint that already implement this distributed state machine with a lot of really cool stuff.
+
+## Implementation
+
+Details about CosmosSDK [App concept](https://cosmos.network/docs/concepts/baseapp.html#baseapp), [Architecture](https://cosmos.network/docs/intro/sdk-app-architecture.html#sdk-application-architecture), [Design](https://cosmos.network/docs/intro/sdk-design.html#modules)
+
+We will use what Cosmos provides:
+- Keeper/Store 
+- Messages
+- Handlers
+- Querier
+
+#### Keeper
+
+The place to store the data. We actually have everything in the database package, this database package will disappear and the resource package (service, instance, and execution) will manage the storing based on these keepers.
+
+Keepers expose getter and setters of the data. We should only read/write the data based on these keepers
+
+#### Messages
+
+Type of messages that can trigger actions on the data. These are the messages that will transit in the network (or within the local instance). This message will validate the basic data (light validation).
+
+Messages are directly handled by Tendermint and will be propagated automatically (magic)
+
+#### Handlers
+
+Handlers are the actions that will update the Keeper based on Message received. This has most of the logic and could be delegated to the sdk package.
+
+Handlers are called either directly from the sdk or call based on the routing defined by the application.
+
+#### Querier
+
+Not sure exactly how this is useful in our case but it allows to read the data, we should probably only read data based on a querier and never try to read directly from the keeper
+
+---
+
+We can implement all these objects directly in the resource packages:
+```
+service
+   - type.go
+   - keeper.go # implement the keeper
+   - msgs.go # implement the messages
+   - handler.go # implement the handlers
+   - querier.go # implement the queries
+   - codec.go # needed codec to save the data
+instance
+   - type.go
+   - keeper.go # implement the keeper
+   - msgs.go # implement the messages
+   - handler.go # implement the handlers
+   - querier.go # implement the queries
+   - codec.go # needed codec to save the data
+execution
+   - type.go
+   - keeper.go # implement the keeper
+   - msgs.go # implement the messages
+   - handler.go # implement the handlers
+   - querier.go # implement the queries
+   - codec.go # needed codec to save the data
+```</description>
+    
+    <lastBuildDate>Sun, 08 Sep 2019 06:17:24 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/network-implementation-with-cosmossdk/304.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Network implementation with CosmosSDK</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <h2>Step-by-step v2 guide to implement Cosmos</h2>
+<p><em>I will use service for this guide.</em></p>
+<h4>Database</h4>
+<ul>
+<li>remove the <code>ServiceDB</code> interface</li>
+<li>Transform <code>LevelDBServiceDB</code> to <code>ServiceDB</code> and change the dependency to <code>leveldb.DB</code> to <code>store.Store</code>
+</li>
+<li>update the rest of the file and the associated tests accordingly
+<ul>
+<li>use <code>Has</code> function to check if a key exist instead of <code>leveldb.ErrNotFound</code>
+</li>
+<li>store doesn’t implement transaction. it could be necessary to implement a similar system</li>
+</ul>
+</li>
+<li>update the rest of codebase:
+<ul>
+<li>
+<code>database.ServiceDB</code> to <code>*database.ServiceDB</code>
+</li>
+<li>update initialisation of ServiceDB to use the goleveldb store:</li>
+</ul>
+<pre><code class="lang-diff">- serviceDB, err := database.NewServiceDB(filepath.path)
++ store, err := store.NewLevelDBStore(path)
+if err != nil {
+	return nil, err
+}
++ serviceDB := database.NewServiceDB(store)
+</code></pre>
+<ul>
+<li>update tests!</li>
+</ul>
+</li>
+<li>Create PR (eg: <a href="https://github.com/mesg-foundation/engine/pull/1244" rel="nofollow noopener">https://github.com/mesg-foundation/engine/pull/1244</a>)</li>
+</ul>
+<h4>SDK step 1</h4>
+<ul>
+<li>Create interface <code>Service</code> of the current public API in new file <code>type.go</code>
+</li>
+<li>Update codebase to use the interface <code>Service</code>. Basically remove pointer on <code>servicesdk.Service</code>
+</li>
+<li>Rename file to <code>deprecated.go</code>
+</li>
+<li>Rename <code>Service</code> struct to <code>Deprecated</code>. <code>New</code> function to <code>NewDeprecated</code>
+</li>
+<li>Update codebase to use <code>NewDeprecated</code> function</li>
+<li>Create PR (eg: <a href="https://github.com/mesg-foundation/engine/pull/1250" rel="nofollow noopener">https://github.com/mesg-foundation/engine/pull/1250</a>)</li>
+</ul>
+<h4>SDK step 2</h4>
+<ul>
+<li>Extract logic function to <code>utils.go</code>
+</li>
+<li>Add new implementation <code>SDK</code> that implement the interface but panic for now</li>
+<li>Add new struct <code>module</code> that implement querier, handler functions and register its module and store to cosmos</li>
+<li>Init new structs <code>sdk</code> and <code>module</code> in <code>New</code> function of <code>sdk/sdk.go</code>
+</li>
+<li>Update <code>main.go</code> for new depencies</li>
+<li>Create PR (eg: <a href="https://github.com/mesg-foundation/engine/pull/1252" rel="nofollow noopener">https://github.com/mesg-foundation/engine/pull/1252</a>)</li>
+</ul>
+<h3>SDK step 3</h3>
+<p>TODO: Concrete implementation of tx, handler and query.</p>
+<h4>Problem to fix before implementing step 3</h4>
+<h5>Should use service proto struct for storing in DB and in the cosmos transaction / query</h5>
+<ul>
+<li>Problem with marshal with current struct using Cosmos Amino
+<ul>
+<li>Amino is based on proto, so using a struct generated from proto solve the problem</li>
+<li>Better performance to encode/decode in “proto” binary rather than JSON in db</li>
+<li>Can still encode in classic JSON for transaction and query for human-readability</li>
+</ul>
+</li>
+<li>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> Need to find a way to keep using the struct tag for hash and validation
+<ul>
+<li>gogoproto have an extension to do it (set the golang tags in the proto files)</li>
+<li>if the validation is set in proto file, then it could be possible to have multi-language validation</li>
+</ul>
+</li>
+<li>No more mapping functions</li>
+<li>One source of truth for structure of data: proto files</li>
+<li>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> Need to move the generated proto files in “resource” (eg: service) folder to be able to add the helper functions on the struct of the data.
+<ul>
+<li>Don’t necessary have to be done this way. Be it will be way nicer.</li>
+</ul>
+</li>
+<li>I would recommend to use the proto struct as data in the database and in the cosmos transaction and query.</li>
+</ul>
+<p>Solution: use proto only for transaction and query. Will use proto for db later on.</p>
+<h5>Public API of SDK needs to receive the user’s account (account name + password)</h5>
+<ul>
+<li>Required to sign the transaction before broadcasting them</li>
+<li>Could be a new struct passed as parameter of the write functions (create, delete)</li>
+<li>Should it be inside a context variable? I’m worry than the context variable could be a “garbage” of all the required data.</li>
+</ul>
+<p>Solution: new struct Account passed as parameter in SDK function. Use <a href="https://github.com/grpc/grpc-go/blob/master/Documentation/grpc-metadata.md" rel="nofollow noopener">gRPC metadata</a> on the network.</p>
+<h5>Should we use the gRPC API’s messages as Cosmos transaction and query</h5>
+<ul>
+<li>They should contain mostly the same data</li>
+<li>Differences: user account management
+<ul>
+<li>In Cosmos transaction the address / public key and a signature will be used</li>
+<li>In the gRPC API message, the account name and password should be provided (could be put in the header maybe? but not the best place i think).</li>
+</ul>
+</li>
+<li>It will really make the gRPC API super close to the SDK api</li>
+<li>be able to get rid of the custom gRPC server implementation in order to use a generic one (sdk could register itself directly to the gPRC server)</li>
+<li>but no flexibility in the data “reserved” for the gRPC API and the ones for the cosmos transactions</li>
+<li>I would recommend to <strong>not</strong> use gRPC API message for now to have maximum flexibility. In a few weeks (maybe when implementation without cosmos is deleted), we could reopen the question in order to refactor and reduce codebase.</li>
+</ul>
+<p>Solution: define cosmos transaction and query for now. let’s see later if a merge with gRPC message is possible.</p>
+<hr>
+<p>Helpers on top of cosmos:</p>
+<ul>
+<li>
+<span class="chcklst-box checked fa fa-check-square fa-fw"></span> <a href="https://github.com/mesg-foundation/engine/pull/1243" rel="nofollow noopener">PR #1243</a> <a class="mention" href="/u/nicolas">@Nicolas</a> make general purpose cosmos kvstore and goleveldb implement the same interface.
+<ul>
+<li>create new interface <code>store</code>
+</li>
+<li>create implementation for cosmos kvstore
+<ul>
+<li>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> <a href="https://github.com/mesg-foundation/engine/pull/1257" rel="nofollow noopener">PR #1257</a> <a class="mention" href="/u/krhubert">@krhubert</a> catch error</li>
+</ul>
+</li>
+<li>create implementation for goleveldb</li>
+</ul>
+</li>
+<li>
+<span class="chcklst-box checked fa fa-check-square fa-fw"></span> <a href="https://github.com/mesg-foundation/engine/pull/1248" rel="nofollow noopener">PR #1248</a> <a class="mention" href="/u/nicolas">@Nicolas</a> Cosmos app constructor</li>
+<li>
+<span class="chcklst-box checked fa fa-check-square fa-fw"></span> <a href="https://github.com/mesg-foundation/engine/pull/1248" rel="nofollow noopener">PR #1248</a> <a class="mention" href="/u/krhubert">@krhubert</a> TXBuilder</li>
+<li>
+<span class="chcklst-box checked fa fa-check-square fa-fw"></span> <a href="https://github.com/mesg-foundation/engine/pull/1248" rel="nofollow noopener">PR #1248</a> <a class="mention" href="/u/krhubert">@krhubert</a> Keybase</li>
+<li>
+<span class="chcklst-box checked fa fa-check-square fa-fw"></span> <a href="https://github.com/mesg-foundation/engine/pull/1248" rel="nofollow noopener">PR #1248</a> <a class="mention" href="/u/krhubert">@krhubert</a> ABCI Querier</li>
+<li>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> <a href="https://github.com/mesg-foundation/engine/pull/1249" rel="nofollow noopener">PR #1249</a> Commit SDK double version(one deprecated, and not the other one). require for step 2</li>
+<li>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> <a href="https://github.com/mesg-foundation/engine/pull/1255" rel="nofollow noopener">PR #1255</a> <a class="mention" href="/u/krhubert">@krhubert</a>  Tx publisher that wait for the tx to be include in a block<br>
+use <code>rpcclient.BroadcastTxSync</code> and <code>rpcclient.Subscribe</code> to sub to the tx<br>
+<a href="https://tendermint.com/docs/app-dev/subscribing-to-events-via-websocket.html" rel="nofollow noopener">https://tendermint.com/docs/app-dev/subscribing-to-events-via-websocket.html</a><br>
+<a href="https://godoc.org/github.com/tendermint/tendermint/types#pkg-constants" rel="nofollow noopener">https://godoc.org/github.com/tendermint/tendermint/types#pkg-constants</a>
+</li>
+</ul>
+          <p><a href="https://forum.mesg.com/t/network-implementation-with-cosmossdk/304/15">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/network-implementation-with-cosmossdk/304/15</link>
+        <pubDate>Thu, 22 Aug 2019 13:21:19 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-304-15</guid>
+        <source url="https://forum.mesg.com/t/network-implementation-with-cosmossdk/304.rss">Network implementation with CosmosSDK</source>
+      </item>
+      <item>
+        <title>Network implementation with CosmosSDK</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="13" data-topic="304">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/nicolas/40/10_2.png" class="avatar"> Nicolas:</div>
+<blockquote>
+<p>Why do you want to create on Database struct that contains all database?</p>
+</blockquote>
+</aside>
+<p>To have only one database interface and rely only on the database object. It could be split as we have right now with InstanceDatabase, Execution etc… but I don’t we need the split and for the sub sdk pacakages</p>
+<pre><code class="lang-auto">// New creates a new SDK with given options.
+func New(c container.Container, serviceDB database.ServiceDB, instanceDB database.InstanceDB, execDB database.ExecutionDB,         workflowDB database.WorkflowDB, engineName, port string) *SDK {
+  ps := pubsub.New(0)
+  serviceSDK := servicesdk.New(c, serviceDB)
+  instanceSDK := instancesdk.New(c, serviceSDK, instanceDB, engineName, port)
+  workflowSDK := workflowsdk.New(instanceSDK, workflowDB)
+  executionSDK := executionsdk.New(ps, serviceSDK, instanceSDK, workflowSDK, execDB)
+  eventSDK := eventsdk.New(ps, serviceSDK, instanceSDK)
+</code></pre>
+<p>So, for now, sdk instances are passed around only just to access it’s getter (fg. instance has service sdk to just call a getter). This is why I think <code>database</code> is needed to be passed instead of sdk.</p>
+<p>If someone needs the database it has to receive only a simple database as a dependency, not the whole sdk. It’s like with SQL db. A package receives an open connection to db to insert/select data it needs, but it dosen’t mean the package and read/write anything it wants from the database.</p>
+<p>With this approch the <code>New</code> funtion should looks more like :</p>
+<pre><code class="lang-auto">// New creates a new SDK with given options.
+func New(c container.Container, db database.Database, engineName, port string ) *SDK {
+  ps := pubsub.New(0)
+  serviceSDK := servicesdk.New(c, db)
+  instanceSDK := instancesdk.New(c, db, engineName, port)
+  workflowSDK := workflowsdk.New(db)
+  executionSDK := executionsdk.New(ps,db)
+  eventSDK := eventsdk.New(ps, db)
+</code></pre>
+          <p><a href="https://forum.mesg.com/t/network-implementation-with-cosmossdk/304/14">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/network-implementation-with-cosmossdk/304/14</link>
+        <pubDate>Mon, 19 Aug 2019 11:27:12 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-304-14</guid>
+        <source url="https://forum.mesg.com/t/network-implementation-with-cosmossdk/304.rss">Network implementation with CosmosSDK</source>
+      </item>
+      <item>
+        <title>Network implementation with CosmosSDK</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="12" data-topic="304">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/krhubert/40/9_2.png" class="avatar"> krhubert:</div>
+<blockquote>
+<p>Are we going to change our sdk implementation now? If no, then why we need an interface in that case? We don’t know how exactly this interface should look like, but we can add it in the feature.</p>
+</blockquote>
+</aside>
+<p>The interface will be useful for being able to switch from <code>Classic</code> to <code>Cosmos</code> implementation of the sdk using the flag <code>experimental</code>. It also something we need to do for a while for unit test <img src="https://forum.mesg.com/images/emoji/twitter/wink.png?v=9" title=":wink:" class="emoji" alt=":wink:"></p>
+<p><code>Classic</code> is the current implementation of the sub-sdk package that directly call the database.<br>
+<code>Cosmos</code> will be the version using the cosmos’s abci query and transaction to create state transition of the db.</p>
+<aside class="quote group-team" data-post="12" data-topic="304">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/krhubert/40/9_2.png" class="avatar"> krhubert:</div>
+<blockquote>
+<p>Also what do you think about two database interface just for readability.</p>
+</blockquote>
+</aside>
+<p>I’m ok with the <code>KVDatabase</code>. <code>ServiceDatabase</code> and <code>InstanceDatabase</code> should keep the current API. Simple <code>Get</code>, <code>List</code>, etc…<br>
+Why do you want to create on Database struct that contains all database?</p>
+<hr>
+<p>Some more suggestion:</p>
+<ul>
+<li>The database or future keeper should have a lot more verification on the data that are saved in the db. In Cosmos design, a keeper can access another keeper. I think we should do the same. Like this, a sdk sub-package will NOT access another SDK package, but the keeper of Instances can access the keeper of Services (for example). Thus, the keepers should be put in their attached data package (Keeper of Services in Service, etc…), this will not create dep cycle as the data themself doesn’t create cycle.</li>
+</ul>
+          <p><a href="https://forum.mesg.com/t/network-implementation-with-cosmossdk/304/13">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/network-implementation-with-cosmossdk/304/13</link>
+        <pubDate>Mon, 19 Aug 2019 11:02:33 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-304-13</guid>
+        <source url="https://forum.mesg.com/t/network-implementation-with-cosmossdk/304.rss">Network implementation with CosmosSDK</source>
+      </item>
+      <item>
+        <title>Network implementation with CosmosSDK</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="11" data-topic="304">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/nicolas/40/10_2.png" class="avatar"> Nicolas:</div>
+<blockquote>
+<p>i’m speaking only about the interface. It will remove the dependency between the sdk and the actual implementation of the database.</p>
+<p><img src="https://forum.mesg.com/user_avatar/forum.mesg.com/krhubert/40/9_2.png" alt width="20" height="20"> krhubert:</p>
+</blockquote>
+</aside>
+<p><img src="https://forum.mesg.com/images/emoji/twitter/+1.png?v=9" title=":+1:" class="emoji" alt=":+1:"></p>
+<aside class="quote group-team" data-post="11" data-topic="304">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/nicolas/40/10_2.png" class="avatar"> Nicolas:</div>
+<blockquote>
+<p>Interface of the current public API. When I’m speaking about SDK, I’m speaking about the sub-sdks package ( <code>Service</code> , <code>Instance</code> etc…).</p>
+<p><img src="https://forum.mesg.com/user_avatar/forum.mesg.com/krhubert/40/9_2.png" alt width="20" height="20"> krhubert:</p>
+</blockquote>
+</aside>
+<p>Are we going to change our sdk implementation now? If no, then why we need an interface in that case? We don’t know how exactly this interface should look like, but we can add it in the feature.</p>
+<aside class="quote group-team" data-post="11" data-topic="304">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/nicolas/40/10_2.png" class="avatar"> Nicolas:</div>
+<blockquote>
+<p>The <code>CreateServcieRequest</code> is not the data to store in database (state) but the action to change the database (state transition). Whatever message we will use, they will not be saved in database, but the result of the modification of state will be saved in database.</p>
+</blockquote>
+</aside>
+<p>As I see it, the <code>MsgSetService</code> (same as <code>MsgRemoveServcie</code>, etc…) describes the action to be taken, so that action has the right data (pbtypes.Service) in order to transition state. So <code>MsgSetService</code> is an actual action because based on that message cosmos app takes the actions.</p>
+<aside class="quote group-team" data-post="11" data-topic="304">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/nicolas/40/10_2.png" class="avatar"> Nicolas:</div>
+<blockquote>
+<p>yes right. I didn’t put anything because it’s not a functionally that the Engine is currently doing.</p>
+</blockquote>
+</aside>
+<p>Ok</p>
+<p>Also what do you think about two database interface just for readability.</p>
+<pre><code class="lang-auto">
+// this interface will be general key-value database interface
+type KVDatabase interface {
+  Set([]byte, []byte) error
+  // remove, list, etc ....
+}
+
+// this interface will be used directly by sdk so the mapping from bytes to struct
+// will be done here and not directly in the sdk methods 
+type ServiceDatabase interface {
+  SetService(pbtypes.Serice) error
+// remove, list etc...
+}
+
+type InstanceDatabase interface {
+  SetInstance(pbtypes.Instance) error
+// remove, list etc...
+}
+
+
+type Database interface {
+  ServiceDtabase
+  InstanceDatabase ....
+}
+</code></pre>
+<p>It requires more code and I’m thinking if this is neccesery or we should just use <code>Marshal</code> directly in the sdk</p>
+<p>EDIT:</p>
+<p>The above database interface dosne’t have to be an interface, it can be just a seperate struct in the sdk package to does the marshal/unmarshal saves etc. So it will look like this</p>
+<pre><code class="lang-auto">type Database struct {
+  serviceKV KVDatabase
+
+  instanceKV KVDatabase
+  // etc...
+}
+
+func (db *Database) SetService(service pbtypes.Servicie) error {
+  return db.serviceKV.Set(service.Hash, service.MarshalBinary())
+}
+
+// the same for list, remove service, interface, execution...</code></pre>
+          <p><a href="https://forum.mesg.com/t/network-implementation-with-cosmossdk/304/12">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/network-implementation-with-cosmossdk/304/12</link>
+        <pubDate>Mon, 19 Aug 2019 10:16:57 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-304-12</guid>
+        <source url="https://forum.mesg.com/t/network-implementation-with-cosmossdk/304.rss">Network implementation with CosmosSDK</source>
+      </item>
+      <item>
+        <title>Network implementation with CosmosSDK</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="10" data-topic="304">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/krhubert/40/9_2.png" class="avatar"> krhubert:</div>
+<blockquote>
+<ul>
+<li>why database needs a context, and what kind of context interface are you writting about?</li>
+</ul>
+</blockquote>
+</aside>
+<p>it is required by cosmos in order to load the actual kvstore. if we want the sdk to work both with cosmos kvstore and without, then it needs to be there.<br>
+I need to check more, but for what I understand the context is different at each call. so the store needs to be loaded every time. the context is containing the height of the blockchain and can load a completely different version of the database.<br>
+We could pass the <code>golevel database</code> or <code>cosmos kvstore</code> instead, using a common interface. But I worry that the context will be useful later to access more data about the current request. We could still change back to context if it makes stuff easier now and we really need it.</p>
+<aside class="quote group-team" data-post="10" data-topic="304">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/krhubert/40/9_2.png" class="avatar"> krhubert:</div>
+<blockquote>
+<ul>
+<li>why you want to move database to sdk sub-package. We can keep it seperate as it is right now (in fact we can move service, instance and everthing else to sdk package because only sdk uses it). I don’t understand the yours irresistible desire to move everything into sdk package <img src="https://forum.mesg.com/images/emoji/twitter/stuck_out_tongue.png?v=9" title=":stuck_out_tongue:" class="emoji" alt=":stuck_out_tongue:">
+</li>
+</ul>
+</blockquote>
+</aside>
+<p>i’m speaking only about the interface. It will remove the dependency between the sdk and the actual implementation of the database.</p>
+<aside class="quote group-team" data-post="10" data-topic="304">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/krhubert/40/9_2.png" class="avatar"> krhubert:</div>
+<blockquote>
+<ul>
+<li>sdk -&gt; Create interface in interface.go (interface for what? :))</li>
+</ul>
+</blockquote>
+</aside>
+<p>Interface of the current public API. When I’m speaking about SDK, I’m speaking about the sub-sdks package (<code>Service</code>, <code>Instance</code> etc…).</p>
+<aside class="quote group-team" data-post="10" data-topic="304">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/krhubert/40/9_2.png" class="avatar"> krhubert:</div>
+<blockquote>
+<p>I don’t understand this part of splitting classic and logic.</p>
+</blockquote>
+</aside>
+<p>The goal is to separate the logic of the package from the public “api” of the same package. Like this, we could create another public api (using a new struct) and still use the same logic functions.</p>
+<aside class="quote group-team" data-post="10" data-topic="304">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/krhubert/40/9_2.png" class="avatar"> krhubert:</div>
+<blockquote>
+<ul>
+<li>Create new messages that inherit the ones already used by the gRPC API (eg: CreateServiceRequest). The same topic as on friaday. I’m against passing CreateServiceRequest to cosmos package because</li>
+</ul>
+<ol>
+<li>it’s diffrent api and will have diffrent messages (for example it already contains the service owner) - you want to unify it with grpc and i think it should stay seperated</li>
+</ol>
+</blockquote>
+</aside>
+<p>That’s a good point. Maybe all data will not make sense to be on both messages.</p>
+<aside class="quote group-team" data-post="10" data-topic="304">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/krhubert/40/9_2.png" class="avatar"> krhubert:</div>
+<blockquote>
+<ol start="2">
+<li>cosmos is key value database and it will store pbtypes.Service so why it needs to know about more types liek CreateServiceRequest</li>
+<li>if cosmos will accept CreateServcieRequest, then the database interface should accept it as well?</li>
+</ol>
+</blockquote>
+</aside>
+<p>The <code>CreateServcieRequest</code> is not the data to store in database (state) but the action to change the database (state transition). Whatever message we will use, they will not be saved in database, but the result of the modification of state will be saved in database.<br>
+The SDK has the logic to apply the action, so it needs to both now the action and the modification of state it produces.</p>
+<aside class="quote group-team" data-post="10" data-topic="304">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/krhubert/40/9_2.png" class="avatar"> krhubert:</div>
+<blockquote>
+<ul>
+<li>there is no info user managment</li>
+</ul>
+</blockquote>
+</aside>
+<p>yes right. I didn’t put anything because it’s not a functionally that the Engine is currently doing.<br>
+We should create a new SDK for it and new gRPC APIs.</p>
+          <p><a href="https://forum.mesg.com/t/network-implementation-with-cosmossdk/304/11">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/network-implementation-with-cosmossdk/304/11</link>
+        <pubDate>Mon, 19 Aug 2019 10:01:05 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-304-11</guid>
+        <source url="https://forum.mesg.com/t/network-implementation-with-cosmossdk/304.rss">Network implementation with CosmosSDK</source>
+      </item>
+      <item>
+        <title>Network implementation with CosmosSDK</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <ul>
+<li>
+<p>why database needs a context, and what kind of context interface are you writting about?</p>
+</li>
+<li>
+<p>why you want to move database to sdk sub-package. We can keep it seperate as it is right now (in fact we can move service, instance and everthing else to sdk package because only sdk uses it). I don’t understand the yours irresistible desire to move everything into sdk package <img src="https://forum.mesg.com/images/emoji/twitter/stuck_out_tongue.png?v=9" title=":stuck_out_tongue:" class="emoji" alt=":stuck_out_tongue:"></p>
+</li>
+<li>
+<p>sdk -&gt; Create interface in interface.go (interface for what? :))</p>
+</li>
+</ul>
+<blockquote>
+<p>Split current sdk implementation into a Classic and logic struct. The Classic implement the interface. The logic implement the logic function. The first version of classic will basically delegate everything to logic.</p>
+</blockquote>
+<p>I don’t understand this part of splitting classic and logic.</p>
+<ul>
+<li>Create new messages that inherit the ones already used by the gRPC API (eg: CreateServiceRequest). The same topic as on friaday. I’m against passing CreateServiceRequest to cosmos package because</li>
+</ul>
+<ol>
+<li>
+<p>it’s diffrent api and will have diffrent messages (for example it already contains the service owner) - you want to unify it with grpc and i think it should stay seperated</p>
+</li>
+<li>
+<p>cosmos is key value database and it will store pbtypes.Service so why it needs to know about more types liek CreateServiceRequest</p>
+</li>
+<li>
+<p>if cosmos will accept CreateServcieRequest, then the database interface should accept it as well?</p>
+</li>
+</ol>
+<ul>
+<li>there is no info user managment</li>
+</ul>
+          <p><a href="https://forum.mesg.com/t/network-implementation-with-cosmossdk/304/10">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/network-implementation-with-cosmossdk/304/10</link>
+        <pubDate>Mon, 19 Aug 2019 09:30:06 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-304-10</guid>
+        <source url="https://forum.mesg.com/t/network-implementation-with-cosmossdk/304.rss">Network implementation with CosmosSDK</source>
+      </item>
+      <item>
+        <title>Network implementation with CosmosSDK</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Step-by-step guide to implement Cosmos:</p>
+<p><strong>DEPRECATED VERSION. Scroll down to see new one.</strong></p>
+<ol>
+<li>
+<p>Database</p>
+<ul>
+<li>Add a param <code>context</code> to each function. This param should use a new interface/struct that implement a getter to fetch the store. In the case of the database, it returns the golevel instance, in the case of the keeper, it returns the kvstore from cosmos.</li>
+<li>Move database interface to sdk sub-package. Make it private because only SDK is using the interface.</li>
+<li>Add (useless) params context to current database struct to make it implement its corresponding interface</li>
+<li>Create keeper that respect the interface. <em>Put it in <code>service</code> package?</em> <a class="mention-group" href="/groups/core">@core</a> what do you think?</li>
+</ul>
+</li>
+<li>
+<p>SDK</p>
+<ul>
+<li>Create interface in <code>interface.go</code>
+</li>
+<li>Split current sdk implementation into a <code>Classic</code> and <code>logic</code> struct. The <code>Classic</code> implement the interface. The <code>logic</code> implement the logic function. The first version of classic will basically delegate everything to <code>logic</code>.</li>
+<li>Create <code>Cosmos</code> struct that implement the interface
+<ul>
+<li>Create new messages that inherit the ones already used by the gRPC API (eg: <code>CreateServiceRequest</code>).
+<ul>
+<li>the messages needs to implement the <code>types.Msg</code> interface. So the inherit version will implement it.</li>
+</ul>
+</li>
+<li>Add function <code>NewHandler</code> and <code>NewQuerierHandler</code> to start to implement the <code>AppModule</code> interface of cosmos. Those functions should use <code>logic</code> struct and encode/decode the inputs and outputs if needed.</li>
+<li>More function needs to be added in order to fully implement the <code>AppModule</code> but it can be done by a generic Struct that make the SDK compatible with Cosmos with ease (lot’s of function that can return default values).</li>
+</ul>
+</li>
+<li>When flag experimental is set, initialize the <code>Cosmos</code> struct instead of the <code>Classic</code>.</li>
+</ul>
+</li>
+</ol>
+          <p><a href="https://forum.mesg.com/t/network-implementation-with-cosmossdk/304/9">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/network-implementation-with-cosmossdk/304/9</link>
+        <pubDate>Mon, 19 Aug 2019 09:19:26 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-304-9</guid>
+        <source url="https://forum.mesg.com/t/network-implementation-with-cosmossdk/304.rss">Network implementation with CosmosSDK</source>
+      </item>
+      <item>
+        <title>Network implementation with CosmosSDK</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="7" data-topic="304">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/krhubert/40/9_2.png" class="avatar"> krhubert:</div>
+<blockquote>
+<p>So this is the question can you store object (in our case exeuction) in kvstore without owner?</p>
+</blockquote>
+</aside>
+<p>I’m pretty sure you can, owner is just a data like any other data. The ownership is controlled by the validation you are doing in the handlers and messages.</p>
+          <p><a href="https://forum.mesg.com/t/network-implementation-with-cosmossdk/304/8">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/network-implementation-with-cosmossdk/304/8</link>
+        <pubDate>Fri, 21 Jun 2019 04:06:46 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-304-8</guid>
+        <source url="https://forum.mesg.com/t/network-implementation-with-cosmossdk/304.rss">Network implementation with CosmosSDK</source>
+      </item>
+      <item>
+        <title>Network implementation with CosmosSDK</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="6" data-topic="304">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/anthony/40/7_2.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>This is just in the handler part and its validation, either only the owner can edit et we trigger an error if the sender is not the owner but in the case of the execution there is no owner, just the one that already append their data cannot change them.</p>
+</blockquote>
+</aside>
+<p>So this is the question can you store object (in our case exeuction) in kvstore without owner?</p>
+<aside class="quote group-team" data-post="6" data-topic="304">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/anthony/40/7_2.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>We already have these apis, I was thinking you wanted to add new apis. We keep the current apis and adapt them to use the store</p>
+</blockquote>
+</aside>
+<p>Yes I need to adopt them <img src="https://forum.mesg.com/images/emoji/twitter/slight_smile.png?v=9" title=":slight_smile:" class="emoji" alt=":slight_smile:"></p>
+          <p><a href="https://forum.mesg.com/t/network-implementation-with-cosmossdk/304/7">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/network-implementation-with-cosmossdk/304/7</link>
+        <pubDate>Thu, 20 Jun 2019 11:54:33 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-304-7</guid>
+        <source url="https://forum.mesg.com/t/network-implementation-with-cosmossdk/304.rss">Network implementation with CosmosSDK</source>
+      </item>
+      <item>
+        <title>Network implementation with CosmosSDK</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="5" data-topic="304">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/krhubert/40/9_2.png" class="avatar"> krhubert:</div>
+<blockquote>
+<p>Have you seen api somewhere for shared edition?</p>
+</blockquote>
+</aside>
+<p>This is just in the handler part and its validation, either only the owner can edit et we trigger an error if the sender is not the owner but in the case of the execution there is no owner, just the one that already append their data cannot change them.</p>
+<aside class="quote group-team" data-post="5" data-topic="304">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/krhubert/40/9_2.png" class="avatar"> krhubert:</div>
+<blockquote>
+<p>How do you want to test it then? how do you want to create/stop instances, update execution without grpc api? Without api, I won’t be able to test the code.</p>
+</blockquote>
+</aside>
+<p>We already have these apis, I was thinking you wanted to add new apis. We keep the current apis and adapt them to use the store</p>
+          <p><a href="https://forum.mesg.com/t/network-implementation-with-cosmossdk/304/6">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/network-implementation-with-cosmossdk/304/6</link>
+        <pubDate>Thu, 20 Jun 2019 09:39:35 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-304-6</guid>
+        <source url="https://forum.mesg.com/t/network-implementation-with-cosmossdk/304.rss">Network implementation with CosmosSDK</source>
+      </item>
+      <item>
+        <title>Network implementation with CosmosSDK</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="3" data-topic="304">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/nicolas/40/10_2.png" class="avatar"> Nicolas:</div>
+<blockquote>
+<p>Could we start with no token and no owner of account? A pure trusted environment?</p>
+</blockquote>
+</aside>
+<p>That would be great, but as I saw, we can start without tokens, but we have to have accounts.</p>
+<aside class="quote group-team" data-post="4" data-topic="304">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/anthony/40/7_2.png" class="avatar"> Anthony:</div>
+<blockquote>
+<ul>
+<li>Service: the node that deploys the service is the owner of it, other nodes cannot edit it</li>
+</ul>
+</blockquote>
+</aside>
+<p>Yes, instances and services are rather easy, this is why I asked mainly about execution.</p>
+<aside class="quote group-team" data-post="4" data-topic="304">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/anthony/40/7_2.png" class="avatar"> Anthony:</div>
+<blockquote>
+<ul>
+<li>Execution: Shared edition, one node create the execution, the rest of the nodes can add their signature to the list of emitters (and the execution will be executed when enough emitters observed the event and create/update the same execution)</li>
+</ul>
+</blockquote>
+</aside>
+<p>Have you seen api somewhere for shared edition?</p>
+<aside class="quote group-team" data-post="4" data-topic="304">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/anthony/40/7_2.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>let’s not worry about rest or event grpc api now</p>
+</blockquote>
+</aside>
+<p>How do you want to test it then? how do you want to create/stop instances, update execution without grpc api? Without api, I won’t be able to test the code.</p>
+<p>And last - if accounts must exist, then how do we manage them (also the account must be handled to test cosmos-sdk stories)</p>
+          <p><a href="https://forum.mesg.com/t/network-implementation-with-cosmossdk/304/5">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/network-implementation-with-cosmossdk/304/5</link>
+        <pubDate>Wed, 19 Jun 2019 04:37:46 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-304-5</guid>
+        <source url="https://forum.mesg.com/t/network-implementation-with-cosmossdk/304.rss">Network implementation with CosmosSDK</source>
+      </item>
+      <item>
+        <title>Network implementation with CosmosSDK</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>Yes let’s not worry about token yet, for the creation of resources:</p>
+<ul>
+<li>Service: the node that deploys the service is the owner of it, other nodes cannot edit it</li>
+<li>Instance: same as service</li>
+<li>Execution: Shared edition, one node create the execution, the rest of the nodes can add their signature to the list of emitters (and the execution will be executed when enough emitters observed the event and create/update the same execution)</li>
+</ul>
+<aside class="quote group-team" data-post="2" data-topic="304">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/krhubert/40/9_2.png" class="avatar"> krhubert:</div>
+<blockquote>
+<p>I would rather do not go with the prosposed file structure. The sdk should be kept as seperate package and only save instance/service/execution object in single database (each db as kvstore put in an app struct like here <a href="https://github.com/cosmos/sdk-application-tutorial/blob/master//app.go#L64" rel="nofollow noopener">https://github.com/cosmos/sdk-application-tutorial/blob/master//app.go#L64</a>)</p>
+</blockquote>
+</aside>
+<p>The proposed structure is not in the sdk but in the dedicated resources packages, /service, /instance, /execution but I’m open to discuss that and improve it</p>
+<aside class="quote group-team" data-post="2" data-topic="304">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/krhubert/40/9_2.png" class="avatar"> krhubert:</div>
+<blockquote>
+<ul>
+<li>the <a href="https://github.com/cosmos/sdk-application-tutorial/blob/master/x/nameservice/client/rest/rest.go" rel="nofollow noopener">rest</a> package can show us how to expose protobuf api for communication. I have to implement <a href="https://github.com/cosmos/cosmos-sdk/blob/HEAD/types/rest/rest.go#L33:6" rel="nofollow noopener">BaseReq</a> fro the protobuf. It is used in every <a href="https://github.com/cosmos/sdk-application-tutorial/blob/master/x/nameservice/client/rest/rest.go#L32" rel="nofollow noopener">request</a>
+</li>
+</ul>
+</blockquote>
+</aside>
+<p>let’s not worry about rest or event grpc api now</p>
+          <p><a href="https://forum.mesg.com/t/network-implementation-with-cosmossdk/304/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/network-implementation-with-cosmossdk/304/4</link>
+        <pubDate>Wed, 19 Jun 2019 04:08:56 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-304-4</guid>
+        <source url="https://forum.mesg.com/t/network-implementation-with-cosmossdk/304.rss">Network implementation with CosmosSDK</source>
+      </item>
+      <item>
+        <title>Network implementation with CosmosSDK</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="2" data-topic="304">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/krhubert/40/9_2.png" class="avatar"> krhubert:</div>
+<blockquote>
+<ul>
+<li>
+<p>how to we solve the creation of execution, service, instanace owner account?<br>
+do we want some api to create them? How do we handle tokens for them, or there is no token at all?</p>
+</li>
+<li>
+<p>How do we handle the update of execution - suppose the service <code>A</code> creates an execution and it’s the owner of it, then service <code>B</code> wants to put and ouptut for execution, but <code>B</code> is not the owner - I need to figure out this sceneario.</p>
+</li>
+</ul>
+</blockquote>
+</aside>
+<p>Could we start with no token and no owner of account? A pure trusted environment?</p>
+          <p><a href="https://forum.mesg.com/t/network-implementation-with-cosmossdk/304/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/network-implementation-with-cosmossdk/304/3</link>
+        <pubDate>Wed, 19 Jun 2019 03:45:42 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-304-3</guid>
+        <source url="https://forum.mesg.com/t/network-implementation-with-cosmossdk/304.rss">Network implementation with CosmosSDK</source>
+      </item>
+      <item>
+        <title>Network implementation with CosmosSDK</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <p>Few notes from development:</p>
+<ul>
+<li>
+<p>docs for app.go is rather poor (cosmos-sdk-tutorial) and there is a lot going on there</p>
+</li>
+<li>
+<p>I would rather do not go with the prosposed file structure. The sdk should be kept as seperate package and only save instance/service/execution object in single database (each db as kvstore put in an app struct like here <a href="https://github.com/cosmos/sdk-application-tutorial/blob/master//app.go#L64" rel="nofollow noopener">https://github.com/cosmos/sdk-application-tutorial/blob/master//app.go#L64</a>)</p>
+</li>
+<li>
+<p>the <a href="https://github.com/cosmos/sdk-application-tutorial/blob/master/x/nameservice/client/rest/rest.go" rel="nofollow noopener">rest</a> package can show us how to expose protobuf api for communication. I have to implement <a href="https://github.com/cosmos/cosmos-sdk/blob/HEAD/types/rest/rest.go#L33:6" rel="nofollow noopener">BaseReq</a> fro the protobuf. It is used in every <a href="https://github.com/cosmos/sdk-application-tutorial/blob/master/x/nameservice/client/rest/rest.go#L32" rel="nofollow noopener">request</a></p>
+</li>
+<li>
+<p>how to we solve the creation of execution, service, instanace owner account?<br>
+do we want some api to create them? How do we handle tokens for them, or there is no token at all?</p>
+</li>
+<li>
+<p>How do we handle the update of execution - suppose the service <code>A</code> creates an execution and it’s the owner of it, then service <code>B</code> wants to put and ouptut for execution, but <code>B</code> is not the owner - I need to figure out this sceneario.</p>
+</li>
+</ul>
+<p>So I continue the creation of very simple example (no cli, no rest api, just protobuf api), simplify app.go to have only one store for execution (and just one method create an execution)</p>
+          <p><a href="https://forum.mesg.com/t/network-implementation-with-cosmossdk/304/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/network-implementation-with-cosmossdk/304/2</link>
+        <pubDate>Tue, 18 Jun 2019 18:05:50 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-304-2</guid>
+        <source url="https://forum.mesg.com/t/network-implementation-with-cosmossdk/304.rss">Network implementation with CosmosSDK</source>
+      </item>
+      <item>
+        <title>Network implementation with CosmosSDK</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <h2>Goal</h2>
+<p>Decentralization of the different resources managed by the Engine:</p>
+<ul>
+<li>
+<strong>Services</strong> (to create this marketplace of services in our own network)</li>
+<li>
+<strong>Instances</strong> (to be able to delegate execution to specific nodes)</li>
+<li>
+<strong>Executions</strong> (to process executions on the network)</li>
+</ul>
+<p>In order to distribute these resources, we need to make sure that every change of state is replicated on the network and verified by each node of the network before broadcasting it.</p>
+<p>For that, we will use CosmosSDK &amp; Tendermint that already implement this distributed state machine with a lot of really cool stuff.</p>
+<h2>Implementation</h2>
+<p>Details about CosmosSDK <a href="https://cosmos.network/docs/concepts/baseapp.html#baseapp" rel="nofollow noopener">App concept</a>, <a href="https://cosmos.network/docs/intro/sdk-app-architecture.html#sdk-application-architecture" rel="nofollow noopener">Architecture</a>, <a href="https://cosmos.network/docs/intro/sdk-design.html#modules" rel="nofollow noopener">Design</a></p>
+<p>We will use what Cosmos provides:</p>
+<ul>
+<li>Keeper/Store</li>
+<li>Messages</li>
+<li>Handlers</li>
+<li>Querier</li>
+</ul>
+<h4>Keeper</h4>
+<p>The place to store the data. We actually have everything in the database package, this database package will disappear and the resource package (service, instance, and execution) will manage the storing based on these keepers.</p>
+<p>Keepers expose getter and setters of the data. We should only read/write the data based on these keepers</p>
+<h4>Messages</h4>
+<p>Type of messages that can trigger actions on the data. These are the messages that will transit in the network (or within the local instance). This message will validate the basic data (light validation).</p>
+<p>Messages are directly handled by Tendermint and will be propagated automatically (magic)</p>
+<h4>Handlers</h4>
+<p>Handlers are the actions that will update the Keeper based on Message received. This has most of the logic and could be delegated to the sdk package.</p>
+<p>Handlers are called either directly from the sdk or call based on the routing defined by the application.</p>
+<h4>Querier</h4>
+<p>Not sure exactly how this is useful in our case but it allows to read the data, we should probably only read data based on a querier and never try to read directly from the keeper</p>
+<hr>
+<p>We can implement all these objects directly in the resource packages:</p>
+<pre><code class="lang-auto">service
+   - type.go
+   - keeper.go # implement the keeper
+   - msgs.go # implement the messages
+   - handler.go # implement the handlers
+   - querier.go # implement the queries
+   - codec.go # needed codec to save the data
+instance
+   - type.go
+   - keeper.go # implement the keeper
+   - msgs.go # implement the messages
+   - handler.go # implement the handlers
+   - querier.go # implement the queries
+   - codec.go # needed codec to save the data
+execution
+   - type.go
+   - keeper.go # implement the keeper
+   - msgs.go # implement the messages
+   - handler.go # implement the handlers
+   - querier.go # implement the queries
+   - codec.go # needed codec to save the data
+</code></pre>
+          <p><a href="https://forum.mesg.com/t/network-implementation-with-cosmossdk/304/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/network-implementation-with-cosmossdk/304/1</link>
+        <pubDate>Thu, 06 Jun 2019 10:48:26 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-304-1</guid>
+        <source url="https://forum.mesg.com/t/network-implementation-with-cosmossdk/304.rss">Network implementation with CosmosSDK</source>
+      </item>
+  </channel>
+</rss>

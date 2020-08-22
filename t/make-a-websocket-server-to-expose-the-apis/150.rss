@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Make a websocket server to expose the APIs</title>
+    <link>https://forum.mesg.com/t/make-a-websocket-server-to-expose-the-apis/150</link>
+    <description>From @Anthony https://github.com/mesg-foundation/core/issues/277
+
+ Right now the API is using gRPC with some streams and streams cannot be used in a client side directly. gRPC is planning to support that but in few months only https://github.com/grpc/grpc-web.
+
+The idea is to have a websocket API that acts as a proxy on the gRPC API and that let users to access the gRPC api even from a client side application.
+
+With that we could easily create a website that let you deploy your service, test it, even create directly apps based on a website only (and the core running in background)
+
+some ideas for implementation
+
+https://github.com/tmc/grpc-websocket-proxy
+https://github.com/improbable-eng/grpc-web
+
+
+
+-----
+
+
+Reply from @ilgooz
+
+
+I watched a video earlier about [Envoy](https://www.youtube.com/watch?v=RVZX4CwKhGE). They call it a special proxy gateway in between gRPC server and [grpc-web](https://github.com/grpc/grpc-web). Video gives a general technical view about Envoy. Gotto check out.</description>
+    
+    <lastBuildDate>Thu, 27 Dec 2018 07:33:00 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/make-a-websocket-server-to-expose-the-apis/150.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Make a websocket server to expose the APIs</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>Yeah, I agree! Let’s go step by step.</p>
+          <p><a href="https://forum.mesg.com/t/make-a-websocket-server-to-expose-the-apis/150/8">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/make-a-websocket-server-to-expose-the-apis/150/8</link>
+        <pubDate>Thu, 27 Dec 2018 07:33:00 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-150-8</guid>
+        <source url="https://forum.mesg.com/t/make-a-websocket-server-to-expose-the-apis/150.rss">Make a websocket server to expose the APIs</source>
+      </item>
+      <item>
+        <title>Make a websocket server to expose the APIs</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Great research <a class="mention" href="/u/ilgooz">@ilgooz</a>!</p>
+<p>I really like the concept to have a universal lib that work in both browser and node with the same API.</p>
+<p>We can do breaking change because we are already removing the when/then logic of the application lib.</p>
+<hr>
+<p>Even if I really like the universal lib, I would like to do it step by step.</p>
+<ul>
+<li>Firstly, we focus only on the node.js version with the generated TS file (so the new API). Once done, we release it as a new major version on NPM. I would like to release this new version and update the doc maximum <strong>Friday 4th January</strong>.</li>
+<li>Secondly, then we have time to make the core compatible with gRPC-web and upgrade the lib to make it compatible with browser as an universal lib. Having more time will also us to do a better universal lib and also release the feature with new docs, medium articles and make a big public announcement!</li>
+</ul>
+<p>What do you think guys?</p>
+          <p><a href="https://forum.mesg.com/t/make-a-websocket-server-to-expose-the-apis/150/7">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/make-a-websocket-server-to-expose-the-apis/150/7</link>
+        <pubDate>Thu, 27 Dec 2018 04:21:44 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-150-7</guid>
+        <source url="https://forum.mesg.com/t/make-a-websocket-server-to-expose-the-apis/150.rss">Make a websocket server to expose the APIs</source>
+      </item>
+      <item>
+        <title>Make a websocket server to expose the APIs</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <h2>Supporting both Server and Browser in mesg-js</h2>
+<p>Please read first: <a href="https://github.com/mesg-foundation/mesg-js/issues/35" rel="nofollow noopener">https://github.com/mesg-foundation/mesg-js/issues/35</a><br>
+That comment on the issue explains how we can provide our gRPC APIs to consumers to consumers by both supporting Browsers and Nodejs.</p>
+<p>This is related with <strong>require(‘mesg-js’).application().api</strong> API. This object exposes the gRPC core APIs. It currently only supports node.js but should also support browsers as well.</p>
+<p>We first thought about sperating the packages for browser and server, that way we don’t include extra code that generated for node while mesg-js is being used in a browser environment.</p>
+<p>But after a second thought, I think seperating them wouldn’t be good because that way it’s not possible to support universal SPAs natively. And if we seperate them, consumers have to do some magic in their webpack confings to switch between the browser and nodejs version of mesg-js. This is not needed. It’s always nice to be able to provide a simple <em>mesg.js</em> that can run in browsers and nodejs without any effort. It should support UMD and that way it can be used with scripts tags in browsers or by getting imported as a package both in browser and node environments easily.</p>
+<p>In future we can think of some kind of optimizations for removing node related code when mesg-js is running on browser but it’s too much for now to think about that. And the extra code is just a few 100s of lines. So it’s OK to have them.</p>
+<p><em>We can make the extra code can be removed when webpack target is web or detecting browsers via ENV vars by checking for <em>procces.env.NODE_ENV</em>. This way we can give an option to our consumers to reduce their mesg.js file size when on browser.</em><br>
+<em>Or we can make it possible to node related code to be removed with some webpack plugins and put this info into the docs.</em> Also <a href="https://github.com/defunctzombie/package-browser-field-spec" rel="nofollow noopener">see</a>.<br>
+<em>Or we can provide separate builds, one (mesg-js) can support both client and server and other (mesg-js-web.js) can only support only web etc…</em></p>
+<p>I propose to make <strong>require(‘mesg-js’).application().api</strong> to support both browsers and node.js for now without thinking any optimizations in mind. And let’s not touch to <strong>require(‘mesg-js’).service().api</strong> because service api is only planned to be run in a server env for now, not browsers. But we can change this in future.<br>
+Note that, his is a breaking change because we’re also going to use plugins to generate clients and types. Which introduces setters/getters for <em>XRequest</em>, <em>XReply</em> types. We used to directly set the values to mutable fields but this is no longer an option.</p>
+<div class="poll" data-poll-status="open" data-poll-public="true" data-poll-results="always" data-poll-type="regular" data-poll-name="poll">
+<div>
+<div class="poll-container">
+<ul>
+<li data-poll-option-id="36c5535c97c7c40873fb19268f3b223c">Update current APIs to support both browsers and node.js without thinking any file size optimizations and generate client code automatically.</li>
+<li data-poll-option-id="c88ac703ff23bf082840145aa79e9d1a">Think about file size optimizations, avoid any breaking change that setter/getters will introduce and manually create client code(only types).</li>
+</ul>
+</div>
+<div class="poll-info">
+<p>
+<span class="info-number">0</span>
+<span class="info-label">voters</span>
+</p>
+</div>
+</div>
+</div>
+          <p><a href="https://forum.mesg.com/t/make-a-websocket-server-to-expose-the-apis/150/6">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/make-a-websocket-server-to-expose-the-apis/150/6</link>
+        <pubDate>Wed, 26 Dec 2018 18:46:57 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-150-6</guid>
+        <source url="https://forum.mesg.com/t/make-a-websocket-server-to-expose-the-apis/150.rss">Make a websocket server to expose the APIs</source>
+      </item>
+      <item>
+        <title>Make a websocket server to expose the APIs</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <h2>Difference between grpc/grpc-web &amp; improbable-eng/grpc-web</h2>
+<p>They both stands for allowing websocket clients to make gRPC requests to servers/proxies that accepts websocket connections.</p>
+<p>They both have the same public APIs but in addition, <em>improbable-eng/grpc-web</em> also supports bidi streams where official one doesn’t. Officials plan to support it in future and their implementation will have the same public APIs with improbable-eng’s version.</p>
+<p>Also, improbable-eng provides a <a href="https://github.com/improbable-eng/ts-protoc-gen" rel="nofollow noopener">plugin</a> to output TS types as well when generating the client code.</p>
+<p>So, it’s totally OK to use <em>improbable-eng/grpc-web</em> in favor of having bidi streams and TS types.</p>
+          <p><a href="https://forum.mesg.com/t/make-a-websocket-server-to-expose-the-apis/150/5">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/make-a-websocket-server-to-expose-the-apis/150/5</link>
+        <pubDate>Wed, 26 Dec 2018 18:19:30 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-150-5</guid>
+        <source url="https://forum.mesg.com/t/make-a-websocket-server-to-expose-the-apis/150.rss">Make a websocket server to expose the APIs</source>
+      </item>
+      <item>
+        <title>Make a websocket server to expose the APIs</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <h2>Clarification about Envoy proxy &amp; supporting websocket</h2>
+<p>gRPC is originally a TCP based communication protocol. But HTML5 doesn’t give access to creating TCP connections to servers. Because of this limitation, folks at gRPC created an official spec about supporting Web clients trough websocket.</p>
+<p>In future, all gRPC servers should both accept TCP and Websocket connections from clients. It’s also possible to access gRPC server from Web by using proxies like Envoy. Envoy is able to proxy Websocket/HTTP based gRPC requests to a gRPC server that only accepts TCP connections.</p>
+<p>So, we have two valid options here. For now, we can just use Envoy to support Web clients and in future we can use a <a href="https://github.com/improbable-eng/grpc-web/blob/master/go/grpcweb/doc.go#L1-L27" rel="nofollow noopener">simple</a> package to support websocket connections next to TCP connections in the Core. This pkg is very simple to use and doesn’t bring any complexity to our code. I haven’t check the code yet but it’s some kind of a wrapper for net connections to upgrade them to a websocket connection or keep them as TCP connections depending on the request style. But anyway, we can do adopt it any time, no need to rush for this.</p>
+          <p><a href="https://forum.mesg.com/t/make-a-websocket-server-to-expose-the-apis/150/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/make-a-websocket-server-to-expose-the-apis/150/4</link>
+        <pubDate>Wed, 26 Dec 2018 18:11:50 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-150-4</guid>
+        <source url="https://forum.mesg.com/t/make-a-websocket-server-to-expose-the-apis/150.rss">Make a websocket server to expose the APIs</source>
+      </item>
+      <item>
+        <title>Make a websocket server to expose the APIs</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>The best will be to create a system service that contain Envoy <img src="https://forum.mesg.com/images/emoji/twitter/slight_smile.png?v=6" title=":slight_smile:" class="emoji" alt=":slight_smile:"></p>
+          <p><a href="https://forum.mesg.com/t/make-a-websocket-server-to-expose-the-apis/150/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/make-a-websocket-server-to-expose-the-apis/150/3</link>
+        <pubDate>Wed, 26 Dec 2018 09:56:43 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-150-3</guid>
+        <source url="https://forum.mesg.com/t/make-a-websocket-server-to-expose-the-apis/150.rss">Make a websocket server to expose the APIs</source>
+      </item>
+      <item>
+        <title>Make a websocket server to expose the APIs</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>I think, we don’t need to have a built-in proxy in Core. Why not just using Envoy as a proxy like recommended in the gRPC Web docs? That way we don’t need to maintain any kind of websocket proxy inside Core. People who wants to access to Core’s gRPC APIs could just use Envoy and I think this option supports bidirectional streams as well.</p>
+<p>We can also publish a special Dockerfile for envoy that is configured for Core. Also, we can make mesg-js to be compatible with browsers and that way devs can use this pre-generated gRPC client for coreapi.</p>
+          <p><a href="https://forum.mesg.com/t/make-a-websocket-server-to-expose-the-apis/150/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/make-a-websocket-server-to-expose-the-apis/150/2</link>
+        <pubDate>Sat, 22 Dec 2018 19:52:53 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-150-2</guid>
+        <source url="https://forum.mesg.com/t/make-a-websocket-server-to-expose-the-apis/150.rss">Make a websocket server to expose the APIs</source>
+      </item>
+      <item>
+        <title>Make a websocket server to expose the APIs</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>From <a class="mention" href="/u/anthony">@Anthony</a> <a href="https://github.com/mesg-foundation/core/issues/277">https://github.com/mesg-foundation/core/issues/277</a></p>
+<p>Right now the API is using gRPC with some streams and streams cannot be used in a client side directly. gRPC is planning to support that but in few months only <a href="https://github.com/grpc/grpc-web">https://github.com/grpc/grpc-web</a>.</p>
+<p>The idea is to have a websocket API that acts as a proxy on the gRPC API and that let users to access the gRPC api even from a client side application.</p>
+<p>With that we could easily create a website that let you deploy your service, test it, even create directly apps based on a website only (and the core running in background)</p>
+<p>some ideas for implementation</p>
+<p><aside class="onebox whitelistedgeneric">
+  <header class="source">
+      <img src="https://github.githubassets.com/favicons/favicon.svg" class="site-icon" width="32" height="32">
+      <a href="https://github.com/tmc/grpc-websocket-proxy" target="_blank">GitHub</a>
+  </header>
+  <article class="onebox-body">
+    <img src="https://forum.mesg.com/uploads/default/original/1X/325991bd6440c2107d46da006016935a386215d1.jpeg" class="thumbnail" width="" height="">
+
+<h3><a href="https://github.com/tmc/grpc-websocket-proxy" target="_blank">tmc/grpc-websocket-proxy</a></h3>
+
+<p>A proxy to transparently upgrade grpc-gateway streaming endpoints to use websockets - tmc/grpc-websocket-proxy</p>
+
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+<br>
+<aside class="onebox whitelistedgeneric">
+  <header class="source">
+      <img src="https://github.githubassets.com/favicons/favicon.svg" class="site-icon" width="32" height="32">
+      <a href="https://github.com/improbable-eng/grpc-web" target="_blank">GitHub</a>
+  </header>
+  <article class="onebox-body">
+    <img src="https://forum.mesg.com/uploads/default/original/1X/57289af5f5b1c625eb71e91a2b25bec536ff4efe.png" class="thumbnail" width="" height="">
+
+<h3><a href="https://github.com/improbable-eng/grpc-web" target="_blank">improbable-eng/grpc-web</a></h3>
+
+<p>gRPC Web implementation for Golang and TypeScript. Contribute to improbable-eng/grpc-web development by creating an account on GitHub.</p>
+
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+</p>
+<hr>
+<p>Reply from <a class="mention" href="/u/ilgooz">@ilgooz</a></p>
+<p>I watched a video earlier about <a href="https://www.youtube.com/watch?v=RVZX4CwKhGE">Envoy</a>. They call it a special proxy gateway in between gRPC server and <a href="https://github.com/grpc/grpc-web">grpc-web</a>. Video gives a general technical view about Envoy. Gotto check out.</p>
+          <p><a href="https://forum.mesg.com/t/make-a-websocket-server-to-expose-the-apis/150/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/make-a-websocket-server-to-expose-the-apis/150/1</link>
+        <pubDate>Thu, 13 Dec 2018 11:12:43 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-150-1</guid>
+        <source url="https://forum.mesg.com/t/make-a-websocket-server-to-expose-the-apis/150.rss">Make a websocket server to expose the APIs</source>
+      </item>
+  </channel>
+</rss>

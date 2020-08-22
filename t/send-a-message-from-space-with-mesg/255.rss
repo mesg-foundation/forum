@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Send a Message from Space with MESG!</title>
+    <link>https://forum.mesg.com/t/send-a-message-from-space-with-mesg/255</link>
+    <description>![Screenshot%20from%202019-02-17%2022-49-14|367x500](upload://zoGOJ1E7hbhaQwVjeA8aixtTCU5.png) 
+
+Once you submit payment, a webhook is sent to the MESG app and is stored temporarily. When the payment is confirmed on Ethereum, the erc20 services alerts the MESG app and then will send the unsent message to the satellite service. Once the satellite service responds with an invoice to be paid, we forward that to our lightning service which is using opennode.co&#39;s api.
+
+## Architecture
+
+This app is broken up into 4 services, 1 MESG application, 1 front end react app.
+
+* ERC20 service - Standard MESG service that just tracks transfers for the MESG ERC20 Contract.
+
+* Webhook service - Standard webhook service we use to send the message from the front end to the MESG app. If we could embed the message in the ERC20 transaction that would of been better.
+
+* Satellite service - Wrapper for the [blockstream satellite api](https:// blockstream .com/)
+
+* Lightning service - Wrapper for Opennode&#39;s [lightning api](https:// opennode .co), a custodial service that allows you to send and receive bitcoin and lightning network transactions.
+
+* React front end to interact with web3 and metamask
+
+* One small MESG app</description>
+    
+    <lastBuildDate>Sun, 17 Feb 2019 15:51:04 +0000</lastBuildDate>
+    <category>Hackathon</category>
+    <atom:link href="https://forum.mesg.com/t/send-a-message-from-space-with-mesg/255.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Send a Message from Space with MESG!</title>
+        <dc:creator><![CDATA[Ryan_Milbourne]]></dc:creator>
+        <description><![CDATA[
+            <p><img src="https://forum.mesg.com/uploads/default/original/1X/f81697d568706212b1d49349f4394a87128764a5.png" alt="Screenshot%20from%202019-02-17%2022-49-14" width="367" height="500"></p>
+<p>Once you submit payment, a webhook is sent to the MESG app and is stored temporarily. When the payment is confirmed on Ethereum, the erc20 services alerts the MESG app and then will send the unsent message to the satellite service. Once the satellite service responds with an invoice to be paid, we forward that to our lightning service which is using <a href="http://opennode.co" rel="nofollow noopener">opennode.co</a>’s api.</p>
+<h2>Architecture</h2>
+<p>This app is broken up into 4 services, 1 MESG application, 1 front end react app.</p>
+<ul>
+<li>
+<p>ERC20 service - Standard MESG service that just tracks transfers for the MESG ERC20 Contract.</p>
+</li>
+<li>
+<p>Webhook service - Standard webhook service we use to send the message from the front end to the MESG app. If we could embed the message in the ERC20 transaction that would of been better.</p>
+</li>
+<li>
+<p>Satellite service - Wrapper for the [blockstream satellite api](https:// blockstream .com/)</p>
+</li>
+<li>
+<p>Lightning service - Wrapper for Opennode’s [lightning api](https:// opennode .co), a custodial service that allows you to send and receive bitcoin and lightning network transactions.</p>
+</li>
+<li>
+<p>React front end to interact with web3 and metamask</p>
+</li>
+<li>
+<p>One small MESG app</p>
+</li>
+</ul>
+          <p><a href="https://forum.mesg.com/t/send-a-message-from-space-with-mesg/255/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/send-a-message-from-space-with-mesg/255/1</link>
+        <pubDate>Sun, 17 Feb 2019 15:51:04 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-255-1</guid>
+        <source url="https://forum.mesg.com/t/send-a-message-from-space-with-mesg/255.rss">Send a Message from Space with MESG!</source>
+      </item>
+  </channel>
+</rss>

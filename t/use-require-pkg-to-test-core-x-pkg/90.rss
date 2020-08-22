@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Use require pkg to test core/x pkg</title>
+    <link>https://forum.mesg.com/t/use-require-pkg-to-test-core-x-pkg/90</link>
+    <description>currently we use _t_ for testing which is hard to write</description>
+    
+    <lastBuildDate>Fri, 12 Oct 2018 05:50:37 +0000</lastBuildDate>
+    <category>Development</category>
+    <atom:link href="https://forum.mesg.com/t/use-require-pkg-to-test-core-x-pkg/90.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Use require pkg to test core/x pkg</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>I don’t see the point here, using another package to test a package shouldn’t be considered something complicated so, I don’t see a real life benefit about not using it here. Also <em>x</em> package itself already depending on lots of external dependencies and adding one more for testing is never an issue in my view.</p>
+          <p><a href="https://forum.mesg.com/t/use-require-pkg-to-test-core-x-pkg/90/5">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/use-require-pkg-to-test-core-x-pkg/90/5</link>
+        <pubDate>Fri, 12 Oct 2018 05:50:37 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-90-5</guid>
+        <source url="https://forum.mesg.com/t/use-require-pkg-to-test-core-x-pkg/90.rss">Use require pkg to test core/x pkg</source>
+      </item>
+      <item>
+        <title>Use require pkg to test core/x pkg</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>To keep the packages as light as possible and independent from the decisions we make on the core’s specific packages.</p>
+          <p><a href="https://forum.mesg.com/t/use-require-pkg-to-test-core-x-pkg/90/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/use-require-pkg-to-test-core-x-pkg/90/4</link>
+        <pubDate>Fri, 12 Oct 2018 03:40:50 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-90-4</guid>
+        <source url="https://forum.mesg.com/t/use-require-pkg-to-test-core-x-pkg/90.rss">Use require pkg to test core/x pkg</source>
+      </item>
+      <item>
+        <title>Use require pkg to test core/x pkg</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>What is the downside of having external dependencies in <em>core/x</em> pkg?</p>
+          <p><a href="https://forum.mesg.com/t/use-require-pkg-to-test-core-x-pkg/90/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/use-require-pkg-to-test-core-x-pkg/90/3</link>
+        <pubDate>Thu, 11 Oct 2018 09:52:54 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-90-3</guid>
+        <source url="https://forum.mesg.com/t/use-require-pkg-to-test-core-x-pkg/90.rss">Use require pkg to test core/x pkg</source>
+      </item>
+      <item>
+        <title>Use require pkg to test core/x pkg</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>I prefer not having <code>require</code> package in those <code>core/x</code> packages.<br>
+It’s better if they have no dependencies.</p>
+<p>But in the case <code>testing</code> is really too limited and the tests are really complex, i don’t mind including <code>require</code>.</p>
+          <p><a href="https://forum.mesg.com/t/use-require-pkg-to-test-core-x-pkg/90/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/use-require-pkg-to-test-core-x-pkg/90/2</link>
+        <pubDate>Thu, 11 Oct 2018 08:08:28 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-90-2</guid>
+        <source url="https://forum.mesg.com/t/use-require-pkg-to-test-core-x-pkg/90.rss">Use require pkg to test core/x pkg</source>
+      </item>
+      <item>
+        <title>Use require pkg to test core/x pkg</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>currently we use <em>t</em> for testing which is hard to write</p>
+          <p><a href="https://forum.mesg.com/t/use-require-pkg-to-test-core-x-pkg/90/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/use-require-pkg-to-test-core-x-pkg/90/1</link>
+        <pubDate>Thu, 11 Oct 2018 06:53:20 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-90-1</guid>
+        <source url="https://forum.mesg.com/t/use-require-pkg-to-test-core-x-pkg/90.rss">Use require pkg to test core/x pkg</source>
+      </item>
+  </channel>
+</rss>

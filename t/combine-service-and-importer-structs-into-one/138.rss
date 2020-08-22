@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Combine service and importer structs into one</title>
+    <link>https://forum.mesg.com/t/combine-service-and-importer-structs-into-one/138</link>
+    <description>Every struct from [definition.go](https://github.com/mesg-foundation/core/blob/dev/service/importer/definition.go) is redefined in [service package](https://github.com/mesg-foundation/core/tree/dev/service) with almost fileds 1:1. 
+
+My proposition is to remove one of them (in importer) and use only one as we don&#39;t need to keep both definitions.</description>
+    
+    <lastBuildDate>Thu, 26 Dec 2019 02:49:13 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/combine-service-and-importer-structs-into-one/138.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Combine service and importer structs into one</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>The importation has been removed from the engine. The engine now receives a compiled version of the service and doesn’t handle yaml anymore.</p>
+          <p><a href="https://forum.mesg.com/t/combine-service-and-importer-structs-into-one/138/6">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/combine-service-and-importer-structs-into-one/138/6</link>
+        <pubDate>Thu, 26 Dec 2019 02:49:13 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-138-6</guid>
+        <source url="https://forum.mesg.com/t/combine-service-and-importer-structs-into-one/138.rss">Combine service and importer structs into one</source>
+      </item>
+      <item>
+        <title>Combine service and importer structs into one</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Yes there is a lot of redefinition but one is using map there other is using array.</p>
+<p>One solution, if possible, will be to “trick” the yaml label in order to parse yaml map in the mesg.yml with the struct that use array.<br>
+It will be perfect if we could use something like:</p>
+<pre><code class="lang-auto">type ServiceDefinition struct {
+	Events []*Event `yaml:"events"`
+}
+type Event struct {
+	Key string `yaml:"$key"`
+	Name string `yaml:"name"`
+}
+</code></pre>
+<p>I check the yaml lib we are using and it doesn’t seem to offer something like this.<br>
+Maybe there is more advanced/customizable lib?</p>
+          <p><a href="https://forum.mesg.com/t/combine-service-and-importer-structs-into-one/138/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/combine-service-and-importer-structs-into-one/138/4</link>
+        <pubDate>Wed, 12 Dec 2018 14:12:43 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-138-4</guid>
+        <source url="https://forum.mesg.com/t/combine-service-and-importer-structs-into-one/138.rss">Combine service and importer structs into one</source>
+      </item>
+      <item>
+        <title>Combine service and importer structs into one</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>One immediate side effect that I see is that existing mesg.yml will not be compatible especially for the declaration of the parameters (that is now a map and would change in an array).<br>
+Also some implication in the libraries that will probably need some updates on the way to handle the parameters.</p>
+<p>Just an idea (probably too much): having a system service for the parsing could be nice like that we can always have a version of the system service for a version of the yml and we don’t really need to have a version system.</p>
+          <p><a href="https://forum.mesg.com/t/combine-service-and-importer-structs-into-one/138/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/combine-service-and-importer-structs-into-one/138/3</link>
+        <pubDate>Wed, 12 Dec 2018 13:36:45 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-138-3</guid>
+        <source url="https://forum.mesg.com/t/combine-service-and-importer-structs-into-one/138.rss">Combine service and importer structs into one</source>
+      </item>
+      <item>
+        <title>Combine service and importer structs into one</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>What are the possible side effects of doing that?</p>
+          <p><a href="https://forum.mesg.com/t/combine-service-and-importer-structs-into-one/138/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/combine-service-and-importer-structs-into-one/138/2</link>
+        <pubDate>Wed, 12 Dec 2018 10:10:34 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-138-2</guid>
+        <source url="https://forum.mesg.com/t/combine-service-and-importer-structs-into-one/138.rss">Combine service and importer structs into one</source>
+      </item>
+      <item>
+        <title>Combine service and importer structs into one</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <p>Every struct from <a href="https://github.com/mesg-foundation/core/blob/dev/service/importer/definition.go" rel="nofollow noopener">definition.go</a> is redefined in <a href="https://github.com/mesg-foundation/core/tree/dev/service" rel="nofollow noopener">service package</a> with almost fileds 1:1.</p>
+<p>My proposition is to remove one of them (in importer) and use only one as we don’t need to keep both definitions.</p>
+          <p><a href="https://forum.mesg.com/t/combine-service-and-importer-structs-into-one/138/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/combine-service-and-importer-structs-into-one/138/1</link>
+        <pubDate>Wed, 12 Dec 2018 09:44:09 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-138-1</guid>
+        <source url="https://forum.mesg.com/t/combine-service-and-importer-structs-into-one/138.rss">Combine service and importer structs into one</source>
+      </item>
+  </channel>
+</rss>

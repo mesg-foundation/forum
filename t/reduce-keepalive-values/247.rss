@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Reduce KeepAlive values</title>
+    <link>https://forum.mesg.com/t/reduce-keepalive-values/247</link>
+    <description>Hey guys,
+
+We spoke on Discord to reduce the time of the different gRPC keep alive properties than we use.
+I would like to have your feedback if we really want to change or not.
+Here are the differents values:
+
+| Property | Default | Current | Proposed |
+|---|---|---|---|
+| `ServerParameters.Time` | 2h | 1 min | 1 min |
+| `EnforcementPolicy.MinTime` | 5 min | 5 min | 1 min |
+| `ClientParameters.Time` | Infinity | 5 min | 2 min |
+
+Also, from https://forum.mesg.com/t/solution-summary-for-docker-dropping-connections-after-15-min/246, the values should respect:
+```
+ServerParameters.Time &lt; Docker idle connection config (15 min)
+ClientParameters.Time &gt; ServerParameters.Time
+ClientParameters.Time &gt;= EnforcementPolicy.MinTime
+```
+
+Please vote in the following poll
+
+[poll type=regular results=always public=true]
+* Keep current values
+* Change to proposed values
+[/poll]</description>
+    
+    <lastBuildDate>Tue, 12 Feb 2019 03:17:34 +0000</lastBuildDate>
+    <category>Development</category>
+    <atom:link href="https://forum.mesg.com/t/reduce-keepalive-values/247.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Reduce KeepAlive values</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>I’m closing the poll. We will keep the current values</p>
+          <p><a href="https://forum.mesg.com/t/reduce-keepalive-values/247/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/reduce-keepalive-values/247/2</link>
+        <pubDate>Tue, 12 Feb 2019 03:17:34 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-247-2</guid>
+        <source url="https://forum.mesg.com/t/reduce-keepalive-values/247.rss">Reduce KeepAlive values</source>
+      </item>
+      <item>
+        <title>Reduce KeepAlive values</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Hey guys,</p>
+<p>We spoke on Discord to reduce the time of the different gRPC keep alive properties than we use.<br>
+I would like to have your feedback if we really want to change or not.<br>
+Here are the differents values:</p>
+<div class="md-table">
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Default</th>
+<th>Current</th>
+<th>Proposed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ServerParameters.Time</code></td>
+<td>2h</td>
+<td>1 min</td>
+<td>1 min</td>
+</tr>
+<tr>
+<td><code>EnforcementPolicy.MinTime</code></td>
+<td>5 min</td>
+<td>5 min</td>
+<td>1 min</td>
+</tr>
+<tr>
+<td><code>ClientParameters.Time</code></td>
+<td>Infinity</td>
+<td>5 min</td>
+<td>2 min</td>
+</tr>
+</tbody>
+</table>
+</div><p>Also, from <a href="https://forum.mesg.com/t/solution-summary-for-docker-dropping-connections-after-15-min/246" class="inline-onebox">Solution summary for Docker dropping connections after 15 min</a>, the values should respect:</p>
+<pre><code class="lang-auto">ServerParameters.Time &lt; Docker idle connection config (15 min)
+ClientParameters.Time &gt; ServerParameters.Time
+ClientParameters.Time &gt;= EnforcementPolicy.MinTime
+</code></pre>
+<p>Please vote in the following poll</p>
+<div class="poll" data-poll-status="open" data-poll-public="true" data-poll-results="always" data-poll-type="regular" data-poll-name="poll">
+<div>
+<div class="poll-container">
+<ul>
+<li data-poll-option-id="d48c832ee283b13d7788492fe61d09b6">Keep current values</li>
+<li data-poll-option-id="0d63f0cbf40569478f7a428b48292275">Change to proposed values</li>
+</ul>
+</div>
+<div class="poll-info">
+<p>
+<span class="info-number">0</span>
+<span class="info-label">voters</span>
+</p>
+</div>
+</div>
+</div>
+          <p><a href="https://forum.mesg.com/t/reduce-keepalive-values/247/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/reduce-keepalive-values/247/1</link>
+        <pubDate>Tue, 05 Feb 2019 04:50:58 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-247-1</guid>
+        <source url="https://forum.mesg.com/t/reduce-keepalive-values/247.rss">Reduce KeepAlive values</source>
+      </item>
+  </channel>
+</rss>

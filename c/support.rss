@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:discourse="http://www.discourse.org/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Support - MESG Community</title>
+    <link>https://forum.mesg.com/c/support</link>
+    <description>Topics in the &#39;Support&#39; category Welcome to our support category! This is where you can post questions and the team and other members of the community can help.</description>
+    
+      <lastBuildDate>Fri, 29 Nov 2019 14:08:14 +0000</lastBuildDate>
+      <atom:link href="https://forum.mesg.com/c/support.rss" rel="self" type="application/rss+xml" />
+        <item>
+          <title>Need help in create process</title>
+          <dc:creator><![CDATA[L-KH]]></dc:creator>
+          <category>Support</category>
+          <description><![CDATA[
+            <p>Hello,<br>
+I am just starting learning here, but I get some errors when creating a process. I used this tutorial: <a href="https://docs.mesg.com/guide/process/process-file.html#steps" rel="nofollow noopener">https://docs.mesg.com/guide/process/process-file.html#steps</a></p>
+<p>when I do the first step, I just copy-paste it, compile done but when I want to create<img src="https://forum.mesg.com/uploads/default/original/1X/9fd608bcf286e370c68ddc48468295f522e0a2a0.png" alt="mes" data-base62-sha1="mNYtZN47fHm5tTXnGHdwDgzvZE4" width="575" height="173"><br>
+this is the error : Error: Unexpected token m in JSON at position 0</p>
+<p>and even when I try to copy-paste this example : <a href="https://docs.mesg.com/guide/process/process-file.html#example-5" rel="nofollow noopener">https://docs.mesg.com/guide/process/process-file.html#example-5</a><br>
+I get this error :<br>
+<strong>›   Error: env variable PROVIDER_ENDPOINT must be set</strong></p>
+<p>I hope someone helps me to find solution to create a safe process.<br>
+Thanks</p>
+            <p><small>7 posts - 2 participants</small></p>
+            <p><a href="https://forum.mesg.com/t/need-help-in-create-process/459">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/need-help-in-create-process/459</link>
+          <pubDate>Fri, 29 Nov 2019 14:08:14 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-459</guid>
+          <source url="https://forum.mesg.com/t/need-help-in-create-process/459.rss">Need help in create process</source>
+        </item>
+        <item>
+          <title>Unable to run &quot;mesg-core start&quot;</title>
+          <dc:creator><![CDATA[vijaykrishnavanshi]]></dc:creator>
+          <category>Support</category>
+          <description><![CDATA[
+            <p>Error Message:<br>
+<code>2018/11/18 10:07:06 Error response from daemon: could not choose an IP address to advertise since this system has multiple addresses on interface wlo1 (2405:204:9521:8f9e:31e1:b99f:f531:ffdd a nd 2405:204:9521:8f9e:a40a:26a0:94c:9101)</code></p>
+<p>I understand from this is mesg tries to initialize docker but is unable to choose from the multiple IPs. Has anyone faced a similar issue? Can you give pointers to resolve this?</p>
+            <p><small>9 posts - 2 participants</small></p>
+            <p><a href="https://forum.mesg.com/t/unable-to-run-mesg-core-start/121">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/unable-to-run-mesg-core-start/121</link>
+          <pubDate>Sun, 18 Nov 2018 04:42:38 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-121</guid>
+          <source url="https://forum.mesg.com/t/unable-to-run-mesg-core-start/121.rss">Unable to run &quot;mesg-core start&quot;</source>
+        </item>
+        <item>
+          <title>Mesg-core logs showing old services</title>
+          <dc:creator><![CDATA[romain-gsr]]></dc:creator>
+          <category>Support</category>
+          <description><![CDATA[
+            <p>Hi there !</p>
+<p>I used to work with the previous version of <strong>mesg-core</strong>, which used to have the ID of the MESG services formatted like <strong>v1_…</strong>. I lately updated the version to 0.3.0, where the format of these ID’s changed.</p>
+<p>I cleaned all my services many times during development and even cleared on Docker (from Portainer) since I ran into many issues with it. This morning I ran a mesg-core logs and was confused to find this in the logs :</p>
+<pre><code>(...) span.kind=server system=grpc time="2018-10-18T11:54:17Z" level=error msg="finished streaming call with code Unknown" error="context canceled" grpc.code=Unknown grpc.method=ListenResult grpc.service=api.Core grpc.start_time="2018-10-18T11:49:38Z" grpc.time_ms=279820.2 span.kind=server system=grpc time="2018-10-18T11:54:20Z" level=warning msg="Database services: Could not decode service \"v1_0fdee4505e6d9452357035d5a7b289b2\"" service=v1_0fdee4505e6d9452357035d5a7b289b2 time="2018-10-18T11:54:20Z" level=warning msg="Database services: Could not decode service \"v1_1c9ee0a234e6b2ecfe6dbf26de6d8c1d\"" service=v1_1c9ee0a234e6b2ecfe6dbf26de6d8c1d time="2018-10-18T11:54:20Z" level=warning msg="Database services: Could not decode service \"v1_2f33c6a6967981d1d2499b449c2c9620\"" service=v1_2f33c6a6967981d1d2499b449c2c9620 time="2018-10-18T11:54:20Z" level=warning msg="Database services: Could not decode service \"v1_8aa3b4d0aa543dcc3a61c0975b48d8f6\"" (...)
+</code></pre>
+<p>I updated prior to yesterday and, as can be seen, it looks like the core is still trying to decode service from the old version (and all my services use latest version of mesg-js in that case).</p>
+<p>I find it weird so that’s why I came to report.</p>
+<p>Cheers guys</p>
+            <p><small>4 posts - 2 participants</small></p>
+            <p><a href="https://forum.mesg.com/t/mesg-core-logs-showing-old-services/97">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/mesg-core-logs-showing-old-services/97</link>
+          <pubDate>Fri, 19 Oct 2018 04:43:26 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-97</guid>
+          <source url="https://forum.mesg.com/t/mesg-core-logs-showing-old-services/97.rss">Mesg-core logs showing old services</source>
+        </item>
+        <item>
+          <title>How to get support with MESG</title>
+          <dc:creator><![CDATA[jonobacon]]></dc:creator>
+          <category>Support</category>
+          <description><![CDATA[
+            <p>Welcome to our support category! This is where you can post questions and the team and other members of the community can help.</p>
+<p>You can ask questions about anything you like here, but please try to (<strong>1</strong>) <a href="https://docs.mesg.com/">first review our documentation</a>, and (<strong>2</strong>) use that search box at the top of the forum to search for your query first - someone may have already asked it!</p>
+<p>If not, go ahead and ask your questions. Please try to be as detailed as possible. Thanks for using MESG!</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://forum.mesg.com/t/how-to-get-support-with-mesg/36">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/how-to-get-support-with-mesg/36</link>
+          <pubDate>Tue, 18 Sep 2018 01:25:27 +0000</pubDate>
+          <discourse:topicPinned>Yes</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-36</guid>
+          <source url="https://forum.mesg.com/t/how-to-get-support-with-mesg/36.rss">How to get support with MESG</source>
+        </item>
+  </channel>
+</rss>

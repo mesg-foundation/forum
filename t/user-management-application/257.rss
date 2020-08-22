@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>User Management Application</title>
+    <link>https://forum.mesg.com/t/user-management-application/257</link>
+    <description>The user is creating, updating and verifying. I&#39;ll make it available in production in a much more advanced way ahead
+
+I wrote all the details github repo
+
+**Services used in the application**
+https://github.com/emrekeskinmac/mongodb-service
+https://github.com/ilgooz/service-http-server
+https://github.com/mesg-foundation/service-email-sendgrid
+
+**Services I wrote myself**
+https://github.com/emrekeskinmac/mongodb-service
+https://github.com/emrekeskinmac/service-sms-twillo
+
+**Application Repo**
+https://github.com/emrekeskinmac/application-users</description>
+    
+    <lastBuildDate>Mon, 18 Feb 2019 09:27:27 +0000</lastBuildDate>
+    <category>Hackathon</category>
+    <atom:link href="https://forum.mesg.com/t/user-management-application/257.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>User Management Application</title>
+        <dc:creator><![CDATA[Emre_Keskin]]></dc:creator>
+        <description><![CDATA[
+            <p>The user is creating, updating and verifying. I’ll make it available in production in a much more advanced way ahead</p>
+<p>I wrote all the details github repo</p>
+<p><strong>Services used in the application</strong><br>
+</p><aside class="onebox whitelistedgeneric">
+  <header class="source">
+      <img src="https://github.githubassets.com/favicons/favicon.svg" class="site-icon" width="32" height="32">
+      <a href="https://github.com/emrekeskinmac/mongodb-service" target="_blank" rel="nofollow noopener">GitHub</a>
+  </header>
+  <article class="onebox-body">
+    <img src="https://forum.mesg.com/uploads/default/original/1X/bf656975ecee4813506a6882625047d3a6b41334.jpeg" class="thumbnail" width="" height="">
+
+<h3><a href="https://github.com/emrekeskinmac/mongodb-service" target="_blank" rel="nofollow noopener">emrekeskinmac/mongodb-service</a></h3>
+
+<p>A MESG Core service to MongoDB . Contribute to emrekeskinmac/mongodb-service development by creating an account on GitHub.</p>
+
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+<br>
+<aside class="onebox whitelistedgeneric">
+  <header class="source">
+      <img src="https://github.githubassets.com/favicons/favicon.svg" class="site-icon" width="32" height="32">
+      <a href="https://github.com/ilgooz/service-http-server" target="_blank" rel="nofollow noopener">GitHub</a>
+  </header>
+  <article class="onebox-body">
+    <img src="https://forum.mesg.com/uploads/default/original/1X/539daf8f9e7d5ba9db32a09c758f90f3cdf19b54.jpeg" class="thumbnail" width="" height="">
+
+<h3><a href="https://github.com/ilgooz/service-http-server" target="_blank" rel="nofollow noopener">ilgooz/service-http-server</a></h3>
+
+<p>A MESG service to serve content over HTTP. Contribute to ilgooz/service-http-server development by creating an account on GitHub.</p>
+
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+<br>
+<aside class="onebox whitelistedgeneric">
+  <header class="source">
+      <img src="https://github.githubassets.com/favicons/favicon.svg" class="site-icon" width="32" height="32">
+      <a href="https://github.com/liteflow-services/sendgrid" target="_blank" rel="nofollow noopener">GitHub</a>
+  </header>
+  <article class="onebox-body">
+    <img src="https://forum.mesg.com/uploads/default/original/1X/998566016a65b7143210b683fcd4d23e14ce9ca8.png" class="thumbnail" width="" height="">
+
+<h3><a href="https://github.com/liteflow-services/sendgrid" target="_blank" rel="nofollow noopener">liteflow-services/sendgrid</a></h3>
+
+<p>MESG Service that sends emails through Sendgrid's API - liteflow-services/sendgrid</p>
+
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+
+<p><strong>Services I wrote myself</strong><br>
+</p><aside class="onebox whitelistedgeneric">
+  <header class="source">
+      <img src="https://github.githubassets.com/favicons/favicon.svg" class="site-icon" width="32" height="32">
+      <a href="https://github.com/emrekeskinmac/mongodb-service" target="_blank" rel="nofollow noopener">GitHub</a>
+  </header>
+  <article class="onebox-body">
+    <img src="https://forum.mesg.com/uploads/default/original/1X/bf656975ecee4813506a6882625047d3a6b41334.jpeg" class="thumbnail" width="" height="">
+
+<h3><a href="https://github.com/emrekeskinmac/mongodb-service" target="_blank" rel="nofollow noopener">emrekeskinmac/mongodb-service</a></h3>
+
+<p>A MESG Core service to MongoDB . Contribute to emrekeskinmac/mongodb-service development by creating an account on GitHub.</p>
+
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+<br>
+<aside class="onebox whitelistedgeneric">
+  <header class="source">
+      <img src="https://github.githubassets.com/favicons/favicon.svg" class="site-icon" width="32" height="32">
+      <a href="https://github.com/emrekeskinmac/service-sms-twilio" target="_blank" rel="nofollow noopener">GitHub</a>
+  </header>
+  <article class="onebox-body">
+    <img src="https://forum.mesg.com/uploads/default/original/1X/bf656975ecee4813506a6882625047d3a6b41334.jpeg" class="thumbnail" width="" height="">
+
+<h3><a href="https://github.com/emrekeskinmac/service-sms-twilio" target="_blank" rel="nofollow noopener">emrekeskinmac/service-sms-twilio</a></h3>
+
+<p>A MESG Core service to send sms by using Twillo . Contribute to emrekeskinmac/service-sms-twilio development by creating an account on GitHub.</p>
+
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+
+<p><strong>Application Repo</strong><br>
+</p><aside class="onebox whitelistedgeneric">
+  <header class="source">
+      <img src="https://github.githubassets.com/favicons/favicon.svg" class="site-icon" width="32" height="32">
+      <a href="https://github.com/emrekeskinmac/application-users" target="_blank" rel="nofollow noopener">GitHub</a>
+  </header>
+  <article class="onebox-body">
+    <img src="https://forum.mesg.com/uploads/default/original/1X/bf656975ecee4813506a6882625047d3a6b41334.jpeg" class="thumbnail" width="" height="">
+
+<h3><a href="https://github.com/emrekeskinmac/application-users" target="_blank" rel="nofollow noopener">emrekeskinmac/application-users</a></h3>
+
+<p>A MESG Core application to User Management . Contribute to emrekeskinmac/application-users development by creating an account on GitHub.</p>
+
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+
+          <p><a href="https://forum.mesg.com/t/user-management-application/257/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/user-management-application/257/1</link>
+        <pubDate>Sun, 17 Feb 2019 23:01:31 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-257-1</guid>
+        <source url="https://forum.mesg.com/t/user-management-application/257.rss">User Management Application</source>
+      </item>
+  </channel>
+</rss>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Go libraries</title>
+    <link>https://forum.mesg.com/t/go-libraries/191</link>
+    <description>Hey guys,
+
+I recently deprecated both [go-application](https://github.com/mesg-foundation/go-application) and [go-service](https://github.com/mesg-foundation/go-service).
+
+## go-application
+
+This lib has been deprecated because (like the js library) we don&#39;t want to support the when/then logic.
+It&#39;s concept and implementation were not perfect and require a lot of time to make it good.
+This logic will be implemented in the future with the workflow system and not as go or js libraries.
+
+The generated gRPC go protofile are well done and pretty easy to use for any go developer. So we don&#39;t need to provide wrapper on top of it (as opposed as the js lib).
+
+Developer should now import directly the [coreapi package](https://github.com/mesg-foundation/core/tree/master/protobuf/coreapi).
+
+## go-service
+
+This lib has also been deprecated because it is not using the `serviceapi` package from core because of vendor issue if I remember well.
+The go-service lib is useful and make service development a lot faster.
+I suggest to keep it but to move it in core repository so it&#39;s easy to maintain and will be easily reusable in system services as well.
+
+I suggest to move this lib in `github.com/mesg-foundation/core/client/service`.
+
+---
+
+@krhubert @ilgooz @Anthony what do you think / do you agree?</description>
+    
+    <lastBuildDate>Tue, 15 Jan 2019 14:29:48 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/go-libraries/191.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Go libraries</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Done in <a href="https://github.com/mesg-foundation/core/pull/704" rel="nofollow noopener">https://github.com/mesg-foundation/core/pull/704</a></p>
+          <p><a href="https://forum.mesg.com/t/go-libraries/191/5">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/go-libraries/191/5</link>
+        <pubDate>Tue, 15 Jan 2019 14:29:48 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-191-5</guid>
+        <source url="https://forum.mesg.com/t/go-libraries/191.rss">Go libraries</source>
+      </item>
+      <item>
+        <title>Go libraries</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>I would love to get ride of the vendor folder!</p>
+          <p><a href="https://forum.mesg.com/t/go-libraries/191/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/go-libraries/191/4</link>
+        <pubDate>Fri, 11 Jan 2019 09:57:42 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-191-4</guid>
+        <source url="https://forum.mesg.com/t/go-libraries/191.rss">Go libraries</source>
+      </item>
+      <item>
+        <title>Go libraries</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <p>I’m ok but we have to remove vendor direcotry</p>
+          <p><a href="https://forum.mesg.com/t/go-libraries/191/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/go-libraries/191/3</link>
+        <pubDate>Fri, 11 Jan 2019 08:47:59 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-191-3</guid>
+        <source url="https://forum.mesg.com/t/go-libraries/191.rss">Go libraries</source>
+      </item>
+      <item>
+        <title>Go libraries</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <ul>
+<li>
+<p>Application can be archived in favor of workflows. I don’t think we’ll ever need to use an application client when workflows gets really mature.</p>
+</li>
+<li>
+<p>Keeping high level apis for service client is good. I don’t mind if we move it to Core or keep separated, as long as it’s importable as standalone. With go mod, maybe we can solve the issue with vendors as well if we chose to keep this pkg in a separated repo like now.</p>
+</li>
+</ul>
+          <p><a href="https://forum.mesg.com/t/go-libraries/191/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/go-libraries/191/2</link>
+        <pubDate>Fri, 11 Jan 2019 06:06:53 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-191-2</guid>
+        <source url="https://forum.mesg.com/t/go-libraries/191.rss">Go libraries</source>
+      </item>
+      <item>
+        <title>Go libraries</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Hey guys,</p>
+<p>I recently deprecated both <a href="https://github.com/mesg-foundation/go-application" rel="nofollow noopener">go-application</a> and <a href="https://github.com/mesg-foundation/go-service" rel="nofollow noopener">go-service</a>.</p>
+<h2>go-application</h2>
+<p>This lib has been deprecated because (like the js library) we don’t want to support the when/then logic.<br>
+It’s concept and implementation were not perfect and require a lot of time to make it good.<br>
+This logic will be implemented in the future with the workflow system and not as go or js libraries.</p>
+<p>The generated gRPC go protofile are well done and pretty easy to use for any go developer. So we don’t need to provide wrapper on top of it (as opposed as the js lib).</p>
+<p>Developer should now import directly the <a href="https://github.com/mesg-foundation/core/tree/master/protobuf/coreapi" rel="nofollow noopener">coreapi package</a>.</p>
+<h2>go-service</h2>
+<p>This lib has also been deprecated because it is not using the <code>serviceapi</code> package from core because of vendor issue if I remember well.<br>
+The go-service lib is useful and make service development a lot faster.<br>
+I suggest to keep it but to move it in core repository so it’s easy to maintain and will be easily reusable in system services as well.</p>
+<p>I suggest to move this lib in <code>github.com/mesg-foundation/core/client/service</code>.</p>
+<hr>
+<p><a class="mention" href="/u/krhubert">@krhubert</a> <a class="mention" href="/u/ilgooz">@ilgooz</a> <a class="mention" href="/u/anthony">@Anthony</a> what do you think / do you agree?</p>
+          <p><a href="https://forum.mesg.com/t/go-libraries/191/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/go-libraries/191/1</link>
+        <pubDate>Fri, 11 Jan 2019 05:42:01 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-191-1</guid>
+        <source url="https://forum.mesg.com/t/go-libraries/191.rss">Go libraries</source>
+      </item>
+  </channel>
+</rss>

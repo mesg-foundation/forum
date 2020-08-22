@@ -1,0 +1,788 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Refactoring list</title>
+    <link>https://forum.mesg.com/t/refactoring-list/123</link>
+    <description>Hi,
+
+I sketched a draft of possible refactors. I know there are quite a few, but I&#39;m happy to solve them. 
+If you could divide them into 3 category
+
+a) totally agree
+b) nor agree nor disagree
+c) totally disagree
+
+It would be awesome. Such categorization tells which refactor everybody is ok with, then talk about bullet points from category b and the last one from c.
+
+Please give a list of them in format, starting from a which is most important one
+
+a: comamnds.1, general.6 etc...
+b: ....
+c: ....
+
+As for me, I see all of them as cat. A (otherwise I wouldn&#39;t write them). If something is unclear let me know - I will clarify my points. If you fill something is missing let me know, then I will add it to this list.
+
+I aware of fact that there are some easy tasks to do as well as more complex one that for sure needs futher discussion, but it&#39;s a starting point.
+
+## General
+
+1) (**a**) keep task inputData naming consistent across packages (now is inputs/tasksInputs/inputData) - also check if other namings are consistent.
+2) move mocks from `mocks` directory to package level
+3) clean/remove for simplicity StatusType - for now there are 4 StatusTypes in 4 different places just to pass it to a command line (maybe we can replace it with github.com/docker/docker/pkg/streamformatter or github.com/docker/docker/pkg/progress)
+4) rename all folder with test data to `testdata`
+5) change integration_test.go to -short flag (as it&#39;s could be more controlled from tests - for example, all test will be in one file)
+6) (**a**) do not call config. Global inside packages - pass config
+7) move interface/cli/main.go and core/main.go to 
+ - cmd/core and cmd/cli (standard in go)
+ - ./main.go (core) and ./cli/main.go (cli) 
+
+### api
+
+1) change api name for sdk, or even better api it is just our server in fact (same like rest servers)
+we should keep server implementation there. Remind yourself if you have written http server did you implement the logic there or keep out and the server was just to set up routes? here we don&#39;t have even routes so almost all grpc/core|service methods are oneliners
+2) move Delete method body to Delete Service and so on...
+
+### commands
+
+1) (**a**) move Stop logic in core_provider to container/daemon - ideally api should be an interface and it should be passed to commands
+2) remove as much logic as possible from providers
+
+### container
+
+1) change package name from container to something more general (maybe docker), because here core handle containers, but also services, swarm and more
+2) (**a**) change dockertest to testify mocks
+3) replace `func presenceHandling` with `return !docker.IsErrNotFound(err), err`
+4) remove client_test.go as it&#39;s probably outdated
+5) use github.com/docker/cli/cli/command/image/build.ReadDockerignore
+6) see if we can use something useful from docker/cli
+
+### config
+
+1) remove loading config with sync and pass it directly (do we still need to load config many times?)
+2) combine Service And Execution Relative Path into one (user don&#39;t need to know internal database layout)
+
+### dameon (done)
+
+1) (**c**) rename Deamon as it&#39;s more associated with running something in the background (not in the container)
+2) (done) (**a**) remove init function
+3) (done) (**a**) make Daemon newable
+4) (done) (**a**) combine all files into one (almost all functions are oneliner)
+5) (done) (**a**) remove Test Logs, Stop, Status and Start (left only test for serviceSpec) as all of them wrappers and they are tested in service/container packages.
+
+### database
+
+1) replace leveldb with badger (performance) (https://github.com/mesg-foundation/core/issues/565)
+2) remove mocks (as long as we don&#39;t use some mocks (or code, in general, we should avoid putting it into repo))
+
+### event
+
+1) get rid of it - there is only one method and it&#39;s just for publishing data - it should be in different place
+
+### execution
+
+1) keep ID as []byte (fmt.Sprintf(&quot;%x&quot;) is a human-readable format, not for id store it should stay []byte)
+
+### interface
+
+1) grpc/server , grpc/core, grpc/client and grpc/service so these are similar. I talked about the possibilites to refactor while describing api. Also, the destination of this packages should be clear. Either we keep:
+  - full validation, data mapping, logic connected with api here
+  - basic validation, data mapping (no logic)
+  - data mapping
+  Now there are some methods that are simply oneliner around api and there are some like core/deploy.go where a lot of stuff is going on
+2) interface/grpc/client/workflow.go - strings.Compare(wf.OnEvent.Name, &quot;*&quot;) == 0 - do not use strings.Compare -&gt; use ==
+3) move tests like TestDeleteService to api package (same for grpc/servce)
+
+### pubsub
+
+1) make pubsub newable
+
+### service
+
+1) move service-test directory to `service` package
+2) importer - replace read dockerfile with validation (github.com/moby/buildkit/frontend/dockerfile/parser.Parse)
+3) importer - simplify reading/validation - there should be one method - Parse which returns definition and error (all validation and other stuff should be done while reading from a path)
+4) so this package contains a lot of stuff that should be splitted - it contains
+  - service validation - if mesg.yml dockerfile etc are ok
+  - service container managing - start, stop, logs etc
+  - service dependencies manager - start-stop handling etc
+  - task/inputs/outputs definition 
+all of above are in one package (expect validations) and all of them are part of one big Service struct. I think there should be struct for deploying/manage dependencies, containers etc...
+5) rename  service.FromService to service.FromDefinition (https://github.com/mesg-foundation/core/issues/436)
+6) **!** Change Ouptus type to map[string*Parametr the same as input (what was the reason to define output in diffrent way then input?)
+```go
+type Task struct {
+  // Inputs are the definition of the execution inputs of task.
+  Inputs map[string]*Parameter `yaml:&quot;inputs&quot;`
+  
+  // Outputs are the definition of the execution results of task.
+  Outputs map[string]*Output `yaml:&quot;outputs&quot;`
+}
+```
+7) we should completely change the way how to serialise/deserialise service to keep it’s definition in db.
+8) Change Status method to ServiceStatus
+
+### utils
+
+1) move clierror to commands package
+
+### others
+
+1) change repository name to `mesg-foundation/mesg`
+2) change `mesg-core` to `mesg-cli` or `mesgcli` as it is actually cli (https://github.com/mesg-foundation/core/issues/365)
+3) include gometalinter to pipeline build, as we have very few errors (most of them are misspelled)
+
+```
+➜  core git:(refactor/todo) ✗ gometalinter --tests --vendor --disable-all --enable=golint --enable=goimports --enable=vetshadow --enable=misspell --enable=vet --min-confidence=1 ./...
+container/dockertest/client.go:53:46:warning: &quot;paramaters&quot; is a misspelling of &quot;parameters&quot; (misspell)
+utils/pretty/pretty.go:255:18:warning: &quot;destroyes&quot; is a misspelling of &quot;destroys&quot; (misspell)
+utils/pretty/pretty.go:374:18:warning: &quot;destroyes&quot; is a misspelling of &quot;destroys&quot; (misspell)
+service/importer/assets/schema.go:1::warning: file is not goimported (goimports)
+container/container_test.go:131::error: github.com/mesg-foundation/core/vendor/github.com/docker/docker/api/types.ServiceInspectOptions composite literal uses unkeyed fields (vet)
+commands/provider/service_provider.go:131::warning: declaration of &quot;err&quot; shadows declaration at commands/provider/service_provider.go:129 (vetshadow)
+commands/service_dev.go:80::warning: declaration of &quot;err&quot; shadows declaration at commands/service_dev.go:65 (vetshadow)
+service/start.go:22::warning: declaration of &quot;err&quot; shadows declaration at service/start.go:15 (vetshadow)
+service/dependency_test.go:54::warning: declaration of &quot;err&quot; shadows declaration at service/dependency_test.go:45 (vetshadow)
+x/xos/os_test.go:59::warning: declaration of &quot;err&quot; shadows declaration at x/xos/os_test.go:51 (vetshadow)
+x/xos/os_test.go:63::warning: declaration of &quot;err&quot; shadows declaration at x/xos/os_test.go:51 (vetshadow)
+main.go:10:7:warning: exported const Dockerfile should have comment or be unexported (golint)
+commands/provider/assets/readme_template.go:1:1:warning: package comment should be of the form &quot;Package assets ...&quot; (golint)
+daemon/init.go:1:1:warning: package comment should be of the form &quot;Package daemon ...&quot; (golint)
+```</description>
+    
+    <lastBuildDate>Thu, 26 Dec 2019 02:53:34 +0000</lastBuildDate>
+    <category>Development</category>
+    <atom:link href="https://forum.mesg.com/t/refactoring-list/123.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Refactoring list</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>I lot of work has been done since this post. A huge majority of the proposed changes are either implemented or not relevant anymore.</p>
+          <p><a href="https://forum.mesg.com/t/refactoring-list/123/7">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/refactoring-list/123/7</link>
+        <pubDate>Thu, 26 Dec 2019 02:53:34 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-123-7</guid>
+        <source url="https://forum.mesg.com/t/refactoring-list/123.rss">Refactoring list</source>
+      </item>
+      <item>
+        <title>Refactoring list</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <ul>
+<li>general-3: I don’t think removing a feature does make sense. If you’ve a solution thats great.</li>
+<li>general-7: It’s a cli if it’s a <em>main</em> pkg. <em>cli</em> also a good name and I see that it’s widely used.</li>
+<li>api-2: We talked about this a lot, even in the issues/PRs while refactoring. Each file in <em>api</em> pkg hosts an API method. And this method can be complex and it’s code may be needed to splitted to different smaller funcs. If we define these funs globally in the <em>api</em> pkg this is a bit messy to me. This is why we have structs to host these small funcs as their methods. This way, they’re private and cannot be acceded by other files. Func names from other files cannot conflict with each other and we can give short names to them without worrying.</li>
+<li>commands-2: I still don’t understand why we need to reduce logic from here? Instead we should be writing tests for them. I think keeping <em>commands</em> smaller kinda makes more sense.</li>
+<li>container-5: I agree that parsing Dockerfile can be useful in <em>importer</em> pkg but here for this bullet we’re talking about <em>.dockerignore</em>.</li>
+<li>config-1: I think we somehow wanted more control on it and made it <em>Newable</em> because of that. Maybe to change its behavior for different environments like testing.</li>
+<li>config-2: I think I’m more closer to keep one as it’s, each db different folders.</li>
+<li>execution-1: I don’t mind both ways, it’s up to the database we use.</li>
+<li>interface-1: Yes it should be just a wrapper. I don’t see any problem with it. gRPC pkgs should not have any logic related to Core.</li>
+<li>interface-2: interface/grpc/client/</li>
+<li>service-4: I don’t quite understand maybe you can create a detailed proposal for this one.</li>
+</ul>
+          <p><a href="https://forum.mesg.com/t/refactoring-list/123/6">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/refactoring-list/123/6</link>
+        <pubDate>Thu, 22 Nov 2018 07:13:36 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-123-6</guid>
+        <source url="https://forum.mesg.com/t/refactoring-list/123.rss">Refactoring list</source>
+      </item>
+      <item>
+        <title>Refactoring list</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <p>Waiting for whole list and the resons for b</p>
+<blockquote>
+<p><strong>container.3</strong> : i don’t understand</p>
+</blockquote>
+<p><a href="https://github.com/mesg-foundation/core/blob/fe98a412386c37fcbdb4b391c1bb4941110bc34f/container/container.go#L185">https://github.com/mesg-foundation/core/blob/fe98a412386c37fcbdb4b391c1bb4941110bc34f/container/container.go#L185</a> : simplify this funciton</p>
+<blockquote>
+<p><strong>config.1</strong> : what do you mean? agree that we don’t need to load it many time</p>
+</blockquote>
+<p>I mean to just load It once on start - so standard process load/init config in the <code>func main()</code> and the pass it. While doing so we don’t need Global function nor sync.Once</p>
+<blockquote>
+<p><strong>execution.1</strong>  i don’t understand</p>
+</blockquote>
+<p><a href="https://github.com/mesg-foundation/core/blob/a940f93a430cc778fe952a5e09a6468ec8443f0e/execution/execution.go#L59:">https://github.com/mesg-foundation/core/blob/a940f93a430cc778fe952a5e09a6468ec8443f0e/execution/execution.go#L59:</a> here is kept as string, but should be <span class="chcklst-box fa fa-square-o fa-fw"></span>bytes (look also on my replay to <a class="mention" href="/u/ilgooz">@ilgooz</a>)</p>
+<blockquote>
+<p><strong>General.2</strong> : so the mocks should be in the same package as the interface? I prefer to separate the interface, implementation and mock in different packages.</p>
+</blockquote>
+<p>So it’s not “go way”. Like that you want to have eg. commands package where<br>
+commands/interface.go is the interface<br>
+commands/impl/ - is package for implementation<br>
+commands/mocks/ - is package for mocks</p>
+<p>This is defenetly not from go, in go you should keep it in one palce. Right now there are two problems:</p>
+<p>For example you imports mocks and create some package</p>
+<ol>
+<li>mocks.NewExecution() - you have to go to imports/definition and check where this is defiend as there (oh it’s executor from commands package. Compare to this commands.NewMockExecution() - you see everthing right away)</li>
+<li>if you need to import two diffrent mocks:</li>
+</ol>
+<pre><code class="lang-auto">import (
+mocksA ".../database/mocks"
+mocksB ".../filesystem/mocks"
+)
+</code></pre>
+<ol start="3">
+<li>
+<a href="https://rakyll.org/style-packages/">https://rakyll.org/style-packages/</a> -&gt; “In go, package names are not plural. This is surprising to programmers who came from other languages and are retaining an old habit of pluralizing names. Don’t name a package httputils, but httputil!”</li>
+<li>if we avoid prulars the package becomes mock and this is already taken by testify/mock (here mock is the purpose of package -&gt; provide mocking)</li>
+</ol>
+<p>In go good practice is to avoid named imports (so no imports should be named). At the early days of golang the pople started to name package as <code>go-database</code>, <code>go-something</code> which resulted in many alias imports (because you can’t use <code>go-database.New</code> etc…).</p>
+<blockquote>
+<p><strong>container.1</strong> : I think we should move a lot more logic from the service package to the container package, and more all docker related implementation to a docker package. We should have a container package that can start a service (with its dependencies and networks) and is not stuck with the logic of docker. We want to be able to switch from docker to something else without breaking the core.</p>
+</blockquote>
+<p>Yes, this is what I ment. See also other my responses - so why it is in C?</p>
+<blockquote>
+<p><strong>config.2</strong> : this is not a user config. Core.Path is the user config. We mix both for now. Any suggestion on how to separate user config to core config? We should keep config constant in one file.</p>
+</blockquote>
+<p>It is user config if we keep it under one structure and you can’t forbid people to use it. What I mean here is just core dosne’t need to have spereate database and systemservices config (they can create them in cone.path joins with core.name)</p>
+<p>One suggest will be to keep core config under <code>core:</code> and the current core config under <code>mesg:</code> or something like that</p>
+<blockquote>
+<p><strong>daemon.1</strong> : It’s running in the background… in docker.</p>
+</blockquote>
+<p>background daemon != docker cointaer (both are running in the background but one is daemon and the other is container)</p>
+<blockquote>
+<p><strong>database.1</strong> : it should be moved to a system service</p>
+</blockquote>
+<p>It’s about replacing it , not move it - could you tell more?</p>
+<blockquote>
+<p><strong>database.2</strong> : we will use api and system services mocks once move to a system service</p>
+</blockquote>
+<p>Once we need it we will create it. By then a database will change a lot probably.</p>
+          <p><a href="https://forum.mesg.com/t/refactoring-list/123/5">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/refactoring-list/123/5</link>
+        <pubDate>Wed, 21 Nov 2018 13:57:31 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-123-5</guid>
+        <source url="https://forum.mesg.com/t/refactoring-list/123.rss">Refactoring list</source>
+      </item>
+      <item>
+        <title>Refactoring list</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <blockquote>
+<ul>
+<li>general-3: I don’t understand what do you suggest to solve it.</li>
+</ul>
+</blockquote>
+<p><code>  rpc DeployService (stream DeployServiceRequest) returns (stream DeployServiceReply) {}</code><br>
+I suggested to remove strem and return simply DeployServiceReplay because It will be enough to tell the users if deploy is ended with success or fail. Moreover if we want to keep this the <code>StatusType</code> is defiend 4 times:</p>
+<pre><code class="lang-auto">api/deploy.go:type StatusType int
+service/status.go:type StatusType uint
+container/type.go:type StatusType uint
+commands/provider/service_deployer.go:type StatusType int
+</code></pre>
+<p>And there is a lot of passing chanels etc just to print deploy status. There should be just one StatusType.</p>
+<blockquote>
+<ul>
+<li>general-4: Can you provide some links to show current ones?</li>
+</ul>
+</blockquote>
+<p><a href="https://github.com/mesg-foundation/core/tree/dev/service-test" class="onebox" target="_blank">https://github.com/mesg-foundation/core/tree/dev/service-test</a></p>
+<p>And some others, but this is is first coming to my mind</p>
+<blockquote>
+<p>general-7: I suggest following to keep cli programs consistent, in the same place:</p>
+</blockquote>
+<p>Yep, but first core is not cli, and keeping under root or cmd directories are more “go way”</p>
+<blockquote>
+<ul>
+<li>api-1: I don’t understand what do you suggest and the problem.</li>
+</ul>
+</blockquote>
+<p>So the api is, for example, Grpc API, or HTTP api etc… here we have the actual implementation which is used by grpc server. So it’s kind of api/kind of not api</p>
+<blockquote>
+<ul>
+<li>api-2: As long as wee keep the separation in func names. Because not all APIs are consist of only with one func.</li>
+</ul>
+</blockquote>
+<p>What do you mean by separation in fucs names? Of course each function will have it’s onw name</p>
+<blockquote>
+<ul>
+<li>commands-2: Can you provide examples with links?</li>
+</ul>
+</blockquote>
+<p><a href="https://github.com/mesg-foundation/core/blob/dev/commands/provider/service_provider.go" class="onebox" target="_blank">https://github.com/mesg-foundation/core/blob/dev/commands/provider/service_provider.go</a></p>
+<p>ServiceDeleteAll<br>
+ServiceLogs<br>
+ServiceListenResults<br>
+ServiceListenEvents</p>
+<p><a href="https://github.com/mesg-foundation/core/blob/dev/commands/provider/core_provider.go" class="onebox" target="_blank">https://github.com/mesg-foundation/core/blob/dev/commands/provider/core_provider.go</a><br>
+Stop</p>
+<blockquote>
+<ul>
+<li>container-1: There is an ongoing discussion about this. service &amp; container pkg’s structure may change a lot in future when we start adopting kubernetes and others.</li>
+</ul>
+</blockquote>
+<p>Yes, but I’m talkin about refactoring and clean it a little bit.</p>
+<blockquote>
+<ul>
+<li>container-5: I don’t understand, need more info.</li>
+<li>container-6: For what?</li>
+</ul>
+</blockquote>
+<p><a href="https://github.com/mesg-foundation/core/blob/dev/container/build.go" class="onebox" target="_blank">https://github.com/mesg-foundation/core/blob/dev/container/build.go</a><br>
+dockerignoreFiles -&gt; replace this one</p>
+<p>Or</p>
+<pre><code class="lang-auto">package main
+
+import (
+	"bytes"
+
+	"github.com/moby/buildkit/frontend/dockerfile/instructions"
+	"github.com/moby/buildkit/frontend/dockerfile/parser"
+)
+
+const Dockerfile = `
+FROM ubuntu:18.04
+XXX
+`
+
+func main() {
+	r := bytes.NewBufferString(Dockerfile)
+
+	dockerfile, err := parser.Parse(r)
+	if err != nil {
+		panic(err)
+	}
+	_, _, err = instructions.Parse(dockerfile.AST)
+	if err != nil {
+		panic(err)
+	}
+
+}
+</code></pre>
+<p>There are some packages to validate dockerfile (not only if this exists as we have now). I looked at docker code and there is a lot of cool stuff. I don’t know what else we can use form them, but there are 2 suggestions for now.</p>
+<blockquote>
+<ul>
+<li>config-1: What do you mean by  <em>sync</em> , need more info.</li>
+</ul>
+</blockquote>
+<p>sync.Once - just to load config at the start of program (as we don’t use this feature)</p>
+<blockquote>
+<ul>
+<li>config-2</li>
+</ul>
+</blockquote>
+<p>Need more info</p>
+<blockquote>
+<ul>
+<li>daemon-1: Maybe as  <em>core</em>  or  <em>core/docker</em> . In future we may use OS’ service managers:  <em>core/systemd</em> .</li>
+</ul>
+</blockquote>
+<p>That’s true, I dont have package name right now, but if we don’t use this as daemon right now</p>
+<blockquote>
+<ul>
+<li>database-1: I don’t have my research.</li>
+</ul>
+</blockquote>
+<aside class="onebox githubissue">
+  <header class="source">
+      <a href="https://github.com/syndtr/goleveldb/issues/226" target="_blank">github.com/syndtr/goleveldb</a>
+  </header>
+  <article class="onebox-body">
+    <div class="github-row">
+  <div class="github-icon-container" title="Issue">
+	  <svg width="60" height="60" class="github-icon" viewBox="0 0 14 16" aria-hidden="true"><path d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg>
+  </div>
+
+  <div class="github-info-container">
+    <h4>
+      <a href="https://github.com/syndtr/goleveldb/issues/226" target="_blank">Compaction time can be quite big</a>
+    </h4>
+
+    <div class="github-info">
+      <div class="date">
+        opened <span class="discourse-local-date" data-format="ll" data-date="2018-07-03" data-time="10:12:49" data-timezone="UTC">10:12AM - 03 Jul 18 UTC</span>
+      </div>
+
+
+      <div class="user">
+        <a href="https://github.com/melekes" target="_blank">
+          <img alt="melekes" src="https://forum.mesg.com/uploads/default/original/1X/06ee87462a8ef5e439f9f13a91aa7f5d07ace233.png" class="onebox-avatar-inline" width="20" height="20">
+          melekes
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="github-row">
+  <p class="github-content">Hey! I am investigation the performance decline in our software tendermint/tendermint#1835. We're using goleveldb as a primary DB for storing blocks...</p>
+</div>
+
+<div class="labels">
+</div>
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+
+<p>I hit the resach when I worked on tendermint</p>
+<blockquote>
+<ul>
+<li>event-1: Where it should be in?</li>
+</ul>
+</blockquote>
+<pre><code class="lang-auto">api/emit_event.go:	event.Publish()
+</code></pre>
+<p>There is exeacly one place where publish is called - so here we can replace it with pubsub.Publush (we are using it already in api package)</p>
+<p>So in event package will be one struct - maybe it should be in api maybe somewhere else, but I think one package just for one struct is too much</p>
+<blockquote>
+<ul>
+<li>execution-1: I don’t understand what is the problem with current  <em>string</em>  type.</li>
+</ul>
+</blockquote>
+<p>There is no pbm with it, but handling <span class="chcklst-box fa fa-square-o fa-fw"></span>byte is general way efficient format to work with (sending through network etc). The is a reason why sha1.Sum returns the byte, io.Reader/Writer reads/writes bytes etc…</p>
+<blockquote>
+<ul>
+<li>interface-1: I don’t understand the problem and what do you suggest, need more details.  <em>grpc/client</em> should be completely removed, it’s not used.</li>
+</ul>
+</blockquote>
+<p>So you have:<br>
+<a href="https://github.com/mesg-foundation/core/blob/dev/interface/grpc/core/delete.go">https://github.com/mesg-foundation/core/blob/dev/interface/grpc/core/delete.go</a> : wrapper aourd api<br>
+<a href="https://github.com/mesg-foundation/core/blob/dev/interface/grpc/core/list_services.go">https://github.com/mesg-foundation/core/blob/dev/interface/grpc/core/list_services.go</a> : doing some stuff after ListeServices to get thier status and then map values to grpc struct<br>
+<a href="https://github.com/mesg-foundation/core/blob/dev/interface/grpc/core/logs.go">https://github.com/mesg-foundation/core/blob/dev/interface/grpc/core/logs.go</a> : get logs and them stream it<br>
+<a href="https://github.com/mesg-foundation/core/blob/dev/interface/grpc/core/execute.go">https://github.com/mesg-foundation/core/blob/dev/interface/grpc/core/execute.go</a> : map data before Execute tasks<br>
+<a href="https://github.com/mesg-foundation/core/blob/dev/interface/grpc/core/deploy.go">https://github.com/mesg-foundation/core/blob/dev/interface/grpc/core/deploy.go</a> : etc …</p>
+<p>So as you can se some functions are just wrappers, some doing more stuff (like getting the status of service) and some just map/stream data, so there is everything here, and the purpose of grpc package should be clear.</p>
+<blockquote>
+<ul>
+<li>service-1: It is used by other packages too. So I’m not sure if should do this change. If we do we can put it under  <em>service/testdata</em> .</li>
+</ul>
+</blockquote>
+<p>We can changed paht in other packages too, or just split them (as I remember not all services are used by every test).</p>
+<blockquote>
+<ul>
+<li>service-5: Changing only func name is not enough we should completely change the way how to serialise/deserialise service to keep it’s definition in db. Saving  <em>Service</em>  struct directly in db is error-prone because upgrading it can be forgotten.</li>
+</ul>
+</blockquote>
+<p>Sure, It was just a start, I will add it to list as poitn servcie-7</p>
+<blockquote>
+<ul>
+<li>general-5: I think we can use  <em>-short</em>  flag but still separate integrations tests and unit tests in different places.</li>
+</ul>
+</blockquote>
+<p>So it it will be exacly the same as we have right now</p>
+<blockquote>
+<ul>
+<li>database-2: We discussed about this before and decided to have it.</li>
+</ul>
+</blockquote>
+<p>Yes, but I’m raising it agin, as this mocks is used nowhere and don’t see the point to keep it, just because we can</p>
+<blockquote>
+<ul>
+<li>interface-2: pkg should be completely removed.</li>
+</ul>
+</blockquote>
+<p>Which one?</p>
+<blockquote>
+<ul>
+<li>interface-3: We should keep tests in both sides but mock  <em>api</em>  pkg while testing  <em>interface/</em>*  pkgs.</li>
+</ul>
+</blockquote>
+<p>Yes, but for now we testing api functionalities in core (I mean we test wrapper around one api method) so we test api in fact.</p>
+<blockquote>
+<ul>
+<li>service-4: I don’t quite understand why and the problem.</li>
+</ul>
+</blockquote>
+<p>There is a lot of stuff in one place in one structure - as I wrote service package hendles:<br>
+container managing - start , stop etc<br>
+service and dependiencies managing<br>
+validations etc …</p>
+<p>I jsut want to keep it clean so for examplem<br>
+move part about manaing container to <code>container pkg</code><br>
+create struct for manage dependencies<br>
+etc …</p>
+<blockquote>
+<ul>
+<li>service-6: What do you mean? They’ve different struct fields.  <em>Parameter</em>  should be used to define input data.</li>
+</ul>
+</blockquote>
+<p>Yes, I’m asking what was the reason, why they are diffrent if they could be the same? You define inputs in mesg.yaml and then outputs are diffrent, but they both represent data types</p>
+          <p><a href="https://forum.mesg.com/t/refactoring-list/123/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/refactoring-list/123/4</link>
+        <pubDate>Wed, 21 Nov 2018 13:34:19 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-123-4</guid>
+        <source url="https://forum.mesg.com/t/refactoring-list/123.rss">Refactoring list</source>
+      </item>
+      <item>
+        <title>Refactoring list</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <h1>a</h1>
+<ul>
+<li>general-1</li>
+<li>general-6</li>
+<li>commands-1</li>
+<li>container-2</li>
+<li>container-3</li>
+<li>container-4: should add equivalent if needed</li>
+<li>daemon-2 &amp; daemon-3</li>
+<li>daemon-4</li>
+<li>pubsub-1</li>
+<li>service-2</li>
+<li>service-3</li>
+<li>utils-1</li>
+<li>others-3</li>
+</ul>
+<h1>b</h1>
+<ul>
+<li>general-2: Having generated code in a separate pkg feels more clean to me. Code base and GoDoc stays much more readable.</li>
+<li>general-3: I don’t understand what do you suggest to solve it.</li>
+<li>general-4: Can you provide some links to show current ones?</li>
+<li>general-7: I suggest following to keep cli programs consistent, in the same place:
+<ul>
+<li>client cli: <code>interface/cli/mesg-core/main.go</code> &gt; this is also <em>go get</em>’abble. binary name will be installed as <em>mesg-core</em>.</li>
+<li>daemon cli: <code>interface/cli/core/main.go</code>
+</li>
+</ul>
+</li>
+<li>api-1: I don’t understand what do you suggest and the problem.</li>
+<li>api-2: As long as wee keep the separation in func names. Because not all APIs are consist of only with one func.</li>
+<li>commands-2: Can you provide examples with links?</li>
+<li>container-1: There is an ongoing discussion about this. service &amp; container pkg’s structure may change a lot in future when we start adopting kubernetes and others.</li>
+<li>container-5: I don’t understand, need more info.</li>
+<li>container-6: For what?</li>
+<li>config-1: What do you mean by <em>sync</em>, need more info.</li>
+<li>config-2</li>
+<li>daemon-1: Maybe as <em>core</em> or <em>core/docker</em>. In future we may use OS’ service managers: <em>core/systemd</em>.</li>
+<li>database-1: I don’t have my research.</li>
+<li>event-1: Where it should be in?</li>
+<li>execution-1: I don’t understand what is the problem with current <em>string</em> type.</li>
+<li>interface-1: I don’t understand the problem and what do you suggest, need more details. <em>grpc/client</em> should be completely removed, it’s not used.</li>
+<li>service-1: It is used by other packages too. So I’m not sure if should do this change. If we do we can put it under <em>service/testdata</em>.</li>
+<li>service-5: Changing only func name is not enough we should completely change the way how to serialise/deserialise service to keep it’s definition in db. Saving <em>Service</em> struct directly in db is error-prone because upgrading it can be forgotten.</li>
+<li>others-1: Maybe.</li>
+<li>others-2: Maybe to <em>mesgf</em> (mesg-foundation)</li>
+</ul>
+<h1>c</h1>
+<ul>
+<li>general-5: I think we can use <em>-short</em> flag but still separate integrations tests and unit tests in different places.</li>
+<li>database-2: We discussed about this before and decided to have it.</li>
+<li>interface-2: pkg should be completely removed.</li>
+<li>interface-3: We should keep tests in both sides but mock <em>api</em> pkg while testing <em>interface/*</em> pkgs.</li>
+<li>service-4: I don’t quite understand why and the problem.</li>
+<li>service-6: What do you mean? They’ve different struct fields. <em>Parameter</em> should be used to define input data.</li>
+</ul>
+          <p><a href="https://forum.mesg.com/t/refactoring-list/123/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/refactoring-list/123/3</link>
+        <pubDate>Wed, 21 Nov 2018 12:23:26 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-123-3</guid>
+        <source url="https://forum.mesg.com/t/refactoring-list/123.rss">Refactoring list</source>
+      </item>
+      <item>
+        <title>Refactoring list</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <h1>a</h1>
+<p><strong>General.1</strong><br>
+<strong>General.5</strong>: yes!<br>
+<strong>General.6</strong><br>
+<strong>General.7</strong>: cmd/core and cmd/cli (standard in go)<br>
+<strong>api.1</strong><br>
+<strong>api.2</strong><br>
+<strong>commands.1</strong><br>
+<strong>commands.2</strong><br>
+<strong>container.2</strong><br>
+<strong>daemon.2</strong><br>
+<strong>daemon.3</strong><br>
+<strong>event.1</strong>: agree. it should be in the future sdk package</p>
+<h1>b</h1>
+<p><strong>General.3</strong><br>
+<strong>General.4</strong><br>
+<strong>container.3</strong>: i don’t understand<br>
+<strong>container.4</strong><br>
+<strong>container.5</strong><br>
+<strong>container.6</strong><br>
+<strong>config.1</strong>: what do you mean? agree that we don’t need to load it many time<br>
+<strong>daemon.4</strong><br>
+<strong>execution.1</strong> i don’t understand</p>
+<h1>c</h1>
+<p><strong>General.2</strong>: so the mocks should be in the same package as the interface? I prefer to separate the interface, implementation and mock in different packages.<br>
+<strong>container.1</strong>: I think we should move a lot more logic from the service package to the container package, and more all docker related implementation to a docker package. We should have a container package that can start a service (with its dependencies and networks) and is not stuck with the logic of docker. We want to be able to switch from docker to something else without breaking the core.<br>
+<strong>config.2</strong>: this is not a user config. Core.Path is the user config. We mix both for now. Any suggestion on how to separate user config to core config? We should keep config constant in one file.<br>
+<strong>daemon.1</strong>: It’s running in the background… in docker.<br>
+<strong>database.1</strong>: it should be moved to a system service<br>
+<strong>database.2</strong>: we will use api and system services mocks once move to a system service</p>
+<hr>
+<p><a class="mention" href="/u/krhubert">@krhubert</a> lots of good suggestion <img src="https://forum.mesg.com/images/emoji/twitter/wink.png?v=6" title=":wink:" class="emoji" alt=":wink:"> But I didn’t understand some. I will continue tomorrow. I stop at <strong>interface</strong>.</p>
+          <p><a href="https://forum.mesg.com/t/refactoring-list/123/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/refactoring-list/123/2</link>
+        <pubDate>Tue, 20 Nov 2018 11:30:11 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-123-2</guid>
+        <source url="https://forum.mesg.com/t/refactoring-list/123.rss">Refactoring list</source>
+      </item>
+      <item>
+        <title>Refactoring list</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <p>Hi,</p>
+<p>I sketched a draft of possible refactors. I know there are quite a few, but I’m happy to solve them.<br>
+If you could divide them into 3 category</p>
+<p>a) totally agree<br>
+b) nor agree nor disagree<br>
+c) totally disagree</p>
+<p>It would be awesome. Such categorization tells which refactor everybody is ok with, then talk about bullet points from category b and the last one from c.</p>
+<p>Please give a list of them in format, starting from a which is most important one</p>
+<p>a: comamnds.1, general.6 etc…<br>
+b: …<br>
+c: …</p>
+<p>As for me, I see all of them as cat. A (otherwise I wouldn’t write them). If something is unclear let me know - I will clarify my points. If you fill something is missing let me know, then I will add it to this list.</p>
+<p>I aware of fact that there are some easy tasks to do as well as more complex one that for sure needs futher discussion, but it’s a starting point.</p>
+<h2>General</h2>
+<ol>
+<li>(<strong>a</strong>) keep task inputData naming consistent across packages (now is inputs/tasksInputs/inputData) - also check if other namings are consistent.</li>
+<li>move mocks from <code>mocks</code> directory to package level</li>
+<li>clean/remove for simplicity StatusType - for now there are 4 StatusTypes in 4 different places just to pass it to a command line (maybe we can replace it with <a href="http://github.com/docker/docker/pkg/streamformatter">github.com/docker/docker/pkg/streamformatter</a> or <a href="http://github.com/docker/docker/pkg/progress">github.com/docker/docker/pkg/progress</a>)</li>
+<li>rename all folder with test data to <code>testdata</code>
+</li>
+<li>change integration_test.go to -short flag (as it’s could be more controlled from tests - for example, all test will be in one file)</li>
+<li>(<strong>a</strong>) do not call config. Global inside packages - pass config</li>
+<li>move interface/cli/main.go and core/main.go to</li>
+</ol>
+<ul>
+<li>cmd/core and cmd/cli (standard in go)</li>
+<li>./main.go (core) and ./cli/main.go (cli)</li>
+</ul>
+<h3>api</h3>
+<ol>
+<li>change api name for sdk, or even better api it is just our server in fact (same like rest servers)<br>
+we should keep server implementation there. Remind yourself if you have written http server did you implement the logic there or keep out and the server was just to set up routes? here we don’t have even routes so almost all grpc/core|service methods are oneliners</li>
+<li>move Delete method body to Delete Service and so on…</li>
+</ol>
+<h3>commands</h3>
+<ol>
+<li>(<strong>a</strong>) move Stop logic in core_provider to container/daemon - ideally api should be an interface and it should be passed to commands</li>
+<li>remove as much logic as possible from providers</li>
+</ol>
+<h3>container</h3>
+<ol>
+<li>change package name from container to something more general (maybe docker), because here core handle containers, but also services, swarm and more</li>
+<li>(<strong>a</strong>) change dockertest to testify mocks</li>
+<li>replace <code>func presenceHandling</code> with <code>return !docker.IsErrNotFound(err), err</code>
+</li>
+<li>remove client_test.go as it’s probably outdated</li>
+<li>use <a href="http://github.com/docker/cli/cli/command/image/build.ReadDockerignore">github.com/docker/cli/cli/command/image/build.ReadDockerignore</a>
+</li>
+<li>see if we can use something useful from docker/cli</li>
+</ol>
+<h3>config</h3>
+<ol>
+<li>remove loading config with sync and pass it directly (do we still need to load config many times?)</li>
+<li>combine Service And Execution Relative Path into one (user don’t need to know internal database layout)</li>
+</ol>
+<h3>dameon (done)</h3>
+<ol>
+<li>(<strong>c</strong>) rename Deamon as it’s more associated with running something in the background (not in the container)</li>
+<li>(done) (<strong>a</strong>) remove init function</li>
+<li>(done) (<strong>a</strong>) make Daemon newable</li>
+<li>(done) (<strong>a</strong>) combine all files into one (almost all functions are oneliner)</li>
+<li>(done) (<strong>a</strong>) remove Test Logs, Stop, Status and Start (left only test for serviceSpec) as all of them wrappers and they are tested in service/container packages.</li>
+</ol>
+<h3>database</h3>
+<ol>
+<li>replace leveldb with badger (performance) (<a href="https://github.com/mesg-foundation/core/issues/565">https://github.com/mesg-foundation/core/issues/565</a>)</li>
+<li>remove mocks (as long as we don’t use some mocks (or code, in general, we should avoid putting it into repo))</li>
+</ol>
+<h3>event</h3>
+<ol>
+<li>get rid of it - there is only one method and it’s just for publishing data - it should be in different place</li>
+</ol>
+<h3>execution</h3>
+<ol>
+<li>keep ID as <span class="chcklst-box fa fa-square-o fa-fw"></span>byte (fmt.Sprintf("%x") is a human-readable format, not for id store it should stay <span class="chcklst-box fa fa-square-o fa-fw"></span>byte)</li>
+</ol>
+<h3>interface</h3>
+<ol>
+<li>grpc/server , grpc/core, grpc/client and grpc/service so these are similar. I talked about the possibilites to refactor while describing api. Also, the destination of this packages should be clear. Either we keep:</li>
+</ol>
+<ul>
+<li>full validation, data mapping, logic connected with api here</li>
+<li>basic validation, data mapping (no logic)</li>
+<li>data mapping<br>
+Now there are some methods that are simply oneliner around api and there are some like core/deploy.go where a lot of stuff is going on</li>
+</ul>
+<ol start="2">
+<li>interface/grpc/client/workflow.go - strings.Compare(wf.OnEvent.Name, “*”) == 0 - do not use strings.Compare -&gt; use ==</li>
+<li>move tests like TestDeleteService to api package (same for grpc/servce)</li>
+</ol>
+<h3>pubsub</h3>
+<ol>
+<li>make pubsub newable</li>
+</ol>
+<h3>service</h3>
+<ol>
+<li>move service-test directory to <code>service</code> package</li>
+<li>importer - replace read dockerfile with validation (<a href="http://github.com/moby/buildkit/frontend/dockerfile/parser.Parse">github.com/moby/buildkit/frontend/dockerfile/parser.Parse</a>)</li>
+<li>importer - simplify reading/validation - there should be one method - Parse which returns definition and error (all validation and other stuff should be done while reading from a path)</li>
+<li>so this package contains a lot of stuff that should be splitted - it contains</li>
+</ol>
+<ul>
+<li>service validation - if mesg.yml dockerfile etc are ok</li>
+<li>service container managing - start, stop, logs etc</li>
+<li>service dependencies manager - start-stop handling etc</li>
+<li>task/inputs/outputs definition<br>
+all of above are in one package (expect validations) and all of them are part of one big Service struct. I think there should be struct for deploying/manage dependencies, containers etc…</li>
+</ul>
+<ol start="5">
+<li>rename  service.FromService to service.FromDefinition (<a href="https://github.com/mesg-foundation/core/issues/436">https://github.com/mesg-foundation/core/issues/436</a>)</li>
+<li>
+<strong>!</strong> Change Ouptus type to map[string*Parametr the same as input (what was the reason to define output in diffrent way then input?)</li>
+</ol>
+<pre><code class="lang-auto">type Task struct {
+  // Inputs are the definition of the execution inputs of task.
+  Inputs map[string]*Parameter `yaml:"inputs"`
+  
+  // Outputs are the definition of the execution results of task.
+  Outputs map[string]*Output `yaml:"outputs"`
+}
+</code></pre>
+<ol start="7">
+<li>we should completely change the way how to serialise/deserialise service to keep it’s definition in db.</li>
+<li>Change Status method to ServiceStatus</li>
+</ol>
+<h3>utils</h3>
+<ol>
+<li>move clierror to commands package</li>
+</ol>
+<h3>others</h3>
+<ol>
+<li>change repository name to <code>mesg-foundation/mesg</code>
+</li>
+<li>change <code>mesg-core</code> to <code>mesg-cli</code> or <code>mesgcli</code> as it is actually cli (<a href="https://github.com/mesg-foundation/core/issues/365">https://github.com/mesg-foundation/core/issues/365</a>)</li>
+<li>include gometalinter to pipeline build, as we have very few errors (most of them are misspelled)</li>
+</ol>
+<pre><code class="lang-auto">➜  core git:(refactor/todo) ✗ gometalinter --tests --vendor --disable-all --enable=golint --enable=goimports --enable=vetshadow --enable=misspell --enable=vet --min-confidence=1 ./...
+container/dockertest/client.go:53:46:warning: "paramaters" is a misspelling of "parameters" (misspell)
+utils/pretty/pretty.go:255:18:warning: "destroyes" is a misspelling of "destroys" (misspell)
+utils/pretty/pretty.go:374:18:warning: "destroyes" is a misspelling of "destroys" (misspell)
+service/importer/assets/schema.go:1::warning: file is not goimported (goimports)
+container/container_test.go:131::error: github.com/mesg-foundation/core/vendor/github.com/docker/docker/api/types.ServiceInspectOptions composite literal uses unkeyed fields (vet)
+commands/provider/service_provider.go:131::warning: declaration of "err" shadows declaration at commands/provider/service_provider.go:129 (vetshadow)
+commands/service_dev.go:80::warning: declaration of "err" shadows declaration at commands/service_dev.go:65 (vetshadow)
+service/start.go:22::warning: declaration of "err" shadows declaration at service/start.go:15 (vetshadow)
+service/dependency_test.go:54::warning: declaration of "err" shadows declaration at service/dependency_test.go:45 (vetshadow)
+x/xos/os_test.go:59::warning: declaration of "err" shadows declaration at x/xos/os_test.go:51 (vetshadow)
+x/xos/os_test.go:63::warning: declaration of "err" shadows declaration at x/xos/os_test.go:51 (vetshadow)
+main.go:10:7:warning: exported const Dockerfile should have comment or be unexported (golint)
+commands/provider/assets/readme_template.go:1:1:warning: package comment should be of the form "Package assets ..." (golint)
+daemon/init.go:1:1:warning: package comment should be of the form "Package daemon ..." (golint)
+</code></pre>
+          <p><a href="https://forum.mesg.com/t/refactoring-list/123/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/refactoring-list/123/1</link>
+        <pubDate>Mon, 19 Nov 2018 21:32:35 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-123-1</guid>
+        <source url="https://forum.mesg.com/t/refactoring-list/123.rss">Refactoring list</source>
+      </item>
+  </channel>
+</rss>

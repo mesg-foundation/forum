@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>MESG-js v1.4.0 Release Notes</title>
+    <link>https://forum.mesg.com/t/mesg-js-v1-4-0-release-notes/99</link>
+    <description># MESG-js v1.4.0
+
+A new version of the `mesg-js` library has been released: `v1.4.0`.
+
+This version brings exciting new features to application developers, such as:
+- Filtering data
+- Execution tags 
+
+## Filtering data
+
+It&#39;s now possible to filter any data being listened to from **events** and **results**.
+This enables a more customized and granular flow in your applications.
+
+#### `whenEvent`
+```js
+MESG.whenEvent({
+  serviceID: &#39;xxx&#39;,
+  eventKey: &#39;xxx&#39;,
+  filter: function (eventKey, eventData) {
+    // Filter here is based on the eventKey (string)
+    // or the eventData (object) containing all the event&#39;s data
+    return true
+  }
+}, taskDefinition)
+```
+
+#### `whenResult`
+```js
+MESG.whenResult({
+  serviceID: &#39;xxx&#39;,
+  outputKey: &#39;xxx&#39;,
+  filter: function (outputKey, outputData, taskKey, tags) {
+    // Filter here is based
+    // on the result&#39;s outputKey (string)
+    // or the result&#39;s outputData (object) containing all the data from the result
+    // or the result&#39;s taskKey (string)
+    // or the result&#39;s tags ([]string) containing the execution&#39;s tags
+    returns true
+  }
+}, taskDefinition)
+```
+
+You may notice the introduction of execution tags, keep reading for more info ;)
+
+## Execution tags
+
+A task&#39;s executions can now accept tags.
+You can attribute a list of tags to the task executions, then create task&#39;s result filter based on them.
+The tags system is powerful and customizable, as tags are not passed onto services.
+You can create your own business-oriented logic without having to stick with the services&#39; logic.
+
+Tags can help you to:
+- categorize a task&#39;s executions
+- add metadata to executions
+- filter based on data which is not related to the task&#39;s input and output data
+
+There are two different ways to attribute tags to task&#39;s executions:
+
+### Static definition
+
+```js
+MESG.whenEvent(eventDefinition, {
+  serviceID: &#39;yyy&#39;,
+  taskKey: &#39;yyy&#39;,
+  inputs: { foo: &#39;bar&#39; },
+  tags: [
+    &#39;metaX&#39;,
+    &#39;metricsA&#39;,
+    ...
+  ]
+})
+```
+
+### Dynamic definition
+
+#### whenEvent
+
+```js
+MESG.whenEvent(eventDefinition, {
+  serviceID: &#39;yyy&#39;,
+  taskKey: &#39;yyy&#39;,
+  inputs: { foo: &#39;bar&#39; },
+  tags: function (eventKey, eventData) {
+    // Create the tags ([]string) here based
+    // on the eventKey (string)
+    // or the eventData (object) that contains all the event&#39;s data
+    return [
+      eventKey,
+      eventData.foo
+    ] 
+  }
+})
+```
+
+#### whenResult
+
+```js
+MESG.whenResult(resultDefinition, {
+  serviceID: &#39;yyy&#39;,
+  taskKey: &#39;yyy&#39;,
+  inputs: { foo: &#39;bar&#39; },
+  tags: function (outputKey, outputData, taskKey, tags) {
+    // Create the tags ([]string) here based 
+    // on the result&#39;s outputKey (string)
+    // or the result&#39;s outputData (object) containing all the data from the result
+    // or the result&#39;s taskKey (string)
+    // or the result&#39;s tags ([]string)
+    return [
+      outputKey,
+      outputData.foo,
+      taskKey,
+      tags.foo
+    ] 
+  }
+})
+```</description>
+    
+    <lastBuildDate>Sun, 21 Oct 2018 04:40:28 +0000</lastBuildDate>
+    <category>News</category>
+    <atom:link href="https://forum.mesg.com/t/mesg-js-v1-4-0-release-notes/99.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>MESG-js v1.4.0 Release Notes</title>
+        <dc:creator><![CDATA[jonobacon]]></dc:creator>
+        <description><![CDATA[
+            <p>Congrats, everyone! Great to see the new release!</p>
+          <p><a href="https://forum.mesg.com/t/mesg-js-v1-4-0-release-notes/99/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mesg-js-v1-4-0-release-notes/99/3</link>
+        <pubDate>Sun, 21 Oct 2018 04:40:28 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-99-3</guid>
+        <source url="https://forum.mesg.com/t/mesg-js-v1-4-0-release-notes/99.rss">MESG-js v1.4.0 Release Notes</source>
+      </item>
+      <item>
+        <title>MESG-js v1.4.0 Release Notes</title>
+        <dc:creator><![CDATA[jonobacon]]></dc:creator>
+        <description><![CDATA[
+            
+          <p><a href="https://forum.mesg.com/t/mesg-js-v1-4-0-release-notes/99/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mesg-js-v1-4-0-release-notes/99/2</link>
+        <pubDate>Sun, 21 Oct 2018 04:40:00 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-99-2</guid>
+        <source url="https://forum.mesg.com/t/mesg-js-v1-4-0-release-notes/99.rss">MESG-js v1.4.0 Release Notes</source>
+      </item>
+      <item>
+        <title>MESG-js v1.4.0 Release Notes</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <h1>MESG-js v1.4.0</h1>
+<p>A new version of the <code>mesg-js</code> library has been released: <code>v1.4.0</code>.</p>
+<p>This version brings exciting new features to application developers, such as:</p>
+<ul>
+<li>Filtering data</li>
+<li>Execution tags</li>
+</ul>
+<h2>Filtering data</h2>
+<p>It’s now possible to filter any data being listened to from <strong>events</strong> and <strong>results</strong>.<br>
+This enables a more customized and granular flow in your applications.</p>
+<h4><code>whenEvent</code></h4>
+<pre><code class="lang-auto">MESG.whenEvent({
+  serviceID: 'xxx',
+  eventKey: 'xxx',
+  filter: function (eventKey, eventData) {
+    // Filter here is based on the eventKey (string)
+    // or the eventData (object) containing all the event's data
+    return true
+  }
+}, taskDefinition)
+</code></pre>
+<h4><code>whenResult</code></h4>
+<pre><code class="lang-auto">MESG.whenResult({
+  serviceID: 'xxx',
+  outputKey: 'xxx',
+  filter: function (outputKey, outputData, taskKey, tags) {
+    // Filter here is based
+    // on the result's outputKey (string)
+    // or the result's outputData (object) containing all the data from the result
+    // or the result's taskKey (string)
+    // or the result's tags ([]string) containing the execution's tags
+    returns true
+  }
+}, taskDefinition)
+</code></pre>
+<p>You may notice the introduction of execution tags, keep reading for more info <img src="https://forum.mesg.com/images/emoji/twitter/wink.png?v=6" title=":wink:" class="emoji" alt=":wink:"></p>
+<h2>Execution tags</h2>
+<p>A task’s executions can now accept tags.<br>
+You can attribute a list of tags to the task executions, then create task’s result filter based on them.<br>
+The tags system is powerful and customizable, as tags are not passed onto services.<br>
+You can create your own business-oriented logic without having to stick with the services’ logic.</p>
+<p>Tags can help you to:</p>
+<ul>
+<li>categorize a task’s executions</li>
+<li>add metadata to executions</li>
+<li>filter based on data which is not related to the task’s input and output data</li>
+</ul>
+<p>There are two different ways to attribute tags to task’s executions:</p>
+<h3>Static definition</h3>
+<pre><code class="lang-auto">MESG.whenEvent(eventDefinition, {
+  serviceID: 'yyy',
+  taskKey: 'yyy',
+  inputs: { foo: 'bar' },
+  tags: [
+    'metaX',
+    'metricsA',
+    ...
+  ]
+})
+</code></pre>
+<h3>Dynamic definition</h3>
+<h4>whenEvent</h4>
+<pre><code class="lang-auto">MESG.whenEvent(eventDefinition, {
+  serviceID: 'yyy',
+  taskKey: 'yyy',
+  inputs: { foo: 'bar' },
+  tags: function (eventKey, eventData) {
+    // Create the tags ([]string) here based
+    // on the eventKey (string)
+    // or the eventData (object) that contains all the event's data
+    return [
+      eventKey,
+      eventData.foo
+    ] 
+  }
+})
+</code></pre>
+<h4>whenResult</h4>
+<pre><code class="lang-auto">MESG.whenResult(resultDefinition, {
+  serviceID: 'yyy',
+  taskKey: 'yyy',
+  inputs: { foo: 'bar' },
+  tags: function (outputKey, outputData, taskKey, tags) {
+    // Create the tags ([]string) here based 
+    // on the result's outputKey (string)
+    // or the result's outputData (object) containing all the data from the result
+    // or the result's taskKey (string)
+    // or the result's tags ([]string)
+    return [
+      outputKey,
+      outputData.foo,
+      taskKey,
+      tags.foo
+    ] 
+  }
+})
+</code></pre>
+          <p><a href="https://forum.mesg.com/t/mesg-js-v1-4-0-release-notes/99/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mesg-js-v1-4-0-release-notes/99/1</link>
+        <pubDate>Fri, 19 Oct 2018 12:28:56 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-99-1</guid>
+        <source url="https://forum.mesg.com/t/mesg-js-v1-4-0-release-notes/99.rss">MESG-js v1.4.0 Release Notes</source>
+      </item>
+  </channel>
+</rss>

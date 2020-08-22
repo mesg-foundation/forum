@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Get result api</title>
+    <link>https://forum.mesg.com/t/get-result-api/174</link>
+    <description>We have a problem when we need to execute a task and listen for its result.
+We solve it by adding a `time.Sleep` between `listenResult` and `executeTask`, eg:
+https://github.com/mesg-foundation/core/blob/85edf1fd53630682a93810154a7796154add575b/commands/service_execute.go#L82-L92
+
+The same pattern is used in the `api` package and also in a lot of simple application. We were also thinking to create an helper in the mesg-js lib to ease the use of this weird pattern.
+
+Does it make sense to use the `listenResult` stream to get the result of only one execution? No.
+Even more, what if we want to get the result of a past execution? We don&#39;t have any api for it.
+
+That&#39;s why I&#39;m suggesting to add a new very simple api:
+
+```proto
+service Core {
+  // Get the result of a specific execution.
+  // If the execution is still in progress, it waits until the execution finishes.
+  rpc GetResult(GetResultRequest) returns (ResultData) {}
+}
+
+message GetResultRequest {
+  string executionID = 1;             // The unique identifier of the execution.
+}
+```
+
+@Anthony @krhubert @ilgooz what do you think?</description>
+    
+    <lastBuildDate>Tue, 08 Jan 2019 05:13:51 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/get-result-api/174.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Get result api</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Let’s close this topic for now and open a new one about implementing <code>Execution</code> APIs</p>
+          <p><a href="https://forum.mesg.com/t/get-result-api/174/11">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/get-result-api/174/11</link>
+        <pubDate>Tue, 08 Jan 2019 05:13:51 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-174-11</guid>
+        <source url="https://forum.mesg.com/t/get-result-api/174.rss">Get result api</source>
+      </item>
+      <item>
+        <title>Get result api</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <p>Disagree, as I wrote, ack is a totally different issue it isn’t solution to this problem. Of course it will “fix the problem” but it’s rather workaround then solution. So in fact ack is what we should propose in new thread and here apply “real” solution</p>
+          <p><a href="https://forum.mesg.com/t/get-result-api/174/10">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/get-result-api/174/10</link>
+        <pubDate>Mon, 07 Jan 2019 16:48:50 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-174-10</guid>
+        <source url="https://forum.mesg.com/t/get-result-api/174.rss">Get result api</source>
+      </item>
+      <item>
+        <title>Get result api</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>Agree with <a class="mention" href="/u/ilgooz">@ilgooz</a> this one should be marked as solved when ack is done and a new proposal about the api using <code>Execution</code> instead of <code>Result</code> should be created</p>
+          <p><a href="https://forum.mesg.com/t/get-result-api/174/9">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/get-result-api/174/9</link>
+        <pubDate>Mon, 07 Jan 2019 16:25:53 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-174-9</guid>
+        <source url="https://forum.mesg.com/t/get-result-api/174.rss">Get result api</source>
+      </item>
+      <item>
+        <title>Get result api</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>Execution API is an another feature. For the issue with streams, I think it’s some kind of bug and we need ack system to solve it. <a href="https://forum.mesg.com/t/acknowledgement-system-on-stream/172/4?u=ilgooz" class="inline-onebox">Acknowledgement system on stream</a></p>
+          <p><a href="https://forum.mesg.com/t/get-result-api/174/8">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/get-result-api/174/8</link>
+        <pubDate>Sun, 06 Jan 2019 12:17:46 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-174-8</guid>
+        <source url="https://forum.mesg.com/t/get-result-api/174.rss">Get result api</source>
+      </item>
+      <item>
+        <title>Get result api</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="5" data-topic="174">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/nicolas/40/10_2.png" class="avatar"> Nicolas:</div>
+<blockquote>
+<ul>
+<li>If the call wait for the execution to finish, then the client could receive connection timeout error because the execution didn’t return any result fast enough.<br>
+I don’t like this approach, a unary call should return “immediately”. Otherwise, it should be a stream.</li>
+<li>If the call doesn’t wait, then the client have to do polling in order to get the result if the execution didn’t finish on time.</li>
+</ul>
+</blockquote>
+</aside>
+<p>I don’t get the point here. The arguments are the same for getExecution/listenExecution:</p>
+<ul>
+<li>if get execution dosen’t wait then client have to do polling</li>
+<li>if execution dosne’t change it states, then we need to have some sort of timeout (for listening resuts it’s the same)</li>
+<li>listen execution should notify about readiness</li>
+</ul>
+<p>But of course, Execution API is what we should implement and relay on this. Because as <a class="mention" href="/u/anthony">@Anthony</a> pointed out:</p>
+<aside class="quote group-team" data-post="6" data-topic="174">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/anthony/40/7_2.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>now it’s weird because we have an executionID but there is no notion of execution in the API</p>
+</blockquote>
+</aside>
+<p>And about deprecation - let’s not bother with this, we’re in alpha stage and let’s use benefits of being in it <img src="https://forum.mesg.com/images/emoji/twitter/slight_smile.png?v=6" title=":slight_smile:" class="emoji" alt=":slight_smile:"></p>
+<aside class="quote group-team" data-post="6" data-topic="174">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/anthony/40/7_2.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>Do we really need to deprecate other apis, we could just replace/rename them because we are still in 0.x.</p>
+</blockquote>
+</aside>
+<p><img src="https://forum.mesg.com/images/emoji/twitter/+1.png?v=6" title=":+1:" class="emoji" alt=":+1:"></p>
+          <p><a href="https://forum.mesg.com/t/get-result-api/174/7">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/get-result-api/174/7</link>
+        <pubDate>Sat, 05 Jan 2019 15:27:44 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-174-7</guid>
+        <source url="https://forum.mesg.com/t/get-result-api/174.rss">Get result api</source>
+      </item>
+      <item>
+        <title>Get result api</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="5" data-topic="174">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/nicolas/40/10_2.png" class="avatar"> Nicolas:</div>
+<blockquote>
+<p>even more, we could also deprecate <code>listenTask</code> api on the service side. it can be done by using <code>listenExecution</code></p>
+</blockquote>
+</aside>
+<p>I haven’t though about that, that’s a good point, I’m just afraid that it might be complicated for developers of services because they will always have to set the filter to <code>status=created</code> but definitely something to thing about as well as the <code>updateExecution</code> <img src="https://forum.mesg.com/images/emoji/twitter/slight_smile.png?v=6" title=":slight_smile:" class="emoji" alt=":slight_smile:"></p>
+<p>I really think we shouldn’t have any “result” in the api but only executions, now it’s weird because we have an executionID but there is no notion of execution in the API and result is just a subset of the execution.</p>
+<p>Do we really need to deprecate other apis, we could just replace/rename them because we are still in 0.x.</p>
+          <p><a href="https://forum.mesg.com/t/get-result-api/174/6">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/get-result-api/174/6</link>
+        <pubDate>Sat, 05 Jan 2019 11:33:56 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-174-6</guid>
+        <source url="https://forum.mesg.com/t/get-result-api/174.rss">Get result api</source>
+      </item>
+      <item>
+        <title>Get result api</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>The problem I see with a <code>getResult</code> api is when the execution didn’t finish yet.</p>
+<ul>
+<li>
+<p>If the call wait for the execution to finish, then the client could receive connection timeout error because the execution didn’t return any result fast enough.<br>
+I don’t like this approach, a unary call should return “immediately”. Otherwise, it should be a stream.</p>
+</li>
+<li>
+<p>If the call doesn’t wait, then the client have to do polling in order to get the result if the execution didn’t finish on time.<br>
+The problem here is <code>ResultData</code> doesn’t contain any info about the status of the execution.<br>
+That’s why it make sense to implement this api by returning all the <code>Execution</code> data, thus renaming the api to <code>getExecution</code>. This way, the client can actually know the state of the execution (and its result if it finished).<br>
+Then we should also implement a stream <code>listenExecution</code> (and deprecate <code>listenResult</code>) that allows client to be notified of EVERY change of state of executions (and not just the completed and failed state with current <code>listenResult</code> stream).</p>
+</li>
+</ul>
+<p>So actually, <code>getResult</code> will not solve the problem is a nice way and we should implement:</p>
+<ul>
+<li>
+<p><code>getExecution(executionID) executionData</code><br>
+Returns all execution data from the execution database based on a specific execution id.</p>
+</li>
+<li>
+<p><code>listenExecution(filters) stream executionData</code><br>
+Be notified of state change of matching executions.</p>
+</li>
+<li>
+<p>deprecate <code>listenResult</code> in favor of <code>listenExecution</code> with a filter that match executions with status completed or failed.</p>
+</li>
+<li>
+<p>even more, we could also deprecate <code>listenTask</code> api on the service side. it can be done by using <code>listenExecution</code> with a filter that match executions with status created and the right service id.<br>
+Even better, the service could set the execution as in progress when it start to process it! (currently, the core set the execution as in progress when it send it to the service), but it requires to add another api <code>updateExecution</code> (that could actually also deprecate the current <code>submitResult</code> api!).</p>
+</li>
+</ul>
+<p>Yeah… we can improve our API a lot with an generic approach using <code>Execution</code>! <img src="https://forum.mesg.com/images/emoji/twitter/sunglasses.png?v=6" title=":sunglasses:" class="emoji" alt=":sunglasses:"><br>
+Also, having Execution apis will make the sync of Execution across multiple Core way easier.</p>
+          <p><a href="https://forum.mesg.com/t/get-result-api/174/5">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/get-result-api/174/5</link>
+        <pubDate>Sat, 05 Jan 2019 08:25:39 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-174-5</guid>
+        <source url="https://forum.mesg.com/t/get-result-api/174.rss">Get result api</source>
+      </item>
+      <item>
+        <title>Get result api</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="2" data-topic="174">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/ilgooz/40/46_1.png" class="avatar"> ilgooz:</div>
+<blockquote>
+<p>However adding a new api should be the last option specially when we already have a similar one.</p>
+</blockquote>
+</aside>
+<p>Why last option? There is nothing wrong with adding new api - we don’t participate in a contest for the lowest method count in api. Also similar api doesn’t mean the same.</p>
+<p>Moreover, we don’t have very complicated api. Take a look at any popular services api - there are hundreds of entries.</p>
+<aside class="quote group-team" data-post="3" data-topic="174">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/anthony/40/7_1.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>Agree with <a class="mention" href="/u/ilgooz">@ilgooz</a>, the problem with the <code>ListenResult</code> should be solved and adding a new API will not change anything (especially an unary call that needs to wait for a result this would lead to many timeouts).</p>
+</blockquote>
+</aside>
+<p>But here is the point, there is nothing wrong with the <code>ListenResult</code> and there is no bug. The way we were thinking of this api was simply wrong and this is the pbm. <code>ListenResult</code> is like stream for results and it should be used that way (not to get a single result) - like in dev command. While doing execution and getting results the “natural” flow is:</p>
+<ul>
+<li>execute the task</li>
+<li>get the task results</li>
+</ul>
+<p>What we do now is (with status ready “bug” fix):</p>
+<ul>
+<li>generate uuid</li>
+<li>Listen for task</li>
+<li>wait for status ready</li>
+<li>execute the task</li>
+<li>read from channel results</li>
+</ul>
+<ol>
+<li>we lost time while waiting for status readiness (execution could be fired first as probably it will take longer)</li>
+<li>there are 5 steps compared to 2 just to “fit to api”</li>
+<li>we’re gonna execute lots of task in system services and we don’t want to lose time for waiting for stream (but this is in the future) (btw, we don’t want to lost time in pkgs/libs as well)</li>
+<li>we use listen (aka stream) results to get just <strong>one</strong> response. We can say that we listen for only one specific results, but if you start saying what we are doing then you realize that we want to execute and get results. We’re generating the uuid to listen for specific task and this is how we “bullshit” ourself that liste results api is all we need. In fact we should be getting the results by exeuction ID and not “magicaly uuid”</li>
+</ol>
+<aside class="quote group-team" data-post="3" data-topic="174">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/anthony/40/7_1.png" class="avatar"> Anthony:</div>
+<blockquote>
+<ul>
+<li>
+<code>getResult</code> API is interesting but I think a <code>GetExecution</code> would make a lot more sense</li>
+<li>
+<code>getExecution</code>  would return the  <strong>execution</strong>  object (event, the state of the execution and the result)</li>
+</ul>
+</blockquote>
+</aside>
+<p>As you point out, the getExecution is diffrent api</p>
+<aside class="quote group-team" data-post="3" data-topic="174">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/anthony/40/7_1.png" class="avatar"> Anthony:</div>
+<blockquote>
+<ul>
+<li>We could rename <code>listenResult</code> to <code>listenExecution</code>
+</li>
+</ul>
+</blockquote>
+</aside>
+<p>We spoke about this but we want to keep current naming convention and do one thing at a time. We also speak about naming convention in general in the whole core but it’s diffrent topic.</p>
+<aside class="quote group-team" data-post="3" data-topic="174">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/anthony/40/7_1.png" class="avatar"> Anthony:</div>
+<blockquote>
+<ul>
+<li>
+<code>listenExecution</code> would listen for every change of state from an execution (with potential filters) and return an <strong>execution</strong> object</li>
+</ul>
+</blockquote>
+</aside>
+<p>It’s ok similar to listen results</p>
+<aside class="quote group-team" data-post="3" data-topic="174">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/anthony/40/7_1.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>For me this would make sense but this is new feature (that will be required) but that shouldn’t be a way to fix the <code>listenResult</code> (even if a polling on the <code>getExecution</code> would solve that)</p>
+</blockquote>
+</aside>
+<p>So listen results is totally fine <img src="https://forum.mesg.com/images/emoji/twitter/slight_smile.png?v=6" title=":slight_smile:" class="emoji" alt=":slight_smile:"> and don’t need to be fixed.<br>
+I also think that we could add some kind of stream readiness (as <a class="mention" href="/u/nicolas">@Nicolas</a> did in POC), even we should, but the pbm with this is we join two “bugs” into one.</p>
+<ul>
+<li>one bug is lack of stream readiness info (it’s could be implemented but usage of it is optional)</li>
+<li>the other is wrong usage of listen results (like invalid thinking)</li>
+</ul>
+<p>They both deserve to be fixed <img src="https://forum.mesg.com/images/emoji/twitter/smiley.png?v=6" title=":smiley:" class="emoji" alt=":smiley:"> but we can’t add the readiness info and pretend that the second bug was solved by doing so and this thread is about the second bug.</p>
+          <p><a href="https://forum.mesg.com/t/get-result-api/174/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/get-result-api/174/4</link>
+        <pubDate>Fri, 04 Jan 2019 14:14:11 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-174-4</guid>
+        <source url="https://forum.mesg.com/t/get-result-api/174.rss">Get result api</source>
+      </item>
+      <item>
+        <title>Get result api</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>Agree with <a class="mention" href="/u/ilgooz">@ilgooz</a>, the problem with the <code>ListenResult</code> should be solved and adding a new API will not change anything (especially an unary call that needs to wait for a result this would lead to many timeouts).</p>
+<ul>
+<li>
+<code>getResult</code> API is interesting but I think a <code>GetExecution</code> would make a lot more sense</li>
+<li>
+<code>getExecution</code> would return the <strong>execution</strong> object (event, the state of the execution and the result)</li>
+<li>We could rename <code>listenResult</code> to <code>listenExecution</code>
+</li>
+<li>
+<code>listenExecution</code> would listen for every change of state from an execution (with potential filters) and return an <strong>execution</strong> object</li>
+<li>
+<code>execute</code> API should return the same <strong>execution</strong> object</li>
+</ul>
+<p>For me this would make sense but this is new feature (that will be required) but that shouldn’t be a way to fix the <code>listenResult</code> (even if a polling on the <code>getExecution</code> would solve that)</p>
+<p>Conclusion:</p>
+<p>Not a fix for the <code>listenResult</code><br>
+New interesting feature not about result but about executions (that are entries in the database)</p>
+          <p><a href="https://forum.mesg.com/t/get-result-api/174/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/get-result-api/174/3</link>
+        <pubDate>Fri, 04 Jan 2019 11:31:49 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-174-3</guid>
+        <source url="https://forum.mesg.com/t/get-result-api/174.rss">Get result api</source>
+      </item>
+      <item>
+        <title>Get result api</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>I understand the problem we want to solve here. However adding a new api should be the last option specially when we already have a similar one.</p>
+<p>We shouldn’t be adding this new api to solve the need of adding <em>sleep</em>. Because if stream is not ready to serve results when call to <em>ListenResult</em> from client is returned, this is some kind of a bug that we need to solve.</p>
+<p>On the other hand, getting results from past is a new feature. Do we really want it? Is there a use case for getting past execution results from execution id or even with other filters? If so, we should maybe consider adding the same for events as well.</p>
+          <p><a href="https://forum.mesg.com/t/get-result-api/174/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/get-result-api/174/2</link>
+        <pubDate>Fri, 04 Jan 2019 11:16:05 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-174-2</guid>
+        <source url="https://forum.mesg.com/t/get-result-api/174.rss">Get result api</source>
+      </item>
+      <item>
+        <title>Get result api</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>We have a problem when we need to execute a task and listen for its result.<br>
+We solve it by adding a <code>time.Sleep</code> between <code>listenResult</code> and <code>executeTask</code>, eg:<br>
+<aside class="onebox githubblob">
+  <header class="source">
+      <a href="https://github.com/mesg-foundation/core/blob/85edf1fd53630682a93810154a7796154add575b/commands/service_execute.go#L82-L92" target="_blank" rel="nofollow noopener">github.com</a>
+  </header>
+  <article class="onebox-body">
+    <h4><a href="https://github.com/mesg-foundation/core/blob/85edf1fd53630682a93810154a7796154add575b/commands/service_execute.go#L82-L92" target="_blank" rel="nofollow noopener">mesg-foundation/core/blob/85edf1fd53630682a93810154a7796154add575b/commands/service_execute.go#L82-L92</a></h4>
+<pre class="onebox"><code class="lang-go"><ol class="start lines" start="82" style="counter-reset: li-counter 81 ;">
+<li>		listenResultsC, resultsErrC, err = c.e.ServiceListenResults(args[0], c.taskKey, "", tags)</li>
+<li>		if err != nil {</li>
+<li>			return</li>
+<li>		}</li>
+<li>
+</li>
+<li>		// XXX: sleep because listen stream may not be ready to stream the data</li>
+<li>		// and execution will done before stream is ready. In that case the response</li>
+<li>		// wlll never come TODO: investigate</li>
+<li>		time.Sleep(1 * time.Second)</li>
+<li>
+</li>
+<li>		err = c.e.ServiceExecuteTask(args[0], c.taskKey, inputData, tags)</li>
+</ol></code></pre>
+
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+</p>
+<p>The same pattern is used in the <code>api</code> package and also in a lot of simple application. We were also thinking to create an helper in the mesg-js lib to ease the use of this weird pattern.</p>
+<p>Does it make sense to use the <code>listenResult</code> stream to get the result of only one execution? No.<br>
+Even more, what if we want to get the result of a past execution? We don’t have any api for it.</p>
+<p>That’s why I’m suggesting to add a new very simple api:</p>
+<pre><code class="lang-auto">service Core {
+  // Get the result of a specific execution.
+  // If the execution is still in progress, it waits until the execution finishes.
+  rpc GetResult(GetResultRequest) returns (ResultData) {}
+}
+
+message GetResultRequest {
+  string executionID = 1;             // The unique identifier of the execution.
+}
+</code></pre>
+<p><a class="mention" href="/u/anthony">@Anthony</a> <a class="mention" href="/u/krhubert">@krhubert</a> <a class="mention" href="/u/ilgooz">@ilgooz</a> what do you think?</p>
+          <p><a href="https://forum.mesg.com/t/get-result-api/174/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/get-result-api/174/1</link>
+        <pubDate>Fri, 04 Jan 2019 10:41:15 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-174-1</guid>
+        <source url="https://forum.mesg.com/t/get-result-api/174.rss">Get result api</source>
+      </item>
+  </channel>
+</rss>

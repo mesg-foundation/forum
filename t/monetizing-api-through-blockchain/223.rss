@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Monetizing API through Blockchain</title>
+    <link>https://forum.mesg.com/t/monetizing-api-through-blockchain/223</link>
+    <description>## Concept
+
+The goal is to give the possibility to businesses to have a new way to monetize their APIs. Right now most of businesses like SaaS products uses recurrent billing and complex systems to accept payment for the features they deliver. Cryptocurrencies can be a good use here where instead of having to manage complex subscription systems they could set a price for every features they want to expose (eg: taking order, accessing data, creating resource...).
+
+## Examples
+
+- Email/SMS/push notifications providers that can have a real pay per use pricing
+- Data storage, prepaid for hosting
+- PaaS like Heroku, DigitalOcean... to deploy new server on demand 
+- Storage of data in a database (pay per Kb)
+...
+
+## Business implications
+
+- New model of monetization that can open the competition
+- Focus on the actual key values proposition of the business without the need to manage its monetization
+- Creation of new innovative business models
+- Reducing the complexity of products and increasing the potential reusability of them
+- Human resources reductions (no need for an extra payment system developer team)
+- Reducing friction for users (pay as you go instead of big packages)
+
+## Materials
+
+We&#39;ve created a proof of concept of that at the Pegasys hackathon https://devpost.com/software/pegasys-hackathon during the Devcon IV in Prague.
+To show the concept we used an email provider (Sendgrid) that you can use through Ethereum Smart Contract where you can pay per email sent.
+The source code is here https://github.com/antho1404/pegasys-hackathon
+
+[![gallery|690x490](upload://pmDpNAyTmLfmT4miijOS41hYsk3.jpeg) ](https://devpost.com/software/pegasys-hackathon)
+
+## Workflow
+
+#### Actual workflow
+- The client pay on the payment gateway
+- The payment gateway notify the API that this client can now use the API
+- The API need to store this information and synchronise it with the payment gateway
+- The client can consume the API
+
+The client needs to know the payment gateway and the API
+![actual-workflow|690x251](upload://27EfhzfDxvG5vBUaTcojHoSshtr.png)
+
+#### New workflow
+- The client create a request on the smart contract / and pay for it
+- The API react to the smart contract
+- The API submit the result on the smart contract
+- The client get the data from the smart contract
+
+The client doesn&#39;t need to know the API
+![new-workflow|690x210](upload://tWb5RVtNNJCXcj3AfQBJny2zVx4.png)</description>
+    
+    <lastBuildDate>Wed, 23 Jan 2019 09:28:56 +0000</lastBuildDate>
+    <category>Proof of Concept</category>
+    <atom:link href="https://forum.mesg.com/t/monetizing-api-through-blockchain/223.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Monetizing API through Blockchain</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <h2>Concept</h2>
+<p>The goal is to give the possibility to businesses to have a new way to monetize their APIs. Right now most of businesses like SaaS products uses recurrent billing and complex systems to accept payment for the features they deliver. Cryptocurrencies can be a good use here where instead of having to manage complex subscription systems they could set a price for every features they want to expose (eg: taking order, accessing data, creating resource…).</p>
+<h2>Examples</h2>
+<ul>
+<li>Email/SMS/push notifications providers that can have a real pay per use pricing</li>
+<li>Data storage, prepaid for hosting</li>
+<li>PaaS like Heroku, DigitalOcean… to deploy new server on demand</li>
+<li>Storage of data in a database (pay per Kb)<br>
+…</li>
+</ul>
+<h2>Business implications</h2>
+<ul>
+<li>New model of monetization that can open the competition</li>
+<li>Focus on the actual key values proposition of the business without the need to manage its monetization</li>
+<li>Creation of new innovative business models</li>
+<li>Reducing the complexity of products and increasing the potential reusability of them</li>
+<li>Human resources reductions (no need for an extra payment system developer team)</li>
+<li>Reducing friction for users (pay as you go instead of big packages)</li>
+</ul>
+<h2>Materials</h2>
+<p>We’ve created a proof of concept of that at the Pegasys hackathon <a href="https://devpost.com/software/pegasys-hackathon" rel="nofollow noopener">https://devpost.com/software/pegasys-hackathon</a> during the Devcon IV in Prague.<br>
+To show the concept we used an email provider (Sendgrid) that you can use through Ethereum Smart Contract where you can pay per email sent.<br>
+The source code is here <a href="https://github.com/antho1404/pegasys-hackathon" rel="nofollow noopener">https://github.com/antho1404/pegasys-hackathon</a></p>
+<p><a href="https://devpost.com/software/pegasys-hackathon" rel="nofollow noopener"><img src="https://forum.mesg.com/uploads/default/original/1X/b1c56391ac876b910262718c070822f6aeefd25b.jpeg" alt="gallery" width="690" height="490"> </a></p>
+<h2>Workflow</h2>
+<h4>Actual workflow</h4>
+<ul>
+<li>The client pay on the payment gateway</li>
+<li>The payment gateway notify the API that this client can now use the API</li>
+<li>The API need to store this information and synchronise it with the payment gateway</li>
+<li>The client can consume the API</li>
+</ul>
+<p>The client needs to know the payment gateway and the API<br>
+<img src="https://forum.mesg.com/uploads/default/original/1X/0ee1b36d4f895d1a680de73ade26d855e6a5f725.png" alt="actual-workflow" width="690" height="251"></p>
+<h4>New workflow</h4>
+<ul>
+<li>The client create a request on the smart contract / and pay for it</li>
+<li>The API react to the smart contract</li>
+<li>The API submit the result on the smart contract</li>
+<li>The client get the data from the smart contract</li>
+</ul>
+<p>The client doesn’t need to know the API<br>
+<img src="https://forum.mesg.com/uploads/default/original/1X/d1d2a4f16be4fa53e6b298eed2c33b110fd3b3ee.png" alt="new-workflow" width="690" height="210"></p>
+          <p><a href="https://forum.mesg.com/t/monetizing-api-through-blockchain/223/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/monetizing-api-through-blockchain/223/1</link>
+        <pubDate>Wed, 23 Jan 2019 08:38:05 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-223-1</guid>
+        <source url="https://forum.mesg.com/t/monetizing-api-through-blockchain/223.rss">Monetizing API through Blockchain</source>
+      </item>
+  </channel>
+</rss>

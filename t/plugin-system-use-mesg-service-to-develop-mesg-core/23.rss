@@ -1,0 +1,914 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>[Plugin system] Use MESG service to develop MESG core</title>
+    <link>https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23</link>
+    <description>## Proposal
+
+We have a system that is oriented with services but we don&#39;t really use services and event driven inside MESG. The idea is to embrace this and develop all or some features that we use using services that will have their own docker container and their own features. By doing so we will have a real experience on how to create services with MESG and we will see directly the frictions and optimizations that needs to be done.
+
+## Examples
+
+#### Docker service
+We could have a service for docker, with different tasks like
+- build image
+- start service
+- stop service
+- list services
+...
+with events like:
+- onNewImage
+- onServiceStarted
+- onServiceStoped
+...
+
+#### MESG service
+A service for all the services features
+- Deploy
+- Start (that will use the docker service(https://forum.mesg.com/t/service-composition/22))
+- Stop (that will use the docker service(https://forum.mesg.com/t/service-composition/22))
+...
+
+---
+Like that the way we create MESG will be by creating MESG application and MESG services and after we just need to create more or less complex service, it doesn&#39;t mean that we need to do really micro services it can be bigger services but the good point of that is that we would have a clear interface for all our services and the core will just when boot deploy all those services and use them, this would be really easy to soft update the core, you will just need to fetch and re-deploy the new version of the service and also people will be able to create their services based on ours if they want to.</description>
+    
+    <lastBuildDate>Thu, 08 Nov 2018 07:55:22 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>[Plugin system] Use MESG service to develop MESG core</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>APIs of system services changed by <a href="https://forum.mesg.com/t/the-import-cycle-between-api-systemservices-packages/105/11">The Import Cycle Between API &amp; SystemServices Packages</a></p>
+          <p><a href="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/27">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/27</link>
+        <pubDate>Thu, 08 Nov 2018 07:55:22 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-23-27</guid>
+        <source url="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23.rss">[Plugin system] Use MESG service to develop MESG core</source>
+      </item>
+      <item>
+        <title>[Plugin system] Use MESG service to develop MESG core</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>implementing by <a href="https://github.com/mesg-foundation/core/pull/535">https://github.com/mesg-foundation/core/pull/535</a></p>
+          <p><a href="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/26">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/26</link>
+        <pubDate>Thu, 18 Oct 2018 06:30:36 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-23-26</guid>
+        <source url="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23.rss">[Plugin system] Use MESG service to develop MESG core</source>
+      </item>
+      <item>
+        <title>[Plugin system] Use MESG service to develop MESG core</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>To access <em>Resolver</em>:</p>
+<pre><code class="lang-auto">ss, _ := systemservices.New(...) // should be initialized only once on startup
+ss.Resolver().AddPeers([]string)
+</code></pre>
+          <p><a href="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/25">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/25</link>
+        <pubDate>Thu, 11 Oct 2018 06:21:12 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-23-25</guid>
+        <source url="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23.rss">[Plugin system] Use MESG service to develop MESG core</source>
+      </item>
+      <item>
+        <title>[Plugin system] Use MESG service to develop MESG core</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="23" data-topic="23">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/ilgooz/40/8_1.png" class="avatar"> ilgooz:</div>
+<blockquote>
+<p>Having <code>func (x *xxx) Resolver() (*Resolver, err)</code> is a lot better instead of a pkg level func because we need some state to share. So this is what we use now.</p>
+</blockquote>
+</aside>
+<p>How do you plan to call <code>Resolver</code> from somewhere in the codebase? Can you provide an example.</p>
+<aside class="quote group-team" data-post="23" data-topic="23">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/ilgooz/40/8_1.png" class="avatar"> ilgooz:</div>
+<blockquote>
+<p>Q: How we should determine the plugin name? From the <em>name</em> section of <em>service.yml</em> or get it from the dir name of service like the one here <code>~/.mesg/systemservices/PLUGIN_NAME</code> . We wen’t with the first option for now.</p>
+</blockquote>
+</aside>
+<p><code>SystemServices</code> knows all <code>SystemService</code>, so it also knows their names. You can hardcode as constant the name of any <code>SystemService</code>.</p>
+          <p><a href="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/24">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/24</link>
+        <pubDate>Thu, 11 Oct 2018 04:19:36 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-23-24</guid>
+        <source url="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23.rss">[Plugin system] Use MESG service to develop MESG core</source>
+      </item>
+      <item>
+        <title>[Plugin system] Use MESG service to develop MESG core</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>Some early ideas during the implementation process:</p>
+<ul>
+<li>
+<p>Having <code>func (x *xxx) Resolver() (*Resolver, err)</code> is a lot better instead of a pkg level func because we need some state to share. So this is what we use now.</p>
+</li>
+<li>
+<p>Q: How we should determine the plugin name? From the <em>name</em> section of <em>service.yml</em> or get it from the dir name of service like the one here <code>~/.mesg/systemservices/PLUGIN_NAME</code>. We wen’t with the first option for now.</p>
+</li>
+</ul>
+          <p><a href="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/23">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/23</link>
+        <pubDate>Wed, 10 Oct 2018 15:19:07 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-23-23</guid>
+        <source url="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23.rss">[Plugin system] Use MESG service to develop MESG core</source>
+      </item>
+      <item>
+        <title>[Plugin system] Use MESG service to develop MESG core</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <h1>Summary</h1>
+<h2>Initialization</h2>
+<p><code>SystemServices</code> knows all the <code>SystemService</code>, creates them and starts them. It should be a blocking function that wait until all services are running and return an error if any problem happen.<br>
+This will be done when the core starts and will need to access some features from the <code>api</code> package.</p>
+<h2>Deployment</h2>
+<p>The <code>SystemServices</code> has the responsibility to deploy the services based on a path <code>~/.mesg/systemservices/PLUGIN_NAME</code>. For now every services are re-deployed every time and later on.<br>
+We will be added this in the config/file/database, we need more thoughts about that so let’s implement later.</p>
+<h2>Use of the System Service</h2>
+<p>Any package can access a typed <code>SystemService</code> with something like</p>
+<pre><code class="lang-auto">r, err := systemservices.Resolver()
+res1, res2, err := r.TaskX(inputA)
+</code></pre>
+<p>Resolver can be either an function from an instance or a function from a package<br>
+eg:</p>
+<pre><code class="lang-auto">package systemservices
+
+func Resolver() (*Resolver, err)
+// or
+func (x *xxx) Resolver() (*Resolver, err)
+</code></pre>
+<p>The rest of the implementation is open, just let’s not make things overcomplicated if it’s not required. KISS</p>
+<h2>Dummy system service</h2>
+<p>For now we can just implement a basic test system service that print something or whatever, the goal here is to really setup the system, not to migrate anything yet.</p>
+<hr>
+<p>We want to have this finish by the end of the week, <a class="mention" href="/u/nicolas">@Nicolas</a>  and I will be really busy so please <a class="mention" href="/u/krhubert">@krhubert</a> and <a class="mention" href="/u/ilgooz">@ilgooz</a> work on that together <img src="https://forum.mesg.com/images/emoji/twitter/slight_smile.png?v=6" title=":slight_smile:" class="emoji" alt=":slight_smile:"></p>
+          <p><a href="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/22">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/22</link>
+        <pubDate>Wed, 10 Oct 2018 11:00:07 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-23-22</guid>
+        <source url="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23.rss">[Plugin system] Use MESG service to develop MESG core</source>
+      </item>
+      <item>
+        <title>[Plugin system] Use MESG service to develop MESG core</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>Agree with that, chan are a bit too complex and we might not need this complexity or even standardization of the system services so yes let’s implement high level wrapper for these services and we’ll see later if we need to “normalize” it or something like that but for now lets keep this simple.</p>
+          <p><a href="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/21">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/21</link>
+        <pubDate>Tue, 09 Oct 2018 14:21:03 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-23-21</guid>
+        <source url="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23.rss">[Plugin system] Use MESG service to develop MESG core</source>
+      </item>
+      <item>
+        <title>[Plugin system] Use MESG service to develop MESG core</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>This is what I also agree on. In addition to this, as suggested before, lets remove the <a href="https://github.com/mesg-foundation/core/blob/3a2e171/systemservices/resolver/resolve.go#L38">chans</a> from the return types and instead, directly return output datas <em>(as structs)</em> and an error for executing tasks. Or as <a class="mention" href="/u/krhubert">@krhubert</a> suggested, we can also create a high level wrapper around the output datas of task executions and only return expected datas and a custom error type. This is something that we should experiment and later give a decision about it because we currently don’t know how the implementation will look like for various plugins.</p>
+          <p><a href="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/20">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/20</link>
+        <pubDate>Tue, 09 Oct 2018 14:14:04 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-23-20</guid>
+        <source url="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23.rss">[Plugin system] Use MESG service to develop MESG core</source>
+      </item>
+      <item>
+        <title>[Plugin system] Use MESG service to develop MESG core</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>My point was why not having all the system services responsibility inside this <code>SystemServices</code> like we agreed on the meeting monday ?</p>
+<p>The <code>SystemServices</code> will have knowledge of all the services and like that can also manage the casting and everytime we use it we just use the different system services without having to care about how to cast them.</p>
+<p>Again following back to this implementation<br>
+<aside class="onebox githubblob">
+  <header class="source">
+      <a href="https://github.com/mesg-foundation/core/blob/feature/system-services/systemservices/systemservices.go" target="_blank">github.com</a>
+  </header>
+  <article class="onebox-body">
+    <h4><a href="https://github.com/mesg-foundation/core/blob/feature/system-services/systemservices/systemservices.go" target="_blank">mesg-foundation/core/blob/feature/system-services/systemservices/systemservices.go</a></h4>
+<pre><code class="lang-go">package systemservices
+
+import (
+	"github.com/mesg-foundation/core/api"
+	"github.com/mesg-foundation/core/systemservices/resolver"
+)
+
+// SystemServices is managing all system services.
+// It is responsible to start all system services when the core start.
+// It reads the services' ID from the config package.
+// All system services should runs all the time.
+// Any interaction with the system services are done by using the API package.
+type SystemServices struct{}
+
+// New creates a new SystemServices instance.
+// It accepts an instance of the API package.
+// It reads the services' ID from the config package.
+// It starts all system services.
+// It waits for all system services to run.
+// If services' ID are not in the config, it should return an error.
+</code></pre>
+
+  This file has been truncated. <a href="https://github.com/mesg-foundation/core/blob/feature/system-services/systemservices/systemservices.go" target="_blank">show original</a>
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+</p>
+<p>I just don’t want to make things over complicated where we might not need this complexity. I don’t see why we need such abstraction now because we will always have to know what kind of system service we have to implement and use</p>
+          <p><a href="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/19">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/19</link>
+        <pubDate>Tue, 09 Oct 2018 13:29:14 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-23-19</guid>
+        <source url="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23.rss">[Plugin system] Use MESG service to develop MESG core</source>
+      </item>
+      <item>
+        <title>[Plugin system] Use MESG service to develop MESG core</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team quote-modified" data-post="17" data-topic="23">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/anthony/40/7_1.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>…why the calling method should be the one creating this ?</p>
+</blockquote>
+</aside>
+<p>I don’t understand that part can you explain?</p>
+<p>If we allow making type assertions inside <em>SystemServices</em> we lose the flexibility of having <em>SystemService</em> interface in the first place and having it will not make sense other than cosmetics which doesn’t provide an actual benefit.</p>
+          <p><a href="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/18">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/18</link>
+        <pubDate>Tue, 09 Oct 2018 11:49:14 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-23-18</guid>
+        <source url="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23.rss">[Plugin system] Use MESG service to develop MESG core</source>
+      </item>
+      <item>
+        <title>[Plugin system] Use MESG service to develop MESG core</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="14" data-topic="23">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/ilgooz/40/8_1.png" class="avatar"> ilgooz:</div>
+<blockquote>
+<p>If we really want <em>SystemServices</em> to be not aware of system service’s types, we cannot have something like this: <code>func (s *SystemServices) Resolver() *resolver.Resolver</code> , instead it should return a <em>SystemService</em> and that can be type asserted by the caller.</p>
+</blockquote>
+</aside>
+<p>I like that this <code>SystemServices</code> doesn’t know about the <code>SystemService</code> but this have for me some serious drawbacks.</p>
+<p>I agree that if the calling method add services to this manager then this manager should not be aware of the different types but why the calling method should be the one creating this ?</p>
+<p>We need to have access to the types for these <code>SystemServices</code> and not having to cast all the time. We can always have a kind of facade that deal with this casting but I think for now that could be directly implemented into the <code>SystemServices</code>.</p>
+<aside class="quote group-team" data-post="16" data-topic="23">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/krhubert/40/9_1.png" class="avatar"> krhubert:</div>
+<blockquote>
+<p>Why you need error here? For not found? Nil is perfect here to represent not found</p>
+</blockquote>
+</aside>
+<p>I definitely prefer a typed error than have to guess that a nil value is representing a not found error.</p>
+<p>Except than that I’m ok to go with the rest</p>
+          <p><a href="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/17">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/17</link>
+        <pubDate>Tue, 09 Oct 2018 11:07:51 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-23-17</guid>
+        <source url="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23.rss">[Plugin system] Use MESG service to develop MESG core</source>
+      </item>
+      <item>
+        <title>[Plugin system] Use MESG service to develop MESG core</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="14" data-topic="23">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/ilgooz/40/8_1.png" class="avatar"> ilgooz:</div>
+<blockquote>
+<p>If we really want <em>SystemServices</em> to be not aware of system service’s types, we cannot have something like this: <code>func (s *SystemServices) Resolver() *resolver.Resolver</code> , instead it should return a <em>SystemService</em> and that can be type asserted by the caller.</p>
+</blockquote>
+</aside>
+<p><img src="https://forum.mesg.com/images/emoji/twitter/+1.png?v=6" title=":+1:" class="emoji" alt=":+1:"> it’s my first choice</p>
+<aside class="quote group-team" data-post="15" data-topic="23">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/nicolas/40/10_1.png" class="avatar"> Nicolas:</div>
+<blockquote>
+<p>For the strategy approach, I will go with the parallel approach. But I not sure if it better to put this strategy in servicesystems or directly in <code>core/main.go</code></p>
+</blockquote>
+</aside>
+<p>Yep, we can put deploy strategy in seperate package. As you saw in comment this is just proposal to show a nice design patter and ofc we will start with parallel (without passing any strategy as it’s too much for now)</p>
+<aside class="quote group-team" data-post="15" data-topic="23">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/nicolas/40/10_1.png" class="avatar"> Nicolas:</div>
+<blockquote>
+<ul>
+<li>For the getter I will go with  <code>func (s *SystemServices) Resolver() *resolver.Resolver</code> . But I will add an error as well:  <code>func (s *SystemServices) Resolver() (*resolver.Resolver, error)</code>
+</li>
+</ul>
+</blockquote>
+</aside>
+<p>Why you need error here? For not found? Nil is perfect here to represent not found</p>
+<aside class="quote group-team" data-post="15" data-topic="23">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/nicolas/40/10_1.png" class="avatar"> Nicolas:</div>
+<blockquote>
+<p>it’s good. Maybe it could be put directly in the API package? So we could even offer an gRPC API like this in the future.</p>
+</blockquote>
+</aside>
+<p><img src="https://forum.mesg.com/images/emoji/twitter/+1.png?v=6" title=":+1:" class="emoji" alt=":+1:"></p>
+<aside class="quote group-team" data-post="15" data-topic="23">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/nicolas/40/10_1.png" class="avatar"> Nicolas:</div>
+<blockquote>
+<ul>
+<li>For  <code>func (r *Resolver) Resolve(serviceID string) (address string, err error)</code>  I also prefer to accept and return simple type rather than struct for simple case. We could still return struct in the case of multiple success output or more complex case.</li>
+</ul>
+</blockquote>
+</aside>
+<p><img src="https://forum.mesg.com/images/emoji/twitter/+1.png?v=6" title=":+1:" class="emoji" alt=":+1:"></p>
+          <p><a href="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/16">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/16</link>
+        <pubDate>Tue, 09 Oct 2018 09:12:38 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-23-16</guid>
+        <source url="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23.rss">[Plugin system] Use MESG service to develop MESG core</source>
+      </item>
+      <item>
+        <title>[Plugin system] Use MESG service to develop MESG core</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>from <a class="mention" href="/u/krhubert">@krhubert</a> post,</p>
+<ul>
+<li>I agree with <code>SystemService</code> interface</li>
+<li>I agree with <code>SystemServices</code> interface</li>
+<li>
+<code>func (s *SystemServices) AddService(ss SystemService) error</code>. I actually like the fact that the servicesystems package is not aware of the configuration and directly receive a SystemService (like you did). In this case, we could put in the <code>core/main.go</code> the logic to read the config, deploy the services from folder if needed, and init the system services.</li>
+<li>For the strategy approach, I will go with the parallel approach. But I not sure if it better to put this strategy in servicesystems or directly in <code>core/main.go</code>
+</li>
+<li>For the getter I will go with <code>func (s *SystemServices) Resolver() *resolver.Resolver</code>. But I will add an error as well: <code>func (s *SystemServices) Resolver() (*resolver.Resolver, error)</code>
+</li>
+<li>For <code>func ExecuteAndListen(a *api.API, serviceID, task string, inputs map[string]interface{}) (*execution.Execution, error)</code> it’s good. Maybe it could be put directly in the API package? So we could even offer an gRPC API like this in the future.</li>
+<li>For <code>func (r *Resolver) Resolve(serviceID string) (address string, err error)</code> I also prefer to accept and return simple type rather than struct for simple case. We could still return struct in the case of multiple success output or more complex case.</li>
+<li>One Suggestion: Create types for errors. If we want to react to error, we need to return dedicated type. For instance, the <code>notFound</code> output of the <code>resolve</code> task, should return a specific error type so the core can react to it.</li>
+</ul>
+          <p><a href="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/15">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/15</link>
+        <pubDate>Tue, 09 Oct 2018 08:54:06 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-23-15</guid>
+        <source url="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23.rss">[Plugin system] Use MESG service to develop MESG core</source>
+      </item>
+      <item>
+        <title>[Plugin system] Use MESG service to develop MESG core</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p><a class="mention" href="/u/krhubert">@krhubert</a>  Your generic solution with <em>SystemService</em> seems nice.</p>
+<p>If we really want <em>SystemServices</em> to be not aware of system service’s types, we cannot have something like this: <code>func (s *SystemServices) Resolver() *resolver.Resolver</code> , instead it should return a <em>SystemService</em> and that can be type asserted by the caller.</p>
+<p>I also would like using constants while registering and getting services to strengthen type safety like this:</p>
+<pre><code class="lang-auto">// in pkg config
+const (
+  ResolverService ServiceType = iota + 1
+)
+
+config.SystemServices = map[ServiceType]string{
+  ResolverService: "4f7891f77a6333787075e95b6d3d73ad50b5d1e9",
+}
+
+// in pkg systemservices
+func (s *SystemServices) AddService(ResolverService, ss SystemService)
+func (s *SystemServices) GetService(ResolverService) SystemService
+</code></pre>
+<p>But I’m not sure if we need this much generic use in the <em>systemservices</em> pkg because we already know what system services core requires to run. It is not determineted in the runtime, so having a systemservices pkg like the one proposed by <a class="mention" href="/u/nicolas">@Nicolas</a> should be well enough and it’s kinda easier to use because we don’t need to make type assertions for services.</p>
+<p>To conclude this discussion we must define the idea behing having a <em>systemservices</em> pkg and it’s roles in the first place.</p>
+          <p><a href="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/14">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/14</link>
+        <pubDate>Tue, 09 Oct 2018 08:51:20 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-23-14</guid>
+        <source url="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23.rss">[Plugin system] Use MESG service to develop MESG core</source>
+      </item>
+      <item>
+        <title>[Plugin system] Use MESG service to develop MESG core</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <p>To not create new branch on github I’m pasting code here. The most important changes:</p>
+<ol>
+<li>There are no channels - we don’t need it here.</li>
+<li>The api of resolver (and any other system service) should be simplified. This is why we create this wrappers, otherwise anywan can execute such task and don’t need resolver service for that. As for the caller he wants simple API that brings knowleage/functionalites to him.</li>
+</ol>
+<pre><code class="lang-auto">package systemservices
+
+import (
+	"fmt"
+
+	"github.com/mesg-foundation/core/api"
+	"github.com/mesg-foundation/core/systemservices/resolver"
+)
+
+type SystemService interface {
+	Name() string
+	SetServiceID(id string)
+}
+
+type SystemServices struct {
+	api *api.API
+
+	services map[string]SystemService
+}
+
+// New don't read config as it knows nothing about config - it should be passed
+// it can accpet serviceIDS, or it coudl be done in AddService (my choice)
+func New(api *api.API) *SystemServices {
+	return &amp;SystemServices{api: api}
+}
+
+func (s *SystemServices) AddService(ss SystemService) error {
+	if _, ok := s.services[ss.Name()]; ok {
+		return fmt.Errorf("system service %s already exists", ss.Name())
+	}
+	s.services[ss.Name()] = ss
+
+	// deploy &amp;&amp; start
+	id := "1234"
+
+	ss.SetServiceID(id)
+	return nil
+}
+
+
+// Seccond approach (it will be too much for now, but to give overview)
+type Strategy int
+
+const (
+	WaitStrategy Strategy= iota
+	ParalleStrategy
+	ExitOnFailStrategy
+	RevertOnFailStrategy
+)
+func (s *SystemServices) AddServices(sss []SystemService, strategy Strategy) error {
+	var (
+	wg sync.WaitGroup
+	mx sync.Mutex
+	deployedServices []string
+)
+
+	if strategy == ParalleStrategy {
+		wg.Add(len(sss))
+	}
+
+	deployFn := func (ss SystemService) {
+	if _, ok := s.services[ss.Name()]; ok {
+			return fmt.Errorf("system service %s already exists", ss.Name())
+		}
+		s.services[ss.Name()] = ss
+	
+		// deploy &amp;&amp; start
+		mx.Lock()
+		id := "1234"
+		s.deployedServices = append(s.deployedServices, id)
+		mx.Unlock()
+	
+		ss.SetServiceID(id)
+	}
+
+	for _, ss := range sss {
+		switch strategy {
+		case WaitStrategy:
+			deployFn()
+		case ParallelStrategy:
+			go func () {
+				deployFn()
+				wg.Done()
+			}()
+		case ExitOnFailStrategy:
+			deployFn()
+			/* if err != nil {return err} */
+		case RevertOnFailStrategy:
+			for _, id := range s.deployedServices {
+				/* remove from service list */
+			}
+				s.services = nil
+		}
+	}
+
+	wg.Wait()
+	return nil
+}
+
+// Here we can have 4 diffrent appraoches to get service:
+
+// by name
+func (s *SystemServices) GetSystemServiceByName(name string) SystemService {
+	return s.services[name]
+}
+
+// by service fg:
+// systemService.GetSystemServiceByService(&amp;resolver.Resolver{})
+func (s *SystemServices) GetSystemServiceByService(ss SystemService) SystemService {
+	return s.services[ss.Name()]
+}
+
+// assuem we know the name and it won't change
+func (s *SystemServices) Resolver() *resolver.Resolver {
+	r, _ := s.services["resolver"].(*resolver.Resolver)
+	return r
+}
+
+// by for loop
+func (s *SystemServices) Resolver2() *resolver.Resolver {
+	for _, service := range s.services {
+		if r, ok := service.(*resolver.Resolver); ok {
+			return r
+		}
+	}
+	return nil
+}
+
+
+// example of system service package
+package resolver
+
+import (
+	"errors"
+	"fmt"
+
+	"github.com/mesg-foundation/core/api"
+	"github.com/mesg-foundation/core/execution"
+	uuid "github.com/satori/go.uuid"
+)
+
+// Tasks
+const (
+	addPeersTask string = "AddPeers"
+	resolveTask         = "Resolve"
+)
+
+type Resolver struct {
+	serviceID string
+	api       *api.API
+}
+
+func New(api *api.API) *Resolver {
+	return &amp;Resolver{api: api}
+}
+
+func (r *Resolver) Name() string {
+	return "resolver"
+}
+
+func (r *Resolver) SetServiceID(serviceID string) {
+	r.serviceID = serviceID
+}
+
+// wrapper will go to api as method
+func ExecuteAndListen(a *api.API, serviceID, task string, inputs map[string]interface{}) (*execution.Execution, error) {
+	tag := uuid.NewV4().String()
+	_, err := a.ExecuteTask(serviceID, task, inputs, []string{tag})
+	if err != nil {
+		return nil, err
+	}
+	result, err := a.ListenResult(serviceID, api.ListenResultTagFilters([]string{tag}))
+	if err != nil {
+		return nil, err
+	}
+	defer result.Close()
+	return &lt;-result.Executions, nil
+}
+
+func (r *Resolver) AddPeers(address string) error {
+	e, err := ExecuteAndListen(r.api, r.serviceID, addPeersTask, map[string]interface{}{
+		"address": address,
+	})
+	if err != nil {
+		return err
+	}
+
+	switch e.Output {
+	case "success":
+		return nil
+	case "error":
+		return errors.New(e.OutputData["error"].(string))
+	default:
+		return errors.New("unknown output")
+	}
+}
+
+type ResolveFoundOutput struct {
+	Address string
+}
+
+func (r *Resolver) Resolve(serviceID string) (address string, err error) {
+	e, err := ExecuteAndListen(r.api, r.serviceID, resolveTask, map[string]interface{}{
+		"serviceID": serviceID,
+	})
+
+	switch e.Output {
+	case "found":
+		return e.OutputData["found"].(*ResolveFoundOutput).Address, nil
+	case "notFound":
+		return "", fmt.Errorf("address for service id %q not found", serviceID)
+	case "error":
+		return "", errors.New(e.OutputData["error"].(string))
+	default:
+		return "", errors.New("unknown output")
+	}
+}
+
+</code></pre>
+          <p><a href="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/13">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/13</link>
+        <pubDate>Tue, 09 Oct 2018 07:29:15 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-23-13</guid>
+        <source url="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23.rss">[Plugin system] Use MESG service to develop MESG core</source>
+      </item>
+      <item>
+        <title>[Plugin system] Use MESG service to develop MESG core</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>I wonder why we have chans returned <a href="https://github.com/mesg-foundation/core/blob/3a2e171/systemservices/resolver/resolve.go#L38">here</a>? I think this func should block untill there is something to return, it seems we don’t need chans here.</p>
+          <p><a href="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/12">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/12</link>
+        <pubDate>Tue, 09 Oct 2018 06:38:54 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-23-12</guid>
+        <source url="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23.rss">[Plugin system] Use MESG service to develop MESG core</source>
+      </item>
+      <item>
+        <title>[Plugin system] Use MESG service to develop MESG core</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>We have the config.Global that is a singleton so we can have this in the New function directly in the body or we can pass it as parameters whatever solutions is fine</p>
+          <p><a href="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/11">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/11</link>
+        <pubDate>Tue, 09 Oct 2018 06:14:35 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-23-11</guid>
+        <source url="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23.rss">[Plugin system] Use MESG service to develop MESG core</source>
+      </item>
+      <item>
+        <title>[Plugin system] Use MESG service to develop MESG core</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>It’s nicely structured and easy to follow. We can also provide config pkg instance as an arg to <em>systemservices.New()</em> to prevent ambiguous access to configs and multiple initialization for config instance.</p>
+          <p><a href="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/10">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/10</link>
+        <pubDate>Tue, 09 Oct 2018 05:46:18 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-23-10</guid>
+        <source url="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23.rss">[Plugin system] Use MESG service to develop MESG core</source>
+      </item>
+      <item>
+        <title>[Plugin system] Use MESG service to develop MESG core</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Here is a first draft of the specification of the system service package:<br>
+<a href="https://github.com/mesg-foundation/core/tree/feature/system-services/systemservices" class="onebox" target="_blank">https://github.com/mesg-foundation/core/tree/feature/system-services/systemservices</a></p>
+<p>I didn’t create an interface because I thought it was over engineering and we will not need mock (i guess?). Are you ok with this?</p>
+<p>Please take a look at the different files and comments in the package and tell me your feedback.</p>
+<p>The goal is to write all necessary indications as comments so the implementation is easier and anyone could read its godoc to use it.</p>
+          <p><a href="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/9">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/9</link>
+        <pubDate>Mon, 08 Oct 2018 15:13:03 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-23-9</guid>
+        <source url="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23.rss">[Plugin system] Use MESG service to develop MESG core</source>
+      </item>
+      <item>
+        <title>[Plugin system] Use MESG service to develop MESG core</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <h2>Config</h2>
+<ul>
+<li>Add a plugin section containing system services’ id</li>
+</ul>
+<h2>SystemServices</h2>
+<ul>
+<li>Reference all system service at any time</li>
+<li>Start all System Services when start core</li>
+<li>Keep System Services alive at all time in Docker</li>
+<li>Call  <code>api</code>  package</li>
+</ul>
+<h2>SystemService instance</h2>
+<ul>
+<li>Specific interface/struct per System Service definition</li>
+<li>Call <code>api</code> package to interact with the service in docker</li>
+</ul>
+<h2>In order to deploy a System Service</h2>
+<ul>
+<li>share a System Service folder on the local machine (<code>~/.mesg/system-services/</code>)</li>
+<li>if no folder, download the default ones from hardcoded url or from an embedded tar in the bin</li>
+</ul>
+<p>-&gt; will put service definition in database<br>
+-&gt; get service id<br>
+-&gt; will put service id in config package</p>
+<h2>In order to start a System Service</h2>
+<ul>
+<li>service definition in database</li>
+<li>service id</li>
+</ul>
+<hr>
+<h1>TODO</h1>
+<ul>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> Need to update the schema</li>
+</ul>
+          <p><a href="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/8">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/8</link>
+        <pubDate>Mon, 08 Oct 2018 10:19:53 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-23-8</guid>
+        <source url="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23.rss">[Plugin system] Use MESG service to develop MESG core</source>
+      </item>
+      <item>
+        <title>[Plugin system] Use MESG service to develop MESG core</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <pre><code class="lang-auto">package test
+
+import (
+    "github.com/mesg-foundation/core/api"
+    "github.com/satori/go.uuid"
+)
+
+// Test ...
+type Test struct {
+    serviceID string
+    api       *api.API
+}
+
+// TaskXSuccess ...
+type TaskXSuccess struct {
+    Message string
+}
+
+// TaskXError ...
+type TaskXError struct {
+    Error string
+}
+
+// New ...
+func New(api *api.API, serviceID string) *Test {
+    return &amp;Test{
+        api:       api,
+        serviceID: serviceID,
+    }
+}
+
+// TaskX ...
+func (t *Test) TaskX(foo string, bar string) (chan TaskXSuccess, chan TaskXError, error) {
+    tag := uuid.NewV4().String()
+    successOutput := make(chan TaskXSuccess)
+    errorOutput := make(chan TaskXError)
+    _, err := t.api.ExecuteTask(t.serviceID, "taskX", map[string]interface{}{
+        "foo": foo,
+        "bar": bar,
+    }, []string{tag})
+    if err != nil {
+        return successOutput, errorOutput, err
+    }
+    result, err := t.api.ListenResult(t.serviceID, api.ListenResultTagFilters([]string{tag}))
+    if err != nil {
+        return successOutput, errorOutput, err
+    }
+    defer result.Close()
+    go func(r *api.ResultListener) {
+        e := &lt;-result.Executions
+        switch e.Output {
+        case "success":
+            successOutput &lt;- TaskXSuccess{
+                Message: e.OutputData["message"].(string),
+            }
+        case "error":
+            errorOutput &lt;- TaskXError{
+                Error: e.OutputData["error"].(string),
+            }
+        }
+    }(result)
+    return successOutput, errorOutput, err
+}
+</code></pre>
+          <p><a href="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/7">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/7</link>
+        <pubDate>Mon, 08 Oct 2018 09:28:17 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-23-7</guid>
+        <source url="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23.rss">[Plugin system] Use MESG service to develop MESG core</source>
+      </item>
+      <item>
+        <title>[Plugin system] Use MESG service to develop MESG core</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <h2>Actors</h2>
+<p>The different actors in the diagram with their associated roles</p>
+<h3>Program</h3>
+<p>The entity that need to execute a plugin, this part is the part that actually implement the business logic and that rely to the plugins to delegate some process</p>
+<h3>Config</h3>
+<p>This is the general configurations for the program. These configurations have default values but can be override.</p>
+<h3>PluginResolver (name to define)</h3>
+<p>The entity responsible for the creation of the plugin instance. This entity is just a kind of manager.</p>
+<h3>Plugin</h3>
+<p>This is the part that actually contains all the “API” and the delegates to the service. This is the interface that exposes all the informations that the plugin provides.</p>
+<h3>Service</h3>
+<p>This is a standard MESG Service than in this case is not used for an application but as a plugin of the core</p>
+<h2>Creation part</h2>
+<p>The creation of the plugin is a new allocation of an object that represent the API of the MESG Service that acts as a plugin. The plugin doesn’t do anything except delegate the call of the function to the MESG Service. Basically it will listen the events of the service and execute tasks to the service. The plugin might even use the grpc API that we have right now or directly the API package.</p>
+          <p><a href="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/6">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/6</link>
+        <pubDate>Thu, 04 Oct 2018 11:27:57 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-23-6</guid>
+        <source url="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23.rss">[Plugin system] Use MESG service to develop MESG core</source>
+      </item>
+      <item>
+        <title>[Plugin system] Use MESG service to develop MESG core</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>Can you clarify the names in diagram please? For example what is a <em>Program, Config, PluginResolver, Plugin, Service</em>?</p>
+<p>What is the difference between a plugin and a service? How do you actually <em>Create</em> a plugin that showed in the diagram? How a program actually executes a task on a plugin?</p>
+<p>I think, we need a long technical article about this plugin system that explains every small aspect of the plugin feature with the assumption of community doesn’t know anything about this new feature and only have some basic knowledge about how core works.</p>
+<p>Right now, I’m struggling to understand the implementation details of plugin feature.</p>
+          <p><a href="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/5">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/5</link>
+        <pubDate>Thu, 04 Oct 2018 09:42:48 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-23-5</guid>
+        <source url="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23.rss">[Plugin system] Use MESG service to develop MESG core</source>
+      </item>
+      <item>
+        <title>[Plugin system] Use MESG service to develop MESG core</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <h2>Plugin system</h2>
+<p>The goal is to find all the scenarios for the plugin system in order to define a good API to use it. This sequence diagram is just to make sure we all see the same way for the plugin system.</p>
+<p><a class="mention-group" href="/groups/core">@core</a> let me know already what you think about that, if we all agree on this workflow or you see something different.</p>
+<h2>Executing</h2>
+<div class="mermaid">
+
+sequenceDiagram
+  Program-&gt;&gt;+Config: GetPluginKey
+  Config--&gt;&gt;-Program: key
+  Program-&gt;&gt;+PluginResolver: GetPlugin(key)
+  alt plugin exists?
+    PluginResolver-&gt;&gt;Plugin: Create
+    Plugin--&gt;&gt;-Program: plugin
+  else
+    Plugin--&gt;&gt;Program: null
+  end
+  alt plugin?
+    Program-&gt;&gt;+Plugin: pluginExecute
+    Plugin-&gt;&gt;Service: Start if needed
+    Plugin-&gt;&gt;Service: Listen for result if needed
+    Plugin-&gt;&gt;Service: Execute task
+    Service--&gt;&gt;-Program: Result
+  end
+
+</div>
+
+<h2>Reacting from an event of a plugin</h2>
+<p>We could have an event driven approach in the core and just listen for the different results or event that the plugin may send, for example plugin started, node added, block received…</p>
+          <p><a href="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/4</link>
+        <pubDate>Thu, 04 Oct 2018 09:09:30 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-23-4</guid>
+        <source url="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23.rss">[Plugin system] Use MESG service to develop MESG core</source>
+      </item>
+      <item>
+        <title>[Plugin system] Use MESG service to develop MESG core</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>We need to think about a good system before start the development. This feature is really important for the future.</p>
+<p>List of requirements:</p>
+<ul>
+<li>Identify a plugin. Eg: resolver plugin != X plugin</li>
+<li>How to manage (deploy, start, etc…) plugins</li>
+<li>How to install them (bundle with core? separate download?)</li>
+<li>Where/how to store plugin interface? Go interface in the core?</li>
+</ul>
+          <p><a href="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/3</link>
+        <pubDate>Wed, 19 Sep 2018 08:21:50 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-23-3</guid>
+        <source url="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23.rss">[Plugin system] Use MESG service to develop MESG core</source>
+      </item>
+  </channel>
+</rss>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>MESG Core v0.5 Release Notes</title>
+    <link>https://forum.mesg.com/t/mesg-core-v0-5-release-notes/136</link>
+    <description># New features in Core v0.5
+
+## Service ID
+
+A new parameter `SID` has been introduced in the service definition file.
+Developer can know specify a unique id to their services that will stay the same even if the service is deploy on another computer! No more nightmare of updating the Service&#39;s ID after every deployment.
+
+Example:
+In the service definition file (`mesg.yml`):
+```yaml
+name: &quot;Ethereum&quot;
+sid: &quot;com.mesg.ethereum&quot;
+description: &quot;Ethereum Service to interact with any Smart Contract&quot;
+```
+And then, use the `SID` in any command, API call or in the libraries. Eg:
+```
+mesg-core service start com.mesg.ethereum
+```
+
+## Persistent volumes
+
+Service&#39;s volume are now persistent. It means that if you stop and start a service, it will still have access to its data before the stop.
+Service&#39;s developers have to set the persistent volume under the  `volumes` parameter in the service definition.
+
+Example:
+```yaml
+configuration:
+  volumes:
+    - /home/ethereum
+```
+----
+
+For the complete changelog, refer to [Github ](https://github.com/mesg-foundation/core/releases/tag/v0.5.0).
+
+To update to v0.5, follow the [installation process on the documentation ](https://docs.mesg.com/guide/start-here/installation.html#automatic-installation)</description>
+    
+    <lastBuildDate>Thu, 13 Dec 2018 11:39:17 +0000</lastBuildDate>
+    <category>News</category>
+    <atom:link href="https://forum.mesg.com/t/mesg-core-v0-5-release-notes/136.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>MESG Core v0.5 Release Notes</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <h1>New features in Core v0.5</h1>
+<h2>Service ID</h2>
+<p>A new parameter <code>SID</code> has been introduced in the service definition file.<br>
+Developer can know specify a unique id to their services that will stay the same even if the service is deploy on another computer! No more nightmare of updating the Service’s ID after every deployment.</p>
+<p>Example:<br>
+In the service definition file (<code>mesg.yml</code>):</p>
+<pre><code class="lang-auto">name: "Ethereum"
+sid: "com.mesg.ethereum"
+description: "Ethereum Service to interact with any Smart Contract"
+</code></pre>
+<p>And then, use the <code>SID</code> in any command, API call or in the libraries. Eg:</p>
+<pre><code class="lang-auto">mesg-core service start com.mesg.ethereum
+</code></pre>
+<h2>Persistent volumes</h2>
+<p>Service’s volume are now persistent. It means that if you stop and start a service, it will still have access to its data before the stop.<br>
+Service’s developers have to set the persistent volume under the  <code>volumes</code> parameter in the service definition.</p>
+<p>Example:</p>
+<pre><code class="lang-auto">configuration:
+  volumes:
+    - /home/ethereum
+</code></pre>
+<hr>
+<p>For the complete changelog, refer to <a href="https://github.com/mesg-foundation/core/releases/tag/v0.5.0" rel="nofollow noopener">Github </a>.</p>
+<p>To update to v0.5, follow the <a href="https://docs.mesg.com/guide/start-here/installation.html#automatic-installation" rel="nofollow noopener">installation process on the documentation </a></p>
+          <p><a href="https://forum.mesg.com/t/mesg-core-v0-5-release-notes/136/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mesg-core-v0-5-release-notes/136/1</link>
+        <pubDate>Wed, 12 Dec 2018 08:58:40 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-136-1</guid>
+        <source url="https://forum.mesg.com/t/mesg-core-v0-5-release-notes/136.rss">MESG Core v0.5 Release Notes</source>
+      </item>
+  </channel>
+</rss>

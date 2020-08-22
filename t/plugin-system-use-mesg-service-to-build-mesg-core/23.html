@@ -1,0 +1,1533 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <title>[Plugin system] Use MESG service to develop MESG core - Engine - MESG Community</title>
+    <meta name="description" content="Proposal
+We have a system that is oriented with services but we don’t really use services and event driven inside MESG. The idea is to embrace this and develop all or some features that we use using services that will ha&amp;hellip;">
+    <meta name="generator" content="Discourse 2.5.0.beta5 - https://github.com/discourse/discourse version 00aab498297cba8f977c1e0eb17b7d38ff06cc68">
+<link rel="icon" type="image/png" href="../../uploads/default/optimized/1X/9f11b6ddfa02bffdbec79487592a0573a0236cb5_2_32x32.png">
+<link rel="apple-touch-icon" type="image/png" href="../../uploads/default/optimized/1X/53630361a40ad76e1733dd0b0f486e9ae2f4f4d6_2_180x180.png">
+<meta name="theme-color" content="#491e8c">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+<link rel="canonical" href="23.html" />
+<script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","url":"https://forum.mesg.com","potentialAction":{"@type":"SearchAction","target":"https://forum.mesg.com/search?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
+<link rel="search" type="application/opensearchdescription+xml" href="../../opensearch.xml" title="MESG Community Search">
+
+      <link href="../../stylesheets/desktop_3_52e3411e87658e862890db7bd06899cf49ad5f59.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop" data-theme-id="7"/>
+      <link href="../../stylesheets/desktop_theme_7_bf4f2d3d8a71e6ee907065be9a79df3d849bd29c.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop_theme" data-theme-id="7"/>
+    
+    <meta id="data-ga-universal-analytics" data-tracking-code="UA-117583862-1" data-json="{&quot;cookieDomain&quot;:&quot;auto&quot;}" data-auto-link-domains="">
+
+<link rel="preload" href="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js" as="script">
+<script src="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js"></script>
+
+
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of &#39;[Plugin system] Use MESG service to develop MESG core&#39;" href="../plugin-system-use-mesg-service-to-develop-mesg-core/23.rss" />
+    <meta property="og:site_name" content="MESG Community" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:url" content="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23" />
+<meta name="twitter:url" content="https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23" />
+<meta property="og:title" content="[Plugin system] Use MESG service to develop MESG core" />
+<meta name="twitter:title" content="[Plugin system] Use MESG service to develop MESG core" />
+<meta property="og:description" content="Proposal We have a system that is oriented with services but we don’t really use services and event driven inside MESG. The idea is to embrace this and develop all or some features that we use using services that will have their own docker container and their own features. By doing so we will have a real experience on how to create services with MESG and we will see directly the frictions and optimizations that needs to be done.  Examples Docker service We could have a service for docker, with d..." />
+<meta name="twitter:description" content="Proposal We have a system that is oriented with services but we don’t really use services and event driven inside MESG. The idea is to embrace this and develop all or some features that we use using services that will have their own docker container and their own features. By doing so we will have a real experience on how to create services with MESG and we will see directly the frictions and optimizations that needs to be done.  Examples Docker service We could have a service for docker, with d..." />
+<meta name="twitter:label1" value="Reading time" />
+<meta name="twitter:data1" value="7 mins 🕑" />
+<meta name="twitter:label2" value="Likes" />
+<meta name="twitter:data2" value="15 ❤" />
+<meta property="article:published_time" content="2018-08-28T03:12:57+00:00" />
+<meta property="og:ignore_canonical" content="true" />
+
+        <link rel="next" href="../plugin-system-use-mesg-service-to-develop-mesg-core/23%3Fpage=2.html">
+
+
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"QAPage","name":"[Plugin system] Use MESG service to develop MESG core","mainEntity":{"@type":"Question","name":"[Plugin system] Use MESG service to develop MESG core","text":"Proposal\n\nWe have a system that is oriented with services but we don’t really use services and event driven inside MESG. The idea is to embrace this and develop all or some features that we use using services that will have their own docker container and their own features. By doing so we will have a&hellip;","upvoteCount":3,"answerCount":1,"dateCreated":"2018-08-28T03:12:57.815Z","author":{"@type":"Person","name":"Anthony"},"acceptedAnswer":{"@type":"Answer","text":"Summary\n\nInitialization\n\nSystemServices knows all the SystemService, creates them and starts them. It should be a blocking function that wait until all services are running and return an error if any problem happen.\n\nThis will be done when the core starts and will need to access some features from the&hellip;","upvoteCount":2,"dateCreated":"2018-10-10T11:00:07.057Z","url":"https://forum.mesg.com/t/plugin-system-use-mesg-service-to-develop-mesg-core/23/22","author":{"@type":"Person","name":"Anthony"}}}}</script>
+  </head>
+  <body class="crawler">
+    
+    <header>
+      <a href="../../index.html">
+          <img src="../../uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png" alt="MESG Community" id="site-logo" style="max-width: 150px;">
+      </a>
+    </header>
+    <div id="main-outlet" class="wrap">
+        <div id="topic-title">
+    <h1>
+      <a href="23.html">[Plugin system] Use MESG service to develop MESG core</a>
+    </h1>
+
+      <div class="topic-category" itemscope itemtype="http://schema.org/BreadcrumbList">
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../c/development.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #AB9364'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Development</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="1" />
+          </span>
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../c/development/engine.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #AB9364'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Engine</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="2" />
+          </span>
+      </div>
+
+  </div>
+
+  
+
+
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="23.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-08-28T03:12:57Z'>
+              <time itemprop='dateModified' datetime='2018-09-19T08:19:46Z' class='post-time'>
+                September 19, 2018,  8:19am
+              </time>
+          <span itemprop='position'>#1</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <h2>Proposal</h2>
+<p>We have a system that is oriented with services but we don’t really use services and event driven inside MESG. The idea is to embrace this and develop all or some features that we use using services that will have their own docker container and their own features. By doing so we will have a real experience on how to create services with MESG and we will see directly the frictions and optimizations that needs to be done.</p>
+<h2>Examples</h2>
+<h4>Docker service</h4>
+<p>We could have a service for docker, with different tasks like</p>
+<ul>
+<li>build image</li>
+<li>start service</li>
+<li>stop service</li>
+<li>list services<br>
+…<br>
+with events like:</li>
+<li>onNewImage</li>
+<li>onServiceStarted</li>
+<li>onServiceStoped<br>
+…</li>
+</ul>
+<h4>MESG service</h4>
+<p>A service for all the services features</p>
+<ul>
+<li>Deploy</li>
+<li>Start (that will use the docker service(<a href="../service-composition/22.html">Service composition</a>))</li>
+<li>Stop (that will use the docker service(<a href="../service-composition/22.html">Service composition</a>))<br>
+…</li>
+</ul>
+<hr>
+<p>Like that the way we create MESG will be by creating MESG application and MESG services and after we just need to create more or less complex service, it doesn’t mean that we need to do really micro services it can be bigger services but the good point of that is that we would have a clear interface for all our services and the core will just when boot deploy all those services and use them, this would be really easy to soft update the core, you will just need to fetch and re-deploy the new version of the service and also people will be able to create their services based on ours if they want to.</p>
+        </div>
+
+        <meta itemprop='headline' content='[Plugin system] Use MESG service to develop MESG core'>
+          <meta itemprop='keywords' content=''>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="3" />
+           <span class='post-likes'>3 Likes</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+            <div class='crawler-linkback-list' itemscope itemtype='http://schema.org/ItemList'>
+                  <div itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+                    <a href="../trustful-network/35.html" itemprop='item'>
+                      <meta itemprop='url' content='https://forum.mesg.com/t/trustful-network/35'>
+                      <meta itemprop='position' content='2'>
+                      <span itemprop='name'>Trustful Network</span>
+                    </a>
+                  </div>
+            </div>
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="23.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-08-28T03:13:26Z' class='post-time'>
+                August 28, 2018,  3:13am
+              </time>
+              <meta itemprop='dateModified' content='2018-08-28T03:13:26Z'>
+          <span itemprop='position'>#2</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>This open to some new possibilities like even run mesg-core in a decentralized way because it’s all based on services and we will have decentralized services it means that it could even be possible to have those parts of mesg-core decentralized. Maybe a bit too much but maybe not because an iot device would just use the service to connect to its peers for example and other services will not be necessary. Anyway this leads to some nice possibilities I think</p>
+        </div>
+
+        <meta itemprop='headline' content='[Plugin system] Use MESG service to develop MESG core'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="2" />
+           <span class='post-likes'>2 Likes</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="23.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-09-19T08:21:50Z'>
+              <time itemprop='dateModified' datetime='2018-09-19T08:27:09Z' class='post-time'>
+                September 19, 2018,  8:27am
+              </time>
+          <span itemprop='position'>#3</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>We need to think about a good system before start the development. This feature is really important for the future.</p>
+<p>List of requirements:</p>
+<ul>
+<li>Identify a plugin. Eg: resolver plugin != X plugin</li>
+<li>How to manage (deploy, start, etc…) plugins</li>
+<li>How to install them (bundle with core? separate download?)</li>
+<li>Where/how to store plugin interface? Go interface in the core?</li>
+</ul>
+        </div>
+
+        <meta itemprop='headline' content='[Plugin system] Use MESG service to develop MESG core'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="23.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-10-04T09:09:30Z' class='post-time'>
+                October 4, 2018,  9:09am
+              </time>
+              <meta itemprop='dateModified' content='2018-10-04T09:09:30Z'>
+          <span itemprop='position'>#4</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <h2>Plugin system</h2>
+<p>The goal is to find all the scenarios for the plugin system in order to define a good API to use it. This sequence diagram is just to make sure we all see the same way for the plugin system.</p>
+<p><a class="mention-group" href="../../groups/core.html">@core</a> let me know already what you think about that, if we all agree on this workflow or you see something different.</p>
+<h2>Executing</h2>
+<div class="mermaid">
+
+sequenceDiagram
+  Program-&gt;&gt;+Config: GetPluginKey
+  Config--&gt;&gt;-Program: key
+  Program-&gt;&gt;+PluginResolver: GetPlugin(key)
+  alt plugin exists?
+    PluginResolver-&gt;&gt;Plugin: Create
+    Plugin--&gt;&gt;-Program: plugin
+  else
+    Plugin--&gt;&gt;Program: null
+  end
+  alt plugin?
+    Program-&gt;&gt;+Plugin: pluginExecute
+    Plugin-&gt;&gt;Service: Start if needed
+    Plugin-&gt;&gt;Service: Listen for result if needed
+    Plugin-&gt;&gt;Service: Execute task
+    Service--&gt;&gt;-Program: Result
+  end
+
+</div>
+
+<h2>Reacting from an event of a plugin</h2>
+<p>We could have an event driven approach in the core and just listen for the different results or event that the plugin may send, for example plugin started, node added, block received…</p>
+        </div>
+
+        <meta itemprop='headline' content='[Plugin system] Use MESG service to develop MESG core'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="1" />
+           <span class='post-likes'>1 Like</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="23.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-10-04T09:42:48Z'>
+              <time itemprop='dateModified' datetime='2018-10-04T09:46:02Z' class='post-time'>
+                October 4, 2018,  9:46am
+              </time>
+          <span itemprop='position'>#5</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Can you clarify the names in diagram please? For example what is a <em>Program, Config, PluginResolver, Plugin, Service</em>?</p>
+<p>What is the difference between a plugin and a service? How do you actually <em>Create</em> a plugin that showed in the diagram? How a program actually executes a task on a plugin?</p>
+<p>I think, we need a long technical article about this plugin system that explains every small aspect of the plugin feature with the assumption of community doesn’t know anything about this new feature and only have some basic knowledge about how core works.</p>
+<p>Right now, I’m struggling to understand the implementation details of plugin feature.</p>
+        </div>
+
+        <meta itemprop='headline' content='[Plugin system] Use MESG service to develop MESG core'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="23.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-10-04T11:27:57Z' class='post-time'>
+                October 4, 2018, 11:27am
+              </time>
+              <meta itemprop='dateModified' content='2018-10-04T11:27:57Z'>
+          <span itemprop='position'>#6</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <h2>Actors</h2>
+<p>The different actors in the diagram with their associated roles</p>
+<h3>Program</h3>
+<p>The entity that need to execute a plugin, this part is the part that actually implement the business logic and that rely to the plugins to delegate some process</p>
+<h3>Config</h3>
+<p>This is the general configurations for the program. These configurations have default values but can be override.</p>
+<h3>PluginResolver (name to define)</h3>
+<p>The entity responsible for the creation of the plugin instance. This entity is just a kind of manager.</p>
+<h3>Plugin</h3>
+<p>This is the part that actually contains all the “API” and the delegates to the service. This is the interface that exposes all the informations that the plugin provides.</p>
+<h3>Service</h3>
+<p>This is a standard MESG Service than in this case is not used for an application but as a plugin of the core</p>
+<h2>Creation part</h2>
+<p>The creation of the plugin is a new allocation of an object that represent the API of the MESG Service that acts as a plugin. The plugin doesn’t do anything except delegate the call of the function to the MESG Service. Basically it will listen the events of the service and execute tasks to the service. The plugin might even use the grpc API that we have right now or directly the API package.</p>
+        </div>
+
+        <meta itemprop='headline' content='[Plugin system] Use MESG service to develop MESG core'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="23.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-10-08T09:28:17Z' class='post-time'>
+                October 8, 2018,  9:28am
+              </time>
+              <meta itemprop='dateModified' content='2018-10-08T09:28:17Z'>
+          <span itemprop='position'>#7</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <pre><code class="lang-auto">package test
+
+import (
+    "github.com/mesg-foundation/core/api"
+    "github.com/satori/go.uuid"
+)
+
+// Test ...
+type Test struct {
+    serviceID string
+    api       *api.API
+}
+
+// TaskXSuccess ...
+type TaskXSuccess struct {
+    Message string
+}
+
+// TaskXError ...
+type TaskXError struct {
+    Error string
+}
+
+// New ...
+func New(api *api.API, serviceID string) *Test {
+    return &amp;Test{
+        api:       api,
+        serviceID: serviceID,
+    }
+}
+
+// TaskX ...
+func (t *Test) TaskX(foo string, bar string) (chan TaskXSuccess, chan TaskXError, error) {
+    tag := uuid.NewV4().String()
+    successOutput := make(chan TaskXSuccess)
+    errorOutput := make(chan TaskXError)
+    _, err := t.api.ExecuteTask(t.serviceID, "taskX", map[string]interface{}{
+        "foo": foo,
+        "bar": bar,
+    }, []string{tag})
+    if err != nil {
+        return successOutput, errorOutput, err
+    }
+    result, err := t.api.ListenResult(t.serviceID, api.ListenResultTagFilters([]string{tag}))
+    if err != nil {
+        return successOutput, errorOutput, err
+    }
+    defer result.Close()
+    go func(r *api.ResultListener) {
+        e := &lt;-result.Executions
+        switch e.Output {
+        case "success":
+            successOutput &lt;- TaskXSuccess{
+                Message: e.OutputData["message"].(string),
+            }
+        case "error":
+            errorOutput &lt;- TaskXError{
+                Error: e.OutputData["error"].(string),
+            }
+        }
+    }(result)
+    return successOutput, errorOutput, err
+}
+</code></pre>
+        </div>
+
+        <meta itemprop='headline' content='[Plugin system] Use MESG service to develop MESG core'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="23.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-10-08T10:19:53Z'>
+              <time itemprop='dateModified' datetime='2018-10-08T10:39:26Z' class='post-time'>
+                October 8, 2018, 10:39am
+              </time>
+          <span itemprop='position'>#8</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <h2>Config</h2>
+<ul>
+<li>Add a plugin section containing system services’ id</li>
+</ul>
+<h2>SystemServices</h2>
+<ul>
+<li>Reference all system service at any time</li>
+<li>Start all System Services when start core</li>
+<li>Keep System Services alive at all time in Docker</li>
+<li>Call  <code>api</code>  package</li>
+</ul>
+<h2>SystemService instance</h2>
+<ul>
+<li>Specific interface/struct per System Service definition</li>
+<li>Call <code>api</code> package to interact with the service in docker</li>
+</ul>
+<h2>In order to deploy a System Service</h2>
+<ul>
+<li>share a System Service folder on the local machine (<code>~/.mesg/system-services/</code>)</li>
+<li>if no folder, download the default ones from hardcoded url or from an embedded tar in the bin</li>
+</ul>
+<p>-&gt; will put service definition in database<br>
+-&gt; get service id<br>
+-&gt; will put service id in config package</p>
+<h2>In order to start a System Service</h2>
+<ul>
+<li>service definition in database</li>
+<li>service id</li>
+</ul>
+<hr>
+<h1>TODO</h1>
+<ul>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> Need to update the schema</li>
+</ul>
+        </div>
+
+        <meta itemprop='headline' content='[Plugin system] Use MESG service to develop MESG core'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="1" />
+           <span class='post-likes'>1 Like</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="23.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-10-08T15:13:03Z' class='post-time'>
+                October 8, 2018,  3:13pm
+              </time>
+              <meta itemprop='dateModified' content='2018-10-08T15:13:03Z'>
+          <span itemprop='position'>#9</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Here is a first draft of the specification of the system service package:<br>
+<a href="https://github.com/mesg-foundation/core/tree/feature/system-services/systemservices" class="onebox" target="_blank">https://github.com/mesg-foundation/core/tree/feature/system-services/systemservices</a></p>
+<p>I didn’t create an interface because I thought it was over engineering and we will not need mock (i guess?). Are you ok with this?</p>
+<p>Please take a look at the different files and comments in the package and tell me your feedback.</p>
+<p>The goal is to write all necessary indications as comments so the implementation is easier and anyone could read its godoc to use it.</p>
+        </div>
+
+        <meta itemprop='headline' content='[Plugin system] Use MESG service to develop MESG core'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="2" />
+           <span class='post-likes'>2 Likes</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="23.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-10-09T05:46:18Z'>
+              <time itemprop='dateModified' datetime='2018-10-09T05:46:24Z' class='post-time'>
+                October 9, 2018,  5:46am
+              </time>
+          <span itemprop='position'>#10</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>It’s nicely structured and easy to follow. We can also provide config pkg instance as an arg to <em>systemservices.New()</em> to prevent ambiguous access to configs and multiple initialization for config instance.</p>
+        </div>
+
+        <meta itemprop='headline' content='[Plugin system] Use MESG service to develop MESG core'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="1" />
+           <span class='post-likes'>1 Like</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="23.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-10-09T06:14:35Z' class='post-time'>
+                October 9, 2018,  6:14am
+              </time>
+              <meta itemprop='dateModified' content='2018-10-09T06:14:35Z'>
+          <span itemprop='position'>#11</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>We have the config.Global that is a singleton so we can have this in the New function directly in the body or we can pass it as parameters whatever solutions is fine</p>
+        </div>
+
+        <meta itemprop='headline' content='[Plugin system] Use MESG service to develop MESG core'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="23.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-10-09T06:38:54Z' class='post-time'>
+                October 9, 2018,  6:38am
+              </time>
+              <meta itemprop='dateModified' content='2018-10-09T06:38:54Z'>
+          <span itemprop='position'>#12</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>I wonder why we have chans returned <a href="https://github.com/mesg-foundation/core/blob/3a2e171/systemservices/resolver/resolve.go#L38">here</a>? I think this func should block untill there is something to return, it seems we don’t need chans here.</p>
+        </div>
+
+        <meta itemprop='headline' content='[Plugin system] Use MESG service to develop MESG core'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/krhubert.html'><span itemprop='name'>krhubert</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="23.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-10-09T07:29:15Z'>
+              <time itemprop='dateModified' datetime='2018-10-09T07:29:39Z' class='post-time'>
+                October 9, 2018,  7:29am
+              </time>
+          <span itemprop='position'>#13</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>To not create new branch on github I’m pasting code here. The most important changes:</p>
+<ol>
+<li>There are no channels - we don’t need it here.</li>
+<li>The api of resolver (and any other system service) should be simplified. This is why we create this wrappers, otherwise anywan can execute such task and don’t need resolver service for that. As for the caller he wants simple API that brings knowleage/functionalites to him.</li>
+</ol>
+<pre><code class="lang-auto">package systemservices
+
+import (
+	"fmt"
+
+	"github.com/mesg-foundation/core/api"
+	"github.com/mesg-foundation/core/systemservices/resolver"
+)
+
+type SystemService interface {
+	Name() string
+	SetServiceID(id string)
+}
+
+type SystemServices struct {
+	api *api.API
+
+	services map[string]SystemService
+}
+
+// New don't read config as it knows nothing about config - it should be passed
+// it can accpet serviceIDS, or it coudl be done in AddService (my choice)
+func New(api *api.API) *SystemServices {
+	return &amp;SystemServices{api: api}
+}
+
+func (s *SystemServices) AddService(ss SystemService) error {
+	if _, ok := s.services[ss.Name()]; ok {
+		return fmt.Errorf("system service %s already exists", ss.Name())
+	}
+	s.services[ss.Name()] = ss
+
+	// deploy &amp;&amp; start
+	id := "1234"
+
+	ss.SetServiceID(id)
+	return nil
+}
+
+
+// Seccond approach (it will be too much for now, but to give overview)
+type Strategy int
+
+const (
+	WaitStrategy Strategy= iota
+	ParalleStrategy
+	ExitOnFailStrategy
+	RevertOnFailStrategy
+)
+func (s *SystemServices) AddServices(sss []SystemService, strategy Strategy) error {
+	var (
+	wg sync.WaitGroup
+	mx sync.Mutex
+	deployedServices []string
+)
+
+	if strategy == ParalleStrategy {
+		wg.Add(len(sss))
+	}
+
+	deployFn := func (ss SystemService) {
+	if _, ok := s.services[ss.Name()]; ok {
+			return fmt.Errorf("system service %s already exists", ss.Name())
+		}
+		s.services[ss.Name()] = ss
+	
+		// deploy &amp;&amp; start
+		mx.Lock()
+		id := "1234"
+		s.deployedServices = append(s.deployedServices, id)
+		mx.Unlock()
+	
+		ss.SetServiceID(id)
+	}
+
+	for _, ss := range sss {
+		switch strategy {
+		case WaitStrategy:
+			deployFn()
+		case ParallelStrategy:
+			go func () {
+				deployFn()
+				wg.Done()
+			}()
+		case ExitOnFailStrategy:
+			deployFn()
+			/* if err != nil {return err} */
+		case RevertOnFailStrategy:
+			for _, id := range s.deployedServices {
+				/* remove from service list */
+			}
+				s.services = nil
+		}
+	}
+
+	wg.Wait()
+	return nil
+}
+
+// Here we can have 4 diffrent appraoches to get service:
+
+// by name
+func (s *SystemServices) GetSystemServiceByName(name string) SystemService {
+	return s.services[name]
+}
+
+// by service fg:
+// systemService.GetSystemServiceByService(&amp;resolver.Resolver{})
+func (s *SystemServices) GetSystemServiceByService(ss SystemService) SystemService {
+	return s.services[ss.Name()]
+}
+
+// assuem we know the name and it won't change
+func (s *SystemServices) Resolver() *resolver.Resolver {
+	r, _ := s.services["resolver"].(*resolver.Resolver)
+	return r
+}
+
+// by for loop
+func (s *SystemServices) Resolver2() *resolver.Resolver {
+	for _, service := range s.services {
+		if r, ok := service.(*resolver.Resolver); ok {
+			return r
+		}
+	}
+	return nil
+}
+
+
+// example of system service package
+package resolver
+
+import (
+	"errors"
+	"fmt"
+
+	"github.com/mesg-foundation/core/api"
+	"github.com/mesg-foundation/core/execution"
+	uuid "github.com/satori/go.uuid"
+)
+
+// Tasks
+const (
+	addPeersTask string = "AddPeers"
+	resolveTask         = "Resolve"
+)
+
+type Resolver struct {
+	serviceID string
+	api       *api.API
+}
+
+func New(api *api.API) *Resolver {
+	return &amp;Resolver{api: api}
+}
+
+func (r *Resolver) Name() string {
+	return "resolver"
+}
+
+func (r *Resolver) SetServiceID(serviceID string) {
+	r.serviceID = serviceID
+}
+
+// wrapper will go to api as method
+func ExecuteAndListen(a *api.API, serviceID, task string, inputs map[string]interface{}) (*execution.Execution, error) {
+	tag := uuid.NewV4().String()
+	_, err := a.ExecuteTask(serviceID, task, inputs, []string{tag})
+	if err != nil {
+		return nil, err
+	}
+	result, err := a.ListenResult(serviceID, api.ListenResultTagFilters([]string{tag}))
+	if err != nil {
+		return nil, err
+	}
+	defer result.Close()
+	return &lt;-result.Executions, nil
+}
+
+func (r *Resolver) AddPeers(address string) error {
+	e, err := ExecuteAndListen(r.api, r.serviceID, addPeersTask, map[string]interface{}{
+		"address": address,
+	})
+	if err != nil {
+		return err
+	}
+
+	switch e.Output {
+	case "success":
+		return nil
+	case "error":
+		return errors.New(e.OutputData["error"].(string))
+	default:
+		return errors.New("unknown output")
+	}
+}
+
+type ResolveFoundOutput struct {
+	Address string
+}
+
+func (r *Resolver) Resolve(serviceID string) (address string, err error) {
+	e, err := ExecuteAndListen(r.api, r.serviceID, resolveTask, map[string]interface{}{
+		"serviceID": serviceID,
+	})
+
+	switch e.Output {
+	case "found":
+		return e.OutputData["found"].(*ResolveFoundOutput).Address, nil
+	case "notFound":
+		return "", fmt.Errorf("address for service id %q not found", serviceID)
+	case "error":
+		return "", errors.New(e.OutputData["error"].(string))
+	default:
+		return "", errors.New("unknown output")
+	}
+}
+
+</code></pre>
+        </div>
+
+        <meta itemprop='headline' content='[Plugin system] Use MESG service to develop MESG core'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="1" />
+           <span class='post-likes'>1 Like</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="23.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-10-09T08:51:20Z' class='post-time'>
+                October 9, 2018,  8:51am
+              </time>
+              <meta itemprop='dateModified' content='2018-10-09T08:51:20Z'>
+          <span itemprop='position'>#14</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p><a class="mention" href="../../u/krhubert.html">@krhubert</a>  Your generic solution with <em>SystemService</em> seems nice.</p>
+<p>If we really want <em>SystemServices</em> to be not aware of system service’s types, we cannot have something like this: <code>func (s *SystemServices) Resolver() *resolver.Resolver</code> , instead it should return a <em>SystemService</em> and that can be type asserted by the caller.</p>
+<p>I also would like using constants while registering and getting services to strengthen type safety like this:</p>
+<pre><code class="lang-auto">// in pkg config
+const (
+  ResolverService ServiceType = iota + 1
+)
+
+config.SystemServices = map[ServiceType]string{
+  ResolverService: "4f7891f77a6333787075e95b6d3d73ad50b5d1e9",
+}
+
+// in pkg systemservices
+func (s *SystemServices) AddService(ResolverService, ss SystemService)
+func (s *SystemServices) GetService(ResolverService) SystemService
+</code></pre>
+<p>But I’m not sure if we need this much generic use in the <em>systemservices</em> pkg because we already know what system services core requires to run. It is not determineted in the runtime, so having a systemservices pkg like the one proposed by <a class="mention" href="../../u/nicolas.html">@Nicolas</a> should be well enough and it’s kinda easier to use because we don’t need to make type assertions for services.</p>
+<p>To conclude this discussion we must define the idea behing having a <em>systemservices</em> pkg and it’s roles in the first place.</p>
+        </div>
+
+        <meta itemprop='headline' content='[Plugin system] Use MESG service to develop MESG core'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="2" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="23.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-10-09T08:54:06Z' class='post-time'>
+                October 9, 2018,  8:54am
+              </time>
+              <meta itemprop='dateModified' content='2018-10-09T08:54:06Z'>
+          <span itemprop='position'>#15</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>from <a class="mention" href="../../u/krhubert.html">@krhubert</a> post,</p>
+<ul>
+<li>I agree with <code>SystemService</code> interface</li>
+<li>I agree with <code>SystemServices</code> interface</li>
+<li>
+<code>func (s *SystemServices) AddService(ss SystemService) error</code>. I actually like the fact that the servicesystems package is not aware of the configuration and directly receive a SystemService (like you did). In this case, we could put in the <code>core/main.go</code> the logic to read the config, deploy the services from folder if needed, and init the system services.</li>
+<li>For the strategy approach, I will go with the parallel approach. But I not sure if it better to put this strategy in servicesystems or directly in <code>core/main.go</code>
+</li>
+<li>For the getter I will go with <code>func (s *SystemServices) Resolver() *resolver.Resolver</code>. But I will add an error as well: <code>func (s *SystemServices) Resolver() (*resolver.Resolver, error)</code>
+</li>
+<li>For <code>func ExecuteAndListen(a *api.API, serviceID, task string, inputs map[string]interface{}) (*execution.Execution, error)</code> it’s good. Maybe it could be put directly in the API package? So we could even offer an gRPC API like this in the future.</li>
+<li>For <code>func (r *Resolver) Resolve(serviceID string) (address string, err error)</code> I also prefer to accept and return simple type rather than struct for simple case. We could still return struct in the case of multiple success output or more complex case.</li>
+<li>One Suggestion: Create types for errors. If we want to react to error, we need to return dedicated type. For instance, the <code>notFound</code> output of the <code>resolve</code> task, should return a specific error type so the core can react to it.</li>
+</ul>
+        </div>
+
+        <meta itemprop='headline' content='[Plugin system] Use MESG service to develop MESG core'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="1" />
+           <span class='post-likes'>1 Like</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/krhubert.html'><span itemprop='name'>krhubert</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="23.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-10-09T09:12:38Z' class='post-time'>
+                October 9, 2018,  9:12am
+              </time>
+              <meta itemprop='dateModified' content='2018-10-09T09:12:38Z'>
+          <span itemprop='position'>#16</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <aside class="quote group-team" data-post="14" data-topic="23">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/ilgooz/40/8_1.png" class="avatar"> ilgooz:</div>
+<blockquote>
+<p>If we really want <em>SystemServices</em> to be not aware of system service’s types, we cannot have something like this: <code>func (s *SystemServices) Resolver() *resolver.Resolver</code> , instead it should return a <em>SystemService</em> and that can be type asserted by the caller.</p>
+</blockquote>
+</aside>
+<p><img src="../../images/emoji/twitter/+1.png%3Fv=6" title=":+1:" class="emoji" alt=":+1:"> it’s my first choice</p>
+<aside class="quote group-team" data-post="15" data-topic="23">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/nicolas/40/10_1.png" class="avatar"> Nicolas:</div>
+<blockquote>
+<p>For the strategy approach, I will go with the parallel approach. But I not sure if it better to put this strategy in servicesystems or directly in <code>core/main.go</code></p>
+</blockquote>
+</aside>
+<p>Yep, we can put deploy strategy in seperate package. As you saw in comment this is just proposal to show a nice design patter and ofc we will start with parallel (without passing any strategy as it’s too much for now)</p>
+<aside class="quote group-team" data-post="15" data-topic="23">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/nicolas/40/10_1.png" class="avatar"> Nicolas:</div>
+<blockquote>
+<ul>
+<li>For the getter I will go with  <code>func (s *SystemServices) Resolver() *resolver.Resolver</code> . But I will add an error as well:  <code>func (s *SystemServices) Resolver() (*resolver.Resolver, error)</code>
+</li>
+</ul>
+</blockquote>
+</aside>
+<p>Why you need error here? For not found? Nil is perfect here to represent not found</p>
+<aside class="quote group-team" data-post="15" data-topic="23">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/nicolas/40/10_1.png" class="avatar"> Nicolas:</div>
+<blockquote>
+<p>it’s good. Maybe it could be put directly in the API package? So we could even offer an gRPC API like this in the future.</p>
+</blockquote>
+</aside>
+<p><img src="../../images/emoji/twitter/+1.png%3Fv=6" title=":+1:" class="emoji" alt=":+1:"></p>
+<aside class="quote group-team" data-post="15" data-topic="23">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/nicolas/40/10_1.png" class="avatar"> Nicolas:</div>
+<blockquote>
+<ul>
+<li>For  <code>func (r *Resolver) Resolve(serviceID string) (address string, err error)</code>  I also prefer to accept and return simple type rather than struct for simple case. We could still return struct in the case of multiple success output or more complex case.</li>
+</ul>
+</blockquote>
+</aside>
+<p><img src="../../images/emoji/twitter/+1.png%3Fv=6" title=":+1:" class="emoji" alt=":+1:"></p>
+        </div>
+
+        <meta itemprop='headline' content='[Plugin system] Use MESG service to develop MESG core'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="23.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-10-09T11:07:51Z' class='post-time'>
+                October 9, 2018, 11:07am
+              </time>
+              <meta itemprop='dateModified' content='2018-10-09T11:07:51Z'>
+          <span itemprop='position'>#17</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <aside class="quote group-team" data-post="14" data-topic="23">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/ilgooz/40/8_1.png" class="avatar"> ilgooz:</div>
+<blockquote>
+<p>If we really want <em>SystemServices</em> to be not aware of system service’s types, we cannot have something like this: <code>func (s *SystemServices) Resolver() *resolver.Resolver</code> , instead it should return a <em>SystemService</em> and that can be type asserted by the caller.</p>
+</blockquote>
+</aside>
+<p>I like that this <code>SystemServices</code> doesn’t know about the <code>SystemService</code> but this have for me some serious drawbacks.</p>
+<p>I agree that if the calling method add services to this manager then this manager should not be aware of the different types but why the calling method should be the one creating this ?</p>
+<p>We need to have access to the types for these <code>SystemServices</code> and not having to cast all the time. We can always have a kind of facade that deal with this casting but I think for now that could be directly implemented into the <code>SystemServices</code>.</p>
+<aside class="quote group-team" data-post="16" data-topic="23">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/krhubert/40/9_1.png" class="avatar"> krhubert:</div>
+<blockquote>
+<p>Why you need error here? For not found? Nil is perfect here to represent not found</p>
+</blockquote>
+</aside>
+<p>I definitely prefer a typed error than have to guess that a nil value is representing a not found error.</p>
+<p>Except than that I’m ok to go with the rest</p>
+        </div>
+
+        <meta itemprop='headline' content='[Plugin system] Use MESG service to develop MESG core'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="23.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-10-09T11:49:14Z' class='post-time'>
+                October 9, 2018, 11:49am
+              </time>
+              <meta itemprop='dateModified' content='2018-10-09T11:49:14Z'>
+          <span itemprop='position'>#18</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <aside class="quote group-team quote-modified" data-post="17" data-topic="23">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/anthony/40/7_1.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>…why the calling method should be the one creating this ?</p>
+</blockquote>
+</aside>
+<p>I don’t understand that part can you explain?</p>
+<p>If we allow making type assertions inside <em>SystemServices</em> we lose the flexibility of having <em>SystemService</em> interface in the first place and having it will not make sense other than cosmetics which doesn’t provide an actual benefit.</p>
+        </div>
+
+        <meta itemprop='headline' content='[Plugin system] Use MESG service to develop MESG core'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="23.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-10-09T13:29:14Z' class='post-time'>
+                October 9, 2018,  1:29pm
+              </time>
+              <meta itemprop='dateModified' content='2018-10-09T13:29:14Z'>
+          <span itemprop='position'>#19</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>My point was why not having all the system services responsibility inside this <code>SystemServices</code> like we agreed on the meeting monday ?</p>
+<p>The <code>SystemServices</code> will have knowledge of all the services and like that can also manage the casting and everytime we use it we just use the different system services without having to care about how to cast them.</p>
+<p>Again following back to this implementation<br>
+<aside class="onebox githubblob">
+  <header class="source">
+      <a href="https://github.com/mesg-foundation/core/blob/feature/system-services/systemservices/systemservices.go" target="_blank">github.com</a>
+  </header>
+  <article class="onebox-body">
+    <h4><a href="https://github.com/mesg-foundation/core/blob/feature/system-services/systemservices/systemservices.go" target="_blank">mesg-foundation/core/blob/feature/system-services/systemservices/systemservices.go</a></h4>
+<pre><code class="lang-go">package systemservices
+
+import (
+	"github.com/mesg-foundation/core/api"
+	"github.com/mesg-foundation/core/systemservices/resolver"
+)
+
+// SystemServices is managing all system services.
+// It is responsible to start all system services when the core start.
+// It reads the services' ID from the config package.
+// All system services should runs all the time.
+// Any interaction with the system services are done by using the API package.
+type SystemServices struct{}
+
+// New creates a new SystemServices instance.
+// It accepts an instance of the API package.
+// It reads the services' ID from the config package.
+// It starts all system services.
+// It waits for all system services to run.
+// If services' ID are not in the config, it should return an error.
+</code></pre>
+
+  This file has been truncated. <a href="https://github.com/mesg-foundation/core/blob/feature/system-services/systemservices/systemservices.go" target="_blank">show original</a>
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+</p>
+<p>I just don’t want to make things over complicated where we might not need this complexity. I don’t see why we need such abstraction now because we will always have to know what kind of system service we have to implement and use</p>
+        </div>
+
+        <meta itemprop='headline' content='[Plugin system] Use MESG service to develop MESG core'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="23.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-10-09T14:14:04Z'>
+              <time itemprop='dateModified' datetime='2018-10-09T14:18:16Z' class='post-time'>
+                October 9, 2018,  2:18pm
+              </time>
+          <span itemprop='position'>#20</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>This is what I also agree on. In addition to this, as suggested before, lets remove the <a href="https://github.com/mesg-foundation/core/blob/3a2e171/systemservices/resolver/resolve.go#L38">chans</a> from the return types and instead, directly return output datas <em>(as structs)</em> and an error for executing tasks. Or as <a class="mention" href="../../u/krhubert.html">@krhubert</a> suggested, we can also create a high level wrapper around the output datas of task executions and only return expected datas and a custom error type. This is something that we should experiment and later give a decision about it because we currently don’t know how the implementation will look like for various plugins.</p>
+        </div>
+
+        <meta itemprop='headline' content='[Plugin system] Use MESG service to develop MESG core'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+
+    <div role='navigation' itemscope itemtype='http://schema.org/SiteNavigationElement' class="topic-body crawler-post">
+        <span itemprop='name'><b><a rel="next" itemprop="url" href="../plugin-system-use-mesg-service-to-develop-mesg-core/23%3Fpage=2.html">next page →</a></b></span>
+    </div>
+
+
+
+
+
+    </div>
+    <footer class="container wrap">
+      <nav class='crawler-nav'>
+        <ul>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../index.html' itemprop="url">Home </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../categories.html' itemprop="url">Categories </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../guidelines.html' itemprop="url">FAQ/Guidelines </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../tos.html' itemprop="url">Terms of Service </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../privacy.html' itemprop="url">Privacy Policy </a>
+          </span>
+        </li>
+        </ul>
+      </nav>
+      <p class='powered-by-link'>Powered by <a href="https://www.discourse.org">Discourse</a>, best viewed with JavaScript enabled</p>
+    </footer>
+    
+    
+  </body>
+  
+</html>

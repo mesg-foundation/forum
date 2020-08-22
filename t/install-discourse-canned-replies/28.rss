@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Install discourse-canned-replies</title>
+    <link>https://forum.mesg.com/t/install-discourse-canned-replies/28</link>
+    <description>Hi, All,
+
+As we start prepping the forum, we may want to install [Canned Replies](https://meta.discourse.org/t/discourse-canned-replies/48296). People are undoubtedly try to submit bugs to Discourse and we will want them submitted to the right GH project, and this will help a lot for moderators.
+
+Make sense?</description>
+    
+    <lastBuildDate>Tue, 18 Sep 2018 10:57:48 +0000</lastBuildDate>
+    <category>General Discussion</category>
+    <atom:link href="https://forum.mesg.com/t/install-discourse-canned-replies/28.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Install discourse-canned-replies</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            
+          <p><a href="https://forum.mesg.com/t/install-discourse-canned-replies/28/12">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/install-discourse-canned-replies/28/12</link>
+        <pubDate>Thu, 13 Dec 2018 11:40:10 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-28-12</guid>
+        <source url="https://forum.mesg.com/t/install-discourse-canned-replies/28.rss">Install discourse-canned-replies</source>
+      </item>
+      <item>
+        <title>Install discourse-canned-replies</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Plugin installed. Thanks for the suggestion <img src="https://forum.mesg.com/images/emoji/twitter/+1.png?v=6" title=":+1:" class="emoji" alt=":+1:"></p>
+          <p><a href="https://forum.mesg.com/t/install-discourse-canned-replies/28/8">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/install-discourse-canned-replies/28/8</link>
+        <pubDate>Tue, 18 Sep 2018 10:55:29 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-28-8</guid>
+        <source url="https://forum.mesg.com/t/install-discourse-canned-replies/28.rss">Install discourse-canned-replies</source>
+      </item>
+      <item>
+        <title>Install discourse-canned-replies</title>
+        <dc:creator><![CDATA[jonobacon]]></dc:creator>
+        <description><![CDATA[
+            <p>Testing if email replies work.</p>
+          <p><a href="https://forum.mesg.com/t/install-discourse-canned-replies/28/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/install-discourse-canned-replies/28/4</link>
+        <pubDate>Mon, 03 Sep 2018 03:45:42 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-28-4</guid>
+        <source url="https://forum.mesg.com/t/install-discourse-canned-replies/28.rss">Install discourse-canned-replies</source>
+      </item>
+      <item>
+        <title>Install discourse-canned-replies</title>
+        <dc:creator><![CDATA[jonobacon]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote no-group" data-post="2" data-topic="28">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://discourse-cdn-sjc2.com/standard10/user_avatar/forum.mesg.com/anthony/40/7_1.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>Thanks, that’s a great plugin, I will try to install it today <img src="https://discourse-cdn-sjc2.com/standard10/images/emoji/twitter/slight_smile.png?v=6" title=":slight_smile:" class="emoji" alt=":slight_smile:"></p>
+</blockquote>
+</aside>
+<p>Perfect. Thanks, <a class="mention" href="/u/anthony">@Anthony</a> - I think this will help with out workflow.</p>
+          <p><a href="https://forum.mesg.com/t/install-discourse-canned-replies/28/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/install-discourse-canned-replies/28/3</link>
+        <pubDate>Mon, 03 Sep 2018 03:37:25 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-28-3</guid>
+        <source url="https://forum.mesg.com/t/install-discourse-canned-replies/28.rss">Install discourse-canned-replies</source>
+      </item>
+      <item>
+        <title>Install discourse-canned-replies</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>Thanks, that’s a great plugin, I will try to install it today <img src="https://discourse-cdn-sjc2.com/standard10/images/emoji/twitter/slight_smile.png?v=6" title=":slight_smile:" class="emoji" alt=":slight_smile:"></p>
+          <p><a href="https://forum.mesg.com/t/install-discourse-canned-replies/28/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/install-discourse-canned-replies/28/2</link>
+        <pubDate>Mon, 03 Sep 2018 03:11:27 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-28-2</guid>
+        <source url="https://forum.mesg.com/t/install-discourse-canned-replies/28.rss">Install discourse-canned-replies</source>
+      </item>
+      <item>
+        <title>Install discourse-canned-replies</title>
+        <dc:creator><![CDATA[jonobacon]]></dc:creator>
+        <description><![CDATA[
+            <p>Hi, All,</p>
+<p>As we start prepping the forum, we may want to install <a href="https://meta.discourse.org/t/discourse-canned-replies/48296">Canned Replies</a>. People are undoubtedly try to submit bugs to Discourse and we will want them submitted to the right GH project, and this will help a lot for moderators.</p>
+<p>Make sense?</p>
+          <p><a href="https://forum.mesg.com/t/install-discourse-canned-replies/28/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/install-discourse-canned-replies/28/1</link>
+        <pubDate>Thu, 30 Aug 2018 16:12:33 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-28-1</guid>
+        <source url="https://forum.mesg.com/t/install-discourse-canned-replies/28.rss">Install discourse-canned-replies</source>
+      </item>
+  </channel>
+</rss>

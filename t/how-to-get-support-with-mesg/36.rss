@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>How to get support with MESG</title>
+    <link>https://forum.mesg.com/t/how-to-get-support-with-mesg/36</link>
+    <description>Welcome to our support category! This is where you can post questions and the team and other members of the community can help.
+
+You can ask questions about anything you like here, but please try to (**1**) [first review our documentation](https://docs.mesg.com/), and (**2**) use that search box at the top of the forum to search for your query first - someone may have already asked it!
+
+If not, go ahead and ask your questions. Please try to be as detailed as possible. Thanks for using MESG!</description>
+    
+    <lastBuildDate>Wed, 19 Sep 2018 11:04:34 +0000</lastBuildDate>
+    <category>Support</category>
+    <atom:link href="https://forum.mesg.com/t/how-to-get-support-with-mesg/36.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>How to get support with MESG</title>
+        <dc:creator><![CDATA[jonobacon]]></dc:creator>
+        <description><![CDATA[
+            <p>Welcome to our support category! This is where you can post questions and the team and other members of the community can help.</p>
+<p>You can ask questions about anything you like here, but please try to (<strong>1</strong>) <a href="https://docs.mesg.com/">first review our documentation</a>, and (<strong>2</strong>) use that search box at the top of the forum to search for your query first - someone may have already asked it!</p>
+<p>If not, go ahead and ask your questions. Please try to be as detailed as possible. Thanks for using MESG!</p>
+          <p><a href="https://forum.mesg.com/t/how-to-get-support-with-mesg/36/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/how-to-get-support-with-mesg/36/1</link>
+        <pubDate>Tue, 18 Sep 2018 01:25:28 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-36-1</guid>
+        <source url="https://forum.mesg.com/t/how-to-get-support-with-mesg/36.rss">How to get support with MESG</source>
+      </item>
+  </channel>
+</rss>

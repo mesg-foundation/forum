@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Welcome to Discourse</title>
+    <link>https://forum.mesg.com/t/welcome-to-discourse/8</link>
+    <description>Welcome to MESG Community forum!
+
+This forum is where our community and development team lives. This is where we discuss, build, support, and evolve MESG into a powerful platform that is enormously valuable for everyone.
+
+Out community is open. We want you to feel free to ask questions for how to use MESG, as well as share your ideas for what MESG should do, share your neat dApps, and let us know anything else you need. Also, we are **always looking for contributors**. If you would like to contribute to MESG core, write documentation, provide translations, organize events, or anything else, you can get started here.
+
+## Getting Started
+
+Here is how to get started:
+
+1. We recommend you first go and full out your profile. Click on the icon in the top-right corner of the page and click the cog icon. Now go and add your profile picture and fill your profile out.
+2. Now go and introduce yourself by **[clicking here]()** and replying to the topic.
+
+As always, let us know if you have any questions! Happy MESGing!</description>
+    
+    <lastBuildDate>Wed, 19 Sep 2018 11:13:58 +0000</lastBuildDate>
+    <category>General Discussion</category>
+    <atom:link href="https://forum.mesg.com/t/welcome-to-discourse/8.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Welcome to Discourse</title>
+        <dc:creator><![CDATA[system]]></dc:creator>
+        <description><![CDATA[
+            <p>Welcome to MESG Community forum!</p>
+<p>This forum is where our community and development team lives. This is where we discuss, build, support, and evolve MESG into a powerful platform that is enormously valuable for everyone.</p>
+<p>Out community is open. We want you to feel free to ask questions for how to use MESG, as well as share your ideas for what MESG should do, share your neat dApps, and let us know anything else you need. Also, we are <strong>always looking for contributors</strong>. If you would like to contribute to MESG core, write documentation, provide translations, organize events, or anything else, you can get started here.</p>
+<h2>Getting Started</h2>
+<p>Here is how to get started:</p>
+<ol>
+<li>We recommend you first go and full out your profile. Click on the icon in the top-right corner of the page and click the cog icon. Now go and add your profile picture and fill your profile out.</li>
+<li>Now go and introduce yourself by <strong><a>clicking here</a></strong> and replying to the topic.</li>
+</ol>
+<p>As always, let us know if you have any questions! Happy MESGing!</p>
+          <p><a href="https://forum.mesg.com/t/welcome-to-discourse/8/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/welcome-to-discourse/8/1</link>
+        <pubDate>Fri, 24 Aug 2018 04:50:40 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-8-1</guid>
+        <source url="https://forum.mesg.com/t/welcome-to-discourse/8.rss">Welcome to Discourse</source>
+      </item>
+  </channel>
+</rss>

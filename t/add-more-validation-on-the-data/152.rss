@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Add more validation on the data</title>
+    <link>https://forum.mesg.com/t/add-more-validation-on-the-data/152</link>
+    <description>From @Anthony https://github.com/mesg-foundation/core/issues/294
+
+
+With the issue https://github.com/mesg-foundation/core/issues/194 data from **inputs**, **results** and **events** are validated to match at least the data in the `mesg.yml`
+
+We should make sure that we also don&#39;t send too much data but exactly the ones needed.
+
+Example:
+
+Let&#39;s have an event that have the data &quot;foo&quot; and &quot;bar&quot;
+
+we actually need to send the payload with &quot;foo&quot; and &quot;bar&quot; but we can also add any other attribute &quot;x&quot;, &quot;y&quot;... and this will be accepted by the core.
+
+We can be strict on the validation and make sure to only have what the `mesg.yml` file defines otherwise it&#39;s an error.
+
+This filter can be done directly in the different libraries like https://github.com/mesg-foundation/mesg-js</description>
+    
+    <lastBuildDate>Thu, 13 Dec 2018 11:17:43 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/add-more-validation-on-the-data/152.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Add more validation on the data</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>From <a class="mention" href="/u/anthony">@Anthony</a> <a href="https://github.com/mesg-foundation/core/issues/294" rel="nofollow noopener">https://github.com/mesg-foundation/core/issues/294</a></p>
+<p>With the issue <a href="https://github.com/mesg-foundation/core/issues/194" rel="nofollow noopener">https://github.com/mesg-foundation/core/issues/194</a> data from <strong>inputs</strong>, <strong>results</strong> and <strong>events</strong> are validated to match at least the data in the <code>mesg.yml</code></p>
+<p>We should make sure that we also don’t send too much data but exactly the ones needed.</p>
+<p>Example:</p>
+<p>Let’s have an event that have the data “foo” and “bar”</p>
+<p>we actually need to send the payload with “foo” and “bar” but we can also add any other attribute “x”, “y”… and this will be accepted by the core.</p>
+<p>We can be strict on the validation and make sure to only have what the <code>mesg.yml</code> file defines otherwise it’s an error.</p>
+<p>This filter can be done directly in the different libraries like <a href="https://github.com/mesg-foundation/mesg-js" rel="nofollow noopener">https://github.com/mesg-foundation/mesg-js</a></p>
+          <p><a href="https://forum.mesg.com/t/add-more-validation-on-the-data/152/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/add-more-validation-on-the-data/152/1</link>
+        <pubDate>Thu, 13 Dec 2018 11:17:43 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-152-1</guid>
+        <source url="https://forum.mesg.com/t/add-more-validation-on-the-data/152.rss">Add more validation on the data</source>
+      </item>
+  </channel>
+</rss>

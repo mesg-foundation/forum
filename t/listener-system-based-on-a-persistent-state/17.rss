@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Listener system based on a persistent state</title>
+    <link>https://forum.mesg.com/t/listener-system-based-on-a-persistent-state/17</link>
+    <description>## Problem
+
+Right now when an application wants to listen for an event (or result) we create a stream and everytime we get events we go through all the different streams open and check if they match the event. This option is fine but if we need to scale to 100+, 1000+ listeners this will be really hard to have good performances and also with the introduction of the workflow file this is not really relevant. Another thing is that it will be kind of hard to syncronize this over a network.
+
+## Solution
+
+We could store all the listeners with their filter in database and based on that for every events/result query the database to find all the listeners that need this event and then send them. The logic will move from the listener part (that filter the event) to the event part (that find the matching listeners).
+This way we can be closer to what the workflow file will look like and have pseudo code like this when we receive event/result
+
+```go
+func receiveEvent(event) {
+  listeners := db.findListenersFromEvent(event)
+  for listener := range listeners {
+    
+    // To manage the case of an application that listen the api stream
+    if hasStream(listener) {
+      stream(listener).send(event)
+    }
+    
+    // To manage the case of a workflow file
+    if hasExecution(listener) {
+      execution(listener).execute(event)
+    }
+  }
+}
+```
+
+This would be helpful for the following issues https://github.com/mesg-foundation/core/issues/195, https://github.com/mesg-foundation/core/issues/378</description>
+    
+    <lastBuildDate>Sat, 18 May 2019 04:35:18 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/listener-system-based-on-a-persistent-state/17.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Listener system based on a persistent state</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>This will be fixed by the implementation of the workflow engine <a href="https://forum.mesg.com/t/workflow-implementation/281" class="inline-onebox">Workflow implementation</a></p>
+          <p><a href="https://forum.mesg.com/t/listener-system-based-on-a-persistent-state/17/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/listener-system-based-on-a-persistent-state/17/2</link>
+        <pubDate>Sat, 18 May 2019 04:35:18 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-17-2</guid>
+        <source url="https://forum.mesg.com/t/listener-system-based-on-a-persistent-state/17.rss">Listener system based on a persistent state</source>
+      </item>
+      <item>
+        <title>Listener system based on a persistent state</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <h2>Problem</h2>
+<p>Right now when an application wants to listen for an event (or result) we create a stream and everytime we get events we go through all the different streams open and check if they match the event. This option is fine but if we need to scale to 100+, 1000+ listeners this will be really hard to have good performances and also with the introduction of the workflow file this is not really relevant. Another thing is that it will be kind of hard to syncronize this over a network.</p>
+<h2>Solution</h2>
+<p>We could store all the listeners with their filter in database and based on that for every events/result query the database to find all the listeners that need this event and then send them. The logic will move from the listener part (that filter the event) to the event part (that find the matching listeners).<br>
+This way we can be closer to what the workflow file will look like and have pseudo code like this when we receive event/result</p>
+<pre><code class="lang-auto">func receiveEvent(event) {
+  listeners := db.findListenersFromEvent(event)
+  for listener := range listeners {
+    
+    // To manage the case of an application that listen the api stream
+    if hasStream(listener) {
+      stream(listener).send(event)
+    }
+    
+    // To manage the case of a workflow file
+    if hasExecution(listener) {
+      execution(listener).execute(event)
+    }
+  }
+}
+</code></pre>
+<p>This would be helpful for the following issues <a href="https://github.com/mesg-foundation/core/issues/195">https://github.com/mesg-foundation/core/issues/195</a>, <a href="https://github.com/mesg-foundation/core/issues/378">https://github.com/mesg-foundation/core/issues/378</a></p>
+          <p><a href="https://forum.mesg.com/t/listener-system-based-on-a-persistent-state/17/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/listener-system-based-on-a-persistent-state/17/1</link>
+        <pubDate>Mon, 27 Aug 2018 06:07:24 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-17-1</guid>
+        <source url="https://forum.mesg.com/t/listener-system-based-on-a-persistent-state/17.rss">Listener system based on a persistent state</source>
+      </item>
+  </channel>
+</rss>

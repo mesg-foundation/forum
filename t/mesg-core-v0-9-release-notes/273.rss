@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>MESG Core v0.9 Release Notes</title>
+    <link>https://forum.mesg.com/t/mesg-core-v0-9-release-notes/273</link>
+    <description># New features in MESG Core v0.9
+
+After three months of intense development, we are very proud to release the v0.9 of MESG Core!
+
+This version is a huge step towards the long-term vision with the release of the beta version of the decentralized marketplace.
+
+## Marketplace beta version
+
+This beta version of the MESG Marketplace lets users buy and sell access to modular application components for a limited period of time.
+
+The Marketplace is fully decentralized as it runs on [Ethereum](https://etherscan.io/address/0x0C6e8d0eC4770fDa8A56CD912392d2ff14822952) with a [custom smart contract](https://github.com/mesg-foundation/marketplace) and uses the [MESG Token](https://mesg.com/token/) for purchasing access to services. The source code of the services are also decentralized as they are published on [IPFS](https://ipfs.io/).
+
+[Check the full article about the release of the Marketplace on Medium](https://medium.com/mesg/mesg-marketplace-beta-now-live-on-the-mainnet-75c40cd70f4b).
+
+### Find and deploy services from the Marketplace website
+
+Go to [marketplace.mesg.com](https://marketplace.mesg.com) to browse the available services. You can find services&#39; documentation, API, offers and versions.
+
+![com_services_email-sendgrid|666x500](upload://wlk6icL1UmJnMjB0yBQut5Plt9e.png) 
+
+Now let&#39;s deploy the service [email-sengrid](https://marketplace.mesg.com/services/email-sendgrid).
+Go to [its dedicated page](https://marketplace.mesg.com/services/email-sendgrid), click on the button &quot;Get this service&quot;, copy the deploy command line, and execute it in a terminal on your local computer (that already runs MESG Core).
+
+Your terminal should look this:
+```bash
+➜  ~ mesg-core service deploy mesg://marketplace/service/8mcRi836QZZmYAvt2o7RgHdUjsvGsdnPdSHVBq25jjyB
+✔ Image built with success
+✔ Service deployed with sid email-sendgrid and hash CGRuEJahcrEQoFNV6nywDAx22CPifyTi1CmaoLVVj6gk
+To start it, run the command:
+        mesg-core service start email-sendgrid
+```
+
+Et voila :champagne: You have deployed a service from the decentralized MESG Marketplace!
+
+### Publish your services and earn tokens
+
+You can also publish any of your service on the Marketplace.
+
+#### Setup the wallet
+
+To publish a service, first you need to setup your wallet and transfer a few Ether into it to pay for transaction fee.
+
+- To create your wallet, execute:
+
+```bash
+mesg-core wallet create
+```
+
+Enter a desired passphrase and hit enter. You should get a new account with an address like `0x87a3e7de89881e2336c128d2b5c0f227885826d1`.
+
+- Backup the passphrase and the account itself by running:
+
+```
+mesg-core wallet export 0x87a3e7de89881e2336c128d2b5c0f227885826d1
+```
+
+Replace `0x87a3e7de89881e2336c128d2b5c0f227885826d1` by the account&#39;s address created during the previous command. Enter the passphrase and hit enter.
+
+Save the outputted JSON in a secured place. You may need it later to import it and not lose access to your tokens.
+
+- Transfer some Ether to your address to pay for transaction fees. I recommend to transfer 0.1 ETH.
+
+#### Publish a service
+
+Now that your wallet is ready, let&#39;s publish a service.
+
+Simply execute the following command:
+
+```
+mesg-core marketplace publish PATH_TO_THE_SERVICE
+```
+
+Answer the questions, wait for the source code to be published on IPFS, wait for the Ethereum transaction to get mined and it should be done!
+
+Click on the URL to display your service on the marketplace website.
+
+#### Create an offer
+
+Now that your service is published, you need to create an offer to authorize other users to purchase it. You need to specify a price in MESG Tokens and a duration in seconds. You can set the price to 0 if you want to share your service **for free**.
+
+Execute the following command to create an offer:
+
+```
+mesg-core marketplace create-offer SERVICE_SID
+```
+
+Replace `SERVICE_SID` by the service&#39;s sid returned by the command `publish`.
+
+Go back to the website or follow the link displayed by the command to see that your service has now an offer!
+
+Congratulations, you&#39;ve fully published a service on the MESG Marketplace!
+
+### Guide
+
+Of course, we also update the docs website to add [a guide about the Marketplace](https://docs.mesg.com/guide/marketplace).
+
+## Deterministic service&#39;s hash
+
+Another big step towards the decentralized network is the calculation of a deterministic service&#39;s hash. Now, any deployment of the same service will return the exact same hash! This was not an easy task as services are using Docker for containerization and Docker doesn&#39;t provide a deterministic environment, thus a deterministic hash.
+
+The solution we implemented is to create an hash based on source files, with only the user&#39;s file permissions as the header, and the overridden environment variables that could change the service&#39;s behavior. The solution seems easy but took a lot of research as file headers contain a lot of required information that are specific to the host computer. If you want to learn more about this, you can read this forum post: https://forum.mesg.com/t/services-hash/261.
+
+----
+
+For the complete changelog, refer to [Github](https://github.com/mesg-foundation/core/releases/tag/v0.9.0).
+
+To update to v0.9, follow the [installation process on the documentation ](https://docs.mesg.com/guide/installation.html#automatic-installation)</description>
+    
+    <lastBuildDate>Wed, 08 May 2019 09:13:53 +0000</lastBuildDate>
+    <category>News</category>
+    <atom:link href="https://forum.mesg.com/t/mesg-core-v0-9-release-notes/273.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>MESG Core v0.9 Release Notes</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <h1>New features in MESG Core v0.9</h1>
+<p>After three months of intense development, we are very proud to release the v0.9 of MESG Core!</p>
+<p>This version is a huge step towards the long-term vision with the release of the beta version of the decentralized marketplace.</p>
+<h2>Marketplace beta version</h2>
+<p>This beta version of the MESG Marketplace lets users buy and sell access to modular application components for a limited period of time.</p>
+<p>The Marketplace is fully decentralized as it runs on <a href="https://etherscan.io/address/0x0C6e8d0eC4770fDa8A56CD912392d2ff14822952" rel="nofollow noopener">Ethereum</a> with a <a href="https://github.com/mesg-foundation/marketplace" rel="nofollow noopener">custom smart contract</a> and uses the <a href="https://mesg.com/token/" rel="nofollow noopener">MESG Token</a> for purchasing access to services. The source code of the services are also decentralized as they are published on <a href="https://ipfs.io/" rel="nofollow noopener">IPFS</a>.</p>
+<p><a href="https://medium.com/mesg/mesg-marketplace-beta-now-live-on-the-mainnet-75c40cd70f4b" rel="nofollow noopener">Check the full article about the release of the Marketplace on Medium</a>.</p>
+<h3>Find and deploy services from the Marketplace website</h3>
+<p>Go to <a href="https://marketplace.mesg.com" rel="nofollow noopener">marketplace.mesg.com</a> to browse the available services. You can find services’ documentation, API, offers and versions.</p>
+<p><img src="https://forum.mesg.com/uploads/default/original/1X/e2aea745610ef6853df0c3f71ce870a1ea022cd8.png" alt="com_services_email-sendgrid" width="666" height="500"></p>
+<p>Now let’s deploy the service <a href="https://marketplace.mesg.com/services/email-sendgrid" rel="nofollow noopener">email-sengrid</a>.<br>
+Go to <a href="https://marketplace.mesg.com/services/email-sendgrid" rel="nofollow noopener">its dedicated page</a>, click on the button “Get this service”, copy the deploy command line, and execute it in a terminal on your local computer (that already runs MESG Core).</p>
+<p>Your terminal should look this:</p>
+<pre><code class="lang-bash">➜  ~ mesg-core service deploy mesg://marketplace/service/8mcRi836QZZmYAvt2o7RgHdUjsvGsdnPdSHVBq25jjyB
+✔ Image built with success
+✔ Service deployed with sid email-sendgrid and hash CGRuEJahcrEQoFNV6nywDAx22CPifyTi1CmaoLVVj6gk
+To start it, run the command:
+        mesg-core service start email-sendgrid
+</code></pre>
+<p>Et voila <img src="https://forum.mesg.com/images/emoji/twitter/champagne.png?v=9" title=":champagne:" class="emoji" alt=":champagne:"> You have deployed a service from the decentralized MESG Marketplace!</p>
+<h3>Publish your services and earn tokens</h3>
+<p>You can also publish any of your service on the Marketplace.</p>
+<h4>Setup the wallet</h4>
+<p>To publish a service, first you need to setup your wallet and transfer a few Ether into it to pay for transaction fee.</p>
+<ul>
+<li>To create your wallet, execute:</li>
+</ul>
+<pre><code class="lang-bash">mesg-core wallet create
+</code></pre>
+<p>Enter a desired passphrase and hit enter. You should get a new account with an address like <code>0x87a3e7de89881e2336c128d2b5c0f227885826d1</code>.</p>
+<ul>
+<li>Backup the passphrase and the account itself by running:</li>
+</ul>
+<pre><code class="lang-auto">mesg-core wallet export 0x87a3e7de89881e2336c128d2b5c0f227885826d1
+</code></pre>
+<p>Replace <code>0x87a3e7de89881e2336c128d2b5c0f227885826d1</code> by the account’s address created during the previous command. Enter the passphrase and hit enter.</p>
+<p>Save the outputted JSON in a secured place. You may need it later to import it and not lose access to your tokens.</p>
+<ul>
+<li>Transfer some Ether to your address to pay for transaction fees. I recommend to transfer 0.1 ETH.</li>
+</ul>
+<h4>Publish a service</h4>
+<p>Now that your wallet is ready, let’s publish a service.</p>
+<p>Simply execute the following command:</p>
+<pre><code class="lang-auto">mesg-core marketplace publish PATH_TO_THE_SERVICE
+</code></pre>
+<p>Answer the questions, wait for the source code to be published on IPFS, wait for the Ethereum transaction to get mined and it should be done!</p>
+<p>Click on the URL to display your service on the marketplace website.</p>
+<h4>Create an offer</h4>
+<p>Now that your service is published, you need to create an offer to authorize other users to purchase it. You need to specify a price in MESG Tokens and a duration in seconds. You can set the price to 0 if you want to share your service <strong>for free</strong>.</p>
+<p>Execute the following command to create an offer:</p>
+<pre><code class="lang-auto">mesg-core marketplace create-offer SERVICE_SID
+</code></pre>
+<p>Replace <code>SERVICE_SID</code> by the service’s sid returned by the command <code>publish</code>.</p>
+<p>Go back to the website or follow the link displayed by the command to see that your service has now an offer!</p>
+<p>Congratulations, you’ve fully published a service on the MESG Marketplace!</p>
+<h3>Guide</h3>
+<p>Of course, we also update the docs website to add <a href="https://docs.mesg.com/guide/marketplace" rel="nofollow noopener">a guide about the Marketplace</a>.</p>
+<h2>Deterministic service’s hash</h2>
+<p>Another big step towards the decentralized network is the calculation of a deterministic service’s hash. Now, any deployment of the same service will return the exact same hash! This was not an easy task as services are using Docker for containerization and Docker doesn’t provide a deterministic environment, thus a deterministic hash.</p>
+<p>The solution we implemented is to create an hash based on source files, with only the user’s file permissions as the header, and the overridden environment variables that could change the service’s behavior. The solution seems easy but took a lot of research as file headers contain a lot of required information that are specific to the host computer. If you want to learn more about this, you can read this forum post: <a href="https://forum.mesg.com/t/services-hash/261" class="inline-onebox">Service's hash</a>.</p>
+<hr>
+<p>For the complete changelog, refer to <a href="https://github.com/mesg-foundation/core/releases/tag/v0.9.0" rel="nofollow noopener">Github</a>.</p>
+<p>To update to v0.9, follow the <a href="https://docs.mesg.com/guide/installation.html#automatic-installation" rel="nofollow noopener">installation process on the documentation </a></p>
+          <p><a href="https://forum.mesg.com/t/mesg-core-v0-9-release-notes/273/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mesg-core-v0-9-release-notes/273/1</link>
+        <pubDate>Wed, 08 May 2019 09:13:53 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-273-1</guid>
+        <source url="https://forum.mesg.com/t/mesg-core-v0-9-release-notes/273.rss">MESG Core v0.9 Release Notes</source>
+      </item>
+  </channel>
+</rss>

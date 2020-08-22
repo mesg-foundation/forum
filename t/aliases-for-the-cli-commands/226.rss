@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Aliases for the cli commands</title>
+    <link>https://forum.mesg.com/t/aliases-for-the-cli-commands/226</link>
+    <description>Every time I use the core I have some problems remembering some commands.
+I think we should rename some commands or at least add aliases for them.
+
+- service delete (remove, rm)
+- service list (ls)
+- service execute (exec)
+- service detail (get)
+
+That&#39;s the one I&#39;m usually confused with (in order of use ish)</description>
+    
+    <lastBuildDate>Sat, 18 May 2019 04:26:14 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/aliases-for-the-cli-commands/226.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Aliases for the cli commands</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>Aliases implemented in the CLI js <a href="https://github.com/mesg-foundation/cli" rel="nofollow noopener">https://github.com/mesg-foundation/cli</a></p>
+          <p><a href="https://forum.mesg.com/t/aliases-for-the-cli-commands/226/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/aliases-for-the-cli-commands/226/4</link>
+        <pubDate>Sat, 18 May 2019 04:26:14 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-226-4</guid>
+        <source url="https://forum.mesg.com/t/aliases-for-the-cli-commands/226.rss">Aliases for the cli commands</source>
+      </item>
+      <item>
+        <title>Aliases for the cli commands</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>Rename is not necessary if we do aliases.<br>
+Still having <strong>remove</strong> instead of <strong>delete</strong> and <strong>get</strong> instead of <strong>detail</strong> would be great.</p>
+          <p><a href="https://forum.mesg.com/t/aliases-for-the-cli-commands/226/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/aliases-for-the-cli-commands/226/3</link>
+        <pubDate>Thu, 24 Jan 2019 09:13:13 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-226-3</guid>
+        <source url="https://forum.mesg.com/t/aliases-for-the-cli-commands/226.rss">Aliases for the cli commands</source>
+      </item>
+      <item>
+        <title>Aliases for the cli commands</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>I’m ok for the aliases.</p>
+<p>What command you would like to rename??</p>
+          <p><a href="https://forum.mesg.com/t/aliases-for-the-cli-commands/226/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/aliases-for-the-cli-commands/226/2</link>
+        <pubDate>Thu, 24 Jan 2019 09:10:58 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-226-2</guid>
+        <source url="https://forum.mesg.com/t/aliases-for-the-cli-commands/226.rss">Aliases for the cli commands</source>
+      </item>
+      <item>
+        <title>Aliases for the cli commands</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>Every time I use the core I have some problems remembering some commands.<br>
+I think we should rename some commands or at least add aliases for them.</p>
+<ul>
+<li>service delete (remove, rm)</li>
+<li>service list (ls)</li>
+<li>service execute (exec)</li>
+<li>service detail (get)</li>
+</ul>
+<p>That’s the one I’m usually confused with (in order of use ish)</p>
+          <p><a href="https://forum.mesg.com/t/aliases-for-the-cli-commands/226/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/aliases-for-the-cli-commands/226/1</link>
+        <pubDate>Thu, 24 Jan 2019 09:01:34 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-226-1</guid>
+        <source url="https://forum.mesg.com/t/aliases-for-the-cli-commands/226.rss">Aliases for the cli commands</source>
+      </item>
+  </channel>
+</rss>

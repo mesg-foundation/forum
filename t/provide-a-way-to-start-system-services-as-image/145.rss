@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Provide a way to start system services as image</title>
+    <link>https://forum.mesg.com/t/provide-a-way-to-start-system-services-as-image/145</link>
+    <description>From https://github.com/mesg-foundation/core/issues/578
+
+@krhubert 
+The system services are built within first time core is started and it is slow (and it will get more and more time in case of increasing number of system services)</description>
+    
+    <lastBuildDate>Thu, 26 Dec 2019 02:45:07 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/provide-a-way-to-start-system-services-as-image/145.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Provide a way to start system services as image</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>System services have been removed</p>
+          <p><a href="https://forum.mesg.com/t/provide-a-way-to-start-system-services-as-image/145/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/provide-a-way-to-start-system-services-as-image/145/2</link>
+        <pubDate>Thu, 26 Dec 2019 02:45:07 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-145-2</guid>
+        <source url="https://forum.mesg.com/t/provide-a-way-to-start-system-services-as-image/145.rss">Provide a way to start system services as image</source>
+      </item>
+      <item>
+        <title>Provide a way to start system services as image</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>From <a href="https://github.com/mesg-foundation/core/issues/578" rel="nofollow noopener">https://github.com/mesg-foundation/core/issues/578</a></p>
+<p><a class="mention" href="/u/krhubert">@krhubert</a><br>
+The system services are built within first time core is started and it is slow (and it will get more and more time in case of increasing number of system services)</p>
+          <p><a href="https://forum.mesg.com/t/provide-a-way-to-start-system-services-as-image/145/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/provide-a-way-to-start-system-services-as-image/145/1</link>
+        <pubDate>Thu, 13 Dec 2018 11:01:24 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-145-1</guid>
+        <source url="https://forum.mesg.com/t/provide-a-way-to-start-system-services-as-image/145.rss">Provide a way to start system services as image</source>
+      </item>
+  </channel>
+</rss>

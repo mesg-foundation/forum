@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>MESG Core v0.8.1 Release Notes</title>
+    <link>https://forum.mesg.com/t/mesg-core-v0-8-1-release-notes/249</link>
+    <description># Core v0.8.1 - Bug fix
+
+## Fixed Go services and CLI connection to Core
+
+v0.8 introduces a bug where services in Go and the CLI were pinging the Core too often in order to prevent the connection to be dropped by Docker. The time between pings was too short and was making the Core to kill the connection for spam reason.
+This version fixes this bug by using a longer time between pings.
+
+----
+
+For the complete changelog, refer to [Github ](https://github.com/mesg-foundation/core/releases/tag/v0.8.1).
+
+To update to v0.8.1, follow the [installation process on the documentation ](https://docs.mesg.com/guide/start-here/installation.html)</description>
+    
+    <lastBuildDate>Tue, 05 Feb 2019 11:21:45 +0000</lastBuildDate>
+    <category>News</category>
+    <atom:link href="https://forum.mesg.com/t/mesg-core-v0-8-1-release-notes/249.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>MESG Core v0.8.1 Release Notes</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <h1>Core v0.8.1 - Bug fix</h1>
+<h2>Fixed Go services and CLI connection to Core</h2>
+<p>v0.8 introduces a bug where services in Go and the CLI were pinging the Core too often in order to prevent the connection to be dropped by Docker. The time between pings was too short and was making the Core to kill the connection for spam reason.<br>
+This version fixes this bug by using a longer time between pings.</p>
+<hr>
+<p>For the complete changelog, refer to <a href="https://github.com/mesg-foundation/core/releases/tag/v0.8.1" rel="nofollow noopener">Github </a>.</p>
+<p>To update to v0.8.1, follow the <a href="https://docs.mesg.com/guide/start-here/installation.html" rel="nofollow noopener">installation process on the documentation </a></p>
+          <p><a href="https://forum.mesg.com/t/mesg-core-v0-8-1-release-notes/249/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mesg-core-v0-8-1-release-notes/249/1</link>
+        <pubDate>Tue, 05 Feb 2019 11:21:45 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-249-1</guid>
+        <source url="https://forum.mesg.com/t/mesg-core-v0-8-1-release-notes/249.rss">MESG Core v0.8.1 Release Notes</source>
+      </item>
+  </channel>
+</rss>

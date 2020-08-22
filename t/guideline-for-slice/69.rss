@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Guideline for slice</title>
+    <link>https://forum.mesg.com/t/guideline-for-slice/69</link>
+    <description>I would like to define some guideline on how to define and use slice.
+Here is my recommendation:
+
+## Best
+```
+slice = make([]string, 0, 1)
+slice = append(slice, &quot;element&quot;)
+slice[0] = &quot;element&quot; // Also work
+```
+Create the slice with a `length` of 0 and a known `capacity`. Use `append` to add element to it.
+Defining the `capacity` is best for memory optimization.
+But the `length` have to be 0 but the function `append` adds element after the length (see last example).
+Of course, assigning a data at a specific element works.
+
+## Good
+```
+slice = make([]string, 0)
+slice[0] = &quot;element&quot; // Doesn&#39;t work
+slice = append(slice, &quot;element&quot;)
+```
+In this case, we don&#39;t know the maximum `capacity` of the slice, so it&#39;s better to not define it at all.
+Still `length` of 0 because we want `append` to start to add element at index 0.
+Assigning a data at a specific element doesn&#39;t work because the slice has no `capacity`.
+
+## Avoid
+```
+slice = make([]string, 1)
+slice = append(slice, &quot;element&quot;) // Adds the element at index 1: [&quot;&quot;, &quot;element&quot;]
+slice[0] = &quot;element&quot; // Must use explicit index
+```
+In this case, with a `length` of 1, `append` will add the element at index 1. Eg slice after append: `[&quot;&quot;, &quot;element&quot;]`. This is not the behavior we expected.
+The only way to add element correctly is to assign it directly to an index of the slice: `slice[0] = &quot;element&quot;`.
+
+----
+
+@core  Do you have any feedback about this or are you ok?</description>
+    
+    <lastBuildDate>Mon, 01 Oct 2018 10:27:08 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/guideline-for-slice/69.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Guideline for slice</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>Yes, I totally agree with this <img src="https://forum.mesg.com/images/emoji/twitter/+1.png?v=6" title=":+1:" class="emoji" alt=":+1:"></p>
+          <p><a href="https://forum.mesg.com/t/guideline-for-slice/69/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/guideline-for-slice/69/3</link>
+        <pubDate>Mon, 01 Oct 2018 10:27:08 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-69-3</guid>
+        <source url="https://forum.mesg.com/t/guideline-for-slice/69.rss">Guideline for slice</source>
+      </item>
+      <item>
+        <title>Guideline for slice</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <aside class="onebox whitelistedgeneric">
+  <header class="source">
+      <img src="https://github.githubassets.com/favicons/favicon.svg" class="site-icon" width="32" height="32">
+      <a href="https://github.com/golang/go/wiki/SliceTricks" target="_blank">GitHub</a>
+  </header>
+  <article class="onebox-body">
+    <img src="https://forum.mesg.com/uploads/default/original/1X/9a1f683e9f1ef63550d9d6b1889263015685e61e.png" class="thumbnail" width="" height="">
+
+<h3><a href="https://github.com/golang/go/wiki/SliceTricks" target="_blank">golang/go</a></h3>
+
+<p>The Go programming language. Contribute to golang/go development by creating an account on GitHub.</p>
+
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+
+          <p><a href="https://forum.mesg.com/t/guideline-for-slice/69/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/guideline-for-slice/69/2</link>
+        <pubDate>Mon, 01 Oct 2018 09:06:25 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-69-2</guid>
+        <source url="https://forum.mesg.com/t/guideline-for-slice/69.rss">Guideline for slice</source>
+      </item>
+      <item>
+        <title>Guideline for slice</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>I would like to define some guideline on how to define and use slice.<br>
+Here is my recommendation:</p>
+<h2>Best</h2>
+<pre><code class="lang-auto">slice = make([]string, 0, 1)
+slice = append(slice, "element")
+slice[0] = "element" // Also work
+</code></pre>
+<p>Create the slice with a <code>length</code> of 0 and a known <code>capacity</code>. Use <code>append</code> to add element to it.<br>
+Defining the <code>capacity</code> is best for memory optimization.<br>
+But the <code>length</code> have to be 0 but the function <code>append</code> adds element after the length (see last example).<br>
+Of course, assigning a data at a specific element works.</p>
+<h2>Good</h2>
+<pre><code class="lang-auto">slice = make([]string, 0)
+slice[0] = "element" // Doesn't work
+slice = append(slice, "element")
+</code></pre>
+<p>In this case, we don’t know the maximum <code>capacity</code> of the slice, so it’s better to not define it at all.<br>
+Still <code>length</code> of 0 because we want <code>append</code> to start to add element at index 0.<br>
+Assigning a data at a specific element doesn’t work because the slice has no <code>capacity</code>.</p>
+<h2>Avoid</h2>
+<pre><code class="lang-auto">slice = make([]string, 1)
+slice = append(slice, "element") // Adds the element at index 1: ["", "element"]
+slice[0] = "element" // Must use explicit index
+</code></pre>
+<p>In this case, with a <code>length</code> of 1, <code>append</code> will add the element at index 1. Eg slice after append: <code>["", "element"]</code>. This is not the behavior we expected.<br>
+The only way to add element correctly is to assign it directly to an index of the slice: <code>slice[0] = "element"</code>.</p>
+<hr>
+<p><a class="mention-group" href="/groups/core">@core</a>  Do you have any feedback about this or are you ok?</p>
+          <p><a href="https://forum.mesg.com/t/guideline-for-slice/69/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/guideline-for-slice/69/1</link>
+        <pubDate>Mon, 01 Oct 2018 07:48:14 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-69-1</guid>
+        <source url="https://forum.mesg.com/t/guideline-for-slice/69.rss">Guideline for slice</source>
+      </item>
+  </channel>
+</rss>

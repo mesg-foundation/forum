@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Env definition as object</title>
+    <link>https://forum.mesg.com/t/env-definition-as-object/162</link>
+    <description>Continuation of [Configuring Services with Deploy-Time or Run-Time Arguments](https://forum.mesg.com/t/configuring-services-with-deploy-time-or-run-time-arguments/124/9)
+
+- [ ] env in mesg.yml are a array of string. It could be good to also accept an array of object
+
+Something like:
+
+```yaml
+configuration:
+  env:
+    - key: AN_ENV_VAR_FOR_SERVICE
+      name: &quot;Set the endpoint of blablabla....&quot; // user friendly name. Optional
+      value: 123 // Developer defined value, eg: default value.
+dependencies:
+  depA:
+    env:
+      - key: AN_OTHER_ENV_VAR_FOR_DEP_A
+        name: &quot;Set the endpoint of blablabla....&quot; // user friendly name. Optional
+        value: 123 // Developer defined value, eg: default value.
+```</description>
+    
+    <lastBuildDate>Thu, 27 Dec 2018 11:32:01 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/env-definition-as-object/162.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Env definition as object</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Continuation of <a href="https://forum.mesg.com/t/configuring-services-with-deploy-time-or-run-time-arguments/124/9">Configuring Services with Deploy-Time or Run-Time Arguments</a></p>
+<ul>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> env in mesg.yml are a array of string. It could be good to also accept an array of object</li>
+</ul>
+<p>Something like:</p>
+<pre><code class="lang-auto">configuration:
+  env:
+    - key: AN_ENV_VAR_FOR_SERVICE
+      name: "Set the endpoint of blablabla...." // user friendly name. Optional
+      value: 123 // Developer defined value, eg: default value.
+dependencies:
+  depA:
+    env:
+      - key: AN_OTHER_ENV_VAR_FOR_DEP_A
+        name: "Set the endpoint of blablabla...." // user friendly name. Optional
+        value: 123 // Developer defined value, eg: default value.
+</code></pre>
+          <p><a href="https://forum.mesg.com/t/env-definition-as-object/162/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/env-definition-as-object/162/1</link>
+        <pubDate>Thu, 27 Dec 2018 11:32:01 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-162-1</guid>
+        <source url="https://forum.mesg.com/t/env-definition-as-object/162.rss">Env definition as object</source>
+      </item>
+  </channel>
+</rss>

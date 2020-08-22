@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Execution DB and API</title>
+    <link>https://forum.mesg.com/t/execution-db-and-api/280</link>
+    <description>## Goal
+
+Provide the data and interfaces to focus on executions in the Engine.
+
+Right now events and task executions are two things quite separated. With the introduction of the workflow and with the goal to decentralize these executions we need to have an execution that links events and task executions together in a way that any node can have access to the same data and that these data should be sufficient to reach consensus, process and verify the execution.
+
+**Executions should not be possible without any workflow. Execution will be triggered because of an event or a result of a previous execution.** 
+
+We need to make sure that we can trace any execution back to its beginning, an event and a list of result. more details [here](https://mesg.com/documents/MESG-application-of-the-decentralized-network-of-services.pdf).
+
+## Execution Database
+
+We need to remove/rename/add a bunch of attributes:
+
+- [\*] ID to rename in hash (we calculate the hash so let&#39;s call it hash)
+- [\*] remove ExecutionDuration (calculated so don&#39;t need to be in the data, can be transformed in function if we need to)
+- [\*] remove Service and just put the service definition hash (we don&#39;t need the full service definition)
+- [\*] OutputData and OutputKey (https://forum.mesg.com/t/simplification-of-the-tasks-output/265/6)
+- [\*] The previous execution that we can call `parentHash` (this will be helpful for data resolution of the workflow)
+- [\*] Calculate the hash of the execution based on previous execution hash, inputs, service hash, task key
+
+When we will start the network we will add a few attributes for consensus of the event (emitters), execution (executor) and validation (validators).
+
+## API
+
+With this focus on execution, we need proper API for that. The goal is on future versions to only use this API and deprecate and even delete the ExecuteTask, ListenEvent, ListenResult, SubmitResult.
+
+- [ ] Create a new proto `api` package under `/protobuf/api/`
+- [ ] Create a `executions.proto` in this package
+- [ ] Create a proto service `Execution`
+- [ ] Create the apis
+  - [ ] `Get(hash) -&gt; Execution`
+  - [ ] `List() -&gt; Execution[]`
+  - [ ] `Updates(filter) -&gt; Stream&lt;Execution&gt;`
+- [ ] Create the `Execution` definition in `/protobuf/definition/execution.proto`
+- [ ] Create the api server in the `/api/ package (previously `interface`)
+- [ ] Create a manager/subpackage in the `sdk` package (previously `api`) called `execution` and create the functions
+  - [ ] `Get -&gt; Execution`
+  - [ ] `List -&gt; Execution[]`
+  - [ ] `Updates -&gt; Channel&lt;Execution&gt;`
+- [ ] Link the api to the sdk functions
+
+In another step we will remove the ExecuteTask, ListenEvent, ListenResult and SubmitResult in order to use only the Execution&#39;s APIs</description>
+    
+    <lastBuildDate>Fri, 31 May 2019 11:22:45 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/execution-db-and-api/280.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Execution DB and API</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>I don’t actually have any preferences for that. We also don’t need to implement this right now for everything. It can be just for the status (the same logic that what is already in the api).</p>
+<p>I don’t want to have something specific for us and have to parse it or something like that.</p>
+<p>I would go with the request your propose (protobuf struct) renamed with <code>Filter</code> and only have the status for now. We will be able to add more filters later on.</p>
+          <p><a href="https://forum.mesg.com/t/execution-db-and-api/280/5">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/execution-db-and-api/280/5</link>
+        <pubDate>Fri, 31 May 2019 11:22:45 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-280-5</guid>
+        <source url="https://forum.mesg.com/t/execution-db-and-api/280.rss">Execution DB and API</source>
+      </item>
+      <item>
+        <title>Execution DB and API</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <p>Question: what is exacly, or what will be filter, because this is one that is missing here.</p>
+<p>Is this will be string custom format (or lang like tcpdump?) or it will be struct in protobuf like:</p>
+<pre><code class="lang-auto">message Request {
+  bytes hash = 1;
+  timestamp from = 2;
+  bytes serviceHash = 3;
+  bytes instanceHash = 4;
+  Status status
+  // etc...
+}
+</code></pre>
+          <p><a href="https://forum.mesg.com/t/execution-db-and-api/280/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/execution-db-and-api/280/4</link>
+        <pubDate>Fri, 31 May 2019 10:38:36 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-280-4</guid>
+        <source url="https://forum.mesg.com/t/execution-db-and-api/280.rss">Execution DB and API</source>
+      </item>
+      <item>
+        <title>Execution DB and API</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="2" data-topic="280">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/krhubert/40/9_2.png" class="avatar"> krhubert:</div>
+<blockquote>
+<p>refactor and rename api package to sdk in this PR</p>
+</blockquote>
+</aside>
+<p>This was supposed to be done already with the renaming of the project cc <a class="mention" href="/u/nicolas">@Nicolas</a></p>
+<aside class="quote group-team" data-post="2" data-topic="280">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/krhubert/40/9_2.png" class="avatar"> krhubert:</div>
+<blockquote>
+<ul>
+<li>
+<code>api.List</code> what it supose to do, returns all the execution in database? It will be milions of it so it can’t be done without for example paging</li>
+</ul>
+</blockquote>
+</aside>
+<p>Pagination would be great, I’m not sure for a first version it’s necessary but if it doesn’t make the feature really complicated i’m fine to have it directly.</p>
+<aside class="quote group-team" data-post="2" data-topic="280">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/krhubert/40/9_2.png" class="avatar"> krhubert:</div>
+<blockquote>
+<p>how you want to manage <code>parentHash</code> aka previous executon hash if we don’t have any link between exeuciton in this step</p>
+</blockquote>
+</aside>
+<p>Just having the structure now and this will be populated by the <a href="https://forum.mesg.com/t/workflow-implementation/281" class="inline-onebox">Workflow implementation</a></p>
+          <p><a href="https://forum.mesg.com/t/execution-db-and-api/280/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/execution-db-and-api/280/3</link>
+        <pubDate>Wed, 29 May 2019 02:48:53 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-280-3</guid>
+        <source url="https://forum.mesg.com/t/execution-db-and-api/280.rss">Execution DB and API</source>
+      </item>
+      <item>
+        <title>Execution DB and API</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <p>We must:</p>
+<p><span class="chcklst-box fa fa-square-o fa-fw"></span> move check output data from execution to api</p>
+<p>We should also:</p>
+<p><span class="chcklst-box fa fa-square-o fa-fw"></span> change ID type to <code>[]byte</code></p>
+<p>We don’t want to:</p>
+<p><span class="chcklst-box fa fa-square-o fa-fw"></span> refactor and rename api package to sdk in this PR (we can do it first in seperate one)</p>
+<p>Questions:</p>
+<ul>
+<li>
+<code>api.List</code> what it supose to do, returns all the execution in database? It will be milions of it so it can’t be done without for example paging</li>
+<li>how you want to manage <code>parentHash</code> aka previous executon hash if we don’t have any link between exeuciton in this step</li>
+</ul>
+          <p><a href="https://forum.mesg.com/t/execution-db-and-api/280/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/execution-db-and-api/280/2</link>
+        <pubDate>Tue, 28 May 2019 18:42:44 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-280-2</guid>
+        <source url="https://forum.mesg.com/t/execution-db-and-api/280.rss">Execution DB and API</source>
+      </item>
+      <item>
+        <title>Execution DB and API</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <h2>Goal</h2>
+<p>Provide the data and interfaces to focus on executions in the Engine.</p>
+<p>Right now events and task executions are two things quite separated. With the introduction of the workflow and with the goal to decentralize these executions we need to have an execution that links events and task executions together in a way that any node can have access to the same data and that these data should be sufficient to reach consensus, process and verify the execution.</p>
+<p><strong>Executions should not be possible without any workflow. Execution will be triggered because of an event or a result of a previous execution.</strong></p>
+<p>We need to make sure that we can trace any execution back to its beginning, an event and a list of result. more details <a href="https://mesg.com/documents/MESG-application-of-the-decentralized-network-of-services.pdf" rel="nofollow noopener">here</a>.</p>
+<h2>Execution Database</h2>
+<p>We need to remove/rename/add a bunch of attributes:</p>
+<ul>
+<li>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> ID to rename in hash (we calculate the hash so let’s call it hash)</li>
+<li>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> remove ExecutionDuration (calculated so don’t need to be in the data, can be transformed in function if we need to)</li>
+<li>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> remove Service and just put the service definition hash (we don’t need the full service definition)</li>
+<li>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> OutputData and OutputKey (<a href="https://forum.mesg.com/t/simplification-of-the-tasks-output/265/6" class="inline-onebox">Simplification of the task's output</a>)</li>
+<li>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> The previous execution that we can call <code>parentHash</code> (this will be helpful for data resolution of the workflow)</li>
+<li>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> Calculate the hash of the execution based on previous execution hash, inputs, service hash, task key</li>
+</ul>
+<p>When we will start the network we will add a few attributes for consensus of the event (emitters), execution (executor) and validation (validators).</p>
+<h2>API</h2>
+<p>With this focus on execution, we need proper API for that. The goal is on future versions to only use this API and deprecate and even delete the ExecuteTask, ListenEvent, ListenResult, SubmitResult.</p>
+<ul>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> Create a new proto <code>api</code> package under <code>/protobuf/api/</code>
+</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> Create a <code>executions.proto</code> in this package</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> Create a proto service <code>Execution</code>
+</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> Create the apis
+<ul>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> <code>Get(hash) -&gt; Execution</code>
+</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> <code>List() -&gt; Execution[]</code>
+</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> <code>Updates(filter) -&gt; Stream&lt;Execution&gt;</code>
+</li>
+</ul>
+</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> Create the <code>Execution</code> definition in <code>/protobuf/definition/execution.proto</code>
+</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> Create the api server in the <code>/api/ package (previously</code>interface`)</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> Create a manager/subpackage in the <code>sdk</code> package (previously <code>api</code>) called <code>execution</code> and create the functions
+<ul>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> <code>Get -&gt; Execution</code>
+</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> <code>List -&gt; Execution[]</code>
+</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> <code>Updates -&gt; Channel&lt;Execution&gt;</code>
+</li>
+</ul>
+</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> Link the api to the sdk functions</li>
+</ul>
+<p>In another step we will remove the ExecuteTask, ListenEvent, ListenResult and SubmitResult in order to use only the Execution’s APIs</p>
+          <p><a href="https://forum.mesg.com/t/execution-db-and-api/280/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/execution-db-and-api/280/1</link>
+        <pubDate>Thu, 16 May 2019 08:00:07 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-280-1</guid>
+        <source url="https://forum.mesg.com/t/execution-db-and-api/280.rss">Execution DB and API</source>
+      </item>
+  </channel>
+</rss>

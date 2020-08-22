@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <title>Workflow implementation - Engine - MESG Community</title>
+    <meta name="description" content="Goal
+Trigger tasks based on some constraints. 
+We can implement these constraints in multiple steps: 
+
+React to one event
+React to one result
+React to one event filtered based on its data
+React to one result filtered bas&amp;hellip;">
+    <meta name="generator" content="Discourse 2.5.0.beta5 - https://github.com/discourse/discourse version 00aab498297cba8f977c1e0eb17b7d38ff06cc68">
+<link rel="icon" type="image/png" href="../../uploads/default/optimized/1X/9f11b6ddfa02bffdbec79487592a0573a0236cb5_2_32x32.png">
+<link rel="apple-touch-icon" type="image/png" href="../../uploads/default/optimized/1X/53630361a40ad76e1733dd0b0f486e9ae2f4f4d6_2_180x180.png">
+<meta name="theme-color" content="#491e8c">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+<link rel="canonical" href="281.html" />
+<script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","url":"https://forum.mesg.com","potentialAction":{"@type":"SearchAction","target":"https://forum.mesg.com/search?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
+<link rel="search" type="application/opensearchdescription+xml" href="../../opensearch.xml" title="MESG Community Search">
+
+      <link href="../../stylesheets/desktop_3_52e3411e87658e862890db7bd06899cf49ad5f59.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop" data-theme-id="7"/>
+      <link href="../../stylesheets/desktop_theme_7_bf4f2d3d8a71e6ee907065be9a79df3d849bd29c.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop_theme" data-theme-id="7"/>
+    
+    <meta id="data-ga-universal-analytics" data-tracking-code="UA-117583862-1" data-json="{&quot;cookieDomain&quot;:&quot;auto&quot;}" data-auto-link-domains="">
+
+<link rel="preload" href="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js" as="script">
+<script src="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js"></script>
+
+
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of &#39;Workflow implementation&#39;" href="281.rss" />
+    <meta property="og:site_name" content="MESG Community" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:url" content="https://forum.mesg.com/t/workflow-implementation/281" />
+<meta name="twitter:url" content="https://forum.mesg.com/t/workflow-implementation/281" />
+<meta property="og:title" content="Workflow implementation" />
+<meta name="twitter:title" content="Workflow implementation" />
+<meta property="og:description" content="Goal Trigger tasks based on some constraints.  We can implement these constraints in multiple steps:   React to one event React to one result React to one event filtered based on its data React to one result filtered based on its data React to multiple events React to multiple results  The current limit for this implementation:   Execution graph React to one event only React to one result only No data transformation  Specifications The initial workflow is a simplification of the final workflow, ..." />
+<meta name="twitter:description" content="Goal Trigger tasks based on some constraints.  We can implement these constraints in multiple steps:   React to one event React to one result React to one event filtered based on its data React to one result filtered based on its data React to multiple events React to multiple results  The current limit for this implementation:   Execution graph React to one event only React to one result only No data transformation  Specifications The initial workflow is a simplification of the final workflow, ..." />
+<meta name="twitter:label1" value="Reading time" />
+<meta name="twitter:data1" value="1 mins 🕑" />
+<meta name="twitter:label2" value="Likes" />
+<meta name="twitter:data2" value="1 ❤" />
+<meta property="article:published_time" content="2019-05-16T12:26:37+00:00" />
+<meta property="og:ignore_canonical" content="true" />
+
+
+
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"QAPage","name":"Workflow implementation","mainEntity":{"@type":"Question","name":"Workflow implementation","text":"Goal\n\nTrigger tasks based on some constraints.\n\nWe can implement these constraints in multiple steps:\n\nReact to one event\n\nReact to one result\n\nReact to one event filtered based on its data\n\nReact to one result filtered based on its data\n\nReact to multiple events\n\nReact to multiple results\n\nThe current l&hellip;","upvoteCount":0,"answerCount":1,"dateCreated":"2019-05-16T12:26:37.322Z","author":{"@type":"Person","name":"Anthony"},"acceptedAnswer":{"@type":"Answer","text":"Drafts:\n\n<a href="https://forum.mesg.com/t/workflow-implementation/\&quot;https://github.com/mesg-foundation/engine/pull/1049\&quot;" rel=\"nofollow noopener\">https://github.com/mesg-foundation/engine/pull/1049<\/a>\n\n<a href="https://forum.mesg.com/t/workflow-implementation/\&quot;https://github.com/mesg-foundation/engine/pull/1056\&quot;" rel=\"nofollow noopener\">https://github.com/mesg-foundation/engine/pull/1056<\/a>\n\n<a href="https://forum.mesg.com/t/workflow-implementation/\&quot;https://github.com/mesg-foundation/engine/pull/1048\&quot;" rel=\"nofollow noopener\">https://github.com/mesg-foundation/engine/pull/1048<\/a>","upvoteCount":1,"dateCreated":"2019-06-25T06:35:46.363Z","url":"https://forum.mesg.com/t/workflow-implementation/281/2","author":{"@type":"Person","name":"krhubert"}}}}</script>
+  </head>
+  <body class="crawler">
+    
+    <header>
+      <a href="../../index.html">
+          <img src="../../uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png" alt="MESG Community" id="site-logo" style="max-width: 150px;">
+      </a>
+    </header>
+    <div id="main-outlet" class="wrap">
+        <div id="topic-title">
+    <h1>
+      <a href="281.html">Workflow implementation</a>
+    </h1>
+
+      <div class="topic-category" itemscope itemtype="http://schema.org/BreadcrumbList">
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../c/development.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #AB9364'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Development</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="1" />
+          </span>
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../c/development/engine.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #AB9364'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Engine</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="2" />
+          </span>
+      </div>
+
+      <div class="topic-category">
+        <div class='discourse-tags list-tags'>
+            <a href='../../tag/proposal.html' class='discourse-tag' rel="tag">proposal</a>
+        </div>
+      </div>
+  </div>
+
+  
+
+
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="281.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2019-05-16T12:26:37Z'>
+              <time itemprop='dateModified' datetime='2019-05-16T12:28:20Z' class='post-time'>
+                May 16, 2019, 12:28pm
+              </time>
+          <span itemprop='position'>#1</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <h1>Goal</h1>
+<p>Trigger tasks based on some constraints.</p>
+<p>We can implement these constraints in multiple steps:</p>
+<ul>
+<li>React to one event</li>
+<li>React to one result</li>
+<li>React to one event filtered based on its data</li>
+<li>React to one result filtered based on its data</li>
+<li>React to multiple events</li>
+<li>React to multiple results</li>
+</ul>
+<p>The current limit for this implementation:</p>
+<ul>
+<li>Execution graph</li>
+<li>React to one event only</li>
+<li>React to one result only</li>
+<li>No data transformation</li>
+</ul>
+<h2>Specifications</h2>
+<p>The initial workflow is a simplification of the final workflow, we will first implement a <a href="https://en.wikipedia.org/wiki/Tree_(graph_theory)" rel="nofollow noopener">Tree Graph</a> of execution instead of a <a href="https://en.wikipedia.org/wiki/Directed_acyclic_graph" rel="nofollow noopener">Directed Acyclic Graph</a> and later on maybe a <a href="https://en.wikipedia.org/wiki/Directed_graph" rel="nofollow noopener">Directed Graph</a>.</p>
+<p>The Tree implementation is possible thanks to the <code>parentHash</code> in the execution structure that references the previous execution.</p>
+<p>Every new execution will create a new execution data that points to the previous one (the result that permits to trigger this execution).</p>
+<p>For now, we limit the concept to <strong>one event start the workflow</strong> and the workflow can contain <strong>multiple chains of results</strong>.</p>
+<p>Here is an example:</p>
+<div class="mermaid">
+
+graph LR
+A[serviceA#eventX] --&gt;C(serviceB#task1)
+C --&gt; D[serviceC#task2]
+C --&gt; E[serviceD#task3]
+C --&gt; F[serviceE#task4]
+D --&gt; G[serviceF#task5]
+
+</div>
+
+<p>The workflow is responsible for creating this execution graph and have the following logic:<br>
+For every event/result, fetch the workflow definition that matches this event/result. Resolve the inputs (for now no processing just passing data into input), create the execution with the link of the previous execution if exists.</p>
+<h2>Implementation</h2>
+<p>The workflow engine will be its own package that runs as a job in its own thread and will listen to all events coming from the api.</p>
+<ul>
+<li>Listen to events</li>
+<li>Match workflows</li>
+<li>Fetch previous execution based on the event data</li>
+<li>Iterate on every</li>
+<li>Create a new execution with the data of the event and the previous executionHash</li>
+</ul>
+<p>The workflow <strong>only listens to events</strong>. It is not directly linked to the end of a task. In order to react from a result we need to create a system event that <code>SubmitResult</code> can emit and that the workflow will listen.</p>
+<p>The user will have the possibility to connect to a result of execution but this should be “compiled” into events.</p>
+<pre><code class="lang-auto">type Task struct {
+  serviceHash string // this needs to be the hash not sid, this will be resolved by the workflow importer when we have an importer
+  taskKey string
+}
+type Trigger struct {
+  serviceHash string
+  eventKey string // executionFinished to have a result of an execution
+  filter Predicate // we can start with a simple map eg: `{ taskKey: "xxx" }`
+}
+type Workflow struct {
+  trigger Trigger
+  tasks []Task
+}
+</code></pre>
+<p>Example of that based on the first graph:</p>
+<pre><code class="lang-auto">workflowA:
+  trigger:
+    serviceHash: serviceA
+    eventKey: "eventX"
+  tasks:
+      - serviceHash: serviceB
+        taskKey: "task1"
+      - serviceHash: serviceC
+        taskKey: "task2"
+      - serviceHash: serviceF
+        taskKey: "task5"
+workflowB:
+  trigger:
+    serviceHash: serviceB
+    eventKey: "executionFinished"
+    filter: { taskKey: "task1" }
+  tasks:
+    - serviceHash: serviceD
+      taskKey: task3
+workflowC:
+  trigger:
+    serviceHash: serviceB
+    eventKey: "executionFinished"
+    filter: { taskKey: "task1" }
+  tasks:
+    - serviceHash: serviceE
+      taskKey: task4
+</code></pre>
+<p>This way we create our tree which is composed of multiple workflows and will be correct by construction.</p>
+<p>One of the limitations here is that we cannot access the data of “eventX” from “workflowB” and “workflowC” but we have a workaround to create a task at the end of “workflowA” that aggregate all the data needed for “workflowB” and “workflowC”, this way the new workflow will have all the data.</p>
+<p>For now, workflows need to be hardcoded when the core starts (creating system workflow) and will be available for users on a different feature.</p>
+        </div>
+
+        <meta itemprop='headline' content='Workflow implementation'>
+          <meta itemprop='keywords' content='proposal'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+            <div class='crawler-linkback-list' itemscope itemtype='http://schema.org/ItemList'>
+                  <div itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+                    <a href="../integration-of-workflows-in-services-solves-service-composition/283/2.html" itemprop='item'>
+                      <meta itemprop='url' content='https://forum.mesg.com/t/integration-of-workflows-in-services-solves-service-composition/283/2'>
+                      <meta itemprop='position' content='4'>
+                      <span itemprop='name'>Integration of workflows in services (solves service composition)</span>
+                    </a>
+                  </div>
+                  <div itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+                    <a href="../integration-of-workflows-in-services-solves-service-composition/283.html" itemprop='item'>
+                      <meta itemprop='url' content='https://forum.mesg.com/t/integration-of-workflows-in-services-solves-service-composition/283'>
+                      <meta itemprop='position' content='5'>
+                      <span itemprop='name'>Integration of workflows in services (solves service composition)</span>
+                    </a>
+                  </div>
+                  <div itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+                    <a href="../listener-system-based-on-a-persistent-state/17/2.html" itemprop='item'>
+                      <meta itemprop='url' content='https://forum.mesg.com/t/listener-system-based-on-a-persistent-state/17/2'>
+                      <meta itemprop='position' content='6'>
+                      <span itemprop='name'>Listener system based on a persistent state</span>
+                    </a>
+                  </div>
+                  <div itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+                    <a href="../execution-db-and-api/280/3.html" itemprop='item'>
+                      <meta itemprop='url' content='https://forum.mesg.com/t/execution-db-and-api/280/3'>
+                      <meta itemprop='position' content='7'>
+                      <span itemprop='name'>Execution DB and API</span>
+                    </a>
+                  </div>
+            </div>
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/krhubert.html'><span itemprop='name'>krhubert</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="281.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2019-06-25T06:35:46Z'>
+              <time itemprop='dateModified' datetime='2019-12-26T01:15:08Z' class='post-time'>
+                December 26, 2019,  1:15am
+              </time>
+          <span itemprop='position'>#2</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Drafts:</p>
+<ul>
+<li><a href="https://github.com/mesg-foundation/engine/pull/1049" rel="nofollow noopener">https://github.com/mesg-foundation/engine/pull/1049</a></li>
+<li><a href="https://github.com/mesg-foundation/engine/pull/1056" rel="nofollow noopener">https://github.com/mesg-foundation/engine/pull/1056</a></li>
+<li><a href="https://github.com/mesg-foundation/engine/pull/1048" rel="nofollow noopener">https://github.com/mesg-foundation/engine/pull/1048</a></li>
+</ul>
+        </div>
+
+        <meta itemprop='headline' content='Workflow implementation'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="1" />
+           <span class='post-likes'>1 Like</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+
+
+
+
+
+
+    </div>
+    <footer class="container wrap">
+      <nav class='crawler-nav'>
+        <ul>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../index.html' itemprop="url">Home </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../categories.html' itemprop="url">Categories </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../guidelines.html' itemprop="url">FAQ/Guidelines </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../tos.html' itemprop="url">Terms of Service </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../privacy.html' itemprop="url">Privacy Policy </a>
+          </span>
+        </li>
+        </ul>
+      </nav>
+      <p class='powered-by-link'>Powered by <a href="https://www.discourse.org">Discourse</a>, best viewed with JavaScript enabled</p>
+    </footer>
+    
+    
+  </body>
+  
+</html>

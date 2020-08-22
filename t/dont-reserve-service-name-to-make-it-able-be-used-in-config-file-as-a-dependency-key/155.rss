@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Don&#39;t reserve &#39;service&#39; name to make it able be used in config file as a dependency key</title>
+    <link>https://forum.mesg.com/t/dont-reserve-service-name-to-make-it-able-be-used-in-config-file-as-a-dependency-key/155</link>
+    <description>From @ilgooz https://github.com/mesg-foundation/core/issues/420 
+
+or raise a validation error from _importer_.
+
+_service_ name currently reserved for service configuration.
+
+----
+
+now, I think that reserving _service_ name for the mesg service can be something good. Because an _nginx_ dependency may want to route http requests to _service_, in this case something like _http://service:3000_ should be placed into the conf file of nginx.</description>
+    
+    <lastBuildDate>Sun, 19 May 2019 08:10:30 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/dont-reserve-service-name-to-make-it-able-be-used-in-config-file-as-a-dependency-key/155.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Don&#39;t reserve &#39;service&#39; name to make it able be used in config file as a dependency key</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>This is not totally fixed.<br>
+The network alias of the service is still “service”. There is still <code>ConfigurationDependencyKey</code> and <code>MainServiceKey</code> constant is the codebase that use the key “service” when needed.</p>
+          <p><a href="https://forum.mesg.com/t/dont-reserve-service-name-to-make-it-able-be-used-in-config-file-as-a-dependency-key/155/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/dont-reserve-service-name-to-make-it-able-be-used-in-config-file-as-a-dependency-key/155/4</link>
+        <pubDate>Sun, 19 May 2019 08:10:30 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-155-4</guid>
+        <source url="https://forum.mesg.com/t/dont-reserve-service-name-to-make-it-able-be-used-in-config-file-as-a-dependency-key/155.rss">Don&#39;t reserve &#39;service&#39; name to make it able be used in config file as a dependency key</source>
+      </item>
+      <item>
+        <title>Don&#39;t reserve &#39;service&#39; name to make it able be used in config file as a dependency key</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>This is now fixed and the default configurations are stored in configuration and not dependencies anymore</p>
+          <p><a href="https://forum.mesg.com/t/dont-reserve-service-name-to-make-it-able-be-used-in-config-file-as-a-dependency-key/155/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/dont-reserve-service-name-to-make-it-able-be-used-in-config-file-as-a-dependency-key/155/3</link>
+        <pubDate>Sat, 18 May 2019 04:44:53 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-155-3</guid>
+        <source url="https://forum.mesg.com/t/dont-reserve-service-name-to-make-it-able-be-used-in-config-file-as-a-dependency-key/155.rss">Don&#39;t reserve &#39;service&#39; name to make it able be used in config file as a dependency key</source>
+      </item>
+      <item>
+        <title>Don&#39;t reserve &#39;service&#39; name to make it able be used in config file as a dependency key</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>I think it’s good to reserve the name.</p>
+<p>But I think the core currently doesn’t raise any error if a dependency is using <code>service</code> as name.<br>
+Let’s investigate.</p>
+          <p><a href="https://forum.mesg.com/t/dont-reserve-service-name-to-make-it-able-be-used-in-config-file-as-a-dependency-key/155/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/dont-reserve-service-name-to-make-it-able-be-used-in-config-file-as-a-dependency-key/155/2</link>
+        <pubDate>Thu, 13 Dec 2018 11:25:27 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-155-2</guid>
+        <source url="https://forum.mesg.com/t/dont-reserve-service-name-to-make-it-able-be-used-in-config-file-as-a-dependency-key/155.rss">Don&#39;t reserve &#39;service&#39; name to make it able be used in config file as a dependency key</source>
+      </item>
+      <item>
+        <title>Don&#39;t reserve &#39;service&#39; name to make it able be used in config file as a dependency key</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>From <a class="mention" href="/u/ilgooz">@ilgooz</a> <a href="https://github.com/mesg-foundation/core/issues/420" rel="nofollow noopener">https://github.com/mesg-foundation/core/issues/420</a></p>
+<p>or raise a validation error from <em>importer</em>.</p>
+<p><em>service</em> name currently reserved for service configuration.</p>
+<hr>
+<p>now, I think that reserving <em>service</em> name for the mesg service can be something good. Because an <em>nginx</em> dependency may want to route http requests to <em>service</em>, in this case something like <em><a href="http://service:3000" rel="nofollow noopener">http://service:3000</a></em> should be placed into the conf file of nginx.</p>
+          <p><a href="https://forum.mesg.com/t/dont-reserve-service-name-to-make-it-able-be-used-in-config-file-as-a-dependency-key/155/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/dont-reserve-service-name-to-make-it-able-be-used-in-config-file-as-a-dependency-key/155/1</link>
+        <pubDate>Thu, 13 Dec 2018 11:23:30 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-155-1</guid>
+        <source url="https://forum.mesg.com/t/dont-reserve-service-name-to-make-it-able-be-used-in-config-file-as-a-dependency-key/155.rss">Don&#39;t reserve &#39;service&#39; name to make it able be used in config file as a dependency key</source>
+      </item>
+  </channel>
+</rss>

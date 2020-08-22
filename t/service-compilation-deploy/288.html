@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <title>Service compilation &amp; deploy - Engine - MESG Community</title>
+    <meta name="description" content="The goal of this document is to explain the evolution of the deploy api and the introduction of the compilation of service. 
+The idea is to have a single way to deploy / publish service to the Engine but also to the Mark&amp;hellip;">
+    <meta name="generator" content="Discourse 2.5.0.beta5 - https://github.com/discourse/discourse version 00aab498297cba8f977c1e0eb17b7d38ff06cc68">
+<link rel="icon" type="image/png" href="../../uploads/default/optimized/1X/9f11b6ddfa02bffdbec79487592a0573a0236cb5_2_32x32.png">
+<link rel="apple-touch-icon" type="image/png" href="../../uploads/default/optimized/1X/53630361a40ad76e1733dd0b0f486e9ae2f4f4d6_2_180x180.png">
+<meta name="theme-color" content="#491e8c">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+<link rel="canonical" href="288.html" />
+<script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","url":"https://forum.mesg.com","potentialAction":{"@type":"SearchAction","target":"https://forum.mesg.com/search?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
+<link rel="search" type="application/opensearchdescription+xml" href="../../opensearch.xml" title="MESG Community Search">
+
+      <link href="../../stylesheets/desktop_3_52e3411e87658e862890db7bd06899cf49ad5f59.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop" data-theme-id="7"/>
+      <link href="../../stylesheets/desktop_theme_7_bf4f2d3d8a71e6ee907065be9a79df3d849bd29c.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop_theme" data-theme-id="7"/>
+    
+    <meta id="data-ga-universal-analytics" data-tracking-code="UA-117583862-1" data-json="{&quot;cookieDomain&quot;:&quot;auto&quot;}" data-auto-link-domains="">
+
+<link rel="preload" href="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js" as="script">
+<script src="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js"></script>
+
+
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of &#39;Service compilation &amp; deploy&#39;" href="288.rss" />
+    <meta property="og:site_name" content="MESG Community" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:url" content="https://forum.mesg.com/t/service-compilation-deploy/288" />
+<meta name="twitter:url" content="https://forum.mesg.com/t/service-compilation-deploy/288" />
+<meta property="og:title" content="Service compilation &amp; deploy" />
+<meta name="twitter:title" content="Service compilation &amp; deploy" />
+<meta property="og:description" content="The goal of this document is to explain the evolution of the deploy api and the introduction of the compilation of service.  The idea is to have a single way to deploy / publish service to the Engine but also to the Marketplace.  The Marketplace reveals that in order to deploy a service to another Engine, not only the source code but also the service definition are important and useful.  Yes, the service definition is also (currently) contained in the source code as a mesg.yml file. But, in orde..." />
+<meta name="twitter:description" content="The goal of this document is to explain the evolution of the deploy api and the introduction of the compilation of service.  The idea is to have a single way to deploy / publish service to the Engine but also to the Marketplace.  The Marketplace reveals that in order to deploy a service to another Engine, not only the source code but also the service definition are important and useful.  Yes, the service definition is also (currently) contained in the source code as a mesg.yml file. But, in orde..." />
+<meta property="article:published_time" content="2019-05-23T11:32:10+00:00" />
+<meta property="og:ignore_canonical" content="true" />
+
+
+
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"QAPage","name":"Service compilation & deploy","mainEntity":{"@type":"Question","name":"Service compilation & deploy","text":"The goal of this document is to explain the evolution of the deploy api and the introduction of the compilation of service.\n\nThe idea is to have a single way to deploy / publish service to the Engine but also to the Marketplace.\n\nThe Marketplace reveals that in order to deploy a service to another E&hellip;","upvoteCount":0,"answerCount":1,"dateCreated":"2019-05-23T11:32:09.970Z","author":{"@type":"Person","name":"Nicolas"},"acceptedAnswer":{"@type":"Answer","text":"A small precision on the service hash calculation from <a href="https://forum.mesg.com/t/service-compilation-deploy/\&quot;https://forum.mesg.com/t/instance-db/295/6:\&quot;">https://forum.mesg.com/t/instance-db/295/6:<\/a>\n\n[image]<a href="https://forum.mesg.com/t/service-compilation-deploy/\&quot;https://forum.mesg.com/t/instance-db/295/6\&quot;">Instance DB<\/a>\n\nservice hash = hash(definition, source files)\n\ninstance hash = hash(service hash, env)","upvoteCount":0,"dateCreated":"2019-06-04T02:49:03.174Z","url":"https://forum.mesg.com/t/service-compilation-deploy/288/3","author":{"@type":"Person","name":"Nicolas"}}}}</script>
+  </head>
+  <body class="crawler">
+    
+    <header>
+      <a href="../../index.html">
+          <img src="../../uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png" alt="MESG Community" id="site-logo" style="max-width: 150px;">
+      </a>
+    </header>
+    <div id="main-outlet" class="wrap">
+        <div id="topic-title">
+    <h1>
+      <a href="288.html">Service compilation &amp; deploy</a>
+    </h1>
+
+      <div class="topic-category" itemscope itemtype="http://schema.org/BreadcrumbList">
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../c/development.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #AB9364'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Development</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="1" />
+          </span>
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../c/development/engine.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #AB9364'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Engine</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="2" />
+          </span>
+      </div>
+
+      <div class="topic-category">
+        <div class='discourse-tags list-tags'>
+            <a href='../../tag/proposal.html' class='discourse-tag' rel="tag">proposal</a>
+        </div>
+      </div>
+  </div>
+
+  
+
+
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="288.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2019-05-23T11:32:10Z'>
+              <time itemprop='dateModified' datetime='2019-06-04T03:32:15Z' class='post-time'>
+                June 4, 2019,  3:32am
+              </time>
+          <span itemprop='position'>#1</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>The goal of this document is to explain the evolution of the deploy api and the introduction of the compilation of service.</p>
+<p>The idea is to have a single way to deploy / publish service to the Engine but also to the Marketplace.</p>
+<p>The Marketplace reveals that in order to deploy a service to another Engine, not only the source code but also the service definition are important and useful.</p>
+<p>Yes, the service definition is also (currently) contained in the source code as a mesg.yml file. But, in order to have a general purpose system and to fit in the long time vision of MESG, the source code should become optional (eg: pure workflow services), so services can be published / deployed / started with only a service definition.</p>
+<p>The current implementation of the Marketplace requires a JSON payload called manifest data containing:</p>
+<ul>
+<li>The service’s definition. Not the mesg.yml version but the protobuf version exposed by the GetService API:
+<ul>
+<li>The service’s hash is present (and not in the mesg.yml)</li>
+</ul>
+</li>
+<li>The service’s source code (as an IPFS hash)</li>
+<li>The service’s documentation (currently the content of README.md)</li>
+</ul>
+<p>By keeping only the service’s definition and the service’s source code, any Engine should be able to run the specified service without any other required data from the User.</p>
+<p>Currently, to start a service, 2 steps / api calls are needed:</p>
+<ul>
+<li>Deploy the service source code to the Engine by:
+<ul>
+<li>Generating the service definition from the mesg.yml</li>
+<li>Calculating the service’s hash</li>
+<li>Building the docker image</li>
+</ul>
+</li>
+<li>Start the actual service based on the service’s hash (or the service’s sid) by:
+<ul>
+<li>Creating the actual docker services and containers using the service definition, the hash and the build docker image</li>
+</ul>
+</li>
+</ul>
+<p>To publish on the marketplace, 5 steps / api calls are required that:</p>
+<ul>
+<li>Generates the service definition and hash from the mesg.yml (by calling the deploy api)</li>
+<li>Get the service definition (by calling the getService api)</li>
+<li>Publish the source on IPFS</li>
+<li>Create the manifest data from the service definition and the IPFS hash</li>
+<li>Finally, publish the manifest data to the marketplace</li>
+</ul>
+<h2>Service definition</h2>
+<p>The service definition is a protobuf structure containing all necessary information to start a service on any Engine.</p>
+<ul>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> The only modification to do on the service definition is to add a link to the service’s source.</li>
+</ul>
+<p>The service definition is the compiled version of the current mesg.yml. The Engine should be only compatible with service definition and not with mesg.yml anymore.</p>
+<p>This gives a lot of flexibility to improve or even replace the mesg.yml. The service definition could be compiled from anything: HCL, syntactic analysis to generate it directly from source code, source code comments, GUI, etc…</p>
+<h2>Compile (path to source) -&gt; service definition</h2>
+<p>The most different function is the compilation of a service.</p>
+<p>This function compiles a service definition from local folder containing the service source.</p>
+<p>This function is very similar to the compilation of an Ethereum Smart Contract: the source code is transformed to an ABI (in our case, service definition) and to bytecode (in our case, the link to the archive containing the source code).</p>
+<p>This function should run completely independently from the Engine. A light software without internet and connection to an Engine should be able to compile a service.</p>
+<p>The steps of this function are:</p>
+<ul>
+<li>Generates the service definition from the mesg.yml
+<ul>
+<li>Validate the mesg.yml</li>
+</ul>
+</li>
+<li>Upload the source to IPFS</li>
+<li>Injecting the source link to the service definition</li>
+<li>Returning the service definition
+<ul>
+<li>Could be returned as raw protobuf (byte / hex representation) or as JSON for readability</li>
+</ul>
+</li>
+</ul>
+<h2>Deploy (service definition) -&gt; service hash</h2>
+<p>This api is very similar to the current deploy api except that it takes as parameter directly the service definition (instead of the tar of the service source code ) and will returned the service hash.</p>
+<p>The steps of this api are:</p>
+<ul>
+<li>Parse the service definition</li>
+<li>Download the service source</li>
+<li>Calculate the service hash from the service definition AND the source code</li>
+<li>Save service definition in service DB (returns error if existing service definition)</li>
+<li>Return the service hash</li>
+</ul>
+<h2>Note</h2>
+<ul>
+<li>The service hash is not calculated from the custom env anymore. This will come back with the introduction of the <a href="../instance-db/295.html" class="inline-onebox">Instance DB</a>. This has the consequence to allow only 1 service (same service definition) to run at a specific time even with different custom env variable.</li>
+</ul>
+<h2>Publish</h2>
+<p>The current command <code>marketplace publish</code> will be drastically simplified by receiving directly the service definition containing most of the required information to publish on the current Marketplace running on Ethereum.</p>
+<p>The evolution of this function is that the future Marketplace will be directly integrated into the decentralized Service DB. I will not explain the details of this future function as we will implement it only when the decentralized Service DB is created. But basically, this future function will be able to publish on the whole network just based on the service definition generated by the Compile function.</p>
+<h1>Schema</h1>
+<p><em>In orange, step that are different than current implementation</em></p>
+<h2>Deploy</h2>
+<div class="mermaid">
+
+graph TD
+1[Parse the service definition] --&gt; 2
+2[Download the service source code] --&gt; 3
+3[Calculate the service hash] --&gt; 4
+4{Check existing hash in Service DB} -- if no exist --&gt; 5
+4 -- if exist --&gt; error
+5[Save service definition in service DB] --&gt; 6
+6[Return the service hash]
+error[return error]
+classDef diff fill:orange;
+class 1,2,3 diff;
+
+</div>
+
+<h1>gRPC definition, server &amp; sdk</h1>
+<p>This feature should not modify any existing gRPC definition, server or sdk functions but rather create new ones to start from a fresh and clean mind even if code duplication is necessary <img src="../../images/emoji/twitter/wink.png%3Fv=9" title=":wink:" class="emoji" alt=":wink:"></p>
+<h2>gRPC</h2>
+<p>A new gRPC api should be created to introduce the beginning of the separation of the gRPC api by ressources.</p>
+<p>EDIT <span class="hashtag">#1</span></p>
+<p>This new gRPC api should be created in <code>/protobuf/api/service.proto</code> and contain the following protobuf def:</p>
+<pre><code class="lang-auto">syntax = "proto3";
+
+import "protobuf/definition/service.proto";
+
+package api;
+
+service Service {
+  rpc Create (definition.Service) returns (string) {}
+}
+</code></pre>
+<p>This api Service will only manage resources in Service DB and use a CRUD-like design.</p>
+<p>The current apis <code>Core.DeployService</code>, <code>Core.DeleteService</code>, <code>Core.ListServices</code>, <code>Core.GetService</code> will be “duplicated” to this new <code>service.proto</code> file and rename to a more CRUD-like style (eg: Create, Delete, List, Get) in another feature / PR.</p>
+<hr>
+<p>EDIT of June 4th: I fix the service hash calculation. It should be calculated from the service definition and the source code.</p>
+        </div>
+
+        <meta itemprop='headline' content='Service compilation &amp; deploy'>
+          <meta itemprop='keywords' content='proposal'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+            <div class='crawler-linkback-list' itemscope itemtype='http://schema.org/ItemList'>
+                  <div itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+                    <a href="../protobuf-folder-structure/297.html" itemprop='item'>
+                      <meta itemprop='url' content='https://forum.mesg.com/t/protobuf-folder-structure/297'>
+                      <meta itemprop='position' content='2'>
+                      <span itemprop='name'>Protobuf folder structure</span>
+                    </a>
+                  </div>
+            </div>
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="288.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2019-06-04T02:49:03Z'>
+              <time itemprop='dateModified' datetime='2019-12-26T01:18:00Z' class='post-time'>
+                December 26, 2019,  1:18am
+              </time>
+          <span itemprop='position'>#3</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>A small precision on the service hash calculation from <a href="https://forum.mesg.com/t/instance-db/295/6:">https://forum.mesg.com/t/instance-db/295/6:</a></p>
+<aside class="quote group-team" data-post="6" data-topic="295">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/nicolas/40/10_2.png" class="avatar"><a href="../instance-db/295/6.html">Instance DB</a>
+</div>
+<blockquote>
+<p><code>service hash = hash(definition, source files)</code><br>
+<code>instance hash = hash(service hash, env)</code></p>
+</blockquote>
+</aside>
+        </div>
+
+        <meta itemprop='headline' content='Service compilation &amp; deploy'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+
+
+
+
+
+
+    </div>
+    <footer class="container wrap">
+      <nav class='crawler-nav'>
+        <ul>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../index.html' itemprop="url">Home </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../categories.html' itemprop="url">Categories </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../guidelines.html' itemprop="url">FAQ/Guidelines </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../tos.html' itemprop="url">Terms of Service </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../privacy.html' itemprop="url">Privacy Policy </a>
+          </span>
+        </li>
+        </ul>
+      </nav>
+      <p class='powered-by-link'>Powered by <a href="https://www.discourse.org">Discourse</a>, best viewed with JavaScript enabled</p>
+    </footer>
+    
+    
+  </body>
+  
+</html>

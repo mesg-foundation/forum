@@ -1,0 +1,656 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Add more detailed data in the mesg.yml</title>
+    <link>https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126</link>
+    <description>## Problem
+
+Right now the `mesg.yml` can only handle few types of data:
+- Number
+- String
+- Boolean
+- Object
+
+The `Object` type is not really clear, it can be an object, an array, a string, whatever...
+
+It can be confusing and we are loosing a lot of informations. We should be able to add more details
+
+## Proposition
+
+We need to handle 2 other kind of data, `Array` and `NestedType` and also make sure to keep the possibility to handle unstructured data.
+
+#### Array
+For the array part we could have a `repeated` attribute in the data
+
+```yml
+data:
+  foo:
+    type: String
+    repeated: true
+```
+
+#### Nested type
+For the nested type we need to be able to define the nested attributes
+
+```yml
+data:
+  foo:
+    type: Object
+    object:
+       attrX:
+         type: String
+       attrY:
+         type: Number
+```
+
+#### Any
+We still need to make sure that we can send any kind of data, in this case the core will not do any validation and the responsibility will be on the user to know what kind of data will be processed in the application
+
+```yml
+data:
+  foo:
+    type: Any
+```</description>
+    
+    <lastBuildDate>Mon, 14 Jan 2019 14:31:23 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Add more detailed data in the mesg.yml</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            
+          <p><a href="https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126/24">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126/24</link>
+        <pubDate>Wed, 30 Jan 2019 09:35:45 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-126-24</guid>
+        <source url="https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126.rss">Add more detailed data in the mesg.yml</source>
+      </item>
+      <item>
+        <title>Add more detailed data in the mesg.yml</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Implemented here:<br>
+<aside class="onebox githubpullrequest">
+  <header class="source">
+      <a href="https://github.com/mesg-foundation/core/pull/679" target="_blank" rel="nofollow noopener">github.com/mesg-foundation/core</a>
+  </header>
+  <article class="onebox-body">
+      <a href="https://github.com/NicolasMahe" target="_blank" rel="nofollow noopener">
+    <img alt="NicolasMahe" src="https://forum.mesg.com/uploads/default/original/1X/26944398294eb78d5fcd9c0ac79f47a8ba160661.jpeg" class="thumbnail onebox-avatar" width="90" height="90">
+  </a>
+
+<h4>
+  <a href="https://github.com/mesg-foundation/core/pull/679" target="_blank" rel="nofollow noopener">Repeated parameters</a>
+</h4>
+
+<div class="date">
+  by <a href="https://github.com/NicolasMahe" target="_blank" rel="nofollow noopener">NicolasMahe</a>
+  on <a href="https://github.com/mesg-foundation/core/pull/679" target="_blank" rel="nofollow noopener">01:04AM - 06 Jan 19 UTC</a>
+</div>
+
+<div class="github-commit-stats">
+  <strong>10 commits</strong>
+  changed <strong>12 files</strong>
+  with <strong>224 additions</strong>
+  and <strong>150 deletions</strong>.
+</div>
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+<br>
+<aside class="onebox githubpullrequest">
+  <header class="source">
+      <a href="https://github.com/mesg-foundation/core/pull/689" target="_blank" rel="nofollow noopener">github.com/mesg-foundation/core</a>
+  </header>
+  <article class="onebox-body">
+      <a href="https://github.com/antho1404" target="_blank" rel="nofollow noopener">
+    <img alt="antho1404" src="https://forum.mesg.com/uploads/default/original/1X/c29c23715883e406db32b7c995f478832a583aa7.png" class="thumbnail onebox-avatar" width="90" height="90">
+  </a>
+
+<h4>
+  <a href="https://github.com/mesg-foundation/core/pull/689" target="_blank" rel="nofollow noopener">Add support of Any for the cli</a>
+</h4>
+
+<div class="date">
+  by <a href="https://github.com/antho1404" target="_blank" rel="nofollow noopener">antho1404</a>
+  on <a href="https://github.com/mesg-foundation/core/pull/689" target="_blank" rel="nofollow noopener">02:59PM - 12 Jan 19 UTC</a>
+</div>
+
+<div class="github-commit-stats">
+  <strong>1 commits</strong>
+  changed <strong>1 files</strong>
+  with <strong>5 additions</strong>
+  and <strong>0 deletions</strong>.
+</div>
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+<br>
+<aside class="onebox githubpullrequest">
+  <header class="source">
+      <a href="https://github.com/mesg-foundation/core/pull/696" target="_blank" rel="nofollow noopener">github.com/mesg-foundation/core</a>
+  </header>
+  <article class="onebox-body">
+      <a href="https://github.com/antho1404" target="_blank" rel="nofollow noopener">
+    <img alt="antho1404" src="https://forum.mesg.com/uploads/default/original/1X/c29c23715883e406db32b7c995f478832a583aa7.png" class="thumbnail onebox-avatar" width="90" height="90">
+  </a>
+
+<h4>
+  <a href="https://github.com/mesg-foundation/core/pull/696" target="_blank" rel="nofollow noopener">Object type support</a>
+</h4>
+
+<div class="date">
+  by <a href="https://github.com/antho1404" target="_blank" rel="nofollow noopener">antho1404</a>
+  on <a href="https://github.com/mesg-foundation/core/pull/696" target="_blank" rel="nofollow noopener">02:55AM - 13 Jan 19 UTC</a>
+</div>
+
+<div class="github-commit-stats">
+  <strong>8 commits</strong>
+  changed <strong>11 files</strong>
+  with <strong>209 additions</strong>
+  and <strong>156 deletions</strong>.
+</div>
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+</p>
+          <p><a href="https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126/23">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126/23</link>
+        <pubDate>Mon, 14 Jan 2019 14:31:23 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-126-23</guid>
+        <source url="https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126.rss">Add more detailed data in the mesg.yml</source>
+      </item>
+      <item>
+        <title>Add more detailed data in the mesg.yml</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            
+          <p><a href="https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126/22">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126/22</link>
+        <pubDate>Fri, 11 Jan 2019 05:15:41 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-126-22</guid>
+        <source url="https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126.rss">Add more detailed data in the mesg.yml</source>
+      </item>
+      <item>
+        <title>Add more detailed data in the mesg.yml</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            
+          <p><a href="https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126/21">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126/21</link>
+        <pubDate>Fri, 11 Jan 2019 05:15:38 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-126-21</guid>
+        <source url="https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126.rss">Add more detailed data in the mesg.yml</source>
+      </item>
+      <item>
+        <title>Add more detailed data in the mesg.yml</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Here is a summary so we can reach consensus about the nested declaration:</p>
+<h2><span class="hashtag">#1</span></h2>
+<pre><code class="lang-auto">type: Object
+object
+  attrX:
+    type: String
+  attrY:
+    type: Number
+</code></pre>
+<h2><span class="hashtag">#2</span></h2>
+<pre><code class="lang-auto">type: Object
+properties:
+  attrX:
+    type: String
+  attrY:
+    type: Number
+</code></pre>
+<h2><span class="hashtag">#3</span></h2>
+<pre><code class="lang-auto">type: Data
+data:
+  attrX:
+    type: String
+  attrY:
+    type: Number
+</code></pre>
+<div class="poll" data-poll-status="open" data-poll-max="20" data-poll-public="true" data-poll-results="always" data-poll-type="regular" data-poll-name="poll">
+<div>
+<div class="poll-container">
+<ul>
+<li data-poll-option-id="e0341540eb696e11be7086a47c429795"><span class="hashtag">#1</span></li>
+<li data-poll-option-id="a09708b685a3556bce0482ee274c8d6b"><span class="hashtag">#2</span></li>
+<li data-poll-option-id="b737595e2038043d98166e3172470b8e"><span class="hashtag">#3</span></li>
+</ul>
+</div>
+<div class="poll-info">
+<p>
+<span class="info-number">0</span>
+<span class="info-label">voters</span>
+</p>
+</div>
+</div>
+</div>
+          <p><a href="https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126/20">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126/20</link>
+        <pubDate>Fri, 04 Jan 2019 04:28:02 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-126-20</guid>
+        <source url="https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126.rss">Add more detailed data in the mesg.yml</source>
+      </item>
+      <item>
+        <title>Add more detailed data in the mesg.yml</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="18" data-topic="126">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/krhubert/40/9_1.png" class="avatar"> krhubert:</div>
+<blockquote>
+<p>I’m ok with <code>type: Object</code> because I didn’t find any other name.</p>
+</blockquote>
+</aside>
+<p>What about the name of the property to define the object properties and types?</p>
+          <p><a href="https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126/19">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126/19</link>
+        <pubDate>Fri, 04 Jan 2019 04:23:56 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-126-19</guid>
+        <source url="https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126.rss">Add more detailed data in the mesg.yml</source>
+      </item>
+      <item>
+        <title>Add more detailed data in the mesg.yml</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <p>I’m ok with <code>type: Object</code> because I didn’t find any other name.</p>
+<p>Some notes from what I have tried:</p>
+<ul>
+<li>our yaml starts looking like json and it’s wired</li>
+<li>if someone need more nested struct then readability hurts</li>
+<li>maybe we should provide funciton in go package like:</li>
+</ul>
+<pre><code class="lang-auto">func CheckTypes(i interface{}) error {
+// pass service interface 
+// read mesg.yaml file
+// check with reflect package if interface == mesg.yaml definitions
+}
+</code></pre>
+<ul>
+<li>why there are multiple outputs for task but only one input (consistency)?</li>
+<li>I’ve also come up with draft of new mesg.yaml which represent objects in seperate section (it also has drawbacks) but just to show it.</li>
+</ul>
+<pre><code class="lang-auto">objects:
+  - name: t1
+    type:
+      var: Number
+
+  - name: t2
+    type:
+      var2: repeted String
+
+  - name: t3
+    type:
+      var3: t1
+      var4: repeted t2
+
+  - name: n1
+    type:
+      url: String
+      body: String
+
+--- with objects
+tasks:
+  execute:
+    inputs: n1
+    outputs:
+      success: t1
+      error: t3
+
+--- without objects
+tasks:
+  execute:
+    inputs:
+      url:
+        type: String
+      body:
+        type: String
+    outputs:
+      success:
+        data:
+          var:
+            type: Number
+      error:
+        data: 
+          var3: 
+            type: Object
+            object:
+              var: Number
+          var4:
+            type: Ojbect
+            repeted: true
+            object:
+              var2: String
+</code></pre>
+<p>To summarize: i’m ok with <code>object</code> <img src="https://forum.mesg.com/images/emoji/twitter/smiley.png?v=6" title=":smiley:" class="emoji" alt=":smiley:">  it would be good to have a time in next few months and rethink how we want to represent those values, so it would be easily readable in code, in docs, testable, etc.</p>
+          <p><a href="https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126/18">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126/18</link>
+        <pubDate>Fri, 04 Jan 2019 02:58:44 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-126-18</guid>
+        <source url="https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126.rss">Add more detailed data in the mesg.yml</source>
+      </item>
+      <item>
+        <title>Add more detailed data in the mesg.yml</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>For nested type,</p>
+<ul>
+<li>we can respect json style</li>
+</ul>
+<pre><code class="lang-auto">type: object
+properties:
+  attrX:
+    type: String
+  attrY:
+    type: Number
+</code></pre>
+<hr>
+<p>Use data because we use data at most of root level stuff</p>
+<pre><code class="lang-auto">type: data
+data:
+  attrX:
+    type: String
+  attrY:
+    type: Number
+</code></pre>
+          <p><a href="https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126/17">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126/17</link>
+        <pubDate>Thu, 03 Jan 2019 09:22:36 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-126-17</guid>
+        <source url="https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126.rss">Add more detailed data in the mesg.yml</source>
+      </item>
+      <item>
+        <title>Add more detailed data in the mesg.yml</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>It’s ok to change the yml, it’s a new feature that if they want to use it they can add it.<br>
+Also this is quite normal as a developer to have something like that</p>
+<ul>
+<li>json schema (eg: <a href="https://github.com/mesg-foundation/core/blob/dev/service/importer/assets/schema.json#L8" rel="nofollow noopener">https://github.com/mesg-foundation/core/blob/dev/service/importer/assets/schema.json#L8</a>)</li>
+<li>a way to declare a variable:</li>
+</ul>
+<pre><code class="lang-auto">variable Type
+struct Type {
+  ...
+}
+</code></pre>
+<p>This is something common in many languages so I really don’t see any problems with that</p>
+          <p><a href="https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126/16">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126/16</link>
+        <pubDate>Thu, 03 Jan 2019 07:19:00 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-126-16</guid>
+        <source url="https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126.rss">Add more detailed data in the mesg.yml</source>
+      </item>
+      <item>
+        <title>Add more detailed data in the mesg.yml</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>I agree that there is a little bit complexity in the code but it doesn’t require us to change yml format. I feel it’s easier for devs to use current syntax instead of adding <em>object</em> field for nested parameter definitions. I’d like to KISS msg yml format for the devs.</p>
+          <p><a href="https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126/15">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126/15</link>
+        <pubDate>Wed, 02 Jan 2019 06:24:07 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-126-15</guid>
+        <source url="https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126.rss">Add more detailed data in the mesg.yml</source>
+      </item>
+      <item>
+        <title>Add more detailed data in the mesg.yml</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Because of the implementation complexity that using <code>type</code> parameter for both Number/String/Boolean/Any and Nested definition brings, <a class="mention" href="/u/anthony">@Anthony</a> and I suggest to add a new parameter <code>object</code> to describe the nested definition.<br>
+When the property <code>type</code> contains <code>Object</code>, then, the Object definition should be done in a property <code>object</code>.</p>
+<p>Before:</p>
+<pre><code class="lang-auto">data:
+  foo:
+    type:
+       attrX:
+         type: String
+       attrY:
+         type: Number
+</code></pre>
+<p>After</p>
+<pre><code class="lang-auto">data:
+  foo:
+    type: Object
+    object:
+       attrX:
+         type: String
+       attrY:
+         type: Number
+</code></pre>
+<p>In go the implementation is super simple. Just need to add to <code>Parameter</code> struct:</p>
+<pre><code class="lang-auto">type Parameter struct {
+	.......
+
+	Object map[string]*Parameter `yaml:"object"`
+}
+</code></pre>
+<p>The JSON Schema should be updated and return an error if <code>type=Object</code> but <code>object=nil</code>. If it too complex to do it in JSON Schema, it should be done manually in Go in <code>service/importer/service_file.go</code>.</p>
+<hr>
+<p><a class="mention" href="/u/ilgooz">@ilgooz</a> <a class="mention" href="/u/krhubert">@krhubert</a> what do you think? Do you like the name <code>object</code> in the mesg.yml file to describe the object properties?</p>
+          <p><a href="https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126/14">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126/14</link>
+        <pubDate>Wed, 02 Jan 2019 04:39:12 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-126-14</guid>
+        <source url="https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126.rss">Add more detailed data in the mesg.yml</source>
+      </item>
+      <item>
+        <title>Add more detailed data in the mesg.yml</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>implemented by <a href="https://github.com/mesg-foundation/core/pull/646" rel="nofollow noopener">https://github.com/mesg-foundation/core/pull/646</a></p>
+          <p><a href="https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126/12">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126/12</link>
+        <pubDate>Sun, 16 Dec 2018 18:31:22 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-126-12</guid>
+        <source url="https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126.rss">Add more detailed data in the mesg.yml</source>
+      </item>
+      <item>
+        <title>Add more detailed data in the mesg.yml</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            
+          <p><a href="https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126/11">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126/11</link>
+        <pubDate>Tue, 11 Dec 2018 11:24:54 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-126-11</guid>
+        <source url="https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126.rss">Add more detailed data in the mesg.yml</source>
+      </item>
+      <item>
+        <title>Add more detailed data in the mesg.yml</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <p>So something like:</p>
+<pre><code class="lang-auto">data:
+  foo:
+    repeted: true
+    type:
+       attrX:
+         type: String
+       attrY:
+         type: Number
+</code></pre>
+<p>lgtm</p>
+          <p><a href="https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126/8">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126/8</link>
+        <pubDate>Tue, 27 Nov 2018 09:34:11 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-126-8</guid>
+        <source url="https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126.rss">Add more detailed data in the mesg.yml</source>
+      </item>
+      <item>
+        <title>Add more detailed data in the mesg.yml</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>Having <code>[]string</code> or <code>string[]</code> is easy to read but limiting the stuff befause what happen if we have a nested data (the actual <code>Object</code> type) ? Do we need to define a <code>typeX</code> with the definition and do a <code>[]typeX</code> ?</p>
+<p>With the <code>repeated</code> we can use it for any types and just transform any types (even the nested ones) in an array.</p>
+          <p><a href="https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126/7">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126/7</link>
+        <pubDate>Tue, 27 Nov 2018 08:19:45 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-126-7</guid>
+        <source url="https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126.rss">Add more detailed data in the mesg.yml</source>
+      </item>
+      <item>
+        <title>Add more detailed data in the mesg.yml</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <blockquote>
+<p>I only suggest to deprecated or directly remove the Object type.</p>
+</blockquote>
+<p>+1</p>
+<p>And I prefere syntax with <code>[]String</code> or <code>Strigs[]</code> as it’s more compact and you see right away what type of data it is and you don’t need to look for additional field.</p>
+          <p><a href="https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126/6">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126/6</link>
+        <pubDate>Tue, 27 Nov 2018 08:12:14 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-126-6</guid>
+        <source url="https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126.rss">Add more detailed data in the mesg.yml</source>
+      </item>
+      <item>
+        <title>Add more detailed data in the mesg.yml</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="2" data-topic="126">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/krhubert/40/9_1.png" class="avatar"> krhubert:</div>
+<blockquote>
+<p>Just an idea come to my mind. Why we have data type at first place?</p>
+</blockquote>
+</aside>
+<p>From an user point of view, static typing will improve the experience a lot. With it, doc can be automatically generated, full data validation and some GUI could even been created with a simple connection from event’s data to task’s input.</p>
+<hr>
+<p><a class="mention" href="/u/anthony">@Anthony</a> I totally agree with everything you write. I really like the possible to mix array and nested type <img src="https://forum.mesg.com/images/emoji/twitter/slight_smile.png?v=6" title=":slight_smile:" class="emoji" alt=":slight_smile:"></p>
+<p>I only suggest to deprecated or directly remove the Object type.</p>
+          <p><a href="https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126/5">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126/5</link>
+        <pubDate>Tue, 27 Nov 2018 06:11:33 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-126-5</guid>
+        <source url="https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126.rss">Add more detailed data in the mesg.yml</source>
+      </item>
+      <item>
+        <title>Add more detailed data in the mesg.yml</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team quote-modified" data-post="2" data-topic="126">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/krhubert/40/9_1.png" class="avatar"> krhubert:</div>
+<blockquote>
+<p>Can’t we just pass the data and the service will be one who validate if the data are correct for it?<br>
+Why core needs to do this, where is the benefit?</p>
+</blockquote>
+</aside>
+<p>I see many reasons why the core needs to have these informations:</p>
+<ul>
+<li>developer experience (validation of data, documentation and things like that), and I agree with you, ultimately this one could be remove</li>
+<li>workflow connections, having the workflow being able to take the outputs of one task and convert them to inputs of the next task at least making sure that this connection is possible like not putting a string into an int.</li>
+</ul>
+<p>Of course you’re right about the static vs dynamic comparison. It’s exactly the same debate, it’s either all static or all dynamic. I personally feels that static is way easier as a bottom layer and we can always build some stuff dynamic on top of that later</p>
+          <p><a href="https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126/4</link>
+        <pubDate>Tue, 27 Nov 2018 05:20:10 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-126-4</guid>
+        <source url="https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126.rss">Add more detailed data in the mesg.yml</source>
+      </item>
+      <item>
+        <title>Add more detailed data in the mesg.yml</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <p>Just an idea come to my mind. Why we have data type at first place?</p>
+<p>Can’t we just pass the data and the service will be one who validate if the data are corrent for it?<br>
+Why core needs to do this, where is the benefit?</p>
+<p>For example service wants binary data - how do we pass it with the core?<br>
+Also we need to figure out what is the data representation. What if we just define the tasks and that’s all?</p>
+<p>This is something like static vs dynamic typing</p>
+          <p><a href="https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126/2</link>
+        <pubDate>Mon, 26 Nov 2018 15:37:44 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-126-2</guid>
+        <source url="https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126.rss">Add more detailed data in the mesg.yml</source>
+      </item>
+      <item>
+        <title>Add more detailed data in the mesg.yml</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <h2>Problem</h2>
+<p>Right now the <code>mesg.yml</code> can only handle few types of data:</p>
+<ul>
+<li>Number</li>
+<li>String</li>
+<li>Boolean</li>
+<li>Object</li>
+</ul>
+<p>The <code>Object</code> type is not really clear, it can be an object, an array, a string, whatever…</p>
+<p>It can be confusing and we are loosing a lot of informations. We should be able to add more details</p>
+<h2>Proposition</h2>
+<p>We need to handle 2 other kind of data, <code>Array</code> and <code>NestedType</code> and also make sure to keep the possibility to handle unstructured data.</p>
+<h4>Array</h4>
+<p>For the array part we could have a <code>repeated</code> attribute in the data</p>
+<pre><code class="lang-auto">data:
+  foo:
+    type: String
+    repeated: true
+</code></pre>
+<h4>Nested type</h4>
+<p>For the nested type we need to be able to define the nested attributes</p>
+<pre><code class="lang-auto">data:
+  foo:
+    type: Object
+    object:
+       attrX:
+         type: String
+       attrY:
+         type: Number
+</code></pre>
+<h4>Any</h4>
+<p>We still need to make sure that we can send any kind of data, in this case the core will not do any validation and the responsibility will be on the user to know what kind of data will be processed in the application</p>
+<pre><code class="lang-auto">data:
+  foo:
+    type: Any
+</code></pre>
+          <p><a href="https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126/1</link>
+        <pubDate>Mon, 26 Nov 2018 14:54:35 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-126-1</guid>
+        <source url="https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126.rss">Add more detailed data in the mesg.yml</source>
+      </item>
+  </channel>
+</rss>

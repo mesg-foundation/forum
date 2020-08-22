@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Core&#39;s name in Config</title>
+    <link>https://forum.mesg.com/t/cores-name-in-config/47</link>
+    <description>We should put the Core&#39;s name in config.
+This includes:
+- [ ] namespace docker service
+- [ ] path to the bind volume
+- [ ] shared network</description>
+    
+    <lastBuildDate>Thu, 20 Sep 2018 09:01:51 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/cores-name-in-config/47.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Core&#39;s name in Config</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            
+          <p><a href="https://forum.mesg.com/t/cores-name-in-config/47/5">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/cores-name-in-config/47/5</link>
+        <pubDate>Sat, 05 Jan 2019 09:36:20 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-47-5</guid>
+        <source url="https://forum.mesg.com/t/cores-name-in-config/47.rss">Core&#39;s name in Config</source>
+      </item>
+      <item>
+        <title>Core&#39;s name in Config</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            
+          <p><a href="https://forum.mesg.com/t/cores-name-in-config/47/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/cores-name-in-config/47/4</link>
+        <pubDate>Thu, 20 Sep 2018 09:57:05 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-47-4</guid>
+        <source url="https://forum.mesg.com/t/cores-name-in-config/47.rss">Core&#39;s name in Config</source>
+      </item>
+      <item>
+        <title>Core&#39;s name in Config</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Done in PR <a href="https://github.com/mesg-foundation/core/pull/478">https://github.com/mesg-foundation/core/pull/478</a></p>
+          <p><a href="https://forum.mesg.com/t/cores-name-in-config/47/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/cores-name-in-config/47/3</link>
+        <pubDate>Thu, 20 Sep 2018 09:01:51 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-47-3</guid>
+        <source url="https://forum.mesg.com/t/cores-name-in-config/47.rss">Core&#39;s name in Config</source>
+      </item>
+      <item>
+        <title>Core&#39;s name in Config</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>We could with (<a href="https://forum.mesg.com/t/bind-core-volume-to-host/46">Bind core volume to host</a>) use the bind path for the database based on the name to be able to namespace all the core executions.</p>
+<pre><code class="lang-auto">.mesg
+  core
+    database
+  core2
+    database
+  coreX
+    database
+...
+</code></pre>
+          <p><a href="https://forum.mesg.com/t/cores-name-in-config/47/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/cores-name-in-config/47/2</link>
+        <pubDate>Wed, 19 Sep 2018 08:17:36 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-47-2</guid>
+        <source url="https://forum.mesg.com/t/cores-name-in-config/47.rss">Core&#39;s name in Config</source>
+      </item>
+      <item>
+        <title>Core&#39;s name in Config</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>We should put the Core’s name in config.<br>
+This includes:</p>
+<ul>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> namespace docker service</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> path to the bind volume</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> shared network</li>
+</ul>
+          <p><a href="https://forum.mesg.com/t/cores-name-in-config/47/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/cores-name-in-config/47/1</link>
+        <pubDate>Wed, 19 Sep 2018 08:13:37 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-47-1</guid>
+        <source url="https://forum.mesg.com/t/cores-name-in-config/47.rss">Core&#39;s name in Config</source>
+      </item>
+  </channel>
+</rss>

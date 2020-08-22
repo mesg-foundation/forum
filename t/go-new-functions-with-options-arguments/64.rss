@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Go New functions with options arguments</title>
+    <link>https://forum.mesg.com/t/go-new-functions-with-options-arguments/64</link>
+    <description>In [many](https://github.com/mesg-foundation/core/blob/c2527ae17bad7f57fe9b1fa8c4027c617bf214f2/api/api.go#L18) [places](https://github.com/mesg-foundation/core/blob/74f839802272107154071678d2d4efcadcbf4465/utils/chunker/chunker.go#L41) [in](https://github.com/mesg-foundation/core/blob/ad9b0fb558d7b37c79200af4b73a3c6edaebf720/interface/grpc/service/type.go#L18) [the](https://github.com/mesg-foundation/core/blob/c3e23fd91747f05750f9f18c699bb4910a082b7e/service/service.go#L90) [code](https://github.com/mesg-foundation/core/blob/ab36dc1f0a6c88710bb3b16b0910409b5e7d3834/container/container.go#L29) we use the pattern to add optional arguments mostly for the `New` functions to be able to customize the behavior of the struct we need to create.
+
+```go
+type XXX struct {}
+
+func New(options ...Option) *XXX {
+  x := &amp;XXX{}
+  for _, option := range options {
+    option(x)
+  }
+  return x
+}
+func OptionX() Option {
+  return func(x *xxx) {
+    // Do something on x
+  }
+}
+```
+
+Most of the time, if not all the time, it is to be able to set a different dependency for the unit tests in some cases it&#39;s really to configure the behavior.
+
+I like this pattern, I feel it&#39;s really flexible to customize a struct, I just feel that we should use it with parsimony because it doesn&#39;t suit for everything.
+
+For me this pattern is perfect to customize parts that are totally optional meaning that we should not have to call these option function in order to configure a struct. The simple use of a `New` without optional arguments should be enough to have something working.
+
+I&#39;ve seen different uses of that pattern so I&#39;m really interested to think what you all think about that and where and how to use it and also where and how not to use it and for what reason.
+
+I really want to make sure that we all agree on how to use this pattern and like that we could start to create some guidelines based on that :)</description>
+    
+    <lastBuildDate>Wed, 26 Sep 2018 14:42:08 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/go-new-functions-with-options-arguments/64.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Go New functions with options arguments</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>I agree and like the arguments you guys are provided.</p>
+          <p><a href="https://forum.mesg.com/t/go-new-functions-with-options-arguments/64/6">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/go-new-functions-with-options-arguments/64/6</link>
+        <pubDate>Wed, 26 Sep 2018 14:42:08 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-64-6</guid>
+        <source url="https://forum.mesg.com/t/go-new-functions-with-options-arguments/64.rss">Go New functions with options arguments</source>
+      </item>
+      <item>
+        <title>Go New functions with options arguments</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>For the part that we have multiple arguments. If we have a lot of different arguments in the first place it’s a design problem and if they are related we could use a structure for that like for example docker that has some <code>methodXOption</code> structure in many functions. With structs we can have something even more readable and more explicit than the options.</p>
+<p>For the part of the error at runtime or compile time. For me it’s just obvious that the compile time is better.</p>
+<p>I think it will be hard to really setup a rule on where to use what. For me I would say something like that:</p>
+<ul>
+<li>Arguments for all required arguments on a function (we don’t rely on the error handling at the runtime)</li>
+<li>Options only for optional parameters and/or to configure a specific behavior. The function should run correctly without the options, based on a default or something like that.</li>
+<li>Structs for arguments that might be related with each other.</li>
+<li>Also if we have more than 4-5 required arguments I think there is a problem and we should consider passing a struct or refactoring the function but I’m pretty sure tools like codeclimate have these kind of tests.</li>
+</ul>
+<div class="poll" data-poll-status="open" data-poll-type="regular" data-poll-public="true" data-poll-name="poll">
+<div>
+<div class="poll-container">
+<ul>
+<li data-poll-option-id="0d757b26b3f13063177d227967ee7aab">Sounds good <img src="https://forum.mesg.com/images/emoji/twitter/slight_smile.png?v=6" title=":slight_smile:" class="emoji" alt=":slight_smile:">
+</li>
+<li data-poll-option-id="da53f191ac9049838897ab4138bfbaec">Terrible idea <img src="https://forum.mesg.com/images/emoji/twitter/frowning.png?v=6" title=":frowning:" class="emoji" alt=":frowning:">
+</li>
+</ul>
+</div>
+<div class="poll-info">
+<p>
+<span class="info-number">0</span>
+<span class="info-label">voters</span>
+</p>
+</div>
+</div>
+</div>
+          <p><a href="https://forum.mesg.com/t/go-new-functions-with-options-arguments/64/5">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/go-new-functions-with-options-arguments/64/5</link>
+        <pubDate>Wed, 26 Sep 2018 08:27:15 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-64-5</guid>
+        <source url="https://forum.mesg.com/t/go-new-functions-with-options-arguments/64.rss">Go New functions with options arguments</source>
+      </item>
+      <item>
+        <title>Go New functions with options arguments</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>My suggestion is to use Option as optional parameters.<br>
+Anything that is required should be a parameter. So we have compile error and not runtime error.<br>
+Having to force to name it Option should not be mandatory and depend on the context.</p>
+<p>Example:</p>
+<pre><code class="lang-auto">func newServiceLister(api *API, filters ...ListServicesFilter) *serviceLister {
+// api is required
+// "options" are named filters because in this context it make a lot more sense.
+// filters are totally optional
+</code></pre>
+<hr>
+<aside class="quote no-group" data-post="3" data-topic="64">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/ilgooz/40/8_1.png" class="avatar"> ilgooz:</div>
+<blockquote>
+<ul>
+<li>One other advantage of the second way is to grouping relational required arguments in one Option feels more clean to me.</li>
+</ul>
+</blockquote>
+</aside>
+<p>I don’t think it is good to use Option in this case. What about grouping the parameter in a struct?<br>
+And even, in the case of an external resource (redis in this case), its instance should be pass directly as parameter.</p>
+<pre><code class="lang-auto">// from ilgooz post
+New("url", "dbname", b)
+
+// from ilgooz post
+New(
+  RequiredRedisOption("url", "dbname"),
+  RequiredOtherOption("b"),
+)
+
+// with struct
+New(
+  &amp;RedisParameter{
+    url: "url",
+    db: "dbname"
+  },
+  "b",
+)
+
+// pass instance of redis
+redis := NewRedis("url", "dbname")
+New(redis, "b")
+</code></pre>
+          <p><a href="https://forum.mesg.com/t/go-new-functions-with-options-arguments/64/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/go-new-functions-with-options-arguments/64/4</link>
+        <pubDate>Wed, 26 Sep 2018 07:55:45 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-64-4</guid>
+        <source url="https://forum.mesg.com/t/go-new-functions-with-options-arguments/64.rss">Go New functions with options arguments</source>
+      </item>
+      <item>
+        <title>Go New functions with options arguments</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>I agree that we should have a transparent pattern about where to adopt Options.</p>
+<h1>Option Types</h1>
+<h3>Required Options</h3>
+<p>These kind of options are required to be provided while calling the <em>New</em> func. Otherwise <em>New</em> should return an error. In my view, I see the “Option” word here like we have to provide this option but from a list of other Options rather than it should be provided “optionally”.</p>
+<p>Should we only adopt and do not accept parameters other than the Options for <em>New</em> funcs? Where is the line? To me, forcing the use of Option all the time is not a good practice but still this is a gray area. In my view, if we require lots of arguments in the initialization time, lets say more than 4, the syntax gets weird and hard to read.</p>
+<p>lets compare:</p>
+<pre><code class="lang-auto">New(a, b, c, d)
+
+// vs.
+
+New(
+  RequiredOption1(a),
+  RequiredOption2(b),
+  RequiredOption3(c),
+  RequiredOption4(d),
+  RequiredOption5(d),
+)
+</code></pre>
+<ul>
+<li>
+<p>The good thing about the first one, we can catch the forgotten argument in the compiler time and for the second one it’ll return an error in the runtime.</p>
+</li>
+<li>
+<p>The good thing about the second one is,  these named options helps a lot with readability when there are lots of required arguments while initializing <em>New</em>.</p>
+</li>
+<li>
+<p>One other advantage of the second way is to grouping relational required arguments in one Option feels more clean to me.</p>
+</li>
+</ul>
+<p>e.g.</p>
+<pre><code class="lang-auto">New("url", "dbname", b)
+
+// vs.
+
+New(
+  RequiredRedisOption("url", "dbname"),
+  RequiredOtherOption("b"),
+)
+</code></pre>
+<p>I agree on having required arguments directly passed without using Options, feels more natural. But we should give the decision about strictly dropping Options for required fields or use it if we have for example &gt;=5 required fields in a row. To me this is a gray area or maybe we even never will have required arguments of this much in a <em>New</em>.  Also consider the “grouping” syntax of Options while giving a decision.</p>
+<h3>Non-Required Options</h3>
+<p>Providing these options are totally up to caller to configure the behavior as needed.</p>
+<h1>Naming Options</h1>
+<p>Sometimes it’s nice to name Options as Filters or something else depending on the context. Like in the <a href="https://github.com/mesg-foundation/core/blob/43e8a7a/api/list.go">api</a> package.</p>
+<h1>Also see</h1>
+<ul>
+<li>demonstrates a good use of Options: <a href="https://github.com/micro/go-micro">https://github.com/micro/go-micro</a>
+</li>
+</ul>
+          <p><a href="https://forum.mesg.com/t/go-new-functions-with-options-arguments/64/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/go-new-functions-with-options-arguments/64/3</link>
+        <pubDate>Wed, 26 Sep 2018 07:03:43 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-64-3</guid>
+        <source url="https://forum.mesg.com/t/go-new-functions-with-options-arguments/64.rss">Go New functions with options arguments</source>
+      </item>
+      <item>
+        <title>Go New functions with options arguments</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <blockquote>
+<p>we should not have to call these option function in order to configure a struct. The simple use of a  <code>New</code>  without optional arguments should be enough to have something working.</p>
+</blockquote>
+<p>And that’s the clue. Passing everything as an option and return an error in case of not configure some option makes golang kind of language with dynamic variables.</p>
+<p>The patter itself is just a pattern and it’s good in some cases and in some is bad. It cannot be applied everywhere.</p>
+          <p><a href="https://forum.mesg.com/t/go-new-functions-with-options-arguments/64/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/go-new-functions-with-options-arguments/64/2</link>
+        <pubDate>Tue, 25 Sep 2018 17:48:20 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-64-2</guid>
+        <source url="https://forum.mesg.com/t/go-new-functions-with-options-arguments/64.rss">Go New functions with options arguments</source>
+      </item>
+      <item>
+        <title>Go New functions with options arguments</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>In <a href="https://github.com/mesg-foundation/core/blob/c2527ae17bad7f57fe9b1fa8c4027c617bf214f2/api/api.go#L18">many</a> <a href="https://github.com/mesg-foundation/core/blob/74f839802272107154071678d2d4efcadcbf4465/utils/chunker/chunker.go#L41">places</a> <a href="https://github.com/mesg-foundation/core/blob/ad9b0fb558d7b37c79200af4b73a3c6edaebf720/interface/grpc/service/type.go#L18">in</a> <a href="https://github.com/mesg-foundation/core/blob/c3e23fd91747f05750f9f18c699bb4910a082b7e/service/service.go#L90">the</a> <a href="https://github.com/mesg-foundation/core/blob/ab36dc1f0a6c88710bb3b16b0910409b5e7d3834/container/container.go#L29">code</a> we use the pattern to add optional arguments mostly for the <code>New</code> functions to be able to customize the behavior of the struct we need to create.</p>
+<pre><code class="lang-auto">type XXX struct {}
+
+func New(options ...Option) *XXX {
+  x := &amp;XXX{}
+  for _, option := range options {
+    option(x)
+  }
+  return x
+}
+func OptionX() Option {
+  return func(x *xxx) {
+    // Do something on x
+  }
+}
+</code></pre>
+<p>Most of the time, if not all the time, it is to be able to set a different dependency for the unit tests in some cases it’s really to configure the behavior.</p>
+<p>I like this pattern, I feel it’s really flexible to customize a struct, I just feel that we should use it with parsimony because it doesn’t suit for everything.</p>
+<p>For me this pattern is perfect to customize parts that are totally optional meaning that we should not have to call these option function in order to configure a struct. The simple use of a <code>New</code> without optional arguments should be enough to have something working.</p>
+<p>I’ve seen different uses of that pattern so I’m really interested to think what you all think about that and where and how to use it and also where and how not to use it and for what reason.</p>
+<p>I really want to make sure that we all agree on how to use this pattern and like that we could start to create some guidelines based on that <img src="https://forum.mesg.com/images/emoji/twitter/slight_smile.png?v=6" title=":slight_smile:" class="emoji" alt=":slight_smile:"></p>
+          <p><a href="https://forum.mesg.com/t/go-new-functions-with-options-arguments/64/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/go-new-functions-with-options-arguments/64/1</link>
+        <pubDate>Tue, 25 Sep 2018 15:45:26 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-64-1</guid>
+        <source url="https://forum.mesg.com/t/go-new-functions-with-options-arguments/64.rss">Go New functions with options arguments</source>
+      </item>
+  </channel>
+</rss>

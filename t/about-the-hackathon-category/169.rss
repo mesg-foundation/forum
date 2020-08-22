@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>About the Hackathon category</title>
+    <link>https://forum.mesg.com/t/about-the-hackathon-category/169</link>
+    <description>This is where you can share your awesome applications or services with the community! You can also get info about MESG Hackathons.</description>
+    
+    <lastBuildDate>Sat, 05 Jan 2019 01:16:40 +0000</lastBuildDate>
+    <category>Hackathon</category>
+    <atom:link href="https://forum.mesg.com/t/about-the-hackathon-category/169.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>About the Hackathon category</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>This is where you can share your awesome applications or services with the community! You can also get info about MESG Hackathons.</p>
+          <p><a href="https://forum.mesg.com/t/about-the-hackathon-category/169/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/about-the-hackathon-category/169/1</link>
+        <pubDate>Wed, 02 Jan 2019 05:02:19 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-169-1</guid>
+        <source url="https://forum.mesg.com/t/about-the-hackathon-category/169.rss">About the Hackathon category</source>
+      </item>
+  </channel>
+</rss>

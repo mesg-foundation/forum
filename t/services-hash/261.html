@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <title>Service&#39;s hash - Engine - MESG Community</title>
+    <meta name="description" content="Related to 
+
+https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211
+
+PR #731.
+
+In this topic, I would like to fix the different issues we have about the hash of a service and find&amp;hellip;">
+    <meta name="generator" content="Discourse 2.5.0.beta5 - https://github.com/discourse/discourse version 00aab498297cba8f977c1e0eb17b7d38ff06cc68">
+<link rel="icon" type="image/png" href="../../uploads/default/optimized/1X/9f11b6ddfa02bffdbec79487592a0573a0236cb5_2_32x32.png">
+<link rel="apple-touch-icon" type="image/png" href="../../uploads/default/optimized/1X/53630361a40ad76e1733dd0b0f486e9ae2f4f4d6_2_180x180.png">
+<meta name="theme-color" content="#491e8c">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+<link rel="canonical" href="261.html" />
+<script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","url":"https://forum.mesg.com","potentialAction":{"@type":"SearchAction","target":"https://forum.mesg.com/search?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
+<link rel="search" type="application/opensearchdescription+xml" href="../../opensearch.xml" title="MESG Community Search">
+
+      <link href="../../stylesheets/desktop_3_52e3411e87658e862890db7bd06899cf49ad5f59.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop" data-theme-id="7"/>
+      <link href="../../stylesheets/desktop_theme_7_bf4f2d3d8a71e6ee907065be9a79df3d849bd29c.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop_theme" data-theme-id="7"/>
+    
+    <meta id="data-ga-universal-analytics" data-tracking-code="UA-117583862-1" data-json="{&quot;cookieDomain&quot;:&quot;auto&quot;}" data-auto-link-domains="">
+
+<link rel="preload" href="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js" as="script">
+<script src="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js"></script>
+
+
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of &#39;Service&#39;s hash&#39;" href="261.rss" />
+    <meta property="og:site_name" content="MESG Community" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:url" content="https://forum.mesg.com/t/services-hash/261" />
+<meta name="twitter:url" content="https://forum.mesg.com/t/services-hash/261" />
+<meta property="og:title" content="Service&#39;s hash" />
+<meta name="twitter:title" content="Service&#39;s hash" />
+<meta property="og:description" content="Related to   Service&#39;s hash are different from downloaded tarball and remote git  PR #731.  In this topic, I would like to fix the different issues we have about the hash of a service and find solutions that can be implemented step-by-step.  The ultimate goal is to have: 1. same hash across any computer  This feature is really important for the future decentralized network. It will be the unique identifier used in order to dispatch executions across multiple Core. That’s how the network will be ..." />
+<meta name="twitter:description" content="Related to   Service&#39;s hash are different from downloaded tarball and remote git  PR #731.  In this topic, I would like to fix the different issues we have about the hash of a service and find solutions that can be implemented step-by-step.  The ultimate goal is to have: 1. same hash across any computer  This feature is really important for the future decentralized network. It will be the unique identifier used in order to dispatch executions across multiple Core. That’s how the network will be ..." />
+<meta property="article:published_time" content="2019-03-05T06:12:00+00:00" />
+<meta property="og:ignore_canonical" content="true" />
+
+
+
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"QAPage","name":"Service's hash","mainEntity":{"@type":"Question","name":"Service's hash","text":"Related to\n\n<a href="https://forum.mesg.com/t/services-hash/\&quot;https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211\&quot;" class=\"inline-onebox\">Service&#39;s hash are different from downloaded tarball and remote git<\/a>\n\n<a href="https://forum.mesg.com/t/services-hash/\&quot;https://github.com/mesg-foundation/core/pull/731\&quot;" rel=\"nofollow noopener\">PR #731<\/a>.\n\nIn this topic, I would like to fix the different issues we have about the hash of a service and find solutions that can be implemented step-by-step.\n\nThe ultimate goal is to have:\n\n1. same hash across any comp&hellip;","upvoteCount":0,"answerCount":1,"dateCreated":"2019-03-05T06:12:00.320Z","author":{"@type":"Person","name":"Nicolas"},"acceptedAnswer":{"@type":"Answer","text":"[image] Anthony:\n\nAgree :+1: I would use the checksum of the tarball except if there is good reason to use the tarsum\n\nOk, with current needs let’s go with a checksum of the tarball :+1:","upvoteCount":0,"dateCreated":"2019-03-06T10:00:55.228Z","url":"https://forum.mesg.com/t/services-hash/261/6","author":{"@type":"Person","name":"krhubert"}}}}</script>
+  </head>
+  <body class="crawler">
+    
+    <header>
+      <a href="../../index.html">
+          <img src="../../uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png" alt="MESG Community" id="site-logo" style="max-width: 150px;">
+      </a>
+    </header>
+    <div id="main-outlet" class="wrap">
+        <div id="topic-title">
+    <h1>
+      <a href="261.html">Service&#39;s hash</a>
+    </h1>
+
+      <div class="topic-category" itemscope itemtype="http://schema.org/BreadcrumbList">
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../c/development.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #AB9364'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Development</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="1" />
+          </span>
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../c/development/engine.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #AB9364'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Engine</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="2" />
+          </span>
+      </div>
+
+      <div class="topic-category">
+        <div class='discourse-tags list-tags'>
+            <a href='../../tag/proposal.html' class='discourse-tag' rel="tag">proposal</a>
+        </div>
+      </div>
+  </div>
+
+  
+
+
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="261.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2019-03-05T06:12:00Z'>
+              <time itemprop='dateModified' datetime='2019-05-06T11:24:25Z' class='post-time'>
+                May 6, 2019, 11:24am
+              </time>
+          <span itemprop='position'>#1</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Related to</p>
+<ul>
+<li><a href="../services-hash-are-different-from-downloaded-tarball-and-remote-git/211.html" class="inline-onebox">Service's hash are different from downloaded tarball and remote git</a></li>
+<li>
+<a href="https://github.com/mesg-foundation/core/pull/731" rel="nofollow noopener">PR #731</a>.</li>
+</ul>
+<p>In this topic, I would like to fix the different issues we have about the hash of a service and find solutions that can be implemented step-by-step.</p>
+<h2>The ultimate goal is to have:</h2>
+<p><strong>1. same hash across any computer</strong><br>
+This feature is really important for the future decentralized network. It will be the unique identifier used in order to dispatch executions across multiple Core. That’s how the network will be able to know which service is running, on which core, and select the right Core to execute and verify executions.</p>
+<p>Requested by <a class="mention" href="../../u/krhubert.html">@krhubert</a>:<br>
+<strong>6. same hash even with different deployment method</strong><br>
+The hash should be the same even if the service is deploy from different method: local dir, git repo or tar archive (including compression).</p>
+<h2>But the hash should change when:</h2>
+<p><strong>2. source code change</strong><br>
+means a potentially completely different service.</p>
+<p><strong>3. service definition change</strong><br>
+means a potentially completely different service.</p>
+<p><strong>4. env variables change</strong><br>
+could drastically change the behavior of a service (eg Ethereum with the different networks. same source code, but the data are completely different, thus the behavior of the service is also different).</p>
+<p><strong>5. dependencies change (OS version, apt-get, npm i, go mod, etc…)</strong><br>
+this is more subtle but should also be taking into account: a different version of a dependency could also change drastically the behavior of the service.<br>
+For instance, a package manager using semver could break when installing a new version that actually break the dependency. (But it should be fine when locking version or using having a ‘lock’ file (eg: <code>package-lock.jso</code>)). Another example, running an <code>apt-get upgrade</code> can also install different version of system libraries.</p>
+<h2>Solutions</h2>
+<h4>- Docker image</h4>
+<p><img src="../../images/emoji/twitter/x.png%3Fv=9" title=":x:" class="emoji" alt=":x:"> <span class="hashtag">#1</span>, <span class="hashtag">#4</span>, <span class="hashtag">#6</span><br>
+<img src="../../images/emoji/twitter/white_check_mark.png%3Fv=9" title=":white_check_mark:" class="emoji" alt=":white_check_mark:"> <span class="hashtag">#2</span>, <span class="hashtag">#3</span>, <span class="hashtag">#5</span><br>
+Docker image hash are absolutely non-deterministic and change anytime a change type <span class="hashtag">#2</span>, <span class="hashtag">#3</span>, <span class="hashtag">#5</span> occur. Even more, rebuild from the same source without docker cache or on another computer will create a different image hash.</p>
+<h4>- Docker image + hash of env variables (current implementation)</h4>
+<p><img src="../../images/emoji/twitter/x.png%3Fv=9" title=":x:" class="emoji" alt=":x:"> <span class="hashtag">#1</span>, <span class="hashtag">#6</span><br>
+<img src="../../images/emoji/twitter/white_check_mark.png%3Fv=9" title=":white_check_mark:" class="emoji" alt=":white_check_mark:"> <span class="hashtag">#2</span>, <span class="hashtag">#3</span>, <span class="hashtag">#4</span>, <span class="hashtag">#5</span><br>
+In this improved version of the previous one, the env variables are taking into account so it solves <span class="hashtag">#4</span>. But goal <span class="hashtag">#1</span> is still not met.</p>
+<h4>- Checksum of source + hash of env variables</h4>
+<p><img src="../../images/emoji/twitter/x.png%3Fv=9" title=":x:" class="emoji" alt=":x:"> <span class="hashtag">#5</span><br>
+<img src="../../images/emoji/twitter/white_check_mark.png%3Fv=9" title=":white_check_mark:" class="emoji" alt=":white_check_mark:"> <span class="hashtag">#1</span>, <span class="hashtag">#2</span>, <span class="hashtag">#3</span>, <span class="hashtag">#4</span>, <span class="hashtag">#6</span><br>
+The <a href="https://github.com/mesg-foundation/core/pull/731" rel="nofollow noopener">PR #731</a> calculate the hash based on the source code, the env variables, and the service definition. It calculates the same hash across computer. BUT it doesn’t take into account the dependencies change.</p>
+<h4>Download already built docker image</h4>
+<p><img src="../../images/emoji/twitter/x.png%3Fv=9" title=":x:" class="emoji" alt=":x:"> <span class="hashtag">#2</span>, <span class="hashtag">#3</span><br>
+<img src="../../images/emoji/twitter/white_check_mark.png%3Fv=9" title=":white_check_mark:" class="emoji" alt=":white_check_mark:"> <span class="hashtag">#1</span>, <span class="hashtag">#4</span>, <span class="hashtag">#5</span>, <span class="hashtag">#6</span><br>
+Same way as Docker Hub is working, the developer build its image and publish it on a image repository.<br>
+From <a class="mention" href="../../u/anthony.html">@Anthony</a>: Docker can also generate a tarball that is easy to distribute with the command <code>docker image save</code>. But the size of the image could be way higher than the source.<br>
+User can simply download the already build image.<br>
+The big problem is there is no way to guarantee the image is actually running the service’s source code. A developer can publish an image that is not build with the same source code.<br>
+One way to solve this will be to “control” the build process either by forcing to use the core or to use a public CI. In both case, there are many flaws and limitations.</p>
+<h4>Deterministic image build + hash of env variables</h4>
+<p><img src="../../images/emoji/twitter/white_check_mark.png%3Fv=9" title=":white_check_mark:" class="emoji" alt=":white_check_mark:"> <span class="hashtag">#1</span>, <span class="hashtag">#2</span>, <span class="hashtag">#3</span>, <span class="hashtag">#4</span>, <span class="hashtag">#5</span>, <span class="hashtag">#6</span><br>
+The ultimate solution could be fixed by using another tool than Docker build to create the image in a deterministic way.<br>
+I found out that it’s possible but may require to use “complicated” tools and could take weeks to actually implement.</p>
+<ul>
+<li><a href="https://blog.bazel.build/2015/07/28/docker_build.html" rel="nofollow noopener">https://blog.bazel.build/2015/07/28/docker_build.html</a></li>
+<li><a href="https://github.com/openshift/source-to-image" rel="nofollow noopener">https://github.com/openshift/source-to-image</a></li>
+</ul>
+<hr>
+<ul>
+<li>I would especially like to have your feedback on the prioritization of <span class="hashtag">#5</span>. I feel it’s important but make the calculation of the hash dramatically more complicated.</li>
+<li>Also please fix the proposed solutions if I made mistakes.</li>
+</ul>
+        </div>
+
+        <meta itemprop='headline' content='Service&#39;s hash'>
+          <meta itemprop='keywords' content='proposal'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+            <div class='crawler-linkback-list' itemscope itemtype='http://schema.org/ItemList'>
+                  <div itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+                    <a href="../mesg-core-v0-9-release-notes/273.html" itemprop='item'>
+                      <meta itemprop='url' content='https://forum.mesg.com/t/mesg-core-v0-9-release-notes/273'>
+                      <meta itemprop='position' content='5'>
+                      <span itemprop='name'>MESG Core v0.9 Release Notes</span>
+                    </a>
+                  </div>
+            </div>
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="261.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2019-03-05T09:54:53Z' class='post-time'>
+                March 5, 2019,  9:54am
+              </time>
+              <meta itemprop='dateModified' content='2019-03-05T09:54:53Z'>
+          <span itemprop='position'>#2</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Another way to have full deterministic hash even with docker is to save the docker image built with <code>docker image save</code>, this generates a tarball that we can <code>shasum</code> and distribute increasing considerably the size of the service but this image can then be imported into docker with exactly the same layers (apt-get, npm install etc… will be exactly the same)</p>
+<p>Something I want clarification on here is what do we want to be deterministic (and I think there is confusion here).</p>
+<ul>
+<li>The hash of the service based on an “import”</li>
+<li>The artifacts generated for a service for an “export”</li>
+</ul>
+<p>I feel we are confusing this and that’s why this PR <a href="https://github.com/mesg-foundation/core/pull/731" rel="nofollow noopener">https://github.com/mesg-foundation/core/pull/731</a> is getting messy.</p>
+<p>For me the priority now is to manage the import (because we control the export with the marketplace). We need to make sure that one tarball received will always generate the exact same hash. If the tarball received is different then it’s ok to have a different hash in that case. And for this case only the <code>tarsum</code> of the tarball + env variable is sufficient.</p>
+<p>For the “export” part I agree it needs a lot more work with the solutions you described or the <code>save</code> / <code>import</code> from docker but this is a different step</p>
+        </div>
+
+        <meta itemprop='headline' content='Service&#39;s hash'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="2" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="261.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2019-03-05T11:46:40Z'>
+              <time itemprop='dateModified' datetime='2019-03-05T11:54:31Z' class='post-time'>
+                March 5, 2019, 11:54am
+              </time>
+          <span itemprop='position'>#3</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <aside class="quote group-team" data-post="2" data-topic="261">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/anthony/40/7_2.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>Another way to have full deterministic hash even with docker is to save the docker image built with <code>docker image save</code> , this generates a tarball that we can <code>shasum</code> and distribute increasing considerably the size of the service but this image can then be imported into docker with exactly the same layers (apt-get, npm install etc… will be exactly the same)</p>
+</blockquote>
+</aside>
+<p>I will include it in solution “Download already built docker image”.</p>
+<aside class="quote group-team quote-modified" data-post="2" data-topic="261">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/anthony/40/7_2.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>Something I want clarification on here is what do we want to be deterministic (and I think there is confusion here).</p>
+<ul>
+<li>The hash of the service based on an “import”</li>
+<li>The artifacts generated for a service for an “export”</li>
+</ul>
+<p>For me the priority now is to manage the import (because we control the export with the marketplace). We need to make sure that one tarball received will always generate the exact same hash. If the tarball received is different then it’s ok to have a different hash in that case. And for this case only the <code>tarsum</code> of the tarball + env variable is sufficient.</p>
+</blockquote>
+</aside>
+<p>So, if I understand it correctly, you think goal <strong><span class="hashtag">#5</span> dependencies change (OS version, apt-get, npm i, go mod, etc…)</strong> is not a priority?</p>
+<p>If we reduced the service’s hash to just the checksum of the source, a lot of uniques properties of the hash will disappear. It will not accurately represent the service because there will be some many variable omitted.</p>
+<hr>
+<p>Updates:<br>
+Maybe it’s enough for now to go back to a “simple” checksum on the source and not using the actual Docker Image hash. The decentralized network is not implemented, so having not exactly the same running services across computer with the same hash is fine for now.<br>
+If we go with this direction, the <a href="https://github.com/mesg-foundation/core/pull/731" rel="nofollow noopener">PR 731</a> actually resolves the requirements + give a bit more flexibility by also implementing <strong>6. same hash even with different deployment method</strong>.</p>
+        </div>
+
+        <meta itemprop='headline' content='Service&#39;s hash'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/krhubert.html'><span itemprop='name'>krhubert</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="261.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2019-03-06T06:45:23Z' class='post-time'>
+                March 6, 2019,  6:45am
+              </time>
+              <meta itemprop='dateModified' content='2019-03-06T06:45:23Z'>
+          <span itemprop='position'>#4</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <aside class="quote group-team" data-post="2" data-topic="261">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/anthony/40/7_2.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>For me the priority now is to manage the import (because we control the export with the marketplace). We need to make sure that one tarball received will always generate the exact same hash. If the tarball received is different then it’s ok to have a different hash in that case.</p>
+</blockquote>
+</aside>
+<p>So how we should treat deploy from git or a local directory (if the hash of the tarred directory will be different then it’s ok for you?). In that case, do we claim that we only support deploy for production from the marketplace, any other way of deploy is for dev|staging|on own responsibility?</p>
+<h4>note: docker image</h4>
+<p>If we are going to use docker image somehow then in the future we can’t replace docker container provider with a diffrent container system (or orchestrator like rocket, kubernetes, cloud providers etc…) easily. And I think we want to do this in a near feature so binding hash with docker is only temporary solution.</p>
+<h5>note: 5. dependencies change</h5>
+<p>Can we provide somehow the deterministic hash for this bullet? Using <code>apt-get upgrade</code> or <code>npm install</code> without lock file can result in different service. For this the only option is download something that is already built because I don’t see how any of another method can provide a deterministic hash, correct me if I’m wrong.</p>
+<p>I just wanted to put those notes here, but I don’t have a solution for them in mind.</p>
+<p><a class="mention" href="../../u/nicolas.html">@Nicolas</a> pointed out good argument</p>
+<aside class="quote group-team" data-post="3" data-topic="261">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/nicolas/40/10_2.png" class="avatar"> Nicolas:</div>
+<blockquote>
+<p>The decentralized network is not implemented,</p>
+</blockquote>
+</aside>
+<p>So maybe let’s use either checksum of tarball or use tarsum (as it provides <span class="hashtag">#6</span>) and we can back to the topic later when we start doing the network. Then we will have more requirements what we will need in implementation time.</p>
+        </div>
+
+        <meta itemprop='headline' content='Service&#39;s hash'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="261.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2019-03-06T08:29:36Z'>
+              <time itemprop='dateModified' datetime='2019-03-06T08:31:07Z' class='post-time'>
+                March 6, 2019,  8:31am
+              </time>
+          <span itemprop='position'>#5</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <aside class="quote group-team" data-post="4" data-topic="261">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/krhubert/40/9_2.png" class="avatar"> krhubert:</div>
+<blockquote>
+<p>So how we should treat deploy from git or a local directory (if the hash of the tarred directory will be different then it’s ok for you?). In that case, do we claim that we only support deploy for production from the marketplace, any other way of deploy is for dev|staging|on own responsibility?</p>
+</blockquote>
+</aside>
+<p>This is not highly critical but would be best to have the same hash all the time. As long as we import it the same way we do to export to the marketplace that should be fine. eg: remove .git, select unique folder and finally create tarball.</p>
+<p>The tarball should have the exact same files and so the exact same hash. If there is any changes on the git/directory like permissions or last update header then this is a different version and the tarball will be different.</p>
+<p>I don’t see any reason to try to have the same tarball if the headers changes except if i’m missing some knowledges about header and for example on linux there is an update on the files by the os (for example last_cache, last_read…)</p>
+<aside class="quote group-team" data-post="4" data-topic="261">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/krhubert/40/9_2.png" class="avatar"> krhubert:</div>
+<blockquote>
+<p>So maybe let’s use either checksum of tarball or use tarsum (as it provides <span class="hashtag">#6</span>) and we can back to the topic later when we start doing the network. Then we will have more requirements what we will need in implementation time.</p>
+</blockquote>
+</aside>
+<p>Agree <img src="../../images/emoji/twitter/+1.png%3Fv=6" title=":+1:" class="emoji" alt=":+1:"> I would use the checksum of the tarball except if there is good reason to use the tarsum</p>
+        </div>
+
+        <meta itemprop='headline' content='Service&#39;s hash'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/krhubert.html'><span itemprop='name'>krhubert</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="261.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2019-03-06T10:00:55Z'>
+              <time itemprop='dateModified' datetime='2019-03-08T04:35:04Z' class='post-time'>
+                March 8, 2019,  4:35am
+              </time>
+          <span itemprop='position'>#6</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <aside class="quote group-team" data-post="5" data-topic="261">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/anthony/40/7_2.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>Agree <img src="../../images/emoji/twitter/+1.png%3Fv=6" title=":+1:" class="emoji" alt=":+1:"> I would use the checksum of the tarball except if there is good reason to use the tarsum</p>
+</blockquote>
+</aside>
+<p>Ok, with current needs let’s go with a checksum of the tarball <img src="../../images/emoji/twitter/+1.png%3Fv=6" title=":+1:" class="emoji" alt=":+1:"></p>
+        </div>
+
+        <meta itemprop='headline' content='Service&#39;s hash'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="261.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2019-03-07T03:26:26Z'>
+              <time itemprop='dateModified' datetime='2019-03-07T03:27:42Z' class='post-time'>
+                March 7, 2019,  3:27am
+              </time>
+          <span itemprop='position'>#7</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <aside class="quote group-team quote-modified" data-post="6" data-topic="261">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/krhubert/40/9_2.png" class="avatar"> krhubert:</div>
+<blockquote>
+<blockquote>
+<p>Agree <img src="../../images/emoji/twitter/+1.png%3Fv=6" title=":+1:" class="emoji" alt=":+1:"> I would use the checksum of the tarball except if there is good reason to use the tarsum</p>
+</blockquote>
+<p>Ok, with current needs let’s go with a checksum of the tarball <img src="../../images/emoji/twitter/+1.png%3Fv=6" title=":+1:" class="emoji" alt=":+1:"></p>
+</blockquote>
+</aside>
+<p>I agree with you but let’s be careful with one thing:<br>
+I think it’s super important to have the same service’s hash saved in the marketplace and calculated locally when deploying a service, so we can actually enforce a verification of the 2 hashes.<br>
+We have to make sure that during the publishing of a service on the marketplace, the hash is calculated the same way as the command deploy.<br>
+Because the Core is “cleaning” the service before calculating the hash, if the CLI simply calculate the hash of the tar published on the marketplace, then it may be different (no deletion of <code>.git</code>, etc…).</p>
+<p>Here my suggestion is simply to deploy the service locally before publishing it, so the CLI can easily get the service’s hash. Also, if we change the calculation of the hash, the CLI will not need any update because it’s relaying on the Core to calculate it.<br>
+Do you agree with this? Do you see other way to do it?</p>
+        </div>
+
+        <meta itemprop='headline' content='Service&#39;s hash'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="2" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="261.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2019-03-07T05:27:55Z'>
+              <time itemprop='dateModified' datetime='2019-03-07T05:28:25Z' class='post-time'>
+                March 7, 2019,  5:28am
+              </time>
+          <span itemprop='position'>#8</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Moreover, with the same hash in marketplace, the Core could check way easier if the service exist on the marketplace and check for purchase.<br>
+Currently, because the hash are different, only the command <code>service deploy</code> can check if the service is purchased.</p>
+        </div>
+
+        <meta itemprop='headline' content='Service&#39;s hash'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="261.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2019-03-07T07:54:30Z' class='post-time'>
+                March 7, 2019,  7:54am
+              </time>
+              <meta itemprop='dateModified' content='2019-03-07T07:54:30Z'>
+          <span itemprop='position'>#9</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <aside class="quote group-team" data-post="7" data-topic="261">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/nicolas/40/10_2.png" class="avatar"> Nicolas:</div>
+<blockquote>
+<p>We have to make sure that during the publishing of a service on the marketplace, the hash is calculated the same way as the command deploy.</p>
+</blockquote>
+</aside>
+<p><img src="../../images/emoji/twitter/+1.png%3Fv=6" title=":+1:" class="emoji" alt=":+1:"></p>
+<p>Deploying the service is a bit too much but agree that this could be a good way to validate this can be done the same way that the validation as proposed here (<a href="https://github.com/mesg-foundation/core/issues/191#issuecomment-465438396" rel="nofollow noopener">https://github.com/mesg-foundation/core/issues/191#issuecomment-465438396</a>). A deploy that doesn’t persist, but only simulate the deployment.</p>
+        </div>
+
+        <meta itemprop='headline' content='Service&#39;s hash'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="261.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2019-03-07T09:30:31Z'>
+              <time itemprop='dateModified' datetime='2019-03-07T09:31:29Z' class='post-time'>
+                March 7, 2019,  9:31am
+              </time>
+          <span itemprop='position'>#10</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>I’ll stick with the idea I put on the PR itself.</p>
+<p>For me:</p>
+<h3>Exports</h3>
+<p>It doesn’t matter if dependencies (exports) change between different deploys. Because locking versions correctly is totally developer’s job. If they don’t do it for some reason and service becomes to buggy than it’s a low quality service.</p>
+<h3>Env Vars</h3>
+<p>We don’t need to include env variables to hash calculation. We actually, only aim to calculate hash from the source code itself. Overwriting env variables on deploy time does not change the service’s source code. So it’s hash shouldn’t change too.</p>
+<p>Also, we don’t <strong>publish</strong> the new service to marketplace with different env var values applied during the deploy time. So, the service doesn’t need to have different hash depending on the custom env var values.</p>
+<p>I’d like to move deploy time env variables to the <strong>service start</strong> time and maybe generate a new hash by combining service’s actual hash + env variables to easily identify that service for stoping it later on and so on.</p>
+<p>With workflows, starting/depending on services will be like:</p>
+<pre><code class="lang-auto">services:
+  - graphql:
+      sid: sid-or-just-tarball-hash
+      env:
+        - SCHEMA=`...type Users {...}...`
+</code></pre>
+<p>As you see it’s easier to provide env variables directly in the workflow. Workflow VM can apply this env variables to service on start time and save the unique service id or/and service hash calculated by combining the service’s hash + env variables in somewhere, to stop or delete it later on.</p>
+<h1>Conclusion</h1>
+<p>By moving <strong>env vars</strong> to start time and leaving control of <strong>exports</strong> to developers, we can simply calculate hashes directly from the service’s tarball without creating special hash calculation techniques.</p>
+<p>On the marketplace publish time, devs can directly provide the tarball file or it’s URL for us to publish it to the marketplace. Or they can provide the source files locally on their computers and we can create a tarball, give a copy of it to the dev and then publish to marketplace.</p>
+<h1>Extra</h1>
+<h3>Supporting Git or different tarballs</h3>
+<p>I think, there is no need to force keeping the same hash while deploying a service via git or from different tarballs tarballs that generated during the service’s publish time. Devs should just be get used to using marketplace like npm, brew or any other pkg managers. If they want to use a service from an unknown source, we can still provide the functionality of deploying services from tarball urls and Git but, checking the safety of that service is should be totally up to devs.</p>
+<h3>Using Docker for getting hash</h3>
+<p>I don’t quite like to use a hash calculated by Docker. Because it’s hard to regenerate that hash from the source code later on. And it’s hard to test the service’s security and know what’s going on inside if we directly publish and use the Docker image to marketplace instead of rebuilding it from the source code on deploy time.</p>
+        </div>
+
+        <meta itemprop='headline' content='Service&#39;s hash'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="261.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2019-03-07T10:29:31Z' class='post-time'>
+                March 7, 2019, 10:29am
+              </time>
+              <meta itemprop='dateModified' content='2019-03-07T10:29:31Z'>
+          <span itemprop='position'>#11</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <aside class="quote group-team" data-post="10" data-topic="261">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/ilgooz/40/46_2.png" class="avatar"> ilgooz:</div>
+<blockquote>
+<p>We don’t need to include env variables to hash calculation. We actually, only aim to calculate hash from the source code itself. Overwriting env variables on deploy time does not change the service’s source code. So it’s hash shouldn’t change too.</p>
+</blockquote>
+</aside>
+<p>Integrating the env into the hash calculation have the advantage of running the same service’s source code with different envs like running an ethereum mainnet service and also an ethereum testnet service as the same time. This is a totally find approach.</p>
+<aside class="quote group-team" data-post="10" data-topic="261">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/ilgooz/40/46_2.png" class="avatar"> ilgooz:</div>
+<blockquote>
+<p>Also, we don’t <strong>publish</strong> the new service to marketplace with different env var values applied during the deploy time. So, the service doesn’t need to have different hash depending on the custom env var values.</p>
+</blockquote>
+</aside>
+<p>Yes you are right, but we could imagine an hash verification only if deployed without env, or a bit more complicated, verifying the hash before applying the custom env.</p>
+<aside class="quote group-team" data-post="10" data-topic="261">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/ilgooz/40/46_2.png" class="avatar"> ilgooz:</div>
+<blockquote>
+<p>I’d like to move deploy time env variables to the <strong>service start</strong> time and maybe generate a new hash by combining service’s actual hash + env variables to easily identify that service for stoping it later on and so on.</p>
+</blockquote>
+</aside>
+<p>This is the behavior of the command deploy. The command deploy is the one that actually create the service, so it creates the hash.<br>
+The command dev is compatible with env and should be use when testing different env.</p>
+<aside class="quote group-team" data-post="10" data-topic="261">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/ilgooz/40/46_2.png" class="avatar"> ilgooz:</div>
+<blockquote>
+<p>As you see it’s easier to provide env variables directly in the workflow. Workflow VM can apply this env variables to service on start time and save the unique service id or/and service hash calculated by combining the service’s hash + env variables in somewhere, to stop or delete it later on.</p>
+</blockquote>
+</aside>
+<p>We could replace the <code>sid</code> by the marketplace URL so the Core can download and deploy it automatically rather than manually by the user in advance.<br>
+Even if env variable are customizable, the Core could still check the service hash like I said in paragraph <span class="hashtag">#2</span>.</p>
+<aside class="quote group-team" data-post="10" data-topic="261">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/ilgooz/40/46_2.png" class="avatar"> ilgooz:</div>
+<blockquote>
+<p>checking the safety of that service is should be totally up to devs.</p>
+</blockquote>
+</aside>
+<p>i agree but anyway this cannot be automatic because the Core doesn’t know the hash to check with.</p>
+        </div>
+
+        <meta itemprop='headline' content='Service&#39;s hash'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="261.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2019-03-07T11:33:49Z'>
+              <time itemprop='dateModified' datetime='2019-03-07T11:48:48Z' class='post-time'>
+                March 7, 2019, 11:48am
+              </time>
+          <span itemprop='position'>#12</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <aside class="quote group-team" data-post="11" data-topic="261">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/nicolas/40/10_2.png" class="avatar"> Nicolas:</div>
+<blockquote>
+<p>Integrating the env into the hash calculation have the advantage of running the same service’s source code with different envs like running an ethereum mainnet service and also an ethereum testnet service as the same time. This is a totally find approach.</p>
+</blockquote>
+</aside>
+<p>It is still possible to do this by setting env vars at start time. A new hash can be calculated by combining the service’s actual hash + env vars. Start command can output the new hash. By moving it to the start time we’ll not be complicating the hash calculating process for service itself anymore and we’ll be still able to get unique hashes as we do now but within the start command.</p>
+<p>I cannot see a problem about moving env vars to start time.</p>
+        </div>
+
+        <meta itemprop='headline' content='Service&#39;s hash'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="261.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2019-03-07T11:52:57Z' class='post-time'>
+                March 7, 2019, 11:52am
+              </time>
+              <meta itemprop='dateModified' content='2019-03-07T11:52:57Z'>
+          <span itemprop='position'>#13</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <aside class="quote group-team" data-post="12" data-topic="261">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/ilgooz/40/46_2.png" class="avatar"> ilgooz:</div>
+<blockquote>
+<p>It is still possible to do this by setting env vars at start time. A new hash can be calculated by combining the service’s actual hash + env vars. Start command can output the new hash. By moving it to the start time we’ll not be complicating the hash calculating process for service itself anymore and we’ll be still able to get unique hashes as we do now but within the start command.</p>
+<p>I cannot see a problem about moving env vars to start time.</p>
+</blockquote>
+</aside>
+<p>So a “temporary” hash will be created during deploy? Otherwise how to start a service? Only by SID? In this case this is not a valid solution as the hash should always be the “source of truth” and unicity.</p>
+        </div>
+
+        <meta itemprop='headline' content='Service&#39;s hash'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="261.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2019-03-07T12:18:40Z'>
+              <time itemprop='dateModified' datetime='2019-03-07T12:20:16Z' class='post-time'>
+                March 7, 2019, 12:20pm
+              </time>
+          <span itemprop='position'>#14</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>No no, we’re still going to use service sid or hash to start it within the start command, like we always do.</p>
+<ul>
+<li>
+<p>Deploy command will calculate a simple hash over the tarball and output it.</p>
+</li>
+<li>
+<p>Start command will receive env variables and service’s sid or hash to start a service. It’ll calculate a new hash by combining deploy time hash +  env vars and then output it. <code>Start</code> name is a bit confusing so I think this is where the confusing comes in. Think it like <code>docker service create</code> command, it also creates a new hash for the service.</p>
+</li>
+</ul>
+<blockquote>
+<p>hash should always be the “source of truth” and unicity</p>
+</blockquote>
+<p>This is an another thing that where confusion also comes in. In my view, we don’t break this rule even if we move env vars to start command.</p>
+<p>The hash we create with the deploy command is no temporary. It’s service’s true hash. And it doesn’t need to be temporary anyway, we need it.</p>
+        </div>
+
+        <meta itemprop='headline' content='Service&#39;s hash'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="261.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2019-03-08T04:34:42Z' class='post-time'>
+                March 8, 2019,  4:34am
+              </time>
+              <meta itemprop='dateModified' content='2019-03-08T04:34:42Z'>
+          <span itemprop='position'>#15</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <aside class="quote group-team" data-post="14" data-topic="261">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/ilgooz/40/46_2.png" class="avatar"> ilgooz:</div>
+<blockquote>
+<ul>
+<li>Start command will receive env variables and service’s sid or hash to start a service. It’ll calculate a new hash by combining deploy time hash + env vars and then output it. <code>Start</code> name is a bit confusing so I think this is where the confusing comes in. Think it like <code>docker service create</code> command, it also creates a new hash for the service.</li>
+</ul>
+</blockquote>
+</aside>
+<p>I really don’t like the idea of changing the hash after the service is deployed. I think it will bring a lot of confusion…</p>
+        </div>
+
+        <meta itemprop='headline' content='Service&#39;s hash'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+
+
+
+
+
+
+    </div>
+    <footer class="container wrap">
+      <nav class='crawler-nav'>
+        <ul>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../index.html' itemprop="url">Home </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../categories.html' itemprop="url">Categories </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../guidelines.html' itemprop="url">FAQ/Guidelines </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../tos.html' itemprop="url">Terms of Service </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../privacy.html' itemprop="url">Privacy Policy </a>
+          </span>
+        </li>
+        </ul>
+      </nav>
+      <p class='powered-by-link'>Powered by <a href="https://www.discourse.org">Discourse</a>, best viewed with JavaScript enabled</p>
+    </footer>
+    
+    
+  </body>
+  
+</html>

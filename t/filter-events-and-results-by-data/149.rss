@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Filter events and results by data</title>
+    <link>https://forum.mesg.com/t/filter-events-and-results-by-data/149</link>
+    <description>From https://github.com/mesg-foundation/core/issues/195
+
+Events/results filtering should be possible on values.
+
+Let&#39;s make a list of operator to implement:
+
+- [ ] Equal
+- [ ] Contain
+- [ ] lower, lower or equal, greater, greater or equal
+
+We should make more research on this issue. We need a really efficient filtering system.
+
+The core, once the network is ready, may have to filter thousands and thousands of events per sec
+
+
+----
+
+Reply from @Anthony
+
+Also the goal with the network is to reverse this and instead of having many applications that listen and filter some events, have an event than can find all associated application that need this event with the filter applied. 
+
+We can easily implement this if we are based only on the event key with a query like `service.all.where(listeners.contains(eventKey))`
+
+But it gets trickier when we want to search for the applications that matches a specific filter.
+
+Example:
+an application that needs to listen an event `eventX` that contains `{foo: String, bar: String}` with the filter `foo=hello`.
+
+When an event `{foo: &quot;hello&quot;, bar: &quot;world&quot;}` is coming we should be able to find the application without having to replay filters for all matching applications.
+
+I&#39;m pretty sure we can find a way to hash these filters if we only use the **equal** operator and get the matching applications for a specific event but if we add more complex operations `gt`, `lt`... i don&#39;t see how so maybe we should implement only the equal operator and do the other filter on the application side only</description>
+    
+    <lastBuildDate>Fri, 19 Jul 2019 05:09:12 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/filter-events-and-results-by-data/149.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Filter events and results by data</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>I agree that we can use different events to do this filtering but we don’t necessarily have access to the service and/or want to modify it for a specific reason. Example: I don’t want to have to update the ethereum service just to send me an event when there is exactly my address…</p>
+<p>There is still a way for the workflow to exists without filters is using other custom services that either return a result or trigger an error if the match doesn’t work (and break the chain of execution). But this is kind of a hack that has its limitations too.</p>
+<p>Anyway, this is about filters in general not only in the context of workflow but also the stream of execution/event.</p>
+<p>If we want a generic filter system we need to know what we exactly want from that and where we want to apply these filters.</p>
+<h3>I don’t think we need a generic filter for everything</h3>
+<p>We certainly need one for the “unstructured” data (<code>map[string]interface{}</code> that we have for event data or execution outputs) but that’s it. The rest we have everything typed and known so it’s better to have well-defined filters.</p>
+<h1>What a filter could be</h1>
+<p>For me, this is all the parts that <strong>could</strong> be needed.</p>
+<ul>
+<li>Comparison of attribute’s value (of course this should be based on the type of data we check)
+<ul>
+<li>equals</li>
+<li>greater than</li>
+<li>less than</li>
+<li>different</li>
+<li>contains</li>
+<li>…</li>
+</ul>
+</li>
+<li>Support of AND conditions eg: <code>gt(xxx, 0) AND different(xxx, 10)</code>
+</li>
+<li>Support of OR conditions eg: <code>eq(xxx, 'hello') OR eq(xxx, 'world')</code>
+</li>
+<li>Nested filtering. Beeing able to filter a data inside an object or array</li>
+</ul>
+<p>Here is a way we could create this kind of filter. I’ve used a similar structure in a previous project and that was covering all the needs.</p>
+<pre><code class="lang-javascript">[
+  { attribute: 'xxx', value: 'xxx', predicate: 'eq' },
+  { attribute: 'yyy', value: ['aa', 'bb'], predicate: 'eq' }, // This is a OR `yyy = 'aa' || yyy = 'bb'`
+  { attribute: 'zzz', value: 10, predicate: 'gt' },
+  { attribute: 'zzz', value: 100, predicate: 'lt' }, // This is an AND `zzz &gt; 10 &amp;&amp; zzz &lt; 100`
+  { attribute: 'data.object', value: 'xxx', predicate: 'neq' }, // This is for nested filtering
+  { attribute: 'data.array[0].xx', value: 'xxx', predicated: 'eq' } // Filter based on the array item
+]
+</code></pre>
+<p>Not sure all that is needed but I’m sure there are libraries that can do that for us:</p>
+<ul>
+<li><a href="https://github.com/bhmj/jsonslice" rel="nofollow noopener">https://github.com/bhmj/jsonslice</a></li>
+<li><a href="https://github.com/gookit/validate#validate-map" rel="nofollow noopener">https://github.com/gookit/validate#validate-map</a></li>
+</ul>
+<h1>To keep in mind</h1>
+<p>Also, something to keep in mind:</p>
+<ul>
+<li>For the workflow, we might need to find the data based on a query and its filter or index based on it for optimization purpose.</li>
+</ul>
+          <p><a href="https://forum.mesg.com/t/filter-events-and-results-by-data/149/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/filter-events-and-results-by-data/149/4</link>
+        <pubDate>Fri, 19 Jul 2019 05:09:12 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-149-4</guid>
+        <source url="https://forum.mesg.com/t/filter-events-and-results-by-data/149.rss">Filter events and results by data</source>
+      </item>
+      <item>
+        <title>Filter events and results by data</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <p>With following event definition</p>
+<pre><code class="lang-auto">// Event stores all informations about Events.
+type Event struct {
+  Hash         hash.Hash              `hash:"-"`
+  InstanceHash hash.Hash              `hash:"name:instanceHash"`
+  Key          string                 `hash:"name:key"`
+  Data         map[string]interface{} `hash:"name:data"`
+}
+</code></pre>
+<p>The only things requires filtering are equality of key and instance hash.</p>
+<p>There is proposal to use protobuf <code>Any</code> for <code>Data</code> instead of json, which I hope we will have (in general mixing two format is strange). If we do so, how do we plan to support contain syntax?</p>
+<p>But even without speaking of filter sytanx, I think if someone needs only specific subset of events, it could be created in mesg.yaml, eg:</p>
+<pre><code class="lang-auto">events:
+   transferMESGTokens:
+     .....
+   transferMESGTokensFromCreatorWallets:
+</code></pre>
+<p>And in workflow someone just listen <code>[transferMESGTokensFromCreatorWallets</code>, …]`</p>
+<p>So for me events filtering is not needed now (and maybe it won’t be needed ever) and we shoudn’t focus on it nor complicate it, as more important things are todo with workflows.</p>
+<p><strong>Only equality on key and instance hash should be possible.</strong></p>
+          <p><a href="https://forum.mesg.com/t/filter-events-and-results-by-data/149/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/filter-events-and-results-by-data/149/3</link>
+        <pubDate>Thu, 18 Jul 2019 06:58:11 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-149-3</guid>
+        <source url="https://forum.mesg.com/t/filter-events-and-results-by-data/149.rss">Filter events and results by data</source>
+      </item>
+      <item>
+        <title>Filter events and results by data</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>We need to re-open the conversation of filters as we implement workflow.<br>
+A few start of discussion:</p>
+<ul>
+<li><a href="https://github.com/mesg-foundation/engine/pull/1181#discussion_r303240335" rel="nofollow noopener">https://github.com/mesg-foundation/engine/pull/1181#discussion_r303240335</a></li>
+<li><a href="https://github.com/mesg-foundation/engine/pull/1188#pullrequestreview-262826725" rel="nofollow noopener">https://github.com/mesg-foundation/engine/pull/1188#pullrequestreview-262826725</a></li>
+</ul>
+          <p><a href="https://forum.mesg.com/t/filter-events-and-results-by-data/149/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/filter-events-and-results-by-data/149/2</link>
+        <pubDate>Wed, 17 Jul 2019 14:59:47 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-149-2</guid>
+        <source url="https://forum.mesg.com/t/filter-events-and-results-by-data/149.rss">Filter events and results by data</source>
+      </item>
+      <item>
+        <title>Filter events and results by data</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>From <a href="https://github.com/mesg-foundation/core/issues/195" rel="nofollow noopener">https://github.com/mesg-foundation/core/issues/195</a></p>
+<p>Events/results filtering should be possible on values.</p>
+<p>Let’s make a list of operator to implement:</p>
+<ul>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> Equal</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> Contain</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> lower, lower or equal, greater, greater or equal</li>
+</ul>
+<p>We should make more research on this issue. We need a really efficient filtering system.</p>
+<p>The core, once the network is ready, may have to filter thousands and thousands of events per sec</p>
+<hr>
+<p>Reply from <a class="mention" href="/u/anthony">@Anthony</a></p>
+<p>Also the goal with the network is to reverse this and instead of having many applications that listen and filter some events, have an event than can find all associated application that need this event with the filter applied.</p>
+<p>We can easily implement this if we are based only on the event key with a query like <code>service.all.where(listeners.contains(eventKey))</code></p>
+<p>But it gets trickier when we want to search for the applications that matches a specific filter.</p>
+<p>Example:<br>
+an application that needs to listen an event <code>eventX</code> that contains <code>{foo: String, bar: String}</code> with the filter <code>foo=hello</code>.</p>
+<p>When an event <code>{foo: "hello", bar: "world"}</code> is coming we should be able to find the application without having to replay filters for all matching applications.</p>
+<p>I’m pretty sure we can find a way to hash these filters if we only use the <strong>equal</strong> operator and get the matching applications for a specific event but if we add more complex operations <code>gt</code>, <code>lt</code>… i don’t see how so maybe we should implement only the equal operator and do the other filter on the application side only</p>
+          <p><a href="https://forum.mesg.com/t/filter-events-and-results-by-data/149/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/filter-events-and-results-by-data/149/1</link>
+        <pubDate>Thu, 13 Dec 2018 11:11:24 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-149-1</guid>
+        <source url="https://forum.mesg.com/t/filter-events-and-results-by-data/149.rss">Filter events and results by data</source>
+      </item>
+  </channel>
+</rss>

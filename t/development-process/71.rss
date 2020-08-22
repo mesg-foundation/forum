@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Development process</title>
+    <link>https://forum.mesg.com/t/development-process/71</link>
+    <description>This topic is about defining the development process that we should use to develop packages of Core, system services and other sensitive parts.
+
+Anthony and I would like to use [BDD](https://en.wikipedia.org/wiki/Behavior-driven_development) to define the functionalities, and then define the public interface. The tests and implementation will come after the first steps are validating.
+
+# BDD
+
+Basically, BDD is a way to define functionalities without using any specific programming language.
+It can then be converted (manually or automatically) to a suite of unit test in a specific language.
+
+The behavior are defined in `.feature` files and looks like:
+```
+Scenario: Refunded items should be returned to stock
+    Given that a customer previously bought a black sweater from me
+    And I have three black sweaters in stock.
+    When they return the black sweater for a refund
+    Then I should have four black sweaters in stock.
+```
+
+[See this post about BDD tools in Go](https://forum.mesg.com/t/bdd-framework-in-go/72)
+
+# Steps
+
+The proposed steps for the development process are the following:
+
+## 1 - Defining the behavior
+
+- Brainstorming about its purpose
+- Defining the functionalities
+- Writing the `.feature` files
+
+## 2 - Defining the interface
+
+- Writing the interface in a specific language
+  - Go Interface for Core&#39;s packages
+  - `mesg.yml` file for service
+
+## 3 - Defining the tests
+
+- Writing the tests corresponding to the `.feature` files from step 1
+  - `_test.go` files for Go package (can be one per feature)
+  - For services, we could write test from a MESG Application point of view (execute task with expected results, test events, etc..)
+
+## 4 - Implementing
+
+- Writing the concrete implementation
+- Make sure the tests from step 3 are passing
+- Doesn&#39;t need to add other unit test as the public API should be fully tested by step 3
+
+--- 
+
+@core What do you think guys? Any feedback are welcome!</description>
+    
+    <lastBuildDate>Fri, 05 Oct 2018 03:46:35 +0000</lastBuildDate>
+    <category>Development</category>
+    <atom:link href="https://forum.mesg.com/t/development-process/71.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Development process</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>I agree on the fact that this .feature files can be overkill and actually more complicated that plain code.</p>
+<p>A good interface, tests and useful comments could be enough.</p>
+          <p><a href="https://forum.mesg.com/t/development-process/71/5">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/development-process/71/5</link>
+        <pubDate>Fri, 05 Oct 2018 03:46:35 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-71-5</guid>
+        <source url="https://forum.mesg.com/t/development-process/71.rss">Development process</source>
+      </item>
+      <item>
+        <title>Development process</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>I think this process is nice, e need to have this conception then test then implementation. I think “forcing” to use the bdd approach and having to describe all your features might be overkill, I would stay flexible on that. We sure need a way to describe the different features but this can be done with schemas for example.<br>
+We should give a try to the feature files I personally think that this is a good way of brainstorm but it might be too much.<br>
+Let’s give a try and then decide</p>
+          <p><a href="https://forum.mesg.com/t/development-process/71/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/development-process/71/4</link>
+        <pubDate>Thu, 04 Oct 2018 04:10:10 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-71-4</guid>
+        <source url="https://forum.mesg.com/t/development-process/71.rss">Development process</source>
+      </item>
+      <item>
+        <title>Development process</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>I really agree on giving more thinking about the public APIs of a new package/service/feature first and create a dummy implementation to see the how the actual API would look like and also think about how it can be tested internally and if it deals with network how the users of that package will be able mock it.</p>
+<p>I also agree on having unit tests in the higher level funcs as possible.</p>
+<p>I’m not sure that adopting <em>feature</em> approach &amp; <em>BDD</em> is the way to go. Because we’re building something heavily technical which is the opposite of BDD’s philosophy. Adopting <em>feature</em> files may struggle us and require a lot of extra work and it may even not fit well for our case. I think it’s better to experiment with these first in an actual part inside core. I’d like to see <em>feature</em> files in the real world with core.</p>
+          <p><a href="https://forum.mesg.com/t/development-process/71/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/development-process/71/3</link>
+        <pubDate>Wed, 03 Oct 2018 15:47:58 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-71-3</guid>
+        <source url="https://forum.mesg.com/t/development-process/71.rss">Development process</source>
+      </item>
+      <item>
+        <title>Development process</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="1" data-topic="71">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/nicolas/40/10_1.png" class="avatar"> Nicolas:</div>
+<blockquote>
+<ul>
+<li>For services, we could write test from a MESG Application point of view (execute task with expected results, test events, etc…)</li>
+</ul>
+</blockquote>
+</aside>
+<p>As a note, we provide this functioanlity with <a href="https://godoc.org/github.com/mesg-foundation/go-service/mesgtest#Server.Execute"><em>mesgtest</em></a> package inside <em>go-service</em>. Plese check this <a href="https://github.com/mesg-foundation/go-service/blob/master/examples/logger/logger/logger_test.go">example</a>.</p>
+<p>For the ones who heard about <em>feature</em> files for the first time in BDD like me, you can read <a href="https://semaphoreci.com/community/tutorials/how-to-use-godog-for-behavior-driven-development-in-go">this</a> detailed article.</p>
+<p>I’ll provide my feedbacks about the topic after I complete my research.</p>
+          <p><a href="https://forum.mesg.com/t/development-process/71/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/development-process/71/2</link>
+        <pubDate>Wed, 03 Oct 2018 09:33:00 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-71-2</guid>
+        <source url="https://forum.mesg.com/t/development-process/71.rss">Development process</source>
+      </item>
+      <item>
+        <title>Development process</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>This topic is about defining the development process that we should use to develop packages of Core, system services and other sensitive parts.</p>
+<p>Anthony and I would like to use <a href="https://en.wikipedia.org/wiki/Behavior-driven_development">BDD</a> to define the functionalities, and then define the public interface. The tests and implementation will come after the first steps are validating.</p>
+<h1>BDD</h1>
+<p>Basically, BDD is a way to define functionalities without using any specific programming language.<br>
+It can then be converted (manually or automatically) to a suite of unit test in a specific language.</p>
+<p>The behavior are defined in <code>.feature</code> files and looks like:</p>
+<pre><code class="lang-auto">Scenario: Refunded items should be returned to stock
+    Given that a customer previously bought a black sweater from me
+    And I have three black sweaters in stock.
+    When they return the black sweater for a refund
+    Then I should have four black sweaters in stock.
+</code></pre>
+<p><a href="https://forum.mesg.com/t/bdd-framework-in-go/72">See this post about BDD tools in Go</a></p>
+<h1>Steps</h1>
+<p>The proposed steps for the development process are the following:</p>
+<h2>1 - Defining the behavior</h2>
+<ul>
+<li>Brainstorming about its purpose</li>
+<li>Defining the functionalities</li>
+<li>Writing the <code>.feature</code> files</li>
+</ul>
+<h2>2 - Defining the interface</h2>
+<ul>
+<li>Writing the interface in a specific language
+<ul>
+<li>Go Interface for Core’s packages</li>
+<li>
+<code>mesg.yml</code> file for service</li>
+</ul>
+</li>
+</ul>
+<h2>3 - Defining the tests</h2>
+<ul>
+<li>Writing the tests corresponding to the <code>.feature</code> files from step 1
+<ul>
+<li>
+<code>_test.go</code> files for Go package (can be one per feature)</li>
+<li>For services, we could write test from a MESG Application point of view (execute task with expected results, test events, etc…)</li>
+</ul>
+</li>
+</ul>
+<h2>4 - Implementing</h2>
+<ul>
+<li>Writing the concrete implementation</li>
+<li>Make sure the tests from step 3 are passing</li>
+<li>Doesn’t need to add other unit test as the public API should be fully tested by step 3</li>
+</ul>
+<hr>
+<p><a class="mention-group" href="/groups/core">@core</a> What do you think guys? Any feedback are welcome!</p>
+          <p><a href="https://forum.mesg.com/t/development-process/71/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/development-process/71/1</link>
+        <pubDate>Wed, 03 Oct 2018 05:13:55 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-71-1</guid>
+        <source url="https://forum.mesg.com/t/development-process/71.rss">Development process</source>
+      </item>
+  </channel>
+</rss>

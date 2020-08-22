@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Mocking container package</title>
+    <link>https://forum.mesg.com/t/mocking-container-package/55</link>
+    <description>We struggle to mock the docker client. It&#39;s too complicated, too long and there is so many called to the docker api from container package that it&#39;s the implementation of test are huge.
+
+Two solutions are possible:
+
+## Fake Docker Server :skull_and_crossbones:
+
+This solution consists of implementing a fake docker server that will mimic the behavior of a real Docker server but without actually executing anything.
+
+This will be the ultimate solution but the implementation of it will be really, really, long, complex to implement and we are not guaranteed to even mimic docker behavior close enough to make it useable.
+
+Also, I didn&#39;t find any existing implementation of something similar.
+
+**I think this is not a viable solution for our project.**
+
+## Mock Container Package
+
+The second solution is to mock the container package.
+Its API is simple, 14 public functions, and the logic will be simple to mock for errors.
+
+In order to mock it, we&#39;ll need to create its interface and create a new container mock package.
+
+Also, we should double check that we pass the container as dependency in our other packages (API, service, daemon, etc...).
+
+We will keep the unit-test and integration test of this package for inner-package test.
+
+That&#39;s the solution I recommend.</description>
+    
+    <lastBuildDate>Fri, 28 Sep 2018 11:25:08 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/mocking-container-package/55.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Mocking container package</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>Hey, I’m experimenting with <em>testify/mock</em> and <em>mockery</em>. Please check this <a href="https://github.com/mesg-foundation/core/pull/506">PR</a>.</p>
+          <p><a href="https://forum.mesg.com/t/mocking-container-package/55/10">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mocking-container-package/55/10</link>
+        <pubDate>Fri, 28 Sep 2018 11:25:08 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-55-10</guid>
+        <source url="https://forum.mesg.com/t/mocking-container-package/55.rss">Mocking container package</source>
+      </item>
+      <item>
+        <title>Mocking container package</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>It’s even possible to autogenerate mock struct from an interface!<br>
+Check out <a href="https://github.com/vektra/mockery">https://github.com/vektra/mockery</a></p>
+<p>Given this is in string.go</p>
+<pre><code class="lang-auto">package test
+
+type Stringer interface {
+	String() string
+}
+</code></pre>
+<p>Run: mockery -name=Stringer and the following will be output to mocks/Stringer.go:</p>
+<pre><code class="lang-auto">package mocks
+
+import "github.com/stretchr/testify/mock"
+
+type Stringer struct {
+	mock.Mock
+}
+
+func (m *Stringer) String() string {
+	ret := m.Called()
+
+	var r0 string
+	if rf, ok := ret.Get(0).(func() string); ok {
+		r0 = rf()
+	} else {
+		r0 = ret.Get(0).(string)
+	}
+
+	return r0
+}
+</code></pre>
+<p><img src="https://forum.mesg.com/images/emoji/twitter/astonished.png?v=6" title=":astonished:" class="emoji" alt=":astonished:"></p>
+          <p><a href="https://forum.mesg.com/t/mocking-container-package/55/9">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mocking-container-package/55/9</link>
+        <pubDate>Thu, 27 Sep 2018 02:02:32 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-55-9</guid>
+        <source url="https://forum.mesg.com/t/mocking-container-package/55.rss">Mocking container package</source>
+      </item>
+      <item>
+        <title>Mocking container package</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>It’s even possible to autogenerate mock struct from an interface!<br>
+Check out <a href="https://github.com/vektra/mockery">https://github.com/vektra/mockery</a></p>
+<p>Given this is in string.go</p>
+<pre><code class="lang-auto">package test
+
+type Stringer interface {
+	String() string
+}
+</code></pre>
+<p>Run: mockery -name=Stringer and the following will be output to mocks/Stringer.go:</p>
+<pre><code class="lang-auto">package mocks
+
+import "github.com/stretchr/testify/mock"
+
+type Stringer struct {
+	mock.Mock
+}
+
+func (m *Stringer) String() string {
+	ret := m.Called()
+
+	var r0 string
+	if rf, ok := ret.Get(0).(func() string); ok {
+		r0 = rf()
+	} else {
+		r0 = ret.Get(0).(string)
+	}
+
+	return r0
+}
+</code></pre>
+<p><img src="https://forum.mesg.com/images/emoji/twitter/astonished.png?v=6" title=":astonished:" class="emoji" alt=":astonished:"></p>
+          <p><a href="https://forum.mesg.com/t/mocking-container-package/55/8">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mocking-container-package/55/8</link>
+        <pubDate>Thu, 27 Sep 2018 02:02:31 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-55-8</guid>
+        <source url="https://forum.mesg.com/t/mocking-container-package/55.rss">Mocking container package</source>
+      </item>
+      <item>
+        <title>Mocking container package</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>Some more knowledge from my side about the topic:</p>
+<p>Creating package level interfaces to mock the functionalities of a package can save us using the mocking interface from a deeper level package. Which is one of the issues we’re facing right now. Because instead of mocking one high level func like <em>Stop()</em> of service package, we’re mocking lots of methods from the <em>container</em> package while unit testing a package like <em>api</em> that calls functionalities from <em>service</em> package.</p>
+<p>But, mocking package level methods/funcs <em>(e.g. methods of service.Service type)</em> is not something that I’d prefer in the first glance because it is a bit messy having an interface to describe the top level methods/funcs of a package. Also there this limitation that if an argument or return value of one of the methods we want to mock has a struct type with some private fields and some public methods that depends on these private fields then to create mocks for these kinda methods we have to change the public api of package methods to accept or return interfaces instead of just keeping the structs.</p>
+<p>So, if we can exercise this with some good feedbacks, I suggest to mock an insider method. As giving <em>service.Service</em>’s <em>Start()</em> method as an example, instead of creating an interface to mock <em>Start()</em> we can mock a method that is responsible with doing the stuff related with calling <em>container</em> methods. <em>service.Service</em>’s <em>Start()</em> can call that method while doing its thing. To accomplish this, we can define an interface like <em>ServiceActor</em> inside the service package and pass a mocked version of it while initializing <em>Service</em> type with <em>New()</em> while testing <em>api</em> package. And also make sure that <em>ServiceActor</em>’s methods will have basic argument/return types or even structs without private fields <em>(like Docker’s client interface)</em>. This way, we’re going to mock the underlying communication directly, not the high level package methods.</p>
+<p>I’ll feel really comfortable when we solve this unit testing problem. So we can create even more crazy unit tests to test core under high load and do some cool benchmarking as we want. <img src="https://forum.mesg.com/images/emoji/twitter/slight_smile.png?v=6" title=":slight_smile:" class="emoji" alt=":slight_smile:"></p>
+          <p><a href="https://forum.mesg.com/t/mocking-container-package/55/7">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mocking-container-package/55/7</link>
+        <pubDate>Mon, 24 Sep 2018 13:22:18 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-55-7</guid>
+        <source url="https://forum.mesg.com/t/mocking-container-package/55.rss">Mocking container package</source>
+      </item>
+      <item>
+        <title>Mocking container package</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <p>Without going into pros and cons details my vote is for mocking as fake docker server is a lot of work and in the end there will be more pbm with it.</p>
+<p>Moreover a lot of packages depends of container and this is the real problem we should be focusing.</p>
+<p>So even mocking container is not a best solution. I’ll give you an example with service package:</p>
+<p>It imports cotnainer for start/stop/status etc… And now we want to mock container to be able to test services (and other packages that maybe depend on service). What we suppose to do is pass <code>Deployer|Builder</code> interface to service.</p>
+<pre><code class="lang-auto">interface {
+  Start()
+  Stop()
+  // etc....
+}
+</code></pre>
+<p>In that pattern, you don’t need to mock container. You can provide just another implementation of <code>Deployer</code> to service. The container pkg is just one of many implementations of <code>Deployer</code> that can be changed over the time.</p>
+<p>So Again, My vote goes to Mocking container package. But the best option is to provide an interface for deploying and reduce container pkg usage across core implementation.</p>
+          <p><a href="https://forum.mesg.com/t/mocking-container-package/55/6">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mocking-container-package/55/6</link>
+        <pubDate>Mon, 24 Sep 2018 08:23:35 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-55-6</guid>
+        <source url="https://forum.mesg.com/t/mocking-container-package/55.rss">Mocking container package</source>
+      </item>
+      <item>
+        <title>Mocking container package</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p><a class="mention" href="/u/krhubert">@krhubert</a> any thoughts on this?</p>
+          <p><a href="https://forum.mesg.com/t/mocking-container-package/55/5">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mocking-container-package/55/5</link>
+        <pubDate>Mon, 24 Sep 2018 07:22:33 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-55-5</guid>
+        <source url="https://forum.mesg.com/t/mocking-container-package/55.rss">Mocking container package</source>
+      </item>
+      <item>
+        <title>Mocking container package</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>I think the solution of a fake docker server is way more complicated than it look. What happen for example when we delete a network, we are using the events from docker so we need to make sure that we mock this event system and not only the simple api to delete the network.</p>
+<p>In the end we will need to implement all the apis, all the state for every resources (service, container, network…) and implement the event system and the filters for some apis etc… the list can be really long and that’s definitely something I don’t want to have to maintain, we should focus more on building the core.</p>
+<p>The container mock does actually makes sense for me and we should have something like that everywhere we need it. For example the database can have its own mock too.</p>
+<p>The only problem is that we will need to inject these dependencies in many places but if it gets really too complicated we can always have a kind of dependency manager.</p>
+          <p><a href="https://forum.mesg.com/t/mocking-container-package/55/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mocking-container-package/55/4</link>
+        <pubDate>Thu, 20 Sep 2018 13:18:55 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-55-4</guid>
+        <source url="https://forum.mesg.com/t/mocking-container-package/55.rss">Mocking container package</source>
+      </item>
+      <item>
+        <title>Mocking container package</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <h1>Fake Docker Server</h1>
+<h2>Pros</h2>
+<ul>
+<li>
+<p>We can use the same tests for integration and unit tests.</p>
+</li>
+<li>
+<p>We can test more aggressive scenarios with 100s of dependencies and services. This way we can see if there is any synchronization mistakes between goroutines and is there any errors in our business logic under heavy use.</p>
+</li>
+<li>
+<p>We don’t need to do fishing to catch which <em>docker API/container package</em> calls made in the implementation of a func that we want to write unit tests for. Mocking complexity even increases for parent consumers e.g. for api package, pipeline is: <em>api p. &gt; service p. &gt; container p.</em> In this case we need to inspect each call in each layer to see which container package calls we’re interested to mock.</p>
+</li>
+<li>
+<p>Execution order of methods called from container package may vary depending on if they are running inside goroutines because of the implementation detail of its consumer. This causes us to fake return values depending on their call arguments or/and do some kind of synchronization to provide fake return arguments at the exact time needed in the execution if we go with mocking option instead of fake server. Because we maybe having some same methods called more than once and this will cause to a race condition if we don’t provide our return values correctly depending on the latest state. So it is not possible to define fake return arguments in advance, before the execution, this should be made conditionally by func arguments if it is possible or do some synchronization to provide these fakes at the right time.</p>
+</li>
+<li>
+<p>Creating fake servers is a common thing: lets remember std <a href="https://golang.org/pkg/net/http/httptest/#Server">httptest</a> package and these redis fakes <a href="https://github.com/alicebob/miniredis">1</a>, <a href="https://github.com/rafaeljusto/redigomock">2</a>.</p>
+</li>
+</ul>
+<h2>Cons</h2>
+<ul>
+<li>
+<p>It requires a whole logic in it, can get complicated fast but I personally think that it should not require weeks to complete, I think 3-5 days is enough to create a such package like this that only covers the methods we use.</p>
+</li>
+<li>
+<p>(*<strong>?</strong>) Simulating native server errors <em>-not the NotFoundErrors, they can be produced by the logic inside fake server-</em> can get complicated. In real world, each method of docker api call can return an internal server error. But this is not a case for fake server, it’ll not have any internal errors unless we manually force for it because it doesn’t depend on anything external. To test the code we have depend on this internal server errors could get challenging because we need to force fake server to fail for each api method independently.</p>
+</li>
+</ul>
+<h1>Mock Container Package</h1>
+<h2>Pros</h2>
+<ul>
+<li>
+<p>Easier to implement <em>-but we pay for this advantage by writing more lines in unit tests-</em>.</p>
+</li>
+<li>
+<p>It’ll reduce the complexity for one layer.<br>
+e.g. testing service package: service &gt; container &gt; [docker api *removed layer]<br>
+e.g. testing api package: api &gt; service &gt; container &gt; [docker api *removed layer]</p>
+</li>
+</ul>
+<h2>Cons</h2>
+<ul>
+<li>
+<p>We have to have two packages like <em>dockertest</em> and <em>containermock</em>.</p>
+</li>
+<li>
+<p>We are still going to need to do fishing to catch which container package methods we should mock. Complexity of this only reduced for one layer.</p>
+</li>
+<li>
+<p>We may require to invent some utility in testing package to provide <em>conditional returns</em> and <em>synchronization</em> features to avoid race conditions that can happen when same methods called more than once in a func that needed to be tested.</p>
+</li>
+</ul>
+          <p><a href="https://forum.mesg.com/t/mocking-container-package/55/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mocking-container-package/55/3</link>
+        <pubDate>Thu, 20 Sep 2018 10:19:00 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-55-3</guid>
+        <source url="https://forum.mesg.com/t/mocking-container-package/55.rss">Mocking container package</source>
+      </item>
+      <item>
+        <title>Mocking container package</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Also, the current API of container package could be simplified and have logic closer to mesg than docker.</p>
+<p>We could only keep the concept of container (docker service) and network.</p>
+<ul>
+<li>Container will be the equivalent of a docker service and may also start docker container.</li>
+<li>Network will still be network.</li>
+<li>Tasks could be replace by an good errors management on the container level</li>
+</ul>
+<p>Some function are not even used outside the package.</p>
+<ul>
+<li>function <code>FindContainer</code> is used outside the package only in test</li>
+</ul>
+<p>This will make the mock even more simpler.</p>
+          <p><a href="https://forum.mesg.com/t/mocking-container-package/55/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mocking-container-package/55/2</link>
+        <pubDate>Thu, 20 Sep 2018 08:53:39 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-55-2</guid>
+        <source url="https://forum.mesg.com/t/mocking-container-package/55.rss">Mocking container package</source>
+      </item>
+      <item>
+        <title>Mocking container package</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>We struggle to mock the docker client. It’s too complicated, too long and there is so many called to the docker api from container package that it’s the implementation of test are huge.</p>
+<p>Two solutions are possible:</p>
+<h2>Fake Docker Server <img src="https://forum.mesg.com/images/emoji/twitter/skull_and_crossbones.png?v=6" title=":skull_and_crossbones:" class="emoji" alt=":skull_and_crossbones:">
+</h2>
+<p>This solution consists of implementing a fake docker server that will mimic the behavior of a real Docker server but without actually executing anything.</p>
+<p>This will be the ultimate solution but the implementation of it will be really, really, long, complex to implement and we are not guaranteed to even mimic docker behavior close enough to make it useable.</p>
+<p>Also, I didn’t find any existing implementation of something similar.</p>
+<p><strong>I think this is not a viable solution for our project.</strong></p>
+<h2>Mock Container Package</h2>
+<p>The second solution is to mock the container package.<br>
+Its API is simple, 14 public functions, and the logic will be simple to mock for errors.</p>
+<p>In order to mock it, we’ll need to create its interface and create a new container mock package.</p>
+<p>Also, we should double check that we pass the container as dependency in our other packages (API, service, daemon, etc…).</p>
+<p>We will keep the unit-test and integration test of this package for inner-package test.</p>
+<p>That’s the solution I recommend.</p>
+          <p><a href="https://forum.mesg.com/t/mocking-container-package/55/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mocking-container-package/55/1</link>
+        <pubDate>Thu, 20 Sep 2018 08:43:24 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-55-1</guid>
+        <source url="https://forum.mesg.com/t/mocking-container-package/55.rss">Mocking container package</source>
+      </item>
+  </channel>
+</rss>

@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Workflow Definition Format</title>
+    <link>https://forum.mesg.com/t/workflow-definition-format/264</link>
+    <description>Within this topic, I aim to find a **native/standard** definition format for creating workflows.
+
+# The Problem
+
+We want to provide the best user experience for creating MESG Applications _(can be mentioned as &#39;app/apps/workflows’)_.
+
+The current way of creating apps is actually coding them in any programming language. A MESG Application is just a piece of software that interacts with Core&#39;s &#39;core&#39; gRPC APIs. This APIs are `ListenEvent()`, `ListenResult()` &amp;amp; `ExecuteTask()`.
+
+**Using full featured programming languages for creating workflows:**
+
+* is boring.
+
+* is time consuming, might require boilerplate code to be written that is not relevant to workflow itself.
+
+* is equally complex with the complexity of used programming language.
+
+* requires legitimate programming skills which is hard for non-programmers.
+
+* is not natural because in workflows we should only describe the data flow between services and should not do any advanced programming.
+
+* is too flexible with lots of advanced(non-needed) features and this leads programmers to do the mistake of putting some service logic right inside of the applications.
+
+* has, no standard for creating workflows.
+
+* causes to poor optimization because everything is up to developer’s code style and the used programming language.
+
+These are the reasons that why we shouldn’t use a pre-exists, full featured scripting language like Lua, JS or Lisp to define/create workflows.
+
+# The Solution
+
+Instead of using a full featured scripting language, we need a standardized, small and targeted configuration language that is specially designed for creating workflows.
+
+Workflows are some sort of configurations that defines the data flow between the services. They don’t require whole features of an actual programming language but still needs some programming primitives like arithmetics, conditional operators, basic loops to manipulate data and create dynamic executions.
+
+A configuration language with these basic features and a VM at the backend to parse, understand this syntax and execute tasks depending on the state of conditions is actually what we should are looking for. Where this VM should also manage(deploy, start etc.) the dependency services and do smart optimizations on listening events, results and executing tasks.
+
+# What is a MEG App(Workflow)?
+
+**Creating a workflow is about:**
+
+* listening some events from some services,
+
+* but filtering these events by their keys or payload data.
+
+* executing tasks from various services depending on events or results that produced by other executions.
+
+* executing fixed or dynamic amount of tasks depending the conditions from root event or previously done executions(task results).
+
+* executing tasks synchronously by depending on each other **or** asynchronously **or** by mixing both ways which all decided by the conditions applied to the information got from root event or previously done executions(task results).
+
+* continuously manipulating the data got from events and results and dynamically creating new data as inputs to task executions.
+
+**Workflow’s life cycle:**
+
+* usually starts by executing some task at the beginning to do application specific things like data migrations or triggering the root(first) events to start sub life cycles.
+
+* starts for listening some events where each event can be seen as a start point and root of its own sub life cycle _(can be called as ‘sub workflow’)_.
+
+* each sub workflow usually consist of a mix of task executions where some of them depends on each other and some running in parallel. a task execution running in parallel might trigger a series of other depended or parallel task executions as well.
+
+* executions might be statically defined and in a fixed amount or can be created dynamically depending on the conditions got from root event or results of other executions.
+
+* data of root event or results from different executions can be combined in different ways depending on some logic to use them as inputs of other task executions **otherwise** life cycle will end for that session.
+
+# Expectations from a Good Workflow Definition Format
+
+* it should fulfill the needs talked in the _What is a MEG App?_ and the _The Solution_ sections.
+
+* it should be easier to create by non-programmers. so it shouldn’t feel like a complicated programming language, it needs to be more like a configuration language with a simple syntax &amp;amp; basic programming features. needs to be in the sweet spot.
+
+* it should be possible to convert definition to JSON and convert back from JSON. this way it’ll be easier to create it programmatically and JSON is available in browsers and most of the programming languages. (creating it programmatically is specially needed while building workflows via user interfaces)
+
+* JSON representation shouldn’t feel like an abstract syntax tree of a complicated programming language. it should be very close to the actual definition format. this is possible because we don’t want to have a full featured programming language. this way, it’ll be easily understandable by humans and easier to create programatically.
+
+# Finding a Workflow Definition Format
+
+Applications are a bunch of configurations that defines the data relationship between the services. It&#39;s about describing the data flow so this why they’re called as workflows. But to describe **how** data is should actually **flow**, we need to be able to do some sort of programming while defining workflows.
+
+As a result, we need to introduce some programming primitives inside to the workflow definition format like arithmetics, conditional operators, basic loops to manipulate data and create dynamic executions.
+
+This means, a workflow definition format needs to be able to accept some basic programming keywords alongside workflow specific definitions like workflow id, name, tasks, events, executions and so on. It is also needed to have an interpreter in the backend to parse &amp;amp; understand this whole definition format and run a special virtual machine for this definition format/language with the purpose of executing tasks in the described ways and pre created conditions.
+
+Since we also want to make this definition format to be easily generated programmatically we definitely need to have it on top of JSON.
+
+While considering all of these with the expectations from a good workflow definition format and after the experimentations I did with the HCL2, it seems that HCL2 is just created to meet with this kind of needs in mind. HCL2 is very close to JSON under the hood and it also has the flexibility we expect from a simple programming language to create workflows.
+
+I don’t like to depend on custom languages like HCL2 and would like to stick with JSON as a data interchange format. But it seems that when HCL2 is converted to JSON, it’s actually still not complicated and actually looking like something that what we could create for defining workflows. HCL2 is also very flexible, extendible and has a nice interpreter that could remove so much work from our VM. So when thinking all about this, I’m really positive about HCL2 and would like to give a good try.
+
+## Why to Choose HCL2
+
+* it has built in support for variables where we can inject values from the interpreter or they can be created inside the workflows.
+
+* it has conditional loops for generating custom data over other data. 
+
+* it’s extendible with 3rd party extensions so it’s actually possible to extend HCL2 language to meet with our special needs.
+
+* it has a data types [extension](https://github.com/hashicorp/hcl2/blob/master/ext/typeexpr/README.md).
+
+* it has an [extension](https://github.com/hashicorp/hcl2/blob/master/ext/dynblock/README.md) to dynamically define configuration sections that we can use to define executions dynamically depending on the state of conditions.
+
+* it has good [packages](https://godoc.org/github.com/hashicorp/hcl2), a parser, printer and others to deal with the language which we can use them to convert or convert back from JSON.
+
+* it has a good interpreter, a small runtime to understand and execute HCL2 programs that could remove a lot of work from our VM.
+
+* and most importantly, the JSON generated from a HCL2 configuration is very nice and legit which means, if we come up with our perfect implementation on top of JSON instead of using HCL2, it could have be very similar. so, this is a very comforting reason to give HCL2 a try. if we think that HCL2 is not enough at some point, we can always create our definition format and interpreter but still keep this underlying JSON format.
+
+* using HCL will reduce the time we invest into creating a workflow definition format and interpreter from scratch. HCL2 already has a good amount of packages and tooling around it that we can get benefit from.
+
+# Details About HCL2
+
+## Resources
+
+### Please Read All of These
+
+* https://media.readthedocs.org/pdf/hcl/guide/hcl.pdf
+* https://www.hashicorp.com/blog/terraform-0-1-2-preview
+* https://github.com/hashicorp/hcl2/tree/master/guide
+* [https://github.com/hashicorp/hcl/blob/master/README.md](https://github.com/hashicorp/hcl)
+* https://github.com/hashicorp/hcl2/blob/master/README.md
+
+### Random
+
+* [technical syntax spec](https://github.com/hashicorp/hcl2/blob/master/hcl/hclsyntax/spec.md)
+* [vars &amp;amp; custom funcs](https://github.com/hashicorp/hcl2/issues/5#issuecomment-359155246)
+* [more about dynamic sections extension](https://github.com/hashicorp/hcl2/blob/2c946fb6e248e71de456afc80ad211bc9b3aaeb3/ext/dynblock/variables_test.go)
+* [injecting var values to interpreter](https://github.com/hashicorp/hcl2/blob/2c946fb6e248e71de456afc80ad211bc9b3aaeb3/hcl/integrationtest/terraformlike_test.go#L140-L148)
+* [packages](https://godoc.org/github.com/hashicorp/hcl2)
+* [see how Terraform uses HCL](https://www.terraform.io/docs/configuration/index.html)
+* [sample custom funcs that Terraform implements](https://www.terraform.io/docs/configuration-0-11/interpolation.html#supported-built-in-functions)
+
+### HCL2 Extensions
+
+* https://github.com/hashicorp/hcl2/tree/master/ext/
+  * https://github.com/hashicorp/hcl2/blob/master/ext/dynblock/README.md
+  * https://github.com/hashicorp/hcl2/blob/master/ext/typeexpr/README.md
+
+## Cons and Tricks
+
+### HCL2 &lt;&gt; JSON
+
+Even converting to or from JSON for HCL2 is possible, it’s not 100% convenient.
+
+For example, function calls or built-in [for expression](https://www.hashicorp.com/blog/hashicorp-terraform-0-12-preview-for-and-for-each) are represented as plain strings when converted to JSON where I expect them to be converted as a structured JSON objects. That way creating them programmatically would be easier.
+
+But this can be accomplished later by improving the existent HCL2 &lt;&gt; JSON tools. For now, we can work around this by using code templates while building JSON representations.
+
+# Some Hints
+* @Anthony we talked about directly passing structured data to workflow runner before [here](https://github.com/mesg-foundation/core/pull/541#discussion_r231840502). I think, HCL2&#39;s JSON representation can be very close to that structure. What do you think?</description>
+    
+    <lastBuildDate>Thu, 26 Dec 2019 02:10:16 +0000</lastBuildDate>
+    <category>Development</category>
+    <atom:link href="https://forum.mesg.com/t/workflow-definition-format/264.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Workflow Definition Format</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>This has been implemented with the Orchestrator feature</p>
+<ul>
+<li><a href="https://mesg.com/mesg-orchestrator">https://mesg.com/mesg-orchestrator</a></li>
+<li><a href="https://docs.mesg.com/guide/process">https://docs.mesg.com/guide/process</a></li>
+</ul>
+<p>The format is now YAML but this is actually compiled into a graph defined in proto (<a href="https://github.com/mesg-foundation/engine/blob/dev/protobuf/types/process.proto">https://github.com/mesg-foundation/engine/blob/dev/protobuf/types/process.proto</a>)</p>
+<p>The CLI is compiling it based on the library <a href="https://www.npmjs.com/package/@mesg/compiler">@mesg/compiler</a>.</p>
+<p>It is still possible to compile different sources as the engine will always receive the same execution graph.</p>
+          <p><a href="https://forum.mesg.com/t/workflow-definition-format/264/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/workflow-definition-format/264/4</link>
+        <pubDate>Thu, 26 Dec 2019 02:10:16 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-264-4</guid>
+        <source url="https://forum.mesg.com/t/workflow-definition-format/264.rss">Workflow Definition Format</source>
+      </item>
+      <item>
+        <title>Workflow Definition Format</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>Thanks for this post, really nice feedback.</p>
+<p>I think HCL is a good candidate for the definition of the workflow but I don’t think we should focus on the representation of this workflow for now. HCL or JSON is for me exactly the same and we should know what data we actually need instead of how to represent them.</p>
+<aside class="quote group-team" data-post="1" data-topic="264">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/ilgooz/40/46_2.png" class="avatar"> ilgooz:</div>
+<blockquote>
+<p>but still needs some programming primitives like arithmetics, conditional operators, basic loops</p>
+</blockquote>
+</aside>
+<p>I disagree with that, arithmetics can be done with services, as well as conditions and loops can be done with recursion so this is not necessary and I would strongly suggest to not go this path yet as it will add a lot complexity. We have different way to reproduce that without having the workflow system that actually manages that so I don’t see the need for this extra complexity. Thus few advantages that you point out with HCL are irrelevant.</p>
+<aside class="quote group-team" data-post="1" data-topic="264">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/ilgooz/40/46_2.png" class="avatar"> ilgooz:</div>
+<blockquote>
+<p>JSON representation shouldn’t feel like an abstract syntax tree of a complicated programming language</p>
+</blockquote>
+</aside>
+<p>JSON representation will be an AST and there is nothing wrong here. This is all the instructions that are needed to execute something (basically the compiled version of it) that’s what actually matters, the list of all the necessary instructions for the workflow eg: definition, tasks to execute, events to watch, dependencies between etc…<br>
+If we don’t have operations loops and all the stuff like that then this AST will be quite simple and I really think this is the stuff we should think about, what kind of data/instructions are needed in here for the rest we can always compile yaml/text/hcl whatever down to that maybe even js haha.</p>
+<aside class="quote group-team" data-post="1" data-topic="264">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/ilgooz/40/46_2.png" class="avatar"> ilgooz:</div>
+<blockquote>
+<p>It is also needed to have an interpreter in the backend to parse &amp; understand this whole definition format and run a special virtual machine for this definition format/language with the purpose of executing tasks in the described ways and pre created conditions.</p>
+</blockquote>
+</aside>
+<p>We need an interpreter to read variables from other tasks/events that happened previously in the workflow but that’s it. We don’t need to recreate a programming language with arithmetics loops etc…</p>
+<hr>
+<p>In general I agree that HCL is a good format but we shouldn’t focus really on that but more on what will be compiled for the core to run this workflow. Also I think a lot can be simplified by having a more functional programming approach. If you think about lisp for example there is no operations and no loops only functions (that can have an alias with an operator but still just function) eg: <code>(+ 1 2)</code>, <code>(add 1 2)</code>…</p>
+<p>For me arithmetics, conditions and loops should not be part of the reflection and also HCL is good but this is something that has to be compiled into an AST and I think now it’s more important to extract what the data of this AST will be. We will always be able to compile HCL/JSON/xxx into it.</p>
+<p>EDIT:</p>
+<p>Just to show why I’m thinking that expressions are not necessary and should not be implemented. It can be done with different services (that could be core services)</p>
+<p>example: iteration and filter over some data to get the list of data.</p>
+<p><img src="https://forum.mesg.com/uploads/default/original/1X/eff0c27aed052548868d645a690eb33fabaf75de.png" alt="27%20pm" width="690" height="225"></p>
+<p>similar to</p>
+<pre><code class="lang-auto">list = []
+for i in 0..x
+  d = data.get(i)
+  if expression(d)
+    append(list, d)
+return list
+</code></pre>
+          <p><a href="https://forum.mesg.com/t/workflow-definition-format/264/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/workflow-definition-format/264/3</link>
+        <pubDate>Fri, 15 Mar 2019 08:49:14 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-264-3</guid>
+        <source url="https://forum.mesg.com/t/workflow-definition-format/264.rss">Workflow Definition Format</source>
+      </item>
+      <item>
+        <title>Workflow Definition Format</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>~reserved for a new post~</p>
+          <p><a href="https://forum.mesg.com/t/workflow-definition-format/264/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/workflow-definition-format/264/2</link>
+        <pubDate>Thu, 14 Mar 2019 18:24:28 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-264-2</guid>
+        <source url="https://forum.mesg.com/t/workflow-definition-format/264.rss">Workflow Definition Format</source>
+      </item>
+      <item>
+        <title>Workflow Definition Format</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>Within this topic, I aim to find a <strong>native/standard</strong> definition format for creating workflows.</p>
+<h1>The Problem</h1>
+<p>We want to provide the best user experience for creating MESG Applications <em>(can be mentioned as 'app/apps/workflows’)</em>.</p>
+<p>The current way of creating apps is actually coding them in any programming language. A MESG Application is just a piece of software that interacts with Core’s ‘core’ gRPC APIs. This APIs are <code>ListenEvent()</code>, <code>ListenResult()</code> &amp; <code>ExecuteTask()</code>.</p>
+<p><strong>Using full featured programming languages for creating workflows:</strong></p>
+<ul>
+<li>
+<p>is boring.</p>
+</li>
+<li>
+<p>is time consuming, might require boilerplate code to be written that is not relevant to workflow itself.</p>
+</li>
+<li>
+<p>is equally complex with the complexity of used programming language.</p>
+</li>
+<li>
+<p>requires legitimate programming skills which is hard for non-programmers.</p>
+</li>
+<li>
+<p>is not natural because in workflows we should only describe the data flow between services and should not do any advanced programming.</p>
+</li>
+<li>
+<p>is too flexible with lots of advanced(non-needed) features and this leads programmers to do the mistake of putting some service logic right inside of the applications.</p>
+</li>
+<li>
+<p>has, no standard for creating workflows.</p>
+</li>
+<li>
+<p>causes to poor optimization because everything is up to developer’s code style and the used programming language.</p>
+</li>
+</ul>
+<p>These are the reasons that why we shouldn’t use a pre-exists, full featured scripting language like Lua, JS or Lisp to define/create workflows.</p>
+<h1>The Solution</h1>
+<p>Instead of using a full featured scripting language, we need a standardized, small and targeted configuration language that is specially designed for creating workflows.</p>
+<p>Workflows are some sort of configurations that defines the data flow between the services. They don’t require whole features of an actual programming language but still needs some programming primitives like arithmetics, conditional operators, basic loops to manipulate data and create dynamic executions.</p>
+<p>A configuration language with these basic features and a VM at the backend to parse, understand this syntax and execute tasks depending on the state of conditions is actually what we should are looking for. Where this VM should also manage(deploy, start etc.) the dependency services and do smart optimizations on listening events, results and executing tasks.</p>
+<h1>What is a MEG App(Workflow)?</h1>
+<p><strong>Creating a workflow is about:</strong></p>
+<ul>
+<li>
+<p>listening some events from some services,</p>
+</li>
+<li>
+<p>but filtering these events by their keys or payload data.</p>
+</li>
+<li>
+<p>executing tasks from various services depending on events or results that produced by other executions.</p>
+</li>
+<li>
+<p>executing fixed or dynamic amount of tasks depending the conditions from root event or previously done executions(task results).</p>
+</li>
+<li>
+<p>executing tasks synchronously by depending on each other <strong>or</strong> asynchronously <strong>or</strong> by mixing both ways which all decided by the conditions applied to the information got from root event or previously done executions(task results).</p>
+</li>
+<li>
+<p>continuously manipulating the data got from events and results and dynamically creating new data as inputs to task executions.</p>
+</li>
+</ul>
+<p><strong>Workflow’s life cycle:</strong></p>
+<ul>
+<li>
+<p>usually starts by executing some task at the beginning to do application specific things like data migrations or triggering the root(first) events to start sub life cycles.</p>
+</li>
+<li>
+<p>starts for listening some events where each event can be seen as a start point and root of its own sub life cycle <em>(can be called as ‘sub workflow’)</em>.</p>
+</li>
+<li>
+<p>each sub workflow usually consist of a mix of task executions where some of them depends on each other and some running in parallel. a task execution running in parallel might trigger a series of other depended or parallel task executions as well.</p>
+</li>
+<li>
+<p>executions might be statically defined and in a fixed amount or can be created dynamically depending on the conditions got from root event or results of other executions.</p>
+</li>
+<li>
+<p>data of root event or results from different executions can be combined in different ways depending on some logic to use them as inputs of other task executions <strong>otherwise</strong> life cycle will end for that session.</p>
+</li>
+</ul>
+<h1>Expectations from a Good Workflow Definition Format</h1>
+<ul>
+<li>
+<p>it should fulfill the needs talked in the <em>What is a MEG App?</em> and the <em>The Solution</em> sections.</p>
+</li>
+<li>
+<p>it should be easier to create by non-programmers. so it shouldn’t feel like a complicated programming language, it needs to be more like a configuration language with a simple syntax &amp; basic programming features. needs to be in the sweet spot.</p>
+</li>
+<li>
+<p>it should be possible to convert definition to JSON and convert back from JSON. this way it’ll be easier to create it programmatically and JSON is available in browsers and most of the programming languages. (creating it programmatically is specially needed while building workflows via user interfaces)</p>
+</li>
+<li>
+<p>JSON representation shouldn’t feel like an abstract syntax tree of a complicated programming language. it should be very close to the actual definition format. this is possible because we don’t want to have a full featured programming language. this way, it’ll be easily understandable by humans and easier to create programatically.</p>
+</li>
+</ul>
+<h1>Finding a Workflow Definition Format</h1>
+<p>Applications are a bunch of configurations that defines the data relationship between the services. It’s about describing the data flow so this why they’re called as workflows. But to describe <strong>how</strong> data is should actually <strong>flow</strong>, we need to be able to do some sort of programming while defining workflows.</p>
+<p>As a result, we need to introduce some programming primitives inside to the workflow definition format like arithmetics, conditional operators, basic loops to manipulate data and create dynamic executions.</p>
+<p>This means, a workflow definition format needs to be able to accept some basic programming keywords alongside workflow specific definitions like workflow id, name, tasks, events, executions and so on. It is also needed to have an interpreter in the backend to parse &amp; understand this whole definition format and run a special virtual machine for this definition format/language with the purpose of executing tasks in the described ways and pre created conditions.</p>
+<p>Since we also want to make this definition format to be easily generated programmatically we definitely need to have it on top of JSON.</p>
+<p>While considering all of these with the expectations from a good workflow definition format and after the experimentations I did with the HCL2, it seems that HCL2 is just created to meet with this kind of needs in mind. HCL2 is very close to JSON under the hood and it also has the flexibility we expect from a simple programming language to create workflows.</p>
+<p>I don’t like to depend on custom languages like HCL2 and would like to stick with JSON as a data interchange format. But it seems that when HCL2 is converted to JSON, it’s actually still not complicated and actually looking like something that what we could create for defining workflows. HCL2 is also very flexible, extendible and has a nice interpreter that could remove so much work from our VM. So when thinking all about this, I’m really positive about HCL2 and would like to give a good try.</p>
+<h2>Why to Choose HCL2</h2>
+<ul>
+<li>
+<p>it has built in support for variables where we can inject values from the interpreter or they can be created inside the workflows.</p>
+</li>
+<li>
+<p>it has conditional loops for generating custom data over other data.</p>
+</li>
+<li>
+<p>it’s extendible with 3rd party extensions so it’s actually possible to extend HCL2 language to meet with our special needs.</p>
+</li>
+<li>
+<p>it has a data types <a href="https://github.com/hashicorp/hcl2/blob/master/ext/typeexpr/README.md" rel="nofollow noopener">extension</a>.</p>
+</li>
+<li>
+<p>it has an <a href="https://github.com/hashicorp/hcl2/blob/master/ext/dynblock/README.md" rel="nofollow noopener">extension</a> to dynamically define configuration sections that we can use to define executions dynamically depending on the state of conditions.</p>
+</li>
+<li>
+<p>it has good <a href="https://godoc.org/github.com/hashicorp/hcl2" rel="nofollow noopener">packages</a>, a parser, printer and others to deal with the language which we can use them to convert or convert back from JSON.</p>
+</li>
+<li>
+<p>it has a good interpreter, a small runtime to understand and execute HCL2 programs that could remove a lot of work from our VM.</p>
+</li>
+<li>
+<p>and most importantly, the JSON generated from a HCL2 configuration is very nice and legit which means, if we come up with our perfect implementation on top of JSON instead of using HCL2, it could have be very similar. so, this is a very comforting reason to give HCL2 a try. if we think that HCL2 is not enough at some point, we can always create our definition format and interpreter but still keep this underlying JSON format.</p>
+</li>
+<li>
+<p>using HCL will reduce the time we invest into creating a workflow definition format and interpreter from scratch. HCL2 already has a good amount of packages and tooling around it that we can get benefit from.</p>
+</li>
+</ul>
+<h1>Details About HCL2</h1>
+<h2>Resources</h2>
+<h3>Please Read All of These</h3>
+<ul>
+<li><a href="https://media.readthedocs.org/pdf/hcl/guide/hcl.pdf" rel="nofollow noopener">https://media.readthedocs.org/pdf/hcl/guide/hcl.pdf</a></li>
+<li><a href="https://www.hashicorp.com/blog/terraform-0-1-2-preview" rel="nofollow noopener">https://www.hashicorp.com/blog/terraform-0-1-2-preview</a></li>
+<li><a href="https://github.com/hashicorp/hcl2/tree/master/guide" rel="nofollow noopener">https://github.com/hashicorp/hcl2/tree/master/guide</a></li>
+<li><a href="https://github.com/hashicorp/hcl" rel="nofollow noopener">https://github.com/hashicorp/hcl/blob/master/README.md</a></li>
+<li><a href="https://github.com/hashicorp/hcl2/blob/master/README.md" rel="nofollow noopener">https://github.com/hashicorp/hcl2/blob/master/README.md</a></li>
+</ul>
+<h3>Random</h3>
+<ul>
+<li><a href="https://github.com/hashicorp/hcl2/blob/master/hcl/hclsyntax/spec.md" rel="nofollow noopener">technical syntax spec</a></li>
+<li><a href="https://github.com/hashicorp/hcl2/issues/5#issuecomment-359155246" rel="nofollow noopener">vars &amp; custom funcs</a></li>
+<li><a href="https://github.com/hashicorp/hcl2/blob/2c946fb6e248e71de456afc80ad211bc9b3aaeb3/ext/dynblock/variables_test.go" rel="nofollow noopener">more about dynamic sections extension</a></li>
+<li><a href="https://github.com/hashicorp/hcl2/blob/2c946fb6e248e71de456afc80ad211bc9b3aaeb3/hcl/integrationtest/terraformlike_test.go#L140-L148" rel="nofollow noopener">injecting var values to interpreter</a></li>
+<li><a href="https://godoc.org/github.com/hashicorp/hcl2" rel="nofollow noopener">packages</a></li>
+<li><a href="https://www.terraform.io/docs/configuration/index.html" rel="nofollow noopener">see how Terraform uses HCL</a></li>
+<li><a href="https://www.terraform.io/docs/configuration-0-11/interpolation.html#supported-built-in-functions" rel="nofollow noopener">sample custom funcs that Terraform implements</a></li>
+</ul>
+<h3>HCL2 Extensions</h3>
+<ul>
+<li>
+<a href="https://github.com/hashicorp/hcl2/tree/master/ext/" rel="nofollow noopener">https://github.com/hashicorp/hcl2/tree/master/ext/</a>
+<ul>
+<li><a href="https://github.com/hashicorp/hcl2/blob/master/ext/dynblock/README.md" rel="nofollow noopener">https://github.com/hashicorp/hcl2/blob/master/ext/dynblock/README.md</a></li>
+<li><a href="https://github.com/hashicorp/hcl2/blob/master/ext/typeexpr/README.md" rel="nofollow noopener">https://github.com/hashicorp/hcl2/blob/master/ext/typeexpr/README.md</a></li>
+</ul>
+</li>
+</ul>
+<h2>Cons and Tricks</h2>
+<h3>HCL2 &lt;&gt; JSON</h3>
+<p>Even converting to or from JSON for HCL2 is possible, it’s not 100% convenient.</p>
+<p>For example, function calls or built-in <a href="https://www.hashicorp.com/blog/hashicorp-terraform-0-12-preview-for-and-for-each" rel="nofollow noopener">for expression</a> are represented as plain strings when converted to JSON where I expect them to be converted as a structured JSON objects. That way creating them programmatically would be easier.</p>
+<p>But this can be accomplished later by improving the existent HCL2 &lt;&gt; JSON tools. For now, we can work around this by using code templates while building JSON representations.</p>
+<h1>Some Hints</h1>
+<ul>
+<li>
+<a class="mention" href="/u/anthony">@Anthony</a> we talked about directly passing structured data to workflow runner before <a href="https://github.com/mesg-foundation/core/pull/541#discussion_r231840502" rel="nofollow noopener">here</a>. I think, HCL2’s JSON representation can be very close to that structure. What do you think?</li>
+</ul>
+          <p><a href="https://forum.mesg.com/t/workflow-definition-format/264/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/workflow-definition-format/264/1</link>
+        <pubDate>Thu, 14 Mar 2019 18:19:11 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-264-1</guid>
+        <source url="https://forum.mesg.com/t/workflow-definition-format/264.rss">Workflow Definition Format</source>
+      </item>
+  </channel>
+</rss>

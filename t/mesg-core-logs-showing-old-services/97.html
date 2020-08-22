@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <title>Mesg-core logs showing old services - Support - MESG Community</title>
+    <meta name="description" content="Hi there ! 
+I used to work with the previous version of mesg-core, which used to have the ID of the MESG services formatted like v1_…. I lately updated the version to 0.3.0, where the format of these ID’s changed. 
+I cle&amp;hellip;">
+    <meta name="generator" content="Discourse 2.5.0.beta5 - https://github.com/discourse/discourse version 00aab498297cba8f977c1e0eb17b7d38ff06cc68">
+<link rel="icon" type="image/png" href="../../uploads/default/optimized/1X/9f11b6ddfa02bffdbec79487592a0573a0236cb5_2_32x32.png">
+<link rel="apple-touch-icon" type="image/png" href="../../uploads/default/optimized/1X/53630361a40ad76e1733dd0b0f486e9ae2f4f4d6_2_180x180.png">
+<meta name="theme-color" content="#491e8c">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+<link rel="canonical" href="97.html" />
+<script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","url":"https://forum.mesg.com","potentialAction":{"@type":"SearchAction","target":"https://forum.mesg.com/search?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
+<link rel="search" type="application/opensearchdescription+xml" href="../../opensearch.xml" title="MESG Community Search">
+
+      <link href="../../stylesheets/desktop_3_52e3411e87658e862890db7bd06899cf49ad5f59.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop" data-theme-id="7"/>
+      <link href="../../stylesheets/desktop_theme_7_bf4f2d3d8a71e6ee907065be9a79df3d849bd29c.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop_theme" data-theme-id="7"/>
+    
+    <meta id="data-ga-universal-analytics" data-tracking-code="UA-117583862-1" data-json="{&quot;cookieDomain&quot;:&quot;auto&quot;}" data-auto-link-domains="">
+
+<link rel="preload" href="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js" as="script">
+<script src="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js"></script>
+
+
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of &#39;Mesg-core logs showing old services&#39;" href="97.rss" />
+    <meta property="og:site_name" content="MESG Community" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:url" content="https://forum.mesg.com/t/mesg-core-logs-showing-old-services/97" />
+<meta name="twitter:url" content="https://forum.mesg.com/t/mesg-core-logs-showing-old-services/97" />
+<meta property="og:title" content="Mesg-core logs showing old services" />
+<meta name="twitter:title" content="Mesg-core logs showing old services" />
+<meta property="og:description" content="Hi there !  I used to work with the previous version of mesg-core, which used to have the ID of the MESG services formatted like v1_…. I lately updated the version to 0.3.0, where the format of these ID’s changed.  I cleaned all my services many times during development and even cleared on Docker (from Portainer) since I ran into many issues with it. This morning I ran a mesg-core logs and was confused to find this in the logs :  (...) span.kind=server system=grpc time=&quot;2018-10-18T11:54:17Z&quot; lev..." />
+<meta name="twitter:description" content="Hi there !  I used to work with the previous version of mesg-core, which used to have the ID of the MESG services formatted like v1_…. I lately updated the version to 0.3.0, where the format of these ID’s changed.  I cleaned all my services many times during development and even cleared on Docker (from Portainer) since I ran into many issues with it. This morning I ran a mesg-core logs and was confused to find this in the logs :  (...) span.kind=server system=grpc time=&quot;2018-10-18T11:54:17Z&quot; lev..." />
+<meta name="twitter:label1" value="Reading time" />
+<meta name="twitter:data1" value="1 mins 🕑" />
+<meta name="twitter:label2" value="Likes" />
+<meta name="twitter:data2" value="3 ❤" />
+<meta property="article:published_time" content="2018-10-19T04:43:26+00:00" />
+<meta property="og:ignore_canonical" content="true" />
+
+
+
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"QAPage","name":"Mesg-core logs showing old services","mainEntity":{"@type":"Question","name":"Mesg-core logs showing old services","text":"Hi there !\n\nI used to work with the previous version of mesg-core, which used to have the ID of the MESG services formatted like v1_…. I lately updated the version to 0.3.0, where the format of these ID’s changed.\n\nI cleaned all my services many times during development and even cleared on Docker (f&hellip;","upvoteCount":2,"answerCount":1,"dateCreated":"2018-10-19T04:43:26.538Z","author":{"@type":"Person","name":"Rom's"},"acceptedAnswer":{"@type":"Answer","text":"Hi <a class=\"mention\" href="https://forum.mesg.com/t/mesg-core-logs-showing-old-services/\&quot;/u/romain-gsr\&quot;">@romain-gsr<\/a>,\n\nYes services kept under ~/.mesg/database and it’s safe to hard delete it in the current version of core but this may change in future. Deleting the database should solve the problem that you’re facing with.\n\nIt’d be really helpful if you can provide further information about which c&hellip;","upvoteCount":0,"dateCreated":"2018-10-22T08:15:59.306Z","url":"https://forum.mesg.com/t/mesg-core-logs-showing-old-services/97/4","author":{"@type":"Person","name":"ilgooz"}}}}</script>
+  </head>
+  <body class="crawler">
+    
+    <header>
+      <a href="../../index.html">
+          <img src="../../uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png" alt="MESG Community" id="site-logo" style="max-width: 150px;">
+      </a>
+    </header>
+    <div id="main-outlet" class="wrap">
+        <div id="topic-title">
+    <h1>
+      <a href="97.html">Mesg-core logs showing old services</a>
+    </h1>
+
+      <div class="topic-category" itemscope itemtype="http://schema.org/BreadcrumbList">
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../c/support.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #12A89D'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Support</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="1" />
+          </span>
+      </div>
+
+  </div>
+
+  
+
+
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/romain-gsr.html'><span itemprop='name'>romain-gsr</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="97.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-10-19T04:43:26Z'>
+              <time itemprop='dateModified' datetime='2018-10-19T09:47:41Z' class='post-time'>
+                October 19, 2018,  9:47am
+              </time>
+          <span itemprop='position'>#1</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Hi there !</p>
+<p>I used to work with the previous version of <strong>mesg-core</strong>, which used to have the ID of the MESG services formatted like <strong>v1_…</strong>. I lately updated the version to 0.3.0, where the format of these ID’s changed.</p>
+<p>I cleaned all my services many times during development and even cleared on Docker (from Portainer) since I ran into many issues with it. This morning I ran a mesg-core logs and was confused to find this in the logs :</p>
+<pre><code>(...) span.kind=server system=grpc time="2018-10-18T11:54:17Z" level=error msg="finished streaming call with code Unknown" error="context canceled" grpc.code=Unknown grpc.method=ListenResult grpc.service=api.Core grpc.start_time="2018-10-18T11:49:38Z" grpc.time_ms=279820.2 span.kind=server system=grpc time="2018-10-18T11:54:20Z" level=warning msg="Database services: Could not decode service \"v1_0fdee4505e6d9452357035d5a7b289b2\"" service=v1_0fdee4505e6d9452357035d5a7b289b2 time="2018-10-18T11:54:20Z" level=warning msg="Database services: Could not decode service \"v1_1c9ee0a234e6b2ecfe6dbf26de6d8c1d\"" service=v1_1c9ee0a234e6b2ecfe6dbf26de6d8c1d time="2018-10-18T11:54:20Z" level=warning msg="Database services: Could not decode service \"v1_2f33c6a6967981d1d2499b449c2c9620\"" service=v1_2f33c6a6967981d1d2499b449c2c9620 time="2018-10-18T11:54:20Z" level=warning msg="Database services: Could not decode service \"v1_8aa3b4d0aa543dcc3a61c0975b48d8f6\"" (...)
+</code></pre>
+<p>I updated prior to yesterday and, as can be seen, it looks like the core is still trying to decode service from the old version (and all my services use latest version of mesg-js in that case).</p>
+<p>I find it weird so that’s why I came to report.</p>
+<p>Cheers guys</p>
+        </div>
+
+        <meta itemprop='headline' content='Mesg-core logs showing old services'>
+          <meta itemprop='keywords' content=''>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="2" />
+           <span class='post-likes'>2 Likes</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="97.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-10-19T05:25:13Z'>
+              <time itemprop='dateModified' datetime='2018-10-19T05:25:37Z' class='post-time'>
+                October 19, 2018,  5:25am
+              </time>
+          <span itemprop='position'>#2</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Hi <a class="mention" href="../../u/romain-gsr.html">@romain-gsr</a>!</p>
+<p>Yes, we changed the service encoding to json while we also removed this <em>v1</em> prefix from the service ids. This is why your services with the old <em>v1</em> prefix cannot be decoded anymore, this was a breaking change.</p>
+<p>As I see from your logs, you still have some services with the old encoding format saved in your <code>~/.mesg/database</code> and your application client trying to listen results from one of these services.</p>
+<p>Have you tried redeploying your service and use the new id you get from the deployment in your application client? This way core shouldn’t need to try decoding old services from your database.</p>
+<p>Cheers.</p>
+        </div>
+
+        <meta itemprop='headline' content='Mesg-core logs showing old services'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/romain-gsr.html'><span itemprop='name'>romain-gsr</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="97.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-10-22T06:04:38Z' class='post-time'>
+                October 22, 2018,  6:04am
+              </time>
+              <meta itemprop='dateModified' content='2018-10-22T06:04:38Z'>
+          <span itemprop='position'>#3</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Hi <a class="mention" href="../../u/ilgooz.html">@ilgooz</a> !</p>
+<p>Yes, as I mentioned I cleaned all my services  and redeployed many times (also going so far as to clean Docker instances, containers and networks), but I was unaware of the <code>~/.mesg/database</code> and that might be actually where they keep being referenced. Is there a way to clean it up ?</p>
+<p>Cheers</p>
+        </div>
+
+        <meta itemprop='headline' content='Mesg-core logs showing old services'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="1" />
+           <span class='post-likes'>1 Like</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="97.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-10-22T08:15:59Z'>
+              <time itemprop='dateModified' datetime='2019-01-28T05:21:42Z' class='post-time'>
+                January 28, 2019,  5:21am
+              </time>
+          <span itemprop='position'>#4</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Hi <a class="mention" href="../../u/romain-gsr.html">@romain-gsr</a>,</p>
+<p>Yes services kept under <code>~/.mesg/database</code> and it’s safe to hard delete it in the current version of core but this may change in future. Deleting the database should solve the problem that you’re facing with.</p>
+<p>It’d be really helpful if you can provide further information about which cli command or mesg client are you using while getting this error to do a complete investigation. <img src="../../images/emoji/twitter/slight_smile.png%3Fv=6" title=":slight_smile:" class="emoji" alt=":slight_smile:"></p>
+<p>Cheers.</p>
+        </div>
+
+        <meta itemprop='headline' content='Mesg-core logs showing old services'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+
+
+
+
+
+
+    </div>
+    <footer class="container wrap">
+      <nav class='crawler-nav'>
+        <ul>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../index.html' itemprop="url">Home </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../categories.html' itemprop="url">Categories </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../guidelines.html' itemprop="url">FAQ/Guidelines </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../tos.html' itemprop="url">Terms of Service </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../privacy.html' itemprop="url">Privacy Policy </a>
+          </span>
+        </li>
+        </ul>
+      </nav>
+      <p class='powered-by-link'>Powered by <a href="https://www.discourse.org">Discourse</a>, best viewed with JavaScript enabled</p>
+    </footer>
+    
+    
+  </body>
+  
+</html>

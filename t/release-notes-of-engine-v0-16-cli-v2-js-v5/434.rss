@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Release Notes of Engine v0.16, CLI v2, JS v5</title>
+    <link>https://forum.mesg.com/t/release-notes-of-engine-v0-16-cli-v2-js-v5/434</link>
+    <description>We finally released v0.16 of the Engine! This version uses [Cosmos](http://cosmos.network/) and [Tendermint](https://tendermint.com/) to replicate the services across multiple Engines using a state machine built on a blockchain!
+
+# Services on the decentralized network
+
+The decentralized network of Services functionality is now out of beta and is activated by default. Now when you start the Engine, it will create by default a local dev blockchain if no specific configuration is set. 
+As soon as the Engine starts, you should see in the logs a new block every second :confetti_ball: 
+You can, of course, connect multiple Engines together. Check out the network section for more details.
+
+![2019-10-29%2017_44_35|690x476](upload://ycR4uFiM1XUPSNH3nxyo4HeIXkW.gif)
+
+# Engine config file
+
+The Engine is now reading most of the configs from a yaml file instead of environmental variables. This makes advanced configuration easier. This file is located by default in `~/.mesg/config.yml`.
+Here is an example of a config file:
+```yml
+log:
+  format: text
+  level: info
+  forcecolors: true
+tendermint:
+  config:
+    p2p:
+      persistentpeers: 9fbd3f7ac4f143d4ad63d94b0ea34c3b39dcf973@3.3.3.3:26656
+```
+
+The two remaining environmental variables are `MESG_NAME` and `MESG_PATH` to respectively set the Engine&#39;s name (default to `engine`) and the path to the root folder in Docker (default to `~/.mesg`).
+
+# Deletion of the system services
+
+The two system services, `ethwallet` and `marketplace` have been deleted and the functionality replaced by directly using Cosmos&#39; account and the decentralized network of services for the marketplace. The `account` commands of the CLI are still available but the `marketplace` commands have been removed to directly use the `service` commands.
+
+Now when you create services, they are automatically available on the network. As there is no official public network for now, the services will be available only on your Engine or the Engines that you manually configure to connect to each other (check the next part to learn how to do it).
+
+# Tuto: Create a network with multiple Engines
+
+Now that the network functionality is available, you can connect multiple Engines running on different computers together on a network and share services.
+
+[Follow this brief guide to learn how to do it.](https://medium.com/mesg/tutorial-create-a-network-with-multiple-engines-71a143b13ea5?sk=90e44f4ed9fd839969d2e545dad3ab46)
+
+# Changelogs
+
+Follow the links below to see the complete changelogs:
+
+* [Engine](https://github.com/mesg-foundation/engine/blob/master/CHANGELOG.md)
+* [mesg-js](https://github.com/mesg-foundation/mesg-js/blob/master/CHANGELOG.md)
+* [CLI](https://github.com/mesg-foundation/cli/blob/master/CHANGELOG.md)
+
+To update the Engine and the CLI, follow the [installation process on the documentation](https://docs.mesg.com/guide/installation.html).</description>
+    
+    <lastBuildDate>Wed, 30 Oct 2019 10:36:34 +0000</lastBuildDate>
+    <category>News</category>
+    <atom:link href="https://forum.mesg.com/t/release-notes-of-engine-v0-16-cli-v2-js-v5/434.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Release Notes of Engine v0.16, CLI v2, JS v5</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>We finally released v0.16 of the Engine! This version uses <a href="http://cosmos.network/" rel="nofollow noopener">Cosmos</a> and <a href="https://tendermint.com/" rel="nofollow noopener">Tendermint</a> to replicate the services across multiple Engines using a state machine built on a blockchain!</p>
+<h1>Services on the decentralized network</h1>
+<p>The decentralized network of Services functionality is now out of beta and is activated by default. Now when you start the Engine, it will create by default a local dev blockchain if no specific configuration is set.<br>
+As soon as the Engine starts, you should see in the logs a new block every second <img src="https://forum.mesg.com/images/emoji/twitter/confetti_ball.png?v=9" title=":confetti_ball:" class="emoji" alt=":confetti_ball:"><br>
+You can, of course, connect multiple Engines together. Check out the network section for more details.</p>
+<p><img src="https://forum.mesg.com/uploads/default/original/1X/efbdf221b00521ab5b0a67ac801df88c1e130e1e.gif" alt="2019-10-29%2017_44_35" data-base62-sha1="ycR4uFiM1XUPSNH3nxyo4HeIXkW" width="690" height="476"></p>
+<h1>Engine config file</h1>
+<p>The Engine is now reading most of the configs from a yaml file instead of environmental variables. This makes advanced configuration easier. This file is located by default in <code>~/.mesg/config.yml</code>.<br>
+Here is an example of a config file:</p>
+<pre><code class="lang-auto">log:
+  format: text
+  level: info
+  forcecolors: true
+tendermint:
+  config:
+    p2p:
+      persistentpeers: 9fbd3f7ac4f143d4ad63d94b0ea34c3b39dcf973@3.3.3.3:26656
+</code></pre>
+<p>The two remaining environmental variables are <code>MESG_NAME</code> and <code>MESG_PATH</code> to respectively set the Engine’s name (default to <code>engine</code>) and the path to the root folder in Docker (default to <code>~/.mesg</code>).</p>
+<h1>Deletion of the system services</h1>
+<p>The two system services, <code>ethwallet</code> and <code>marketplace</code> have been deleted and the functionality replaced by directly using Cosmos’ account and the decentralized network of services for the marketplace. The <code>account</code> commands of the CLI are still available but the <code>marketplace</code> commands have been removed to directly use the <code>service</code> commands.</p>
+<p>Now when you create services, they are automatically available on the network. As there is no official public network for now, the services will be available only on your Engine or the Engines that you manually configure to connect to each other (check the next part to learn how to do it).</p>
+<h1>Tuto: Create a network with multiple Engines</h1>
+<p>Now that the network functionality is available, you can connect multiple Engines running on different computers together on a network and share services.</p>
+<p><a href="https://medium.com/mesg/tutorial-create-a-network-with-multiple-engines-71a143b13ea5?sk=90e44f4ed9fd839969d2e545dad3ab46" rel="nofollow noopener">Follow this brief guide to learn how to do it.</a></p>
+<h1>Changelogs</h1>
+<p>Follow the links below to see the complete changelogs:</p>
+<ul>
+<li><a href="https://github.com/mesg-foundation/engine/blob/master/CHANGELOG.md" rel="nofollow noopener">Engine</a></li>
+<li><a href="https://github.com/mesg-foundation/mesg-js/blob/master/CHANGELOG.md" rel="nofollow noopener">mesg-js</a></li>
+<li><a href="https://github.com/mesg-foundation/cli/blob/master/CHANGELOG.md" rel="nofollow noopener">CLI</a></li>
+</ul>
+<p>To update the Engine and the CLI, follow the <a href="https://docs.mesg.com/guide/installation.html" rel="nofollow noopener">installation process on the documentation</a>.</p>
+          <p><a href="https://forum.mesg.com/t/release-notes-of-engine-v0-16-cli-v2-js-v5/434/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/release-notes-of-engine-v0-16-cli-v2-js-v5/434/1</link>
+        <pubDate>Wed, 30 Oct 2019 06:26:32 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-434-1</guid>
+        <source url="https://forum.mesg.com/t/release-notes-of-engine-v0-16-cli-v2-js-v5/434.rss">Release Notes of Engine v0.16, CLI v2, JS v5</source>
+      </item>
+  </channel>
+</rss>

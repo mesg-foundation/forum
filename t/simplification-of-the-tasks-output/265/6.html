@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <title>Simplification of the task&#39;s output - Engine - MESG Community</title>
+    <meta name="description" content="After few months using MESG Core, I realize that create task’s outputs is a bit overcomplicated. 
+For now we have the following: 
+One task has one payload of inputs and multiple possible outputs with their own payload. 
+T&amp;hellip;">
+    <meta name="generator" content="Discourse 2.5.0.beta5 - https://github.com/discourse/discourse version 00aab498297cba8f977c1e0eb17b7d38ff06cc68">
+<link rel="icon" type="image/png" href="../../../uploads/default/optimized/1X/9f11b6ddfa02bffdbec79487592a0573a0236cb5_2_32x32.png">
+<link rel="apple-touch-icon" type="image/png" href="../../../uploads/default/optimized/1X/53630361a40ad76e1733dd0b0f486e9ae2f4f4d6_2_180x180.png">
+<meta name="theme-color" content="#491e8c">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+<link rel="canonical" href="../265.html" />
+<script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","url":"https://forum.mesg.com","potentialAction":{"@type":"SearchAction","target":"https://forum.mesg.com/search?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
+<link rel="search" type="application/opensearchdescription+xml" href="../../../opensearch.xml" title="MESG Community Search">
+
+      <link href="../../../stylesheets/desktop_3_52e3411e87658e862890db7bd06899cf49ad5f59.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop" data-theme-id="7"/>
+      <link href="../../../stylesheets/desktop_theme_7_bf4f2d3d8a71e6ee907065be9a79df3d849bd29c.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop_theme" data-theme-id="7"/>
+    
+    <meta id="data-ga-universal-analytics" data-tracking-code="UA-117583862-1" data-json="{&quot;cookieDomain&quot;:&quot;auto&quot;}" data-auto-link-domains="">
+
+<link rel="preload" href="../../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js" as="script">
+<script src="../../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js"></script>
+
+
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of &#39;Simplification of the task&#39;s output&#39;" href="../265.rss" />
+    <meta property="og:site_name" content="MESG Community" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:url" content="https://forum.mesg.com/t/simplification-of-the-tasks-output/265/6" />
+<meta name="twitter:url" content="https://forum.mesg.com/t/simplification-of-the-tasks-output/265/6" />
+<meta property="og:title" content="Simplification of the task&#39;s output" />
+<meta name="twitter:title" content="Simplification of the task&#39;s output" />
+<meta property="og:description" content="According to the new dev roadmap, this proposal is one of the first to be implemented and is blocking for many other dev on the Engine and CLI.  It will be divided in many small PRs that should not break the Engine or introduce bugs. Most of the PRs are dependant to each other, but some are not, so be careful and don’t merge PRs that don’t have to be dependant!  If some modification break other part of the codebase that are not define by the PR, fix it the easiest way to make it work (default va..." />
+<meta name="twitter:description" content="According to the new dev roadmap, this proposal is one of the first to be implemented and is blocking for many other dev on the Engine and CLI.  It will be divided in many small PRs that should not break the Engine or introduce bugs. Most of the PRs are dependant to each other, but some are not, so be careful and don’t merge PRs that don’t have to be dependant!  If some modification break other part of the codebase that are not define by the PR, fix it the easiest way to make it work (default va..." />
+<meta property="article:published_time" content="2019-05-15T10:18:17+00:00" />
+<meta property="og:ignore_canonical" content="true" />
+
+
+
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"QAPage","name":"Simplification of the task's output","mainEntity":{"@type":"Question","name":"Simplification of the task's output","text":"After few months using MESG Core, I realize that create task’s outputs is a bit overcomplicated.\n\nFor now we have the following:\n\nOne task has one payload of inputs and multiple possible outputs with their own payload.\n\nThis is good to have multiple outputs in a function outputs are mostly (if not a&hellip;","upvoteCount":0,"answerCount":1,"dateCreated":"2019-03-28T11:29:59.022Z","author":{"@type":"Person","name":"Anthony"},"acceptedAnswer":{"@type":"Answer","text":"Merged with PR <a href="https://forum.mesg.com/t/simplification-of-the-tasks-output/265/\&quot;https://github.com/mesg-foundation/engine/pull/974\&quot;" rel=\"nofollow noopener\">https://github.com/mesg-foundation/engine/pull/974<\/a>","upvoteCount":0,"dateCreated":"2019-05-30T05:15:49.929Z","url":"https://forum.mesg.com/t/simplification-of-the-tasks-output/265/9","author":{"@type":"Person","name":"Nicolas"}}}}</script>
+  </head>
+  <body class="crawler">
+    
+    <header>
+      <a href="../../../index.html">
+          <img src="../../../uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png" alt="MESG Community" id="site-logo" style="max-width: 150px;">
+      </a>
+    </header>
+    <div id="main-outlet" class="wrap">
+        <div id="topic-title">
+    <h1>
+      <a href="../265.html">Simplification of the task&#39;s output</a>
+    </h1>
+
+      <div class="topic-category" itemscope itemtype="http://schema.org/BreadcrumbList">
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../../c/development.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #AB9364'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Development</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="1" />
+          </span>
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../../c/development/engine.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #AB9364'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Engine</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="2" />
+          </span>
+      </div>
+
+      <div class="topic-category">
+        <div class='discourse-tags list-tags'>
+            <a href='../../../tag/proposal.html' class='discourse-tag' rel="tag">proposal</a>
+        </div>
+      </div>
+  </div>
+
+  
+
+
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="../265.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2019-03-28T11:29:59Z' class='post-time'>
+                March 28, 2019, 11:29am
+              </time>
+              <meta itemprop='dateModified' content='2019-03-28T11:29:59Z'>
+          <span itemprop='position'>#1</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>After few months using MESG Core, I realize that create task’s outputs is a bit overcomplicated.<br>
+For now we have the following:</p>
+<p>One task has one payload of inputs and multiple possible outputs with their own payload.</p>
+<p>This is good to have multiple outputs in a function outputs are mostly (if not all the time) something like <code>success</code> or <code>error</code>.</p>
+<p>We could simplify this and just have one output from the task with its own payload. Of course the service could still raise an error.</p>
+<p><strong>PRO:</strong></p>
+<ul>
+<li>Simplification of the mesg.yml</li>
+</ul>
+<pre><code class="lang-auto">tasks:
+  xxx:
+    inputs: {...}
+    outputs:
+      foo: { type: String }
+</code></pre>
+<ul>
+<li>Simplification of the libraries</li>
+</ul>
+<pre><code class="lang-auto">// mesg lib catches empty result and do a big try catch on the function
+// also now the task don't have the responsibility to call the the submit result the lib can control only one submit result
+mesg.listenTask({
+  foo: (inputs: object): object =&gt; {}
+})
+</code></pre>
+<p><strong>CON:</strong></p>
+<ul>
+<li>A huge breaking change as all existing services will be broken</li>
+<li>Need update on the API</li>
+<li>Need update on the libraries</li>
+</ul>
+<p>We could have some way to minimize the impact with some conventions. If you are using success/error then we can automatically assign the success as output and catch the error but that will be ugly.</p>
+        </div>
+
+        <meta itemprop='headline' content='Simplification of the task&#39;s output'>
+          <meta itemprop='keywords' content='proposal'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="../265.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2019-04-01T05:15:35Z' class='post-time'>
+                April 1, 2019,  5:15am
+              </time>
+              <meta itemprop='dateModified' content='2019-04-01T05:15:35Z'>
+          <span itemprop='position'>#2</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>I totally support this simplification even if it breaks every services!</p>
+<p>I would like to add also a PRO argument:</p>
+<p>The states of execution will also be simplified and more precise.<br>
+Currently, there is a error state only for error occurring inside the Core.<br>
+If the error output is managed by the Core, then the Core could set the execution’s state to error as well. It will be a very nice feature to allow a better retry system on execution.</p>
+<p>As <a class="mention" href="../../../u/anthony.html">@Anthony</a> said, the libs should catches error throwed or returned by the task function.<br>
+But gRPC api must integrate the error.<br>
+The current message containing the result of an execution is:</p>
+<pre><code class="lang-auto">message SubmitResultRequest {
+  string executionID = 1;
+  string outputKey = 2;
+  string outputData = 3;
+}
+</code></pre>
+<p>I suggest to transform it to something like:</p>
+<pre><code class="lang-auto">message SubmitResultRequest {
+  string executionID = 1;
+  oneof output {
+    string outputData = 3;
+    string error = 4;
+  }
+}
+</code></pre>
+        </div>
+
+        <meta itemprop='headline' content='Simplification of the task&#39;s output'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="1" />
+           <span class='post-likes'>1 Like</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="../265.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2019-04-01T06:12:27Z' class='post-time'>
+                April 1, 2019,  6:12am
+              </time>
+              <meta itemprop='dateModified' content='2019-04-01T06:12:27Z'>
+          <span itemprop='position'>#3</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>I was thinking about this for a while and I agree on this simplification. And since we now support object types in the definition format, it’s still possible for devs create different type of outputs by directly defining them in the output data itself.</p>
+<p>One other thing to think about is, we should be able to filter by output types inside the applications. If we remove this feature now, devs will need to do this filtering directly on the data by checking which output presents in the data object.</p>
+<p>Also, we don’t have many input data types in events and task inputs too. So having them for only task outputs doesn’t makes too much sense.</p>
+        </div>
+
+        <meta itemprop='headline' content='Simplification of the task&#39;s output'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="../265.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2019-04-01T08:25:33Z' class='post-time'>
+                April 1, 2019,  8:25am
+              </time>
+              <meta itemprop='dateModified' content='2019-04-01T08:25:33Z'>
+          <span itemprop='position'>#4</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <aside class="quote group-team" data-post="3" data-topic="265">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../../user_avatar/forum.mesg.com/ilgooz/40/46_2.png" class="avatar"> ilgooz:</div>
+<blockquote>
+<p>Also, we don’t have many input data types in events and task inputs too. So having them for only task outputs doesn’t makes too much sense.</p>
+</blockquote>
+</aside>
+<p>I’m not sure to understand. Can you explain more please.</p>
+<aside class="quote group-team" data-post="3" data-topic="265">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../../user_avatar/forum.mesg.com/ilgooz/40/46_2.png" class="avatar"> ilgooz:</div>
+<blockquote>
+<p>One other thing to think about is, we should be able to filter by output types inside the applications. If we remove this feature now, devs will need to do this filtering directly on the data by checking which output presents in the data object.</p>
+</blockquote>
+</aside>
+<p>Yes i agree. But this filtering should be done the same way on both task’s output and events!</p>
+        </div>
+
+        <meta itemprop='headline' content='Simplification of the task&#39;s output'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="../265.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2019-04-01T10:28:29Z'>
+              <time itemprop='dateModified' datetime='2019-04-01T10:30:05Z' class='post-time'>
+                April 1, 2019, 10:30am
+              </time>
+          <span itemprop='position'>#5</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <blockquote>
+<p>I’m not sure to understand. Can you explain more please.</p>
+</blockquote>
+<p>Nothing important. I say that we have <code>outputX</code>, <code>outputY</code> etc. in the task results and we don’t have the similar thing for events to accept different inputs like <code>inputY</code>, <code>inputY</code> or for task inputs. So, there is no a good reason to keep this pattern just for task outputs, users can implement their own since we support the object data type now.</p>
+        </div>
+
+        <meta itemprop='headline' content='Simplification of the task&#39;s output'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="../265.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2019-05-15T10:18:17Z'>
+              <time itemprop='dateModified' datetime='2019-06-20T02:57:41Z' class='post-time'>
+                June 20, 2019,  2:57am
+              </time>
+          <span itemprop='position'>#6</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>According to the new dev roadmap, this proposal is one of the first to be implemented and is blocking for many other dev on the Engine and CLI.</p>
+<p>It will be divided in many small PRs that should not break the Engine or introduce bugs. Most of the PRs are dependant to each other, but some are not, so be careful and don’t merge PRs that don’t have to be dependant!<br>
+If some modification break other part of the codebase that are not define by the PR, fix it the easiest way to make it work (default value, hardcode stuff, etc…) because it will be updated by a other PR.</p>
+<p><a class="mention" href="../../../u/krhubert.html">@krhubert</a> is responsible for the implementation of this proposal, expect for the update of the JS lib.</p>
+<p>EDIT 20th May:<br>
+All of the following PR should be merged to the branch <code>feature/single-output</code> (instead of <code>dev</code>) so we can still release the <code>dev</code> branch in case there is bug fix!</p>
+<h4>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> update importer package <a href="https://github.com/mesg-foundation/engine/pull/963" rel="nofollow noopener">PR #963</a>
+</h4>
+<ul>
+<li>It should read a single output mesg.yml file and transform it to a multiple output service definition (current service definition).<br>
+This way, only the importer package have to be updated and <strong>the rest of the codebase doesn’t.</strong>
+</li>
+<li>the new mesg.yml should look like:</li>
+</ul>
+<pre><code class="lang-auto">tasks:
+  name:
+    name: "Token's name"
+    description: "Get the name of a ERC20"
+    inputs:
+      contractAddress:
+        name: "Contract address"
+        description: "The address of the contract"
+        type: String
+    outputs:
+      name:
+        name: "Token's name"
+        description: "The name of the ERC20"
+        type: String
+</code></pre>
+<ul>
+<li>the outputs in the service definition should be like:</li>
+</ul>
+<pre><code class="lang-auto">    outputs:
+      success:
+        name: "Success"
+        description: "Output when the task executes successfully"
+        data: #the outputs data from the new mesg.yml outputs
+          name:
+            name: "Token's name"
+            description: "The name of the ERC20"
+            type: String
+      error:
+        name: "Error"
+        description: "Output when an error occurs"
+        data:
+          message:
+            name: "Message"
+            description: "The error message"
+            type: String
+</code></pre>
+<h4>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> change internal structure</h4>
+<p>Dependant on the previous PR.</p>
+<ul>
+<li>
+<span class="chcklst-box checked fa fa-check-square fa-fw"></span> Update the <code>Task.Outputs</code> to type <code>[]*Parameter</code> in service package <a href="https://github.com/mesg-foundation/engine/pull/964" rel="nofollow noopener">PR #964</a>
+</li>
+<li>
+<span class="chcklst-box checked fa fa-check-square fa-fw"></span> Remove the <code>Output</code> struct in service package <a href="https://github.com/mesg-foundation/engine/pull/973" rel="nofollow noopener">PR #973</a>
+</li>
+<li>
+<span class="chcklst-box checked fa fa-check-square fa-fw"></span> Update validation logic (most of it should be in <code>service/task.go</code>) <a href="https://github.com/mesg-foundation/engine/pull/973" rel="nofollow noopener">PR #973</a>
+</li>
+</ul>
+<h4>
+<span class="chcklst-box checked fa fa-check-square fa-fw"></span> update execution package</h4>
+<p>Dependant on the previous PR.</p>
+<ul>
+<li>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> remove <code>outputKey</code> <a href="https://github.com/mesg-foundation/engine/pull/975" rel="nofollow noopener">PR #975</a>
+</li>
+<li>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> rename <code>outputData</code> to <code>outputs</code>
+</li>
+<li>
+<span class="chcklst-box checked fa fa-check-square fa-fw"></span> accept error from service when submitting an error</li>
+</ul>
+<h4>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> update API package</h4>
+<ul>
+<li>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> Remove <code>outputKey</code> <a href="https://github.com/mesg-foundation/engine/pull/975" rel="nofollow noopener">PR #975</a>
+</li>
+<li>
+<span class="chcklst-box checked fa fa-check-square fa-fw"></span> Add management of <code>error</code> from the service. (in <code>SubmitResult</code> and <code>processExecution</code> I guess).</li>
+<li>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> remove <code>outputKey</code> from filter <a href="https://github.com/mesg-foundation/engine/pull/971" rel="nofollow noopener">PR #971</a>
+</li>
+<li>
+<span class="chcklst-box checked fa fa-check-square fa-fw"></span> remove any hack to use service and execution db</li>
+</ul>
+<h4>
+<span class="chcklst-box checked fa fa-check-square fa-fw"></span> update gRPC APIs</h4>
+<p>Dependant on the previous PR.</p>
+<ul>
+<li>
+<span class="chcklst-box checked fa fa-check-square fa-fw"></span> Update the service struct in protobuf package</li>
+<li>
+<span class="chcklst-box checked fa fa-check-square fa-fw"></span> Update the <code>SubmitResultRequest</code> to:</li>
+</ul>
+<pre><code class="lang-auto">message SubmitResultRequest {
+  string executionID = 1;
+  string outputData = 3;
+  string error = 4;
+}
+</code></pre>
+<p>maybe with an oneOf on <code>outputData</code> and <code>error</code>.</p>
+<ul>
+<li>
+<span class="chcklst-box checked fa fa-check-square fa-fw"></span> Remove <code>outputFilter</code> from <code>ListenResultRequest</code>
+</li>
+<li>
+<span class="chcklst-box checked fa fa-check-square fa-fw"></span> Remove <code>outputKey</code> from <code>ResultData</code>
+</li>
+</ul>
+<h4>
+<span class="chcklst-box checked fa fa-check-square fa-fw"></span> update Go libraries</h4>
+<p>Dependant on the PR Update APIs.</p>
+<ul>
+<li>
+<span class="chcklst-box checked fa fa-check-square fa-fw"></span> Remove the <code>OutputKey</code>.</li>
+<li>
+<span class="chcklst-box checked fa fa-check-square fa-fw"></span> Add the error management</li>
+</ul>
+<h4>
+<span class="chcklst-box checked fa fa-check-square fa-fw"></span> update JS libraries <a href="https://github.com/mesg-foundation/mesg-js/pull/90" rel="nofollow noopener">PR #90</a>
+</h4>
+<p>Dependant on the PR Update APIs.</p>
+<ul>
+<li>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> Don’t pass outputs callback to the parameter of the task function.<br>
+The task function should return an Object that will be JSONed by the lib before send to the Engine.<br>
+If the task function throw an error, the lib should catch it and send it to the Engine.<br>
+Maybe, the lib could also be compatible with the task function returning a Promise? <a class="mention-group" href="../../../groups/core.html">@core</a> what do you think?</li>
+</ul>
+<h4>
+<span class="chcklst-box checked fa fa-check-square fa-fw"></span> update services</h4>
+<p>Dependant on the PR Update JS lib for JS service and Go lib for Go service.</p>
+<ul>
+<li>Update both the mesg.yml and the code of services</li>
+</ul>
+<h4>
+<span class="chcklst-box checked fa fa-check-square fa-fw"></span> update CLI</h4>
+<p>Dependant on the PR Update APIs.</p>
+<ul>
+<li>Update the CLI commands to get rid of all output key related stuff.</li>
+</ul>
+<p><a href="https://github.com/mesg-foundation/engine/pull/972" rel="nofollow noopener">PR #972</a></p>
+        </div>
+
+        <meta itemprop='headline' content='Simplification of the task&#39;s output'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+            <div class='crawler-linkback-list' itemscope itemtype='http://schema.org/ItemList'>
+                  <div itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+                    <a href="../../execution-db-and-api/280.html" itemprop='item'>
+                      <meta itemprop='url' content='https://forum.mesg.com/t/execution-db-and-api/280'>
+                      <meta itemprop='position' content='9'>
+                      <span itemprop='name'>Execution DB and API</span>
+                    </a>
+                  </div>
+            </div>
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="../265.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2019-05-23T08:12:29Z'>
+              <time itemprop='dateModified' datetime='2019-05-30T05:14:28Z' class='post-time'>
+                May 30, 2019,  5:14am
+              </time>
+          <span itemprop='position'>#7</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>A new thing came up during the update of the Execution and API package:</p>
+<p>With <a href="https://github.com/mesg-foundation/engine/pull/975" rel="nofollow noopener">PR 975</a>, Executions go to state <code>Failed</code> when the service return an error in the <code>SubmitResult</code> request. This is the good behavior.<br>
+The problem is Executions also go to state <code>Failed</code> when errors are returned from: <code>json.Unmarshal</code> and <code>exec.Complete</code>.</p>
+<ul>
+<li>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> This have to be fixed by simply returning the error from those function instead of saving them into Executions.</li>
+<li>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> If an error occurs, the execution should not be published on the pubsub system</li>
+</ul>
+<p>The returned error will be send back to the service as response of the <code>SubmitResult</code> api.</p>
+<p>Executions should go to failed state only when the service send an error when calling <code>SubmitResult</code>.</p>
+<p>The function <code>SubmitResult</code>, <code>processExecution</code> and <code>saveExecution</code> need to be modified to fix this bad behavior:<br>
+<aside class="onebox githubblob">
+  <header class="source">
+      <a href="https://github.com/mesg-foundation/engine/blob/9581a0216fab48cea14dec11860f0db0aee907f1/api/api.go#L179-L231" target="_blank" rel="nofollow noopener">github.com</a>
+  </header>
+  <article class="onebox-body">
+    <h4><a href="https://github.com/mesg-foundation/engine/blob/9581a0216fab48cea14dec11860f0db0aee907f1/api/api.go#L179-L231" target="_blank" rel="nofollow noopener">mesg-foundation/engine/blob/9581a0216fab48cea14dec11860f0db0aee907f1/api/api.go#L179-L231</a></h4>
+<pre class="onebox"><code class="lang-go"><ol class="start lines" start="179" style="counter-reset: li-counter 178 ;">
+<li>func (a *API) SubmitResult(executionID string, outputs []byte, reterr error) error {</li>
+<li>	exec, stateChanged, err := a.processExecution(executionID, outputs, reterr)</li>
+<li>	if stateChanged {</li>
+<li>		// only publish to listeners when the execution's state changed.</li>
+<li>		go a.ps.Pub(exec, executionSubTopic(exec.Service.Hash))</li>
+<li>	}</li>
+<li>	return err</li>
+<li>}</li>
+<li>
+</li>
+<li>// processExecution processes execution and marks it as complated or failed.</li>
+<li>func (a *API) processExecution(executionID string, outputData []byte, reterr error) (exec *execution.Execution, stateChanged bool, err error) {</li>
+<li>	tx, err := a.execDB.OpenTransaction()</li>
+<li>	if err != nil {</li>
+<li>		return nil, false, err</li>
+<li>	}</li>
+<li>
+</li>
+<li>	exec, err = tx.Find(executionID)</li>
+<li>	if err != nil {</li>
+<li>		tx.Discard()</li>
+<li>		return nil, false, err</li>
+</ol></code></pre>
+
+  This file has been truncated. <a href="https://github.com/mesg-foundation/engine/blob/9581a0216fab48cea14dec11860f0db0aee907f1/api/api.go#L179-L231" target="_blank" rel="nofollow noopener">show original</a>
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+</p>
+        </div>
+
+        <meta itemprop='headline' content='Simplification of the task&#39;s output'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="../265.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2019-05-23T08:53:33Z' class='post-time'>
+                May 23, 2019,  8:53am
+              </time>
+              <meta itemprop='dateModified' content='2019-05-23T08:53:33Z'>
+          <span itemprop='position'>#8</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>To test the features, you can use the service erc20 with branch <code>single-outputs</code>:</p>
+<pre><code class="lang-auto">./dev-cli service dev https://github.com/mesg-foundation/service-ethereum-erc20/tarball/single-outputs
+</code></pre>
+<p>Then to execute a task without error:</p>
+<pre><code class="lang-auto">./dev-cli service execute ethereum-erc20 --task name --data contractAddress='0x420167d87d35c3a249b32ef6225872fbd9ab85d2'
+</code></pre>
+<p>Task with error:</p>
+<pre><code class="lang-auto">./dev-cli service execute ethereum-erc20 --task name --data contractAddress='0x420167d87d35c3a249b32ef6225872fbd9ab85d'
+</code></pre>
+        </div>
+
+        <meta itemprop='headline' content='Simplification of the task&#39;s output'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="../265.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2019-05-30T05:15:49Z'>
+              <time itemprop='dateModified' datetime='2019-05-30T05:15:58Z' class='post-time'>
+                May 30, 2019,  5:15am
+              </time>
+          <span itemprop='position'>#9</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Merged with PR <a href="https://github.com/mesg-foundation/engine/pull/974" rel="nofollow noopener">https://github.com/mesg-foundation/engine/pull/974</a></p>
+        </div>
+
+        <meta itemprop='headline' content='Simplification of the task&#39;s output'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+
+
+
+
+
+
+    </div>
+    <footer class="container wrap">
+      <nav class='crawler-nav'>
+        <ul>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../../index.html' itemprop="url">Home </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../../categories.html' itemprop="url">Categories </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../../guidelines.html' itemprop="url">FAQ/Guidelines </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../../tos.html' itemprop="url">Terms of Service </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../../privacy.html' itemprop="url">Privacy Policy </a>
+          </span>
+        </li>
+        </ul>
+      </nav>
+      <p class='powered-by-link'>Powered by <a href="https://www.discourse.org">Discourse</a>, best viewed with JavaScript enabled</p>
+    </footer>
+    
+    
+  </body>
+  
+</html>

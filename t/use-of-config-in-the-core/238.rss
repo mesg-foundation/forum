@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Use of config in the Core</title>
+    <link>https://forum.mesg.com/t/use-of-config-in-the-core/238</link>
+    <description>In the core we are using the package config in 2 different ways:
+
+## As a dependency injected in a package
+
+Pro: We could mock it easily 
+Con: We need to pass it pretty much everywhere and that become a de-facto dependency
+
+## As a singleton
+
+Pro: Ease of use
+Con: Creates a string dependency
+
+----
+
+Both solutions are valid but we need to make sure we choose only one to not have any confusion in the code with sometime dependencies and sometime singleton.
+
+Both solution needs some modifications in the code. If singleton, we need to have a **real singleton** the **New** function should not be exposed. If dependency we need to remove the **Global** function and do everything in the **New** method.
+
+Would like to have your feedbacks on that :)
+
+This subject came from this discussion on github https://github.com/mesg-foundation/core/pull/737#discussion_r251319159</description>
+    
+    <lastBuildDate>Thu, 26 Dec 2019 02:21:43 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/use-of-config-in-the-core/238.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Use of config in the Core</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>Everything is now passed as a dependency and we don’t use any singleton anymore</p>
+          <p><a href="https://forum.mesg.com/t/use-of-config-in-the-core/238/5">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/use-of-config-in-the-core/238/5</link>
+        <pubDate>Thu, 26 Dec 2019 02:21:43 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-238-5</guid>
+        <source url="https://forum.mesg.com/t/use-of-config-in-the-core/238.rss">Use of config in the Core</source>
+      </item>
+      <item>
+        <title>Use of config in the Core</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <p>Singleton is consider by many as antipattern. Also it leads to situation like in service package (described here <a href="https://github.com/mesg-foundation/core/pull/737#discussion_r251319159" rel="nofollow noopener">https://github.com/mesg-foundation/core/pull/737#discussion_r251319159</a>)</p>
+          <p><a href="https://forum.mesg.com/t/use-of-config-in-the-core/238/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/use-of-config-in-the-core/238/4</link>
+        <pubDate>Fri, 01 Feb 2019 08:58:32 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-238-4</guid>
+        <source url="https://forum.mesg.com/t/use-of-config-in-the-core/238.rss">Use of config in the Core</source>
+      </item>
+      <item>
+        <title>Use of config in the Core</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>I vote for singleton.</p>
+<p>Having each package with different config will result in a mess. Some package needs config for other package because of the container architecture we have.</p>
+          <p><a href="https://forum.mesg.com/t/use-of-config-in-the-core/238/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/use-of-config-in-the-core/238/3</link>
+        <pubDate>Tue, 29 Jan 2019 10:19:01 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-238-3</guid>
+        <source url="https://forum.mesg.com/t/use-of-config-in-the-core/238.rss">Use of config in the Core</source>
+      </item>
+      <item>
+        <title>Use of config in the Core</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <p>There are more solutions to this.</p>
+<ol>
+<li>A global variable (we don’t need singleton because of it just simulation of a global variable)</li>
+</ol>
+<pre><code class="lang-auto">package config
+
+var Cfg *Config
+
+type Config struct {
+  Bar string
+}
+
+func Init() error {
+ Cfg = &amp;Config{Bar: "bar"}
+ return nil
+}
+
+package main
+
+import "config"
+import "a"
+
+func main() {
+  config.Init()
+  a.New().foo()
+}
+
+package a
+
+import "config"
+
+type A struct {
+}
+
+func New() *A {
+  return &amp;A{}
+}
+
+func (a *A) foo() {
+  fmt.Println(config.Cfg.Bar)
+}
+</code></pre>
+<ol start="2">
+<li>Pass config</li>
+</ol>
+<pre><code class="lang-auto">package config
+
+type Config struct {
+  Bar string
+}
+
+func New() (*Config) {
+ return &amp;Config{Bar: "bar"}
+}
+
+package main
+
+import "config"
+import "a"
+
+func main() {
+  cfg := config.New()
+  a.New(cfg).foo()
+}
+
+package a
+
+import "config"
+
+type A struct {
+  cfg *config.Config
+}
+
+func New(cfg *config.Config) *A {
+  return &amp;A{cfg: cfg}
+}
+
+func (a *A) foo() {
+  fmt.Println(a.cfg.Bar)
+}
+</code></pre>
+<ol start="3">
+<li>Pass part of config</li>
+</ol>
+<pre><code class="lang-auto">package config
+
+type BarConfig struct {
+  Bar string
+}
+
+type Config struct {
+  Bar BarConfig
+}
+
+func New() (*Config) {
+ return &amp;Config{Bar: BarConfig{"bar"}}
+}
+
+package main
+
+import "config"
+import "a"
+
+func main() {
+  cfg := config.New()
+  a.New(cfg.BarConfig).foo()
+}
+
+package a
+
+import "config"
+
+type A struct {
+  cfg *config.BarConfig
+}
+
+func New(cfg *config.BarConfig) *A {
+  return &amp;A{cfg: cfg}
+}
+
+func (a *A) foo() {
+  fmt.Println(a.cfg.Bar)
+}
+</code></pre>
+<ol start="4">
+<li>Each package create it’s own options to configure</li>
+</ol>
+<pre><code class="lang-auto">package config
+
+type BarConfig struct {
+  Bar string
+}
+
+type Config struct {
+  Bar BarConfig
+}
+
+func New() (*Config) {
+ return &amp;Config{Bar: BarConfig{"bar"}}
+}
+
+package main
+
+import "config"
+import "a"
+
+func main() {
+  cfg := config.New()
+  a.New(&amp;a.Config{Bar: cfg.BarConfig}).foo()
+}
+
+package a
+
+import "config"
+
+type Config struct {
+  Bar string
+}
+
+type A struct {
+  cfg *Config
+}
+
+func New(cfg *Config) *A {
+  return &amp;A{cfg: cfg}
+}
+
+func (a *A) foo() {
+  fmt.Println(a.cfg.Bar)
+}
+</code></pre>
+<div class="poll" data-poll-status="open" data-poll-public="true" data-poll-results="always" data-poll-type="regular" data-poll-name="poll">
+<div>
+<div class="poll-container">
+<ul>
+<li data-poll-option-id="ea7d0c8f93f8f53c17dfde0cc76d443a">1 A global variable</li>
+<li data-poll-option-id="1822ff717e2f020104429004cb4affbb">2 Pass config</li>
+<li data-poll-option-id="e18bbf7fac2b35e50c9e6a57228ac6c5">3 Pass part of config</li>
+<li data-poll-option-id="669443cf3f21f7cdb58211e7d3b5158c">4 Each package create it’s own options to configure</li>
+</ul>
+</div>
+<div class="poll-info">
+<p>
+<span class="info-number">0</span>
+<span class="info-label">voters</span>
+</p>
+</div>
+</div>
+</div>
+          <p><a href="https://forum.mesg.com/t/use-of-config-in-the-core/238/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/use-of-config-in-the-core/238/2</link>
+        <pubDate>Tue, 29 Jan 2019 08:39:39 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-238-2</guid>
+        <source url="https://forum.mesg.com/t/use-of-config-in-the-core/238.rss">Use of config in the Core</source>
+      </item>
+      <item>
+        <title>Use of config in the Core</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>In the core we are using the package config in 2 different ways:</p>
+<h2>As a dependency injected in a package</h2>
+<p>Pro: We could mock it easily<br>
+Con: We need to pass it pretty much everywhere and that become a de-facto dependency</p>
+<h2>As a singleton</h2>
+<p>Pro: Ease of use<br>
+Con: Creates a string dependency</p>
+<hr>
+<p>Both solutions are valid but we need to make sure we choose only one to not have any confusion in the code with sometime dependencies and sometime singleton.</p>
+<p>Both solution needs some modifications in the code. If singleton, we need to have a <strong>real singleton</strong> the <strong>New</strong> function should not be exposed. If dependency we need to remove the <strong>Global</strong> function and do everything in the <strong>New</strong> method.</p>
+<p>Would like to have your feedbacks on that <img src="https://forum.mesg.com/images/emoji/twitter/slight_smile.png?v=6" title=":slight_smile:" class="emoji" alt=":slight_smile:"></p>
+<p>This subject came from this discussion on github <a href="https://github.com/mesg-foundation/core/pull/737#discussion_r251319159" rel="nofollow noopener">https://github.com/mesg-foundation/core/pull/737#discussion_r251319159</a></p>
+          <p><a href="https://forum.mesg.com/t/use-of-config-in-the-core/238/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/use-of-config-in-the-core/238/1</link>
+        <pubDate>Tue, 29 Jan 2019 07:24:11 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-238-1</guid>
+        <source url="https://forum.mesg.com/t/use-of-config-in-the-core/238.rss">Use of config in the Core</source>
+      </item>
+  </channel>
+</rss>

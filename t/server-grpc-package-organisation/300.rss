@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Server/grpc package organisation</title>
+    <link>https://forum.mesg.com/t/server-grpc-package-organisation/300</link>
+    <description>Hey guys, I would like to suggest a simpler organisation of the `server/grpc` package.
+
+So currently, we have:
+```
+- server
+  - grpc
+    - core
+    - service
+  - server.go
+```
+`server.go` contains the initialization of the gRPC server and the register function that assign the different gRPC service implementation to the server itself.
+`core` and `service` folders each contains one file with a struct that implement the corresponding generated gRPC interface.
+
+My suggestion is to add new grpc services in new files directly in the grpc folder/package.
+Each grpc service will have a dedicated struct (like currently) with its own dependency (could be to sdk or to a sub package for sdk).
+The filename will be the same as the gRPC service (eg: execution) and the struct will be suffixed by Server (like the generated gRPC interface to implement).
+
+So the folder will look like:
+```
+- server
+  - grpc
+    execution.go
+    service.go
+    instance.go
+    server.go
+```
+
+and for example the content of `execution.go` will look like:
+
+```go
+package grpc
+
+type ExecutionServer struct {
+	sdk *sdk.SDK
+}
+
+func NewExecutionServer(sdk *sdk.SDK) *ExecutionServer {
+	return &amp;ExecutionServer{sdk: sdk}
+}
+
+func (s *ExecutionServer) Create(context context.Context, request ....) (*serviceapi.EmitEventReply, error) {
+	......
+}
+```
+
+The register function in server.go will look like:
+```go
+func (s *Server) register() error {
+	executionServer := NewExecutionServer(s.sdk)
+	// same for all grpc service
+
+	api.RegisterExecutionServer(s.instance, executionServer)
+	// same for all grpc service
+
+	reflection.Register(s.instance)
+	return nil
+}
+```
+
+@core what are you feedbacks?</description>
+    
+    <lastBuildDate>Mon, 03 Jun 2019 11:11:53 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/server-grpc-package-organisation/300.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Server/grpc package organisation</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Hey guys, I would like to suggest a simpler organisation of the <code>server/grpc</code> package.</p>
+<p>So currently, we have:</p>
+<pre><code class="lang-auto">- server
+  - grpc
+    - core
+    - service
+  - server.go
+</code></pre>
+<p><code>server.go</code> contains the initialization of the gRPC server and the register function that assign the different gRPC service implementation to the server itself.<br>
+<code>core</code> and <code>service</code> folders each contains one file with a struct that implement the corresponding generated gRPC interface.</p>
+<p>My suggestion is to add new grpc services in new files directly in the grpc folder/package.<br>
+Each grpc service will have a dedicated struct (like currently) with its own dependency (could be to sdk or to a sub package for sdk).<br>
+The filename will be the same as the gRPC service (eg: execution) and the struct will be suffixed by Server (like the generated gRPC interface to implement).</p>
+<p>So the folder will look like:</p>
+<pre><code class="lang-auto">- server
+  - grpc
+    execution.go
+    service.go
+    instance.go
+    server.go
+</code></pre>
+<p>and for example the content of <code>execution.go</code> will look like:</p>
+<pre><code class="lang-auto">package grpc
+
+type ExecutionServer struct {
+	sdk *sdk.SDK
+}
+
+func NewExecutionServer(sdk *sdk.SDK) *ExecutionServer {
+	return &amp;ExecutionServer{sdk: sdk}
+}
+
+func (s *ExecutionServer) Create(context context.Context, request ....) (*serviceapi.EmitEventReply, error) {
+	......
+}
+</code></pre>
+<p>The register function in server.go will look like:</p>
+<pre><code class="lang-auto">func (s *Server) register() error {
+	executionServer := NewExecutionServer(s.sdk)
+	// same for all grpc service
+
+	api.RegisterExecutionServer(s.instance, executionServer)
+	// same for all grpc service
+
+	reflection.Register(s.instance)
+	return nil
+}
+</code></pre>
+<p><a class="mention-group" href="/groups/core">@core</a> what are you feedbacks?</p>
+          <p><a href="https://forum.mesg.com/t/server-grpc-package-organisation/300/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/server-grpc-package-organisation/300/1</link>
+        <pubDate>Mon, 03 Jun 2019 11:11:53 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-300-1</guid>
+        <source url="https://forum.mesg.com/t/server-grpc-package-organisation/300.rss">Server/grpc package organisation</source>
+      </item>
+  </channel>
+</rss>

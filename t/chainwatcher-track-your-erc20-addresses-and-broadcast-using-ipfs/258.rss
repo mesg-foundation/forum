@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>ChainWatcher -- track your ERC20 addresses, and broadcast using IPFS</title>
+    <link>https://forum.mesg.com/t/chainwatcher-track-your-erc20-addresses-and-broadcast-using-ipfs/258</link>
+    <description>ChainWatcher is an application built using MESG services. It utilises the ethereum-erc20 service, as well as an [IPFS](https://github.com/dcprevere/service-ipfs) service written specifically for this project.
+
+It allows one to monitor the transfers that involve addresses one is interested in.
+
+For each relevant transfer, the application also finds the balance of that address and writes a record of the address, transfer and current balance to IPFS.
+
+The location of the IPFS files are then broadcast using IPFS pubsub, which allows the information to be received by multiple remote consumers.
+
+For more information, please see: [ChainWatcher](https://github.com/DCPRevere/chain-watcher)</description>
+    
+    <lastBuildDate>Mon, 18 Feb 2019 06:02:29 +0000</lastBuildDate>
+    <category>Hackathon</category>
+    <atom:link href="https://forum.mesg.com/t/chainwatcher-track-your-erc20-addresses-and-broadcast-using-ipfs/258.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>ChainWatcher -- track your ERC20 addresses, and broadcast using IPFS</title>
+        <dc:creator><![CDATA[DCPRevere]]></dc:creator>
+        <description><![CDATA[
+            <p>ChainWatcher is an application built using MESG services. It utilises the ethereum-erc20 service, as well as an <a href="https://github.com/dcprevere/service-ipfs" rel="nofollow noopener">IPFS</a> service written specifically for this project.</p>
+<p>It allows one to monitor the transfers that involve addresses one is interested in.</p>
+<p>For each relevant transfer, the application also finds the balance of that address and writes a record of the address, transfer and current balance to IPFS.</p>
+<p>The location of the IPFS files are then broadcast using IPFS pubsub, which allows the information to be received by multiple remote consumers.</p>
+<p>For more information, please see: <a href="https://github.com/DCPRevere/chain-watcher" rel="nofollow noopener">ChainWatcher</a></p>
+          <p><a href="https://forum.mesg.com/t/chainwatcher-track-your-erc20-addresses-and-broadcast-using-ipfs/258/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/chainwatcher-track-your-erc20-addresses-and-broadcast-using-ipfs/258/1</link>
+        <pubDate>Mon, 18 Feb 2019 06:02:29 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-258-1</guid>
+        <source url="https://forum.mesg.com/t/chainwatcher-track-your-erc20-addresses-and-broadcast-using-ipfs/258.rss">ChainWatcher -- track your ERC20 addresses, and broadcast using IPFS</source>
+      </item>
+  </channel>
+</rss>

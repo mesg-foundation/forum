@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>About the Blog discussions category</title>
+    <link>https://forum.mesg.com/t/about-the-blog-discussions-category/478</link>
+    <description>This category is dedicated to discussions revolving around the [MESG Blog](https://blog.mesg.com). 
+
+Feel free to leave any questions, comments, suggestions or feedback on blog content and topics in this category.
+
+Ensure each new post contains a URL referencing the original content on the blog.</description>
+    
+    <lastBuildDate>Thu, 09 Jan 2020 07:56:03 +0000</lastBuildDate>
+    <category>Blog discussions</category>
+    <atom:link href="https://forum.mesg.com/t/about-the-blog-discussions-category/478.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>About the Blog discussions category</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>This category is dedicated to discussions revolving around the <a href="https://blog.mesg.com">MESG Blog</a>.</p>
+<p>Feel free to leave any questions, comments, suggestions or feedback on blog content and topics in this category.</p>
+<p>Ensure each new post contains a URL referencing the original content on the blog.</p>
+          <p><a href="https://forum.mesg.com/t/about-the-blog-discussions-category/478/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/about-the-blog-discussions-category/478/1</link>
+        <pubDate>Thu, 12 Dec 2019 11:01:12 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-478-1</guid>
+        <source url="https://forum.mesg.com/t/about-the-blog-discussions-category/478.rss">About the Blog discussions category</source>
+      </item>
+  </channel>
+</rss>

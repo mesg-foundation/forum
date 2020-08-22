@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Stripe to ERC20</title>
+    <link>https://forum.mesg.com/t/stripe-to-erc20/206</link>
+    <description>## Concept
+
+The idea of this one is to be able to accept payment on [Stripe](https://stripe.com) and send token to the buyer (kind of airdrop the token). This can be used in many cases, with [ERC20](https://theethereum.wiki/w/index.php/ERC20_Token_Standard) simply to buy ERC20 without having to go to an exchange and the company that release the token can also sell it directly with the price they decide.
+
+One other implication is using [ERC71](http://erc721.org/), it allows to buy collectibles (cryptokitties, game skins, addons...) without having to even know about Ethereum.
+
+## Business implication
+- Every project could be now able to use the benefits of blockchain and tokenize everything without having the barrier to entry that blockchains has now.
+- New way of ICO if legal
+- Gaming industry could have their token in the game that is actual token based on ERC20 or the different objects to craft or whatever based on the ERC721.
+- Shop could do their inventory on blockchain and still selling this with a simple credit cart system.
+
+## Materials
+Demo video: [https://drive.google.com/file/d/1WfZZ9tcNJAEdKms9LKynR1rlle4rS_Ix/view?usp=sharing](https://drive.google.com/file/d/1WfZZ9tcNJAEdKms9LKynR1rlle4rS_Ix/view?usp=sharing)
+https://github.com/mesg-foundation/application-stripe-to-erc20
+
+## Workflow
+
+![stripe-erc20-workflow|690x244](upload://eKz3PORJqy0cdKzHEFZSfnASyPP.jpeg)</description>
+    
+    <lastBuildDate>Thu, 24 Jan 2019 12:17:20 +0000</lastBuildDate>
+    <category>Proof of Concept</category>
+    <atom:link href="https://forum.mesg.com/t/stripe-to-erc20/206.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Stripe to ERC20</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>I put the demo online accessible for anyone at <a href="http://stripe-erc20.demo.mesg.com:8080/" rel="nofollow noopener">http://stripe-erc20.demo.mesg.com:8080/</a> <img src="https://forum.mesg.com/images/emoji/twitter/slight_smile.png?v=6" title=":slight_smile:" class="emoji" alt=":slight_smile:"></p>
+          <p><a href="https://forum.mesg.com/t/stripe-to-erc20/206/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/stripe-to-erc20/206/2</link>
+        <pubDate>Thu, 24 Jan 2019 12:17:20 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-206-2</guid>
+        <source url="https://forum.mesg.com/t/stripe-to-erc20/206.rss">Stripe to ERC20</source>
+      </item>
+      <item>
+        <title>Stripe to ERC20</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <h2>Concept</h2>
+<p>The idea of this one is to be able to accept payment on <a href="https://stripe.com">Stripe</a> and send token to the buyer (kind of airdrop the token). This can be used in many cases, with <a href="https://theethereum.wiki/w/index.php/ERC20_Token_Standard">ERC20</a> simply to buy ERC20 without having to go to an exchange and the company that release the token can also sell it directly with the price they decide.</p>
+<p>One other implication is using <a href="http://erc721.org/">ERC71</a>, it allows to buy collectibles (cryptokitties, game skins, addons…) without having to even know about Ethereum.</p>
+<h2>Business implication</h2>
+<ul>
+<li>Every project could be now able to use the benefits of blockchain and tokenize everything without having the barrier to entry that blockchains has now.</li>
+<li>New way of ICO if legal</li>
+<li>Gaming industry could have their token in the game that is actual token based on ERC20 or the different objects to craft or whatever based on the ERC721.</li>
+<li>Shop could do their inventory on blockchain and still selling this with a simple credit cart system.</li>
+</ul>
+<h2>Materials</h2>
+<p>Demo video: <a href="https://drive.google.com/file/d/1WfZZ9tcNJAEdKms9LKynR1rlle4rS_Ix/view?usp=sharing">https://drive.google.com/file/d/1WfZZ9tcNJAEdKms9LKynR1rlle4rS_Ix/view?usp=sharing</a><br>
+<aside class="onebox whitelistedgeneric">
+  <header class="source">
+      <img src="https://github.githubassets.com/favicons/favicon.svg" class="site-icon" width="32" height="32">
+      <a href="https://github.com/mesg-foundation/application-stripe-to-erc20" target="_blank">GitHub</a>
+  </header>
+  <article class="onebox-body">
+    <img src="https://forum.mesg.com/uploads/default/original/1X/9a7d31725705dc0a66d95aa32a5ecc784f926ecf.png" class="thumbnail" width="" height="">
+
+<h3><a href="https://github.com/mesg-foundation/application-stripe-to-erc20" target="_blank">mesg-foundation/application-stripe-to-erc20</a></h3>
+
+<p>Example application using a payment with stripe to send erc20 tokens - mesg-foundation/application-stripe-to-erc20</p>
+
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+</p>
+<h2>Workflow</h2>
+<p><img src="https://forum.mesg.com/uploads/default/original/1X/6761f63f59f0eae2ea5880b007a22d7977c8f285.jpeg" alt="stripe-erc20-workflow" data-base62-sha1="eKz3PORJqy0cdKzHEFZSfnASyPP" width="690" height="244"></p>
+          <p><a href="https://forum.mesg.com/t/stripe-to-erc20/206/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/stripe-to-erc20/206/1</link>
+        <pubDate>Sun, 20 Jan 2019 11:47:06 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-206-1</guid>
+        <source url="https://forum.mesg.com/t/stripe-to-erc20/206.rss">Stripe to ERC20</source>
+      </item>
+  </channel>
+</rss>

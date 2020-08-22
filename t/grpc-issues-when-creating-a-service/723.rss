@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>gRPC issues when creating a service</title>
+    <link>https://forum.mesg.com/t/grpc-issues-when-creating-a-service/723</link>
+    <description>`npm link` does not work
+
+Error:
+
+    `Error: The gRPC binary module was not installed. This may be fixed by running &quot;npm rebuild&quot;
+Original error: Cannot find module &#39;/usr/lib/node_modules/@mesg/cli/node_modules/grpc/src/node/extension_binary/node-v64-linux-x64-glibc/grpc_node.node&#39;
+    at Object.&lt;anonymous&gt; (/usr/lib/node_modules/@mesg/cli/node_modules/grpc/src/grpc_extension.js:43:17)
+    at Object.&lt;anonymous&gt; (/usr/lib/node_modules/@mesg/cli/node_modules/grpc/src/client_interceptors.js:144:12)
+`</description>
+    
+    <lastBuildDate>Mon, 27 Apr 2020 23:03:32 +0000</lastBuildDate>
+    <category>Hackathon</category>
+    <atom:link href="https://forum.mesg.com/t/grpc-issues-when-creating-a-service/723.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>gRPC issues when creating a service</title>
+        <dc:creator><![CDATA[fragment]]></dc:creator>
+        <description><![CDATA[
+            <p>Sure! The error pops up on *NIX 18.04 Ubuntu LTS and Windows via Powershell. It shows this:</p>
+<p><img src="https://forum.mesg.com/uploads/default/original/1X/98d0407c6c5956cb66c4fe41cacf083c29345049.png" alt="powershell_IOmMqCPmof" data-base62-sha1="lNQKH56b6ehmx1eZ5g2pTUwPLRf" width="690" height="360"></p>
+          <p><a href="https://forum.mesg.com/t/grpc-issues-when-creating-a-service/723/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/grpc-issues-when-creating-a-service/723/3</link>
+        <pubDate>Mon, 27 Apr 2020 23:03:32 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-723-3</guid>
+        <source url="https://forum.mesg.com/t/grpc-issues-when-creating-a-service/723.rss">gRPC issues when creating a service</source>
+      </item>
+      <item>
+        <title>gRPC issues when creating a service</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Hi,</p>
+<p>why are you trying the use <code>npm link</code>?</p>
+<p>To install the CLI, you should run <code>npm install -g @mesg/cli</code><br>
+To install the service lib in a service: <code>npm install @mesg/service</code></p>
+<p>Could you show the whole output with the command you use and the OS you are running.</p>
+          <p><a href="https://forum.mesg.com/t/grpc-issues-when-creating-a-service/723/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/grpc-issues-when-creating-a-service/723/2</link>
+        <pubDate>Mon, 27 Apr 2020 07:33:45 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-723-2</guid>
+        <source url="https://forum.mesg.com/t/grpc-issues-when-creating-a-service/723.rss">gRPC issues when creating a service</source>
+      </item>
+      <item>
+        <title>gRPC issues when creating a service</title>
+        <dc:creator><![CDATA[fragment]]></dc:creator>
+        <description><![CDATA[
+            <p><code>npm link</code> does not work</p>
+<p>Error:</p>
+<pre><code>`Error: The gRPC binary module was not installed. This may be fixed by running "npm rebuild"
+</code></pre>
+<p>Original error: Cannot find module ‘/usr/lib/node_modules/<span class="mention">@mesg</span>/cli/node_modules/grpc/src/node/extension_binary/node-v64-linux-x64-glibc/grpc_node.node’<br>
+at Object. (/usr/lib/node_modules/<span class="mention">@mesg</span>/cli/node_modules/grpc/src/grpc_extension.js:43:17)<br>
+at Object. (/usr/lib/node_modules/<span class="mention">@mesg</span>/cli/node_modules/grpc/src/client_interceptors.js:144:12)<br>
+`</p>
+          <p><a href="https://forum.mesg.com/t/grpc-issues-when-creating-a-service/723/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/grpc-issues-when-creating-a-service/723/1</link>
+        <pubDate>Sun, 26 Apr 2020 23:24:01 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-723-1</guid>
+        <source url="https://forum.mesg.com/t/grpc-issues-when-creating-a-service/723.rss">gRPC issues when creating a service</source>
+      </item>
+  </channel>
+</rss>

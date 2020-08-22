@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Instance on the Network</title>
+    <link>https://forum.mesg.com/t/instance-on-the-network/406</link>
+    <description>Hey guys, I would like your feedbacks on how to implement the Instance on the Network.
+
+## 1. Instance hash calculation needs to change.
+Instance hash is calculated with the instances&#39; env variables. But for security reason, the env variables are not save in any database. This cause the problem of not being able to recalculate the instance hash without the original envs. Only the engine that start the instance knows the env and thus the instance hash. This is not something good in order to implement the decentralized network correctly.
+
+The solution is simply the calculate first the hash of the instance envs and to save it in the instance struct. Like this, anyone will be able to recalculate the instance hash without having to know the envs variable.
+
+I already created an issue about this as it&#39;s simple:
+https://github.com/mesg-foundation/engine/issues/1279
+
+
+## 2. Properly define client and validator role
+Both instance sdk create and delete function are doing 2 things:
+- Starting/stopping the docker services
+- Create/delete the instance object in the database
+To implement the decentralized network correctly, we need to separate better those 2 functions in 2 separate steps to define properly what the local engine have to do (client / instance sdk), and what the tendermint validator engine have to do (validator / instance backend).
+
+I suggest the following logic:
+
+#### Instance creation
+1. In `InstanceSDK.Create`:
+   1. Calculate instance hash to check if instance doesn&#39;t already run locally. If yes, return error.
+   2. Download source and start instance in docker. Wait for it to start.
+   3. Create transaction with message `msgCreateInstance`. This message contain the data of the instance (service hash and env hash) and also the address of the account that start this instance, we we call it `node`.
+2. In `InstanceBackend.Create`
+   1. Create the instance struct. Calculate its hash.
+   2. Check if instance exist in db. If not, create it. If already exist, continue.
+   3. Register `node` as running this instance
+
+#### Instance deletion
+Basically the same as previous block but in reverse:
+1. unregister the node from the blockchain by executing a transaction.
+2. once tx confirmed, stop the local instance in docker
+
+### 3. List of nodes that runs instances
+Each node will have the responsibility to register and unregister itself from the instance, like this the whole network knows who is running what.
+But what is the best way to store them?
+
+We could simply add an array of nodes in the instance struct, but it will require to update the instance object over and over.
+I&#39;m suggesting to create a new store where each entry is referencing the instance hash and the node address (similar to ownership sdk). Like this it&#39;s very simple to check if the node is register or can unregister itself.
+The big question is &quot;who&quot; is managing this new store? It is directly `instance sdk`? Is it a new instance runner sdk? See https://forum.mesg.com/t/immutable-data-on-tendermint/407 to answer.</description>
+    
+    <lastBuildDate>Fri, 01 Nov 2019 11:28:40 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/instance-on-the-network/406.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Instance on the Network</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>WIP<br>
+<aside class="onebox githubpullrequest">
+  <header class="source">
+      <a href="https://github.com/mesg-foundation/engine/pull/1456" target="_blank" rel="nofollow noopener">github.com/mesg-foundation/engine</a>
+  </header>
+  <article class="onebox-body">
+      <a href="https://github.com/NicolasMahe" target="_blank" rel="nofollow noopener">
+    <img alt="NicolasMahe" src="https://forum.mesg.com/uploads/default/original/1X/26944398294eb78d5fcd9c0ac79f47a8ba160661.jpeg" class="thumbnail onebox-avatar" width="90" height="90">
+  </a>
+
+<h4>
+  <a href="https://github.com/mesg-foundation/engine/pull/1456" target="_blank" rel="nofollow noopener">Feature/runners</a>
+</h4>
+
+<div class="date">
+  by <a href="https://github.com/NicolasMahe" target="_blank" rel="nofollow noopener">NicolasMahe</a>
+  on <a href="https://github.com/mesg-foundation/engine/pull/1456" target="_blank" rel="nofollow noopener">11:21AM - 01 Nov 19 UTC</a>
+</div>
+
+<div class="github-commit-stats">
+  <strong>5 commits</strong>
+  changed <strong>38 files</strong>
+  with <strong>2112 additions</strong>
+  and <strong>919 deletions</strong>.
+</div>
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+</p>
+          <p><a href="https://forum.mesg.com/t/instance-on-the-network/406/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/instance-on-the-network/406/4</link>
+        <pubDate>Fri, 01 Nov 2019 11:28:40 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-406-4</guid>
+        <source url="https://forum.mesg.com/t/instance-on-the-network/406.rss">Instance on the Network</source>
+      </item>
+      <item>
+        <title>Instance on the Network</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="1" data-topic="406">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/nicolas/40/10_2.png" class="avatar"> Nicolas:</div>
+<blockquote>
+<p>The big question is “who” is managing this new store? It is directly <code>instance sdk</code> ? Is it a new instance runner sdk? See <a href="https://forum.mesg.com/t/immutable-data-on-tendermint/407">Immutable data on Tendermint</a> to answer.</p>
+</blockquote>
+</aside>
+<p>The runner should be a new dedicated sdk.<br>
+The instance creation should be managed by the runner backend (like the ownership) when a runner is created.<br>
+The creation of the runner should contains all info needed to create the instance and of course the runner.<br>
+The instance sdk should not expose any write function, only read ones.</p>
+          <p><a href="https://forum.mesg.com/t/instance-on-the-network/406/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/instance-on-the-network/406/3</link>
+        <pubDate>Thu, 31 Oct 2019 11:26:30 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-406-3</guid>
+        <source url="https://forum.mesg.com/t/instance-on-the-network/406.rss">Instance on the Network</source>
+      </item>
+      <item>
+        <title>Instance on the Network</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <blockquote>
+<p>The solution is simply the calculate first the hash of the instance envs and to save it in the instance struct. Like this,       anyone will be able to recalculate the instance hash without having to know the envs variable.</p>
+</blockquote>
+<p>Why someone want to recalculate those hashes? If you are able to get the isntance struct why you can’t use instance hash directly?</p>
+<blockquote>
+<p>Instance creation</p>
+</blockquote>
+<p>how/when instance sdk create will be called? SDK firsth then msgCreateInstance will call Backend right?</p>
+          <p><a href="https://forum.mesg.com/t/instance-on-the-network/406/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/instance-on-the-network/406/2</link>
+        <pubDate>Mon, 30 Sep 2019 05:09:05 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-406-2</guid>
+        <source url="https://forum.mesg.com/t/instance-on-the-network/406.rss">Instance on the Network</source>
+      </item>
+      <item>
+        <title>Instance on the Network</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Hey guys, I would like your feedbacks on how to implement the Instance on the Network.</p>
+<h2>1. Instance hash calculation needs to change.</h2>
+<p>Instance hash is calculated with the instances’ env variables. But for security reason, the env variables are not save in any database. This cause the problem of not being able to recalculate the instance hash without the original envs. Only the engine that start the instance knows the env and thus the instance hash. This is not something good in order to implement the decentralized network correctly.</p>
+<p>The solution is simply the calculate first the hash of the instance envs and to save it in the instance struct. Like this, anyone will be able to recalculate the instance hash without having to know the envs variable.</p>
+<p>I already created an issue about this as it’s simple:<br>
+<aside class="onebox githubissue">
+  <header class="source">
+      <a href="https://github.com/mesg-foundation/engine/issues/1279" target="_blank" rel="nofollow noopener">github.com/mesg-foundation/engine</a>
+  </header>
+  <article class="onebox-body">
+    <a href="https://github.com/NicolasMahe" rel="nofollow noopener">
+<img src="https://forum.mesg.com/uploads/default/original/1X/898d9206fbf04e195bccf6b3dbe0eee0e171ca3b.jpeg" class="thumbnail onebox-avatar" width="" height="">
+</a>
+
+<h4><a href="https://github.com/mesg-foundation/engine/issues/1279" target="_blank" rel="nofollow noopener">Issue: Change calculation of instance hash</a></h4>
+
+<div class="date" style="margin-top:10px;">
+	<div class="user" style="margin-top:10px;">
+	opened by <a href="https://github.com/NicolasMahe" target="_blank" rel="nofollow noopener">NicolasMahe</a>
+	on <a href="https://github.com/mesg-foundation/engine/issues/1279" target="_blank" rel="nofollow noopener">2019-08-31</a>
+	</div>
+	<div class="user">
+	</div>
+</div>
+
+<pre class="content" style="white-space: pre-wrap;">Instance hash is calculated with the instances' env variables. But for security reason, the env variables are not save in any...</pre>
+
+<div class="labels">
+ 	<span style="display:inline-block;margin-top:2px;background-color: #B8B8B8;padding: 2px;border-radius: 4px;color: #fff;margin-left: 3px;">enhancement</span>
+</div>
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+</p>
+<h2>2. Properly define client and validator role</h2>
+<p>Both instance sdk create and delete function are doing 2 things:</p>
+<ul>
+<li>Starting/stopping the docker services</li>
+<li>Create/delete the instance object in the database<br>
+To implement the decentralized network correctly, we need to separate better those 2 functions in 2 separate steps to define properly what the local engine have to do (client / instance sdk), and what the tendermint validator engine have to do (validator / instance backend).</li>
+</ul>
+<p>I suggest the following logic:</p>
+<h4>Instance creation</h4>
+<ol>
+<li>In <code>InstanceSDK.Create</code>:
+<ol>
+<li>Calculate instance hash to check if instance doesn’t already run locally. If yes, return error.</li>
+<li>Download source and start instance in docker. Wait for it to start.</li>
+<li>Create transaction with message <code>msgCreateInstance</code>. This message contain the data of the instance (service hash and env hash) and also the address of the account that start this instance, we we call it <code>node</code>.</li>
+</ol>
+</li>
+<li>In <code>InstanceBackend.Create</code>
+<ol>
+<li>Create the instance struct. Calculate its hash.</li>
+<li>Check if instance exist in db. If not, create it. If already exist, continue.</li>
+<li>Register <code>node</code> as running this instance</li>
+</ol>
+</li>
+</ol>
+<h4>Instance deletion</h4>
+<p>Basically the same as previous block but in reverse:</p>
+<ol>
+<li>unregister the node from the blockchain by executing a transaction.</li>
+<li>once tx confirmed, stop the local instance in docker</li>
+</ol>
+<h3>3. List of nodes that runs instances</h3>
+<p>Each node will have the responsibility to register and unregister itself from the instance, like this the whole network knows who is running what.<br>
+But what is the best way to store them?</p>
+<p>We could simply add an array of nodes in the instance struct, but it will require to update the instance object over and over.<br>
+I’m suggesting to create a new store where each entry is referencing the instance hash and the node address (similar to ownership sdk). Like this it’s very simple to check if the node is register or can unregister itself.<br>
+The big question is “who” is managing this new store? It is directly <code>instance sdk</code>? Is it a new instance runner sdk? See <a href="https://forum.mesg.com/t/immutable-data-on-tendermint/407" class="inline-onebox">Immutable data on Tendermint</a> to answer.</p>
+          <p><a href="https://forum.mesg.com/t/instance-on-the-network/406/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/instance-on-the-network/406/1</link>
+        <pubDate>Sun, 29 Sep 2019 07:14:10 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-406-1</guid>
+        <source url="https://forum.mesg.com/t/instance-on-the-network/406.rss">Instance on the Network</source>
+      </item>
+  </channel>
+</rss>

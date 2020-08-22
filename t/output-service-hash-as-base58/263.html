@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <title>Output service hash as base58 - Engine - MESG Community</title>
+    <meta name="description" content="Hey guys, I would like to propose to use base58 to output the service hash instead of the current base16 (hex). 
+base58 is used by Bitcoin and IPFS. 
+base16 (with 0x prefix) is used by Ethereum. 
+base58 is shorter than b&amp;hellip;">
+    <meta name="generator" content="Discourse 2.5.0.beta5 - https://github.com/discourse/discourse version 00aab498297cba8f977c1e0eb17b7d38ff06cc68">
+<link rel="icon" type="image/png" href="../../uploads/default/optimized/1X/9f11b6ddfa02bffdbec79487592a0573a0236cb5_2_32x32.png">
+<link rel="apple-touch-icon" type="image/png" href="../../uploads/default/optimized/1X/53630361a40ad76e1733dd0b0f486e9ae2f4f4d6_2_180x180.png">
+<meta name="theme-color" content="#491e8c">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+<link rel="canonical" href="263.html" />
+<script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","url":"https://forum.mesg.com","potentialAction":{"@type":"SearchAction","target":"https://forum.mesg.com/search?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
+<link rel="search" type="application/opensearchdescription+xml" href="../../opensearch.xml" title="MESG Community Search">
+
+      <link href="../../stylesheets/desktop_3_52e3411e87658e862890db7bd06899cf49ad5f59.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop" data-theme-id="7"/>
+      <link href="../../stylesheets/desktop_theme_7_bf4f2d3d8a71e6ee907065be9a79df3d849bd29c.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop_theme" data-theme-id="7"/>
+    
+    <meta id="data-ga-universal-analytics" data-tracking-code="UA-117583862-1" data-json="{&quot;cookieDomain&quot;:&quot;auto&quot;}" data-auto-link-domains="">
+
+<link rel="preload" href="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js" as="script">
+<script src="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js"></script>
+
+
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of &#39;Output service hash as base58&#39;" href="263.rss" />
+    <meta property="og:site_name" content="MESG Community" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:url" content="https://forum.mesg.com/t/output-service-hash-as-base58/263" />
+<meta name="twitter:url" content="https://forum.mesg.com/t/output-service-hash-as-base58/263" />
+<meta property="og:title" content="Output service hash as base58" />
+<meta name="twitter:title" content="Output service hash as base58" />
+<meta property="og:description" content="Hey guys, I would like to propose to use base58 to output the service hash instead of the current base16 (hex).  base58 is used by Bitcoin and IPFS.  base16 (with 0x prefix) is used by Ethereum.  base58 is shorter than base16. 44 characters vs 64.  The same value represented in both way:  e50b7d3bf80e522a59fd2a9b5f50b0f59062501f0ba98d29fdb30c094e806410 GR6XPNNvBrUth247vLXZ686gk7hGdx33sW14vsWekiAT  The marketplace url will look like:  mesg://marketplace/service/GR6XPNNvBrUth247vLXZ686gk7hGdx33sW1..." />
+<meta name="twitter:description" content="Hey guys, I would like to propose to use base58 to output the service hash instead of the current base16 (hex).  base58 is used by Bitcoin and IPFS.  base16 (with 0x prefix) is used by Ethereum.  base58 is shorter than base16. 44 characters vs 64.  The same value represented in both way:  e50b7d3bf80e522a59fd2a9b5f50b0f59062501f0ba98d29fdb30c094e806410 GR6XPNNvBrUth247vLXZ686gk7hGdx33sW14vsWekiAT  The marketplace url will look like:  mesg://marketplace/service/GR6XPNNvBrUth247vLXZ686gk7hGdx33sW1..." />
+<meta name="twitter:label1" value="Reading time" />
+<meta name="twitter:data1" value="1 mins 🕑" />
+<meta name="twitter:label2" value="Likes" />
+<meta name="twitter:data2" value="1 ❤" />
+<meta property="article:published_time" content="2019-03-12T13:39:12+00:00" />
+<meta property="og:ignore_canonical" content="true" />
+
+
+
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"QAPage","name":"Output service hash as base58","mainEntity":{"@type":"Question","name":"Output service hash as base58","text":"Hey guys, I would like to propose to use base58 to output the service hash instead of the current base16 (hex).\n\nbase58 is used by Bitcoin and IPFS.\n\nbase16 (with 0x prefix) is used by Ethereum.\n\nbase58 is shorter than base16. 44 characters vs 64.\n\nThe same value represented in both way:\n\ne50b7d3bf8&hellip;","upvoteCount":0,"answerCount":1,"dateCreated":"2019-03-12T13:39:12.365Z","author":{"@type":"Person","name":"Nicolas"},"acceptedAnswer":{"@type":"Answer","text":"Implemented in this Pull request <a href="https://forum.mesg.com/t/output-service-hash-as-base58/\&quot;https://github.com/mesg-foundation/core/pull/849\&quot;" rel=\"nofollow noopener\">https://github.com/mesg-foundation/core/pull/849<\/a> and part of the v0.9.0","upvoteCount":0,"dateCreated":"2019-05-18T04:23:30.144Z","url":"https://forum.mesg.com/t/output-service-hash-as-base58/263/6","author":{"@type":"Person","name":"Anthony"}}}}</script>
+  </head>
+  <body class="crawler">
+    
+    <header>
+      <a href="../../index.html">
+          <img src="../../uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png" alt="MESG Community" id="site-logo" style="max-width: 150px;">
+      </a>
+    </header>
+    <div id="main-outlet" class="wrap">
+        <div id="topic-title">
+    <h1>
+      <a href="263.html">Output service hash as base58</a>
+    </h1>
+
+      <div class="topic-category" itemscope itemtype="http://schema.org/BreadcrumbList">
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../c/development.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #AB9364'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Development</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="1" />
+          </span>
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../c/development/engine.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #AB9364'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Engine</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="2" />
+          </span>
+      </div>
+
+      <div class="topic-category">
+        <div class='discourse-tags list-tags'>
+            <a href='../../tag/proposal.html' class='discourse-tag' rel="tag">proposal</a>
+        </div>
+      </div>
+  </div>
+
+  
+
+
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="263.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2019-03-12T13:39:12Z'>
+              <time itemprop='dateModified' datetime='2019-03-12T13:44:50Z' class='post-time'>
+                March 12, 2019,  1:44pm
+              </time>
+          <span itemprop='position'>#1</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Hey guys, I would like to propose to use base58 to output the service hash instead of the current base16 (hex).</p>
+<p>base58 is used by Bitcoin and IPFS.<br>
+base16 (with 0x prefix) is used by Ethereum.</p>
+<p>base58 is shorter than base16. 44 characters vs 64.<br>
+The same value represented in both way:</p>
+<pre><code class="lang-auto">e50b7d3bf80e522a59fd2a9b5f50b0f59062501f0ba98d29fdb30c094e806410
+GR6XPNNvBrUth247vLXZ686gk7hGdx33sW14vsWekiAT
+</code></pre>
+<p>The marketplace url will look like:</p>
+<pre><code class="lang-auto">mesg://marketplace/service/GR6XPNNvBrUth247vLXZ686gk7hGdx33sW14vsWekiAT
+// instead of
+mesg://marketplace/service/a07d866879f3c08676b8a7e2a86de5ddc21d0f53b0cecec62c4c04a86b017f39
+</code></pre>
+<p>In the core, <code>hash</code> is a string, so there is no difference to use a base58. (but actually <code>hash</code> should be of type <code>[]byte</code> and transformed to a string when outputted).<br>
+See: <a href="https://github.com/mesg-foundation/core/blob/b215cc4c091a1cf78fb423f5a7dfb8bca9a91a28/service/service.go#L123" rel="nofollow noopener">https://github.com/mesg-foundation/core/blob/b215cc4c091a1cf78fb423f5a7dfb8bca9a91a28/service/service.go#L123</a></p>
+<p>The only counterargument is in the marketplace smart contract, hash is represent as a bytes32 that is compatible with string that start with <code>0x</code> follow by the base16 value (eg: <code>0xe50b7d3bf80e522a59fd2a9b5f50b0f59062501f0ba98d29fdb30c094e806410</code>).<br>
+But as most of the data of the marketplace are already transformed to there base16 representation, it will follow the same pattern: sid, manifest url, manifest protocol (everything that’s not a number) are already encoded / decoded from ascii to hex in the service marketplace.<br>
+Base58 value can be super easily encoded to base16 for the marketplace smart contract on ethereum by the marketplace service.</p>
+<p>Let’s me know what you think <img src="../../images/emoji/twitter/wink.png%3Fv=6" title=":wink:" class="emoji" alt=":wink:"></p>
+        </div>
+
+        <meta itemprop='headline' content='Output service hash as base58'>
+          <meta itemprop='keywords' content='proposal'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="263.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2019-03-12T18:10:46Z' class='post-time'>
+                March 12, 2019,  6:10pm
+              </time>
+              <meta itemprop='dateModified' content='2019-03-12T18:10:46Z'>
+          <span itemprop='position'>#2</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>I just wonder if there is any good technical reason or if it’s just some cosmetic. If we have to change the marketplace to accept a new kind of sid and the reason are just cosmetic I don’t really see the necessity.</p>
+<p>I like the cosmetic change and I think it’s good in a future because of shorter size so reducing the data on the network and also on disk but I don’t think this is a huge difference. Also transactions on the marketplace might be more expensive.</p>
+<p>Would like to have more detail of what are the reasons to change.</p>
+        </div>
+
+        <meta itemprop='headline' content='Output service hash as base58'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="2" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/krhubert.html'><span itemprop='name'>krhubert</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="263.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2019-03-12T18:53:40Z' class='post-time'>
+                March 12, 2019,  6:53pm
+              </time>
+              <meta itemprop='dateModified' content='2019-03-12T18:53:40Z'>
+          <span itemprop='position'>#3</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <aside class="quote group-team" data-post="2" data-topic="263">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/anthony/40/7_2.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>I just wonder if there is any good technical reason or if it’s just some cosmetic.</p>
+</blockquote>
+</aside>
+<p>Cosmetic <img src="../../images/emoji/twitter/slight_smile.png%3Fv=6" title=":slight_smile:" class="emoji" alt=":slight_smile:"></p>
+<aside class="quote group-team" data-post="2" data-topic="263">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/anthony/40/7_2.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>If we have to change the marketplace to accept a new kind of sid</p>
+</blockquote>
+</aside>
+<p>Sid won’t be touched - do you mean hash? It won’t be touched either!</p>
+<p>So the hash in the marketplace will still be saved on bytes64, in go it will be a slice of bytes (also over the network and inside the database).</p>
+<p>It is just for printing (like in service list cmd or on the web/url) to make it shorter. That’s all <img src="../../images/emoji/twitter/slight_smile.png%3Fv=6" title=":slight_smile:" class="emoji" alt=":slight_smile:"></p>
+        </div>
+
+        <meta itemprop='headline' content='Output service hash as base58'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="263.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2019-03-13T04:17:53Z'>
+              <time itemprop='dateModified' datetime='2019-03-13T04:25:42Z' class='post-time'>
+                March 13, 2019,  4:25am
+              </time>
+          <span itemprop='position'>#4</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <aside class="quote group-team" data-post="2" data-topic="263">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/anthony/40/7_2.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>I just wonder if there is any good technical reason or if it’s just some cosmetic.</p>
+</blockquote>
+</aside>
+<p>The technical reason is independent from the output for human.<br>
+The technical improvement is to store hash as <span class="chcklst-box fa fa-square-o fa-fw"></span>byte.<br>
+The cosmetic improvement is to show it as a shorter string using base58 because it have more “vocabulary” than base16.</p>
+<aside class="quote group-team" data-post="2" data-topic="263">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/anthony/40/7_2.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>If we have to change the marketplace to accept a new kind of sid and the reason are just cosmetic I don’t really see the necessity.</p>
+</blockquote>
+</aside>
+<aside class="quote group-team" data-post="2" data-topic="263">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/anthony/40/7_2.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>Also transactions on the marketplace might be more expensive.</p>
+</blockquote>
+</aside>
+<p>There is no modification in the marketplace smart contract. The marketplace already <strong>only</strong> accept a array of 32 bytes (<code>bytes32</code>). The hash that we currently pass already need modification: adding and removing the <code>0x</code> prefix. Using base58 will require to encode and decode the base58 value to a base16 value for the marketplace smart contract.</p>
+<aside class="quote group-team" data-post="2" data-topic="263">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/anthony/40/7_2.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>shorter size so reducing the data on the network</p>
+</blockquote>
+</aside>
+<p>The hash on the network, in the proto definition, and in the service struct should be an array of byte. Same type as the hash function returned. This is completely independent of how we want to output the hash to human. Using a string to store the hash is not optimized whatever base we choose.</p>
+        </div>
+
+        <meta itemprop='headline' content='Output service hash as base58'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="263.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2019-03-13T09:37:10Z' class='post-time'>
+                March 13, 2019,  9:37am
+              </time>
+              <meta itemprop='dateModified' content='2019-03-13T09:37:10Z'>
+          <span itemprop='position'>#5</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>i’m fine with storing the hash in bytes that makes sense, for the representation then if it’s just cosmetic, the cli will manage this or the markeplace. Just the marketplace might not need to have a hash related to the service but that’s a different discussion.</p>
+<p>So <code>[]bytes</code> for the hash -&gt; OK<br>
+Display with base58 (pure cosmetic) -&gt; OK</p>
+        </div>
+
+        <meta itemprop='headline' content='Output service hash as base58'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="1" />
+           <span class='post-likes'>1 Like</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="263.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2019-05-18T04:23:30Z'>
+              <time itemprop='dateModified' datetime='2019-05-18T04:23:33Z' class='post-time'>
+                May 18, 2019,  4:23am
+              </time>
+          <span itemprop='position'>#6</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Implemented in this Pull request <a href="https://github.com/mesg-foundation/core/pull/849" rel="nofollow noopener">https://github.com/mesg-foundation/core/pull/849</a> and part of the v0.9.0</p>
+        </div>
+
+        <meta itemprop='headline' content='Output service hash as base58'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+
+
+
+
+
+
+    </div>
+    <footer class="container wrap">
+      <nav class='crawler-nav'>
+        <ul>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../index.html' itemprop="url">Home </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../categories.html' itemprop="url">Categories </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../guidelines.html' itemprop="url">FAQ/Guidelines </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../tos.html' itemprop="url">Terms of Service </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../privacy.html' itemprop="url">Privacy Policy </a>
+          </span>
+        </li>
+        </ul>
+      </nav>
+      <p class='powered-by-link'>Powered by <a href="https://www.discourse.org">Discourse</a>, best viewed with JavaScript enabled</p>
+    </footer>
+    
+    
+  </body>
+  
+</html>

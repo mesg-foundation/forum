@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <title>Go New functions with options arguments - Engine - MESG Community</title>
+    <meta name="description" content="In many places in the code we use the pattern to add optional arguments mostly for the New functions to be able to customize the behavior of the struct we need to create. 
+type XXX struct {}
+
+func New(options ...Option) &amp;hellip;">
+    <meta name="generator" content="Discourse 2.5.0.beta5 - https://github.com/discourse/discourse version 00aab498297cba8f977c1e0eb17b7d38ff06cc68">
+<link rel="icon" type="image/png" href="../../uploads/default/optimized/1X/9f11b6ddfa02bffdbec79487592a0573a0236cb5_2_32x32.png">
+<link rel="apple-touch-icon" type="image/png" href="../../uploads/default/optimized/1X/53630361a40ad76e1733dd0b0f486e9ae2f4f4d6_2_180x180.png">
+<meta name="theme-color" content="#491e8c">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+<link rel="canonical" href="64.html" />
+<script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","url":"https://forum.mesg.com","potentialAction":{"@type":"SearchAction","target":"https://forum.mesg.com/search?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
+<link rel="search" type="application/opensearchdescription+xml" href="../../opensearch.xml" title="MESG Community Search">
+
+      <link href="../../stylesheets/desktop_3_52e3411e87658e862890db7bd06899cf49ad5f59.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop" data-theme-id="7"/>
+      <link href="../../stylesheets/desktop_theme_7_bf4f2d3d8a71e6ee907065be9a79df3d849bd29c.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop_theme" data-theme-id="7"/>
+    
+    <meta id="data-ga-universal-analytics" data-tracking-code="UA-117583862-1" data-json="{&quot;cookieDomain&quot;:&quot;auto&quot;}" data-auto-link-domains="">
+
+<link rel="preload" href="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js" as="script">
+<script src="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js"></script>
+
+
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of &#39;Go New functions with options arguments&#39;" href="64.rss" />
+    <meta property="og:site_name" content="MESG Community" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:url" content="https://forum.mesg.com/t/go-new-functions-with-options-arguments/64" />
+<meta name="twitter:url" content="https://forum.mesg.com/t/go-new-functions-with-options-arguments/64" />
+<meta property="og:title" content="Go New functions with options arguments" />
+<meta name="twitter:title" content="Go New functions with options arguments" />
+<meta property="og:description" content="In many places in the code we use the pattern to add optional arguments mostly for the New functions to be able to customize the behavior of the struct we need to create.  type XXX struct {}  func New(options ...Option) *XXX {   x := &amp;XXX{}   for _, option := range options {     option(x)   }   return x } func OptionX() Option {   return func(x *xxx) {     // Do something on x   } }  Most of the time, if not all the time, it is to be able to set a different dependency for the unit tests in some ..." />
+<meta name="twitter:description" content="In many places in the code we use the pattern to add optional arguments mostly for the New functions to be able to customize the behavior of the struct we need to create.  type XXX struct {}  func New(options ...Option) *XXX {   x := &amp;XXX{}   for _, option := range options {     option(x)   }   return x } func OptionX() Option {   return func(x *xxx) {     // Do something on x   } }  Most of the time, if not all the time, it is to be able to set a different dependency for the unit tests in some ..." />
+<meta name="twitter:label1" value="Reading time" />
+<meta name="twitter:data1" value="2 mins 🕑" />
+<meta name="twitter:label2" value="Likes" />
+<meta name="twitter:data2" value="4 ❤" />
+<meta property="article:published_time" content="2018-09-25T15:45:26+00:00" />
+<meta property="og:ignore_canonical" content="true" />
+
+
+
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"QAPage","name":"Go New functions with options arguments","mainEntity":{"@type":"Question","name":"Go New functions with options arguments","text":"In <a href="https://forum.mesg.com/t/go-new-functions-with-options-arguments/\&quot;https://github.com/mesg-foundation/core/blob/c2527ae17bad7f57fe9b1fa8c4027c617bf214f2/api/api.go#L18\"">many<\/a> <a href="https://forum.mesg.com/t/go-new-functions-with-options-arguments/\&quot;https://github.com/mesg-foundation/core/blob/74f839802272107154071678d2d4efcadcbf4465/utils/chunker/chunker.go#L41\"">places<\/a> <a href="https://forum.mesg.com/t/go-new-functions-with-options-arguments/\&quot;https://github.com/mesg-foundation/core/blob/ad9b0fb558d7b37c79200af4b73a3c6edaebf720/interface/grpc/service/type.go#L18\"">in<\/a> <a href="https://forum.mesg.com/t/go-new-functions-with-options-arguments/\&quot;https://github.com/mesg-foundation/core/blob/c3e23fd91747f05750f9f18c699bb4910a082b7e/service/service.go#L90\"">the<\/a> <a href="https://forum.mesg.com/t/go-new-functions-with-options-arguments/\&quot;https://github.com/mesg-foundation/core/blob/ab36dc1f0a6c88710bb3b16b0910409b5e7d3834/container/container.go#L29\"">code<\/a> we use the pattern to add optional arguments mostly for the New functions to be able to customize the behavior of the struct we need to create.\n\ntype XXX struct {}\n\nfunc New(options ...Option) *XXX {\n\nx := &amp;XXX{}\n\nfor _, option := range options {\n\noption(x)\n\n}\n\nretu&hellip;","upvoteCount":0,"answerCount":1,"dateCreated":"2018-09-25T15:45:26.371Z","author":{"@type":"Person","name":"Anthony"},"acceptedAnswer":{"@type":"Answer","text":"For the part that we have multiple arguments. If we have a lot of different arguments in the first place it’s a design problem and if they are related we could use a structure for that like for example docker that has some methodXOption structure in many functions. With structs we can have something&hellip;","upvoteCount":0,"dateCreated":"2018-09-26T08:27:15.028Z","url":"https://forum.mesg.com/t/go-new-functions-with-options-arguments/64/5","author":{"@type":"Person","name":"Anthony"}}}}</script>
+  </head>
+  <body class="crawler">
+    
+    <header>
+      <a href="../../index.html">
+          <img src="../../uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png" alt="MESG Community" id="site-logo" style="max-width: 150px;">
+      </a>
+    </header>
+    <div id="main-outlet" class="wrap">
+        <div id="topic-title">
+    <h1>
+      <a href="64.html">Go New functions with options arguments</a>
+    </h1>
+
+      <div class="topic-category" itemscope itemtype="http://schema.org/BreadcrumbList">
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../c/development.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #AB9364'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Development</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="1" />
+          </span>
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../c/development/engine.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #AB9364'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Engine</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="2" />
+          </span>
+      </div>
+
+      <div class="topic-category">
+        <div class='discourse-tags list-tags'>
+            <a href='../../tag/guideline.html' class='discourse-tag' rel="tag">guideline</a>
+        </div>
+      </div>
+  </div>
+
+  
+
+
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="64.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-09-25T15:45:26Z'>
+              <time itemprop='dateModified' datetime='2018-10-01T07:28:23Z' class='post-time'>
+                October 1, 2018,  7:28am
+              </time>
+          <span itemprop='position'>#1</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>In <a href="https://github.com/mesg-foundation/core/blob/c2527ae17bad7f57fe9b1fa8c4027c617bf214f2/api/api.go#L18">many</a> <a href="https://github.com/mesg-foundation/core/blob/74f839802272107154071678d2d4efcadcbf4465/utils/chunker/chunker.go#L41">places</a> <a href="https://github.com/mesg-foundation/core/blob/ad9b0fb558d7b37c79200af4b73a3c6edaebf720/interface/grpc/service/type.go#L18">in</a> <a href="https://github.com/mesg-foundation/core/blob/c3e23fd91747f05750f9f18c699bb4910a082b7e/service/service.go#L90">the</a> <a href="https://github.com/mesg-foundation/core/blob/ab36dc1f0a6c88710bb3b16b0910409b5e7d3834/container/container.go#L29">code</a> we use the pattern to add optional arguments mostly for the <code>New</code> functions to be able to customize the behavior of the struct we need to create.</p>
+<pre><code class="lang-auto">type XXX struct {}
+
+func New(options ...Option) *XXX {
+  x := &amp;XXX{}
+  for _, option := range options {
+    option(x)
+  }
+  return x
+}
+func OptionX() Option {
+  return func(x *xxx) {
+    // Do something on x
+  }
+}
+</code></pre>
+<p>Most of the time, if not all the time, it is to be able to set a different dependency for the unit tests in some cases it’s really to configure the behavior.</p>
+<p>I like this pattern, I feel it’s really flexible to customize a struct, I just feel that we should use it with parsimony because it doesn’t suit for everything.</p>
+<p>For me this pattern is perfect to customize parts that are totally optional meaning that we should not have to call these option function in order to configure a struct. The simple use of a <code>New</code> without optional arguments should be enough to have something working.</p>
+<p>I’ve seen different uses of that pattern so I’m really interested to think what you all think about that and where and how to use it and also where and how not to use it and for what reason.</p>
+<p>I really want to make sure that we all agree on how to use this pattern and like that we could start to create some guidelines based on that <img src="../../images/emoji/twitter/slight_smile.png%3Fv=6" title=":slight_smile:" class="emoji" alt=":slight_smile:"></p>
+        </div>
+
+        <meta itemprop='headline' content='Go New functions with options arguments'>
+          <meta itemprop='keywords' content='guideline'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/krhubert.html'><span itemprop='name'>krhubert</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="64.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-09-25T17:48:20Z' class='post-time'>
+                September 25, 2018,  5:48pm
+              </time>
+              <meta itemprop='dateModified' content='2018-09-25T17:48:20Z'>
+          <span itemprop='position'>#2</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <blockquote>
+<p>we should not have to call these option function in order to configure a struct. The simple use of a  <code>New</code>  without optional arguments should be enough to have something working.</p>
+</blockquote>
+<p>And that’s the clue. Passing everything as an option and return an error in case of not configure some option makes golang kind of language with dynamic variables.</p>
+<p>The patter itself is just a pattern and it’s good in some cases and in some is bad. It cannot be applied everywhere.</p>
+        </div>
+
+        <meta itemprop='headline' content='Go New functions with options arguments'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="1" />
+           <span class='post-likes'>1 Like</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="64.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-09-26T07:03:43Z'>
+              <time itemprop='dateModified' datetime='2018-09-26T07:04:00Z' class='post-time'>
+                September 26, 2018,  7:04am
+              </time>
+          <span itemprop='position'>#3</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>I agree that we should have a transparent pattern about where to adopt Options.</p>
+<h1>Option Types</h1>
+<h3>Required Options</h3>
+<p>These kind of options are required to be provided while calling the <em>New</em> func. Otherwise <em>New</em> should return an error. In my view, I see the “Option” word here like we have to provide this option but from a list of other Options rather than it should be provided “optionally”.</p>
+<p>Should we only adopt and do not accept parameters other than the Options for <em>New</em> funcs? Where is the line? To me, forcing the use of Option all the time is not a good practice but still this is a gray area. In my view, if we require lots of arguments in the initialization time, lets say more than 4, the syntax gets weird and hard to read.</p>
+<p>lets compare:</p>
+<pre><code class="lang-auto">New(a, b, c, d)
+
+// vs.
+
+New(
+  RequiredOption1(a),
+  RequiredOption2(b),
+  RequiredOption3(c),
+  RequiredOption4(d),
+  RequiredOption5(d),
+)
+</code></pre>
+<ul>
+<li>
+<p>The good thing about the first one, we can catch the forgotten argument in the compiler time and for the second one it’ll return an error in the runtime.</p>
+</li>
+<li>
+<p>The good thing about the second one is,  these named options helps a lot with readability when there are lots of required arguments while initializing <em>New</em>.</p>
+</li>
+<li>
+<p>One other advantage of the second way is to grouping relational required arguments in one Option feels more clean to me.</p>
+</li>
+</ul>
+<p>e.g.</p>
+<pre><code class="lang-auto">New("url", "dbname", b)
+
+// vs.
+
+New(
+  RequiredRedisOption("url", "dbname"),
+  RequiredOtherOption("b"),
+)
+</code></pre>
+<p>I agree on having required arguments directly passed without using Options, feels more natural. But we should give the decision about strictly dropping Options for required fields or use it if we have for example &gt;=5 required fields in a row. To me this is a gray area or maybe we even never will have required arguments of this much in a <em>New</em>.  Also consider the “grouping” syntax of Options while giving a decision.</p>
+<h3>Non-Required Options</h3>
+<p>Providing these options are totally up to caller to configure the behavior as needed.</p>
+<h1>Naming Options</h1>
+<p>Sometimes it’s nice to name Options as Filters or something else depending on the context. Like in the <a href="https://github.com/mesg-foundation/core/blob/43e8a7a/api/list.go">api</a> package.</p>
+<h1>Also see</h1>
+<ul>
+<li>demonstrates a good use of Options: <a href="https://github.com/micro/go-micro">https://github.com/micro/go-micro</a>
+</li>
+</ul>
+        </div>
+
+        <meta itemprop='headline' content='Go New functions with options arguments'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="1" />
+           <span class='post-likes'>1 Like</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="64.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-09-26T07:55:45Z'>
+              <time itemprop='dateModified' datetime='2018-09-26T08:02:57Z' class='post-time'>
+                September 26, 2018,  8:02am
+              </time>
+          <span itemprop='position'>#4</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>My suggestion is to use Option as optional parameters.<br>
+Anything that is required should be a parameter. So we have compile error and not runtime error.<br>
+Having to force to name it Option should not be mandatory and depend on the context.</p>
+<p>Example:</p>
+<pre><code class="lang-auto">func newServiceLister(api *API, filters ...ListServicesFilter) *serviceLister {
+// api is required
+// "options" are named filters because in this context it make a lot more sense.
+// filters are totally optional
+</code></pre>
+<hr>
+<aside class="quote no-group" data-post="3" data-topic="64">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/ilgooz/40/8_1.png" class="avatar"> ilgooz:</div>
+<blockquote>
+<ul>
+<li>One other advantage of the second way is to grouping relational required arguments in one Option feels more clean to me.</li>
+</ul>
+</blockquote>
+</aside>
+<p>I don’t think it is good to use Option in this case. What about grouping the parameter in a struct?<br>
+And even, in the case of an external resource (redis in this case), its instance should be pass directly as parameter.</p>
+<pre><code class="lang-auto">// from ilgooz post
+New("url", "dbname", b)
+
+// from ilgooz post
+New(
+  RequiredRedisOption("url", "dbname"),
+  RequiredOtherOption("b"),
+)
+
+// with struct
+New(
+  &amp;RedisParameter{
+    url: "url",
+    db: "dbname"
+  },
+  "b",
+)
+
+// pass instance of redis
+redis := NewRedis("url", "dbname")
+New(redis, "b")
+</code></pre>
+        </div>
+
+        <meta itemprop='headline' content='Go New functions with options arguments'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="1" />
+           <span class='post-likes'>1 Like</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="64.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-09-26T08:27:15Z'>
+              <time itemprop='dateModified' datetime='2018-10-02T15:25:31Z' class='post-time'>
+                October 2, 2018,  3:25pm
+              </time>
+          <span itemprop='position'>#5</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>For the part that we have multiple arguments. If we have a lot of different arguments in the first place it’s a design problem and if they are related we could use a structure for that like for example docker that has some <code>methodXOption</code> structure in many functions. With structs we can have something even more readable and more explicit than the options.</p>
+<p>For the part of the error at runtime or compile time. For me it’s just obvious that the compile time is better.</p>
+<p>I think it will be hard to really setup a rule on where to use what. For me I would say something like that:</p>
+<ul>
+<li>Arguments for all required arguments on a function (we don’t rely on the error handling at the runtime)</li>
+<li>Options only for optional parameters and/or to configure a specific behavior. The function should run correctly without the options, based on a default or something like that.</li>
+<li>Structs for arguments that might be related with each other.</li>
+<li>Also if we have more than 4-5 required arguments I think there is a problem and we should consider passing a struct or refactoring the function but I’m pretty sure tools like codeclimate have these kind of tests.</li>
+</ul>
+<div class="poll" data-poll-status="open" data-poll-type="regular" data-poll-public="true" data-poll-name="poll">
+<div>
+<div class="poll-container">
+<ul>
+<li data-poll-option-id="0d757b26b3f13063177d227967ee7aab">Sounds good <img src="../../images/emoji/twitter/slight_smile.png%3Fv=6" title=":slight_smile:" class="emoji" alt=":slight_smile:">
+</li>
+<li data-poll-option-id="da53f191ac9049838897ab4138bfbaec">Terrible idea <img src="../../images/emoji/twitter/frowning.png%3Fv=6" title=":frowning:" class="emoji" alt=":frowning:">
+</li>
+</ul>
+</div>
+<div class="poll-info">
+<p>
+<span class="info-number">0</span>
+<span class="info-label">voters</span>
+</p>
+</div>
+</div>
+</div>
+        </div>
+
+        <meta itemprop='headline' content='Go New functions with options arguments'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="64.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-09-26T14:42:08Z' class='post-time'>
+                September 26, 2018,  2:42pm
+              </time>
+              <meta itemprop='dateModified' content='2018-09-26T14:42:08Z'>
+          <span itemprop='position'>#6</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>I agree and like the arguments you guys are provided.</p>
+        </div>
+
+        <meta itemprop='headline' content='Go New functions with options arguments'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="1" />
+           <span class='post-likes'>1 Like</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+
+
+
+
+
+
+    </div>
+    <footer class="container wrap">
+      <nav class='crawler-nav'>
+        <ul>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../index.html' itemprop="url">Home </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../categories.html' itemprop="url">Categories </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../guidelines.html' itemprop="url">FAQ/Guidelines </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../tos.html' itemprop="url">Terms of Service </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../privacy.html' itemprop="url">Privacy Policy </a>
+          </span>
+        </li>
+        </ul>
+      </nav>
+      <p class='powered-by-link'>Powered by <a href="https://www.discourse.org">Discourse</a>, best viewed with JavaScript enabled</p>
+    </footer>
+    
+    
+  </body>
+  
+</html>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Mesg.yml: possibility to define a logo url</title>
+    <link>https://forum.mesg.com/t/mesg-yml-possibility-to-define-a-logo-url/212</link>
+    <description>Let&#39;s have a new prop called `logo` or `icon` in the mesg.yml file which accepts service&#39;s logo url. This way we can list services on the marketplace nicely with their logos.</description>
+    
+    <lastBuildDate>Wed, 23 Jan 2019 09:55:33 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/mesg-yml-possibility-to-define-a-logo-url/212.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Mesg.yml: possibility to define a logo url</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="2" data-topic="212">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/anthony/40/7_2.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>I don’t know if the mesg.yml is the right place for that, that’s a bit strange to have to do that when you just want to do some coding, maybe just attaching this to the marketplace when we deploy, like a manifest file with informations like:</p>
+</blockquote>
+</aside>
+<p><img src="https://forum.mesg.com/images/emoji/twitter/+1.png?v=6" title=":+1:" class="emoji" alt=":+1:"></p>
+<p>Let’s don’t  make new package.json from mesg.yml. package.json is bolded and try to have everything, but developers then to split the information (for eslint, prettier etc…) in diffrent file. Like in coding you don’t put everthing inside one file/package. Let’s have mesg.yaml for service/developers and we can add new file for all metadata.</p>
+          <p><a href="https://forum.mesg.com/t/mesg-yml-possibility-to-define-a-logo-url/212/5">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mesg-yml-possibility-to-define-a-logo-url/212/5</link>
+        <pubDate>Wed, 23 Jan 2019 09:55:33 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-212-5</guid>
+        <source url="https://forum.mesg.com/t/mesg-yml-possibility-to-define-a-logo-url/212.rss">Mesg.yml: possibility to define a logo url</source>
+      </item>
+      <item>
+        <title>Mesg.yml: possibility to define a logo url</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>I agree with <a class="mention" href="/u/ilgooz">@ilgooz</a>. The service definition is the right place. Like <code>package.json</code> that contains a bunch of stuff not related to the code itself.</p>
+          <p><a href="https://forum.mesg.com/t/mesg-yml-possibility-to-define-a-logo-url/212/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mesg-yml-possibility-to-define-a-logo-url/212/4</link>
+        <pubDate>Tue, 22 Jan 2019 10:36:19 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-212-4</guid>
+        <source url="https://forum.mesg.com/t/mesg-yml-possibility-to-define-a-logo-url/212.rss">Mesg.yml: possibility to define a logo url</source>
+      </item>
+      <item>
+        <title>Mesg.yml: possibility to define a logo url</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>Really good idea by having the tags <img src="https://forum.mesg.com/images/emoji/twitter/+1.png?v=6" title=":+1:" class="emoji" alt=":+1:"></p>
+<p>I really like the idea of putting every information related with the service into the mesg.yml file. Because, I see it as a universal definition format for the services and like that we can pass it around and keep the service info in one place. Otherwise if we define this logo, tags, tarbal_url info on the Marketplace it limits the flexibility a bit in my view.</p>
+          <p><a href="https://forum.mesg.com/t/mesg-yml-possibility-to-define-a-logo-url/212/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mesg-yml-possibility-to-define-a-logo-url/212/3</link>
+        <pubDate>Tue, 22 Jan 2019 09:48:23 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-212-3</guid>
+        <source url="https://forum.mesg.com/t/mesg-yml-possibility-to-define-a-logo-url/212.rss">Mesg.yml: possibility to define a logo url</source>
+      </item>
+      <item>
+        <title>Mesg.yml: possibility to define a logo url</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>In that case we should also add some meta informations like categories / tags. I personally prefer tags like that we can generate categories based on tags where the other way around is not possible.</p>
+<p>I don’t know if the mesg.yml is the right place for that, that’s a bit strange to have to do that when you just want to do some coding, maybe just attaching this to the marketplace when we deploy, like a manifest file with informations like:</p>
+<ul>
+<li>title (default from the mesg.yml)</li>
+<li>description (default from the mesg.yml)</li>
+<li>logo</li>
+<li>tags</li>
+<li>tarball_url (added during publication on the marketplace)</li>
+</ul>
+<p>Agree with the idea but i think we should keep the mesg.yml just developer oriented</p>
+          <p><a href="https://forum.mesg.com/t/mesg-yml-possibility-to-define-a-logo-url/212/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mesg-yml-possibility-to-define-a-logo-url/212/2</link>
+        <pubDate>Tue, 22 Jan 2019 09:39:10 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-212-2</guid>
+        <source url="https://forum.mesg.com/t/mesg-yml-possibility-to-define-a-logo-url/212.rss">Mesg.yml: possibility to define a logo url</source>
+      </item>
+      <item>
+        <title>Mesg.yml: possibility to define a logo url</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>Let’s have a new prop called <code>logo</code> or <code>icon</code> in the mesg.yml file which accepts service’s logo url. This way we can list services on the marketplace nicely with their logos.</p>
+          <p><a href="https://forum.mesg.com/t/mesg-yml-possibility-to-define-a-logo-url/212/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mesg-yml-possibility-to-define-a-logo-url/212/1</link>
+        <pubDate>Mon, 21 Jan 2019 11:09:07 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-212-1</guid>
+        <source url="https://forum.mesg.com/t/mesg-yml-possibility-to-define-a-logo-url/212.rss">Mesg.yml: possibility to define a logo url</source>
+      </item>
+  </channel>
+</rss>

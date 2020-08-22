@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Best practice on Disourse</title>
+    <link>https://forum.mesg.com/t/best-practice-on-disourse/61</link>
+    <description>I would like to know what is the best practice for managing topic.
+Should we close them? Archive? Solve?
+
+What are your recommandation @jonobacon.
+
+Thanks :)</description>
+    
+    <lastBuildDate>Mon, 24 Sep 2018 18:14:36 +0000</lastBuildDate>
+    <category>General Discussion</category>
+    <atom:link href="https://forum.mesg.com/t/best-practice-on-disourse/61.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Best practice on Disourse</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            
+          <p><a href="https://forum.mesg.com/t/best-practice-on-disourse/61/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/best-practice-on-disourse/61/3</link>
+        <pubDate>Thu, 13 Dec 2018 11:43:57 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-61-3</guid>
+        <source url="https://forum.mesg.com/t/best-practice-on-disourse/61.rss">Best practice on Disourse</source>
+      </item>
+      <item>
+        <title>Best practice on Disourse</title>
+        <dc:creator><![CDATA[jonobacon]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote no-group" data-post="1" data-topic="61">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/nicolas/40/10_1.png" class="avatar"> Nicolas:</div>
+<blockquote>
+<p>What are your recommandation <a class="mention" href="/u/jonobacon">@jonobacon</a>.</p>
+</blockquote>
+</aside>
+<p>Great question, <a class="mention" href="/u/nicolas">@Nicolas</a></p>
+<p>I think what we are already starting to see is looking good. Great to see the development team collaborating out in the open on Discourse. This provides interesting insight for new MESG users to see how the sausage is made.</p>
+<p>Some recommendations:</p>
+<ul>
+<li>Topics don’t need to be archived. They are best left open (this will make it easy for people to search for them.)</li>
+<li>I recommend you start publishing release notes regularly to the <code>News</code> category.</li>
+<li>We should start promoting the community actively on social media and in <a class="mention" href="/u/will">@will</a>’s content plan.</li>
+<li>Can we start getting some HOWTOs and hacks into the <code>HOWTO</code> category?</li>
+</ul>
+<p>Thanks,</p>
+          <p><a href="https://forum.mesg.com/t/best-practice-on-disourse/61/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/best-practice-on-disourse/61/2</link>
+        <pubDate>Mon, 24 Sep 2018 18:14:36 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-61-2</guid>
+        <source url="https://forum.mesg.com/t/best-practice-on-disourse/61.rss">Best practice on Disourse</source>
+      </item>
+      <item>
+        <title>Best practice on Disourse</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>I would like to know what is the best practice for managing topic.<br>
+Should we close them? Archive? Solve?</p>
+<p>What are your recommandation <a class="mention" href="/u/jonobacon">@jonobacon</a>.</p>
+<p>Thanks <img src="https://forum.mesg.com/images/emoji/twitter/slight_smile.png?v=6" title=":slight_smile:" class="emoji" alt=":slight_smile:"></p>
+          <p><a href="https://forum.mesg.com/t/best-practice-on-disourse/61/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/best-practice-on-disourse/61/1</link>
+        <pubDate>Mon, 24 Sep 2018 07:59:57 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-61-1</guid>
+        <source url="https://forum.mesg.com/t/best-practice-on-disourse/61.rss">Best practice on Disourse</source>
+      </item>
+  </channel>
+</rss>

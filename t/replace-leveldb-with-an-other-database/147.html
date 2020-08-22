@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <title>Replace leveldb with an other database - Engine - MESG Community</title>
+    <meta name="description" content="From @krhubert https://github.com/mesg-foundation/core/issues/565 
+As shown here https://github.com/syndtr/goleveldb/issues/226, leveldb might have some performance issues. 
+We can replace it with one of the following: 
+
+&amp;hellip;">
+    <meta name="generator" content="Discourse 2.5.0.beta5 - https://github.com/discourse/discourse version 00aab498297cba8f977c1e0eb17b7d38ff06cc68">
+<link rel="icon" type="image/png" href="../../uploads/default/optimized/1X/9f11b6ddfa02bffdbec79487592a0573a0236cb5_2_32x32.png">
+<link rel="apple-touch-icon" type="image/png" href="../../uploads/default/optimized/1X/53630361a40ad76e1733dd0b0f486e9ae2f4f4d6_2_180x180.png">
+<meta name="theme-color" content="#491e8c">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+<link rel="canonical" href="147.html" />
+<script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","url":"https://forum.mesg.com","potentialAction":{"@type":"SearchAction","target":"https://forum.mesg.com/search?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
+<link rel="search" type="application/opensearchdescription+xml" href="../../opensearch.xml" title="MESG Community Search">
+
+      <link href="../../stylesheets/desktop_3_52e3411e87658e862890db7bd06899cf49ad5f59.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop" data-theme-id="7"/>
+      <link href="../../stylesheets/desktop_theme_7_bf4f2d3d8a71e6ee907065be9a79df3d849bd29c.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop_theme" data-theme-id="7"/>
+    
+    <meta id="data-ga-universal-analytics" data-tracking-code="UA-117583862-1" data-json="{&quot;cookieDomain&quot;:&quot;auto&quot;}" data-auto-link-domains="">
+
+<link rel="preload" href="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js" as="script">
+<script src="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js"></script>
+
+
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of &#39;Replace leveldb with an other database&#39;" href="147.rss" />
+    <meta property="og:site_name" content="MESG Community" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:url" content="https://forum.mesg.com/t/replace-leveldb-with-an-other-database/147" />
+<meta name="twitter:url" content="https://forum.mesg.com/t/replace-leveldb-with-an-other-database/147" />
+<meta property="og:title" content="Replace leveldb with an other database" />
+<meta name="twitter:title" content="Replace leveldb with an other database" />
+<meta property="og:description" content="From @krhubert https://github.com/mesg-foundation/core/issues/565  As shown here https://github.com/syndtr/goleveldb/issues/226, leveldb might have some performance issues.  We can replace it with one of the following:    https://github.com/dgraph-io/badger - LSM Tree  https://github.com/etcd-io/bbolt - B+ Tree  I think for mesg usecase the LSM Tree will be better choice (so badger key/value db)" />
+<meta name="twitter:description" content="From @krhubert https://github.com/mesg-foundation/core/issues/565  As shown here https://github.com/syndtr/goleveldb/issues/226, leveldb might have some performance issues.  We can replace it with one of the following:    https://github.com/dgraph-io/badger - LSM Tree  https://github.com/etcd-io/bbolt - B+ Tree  I think for mesg usecase the LSM Tree will be better choice (so badger key/value db)" />
+<meta name="twitter:label1" value="Reading time" />
+<meta name="twitter:data1" value="1 mins 🕑" />
+<meta name="twitter:label2" value="Likes" />
+<meta name="twitter:data2" value="1 ❤" />
+<meta property="article:published_time" content="2018-12-13T11:03:57+00:00" />
+<meta property="og:ignore_canonical" content="true" />
+
+
+
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"QAPage","name":"Replace leveldb with an other database","mainEntity":{"@type":"Question","name":"Replace leveldb with an other database","text":"From <a class=\"mention\" href="https://forum.mesg.com/t/replace-leveldb-with-an-other-database/\&quot;/u/krhubert\&quot;">@krhubert<\/a> <a href="https://forum.mesg.com/t/replace-leveldb-with-an-other-database/\&quot;https://github.com/mesg-foundation/core/issues/565\&quot;" rel=\"nofollow noopener\">https://github.com/mesg-foundation/core/issues/565<\/a>\n\nAs shown here <a href="https://forum.mesg.com/t/replace-leveldb-with-an-other-database/\&quot;https://github.com/syndtr/goleveldb/issues/226\&quot;" rel=\"nofollow noopener\">https://github.com/syndtr/goleveldb/issues/226<\/a>, leveldb might have some performance issues.\n\nWe can replace it with one of the following:\n\n<a href="https://forum.mesg.com/t/replace-leveldb-with-an-other-database/\&quot;https://github.com/dgraph-io/badger\&quot;" rel=\"nofollow noopener\">https://github.com/dgraph-io/badger<\/a> - LSM Tree\n\n<a href="https://forum.mesg.com/t/replace-leveldb-with-an-other-database/\&quot;https://github.com/etcd-io/bbolt\&quot;" rel=\"nofollow noopener\">https://github.com/etcd-io/bbo&hellip;<\/a>","upvoteCount":0,"answerCount":0,"dateCreated":"2018-12-13T11:03:57.133Z","author":{"@type":"Person","name":"Nicolas"}}}</script>
+  </head>
+  <body class="crawler">
+    
+    <header>
+      <a href="../../index.html">
+          <img src="../../uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png" alt="MESG Community" id="site-logo" style="max-width: 150px;">
+      </a>
+    </header>
+    <div id="main-outlet" class="wrap">
+        <div id="topic-title">
+    <h1>
+      <a href="147.html">Replace leveldb with an other database</a>
+    </h1>
+
+      <div class="topic-category" itemscope itemtype="http://schema.org/BreadcrumbList">
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../c/development.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #AB9364'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Development</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="1" />
+          </span>
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../c/development/engine.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #AB9364'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Engine</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="2" />
+          </span>
+      </div>
+
+      <div class="topic-category">
+        <div class='discourse-tags list-tags'>
+            <a href='../../tag/proposal.html' class='discourse-tag' rel="tag">proposal</a>
+        </div>
+      </div>
+  </div>
+
+  
+
+
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="147.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-12-13T11:03:57Z' class='post-time'>
+                December 13, 2018, 11:03am
+              </time>
+              <meta itemprop='dateModified' content='2018-12-13T11:03:57Z'>
+          <span itemprop='position'>#1</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>From <a class="mention" href="../../u/krhubert.html">@krhubert</a> <a href="https://github.com/mesg-foundation/core/issues/565" rel="nofollow noopener">https://github.com/mesg-foundation/core/issues/565</a></p>
+<p>As shown here <a href="https://github.com/syndtr/goleveldb/issues/226" rel="nofollow noopener">https://github.com/syndtr/goleveldb/issues/226</a>, leveldb might have some performance issues.</p>
+<p>We can replace it with one of the following:</p>
+<ul>
+<li>
+<a href="https://github.com/dgraph-io/badger" rel="nofollow noopener">https://github.com/dgraph-io/badger</a> - LSM Tree</li>
+<li>
+<a href="https://github.com/etcd-io/bbolt" rel="nofollow noopener">https://github.com/etcd-io/bbolt</a> - B+ Tree</li>
+</ul>
+<p>I think for mesg usecase the LSM Tree will be better choice (so badger key/value db)</p>
+        </div>
+
+        <meta itemprop='headline' content='Replace leveldb with an other database'>
+          <meta itemprop='keywords' content='proposal'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="147.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2019-03-07T10:03:49Z' class='post-time'>
+                March 7, 2019, 10:03am
+              </time>
+              <meta itemprop='dateModified' content='2019-03-07T10:03:49Z'>
+          <span itemprop='position'>#2</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Just to open the discussion, why not using a classic database such as mongodb or postgresql, why do we “need” a key/value database ?</p>
+<p>Also we don’t need to have the same database for the services and the executions, we could have services with mongodb and executions with sqlite (these are just examples)</p>
+<p>I think we should explore the idea to move these 2 different databases into mesg services that will give us a lot of flexibility and control</p>
+        </div>
+
+        <meta itemprop='headline' content='Replace leveldb with an other database'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="1" />
+           <span class='post-likes'>1 Like</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="2" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="147.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2019-03-07T10:09:39Z' class='post-time'>
+                March 7, 2019, 10:09am
+              </time>
+              <meta itemprop='dateModified' content='2019-03-07T10:09:39Z'>
+          <span itemprop='position'>#3</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>This is exactly what we need to do in ultimate version of Core. And we need to run this service at the start time. But there is one glitch, it might be hard to move database to a mesg service since it works in a very native layer.</p>
+        </div>
+
+        <meta itemprop='headline' content='Replace leveldb with an other database'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="147.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2019-03-07T10:09:40Z'>
+              <time itemprop='dateModified' datetime='2019-03-07T10:11:19Z' class='post-time'>
+                March 7, 2019, 10:11am
+              </time>
+          <span itemprop='position'>#4</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Just as a note:</p>
+<ul>
+<li>
+<a href="https://github.com/dgraph-io/dgraph" rel="nofollow noopener">https://github.com/dgraph-io/dgraph</a> Distributed Graph DB</li>
+</ul>
+<p>Edit (anthony):</p>
+<ul>
+<li><a href="https://www.bigchaindb.com/" rel="nofollow noopener">https://www.bigchaindb.com/</a></li>
+</ul>
+        </div>
+
+        <meta itemprop='headline' content='Replace leveldb with an other database'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="147.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2019-03-07T10:15:01Z' class='post-time'>
+                March 7, 2019, 10:15am
+              </time>
+              <meta itemprop='dateModified' content='2019-03-07T10:15:01Z'>
+          <span itemprop='position'>#5</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <aside class="quote group-team" data-post="2" data-topic="147">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/anthony/40/7_2.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>I think we should explore the idea to move these 2 different databases into mesg services that will give us a lot of flexibility and control</p>
+</blockquote>
+</aside>
+<p>Yeah that’s will be very cool.</p>
+<p>Even more, if the Core still need some kind of state, then an in-memory storage will be enough (like saving the system service hash that are deployed on start).</p>
+        </div>
+
+        <meta itemprop='headline' content='Replace leveldb with an other database'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+
+
+
+
+
+
+    </div>
+    <footer class="container wrap">
+      <nav class='crawler-nav'>
+        <ul>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../index.html' itemprop="url">Home </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../categories.html' itemprop="url">Categories </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../guidelines.html' itemprop="url">FAQ/Guidelines </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../tos.html' itemprop="url">Terms of Service </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../privacy.html' itemprop="url">Privacy Policy </a>
+          </span>
+        </li>
+        </ul>
+      </nav>
+      <p class='powered-by-link'>Powered by <a href="https://www.discourse.org">Discourse</a>, best viewed with JavaScript enabled</p>
+    </footer>
+    
+    
+  </body>
+  
+</html>

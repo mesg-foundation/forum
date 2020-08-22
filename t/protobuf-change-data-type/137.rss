@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Protobuf: change data type</title>
+    <link>https://forum.mesg.com/t/protobuf-change-data-type/137</link>
+    <description>Change data type in [service.proto](https://github.com/mesg-foundation/core/blob/dev/protobuf/serviceapi/api.proto) from string to bytes
+
+- EmitEventRequest.eventData
+- TaskData.inputData
+- SubmitResultRequest.outputData
+ 
+We can even introduce `DataEncoding` field in the feature if needed.</description>
+    
+    <lastBuildDate>Thu, 26 Dec 2019 02:51:33 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/protobuf-change-data-type/137.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Protobuf: change data type</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>We are now using a struct for all the data <a href="https://github.com/mesg-foundation/engine/blob/dev/protobuf/types/struct.proto">https://github.com/mesg-foundation/engine/blob/dev/protobuf/types/struct.proto</a></p>
+<p>This way we don’t need to have to deal with any encoding anymore and we can have structured and typed data</p>
+          <p><a href="https://forum.mesg.com/t/protobuf-change-data-type/137/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/protobuf-change-data-type/137/2</link>
+        <pubDate>Thu, 26 Dec 2019 02:51:33 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-137-2</guid>
+        <source url="https://forum.mesg.com/t/protobuf-change-data-type/137.rss">Protobuf: change data type</source>
+      </item>
+      <item>
+        <title>Protobuf: change data type</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <p>Change data type in <a href="https://github.com/mesg-foundation/core/blob/dev/protobuf/serviceapi/api.proto" rel="nofollow noopener">service.proto</a> from string to bytes</p>
+<ul>
+<li>EmitEventRequest.eventData</li>
+<li>TaskData.inputData</li>
+<li>SubmitResultRequest.outputData</li>
+</ul>
+<p>We can even introduce <code>DataEncoding</code> field in the feature if needed.</p>
+          <p><a href="https://forum.mesg.com/t/protobuf-change-data-type/137/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/protobuf-change-data-type/137/1</link>
+        <pubDate>Wed, 12 Dec 2018 09:03:19 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-137-1</guid>
+        <source url="https://forum.mesg.com/t/protobuf-change-data-type/137.rss">Protobuf: change data type</source>
+      </item>
+  </channel>
+</rss>

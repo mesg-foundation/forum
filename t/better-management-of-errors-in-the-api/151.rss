@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Better management of errors in the API</title>
+    <link>https://forum.mesg.com/t/better-management-of-errors-in-the-api/151</link>
+    <description>From @Anthony https://github.com/mesg-foundation/core/issues/292
+
+For now errors can be difficult to catch on the application side, if using Go we can test the error but if using anything else we will just have the message of the error, it could be good to add a &quot;code&quot; error also to make sure that we can catch a specific error</description>
+    
+    <lastBuildDate>Thu, 13 Dec 2018 11:16:24 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/better-management-of-errors-in-the-api/151.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Better management of errors in the API</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Errors need to implement <code>GRPCStatus() *Status</code> method.<br>
+See:<br>
+<aside class="onebox whitelistedgeneric">
+  <header class="source">
+      <a href="https://godoc.org/google.golang.org/grpc/status#FromError" target="_blank" rel="nofollow noopener">godoc.org</a>
+  </header>
+  <article class="onebox-body">
+    
+
+<h3><a href="https://godoc.org/google.golang.org/grpc/status#FromError" target="_blank" rel="nofollow noopener">Package status</a></h3>
+
+<p>Package status implements errors returned by gRPC.</p>
+
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+</p>
+          <p><a href="https://forum.mesg.com/t/better-management-of-errors-in-the-api/151/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/better-management-of-errors-in-the-api/151/2</link>
+        <pubDate>Thu, 13 Dec 2018 11:16:24 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-151-2</guid>
+        <source url="https://forum.mesg.com/t/better-management-of-errors-in-the-api/151.rss">Better management of errors in the API</source>
+      </item>
+      <item>
+        <title>Better management of errors in the API</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>From <a class="mention" href="/u/anthony">@Anthony</a> <a href="https://github.com/mesg-foundation/core/issues/292" rel="nofollow noopener">https://github.com/mesg-foundation/core/issues/292</a></p>
+<p>For now errors can be difficult to catch on the application side, if using Go we can test the error but if using anything else we will just have the message of the error, it could be good to add a “code” error also to make sure that we can catch a specific error</p>
+          <p><a href="https://forum.mesg.com/t/better-management-of-errors-in-the-api/151/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/better-management-of-errors-in-the-api/151/1</link>
+        <pubDate>Thu, 13 Dec 2018 11:15:07 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-151-1</guid>
+        <source url="https://forum.mesg.com/t/better-management-of-errors-in-the-api/151.rss">Better management of errors in the API</source>
+      </item>
+  </channel>
+</rss>

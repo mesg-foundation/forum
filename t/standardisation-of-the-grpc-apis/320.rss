@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Standardisation of the gRPC apis</title>
+    <link>https://forum.mesg.com/t/standardisation-of-the-grpc-apis/320</link>
+    <description>Hey guys, I would like to propose a standardisation of the definition of the gRPC apis.
+
+# Get
+
+The request should contain the `hash` of the resource to get.
+The response should be directly the resource definition.
+
+```protobuf
+rpc Get(GetResourceRequest) returns (definition.Resource) {}
+
+message GetResourceRequest {
+  string hash = 1;
+}
+```
+
+Here is my pro and con to directly return the resource definition instead of a response message that contains it:
+### Pro
+1. Less proto definition. No need to create a other proto message
+2. Force to only returns the resource without any other data. If any data needs to be returned it&#39;s either because the api is not well designed or a new type of api and resource need to be created.
+3. Reusability. Having to create the resource definition in the package `protobuf/definition` push to reuse the same definition for many APIs.
+
+### Con
+1. Less flexibility. Cannot add metadata on the returned ressource. But as said in point pro.2, it&#39;s actually mean the api is poorly designed.
+
+# List
+
+The request message should contained the possible and optional filter to apply. The request can be empty if no filter is implemented.
+The response message should contain the resources as an array.
+
+```protobuf
+rpc List (ListResourcesRequest) returns (ListResourcesResponse) {}
+
+message ListResourcesRequest {
+  string possibleAndOptionalFilter = 1;
+}
+
+ message ListResourcesResponse {
+  repeated definition.Resource resources = 1;
+}
+```
+
+# Create
+
+The request should contain the necessary data to create the resource.
+The response should only contain the calculated hash corresponding to the added resource.
+
+EDIT #1:
+```
+rpc Create (CreateResourceRequest) returns (CreateResourceResponse) {}
+
+message CreateResourceRequest {
+  string allNecessaryDataToCreateTheResource = 1;
+}
+
+message CreateResourceResponse {
+  string hash = 1;
+}
+```
+
+# Delete
+
+I suggest that the delete API should be &quot;send and forget&quot;.
+The request contains everything necessary but the response is empty.
+Only the `hash` should be send in request.
+
+```
+rpc Delete (DeleteResourceRequest) returns (DeleteResourceResponse) {}
+
+message DeleteResourceRequest {
+  string hash = 1;
+}
+
+message DeleteResourceResponse {}
+```
+
+# Update
+
+I suggest that the update API should be &quot;send and forget&quot;.
+The request contains everything necessary but the response is empty.
+The `hash` and the data to update should be send in request.
+
+```
+rpc Update (UpdateResourceRequest) returns (UpdateResourceResponse) {}
+
+message UpdateResourceRequest {
+  string hash = 1;
+  string dataToUpdate = 2;
+}
+
+message UpdateResourceResponse {}
+```
+
+# Merge identical message
+
+As you see, there is a few identical messages that only contain the resource&#39;s hash:
+- `GetResourceRequest `
+- `CreateResourceResponse `
+- `DeleteResourceRequest`.
+
+We could merge those message into one:
+```
+message ResourceIdentifier {
+  string hash = 1;
+}
+```
+I&#39;m not sure it&#39;s really necessary and actually useful. It will remove flexibility to add &quot;flags&quot; to the request (but do we actually want those?).
+
+---
+
+@core what do you think guys?</description>
+    
+    <lastBuildDate>Thu, 04 Jul 2019 04:58:29 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/standardisation-of-the-grpc-apis/320.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Standardisation of the gRPC apis</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>This will be released in Engine v0.11</p>
+          <p><a href="https://forum.mesg.com/t/standardisation-of-the-grpc-apis/320/5">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/standardisation-of-the-grpc-apis/320/5</link>
+        <pubDate>Thu, 04 Jul 2019 04:58:29 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-320-5</guid>
+        <source url="https://forum.mesg.com/t/standardisation-of-the-grpc-apis/320.rss">Standardisation of the gRPC apis</source>
+      </item>
+      <item>
+        <title>Standardisation of the gRPC apis</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <p>As for me:</p>
+<p><code>+</code> return resources for get</p>
+<ul>
+<li>Merge identical messages - that might introduce some pbms in the future and I think it’s safer to split them.</li>
+<li>List should return resources stream instead of one big object as caller might have ask about lots of objects.</li>
+</ul>
+<p>But let’s not forget that api should be designed for functionalities and not strictly for following the rules.</p>
+          <p><a href="https://forum.mesg.com/t/standardisation-of-the-grpc-apis/320/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/standardisation-of-the-grpc-apis/320/4</link>
+        <pubDate>Fri, 21 Jun 2019 08:33:53 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-320-4</guid>
+        <source url="https://forum.mesg.com/t/standardisation-of-the-grpc-apis/320.rss">Standardisation of the gRPC apis</source>
+      </item>
+      <item>
+        <title>Standardisation of the gRPC apis</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>I prefer explicit XRequest &amp; XResponse, otherwise it’s not possible to have the repeated types or metadata. this is not a bad api at all.  same applied in the resfull api world</p>
+<p>I like the idea of responses to return deleted resource, that way cli can use it to inform user after deletion, and it’s more functional. but not mandatory.</p>
+<p>Updates must return the updated resource, always a good pattern, same applied in the resfull api world.</p>
+          <p><a href="https://forum.mesg.com/t/standardisation-of-the-grpc-apis/320/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/standardisation-of-the-grpc-apis/320/3</link>
+        <pubDate>Thu, 20 Jun 2019 10:08:41 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-320-3</guid>
+        <source url="https://forum.mesg.com/t/standardisation-of-the-grpc-apis/320.rss">Standardisation of the gRPC apis</source>
+      </item>
+      <item>
+        <title>Standardisation of the gRPC apis</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>EDIT <span class="hashtag">#1</span></p>
+<p>Replaced:</p>
+<pre><code class="lang-auto">rpc Create (definition.Resource) returns (CreateResourceResponse) {}
+
+message CreateResourceResponse {
+  string hash = 1;
+}
+</code></pre>
+<p>By:</p>
+<pre><code class="lang-auto">rpc Create (CreateResourceRequest) returns (CreateResourceResponse) {}
+
+message CreateResourceRequest {
+  string allNecessaryDataToCreateTheResource = 1;
+}
+
+message CreateResourceResponse {
+  string hash = 1;
+}
+</code></pre>
+          <p><a href="https://forum.mesg.com/t/standardisation-of-the-grpc-apis/320/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/standardisation-of-the-grpc-apis/320/2</link>
+        <pubDate>Thu, 20 Jun 2019 10:01:57 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-320-2</guid>
+        <source url="https://forum.mesg.com/t/standardisation-of-the-grpc-apis/320.rss">Standardisation of the gRPC apis</source>
+      </item>
+      <item>
+        <title>Standardisation of the gRPC apis</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Hey guys, I would like to propose a standardisation of the definition of the gRPC apis.</p>
+<h1>Get</h1>
+<p>The request should contain the <code>hash</code> of the resource to get.<br>
+The response should be directly the resource definition.</p>
+<pre><code class="lang-auto">rpc Get(GetResourceRequest) returns (definition.Resource) {}
+
+message GetResourceRequest {
+  string hash = 1;
+}
+</code></pre>
+<p>Here is my pro and con to directly return the resource definition instead of a response message that contains it:</p>
+<h3>Pro</h3>
+<ol>
+<li>Less proto definition. No need to create a other proto message</li>
+<li>Force to only returns the resource without any other data. If any data needs to be returned it’s either because the api is not well designed or a new type of api and resource need to be created.</li>
+<li>Reusability. Having to create the resource definition in the package <code>protobuf/definition</code> push to reuse the same definition for many APIs.</li>
+</ol>
+<h3>Con</h3>
+<ol>
+<li>Less flexibility. Cannot add metadata on the returned ressource. But as said in point pro.2, it’s actually mean the api is poorly designed.</li>
+</ol>
+<h1>List</h1>
+<p>The request message should contained the possible and optional filter to apply. The request can be empty if no filter is implemented.<br>
+The response message should contain the resources as an array.</p>
+<pre><code class="lang-auto">rpc List (ListResourcesRequest) returns (ListResourcesResponse) {}
+
+message ListResourcesRequest {
+  string possibleAndOptionalFilter = 1;
+}
+
+ message ListResourcesResponse {
+  repeated definition.Resource resources = 1;
+}
+</code></pre>
+<h1>Create</h1>
+<p>The request should contain the necessary data to create the resource.<br>
+The response should only contain the calculated hash corresponding to the added resource.</p>
+<p>EDIT <span class="hashtag">#1:</span></p>
+<pre><code class="lang-auto">rpc Create (CreateResourceRequest) returns (CreateResourceResponse) {}
+
+message CreateResourceRequest {
+  string allNecessaryDataToCreateTheResource = 1;
+}
+
+message CreateResourceResponse {
+  string hash = 1;
+}
+</code></pre>
+<h1>Delete</h1>
+<p>I suggest that the delete API should be “send and forget”.<br>
+The request contains everything necessary but the response is empty.<br>
+Only the <code>hash</code> should be send in request.</p>
+<pre><code class="lang-auto">rpc Delete (DeleteResourceRequest) returns (DeleteResourceResponse) {}
+
+message DeleteResourceRequest {
+  string hash = 1;
+}
+
+message DeleteResourceResponse {}
+</code></pre>
+<h1>Update</h1>
+<p>I suggest that the update API should be “send and forget”.<br>
+The request contains everything necessary but the response is empty.<br>
+The <code>hash</code> and the data to update should be send in request.</p>
+<pre><code class="lang-auto">rpc Update (UpdateResourceRequest) returns (UpdateResourceResponse) {}
+
+message UpdateResourceRequest {
+  string hash = 1;
+  string dataToUpdate = 2;
+}
+
+message UpdateResourceResponse {}
+</code></pre>
+<h1>Merge identical message</h1>
+<p>As you see, there is a few identical messages that only contain the resource’s hash:</p>
+<ul>
+<li><code>GetResourceRequest</code></li>
+<li><code>CreateResourceResponse</code></li>
+<li>
+<code>DeleteResourceRequest</code>.</li>
+</ul>
+<p>We could merge those message into one:</p>
+<pre><code class="lang-auto">message ResourceIdentifier {
+  string hash = 1;
+}
+</code></pre>
+<p>I’m not sure it’s really necessary and actually useful. It will remove flexibility to add “flags” to the request (but do we actually want those?).</p>
+<hr>
+<p><a class="mention-group" href="/groups/core">@core</a> what do you think guys?</p>
+          <p><a href="https://forum.mesg.com/t/standardisation-of-the-grpc-apis/320/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/standardisation-of-the-grpc-apis/320/1</link>
+        <pubDate>Thu, 20 Jun 2019 09:36:49 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-320-1</guid>
+        <source url="https://forum.mesg.com/t/standardisation-of-the-grpc-apis/320.rss">Standardisation of the gRPC apis</source>
+      </item>
+  </channel>
+</rss>

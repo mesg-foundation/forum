@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Merge logic of unit and integration test</title>
+    <link>https://forum.mesg.com/t/merge-logic-of-unit-and-integration-test/85</link>
+    <description>Hey guys,
+
+I was reading a couple of unit and integration tests files and most of the tests are exactly the same.
+If we exclude the lines for mocking the unit tests, the lines are exactly the same.
+
+Shouldn&#39;t we merge integration and unit tests asserts and find a way to separate the configuration of each case?
+
+The other argument is to have only one set of test of maintainability. Having 2 set of tests is harder to maintain and we don&#39;t always think to update a test in unit and integration files.
+
+I create a small POC on the `daemon` package (that is not Newable and use a shared `defaultContainer` variable to access the container instance):
+```go
+func TestLogs(t *testing.T) {
+	// `go test` command accept a `-short` flag that is meant to accelerate test.
+	if testing.Short() {
+		defaultContainer = new(mocks.Container)
+	}
+
+	// Other possible condition, if the interface typed variable is actually a mock, we can cast it and configure the mock
+	if mockContainer, ok := defaultContainer.(*mocks.Container); ok {
+		fmt.Println(&quot;it&#39;s a mock&quot;)
+		r, _ := io.Pipe()
+		mockContainer.On(&quot;ServiceLogs&quot;, mock.Anything).Return(r, nil)
+	} else {
+		// Require config for integration test
+		startForTest()
+	}
+
+	// Execute the same logic and asserts
+	reader, err := Logs()
+	require.Nil(t, err)
+	require.NotNil(t, reader)
+}
+```
+
+What do you think @core ?</description>
+    
+    <lastBuildDate>Wed, 10 Oct 2018 09:43:44 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/merge-logic-of-unit-and-integration-test/85.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Merge logic of unit and integration test</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="7" data-topic="85">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/krhubert/40/9_1.png" class="avatar"> krhubert:</div>
+<blockquote>
+<p>Nobody said that we need only one of those type tests. And about 1 way, no we shouldn’t. Tests should be smart, if you can tests something with unit test go with them, if not go with other tests (e2e, functional, integration etc…).</p>
+</blockquote>
+</aside>
+<p>I express my thought the wrong way. I should not say “only 1 way to test a package” but only one test per thing to test (can be integration, unit, etc…). I would like to avoid to test the same feature, with the same path, in differents ways. Example:<br>
+In <code>service</code> package:</p>
+<ul>
+<li>
+<code>TestIntegrationStartWith2DependenciesIntegration</code> / <code>TestStartWith2Dependencies</code>
+</li>
+<li>
+<code>TestIntegrationStartServiceIntegration</code> / <code>TestStartService</code>.</li>
+</ul>
+<p>My suggestion is to test with only one test a feature using the best tool.<br>
+Example:</p>
+<ul>
+<li>For a “happy path” of the <code>service.Start</code> function, it should be done by using the real Docker Engine, so integration test.</li>
+<li>For a path with error of the same <code>service.Start</code> function, we should use a mock to inject precisely the desired error and test if the return of the function is correct.</li>
+</ul>
+          <p><a href="https://forum.mesg.com/t/merge-logic-of-unit-and-integration-test/85/8">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/merge-logic-of-unit-and-integration-test/85/8</link>
+        <pubDate>Wed, 10 Oct 2018 09:43:44 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-85-8</guid>
+        <source url="https://forum.mesg.com/t/merge-logic-of-unit-and-integration-test/85.rss">Merge logic of unit and integration test</source>
+      </item>
+      <item>
+        <title>Merge logic of unit and integration test</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="4" data-topic="85">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/nicolas/40/10_1.png" class="avatar"> Nicolas:</div>
+<blockquote>
+<p>Let’s say we have 2 packages: <code>container</code> , <code>service</code> .<br>
+<code>container</code> uses an external system: docker.<br>
+<code>service</code> doesn’t use any external system directly but use <code>container</code> .</p>
+</blockquote>
+</aside>
+<p>You choose the wrong two packages <img src="https://forum.mesg.com/images/emoji/twitter/slight_smile.png?v=6" title=":slight_smile:" class="emoji" alt=":slight_smile:"> What I mean by that, here the container and the service should have integration tests.</p>
+<p>The <code>service</code> imports <code>container</code> but… The container is just a wrapper for docker api, and the <code>service</code> is just wrapper for <code>container</code> which is wrapper for docker api. Those two packages are super thight releated with docker and at least one (<code>service</code>) of them shouldn’t.</p>
+<p>But in general if you have more SOLID code this should work as you described</p>
+<aside class="quote group-team" data-post="4" data-topic="85">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/nicolas/40/10_1.png" class="avatar"> Nicolas:</div>
+<blockquote>
+<p>At the end, I think we don’t ask the right question if we need integration test and/or unit test. I think the right question is: shouldn’t we have only 1 way to test a package?</p>
+</blockquote>
+</aside>
+<p>Nobody said that we need only one of those type tests. And about 1 way, no we shouldn’t. Tests should be smart, if you can tests something with unit test go with them, if not go with other tests (e2e, functional, integration etc…).</p>
+          <p><a href="https://forum.mesg.com/t/merge-logic-of-unit-and-integration-test/85/7">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/merge-logic-of-unit-and-integration-test/85/7</link>
+        <pubDate>Tue, 09 Oct 2018 07:46:20 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-85-7</guid>
+        <source url="https://forum.mesg.com/t/merge-logic-of-unit-and-integration-test/85.rss">Merge logic of unit and integration test</source>
+      </item>
+      <item>
+        <title>Merge logic of unit and integration test</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>In addition to integration testing of core:</p>
+<p>There is always a margin for mistakes with unit testing too. So we cannot never be sure if core works well with docker or other external services as it is suppose to be if we don’t have integration tests in the higher level.</p>
+<p>I think we can still have some integration tests but not required to have them in the core itself. We can have integration tests within another languages or even with some bash scripts. We can integration test the core through the gRPC API directly.</p>
+<p>We don’t even need to check if a network or container is created with this kind of testing. Lets just create a few scenarios about coupling a few services together and compare the expected task results, event data, service list etc. through the gRPC API.</p>
+          <p><a href="https://forum.mesg.com/t/merge-logic-of-unit-and-integration-test/85/6">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/merge-logic-of-unit-and-integration-test/85/6</link>
+        <pubDate>Mon, 08 Oct 2018 13:08:59 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-85-6</guid>
+        <source url="https://forum.mesg.com/t/merge-logic-of-unit-and-integration-test/85.rss">Merge logic of unit and integration test</source>
+      </item>
+      <item>
+        <title>Merge logic of unit and integration test</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p><a class="mention" href="/u/nicolas">@Nicolas</a> When you put it this way, I totally agree with you. I don’t see any reason keeping integration tests except for the container package. Let’s validate this idea and make sure it’s right.</p>
+<p>For container package, we must have the integration tests. We can/should also keep the unit tests for container package for running tests faster while developing the container package.</p>
+<p>I’m not so sure about combining unit tests and integration tests together for container package because it might complicate the tests. If we decide to combine them, I’m also in favor of using <em>-short</em> flag for disabling integration tests instead of enabling integration tests with <em>tags=integration</em>. Short flag makes a bit more sense to use in our case because we’ll not heavily depend on integration testing.</p>
+          <p><a href="https://forum.mesg.com/t/merge-logic-of-unit-and-integration-test/85/5">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/merge-logic-of-unit-and-integration-test/85/5</link>
+        <pubDate>Mon, 08 Oct 2018 13:00:29 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-85-5</guid>
+        <source url="https://forum.mesg.com/t/merge-logic-of-unit-and-integration-test/85.rss">Merge logic of unit and integration test</source>
+      </item>
+      <item>
+        <title>Merge logic of unit and integration test</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Actually, I think we don’t need most of the integration test we have. Let me explain:</p>
+<p>Let’s say we have 2 packages: <code>container</code>, <code>service</code>.<br>
+<code>container</code> uses an external system: docker.<br>
+<code>service</code>doesn’t use any external system directly but use <code>container</code>.</p>
+<p>In this case, <code>container</code> should have <strong>integration</strong> tests. This way we can be 100% sure that everything is working. Then, we <strong>could</strong> also have unit test to make sure if we break stuff we can know really fast. But again, the unit test <strong>are be optional</strong> because they will <strong>never</strong> give us 100% trust on test on the package.</p>
+<p>Then, <code>service</code> should have only <strong>unit test</strong> that use a mock of <code>container</code>. As <code>service</code> doesn’t internally really on slow external system, we can run the test really fast (with a mock of <code>container</code> of course).</p>
+<p>At the end, I think we don’t ask the right question if we need integration test and/or unit test. I think the right question is: shouldn’t we have only 1 way to test a package?</p>
+<p>Whenever it’s integration or unit test, it’s more about fast or slow test. So the <code>-short</code> flag and the <code>t.Skip</code> function could prevent slow test to be executed when we don’t want.<br>
+Quote from <a href="https://golang.org/pkg/testing:">https://golang.org/pkg/testing:</a></p>
+<blockquote>
+<p>Tests and benchmarks may be skipped if not applicable with a call to the Skip method of *T and *B:</p>
+<pre><code class="lang-auto">func TestTimeConsuming(t *testing.T) {
+    if testing.Short() {
+       t.Skip("skipping test in short mode.")
+   }
+   ...
+}
+</code></pre>
+</blockquote>
+<p>But again, we could reach the same functionality with the <code>-tags</code> and the header in test files (like <code>integration</code> tag)</p>
+<p><a class="mention" href="/u/krhubert">@krhubert</a> <a class="mention" href="/u/ilgooz">@ilgooz</a> <a class="mention" href="/u/anthony">@Anthony</a> what are you feedbacks?</p>
+          <p><a href="https://forum.mesg.com/t/merge-logic-of-unit-and-integration-test/85/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/merge-logic-of-unit-and-integration-test/85/4</link>
+        <pubDate>Mon, 08 Oct 2018 07:55:33 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-85-4</guid>
+        <source url="https://forum.mesg.com/t/merge-logic-of-unit-and-integration-test/85.rss">Merge logic of unit and integration test</source>
+      </item>
+      <item>
+        <title>Merge logic of unit and integration test</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <p>I think what we should do it to avoid duplicaiton of the same test with mock and in integration. So for know we have solution with integration tag and it’s good (same with short), but we should only proivde one test because testing the same thing with/without mock doesn’t brings any value.</p>
+          <p><a href="https://forum.mesg.com/t/merge-logic-of-unit-and-integration-test/85/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/merge-logic-of-unit-and-integration-test/85/3</link>
+        <pubDate>Mon, 08 Oct 2018 07:11:14 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-85-3</guid>
+        <source url="https://forum.mesg.com/t/merge-logic-of-unit-and-integration-test/85.rss">Merge logic of unit and integration test</source>
+      </item>
+      <item>
+        <title>Merge logic of unit and integration test</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>Merging integration tests and unit tests like this is doable. As you said, it’ll make the test maintenance easier and we’ll have the same tests for both unit and integration tests.</p>
+<p>As a downside, it’ll complicate the tests because we’ll have more if-else statements to check the test type and for bigger tests it can become an issue. Merging tests like this feels like a monolithic approach to me, easy to do but in a long term can be quite confusing and could get out of control.</p>
+<p>I prefer having much stupid tests with less lines in it as possible. An ideal test should be small, should be targeted and shouldn’t be updated too often. But having monolithic tests breaks this rules and introduces complexity in tests itself.</p>
+          <p><a href="https://forum.mesg.com/t/merge-logic-of-unit-and-integration-test/85/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/merge-logic-of-unit-and-integration-test/85/2</link>
+        <pubDate>Sun, 07 Oct 2018 11:24:43 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-85-2</guid>
+        <source url="https://forum.mesg.com/t/merge-logic-of-unit-and-integration-test/85.rss">Merge logic of unit and integration test</source>
+      </item>
+      <item>
+        <title>Merge logic of unit and integration test</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Hey guys,</p>
+<p>I was reading a couple of unit and integration tests files and most of the tests are exactly the same.<br>
+If we exclude the lines for mocking the unit tests, the lines are exactly the same.</p>
+<p>Shouldn’t we merge integration and unit tests asserts and find a way to separate the configuration of each case?</p>
+<p>The other argument is to have only one set of test of maintainability. Having 2 set of tests is harder to maintain and we don’t always think to update a test in unit and integration files.</p>
+<p>I create a small POC on the <code>daemon</code> package (that is not Newable and use a shared <code>defaultContainer</code> variable to access the container instance):</p>
+<pre><code class="lang-auto">func TestLogs(t *testing.T) {
+	// `go test` command accept a `-short` flag that is meant to accelerate test.
+	if testing.Short() {
+		defaultContainer = new(mocks.Container)
+	}
+
+	// Other possible condition, if the interface typed variable is actually a mock, we can cast it and configure the mock
+	if mockContainer, ok := defaultContainer.(*mocks.Container); ok {
+		fmt.Println("it's a mock")
+		r, _ := io.Pipe()
+		mockContainer.On("ServiceLogs", mock.Anything).Return(r, nil)
+	} else {
+		// Require config for integration test
+		startForTest()
+	}
+
+	// Execute the same logic and asserts
+	reader, err := Logs()
+	require.Nil(t, err)
+	require.NotNil(t, reader)
+}
+</code></pre>
+<p>What do you think <a class="mention-group" href="/groups/core">@core</a> ?</p>
+          <p><a href="https://forum.mesg.com/t/merge-logic-of-unit-and-integration-test/85/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/merge-logic-of-unit-and-integration-test/85/1</link>
+        <pubDate>Sun, 07 Oct 2018 10:47:07 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-85-1</guid>
+        <source url="https://forum.mesg.com/t/merge-logic-of-unit-and-integration-test/85.rss">Merge logic of unit and integration test</source>
+      </item>
+  </channel>
+</rss>

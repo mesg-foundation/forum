@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Wiki Page for MESG</title>
+    <link>https://forum.mesg.com/t/wiki-page-for-mesg/84</link>
+    <description>I&#39;m thinking that we should start writing some documentation for core in the [Wiki](https://github.com/mesg-foundation/core/wiki) page.
+
+It&#39;ll be like a small book with 5-15 pages about how core, services, plugins and network and other features of MESG works.
+
+Wiki can get very technical and we can put things about our folder structure, what&#39;s the job of each internal packages, a detailed view of gRPC apis and how all of this, services, applications, plugins and network composite together.
+
+We now have this lack of information about technical side of MESG and not having a good detailed wiki can block us to get contributions from the community. Because right now the only way of understanding MESG is reading lots of source code and some forum posts that might not make sense for devs because they are very specific and requires a lot of knowledge before digging in.
+
+Having a detailed Wiki about MESG is useful for our core team too. Coding is only the small part of the job. Thinking and proposing is a lot important but if we cannot put our thinking to words in an organized and detailed way not everybody can easily follow it. I suggested to put a detailed wiki first before a feature implementation.</description>
+    
+    <lastBuildDate>Fri, 05 Oct 2018 08:11:26 +0000</lastBuildDate>
+    <category>General Discussion</category>
+    <atom:link href="https://forum.mesg.com/t/wiki-page-for-mesg/84.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Wiki Page for MESG</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>I’m thinking that we should start writing some documentation for core in the <a href="https://github.com/mesg-foundation/core/wiki">Wiki</a> page.</p>
+<p>It’ll be like a small book with 5-15 pages about how core, services, plugins and network and other features of MESG works.</p>
+<p>Wiki can get very technical and we can put things about our folder structure, what’s the job of each internal packages, a detailed view of gRPC apis and how all of this, services, applications, plugins and network composite together.</p>
+<p>We now have this lack of information about technical side of MESG and not having a good detailed wiki can block us to get contributions from the community. Because right now the only way of understanding MESG is reading lots of source code and some forum posts that might not make sense for devs because they are very specific and requires a lot of knowledge before digging in.</p>
+<p>Having a detailed Wiki about MESG is useful for our core team too. Coding is only the small part of the job. Thinking and proposing is a lot important but if we cannot put our thinking to words in an organized and detailed way not everybody can easily follow it. I suggested to put a detailed wiki first before a feature implementation.</p>
+          <p><a href="https://forum.mesg.com/t/wiki-page-for-mesg/84/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/wiki-page-for-mesg/84/1</link>
+        <pubDate>Fri, 05 Oct 2018 08:11:26 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-84-1</guid>
+        <source url="https://forum.mesg.com/t/wiki-page-for-mesg/84.rss">Wiki Page for MESG</source>
+      </item>
+  </channel>
+</rss>

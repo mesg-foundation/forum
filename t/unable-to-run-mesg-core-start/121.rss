@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Unable to run &quot;mesg-core start&quot;</title>
+    <link>https://forum.mesg.com/t/unable-to-run-mesg-core-start/121</link>
+    <description>Error Message: 
+`2018/11/18 10:07:06 Error response from daemon: could not choose an IP address to advertise since this system has multiple addresses on interface wlo1 (2405:204:9521:8f9e:31e1:b99f:f531:ffdd a
+nd 2405:204:9521:8f9e:a40a:26a0:94c:9101)`
+
+I understand from this is mesg tries to initialize docker but is unable to choose from the multiple IPs. Has anyone faced a similar issue? Can you give pointers to resolve this?</description>
+    
+    <lastBuildDate>Sun, 18 Nov 2018 12:54:15 +0000</lastBuildDate>
+    <category>Support</category>
+    <atom:link href="https://forum.mesg.com/t/unable-to-run-mesg-core-start/121.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Unable to run &quot;mesg-core start&quot;</title>
+        <dc:creator><![CDATA[vijaykrishnavanshi]]></dc:creator>
+        <description><![CDATA[
+            <p>Okay Cool. Will do it in sometime from now.<br>
+Thanks</p>
+          <p><a href="https://forum.mesg.com/t/unable-to-run-mesg-core-start/121/9">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/unable-to-run-mesg-core-start/121/9</link>
+        <pubDate>Sun, 18 Nov 2018 12:54:15 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-121-9</guid>
+        <source url="https://forum.mesg.com/t/unable-to-run-mesg-core-start/121.rss">Unable to run &quot;mesg-core start&quot;</source>
+      </item>
+      <item>
+        <title>Unable to run &quot;mesg-core start&quot;</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>Could you create an issue on the <a href="https://github.com/mesg-foundation/core/issues/new">Github</a> and share</p>
+<ul>
+<li>mesg-core version (<code>mesg-core --version</code>)</li>
+<li>docker image (<code>docker image ls | grep mesg/core</code>)</li>
+<li>docker version (<code>docker --version</code>)</li>
+<li>environment (<code>uname -a</code>)</li>
+<li>any relevant informations (screenshot or whatever)</li>
+</ul>
+<p>I cannot reproduce this issue and this is the first time I see this issue.</p>
+<p>Thanks</p>
+          <p><a href="https://forum.mesg.com/t/unable-to-run-mesg-core-start/121/8">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/unable-to-run-mesg-core-start/121/8</link>
+        <pubDate>Sun, 18 Nov 2018 12:46:52 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-121-8</guid>
+        <source url="https://forum.mesg.com/t/unable-to-run-mesg-core-start/121.rss">Unable to run &quot;mesg-core start&quot;</source>
+      </item>
+      <item>
+        <title>Unable to run &quot;mesg-core start&quot;</title>
+        <dc:creator><![CDATA[vijaykrishnavanshi]]></dc:creator>
+        <description><![CDATA[
+            <p>This is the error that I get on starting the mesg-core using the command <code>mesg-core start</code> so I am not able to understand where is this being used/needed?</p>
+          <p><a href="https://forum.mesg.com/t/unable-to-run-mesg-core-start/121/7">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/unable-to-run-mesg-core-start/121/7</link>
+        <pubDate>Sun, 18 Nov 2018 12:38:41 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-121-7</guid>
+        <source url="https://forum.mesg.com/t/unable-to-run-mesg-core-start/121.rss">Unable to run &quot;mesg-core start&quot;</source>
+      </item>
+      <item>
+        <title>Unable to run &quot;mesg-core start&quot;</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>This doesn’t seems related to mesg-core and if your docker is correctly installed there is no reason to touch this kind of folder.</p>
+<p>If the core is running now it’s usable without anything else to do. You can start to <a href="https://docs.mesg.com/guide/service/what-is-a-service.html#receiving-tasks">create your services</a> and <a href="https://docs.mesg.com/guide/application/what-is-an-application.html">create your application</a>.</p>
+<p>Why and where do you need this <code>mkdir</code> for ?</p>
+          <p><a href="https://forum.mesg.com/t/unable-to-run-mesg-core-start/121/6">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/unable-to-run-mesg-core-start/121/6</link>
+        <pubDate>Sun, 18 Nov 2018 12:36:52 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-121-6</guid>
+        <source url="https://forum.mesg.com/t/unable-to-run-mesg-core-start/121.rss">Unable to run &quot;mesg-core start&quot;</source>
+      </item>
+      <item>
+        <title>Unable to run &quot;mesg-core start&quot;</title>
+        <dc:creator><![CDATA[vijaykrishnavanshi]]></dc:creator>
+        <description><![CDATA[
+            <p>This is the error I am getting on running this.<br>
+<code>mkdir /var/lib/docker: permission denied</code></p>
+          <p><a href="https://forum.mesg.com/t/unable-to-run-mesg-core-start/121/5">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/unable-to-run-mesg-core-start/121/5</link>
+        <pubDate>Sun, 18 Nov 2018 11:49:18 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-121-5</guid>
+        <source url="https://forum.mesg.com/t/unable-to-run-mesg-core-start/121.rss">Unable to run &quot;mesg-core start&quot;</source>
+      </item>
+      <item>
+        <title>Unable to run &quot;mesg-core start&quot;</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>This is probably related to the previous error, the core is probably running already inside docker but not correctly. This port is exposed by mesg-core.<br>
+Try to stop and start the mesg-core again.<br>
+<code>mesg-core stop</code> and <code>mesg-core start</code> again.</p>
+<p>If this doesn’t work for any reason you can force the stop with <code>docker service rm core</code> and then start it again.</p>
+          <p><a href="https://forum.mesg.com/t/unable-to-run-mesg-core-start/121/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/unable-to-run-mesg-core-start/121/4</link>
+        <pubDate>Sun, 18 Nov 2018 11:20:56 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-121-4</guid>
+        <source url="https://forum.mesg.com/t/unable-to-run-mesg-core-start/121.rss">Unable to run &quot;mesg-core start&quot;</source>
+      </item>
+      <item>
+        <title>Unable to run &quot;mesg-core start&quot;</title>
+        <dc:creator><![CDATA[vijaykrishnavanshi]]></dc:creator>
+        <description><![CDATA[
+            <p>Thanks <a class="mention" href="/u/anthony">@Anthony</a><br>
+The above issue is resolved but I get another issue that I am unable to get past.<br>
+My guess is it is something related to working of mesg-core start command. I looked up 50052 port and it is not already used.<br>
+<code>Error response from daemon: rpc error: code = InvalidArgument desc = port '50052' is already in use by service 'core' (l08ypvbd16znurzv9lq9vt91r) as an ingress port</code></p>
+          <p><a href="https://forum.mesg.com/t/unable-to-run-mesg-core-start/121/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/unable-to-run-mesg-core-start/121/3</link>
+        <pubDate>Sun, 18 Nov 2018 10:35:38 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-121-3</guid>
+        <source url="https://forum.mesg.com/t/unable-to-run-mesg-core-start/121.rss">Unable to run &quot;mesg-core start&quot;</source>
+      </item>
+      <item>
+        <title>Unable to run &quot;mesg-core start&quot;</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>Hello,</p>
+<p>This looks really similar to this issue</p>
+<aside class="onebox githubissue">
+  <header class="source">
+      <a href="https://github.com/mesg-foundation/core/issues/213" target="_blank" rel="nofollow noopener">github.com/mesg-foundation/core</a>
+  </header>
+  <article class="onebox-body">
+    <a href="https://github.com/antho1404" rel="nofollow noopener">
+<img src="https://forum.mesg.com/uploads/default/original/1X/e9026401f8a379e473924906ae355ac25ba8da55.png" class="thumbnail onebox-avatar" width="" height="">
+</a>
+
+<h4><a href="https://github.com/mesg-foundation/core/issues/213" target="_blank" rel="nofollow noopener">Issue: Cannot start MESG Core on Digital Ocean with Docker image</a></h4>
+
+<div class="date" style="margin-top:10px;">
+	<div class="user" style="margin-top:10px;">
+	opened by <a href="https://github.com/antho1404" target="_blank" rel="nofollow noopener">antho1404</a>
+	on <a href="https://github.com/mesg-foundation/core/issues/213" target="_blank" rel="nofollow noopener">2018-06-13</a>
+	</div>
+	<div class="user">
+	closed by <a href="https://github.com/ilgooz" target="_blank" rel="nofollow noopener">ilgooz</a>
+	on <a href="https://github.com/mesg-foundation/core/issues/213" target="_blank" rel="nofollow noopener">2018-12-04</a>
+	</div>
+</div>
+
+<pre class="content" style="white-space: pre-wrap;">When using Digital Ocean and the built in docker image we have an error when running MESG Core.
+Error response from daemon:...</pre>
+
+<div class="labels">
+ 	<span style="display:inline-block;margin-top:2px;background-color: #B8B8B8;padding: 2px;border-radius: 4px;color: #fff;margin-left: 3px;">bug</span>
+</div>
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+
+<p>This is because mesg-core is initializing docker swarm but you computer exposes two different ip addresses so you have to manually select the one you want to expose with the following command</p>
+<pre><code class="lang-auto">docker swarm init --advertise-addr xxx.xxx.xxx.xxx
+</code></pre>
+<p>This should solve the problem.</p>
+          <p><a href="https://forum.mesg.com/t/unable-to-run-mesg-core-start/121/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/unable-to-run-mesg-core-start/121/2</link>
+        <pubDate>Sun, 18 Nov 2018 05:20:11 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-121-2</guid>
+        <source url="https://forum.mesg.com/t/unable-to-run-mesg-core-start/121.rss">Unable to run &quot;mesg-core start&quot;</source>
+      </item>
+      <item>
+        <title>Unable to run &quot;mesg-core start&quot;</title>
+        <dc:creator><![CDATA[vijaykrishnavanshi]]></dc:creator>
+        <description><![CDATA[
+            <p>Error Message:<br>
+<code>2018/11/18 10:07:06 Error response from daemon: could not choose an IP address to advertise since this system has multiple addresses on interface wlo1 (2405:204:9521:8f9e:31e1:b99f:f531:ffdd a nd 2405:204:9521:8f9e:a40a:26a0:94c:9101)</code></p>
+<p>I understand from this is mesg tries to initialize docker but is unable to choose from the multiple IPs. Has anyone faced a similar issue? Can you give pointers to resolve this?</p>
+          <p><a href="https://forum.mesg.com/t/unable-to-run-mesg-core-start/121/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/unable-to-run-mesg-core-start/121/1</link>
+        <pubDate>Sun, 18 Nov 2018 04:42:38 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-121-1</guid>
+        <source url="https://forum.mesg.com/t/unable-to-run-mesg-core-start/121.rss">Unable to run &quot;mesg-core start&quot;</source>
+      </item>
+  </channel>
+</rss>

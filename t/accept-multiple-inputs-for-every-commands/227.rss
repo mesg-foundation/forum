@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Accept multiple inputs for every commands</title>
+    <link>https://forum.mesg.com/t/accept-multiple-inputs-for-every-commands/227</link>
+    <description>The `service delete` command accept a list of services. This is really convenient and we should have this for the following commands:
+
+- start
+- stop
+- deploy
+
+and maybe more if it make sense.
+
+With that and with a `quiet` mode on the `service list` command we could do some stuff like in docker.
+`mesg-core service stop $(mesg-core service list -q)` to stop all the services.
+This would be perfect for developer experience,</description>
+    
+    <lastBuildDate>Sat, 18 May 2019 04:27:24 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/accept-multiple-inputs-for-every-commands/227.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Accept multiple inputs for every commands</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>Implemented in this PR <a href="https://github.com/mesg-foundation/core/pull/732" rel="nofollow noopener">https://github.com/mesg-foundation/core/pull/732</a> and also part of the new CLI implementation in js</p>
+          <p><a href="https://forum.mesg.com/t/accept-multiple-inputs-for-every-commands/227/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/accept-multiple-inputs-for-every-commands/227/4</link>
+        <pubDate>Sat, 18 May 2019 04:27:24 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-227-4</guid>
+        <source url="https://forum.mesg.com/t/accept-multiple-inputs-for-every-commands/227.rss">Accept multiple inputs for every commands</source>
+      </item>
+      <item>
+        <title>Accept multiple inputs for every commands</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <p>It would be good to add it to:</p>
+<ul>
+<li>detail</li>
+<li>logs</li>
+<li>dev</li>
+</ul>
+<p>if we want to be consistent</p>
+          <p><a href="https://forum.mesg.com/t/accept-multiple-inputs-for-every-commands/227/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/accept-multiple-inputs-for-every-commands/227/3</link>
+        <pubDate>Fri, 25 Jan 2019 06:59:35 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-227-3</guid>
+        <source url="https://forum.mesg.com/t/accept-multiple-inputs-for-every-commands/227.rss">Accept multiple inputs for every commands</source>
+      </item>
+      <item>
+        <title>Accept multiple inputs for every commands</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>that’s a good idea. I agree</p>
+          <p><a href="https://forum.mesg.com/t/accept-multiple-inputs-for-every-commands/227/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/accept-multiple-inputs-for-every-commands/227/2</link>
+        <pubDate>Thu, 24 Jan 2019 09:12:04 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-227-2</guid>
+        <source url="https://forum.mesg.com/t/accept-multiple-inputs-for-every-commands/227.rss">Accept multiple inputs for every commands</source>
+      </item>
+      <item>
+        <title>Accept multiple inputs for every commands</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>The <code>service delete</code> command accept a list of services. This is really convenient and we should have this for the following commands:</p>
+<ul>
+<li>start</li>
+<li>stop</li>
+<li>deploy</li>
+</ul>
+<p>and maybe more if it make sense.</p>
+<p>With that and with a <code>quiet</code> mode on the <code>service list</code> command we could do some stuff like in docker.<br>
+<code>mesg-core service stop $(mesg-core service list -q)</code> to stop all the services.<br>
+This would be perfect for developer experience,</p>
+          <p><a href="https://forum.mesg.com/t/accept-multiple-inputs-for-every-commands/227/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/accept-multiple-inputs-for-every-commands/227/1</link>
+        <pubDate>Thu, 24 Jan 2019 09:05:00 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-227-1</guid>
+        <source url="https://forum.mesg.com/t/accept-multiple-inputs-for-every-commands/227.rss">Accept multiple inputs for every commands</source>
+      </item>
+  </channel>
+</rss>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Milestone v0.6</title>
+    <link>https://forum.mesg.com/t/milestone-v0-6/134</link>
+    <description>**Tag :** [v0.6](https://forum.mesg.com/tags/v0-6)
+**Due date:** 21 December 2018
+
+# Main features
+
+- [\*] @krhubert https://forum.mesg.com/t/configuring-services-with-deploy-time-or-run-time-arguments/124
+- [ ] @ilgooz https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126
+
+# Bugs
+
+- [ ] @Nicolas [fix LICENCE by adding company info](https://github.com/mesg-foundation/core/issues/353)
+- [ ] [Concurrency issue when starting service](https://github.com/mesg-foundation/core/issues/538)
+- [ ] @krhubert [interface/grpc/core: ListenTask gets canceled](https://github.com/mesg-foundation/core/issues/549)
+- [\*] [service execute command hangs forever on unexpected data type](https://github.com/mesg-foundation/core/issues/573)
+- [\*] [Core shouldn&#39;t allow multiple output for the same execution](https://github.com/mesg-foundation/core/issues/610)
+- [ ] [Volume are not compatible with CircleCI](https://github.com/mesg-foundation/core/issues/621)
+- [ ] [sync completion of executions](https://github.com/mesg-foundation/core/issues/637)
+
+# Discussions
+
+- [ ] [protobuf: have error field in EventData (event stream)](https://github.com/mesg-foundation/core/issues/600)
+- [ ] @krhubert [Command service delete, improve tests](https://github.com/mesg-foundation/core/issues/622)
+- [\*] [Service.configuration is duplicated in Service.dependencies](https://forum.mesg.com/t/service-configuration-is-duplicated-in-service-dependencies/143)</description>
+    
+    <lastBuildDate>Sat, 29 Dec 2018 08:16:57 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/milestone-v0-6/134.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Milestone v0.6</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>V0.6 released!<br>
+See <a href="https://forum.mesg.com/t/mesg-core-v0-6-release-notes/166" class="inline-onebox">MESG Core v0.6 Release Notes</a></p>
+          <p><a href="https://forum.mesg.com/t/milestone-v0-6/134/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/milestone-v0-6/134/4</link>
+        <pubDate>Sat, 29 Dec 2018 08:16:57 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-134-4</guid>
+        <source url="https://forum.mesg.com/t/milestone-v0-6/134.rss">Milestone v0.6</source>
+      </item>
+      <item>
+        <title>Milestone v0.6</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>Let us know if you want some help with that!</p>
+          <p><a href="https://forum.mesg.com/t/milestone-v0-6/134/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/milestone-v0-6/134/3</link>
+        <pubDate>Wed, 12 Dec 2018 10:05:25 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-134-3</guid>
+        <source url="https://forum.mesg.com/t/milestone-v0-6/134.rss">Milestone v0.6</source>
+      </item>
+      <item>
+        <title>Milestone v0.6</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Currently, a lot of issue that are not bug are still on Github. That’s why some links direct to GitHub.<br>
+I will transfer them to the forum in the future.</p>
+          <p><a href="https://forum.mesg.com/t/milestone-v0-6/134/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/milestone-v0-6/134/2</link>
+        <pubDate>Wed, 12 Dec 2018 08:39:25 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-134-2</guid>
+        <source url="https://forum.mesg.com/t/milestone-v0-6/134.rss">Milestone v0.6</source>
+      </item>
+      <item>
+        <title>Milestone v0.6</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p><strong>Tag :</strong> <a href="https://forum.mesg.com/tags/v0-6">v0.6</a><br>
+<strong>Due date:</strong> 21 December 2018</p>
+<h1>Main features</h1>
+<ul>
+<li>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> <a class="mention" href="/u/krhubert">@krhubert</a> <a href="https://forum.mesg.com/t/configuring-services-with-deploy-time-or-run-time-arguments/124" class="inline-onebox">Configuring Services with Deploy-Time or Run-Time Arguments</a>
+</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> <a class="mention" href="/u/ilgooz">@ilgooz</a> <a href="https://forum.mesg.com/t/add-more-detailed-data-in-the-mesg-yml/126" class="inline-onebox">Add more detailed data in the mesg.yml</a>
+</li>
+</ul>
+<h1>Bugs</h1>
+<ul>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> <a class="mention" href="/u/nicolas">@Nicolas</a> <a href="https://github.com/mesg-foundation/core/issues/353" rel="nofollow noopener">fix LICENCE by adding company info</a>
+</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> <a href="https://github.com/mesg-foundation/core/issues/538" rel="nofollow noopener">Concurrency issue when starting service</a>
+</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> <a class="mention" href="/u/krhubert">@krhubert</a> <a href="https://github.com/mesg-foundation/core/issues/549" rel="nofollow noopener">interface/grpc/core: ListenTask gets canceled</a>
+</li>
+<li>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> <a href="https://github.com/mesg-foundation/core/issues/573" rel="nofollow noopener">service execute command hangs forever on unexpected data type</a>
+</li>
+<li>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> <a href="https://github.com/mesg-foundation/core/issues/610" rel="nofollow noopener">Core shouldn’t allow multiple output for the same execution</a>
+</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> <a href="https://github.com/mesg-foundation/core/issues/621" rel="nofollow noopener">Volume are not compatible with CircleCI</a>
+</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> <a href="https://github.com/mesg-foundation/core/issues/637" rel="nofollow noopener">sync completion of executions</a>
+</li>
+</ul>
+<h1>Discussions</h1>
+<ul>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> <a href="https://github.com/mesg-foundation/core/issues/600" rel="nofollow noopener">protobuf: have error field in EventData (event stream)</a>
+</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> <a class="mention" href="/u/krhubert">@krhubert</a> <a href="https://github.com/mesg-foundation/core/issues/622" rel="nofollow noopener">Command service delete, improve tests</a>
+</li>
+<li>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> <a href="https://forum.mesg.com/t/service-configuration-is-duplicated-in-service-dependencies/143">Service.configuration is duplicated in Service.dependencies</a>
+</li>
+</ul>
+          <p><a href="https://forum.mesg.com/t/milestone-v0-6/134/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/milestone-v0-6/134/1</link>
+        <pubDate>Wed, 12 Dec 2018 08:26:34 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-134-1</guid>
+        <source url="https://forum.mesg.com/t/milestone-v0-6/134.rss">Milestone v0.6</source>
+      </item>
+  </channel>
+</rss>

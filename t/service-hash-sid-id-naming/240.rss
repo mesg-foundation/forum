@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Service hash, sid, id naming</title>
+    <link>https://forum.mesg.com/t/service-hash-sid-id-naming/240</link>
+    <description>As discuss with @Anthony we need naming consistency for (service or id) variable. This will help us and other developers.
+
+we are using right now:
+
+- serviceID in coreapi
+- hashOrSid in database
+
+Moreover, we have `Name` variable in `api.proto.Service` struct - which probably was forgotten but is still displayed in cli.
+
+The idea is to:
+
+- remove Name variable from Service struct
+- rename serviceID/hashOrSid to ... we have two options:
+- - reference 
+- - service
+- - source
+
+For example docker is calling this variable `container`
+
+https://github.com/moby/moby/blob/master/client/interface.go#L62 .
+
+And this is how they display it in the docs:
+
+https://docs.docker.com/engine/api/v1.24/ (search for GET CONTAINER LOGS)
+
+In cli:
+
+```
+➜  core git:(dev) ✗ docker logs -h
+Flag shorthand -h has been deprecated, please use --help
+
+Usage:	docker logs [OPTIONS] CONTAINER
+```
+
+We are already using `service` in `cli`:
+
+```
+➜  core git:(dev) ✗ ./dev-cli service logs -h
+Show logs of a service
+
+Usage:
+  mesg-core service logs [flags]
+
+Examples:
+mesg-core service logs SERVICE
+```
+
+So we should use this in API as well and in the source code.</description>
+    
+    <lastBuildDate>Fri, 01 Feb 2019 07:53:44 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/service-hash-sid-id-naming/240.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Service hash, sid, id naming</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>I think we should keep name.<br>
+It’s a nice human-only short string about the service</p>
+<pre><code class="lang-auto">name: "Ethereum ERC20 token"
+sid: ethereum-erc20
+description: "MESG Service to interact with an Ethereum ERC20 token"
+</code></pre>
+<hr>
+<p>+1 for <code>service</code> instead of <code>serviceID</code> and <code>hashOrSid</code>.</p>
+          <p><a href="https://forum.mesg.com/t/service-hash-sid-id-naming/240/5">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/service-hash-sid-id-naming/240/5</link>
+        <pubDate>Fri, 01 Feb 2019 07:53:44 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-240-5</guid>
+        <source url="https://forum.mesg.com/t/service-hash-sid-id-naming/240.rss">Service hash, sid, id naming</source>
+      </item>
+      <item>
+        <title>Service hash, sid, id naming</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="3" data-topic="240">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/anthony/40/7_2.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>Why ? Name is good for documentation, this should stay, renaming could be an option but I don’t have any problem with name</p>
+</blockquote>
+</aside>
+<p>Because it seems to much, for example we have</p>
+<p>hash: 0x0000<br>
+sid: ethereum<br>
+name: ?<br>
+description: ethreums is …</p>
+<p>So what is the role of name variable?</p>
+<aside class="quote group-team" data-post="3" data-topic="240">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/anthony/40/7_2.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>, we also thought about <code>Source</code></p>
+</blockquote>
+</aside>
+<p>I forgot about it adding.</p>
+          <p><a href="https://forum.mesg.com/t/service-hash-sid-id-naming/240/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/service-hash-sid-id-naming/240/4</link>
+        <pubDate>Thu, 31 Jan 2019 09:38:55 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-240-4</guid>
+        <source url="https://forum.mesg.com/t/service-hash-sid-id-naming/240.rss">Service hash, sid, id naming</source>
+      </item>
+      <item>
+        <title>Service hash, sid, id naming</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="1" data-topic="240">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/krhubert/40/9_2.png" class="avatar"> krhubert:</div>
+<blockquote>
+<ul>
+<li>remove Name variable from Service struct</li>
+</ul>
+</blockquote>
+</aside>
+<p>Why ? Name is good for documentation, this should stay, renaming could be an option but I don’t have any problem with name</p>
+<aside class="quote group-team" data-post="1" data-topic="240">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/krhubert/40/9_2.png" class="avatar"> krhubert:</div>
+<blockquote>
+<p>rename serviceID/hashOrSid to … we have two options</p>
+</blockquote>
+</aside>
+<p>I vote for <code>Service</code>, we also thought about <code>Source</code></p>
+          <p><a href="https://forum.mesg.com/t/service-hash-sid-id-naming/240/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/service-hash-sid-id-naming/240/3</link>
+        <pubDate>Thu, 31 Jan 2019 09:35:10 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-240-3</guid>
+        <source url="https://forum.mesg.com/t/service-hash-sid-id-naming/240.rss">Service hash, sid, id naming</source>
+      </item>
+      <item>
+        <title>Service hash, sid, id naming</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <ul>
+<li>
+<p>I’d like to keep <em>Name</em> but maybe change it as <em>Title(optional)</em>? Because it’s good human readable but small indicator about what service does. <em>Description</em> is kind of longer version of this title.</p>
+</li>
+<li>
+<p>I like using generic <em>service</em> name in place of <em>hash</em>, <em>sid</em> or <em>serviceID</em>.</p>
+</li>
+</ul>
+          <p><a href="https://forum.mesg.com/t/service-hash-sid-id-naming/240/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/service-hash-sid-id-naming/240/2</link>
+        <pubDate>Thu, 31 Jan 2019 09:31:35 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-240-2</guid>
+        <source url="https://forum.mesg.com/t/service-hash-sid-id-naming/240.rss">Service hash, sid, id naming</source>
+      </item>
+      <item>
+        <title>Service hash, sid, id naming</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <p>As discuss with <a class="mention" href="/u/anthony">@Anthony</a> we need naming consistency for (service or id) variable. This will help us and other developers.</p>
+<p>we are using right now:</p>
+<ul>
+<li>serviceID in coreapi</li>
+<li>hashOrSid in database</li>
+</ul>
+<p>Moreover, we have <code>Name</code> variable in <code>api.proto.Service</code> struct - which probably was forgotten but is still displayed in cli.</p>
+<p>The idea is to:</p>
+<ul>
+<li>remove Name variable from Service struct</li>
+<li>rename serviceID/hashOrSid to … we have two options:</li>
+<li>
+<ul>
+<li>reference</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>service</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>source</li>
+</ul>
+</li>
+</ul>
+<p>For example docker is calling this variable <code>container</code></p>
+<p><a href="https://github.com/moby/moby/blob/master/client/interface.go#L62" rel="nofollow noopener">https://github.com/moby/moby/blob/master/client/interface.go#L62</a> .</p>
+<p>And this is how they display it in the docs:</p>
+<p><a href="https://docs.docker.com/engine/api/v1.24/" rel="nofollow noopener">https://docs.docker.com/engine/api/v1.24/</a> (search for GET CONTAINER LOGS)</p>
+<p>In cli:</p>
+<pre><code class="lang-auto">➜  core git:(dev) ✗ docker logs -h
+Flag shorthand -h has been deprecated, please use --help
+
+Usage:	docker logs [OPTIONS] CONTAINER
+</code></pre>
+<p>We are already using <code>service</code> in <code>cli</code>:</p>
+<pre><code class="lang-auto">➜  core git:(dev) ✗ ./dev-cli service logs -h
+Show logs of a service
+
+Usage:
+  mesg-core service logs [flags]
+
+Examples:
+mesg-core service logs SERVICE
+</code></pre>
+<p>So we should use this in API as well and in the source code.</p>
+          <p><a href="https://forum.mesg.com/t/service-hash-sid-id-naming/240/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/service-hash-sid-id-naming/240/1</link>
+        <pubDate>Thu, 31 Jan 2019 09:17:32 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-240-1</guid>
+        <source url="https://forum.mesg.com/t/service-hash-sid-id-naming/240.rss">Service hash, sid, id naming</source>
+      </item>
+  </channel>
+</rss>

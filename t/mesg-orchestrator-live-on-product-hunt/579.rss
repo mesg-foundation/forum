@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>MESG Orchestrator: Live on Product Hunt</title>
+    <link>https://forum.mesg.com/t/mesg-orchestrator-live-on-product-hunt/579</link>
+    <description>&lt;p&gt;&lt;a href=&quot;https://mesg.com/mesg-orchestrator&quot;&gt;MESG Orchestrator&lt;/a&gt; is an event-driven task-orchestration system that manages the connections between the events and tasks of &lt;a href=&quot;https://docs.mesg.com/guide/service/&quot;&gt;services&lt;/a&gt; by following the steps described in a simple &lt;a href=&quot;https://docs.mesg.com/guide/process/&quot;&gt;process file&lt;/a&gt;.&lt;/p&gt;
+&lt;hr&gt;
+&lt;small&gt;This is a companion discussion topic for the original entry at &lt;a href=&quot;https://blog.mesg.com/mesg-orchestrator-live-on-product-hunt/&quot;&gt;https://blog.mesg.com/mesg-orchestrator-live-on-product-hunt/&lt;/a&gt;&lt;/small&gt;</description>
+    
+    <lastBuildDate>Thu, 12 Dec 2019 11:43:56 +0000</lastBuildDate>
+    <category>Blog discussions</category>
+    <atom:link href="https://forum.mesg.com/t/mesg-orchestrator-live-on-product-hunt/579.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>MESG Orchestrator: Live on Product Hunt</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p><a href="https://mesg.com/mesg-orchestrator">MESG Orchestrator</a> is an event-driven task-orchestration system that manages the connections between the events and tasks of <a href="https://docs.mesg.com/guide/service/">services</a> by following the steps described in a simple <a href="https://docs.mesg.com/guide/process/">process file</a>.</p>
+<hr>
+<small>This is a companion discussion topic for the original entry at <a href="https://blog.mesg.com/mesg-orchestrator-live-on-product-hunt/">https://blog.mesg.com/mesg-orchestrator-live-on-product-hunt/</a></small>
+          <p><a href="https://forum.mesg.com/t/mesg-orchestrator-live-on-product-hunt/579/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mesg-orchestrator-live-on-product-hunt/579/1</link>
+        <pubDate>Thu, 12 Dec 2019 11:43:56 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-579-1</guid>
+        <source url="https://forum.mesg.com/t/mesg-orchestrator-live-on-product-hunt/579.rss">MESG Orchestrator: Live on Product Hunt</source>
+      </item>
+  </channel>
+</rss>

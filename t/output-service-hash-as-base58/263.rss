@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Output service hash as base58</title>
+    <link>https://forum.mesg.com/t/output-service-hash-as-base58/263</link>
+    <description>Hey guys, I would like to propose to use base58 to output the service hash instead of the current base16 (hex).
+
+base58 is used by Bitcoin and IPFS.
+base16 (with 0x prefix) is used by Ethereum.
+
+base58 is shorter than base16. 44 characters vs 64.
+The same value represented in both way:
+```
+e50b7d3bf80e522a59fd2a9b5f50b0f59062501f0ba98d29fdb30c094e806410
+GR6XPNNvBrUth247vLXZ686gk7hGdx33sW14vsWekiAT
+```
+
+The marketplace url will look like:
+```
+mesg://marketplace/service/GR6XPNNvBrUth247vLXZ686gk7hGdx33sW14vsWekiAT
+// instead of
+mesg://marketplace/service/a07d866879f3c08676b8a7e2a86de5ddc21d0f53b0cecec62c4c04a86b017f39
+```
+
+In the core, `hash` is a string, so there is no difference to use a base58. (but actually `hash` should be of type `[]byte` and transformed to a string when outputted).
+See: https://github.com/mesg-foundation/core/blob/b215cc4c091a1cf78fb423f5a7dfb8bca9a91a28/service/service.go#L123
+
+The only counterargument is in the marketplace smart contract, hash is represent as a bytes32 that is compatible with string that start with `0x` follow by the base16 value (eg: `0xe50b7d3bf80e522a59fd2a9b5f50b0f59062501f0ba98d29fdb30c094e806410`).
+But as most of the data of the marketplace are already transformed to there base16 representation, it will follow the same pattern: sid, manifest url, manifest protocol (everything that&#39;s not a number) are already encoded / decoded from ascii to hex in the service marketplace.
+Base58 value can be super easily encoded to base16 for the marketplace smart contract on ethereum by the marketplace service.
+
+Let&#39;s me know what you think ;)</description>
+    
+    <lastBuildDate>Sat, 18 May 2019 04:23:30 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/output-service-hash-as-base58/263.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Output service hash as base58</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>Implemented in this Pull request <a href="https://github.com/mesg-foundation/core/pull/849" rel="nofollow noopener">https://github.com/mesg-foundation/core/pull/849</a> and part of the v0.9.0</p>
+          <p><a href="https://forum.mesg.com/t/output-service-hash-as-base58/263/6">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/output-service-hash-as-base58/263/6</link>
+        <pubDate>Sat, 18 May 2019 04:23:30 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-263-6</guid>
+        <source url="https://forum.mesg.com/t/output-service-hash-as-base58/263.rss">Output service hash as base58</source>
+      </item>
+      <item>
+        <title>Output service hash as base58</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>i’m fine with storing the hash in bytes that makes sense, for the representation then if it’s just cosmetic, the cli will manage this or the markeplace. Just the marketplace might not need to have a hash related to the service but that’s a different discussion.</p>
+<p>So <code>[]bytes</code> for the hash -&gt; OK<br>
+Display with base58 (pure cosmetic) -&gt; OK</p>
+          <p><a href="https://forum.mesg.com/t/output-service-hash-as-base58/263/5">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/output-service-hash-as-base58/263/5</link>
+        <pubDate>Wed, 13 Mar 2019 09:37:10 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-263-5</guid>
+        <source url="https://forum.mesg.com/t/output-service-hash-as-base58/263.rss">Output service hash as base58</source>
+      </item>
+      <item>
+        <title>Output service hash as base58</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="2" data-topic="263">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/anthony/40/7_2.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>I just wonder if there is any good technical reason or if it’s just some cosmetic.</p>
+</blockquote>
+</aside>
+<p>The technical reason is independent from the output for human.<br>
+The technical improvement is to store hash as <span class="chcklst-box fa fa-square-o fa-fw"></span>byte.<br>
+The cosmetic improvement is to show it as a shorter string using base58 because it have more “vocabulary” than base16.</p>
+<aside class="quote group-team" data-post="2" data-topic="263">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/anthony/40/7_2.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>If we have to change the marketplace to accept a new kind of sid and the reason are just cosmetic I don’t really see the necessity.</p>
+</blockquote>
+</aside>
+<aside class="quote group-team" data-post="2" data-topic="263">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/anthony/40/7_2.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>Also transactions on the marketplace might be more expensive.</p>
+</blockquote>
+</aside>
+<p>There is no modification in the marketplace smart contract. The marketplace already <strong>only</strong> accept a array of 32 bytes (<code>bytes32</code>). The hash that we currently pass already need modification: adding and removing the <code>0x</code> prefix. Using base58 will require to encode and decode the base58 value to a base16 value for the marketplace smart contract.</p>
+<aside class="quote group-team" data-post="2" data-topic="263">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/anthony/40/7_2.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>shorter size so reducing the data on the network</p>
+</blockquote>
+</aside>
+<p>The hash on the network, in the proto definition, and in the service struct should be an array of byte. Same type as the hash function returned. This is completely independent of how we want to output the hash to human. Using a string to store the hash is not optimized whatever base we choose.</p>
+          <p><a href="https://forum.mesg.com/t/output-service-hash-as-base58/263/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/output-service-hash-as-base58/263/4</link>
+        <pubDate>Wed, 13 Mar 2019 04:17:53 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-263-4</guid>
+        <source url="https://forum.mesg.com/t/output-service-hash-as-base58/263.rss">Output service hash as base58</source>
+      </item>
+      <item>
+        <title>Output service hash as base58</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="2" data-topic="263">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/anthony/40/7_2.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>I just wonder if there is any good technical reason or if it’s just some cosmetic.</p>
+</blockquote>
+</aside>
+<p>Cosmetic <img src="https://forum.mesg.com/images/emoji/twitter/slight_smile.png?v=6" title=":slight_smile:" class="emoji" alt=":slight_smile:"></p>
+<aside class="quote group-team" data-post="2" data-topic="263">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/anthony/40/7_2.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>If we have to change the marketplace to accept a new kind of sid</p>
+</blockquote>
+</aside>
+<p>Sid won’t be touched - do you mean hash? It won’t be touched either!</p>
+<p>So the hash in the marketplace will still be saved on bytes64, in go it will be a slice of bytes (also over the network and inside the database).</p>
+<p>It is just for printing (like in service list cmd or on the web/url) to make it shorter. That’s all <img src="https://forum.mesg.com/images/emoji/twitter/slight_smile.png?v=6" title=":slight_smile:" class="emoji" alt=":slight_smile:"></p>
+          <p><a href="https://forum.mesg.com/t/output-service-hash-as-base58/263/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/output-service-hash-as-base58/263/3</link>
+        <pubDate>Tue, 12 Mar 2019 18:53:40 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-263-3</guid>
+        <source url="https://forum.mesg.com/t/output-service-hash-as-base58/263.rss">Output service hash as base58</source>
+      </item>
+      <item>
+        <title>Output service hash as base58</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>I just wonder if there is any good technical reason or if it’s just some cosmetic. If we have to change the marketplace to accept a new kind of sid and the reason are just cosmetic I don’t really see the necessity.</p>
+<p>I like the cosmetic change and I think it’s good in a future because of shorter size so reducing the data on the network and also on disk but I don’t think this is a huge difference. Also transactions on the marketplace might be more expensive.</p>
+<p>Would like to have more detail of what are the reasons to change.</p>
+          <p><a href="https://forum.mesg.com/t/output-service-hash-as-base58/263/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/output-service-hash-as-base58/263/2</link>
+        <pubDate>Tue, 12 Mar 2019 18:10:46 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-263-2</guid>
+        <source url="https://forum.mesg.com/t/output-service-hash-as-base58/263.rss">Output service hash as base58</source>
+      </item>
+      <item>
+        <title>Output service hash as base58</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Hey guys, I would like to propose to use base58 to output the service hash instead of the current base16 (hex).</p>
+<p>base58 is used by Bitcoin and IPFS.<br>
+base16 (with 0x prefix) is used by Ethereum.</p>
+<p>base58 is shorter than base16. 44 characters vs 64.<br>
+The same value represented in both way:</p>
+<pre><code class="lang-auto">e50b7d3bf80e522a59fd2a9b5f50b0f59062501f0ba98d29fdb30c094e806410
+GR6XPNNvBrUth247vLXZ686gk7hGdx33sW14vsWekiAT
+</code></pre>
+<p>The marketplace url will look like:</p>
+<pre><code class="lang-auto">mesg://marketplace/service/GR6XPNNvBrUth247vLXZ686gk7hGdx33sW14vsWekiAT
+// instead of
+mesg://marketplace/service/a07d866879f3c08676b8a7e2a86de5ddc21d0f53b0cecec62c4c04a86b017f39
+</code></pre>
+<p>In the core, <code>hash</code> is a string, so there is no difference to use a base58. (but actually <code>hash</code> should be of type <code>[]byte</code> and transformed to a string when outputted).<br>
+See: <a href="https://github.com/mesg-foundation/core/blob/b215cc4c091a1cf78fb423f5a7dfb8bca9a91a28/service/service.go#L123" rel="nofollow noopener">https://github.com/mesg-foundation/core/blob/b215cc4c091a1cf78fb423f5a7dfb8bca9a91a28/service/service.go#L123</a></p>
+<p>The only counterargument is in the marketplace smart contract, hash is represent as a bytes32 that is compatible with string that start with <code>0x</code> follow by the base16 value (eg: <code>0xe50b7d3bf80e522a59fd2a9b5f50b0f59062501f0ba98d29fdb30c094e806410</code>).<br>
+But as most of the data of the marketplace are already transformed to there base16 representation, it will follow the same pattern: sid, manifest url, manifest protocol (everything that’s not a number) are already encoded / decoded from ascii to hex in the service marketplace.<br>
+Base58 value can be super easily encoded to base16 for the marketplace smart contract on ethereum by the marketplace service.</p>
+<p>Let’s me know what you think <img src="https://forum.mesg.com/images/emoji/twitter/wink.png?v=6" title=":wink:" class="emoji" alt=":wink:"></p>
+          <p><a href="https://forum.mesg.com/t/output-service-hash-as-base58/263/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/output-service-hash-as-base58/263/1</link>
+        <pubDate>Tue, 12 Mar 2019 13:39:12 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-263-1</guid>
+        <source url="https://forum.mesg.com/t/output-service-hash-as-base58/263.rss">Output service hash as base58</source>
+      </item>
+  </channel>
+</rss>

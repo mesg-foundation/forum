@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:discourse="http://www.discourse.org/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Library JS - MESG Community</title>
+    <link>https://forum.mesg.com/c/development/library-js</link>
+    <description>Topics in the &#39;Library JS&#39; category </description>
+    
+      <lastBuildDate>Tue, 08 Jan 2019 08:45:51 +0000</lastBuildDate>
+      <atom:link href="https://forum.mesg.com/c/development/library-js.rss" rel="self" type="application/rss+xml" />
+        <item>
+          <title>Mesg-js: implement &#39;ready&#39; state for streams</title>
+          <dc:creator><![CDATA[ilgooz]]></dc:creator>
+          <category>Library JS</category>
+          <description><![CDATA[
+            <p>related with:</p>
+<ul>
+<li><a href="https://github.com/mesg-foundation/mesg-js/pull/49" rel="nofollow noopener">https://github.com/mesg-foundation/mesg-js/pull/49</a></li>
+<li><a href="https://github.com/mesg-foundation/mesg-js/pull/47" rel="nofollow noopener">https://github.com/mesg-foundation/mesg-js/pull/47</a></li>
+</ul>
+<p>With the new high level APIs of application and service clients we don’t have a way of notify users about if the stream is ready for serving <code>task/event/result</code> data.</p>
+<p>In the example below, we never know if the stream is ready to serve <em>result</em> data. We can only be sure of that when the first result received. But in order to provide a more consistent API and implement new <em>ack</em> feature, we need to know that stream is ready to serve data so we can execute a task afterwards.</p>
+<pre><code class="lang-auto">const stream = app.listenResult({serviceID: "3989b1e17bd5fc4b7fca846141cb8dc4efa6fc64"})
+stream.on('result', (e) =&gt; { console.log(e) })
+stream.on('end', (e) =&gt; { console.log(e) })
+</code></pre>
+<p><strong>I propose two solutions for this:</strong></p>
+<p>1- introduce ‘ready’ event:</p>
+<pre><code class="lang-auto">// note that with this implementation, since we return stream directly with the listenResult() it's possible to cancel the stream easily/anytime by calling stream.cancel()
+// with the other option stream cancelation only possible after stream is actually started(ready).
+const stream = app.listenResult({serviceID: "3989b1e17bd5fc4b7fca846141cb8dc4efa6fc64"})
+stream.on('ready', () =&gt; {  })
+stream.on('result', (e) =&gt; { console.log(e) })
+stream.on('end', (e) =&gt; { console.log(e) })
+</code></pre>
+<p>2- or we can accept a callback and inject the stream to it when it’s ready.</p>
+<pre><code class="lang-auto">app.listenResult({serviceID: "3989b1e17bd5fc4b7fca846141cb8dc4efa6fc64"}, (stream) =&gt; {
+  stream.on('result', (e) =&gt; { console.log(e) })
+  stream.on('end', (e) =&gt; { console.log(e) })
+})
+</code></pre>
+<div class="poll" data-poll-status="open" data-poll-public="true" data-poll-results="always" data-poll-type="regular" data-poll-name="poll">
+<div>
+<div class="poll-container">
+<ul>
+<li data-poll-option-id="09fba58a5296c7db22bfac271abe7f7d">event</li>
+<li data-poll-option-id="6a1d6f88839753646a4125d38cbde7de">callback</li>
+</ul>
+</div>
+<div class="poll-info">
+<p>
+<span class="info-number">0</span>
+<span class="info-label">voters</span>
+</p>
+</div>
+</div>
+</div>
+            <p><small>2 posts - 1 participant</small></p>
+            <p><a href="https://forum.mesg.com/t/mesg-js-implement-ready-state-for-streams/179">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/mesg-js-implement-ready-state-for-streams/179</link>
+          <pubDate>Tue, 08 Jan 2019 08:45:51 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-179</guid>
+          <source url="https://forum.mesg.com/t/mesg-js-implement-ready-state-for-streams/179.rss">Mesg-js: implement &#39;ready&#39; state for streams</source>
+        </item>
+        <item>
+          <title>About the Library JS category</title>
+          <dc:creator><![CDATA[Nicolas]]></dc:creator>
+          <category>Library JS</category>
+          <description><![CDATA[
+            <p>(Replace this first paragraph with a brief description of your new category. This guidance will appear in the category selection area, so try to keep it below 200 characters. <strong>Until you edit this description or create topics, this category won’t appear on the categories page.</strong>)</p>
+<p>Use the following paragraphs for a longer description, or to establish category guidelines or rules:</p>
+<ul>
+<li>
+<p>Why should people use this category? What is it for?</p>
+</li>
+<li>
+<p>How exactly is this different than the other categories we already have?</p>
+</li>
+<li>
+<p>What should topics in this category generally contain?</p>
+</li>
+<li>
+<p>Do we need this category? Can we merge with another category, or subcategory?</p>
+</li>
+</ul>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://forum.mesg.com/t/about-the-library-js-category/176">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/about-the-library-js-category/176</link>
+          <pubDate>Sat, 05 Jan 2019 10:00:27 +0000</pubDate>
+          <discourse:topicPinned>Yes</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-176</guid>
+          <source url="https://forum.mesg.com/t/about-the-library-js-category/176.rss">About the Library JS category</source>
+        </item>
+        <item>
+          <title>Mesg-js: make it possible to configure server address</title>
+          <dc:creator><![CDATA[ilgooz]]></dc:creator>
+          <category>Library JS</category>
+          <description><![CDATA[
+            <p>Currently it is only possible to configure Core address for <em>application()</em> with the env vars. I think it would be nice to make  <em>application({addr})</em> accept an options object, that way we can also configure it programatically.</p>
+<p>This is also useful to configure addr in browser env.</p>
+            <p><small>5 posts - 2 participants</small></p>
+            <p><a href="https://forum.mesg.com/t/mesg-js-make-it-possible-to-configure-server-address/159">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/mesg-js-make-it-possible-to-configure-server-address/159</link>
+          <pubDate>Wed, 26 Dec 2018 19:08:52 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-159</guid>
+          <source url="https://forum.mesg.com/t/mesg-js-make-it-possible-to-configure-server-address/159.rss">Mesg-js: make it possible to configure server address</source>
+        </item>
+  </channel>
+</rss>

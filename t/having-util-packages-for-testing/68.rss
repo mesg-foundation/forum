@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Having util packages for testing</title>
+    <link>https://forum.mesg.com/t/having-util-packages-for-testing/68</link>
+    <description>Unit tests are also such programs that require some util packages in the testing process. If we don&#39;t have util packages for testing, the common functionalities we use for testing can be duplicated while testing different packages.
+
+So, I propose having a place in the code base to put some util packages for tests. I think we can have a package in the root of core named as _testutils_ to collect util packages for tests inside.
+
+As a first test util package, I need to extract [this one _(outputStream)_](https://github.com/mesg-foundation/core/pull/499/commits/9a431bf4e85856ff8fa818f5c8196f90025896d1) to its own package.</description>
+    
+    <lastBuildDate>Tue, 02 Oct 2018 08:51:15 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/having-util-packages-for-testing/68.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Having util packages for testing</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Yes, let’s move them to a <code>xtesting</code> package only if more than one package is using it.</p>
+          <p><a href="https://forum.mesg.com/t/having-util-packages-for-testing/68/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/having-util-packages-for-testing/68/4</link>
+        <pubDate>Tue, 02 Oct 2018 08:51:15 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-68-4</guid>
+        <source url="https://forum.mesg.com/t/having-util-packages-for-testing/68.rss">Having util packages for testing</source>
+      </item>
+      <item>
+        <title>Having util packages for testing</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote no-group" data-post="2" data-topic="68">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/anthony/40/7_1.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>Also I’m totally fine to have some duplication in the test in order to really see what kind of pattern we have before doing some kind of early optimizations that are not necessarily relevant.</p>
+</blockquote>
+</aside>
+<p>We colud, bue we can create xrequire pkg, or xtesting or something like httptest, depends on usecase. If you sure that more then 1 pkg will be using it, the it’s good to create pkg to it, otherwise no. So it depends <img src="https://forum.mesg.com/images/emoji/twitter/slight_smile.png?v=6" title=":slight_smile:" class="emoji" alt=":slight_smile:"></p>
+          <p><a href="https://forum.mesg.com/t/having-util-packages-for-testing/68/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/having-util-packages-for-testing/68/3</link>
+        <pubDate>Mon, 01 Oct 2018 09:17:35 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-68-3</guid>
+        <source url="https://forum.mesg.com/t/having-util-packages-for-testing/68.rss">Having util packages for testing</source>
+      </item>
+      <item>
+        <title>Having util packages for testing</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>I don’t really like the idea of having a package that is used only for testing.</p>
+<p>A package should be related to some business logic. Also I feel that if we have some stuff in common it’s to test the same behavior and so for me it makes more sense to extract the behavior in its own package and so of course the tests will be in this package in there is no need to duplicate these tests.</p>
+<p>Also I’m totally fine to have some duplication in the test in order to really see what kind of pattern we have before doing some kind of early optimizations that are not necessarily relevant.</p>
+          <p><a href="https://forum.mesg.com/t/having-util-packages-for-testing/68/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/having-util-packages-for-testing/68/2</link>
+        <pubDate>Sat, 29 Sep 2018 07:50:06 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-68-2</guid>
+        <source url="https://forum.mesg.com/t/having-util-packages-for-testing/68.rss">Having util packages for testing</source>
+      </item>
+      <item>
+        <title>Having util packages for testing</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>Unit tests are also such programs that require some util packages in the testing process. If we don’t have util packages for testing, the common functionalities we use for testing can be duplicated while testing different packages.</p>
+<p>So, I propose having a place in the code base to put some util packages for tests. I think we can have a package in the root of core named as <em>testutils</em> to collect util packages for tests inside.</p>
+<p>As a first test util package, I need to extract <a href="https://github.com/mesg-foundation/core/pull/499/commits/9a431bf4e85856ff8fa818f5c8196f90025896d1">this one <em>(outputStream)</em></a> to its own package.</p>
+          <p><a href="https://forum.mesg.com/t/having-util-packages-for-testing/68/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/having-util-packages-for-testing/68/1</link>
+        <pubDate>Fri, 28 Sep 2018 14:34:37 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-68-1</guid>
+        <source url="https://forum.mesg.com/t/having-util-packages-for-testing/68.rss">Having util packages for testing</source>
+      </item>
+  </channel>
+</rss>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Monitoring system of online server</title>
+    <link>https://forum.mesg.com/t/monitoring-system-of-online-server/269</link>
+    <description>Hey guys,
+
+I think it&#39;s time to setup a monitoring system for all server that are using for MESG.
+This includes the demo backend, the marketplace backend, the forum backend and the ipfs node.
+The system should be accessible from a public URL.
+This system should send alert by email (at least) when a server is down.
+Nice to have: cpu, memory, bandwidth, Docker containers stats of each server.
+
+@krhubert suggests https://www.pingdom.com/
+@Anthony suggests https://newrelic.com/</description>
+    
+    <lastBuildDate>Sat, 18 May 2019 04:24:50 +0000</lastBuildDate>
+    <category>Development</category>
+    <atom:link href="https://forum.mesg.com/t/monitoring-system-of-online-server/269.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Monitoring system of online server</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>We decided to use newrelic</p>
+          <p><a href="https://forum.mesg.com/t/monitoring-system-of-online-server/269/5">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/monitoring-system-of-online-server/269/5</link>
+        <pubDate>Sat, 18 May 2019 04:24:50 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-269-5</guid>
+        <source url="https://forum.mesg.com/t/monitoring-system-of-online-server/269.rss">Monitoring system of online server</source>
+      </item>
+      <item>
+        <title>Monitoring system of online server</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>NewRelic has software integration in many language, including Golang:</p>
+<blockquote>
+<p>Easily monitor the health of your entire Go runtime environment.<br>
+See how your Go applications are performing with full context.</p>
+<ul>
+<li>Track goroutine counts over time in the Go runtime dashboard</li>
+<li>Identify possible Goroutine leaks and narrow down concurrency issues</li>
+<li>Troubleshoot issues using system metrics such as garbage collector information and memory usage</li>
+</ul>
+<p><a href="https://newrelic.com/golang" rel="nofollow noopener">https://newrelic.com/golang</a></p>
+</blockquote>
+          <p><a href="https://forum.mesg.com/t/monitoring-system-of-online-server/269/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/monitoring-system-of-online-server/269/4</link>
+        <pubDate>Sat, 13 Apr 2019 01:32:21 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-269-4</guid>
+        <source url="https://forum.mesg.com/t/monitoring-system-of-online-server/269.rss">Monitoring system of online server</source>
+      </item>
+      <item>
+        <title>Monitoring system of online server</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="2" data-topic="269">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/anthony/40/7_2.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>Also another solution to explore is our own “stat” server like that we could even have it to <a href="https://forum.mesg.com/t/collect-stats-from-core/48">Collect stats from core</a>.</p>
+</blockquote>
+</aside>
+<p>The pbm with own solution - you have to monitor the monitoring system, so you have to create something quite complex to achieve very little (in that case monitor api) (installing from DO marketplace is the same story). So if you want to collect stats, own server is good start (but even then it might be worth considering could database), but for monitoring, I would suggest a ready solution.</p>
+<p>About relic - I don’t know them and looking at their page they don’t give any info about pricing model and also you have to request a demo to play with it. I know only pingdom and it’s very easy and intuitive to set up (in few minutes).</p>
+          <p><a href="https://forum.mesg.com/t/monitoring-system-of-online-server/269/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/monitoring-system-of-online-server/269/3</link>
+        <pubDate>Fri, 12 Apr 2019 07:45:19 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-269-3</guid>
+        <source url="https://forum.mesg.com/t/monitoring-system-of-online-server/269.rss">Monitoring system of online server</source>
+      </item>
+      <item>
+        <title>Monitoring system of online server</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>We might have a look at the new Digital Ocean marketplace, maybe we can directly install from it. Also another solution to explore is our own “stat” server like that we could even have it to <a href="https://forum.mesg.com/t/collect-stats-from-core/48" class="inline-onebox">Collect stats from core</a>. Not sure it’s useful for that but just an idea to explore</p>
+          <p><a href="https://forum.mesg.com/t/monitoring-system-of-online-server/269/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/monitoring-system-of-online-server/269/2</link>
+        <pubDate>Fri, 12 Apr 2019 07:35:11 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-269-2</guid>
+        <source url="https://forum.mesg.com/t/monitoring-system-of-online-server/269.rss">Monitoring system of online server</source>
+      </item>
+      <item>
+        <title>Monitoring system of online server</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Hey guys,</p>
+<p>I think it’s time to setup a monitoring system for all server that are using for MESG.<br>
+This includes the demo backend, the marketplace backend, the forum backend and the ipfs node.<br>
+The system should be accessible from a public URL.<br>
+This system should send alert by email (at least) when a server is down.<br>
+Nice to have: cpu, memory, bandwidth, Docker containers stats of each server.</p>
+<p><a class="mention" href="/u/krhubert">@krhubert</a> suggests <a href="https://www.pingdom.com/" rel="nofollow noopener">https://www.pingdom.com/</a><br>
+<a class="mention" href="/u/anthony">@Anthony</a> suggests <a href="https://newrelic.com/" rel="nofollow noopener">https://newrelic.com/</a></p>
+          <p><a href="https://forum.mesg.com/t/monitoring-system-of-online-server/269/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/monitoring-system-of-online-server/269/1</link>
+        <pubDate>Fri, 12 Apr 2019 07:24:33 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-269-1</guid>
+        <source url="https://forum.mesg.com/t/monitoring-system-of-online-server/269.rss">Monitoring system of online server</source>
+      </item>
+  </channel>
+</rss>

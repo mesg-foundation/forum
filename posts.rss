@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:discourse="http://www.discourse.org/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>MESG Community - Latest posts</title>
+    <link>https://forum.mesg.com</link>
+    <description>Latest posts</description>
+      <item>
+        <title>Build Easier, Ship Faster: Why We Launched Liteflow</title>
+        <dc:creator><![CDATA[@Anthony Anthony]]></dc:creator>
+        <description><![CDATA[ <p><a href="https://liteflow.com/?utm_source=mesg_blog&amp;utm_medium=blog_post&amp;utm_campaign=why_liteflow">Liteflow</a> is a new open platform for application processing that helps developer-entrepreneurs launch projects easily and quickly. </p>
+<hr>
+<small>This is a companion discussion topic for the original entry at <a href="https://blog.mesg.com/what-is-liteflow/">https://blog.mesg.com/what-is-liteflow/</a></small> ]]></description>
+        <link>https://forum.mesg.com/t/build-easier-ship-faster-why-we-launched-liteflow/763/1</link>
+        <pubDate>Mon, 10 Aug 2020 11:57:09 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-2560</guid>
+      </item>
+      <item>
+        <title>Community Update: April &amp; May 2020</title>
+        <dc:creator><![CDATA[@Anthony Anthony]]></dc:creator>
+        <description><![CDATA[ <p class="subscribe-overlay-description">Stay up to date! Get all the latest &amp; greatest posts delivered
+                    straight to your inbox</p>
+<hr>
+<small>This is a companion discussion topic for the original entry at <a href="https://blog.mesg.com/community-update-april-may-2020/">https://blog.mesg.com/community-update-april-may-2020/</a></small> ]]></description>
+        <link>https://forum.mesg.com/t/community-update-april-may-2020/757/1</link>
+        <pubDate>Wed, 03 Jun 2020 09:36:44 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-2554</guid>
+      </item>
+  </channel>
+</rss>

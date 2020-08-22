@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Mesg-js: seperate service and application code to different pkgs</title>
+    <link>https://forum.mesg.com/t/mesg-js-seperate-service-and-application-code-to-different-pkgs/158</link>
+    <description>Current pkg name is **mesg-js**. We can create an organization in npm an use it as a prefix and have two different packages as **@org/service** and **@org/application**. Which is very convenient. We also did the similar thing with Go clients.</description>
+    
+    <lastBuildDate>Thu, 26 Dec 2019 02:37:44 +0000</lastBuildDate>
+    <category>Development</category>
+    <atom:link href="https://forum.mesg.com/t/mesg-js-seperate-service-and-application-code-to-different-pkgs/158.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Mesg-js: seperate service and application code to different pkgs</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>The javascript library has been reorganized with a mono repo (<a href="https://github.com/mesg-foundation/js-sdk">https://github.com/mesg-foundation/js-sdk</a>) and the following lib:</p>
+<ul>
+<li>
+<a href="https://github.com/mesg-foundation/js-sdk/blob/master/packages/cli/README.md">@mesg/cli</a>: Command line interface to create/test/deploy services and processes and manage your MESG node.</li>
+<li>
+<a href="https://github.com/mesg-foundation/js-sdk/blob/master/packages/api/README.md">@mesg/api</a>: This library responsible for the communication with the MESG Engine API.</li>
+<li>
+<a href="https://github.com/mesg-foundation/js-sdk/blob/master/packages/service/README.md">@mesg/service</a>: Handles the connection with the MESG Engine, some authentication, and finally, the functions for your service to listen to tasks sent by the engine or emit events that your service needs to expose to the engine.</li>
+<li>
+<a href="https://github.com/mesg-foundation/js-sdk/blob/master/packages/application/README.md">@mesg/application</a>: This library lets you connect to the MESG engine to listen for any event or result that you might be interested too. It also allows you to execute a task, either synchronously or asynchronously.</li>
+<li>
+<a href="https://github.com/mesg-foundation/js-sdk/blob/master/packages/compiler/README.md">@mesg/compiler</a>: This library let you compile your services and/or processes.</li>
+</ul>
+          <p><a href="https://forum.mesg.com/t/mesg-js-seperate-service-and-application-code-to-different-pkgs/158/5">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mesg-js-seperate-service-and-application-code-to-different-pkgs/158/5</link>
+        <pubDate>Thu, 26 Dec 2019 02:37:44 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-158-5</guid>
+        <source url="https://forum.mesg.com/t/mesg-js-seperate-service-and-application-code-to-different-pkgs/158.rss">Mesg-js: seperate service and application code to different pkgs</source>
+      </item>
+      <item>
+        <title>Mesg-js: seperate service and application code to different pkgs</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p><em><span class="mention">@mesg</span>/core</em> is also nice but it would be nice if we can provide a similar api. For example, if we have <em>require(’<span class="mention">@org</span>/service’).grpc()</em> for accessing service gRPC APIs, I think we should follow the same naming pattern for core as well(<em>require(’<span class="mention">@org</span>/core’).grpc()</em>).</p>
+<blockquote>
+<p>Should we use one github repository or one per npm package?</p>
+</blockquote>
+<p>I think we can separate them to make it easier separating CI tasks? There is no much difference tho. Maybe we can create two repos as <em>js-core</em> &amp; <em>js-service</em>.</p>
+          <p><a href="https://forum.mesg.com/t/mesg-js-seperate-service-and-application-code-to-different-pkgs/158/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mesg-js-seperate-service-and-application-code-to-different-pkgs/158/4</link>
+        <pubDate>Thu, 27 Dec 2018 07:28:29 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-158-4</guid>
+        <source url="https://forum.mesg.com/t/mesg-js-seperate-service-and-application-code-to-different-pkgs/158.rss">Mesg-js: seperate service and application code to different pkgs</source>
+      </item>
+      <item>
+        <title>Mesg-js: seperate service and application code to different pkgs</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>I also like the <code>@org/xxx</code> naming for NPM.<br>
+Agree with anthony, let’s use <code>@mesg/core</code> and <code>@mesg/service</code>.</p>
+<hr>
+<p>Should we use one github repository or one per npm package?</p>
+          <p><a href="https://forum.mesg.com/t/mesg-js-seperate-service-and-application-code-to-different-pkgs/158/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mesg-js-seperate-service-and-application-code-to-different-pkgs/158/3</link>
+        <pubDate>Thu, 27 Dec 2018 04:06:47 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-158-3</guid>
+        <source url="https://forum.mesg.com/t/mesg-js-seperate-service-and-application-code-to-different-pkgs/158.rss">Mesg-js: seperate service and application code to different pkgs</source>
+      </item>
+      <item>
+        <title>Mesg-js: seperate service and application code to different pkgs</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>Agree with that it will make more sense than having to do a <code>.application()</code> or <code>.service()</code>.<br>
+Also what about calling it <span class="mention">@org</span>/core instead of <span class="mention">@org</span>/application if we are not doing the when/then layer.</p>
+          <p><a href="https://forum.mesg.com/t/mesg-js-seperate-service-and-application-code-to-different-pkgs/158/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mesg-js-seperate-service-and-application-code-to-different-pkgs/158/2</link>
+        <pubDate>Thu, 27 Dec 2018 02:21:46 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-158-2</guid>
+        <source url="https://forum.mesg.com/t/mesg-js-seperate-service-and-application-code-to-different-pkgs/158.rss">Mesg-js: seperate service and application code to different pkgs</source>
+      </item>
+      <item>
+        <title>Mesg-js: seperate service and application code to different pkgs</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>Current pkg name is <strong>mesg-js</strong>. We can create an organization in npm an use it as a prefix and have two different packages as <strong><span class="mention">@org</span>/service</strong> and <strong><span class="mention">@org</span>/application</strong>. Which is very convenient. We also did the similar thing with Go clients.</p>
+          <p><a href="https://forum.mesg.com/t/mesg-js-seperate-service-and-application-code-to-different-pkgs/158/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mesg-js-seperate-service-and-application-code-to-different-pkgs/158/1</link>
+        <pubDate>Wed, 26 Dec 2018 19:06:41 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-158-1</guid>
+        <source url="https://forum.mesg.com/t/mesg-js-seperate-service-and-application-code-to-different-pkgs/158.rss">Mesg-js: seperate service and application code to different pkgs</source>
+      </item>
+  </channel>
+</rss>

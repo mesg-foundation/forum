@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Replace leveldb with an other database</title>
+    <link>https://forum.mesg.com/t/replace-leveldb-with-an-other-database/147</link>
+    <description>From @krhubert https://github.com/mesg-foundation/core/issues/565
+
+As shown here https://github.com/syndtr/goleveldb/issues/226, leveldb might have some performance issues.
+
+We can replace it with one of the following:
+
+- https://github.com/dgraph-io/badger - LSM Tree
+- https://github.com/etcd-io/bbolt - B+ Tree
+
+I think for mesg usecase the LSM Tree will be better choice (so badger key/value db)</description>
+    
+    <lastBuildDate>Thu, 07 Mar 2019 10:15:01 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/replace-leveldb-with-an-other-database/147.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Replace leveldb with an other database</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="2" data-topic="147">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/anthony/40/7_2.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>I think we should explore the idea to move these 2 different databases into mesg services that will give us a lot of flexibility and control</p>
+</blockquote>
+</aside>
+<p>Yeah that’s will be very cool.</p>
+<p>Even more, if the Core still need some kind of state, then an in-memory storage will be enough (like saving the system service hash that are deployed on start).</p>
+          <p><a href="https://forum.mesg.com/t/replace-leveldb-with-an-other-database/147/5">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/replace-leveldb-with-an-other-database/147/5</link>
+        <pubDate>Thu, 07 Mar 2019 10:15:01 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-147-5</guid>
+        <source url="https://forum.mesg.com/t/replace-leveldb-with-an-other-database/147.rss">Replace leveldb with an other database</source>
+      </item>
+      <item>
+        <title>Replace leveldb with an other database</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Just as a note:</p>
+<ul>
+<li>
+<a href="https://github.com/dgraph-io/dgraph" rel="nofollow noopener">https://github.com/dgraph-io/dgraph</a> Distributed Graph DB</li>
+</ul>
+<p>Edit (anthony):</p>
+<ul>
+<li><a href="https://www.bigchaindb.com/" rel="nofollow noopener">https://www.bigchaindb.com/</a></li>
+</ul>
+          <p><a href="https://forum.mesg.com/t/replace-leveldb-with-an-other-database/147/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/replace-leveldb-with-an-other-database/147/4</link>
+        <pubDate>Thu, 07 Mar 2019 10:09:40 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-147-4</guid>
+        <source url="https://forum.mesg.com/t/replace-leveldb-with-an-other-database/147.rss">Replace leveldb with an other database</source>
+      </item>
+      <item>
+        <title>Replace leveldb with an other database</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>This is exactly what we need to do in ultimate version of Core. And we need to run this service at the start time. But there is one glitch, it might be hard to move database to a mesg service since it works in a very native layer.</p>
+          <p><a href="https://forum.mesg.com/t/replace-leveldb-with-an-other-database/147/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/replace-leveldb-with-an-other-database/147/3</link>
+        <pubDate>Thu, 07 Mar 2019 10:09:39 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-147-3</guid>
+        <source url="https://forum.mesg.com/t/replace-leveldb-with-an-other-database/147.rss">Replace leveldb with an other database</source>
+      </item>
+      <item>
+        <title>Replace leveldb with an other database</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>Just to open the discussion, why not using a classic database such as mongodb or postgresql, why do we “need” a key/value database ?</p>
+<p>Also we don’t need to have the same database for the services and the executions, we could have services with mongodb and executions with sqlite (these are just examples)</p>
+<p>I think we should explore the idea to move these 2 different databases into mesg services that will give us a lot of flexibility and control</p>
+          <p><a href="https://forum.mesg.com/t/replace-leveldb-with-an-other-database/147/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/replace-leveldb-with-an-other-database/147/2</link>
+        <pubDate>Thu, 07 Mar 2019 10:03:49 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-147-2</guid>
+        <source url="https://forum.mesg.com/t/replace-leveldb-with-an-other-database/147.rss">Replace leveldb with an other database</source>
+      </item>
+      <item>
+        <title>Replace leveldb with an other database</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>From <a class="mention" href="/u/krhubert">@krhubert</a> <a href="https://github.com/mesg-foundation/core/issues/565" rel="nofollow noopener">https://github.com/mesg-foundation/core/issues/565</a></p>
+<p>As shown here <a href="https://github.com/syndtr/goleveldb/issues/226" rel="nofollow noopener">https://github.com/syndtr/goleveldb/issues/226</a>, leveldb might have some performance issues.</p>
+<p>We can replace it with one of the following:</p>
+<ul>
+<li>
+<a href="https://github.com/dgraph-io/badger" rel="nofollow noopener">https://github.com/dgraph-io/badger</a> - LSM Tree</li>
+<li>
+<a href="https://github.com/etcd-io/bbolt" rel="nofollow noopener">https://github.com/etcd-io/bbolt</a> - B+ Tree</li>
+</ul>
+<p>I think for mesg usecase the LSM Tree will be better choice (so badger key/value db)</p>
+          <p><a href="https://forum.mesg.com/t/replace-leveldb-with-an-other-database/147/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/replace-leveldb-with-an-other-database/147/1</link>
+        <pubDate>Thu, 13 Dec 2018 11:03:57 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-147-1</guid>
+        <source url="https://forum.mesg.com/t/replace-leveldb-with-an-other-database/147.rss">Replace leveldb with an other database</source>
+      </item>
+  </channel>
+</rss>

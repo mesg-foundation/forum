@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Shamir Secret Sharing for splitting mnemonic</title>
+    <link>https://forum.mesg.com/t/shamir-secret-sharing-for-splitting-mnemonic/392</link>
+    <description>We need to split mnemonics in order to securely backup them without losing too much security.
+
+Shamir secret sharing algorithm is a perfect solution for this problem: 
+https://en.wikipedia.org/wiki/Shamir%27s_Secret_Sharing
+
+The issue is to find a trustable CLI that can encode and decode but also that can be installed easily on a offline computer and that should work on an ubuntu for many years.
+
+Here is some cli that we could use:
+- [go-shamir](https://github.com/kinvolk/go-shamir). It&#39;s using [Vault&#39;s implementation](https://github.com/hashicorp/vault/tree/master/shamir). It&#39;s open source and in Go, so can be verified, improved and easily compiled to any system.
+- [ssss](http://point-at-infinity.org/ssss/). It&#39;s seems to be available on debian package system and open source. It&#39;s written in C.
+- [KPN-CISO/shamir-secret](https://github.com/KPN-CISO/shamir-secret). Open source, C.
+- [secrets.js](https://github.com/grempe/secrets.js). Not a CLI but a JS library used by the project [darkcrystal](https://darkcrystal.pw/). 
+
+---
+
+I would go with [go-shamir](https://github.com/kinvolk/go-shamir) as it&#39;s simple and written in Go and using Hasicorp Vault that seems to be a respectable project.
+
+@core Can you give your feedback and take a look at the different links and suggest other if you have.</description>
+    
+    <lastBuildDate>Thu, 26 Dec 2019 01:11:18 +0000</lastBuildDate>
+    <category>Development</category>
+    <atom:link href="https://forum.mesg.com/t/shamir-secret-sharing-for-splitting-mnemonic/392.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Shamir Secret Sharing for splitting mnemonic</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>We used go-shamir on a fresh new air-gapped OS (ish)</p>
+          <p><a href="https://forum.mesg.com/t/shamir-secret-sharing-for-splitting-mnemonic/392/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/shamir-secret-sharing-for-splitting-mnemonic/392/4</link>
+        <pubDate>Thu, 26 Dec 2019 01:11:18 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-392-4</guid>
+        <source url="https://forum.mesg.com/t/shamir-secret-sharing-for-splitting-mnemonic/392.rss">Shamir Secret Sharing for splitting mnemonic</source>
+      </item>
+      <item>
+        <title>Shamir Secret Sharing for splitting mnemonic</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <p>I remeber that I created the key for you with <code>ssss</code> because you didn’t want go version. I do not remember the reason for that, but for me go version is easy to use.</p>
+          <p><a href="https://forum.mesg.com/t/shamir-secret-sharing-for-splitting-mnemonic/392/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/shamir-secret-sharing-for-splitting-mnemonic/392/3</link>
+        <pubDate>Wed, 11 Sep 2019 10:20:04 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-392-3</guid>
+        <source url="https://forum.mesg.com/t/shamir-secret-sharing-for-splitting-mnemonic/392.rss">Shamir Secret Sharing for splitting mnemonic</source>
+      </item>
+      <item>
+        <title>Shamir Secret Sharing for splitting mnemonic</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>If I remember correctly, we had some issues with ssss because it was limited to a certain amount of characters.</p>
+<p>go-shamir seems pretty good, I don’t see anything out of ordinary in the code of the vault or the cli so this could definitely be a good tool to use. Also in go so if we can get familiar with that, that can always be helpful.</p>
+<p>Also, one way to reduce the trust factor is to use the tools with a huge set of inputs that are just a to add some noise if there is any spyware in the code. We decide that the result 312 out of 1000 is the one we want and like that there are 999 useless results that all generate a valid private key.</p>
+          <p><a href="https://forum.mesg.com/t/shamir-secret-sharing-for-splitting-mnemonic/392/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/shamir-secret-sharing-for-splitting-mnemonic/392/2</link>
+        <pubDate>Wed, 11 Sep 2019 04:08:23 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-392-2</guid>
+        <source url="https://forum.mesg.com/t/shamir-secret-sharing-for-splitting-mnemonic/392.rss">Shamir Secret Sharing for splitting mnemonic</source>
+      </item>
+      <item>
+        <title>Shamir Secret Sharing for splitting mnemonic</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>We need to split mnemonics in order to securely backup them without losing too much security.</p>
+<p>Shamir secret sharing algorithm is a perfect solution for this problem:<br>
+<aside class="onebox wikipedia">
+  <header class="source">
+      <a href="https://en.wikipedia.org/wiki/Shamir%27s_Secret_Sharing" target="_blank" rel="nofollow noopener">en.wikipedia.org</a>
+  </header>
+  <article class="onebox-body">
+    <img src="https://forum.mesg.com/uploads/default/original/1X/144f61b369715be9cf617d61635d97ec9e973d6e.png" class="thumbnail" width="" height="">
+
+<h3><a href="https://en.wikipedia.org/wiki/Shamir%27s_Secret_Sharing" target="_blank" rel="nofollow noopener">Shamir's Secret Sharing</a></h3>
+
+<p>Shamir's Secret Sharing is an algorithm in cryptography created by Adi Shamir. It is a form of secret sharing, where a secret is divided into parts, giving each participant its own unique part.
+ To reconstruct the original secret, a minimum number of parts is required. In the threshold scheme this number is less than the total number of parts. Otherwise all participants are needed to reconstruct the original secret.
+ Shamir's Secret Sharing is used to secure a secret in a distributed way, most of...</p>
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+</p>
+<p>The issue is to find a trustable CLI that can encode and decode but also that can be installed easily on a offline computer and that should work on an ubuntu for many years.</p>
+<p>Here is some cli that we could use:</p>
+<ul>
+<li>
+<a href="https://github.com/kinvolk/go-shamir" rel="nofollow noopener">go-shamir</a>. It’s using <a href="https://github.com/hashicorp/vault/tree/master/shamir" rel="nofollow noopener">Vault’s implementation</a>. It’s open source and in Go, so can be verified, improved and easily compiled to any system.</li>
+<li>
+<a href="http://point-at-infinity.org/ssss/" rel="nofollow noopener">ssss</a>. It’s seems to be available on debian package system and open source. It’s written in C.</li>
+<li>
+<a href="https://github.com/KPN-CISO/shamir-secret" rel="nofollow noopener">KPN-CISO/shamir-secret</a>. Open source, C.</li>
+<li>
+<a href="https://github.com/grempe/secrets.js" rel="nofollow noopener">secrets.js</a>. Not a CLI but a JS library used by the project <a href="https://darkcrystal.pw/" rel="nofollow noopener">darkcrystal</a>.</li>
+</ul>
+<hr>
+<p>I would go with <a href="https://github.com/kinvolk/go-shamir" rel="nofollow noopener">go-shamir</a> as it’s simple and written in Go and using Hasicorp Vault that seems to be a respectable project.</p>
+<p><a class="mention-group" href="/groups/core">@core</a> Can you give your feedback and take a look at the different links and suggest other if you have.</p>
+          <p><a href="https://forum.mesg.com/t/shamir-secret-sharing-for-splitting-mnemonic/392/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/shamir-secret-sharing-for-splitting-mnemonic/392/1</link>
+        <pubDate>Wed, 11 Sep 2019 03:40:30 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-392-1</guid>
+        <source url="https://forum.mesg.com/t/shamir-secret-sharing-for-splitting-mnemonic/392.rss">Shamir Secret Sharing for splitting mnemonic</source>
+      </item>
+  </channel>
+</rss>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <title>Move logic of stopping core and services to api or daemon package - Engine - MESG Community</title>
+    <meta name="description" content="From https://github.com/mesg-foundation/core/issues/576 
+Now, when stopping the core (command mesg-core stop), the CLI manually load and stop services before stopping the core. 
+This logic should be move in API or daemon &amp;hellip;">
+    <meta name="generator" content="Discourse 2.5.0.beta5 - https://github.com/discourse/discourse version 00aab498297cba8f977c1e0eb17b7d38ff06cc68">
+<link rel="icon" type="image/png" href="../../uploads/default/optimized/1X/9f11b6ddfa02bffdbec79487592a0573a0236cb5_2_32x32.png">
+<link rel="apple-touch-icon" type="image/png" href="../../uploads/default/optimized/1X/53630361a40ad76e1733dd0b0f486e9ae2f4f4d6_2_180x180.png">
+<meta name="theme-color" content="#491e8c">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+<link rel="canonical" href="146.html" />
+<script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","url":"https://forum.mesg.com","potentialAction":{"@type":"SearchAction","target":"https://forum.mesg.com/search?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
+<link rel="search" type="application/opensearchdescription+xml" href="../../opensearch.xml" title="MESG Community Search">
+
+      <link href="../../stylesheets/desktop_3_52e3411e87658e862890db7bd06899cf49ad5f59.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop" data-theme-id="7"/>
+      <link href="../../stylesheets/desktop_theme_7_bf4f2d3d8a71e6ee907065be9a79df3d849bd29c.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop_theme" data-theme-id="7"/>
+    
+    <meta id="data-ga-universal-analytics" data-tracking-code="UA-117583862-1" data-json="{&quot;cookieDomain&quot;:&quot;auto&quot;}" data-auto-link-domains="">
+
+<link rel="preload" href="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js" as="script">
+<script src="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js"></script>
+
+
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of &#39;Move logic of stopping core and services to api or daemon package&#39;" href="146.rss" />
+    <meta property="og:site_name" content="MESG Community" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:url" content="https://forum.mesg.com/t/move-logic-of-stopping-core-and-services-to-api-or-daemon-package/146" />
+<meta name="twitter:url" content="https://forum.mesg.com/t/move-logic-of-stopping-core-and-services-to-api-or-daemon-package/146" />
+<meta property="og:title" content="Move logic of stopping core and services to api or daemon package" />
+<meta name="twitter:title" content="Move logic of stopping core and services to api or daemon package" />
+<meta property="og:description" content="From https://github.com/mesg-foundation/core/issues/576  Now, when stopping the core (command mesg-core stop), the CLI manually load and stop services before stopping the core.  This logic should be move in API or daemon package.  Concerned source code:       Reply from @Anthony  I would vote for the daemon package to run this logic but it can rely to a stopAllServices from the API   Reply from @krhubert  That would be good start, but for now we are listing services from the database.  Maybe we ..." />
+<meta name="twitter:description" content="From https://github.com/mesg-foundation/core/issues/576  Now, when stopping the core (command mesg-core stop), the CLI manually load and stop services before stopping the core.  This logic should be move in API or daemon package.  Concerned source code:       Reply from @Anthony  I would vote for the daemon package to run this logic but it can rely to a stopAllServices from the API   Reply from @krhubert  That would be good start, but for now we are listing services from the database.  Maybe we ..." />
+<meta property="article:published_time" content="2018-12-13T11:03:02+00:00" />
+<meta property="og:ignore_canonical" content="true" />
+
+
+
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"QAPage","name":"Move logic of stopping core and services to api or daemon package","mainEntity":{"@type":"Question","name":"Move logic of stopping core and services to api or daemon package","text":"From <a href="https://forum.mesg.com/t/move-logic-of-stopping-core-and-services-to-api-or-daemon-package/\&quot;https://github.com/mesg-foundation/core/issues/576\&quot;" rel=\"nofollow noopener\">https://github.com/mesg-foundation/core/issues/576<\/a>\n\nNow, when stopping the core (command mesg-core stop), the CLI manually load and stop services before stopping the core.\n\nThis logic should be move in API or daemon package.\n\nConcerned source code:\n\n<a href="https://forum.mesg.com/t/move-logic-of-stopping-core-and-services-to-api-or-daemon-package/\&quot;https://github.com/mesg-foundation/core/blob/a5a1dc6fb4640a2a43366be0fcf59191c36794fb/commands/provider/core_provider.go#L34-L72\"" target=\"_blank\" rel=\"nofollow noopener\">mesg-foundation/core/blob/a5a1dc6fb4&hellip;<\/a>","upvoteCount":0,"answerCount":1,"dateCreated":"2018-12-13T11:03:02.546Z","author":{"@type":"Person","name":"Nicolas"},"acceptedAnswer":{"@type":"Answer","text":"The engine is now responsible of shutting down all the services when we shutdown the daemon <a href="https://forum.mesg.com/t/move-logic-of-stopping-core-and-services-to-api-or-daemon-package/\&quot;https://github.com/mesg-foundation/engine/blob/5fc8601c1de2edd06fd0549dc76f07aca91ef881/core/main.go#L209\"">https://github.com/mesg-foundation/engine/blob/5fc8601c1de2edd06fd0549dc76f07aca91ef881/core/main.go#L209<\/a>","upvoteCount":0,"dateCreated":"2019-12-26T02:44:40.078Z","url":"https://forum.mesg.com/t/move-logic-of-stopping-core-and-services-to-api-or-daemon-package/146/2","author":{"@type":"Person","name":"Anthony"}}}}</script>
+  </head>
+  <body class="crawler">
+    
+    <header>
+      <a href="../../index.html">
+          <img src="../../uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png" alt="MESG Community" id="site-logo" style="max-width: 150px;">
+      </a>
+    </header>
+    <div id="main-outlet" class="wrap">
+        <div id="topic-title">
+    <h1>
+      <a href="146.html">Move logic of stopping core and services to api or daemon package</a>
+    </h1>
+
+      <div class="topic-category" itemscope itemtype="http://schema.org/BreadcrumbList">
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../c/development.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #AB9364'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Development</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="1" />
+          </span>
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../c/development/engine.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #AB9364'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Engine</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="2" />
+          </span>
+      </div>
+
+      <div class="topic-category">
+        <div class='discourse-tags list-tags'>
+            <a href='../../tag/proposal.html' class='discourse-tag' rel="tag">proposal</a>
+        </div>
+      </div>
+  </div>
+
+  
+
+
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="146.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-12-13T11:03:02Z' class='post-time'>
+                December 13, 2018, 11:03am
+              </time>
+              <meta itemprop='dateModified' content='2018-12-13T11:03:02Z'>
+          <span itemprop='position'>#1</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>From <a href="https://github.com/mesg-foundation/core/issues/576" rel="nofollow noopener">https://github.com/mesg-foundation/core/issues/576</a></p>
+<p>Now, when stopping the core (command <code>mesg-core stop</code>), the CLI manually load and stop services before stopping the core.<br>
+This logic should be move in <code>API</code> or <code>daemon</code> package.</p>
+<p>Concerned source code:<br>
+<aside class="onebox githubblob">
+  <header class="source">
+      <a href="https://github.com/mesg-foundation/core/blob/a5a1dc6fb4640a2a43366be0fcf59191c36794fb/commands/provider/core_provider.go#L34-L72" target="_blank" rel="nofollow noopener">github.com</a>
+  </header>
+  <article class="onebox-body">
+    <h4><a href="https://github.com/mesg-foundation/core/blob/a5a1dc6fb4640a2a43366be0fcf59191c36794fb/commands/provider/core_provider.go#L34-L72" target="_blank" rel="nofollow noopener">mesg-foundation/core/blob/a5a1dc6fb4640a2a43366be0fcf59191c36794fb/commands/provider/core_provider.go#L34-L72</a></h4>
+<pre class="onebox"><code class="lang-go"><ol class="start lines" start="34" style="counter-reset: li-counter 33 ;">
+<li>func (p *CoreProvider) Stop() error {</li>
+<li>	ids, err := service.ListRunning()</li>
+<li>	if err != nil {</li>
+<li>		return err</li>
+<li>	}</li>
+<li>
+</li>
+<li>	var (</li>
+<li>		idsLen = len(ids)</li>
+<li>		errC   = make(chan error, idsLen)</li>
+<li>		wg     sync.WaitGroup</li>
+<li>	)</li>
+<li>
+</li>
+<li>	wg.Add(idsLen)</li>
+<li>	for _, id := range ids {</li>
+<li>		go func(id string) {</li>
+<li>			defer wg.Done()</li>
+<li>			_, err := p.client.StopService(context.Background(), &amp;coreapi.StopServiceRequest{</li>
+<li>				ServiceID: id,</li>
+<li>			})</li>
+<li>			if err != nil {</li>
+</ol></code></pre>
+
+  This file has been truncated. <a href="https://github.com/mesg-foundation/core/blob/a5a1dc6fb4640a2a43366be0fcf59191c36794fb/commands/provider/core_provider.go#L34-L72" target="_blank" rel="nofollow noopener">show original</a>
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+</p>
+<hr>
+<p>Reply from <a class="mention" href="../../u/anthony.html">@Anthony</a></p>
+<p>I would vote for the daemon package to run this logic but it can rely to a <code>stopAllServices</code> from the API</p>
+<hr>
+<p>Reply from <a class="mention" href="../../u/krhubert.html">@krhubert</a></p>
+<p>That would be good start, but for now we are listing services from the database.</p>
+<p>Maybe we should add label to each container and just create a function <code>container.StopService(filter/label)</code></p>
+<p>And in daemon - container.StopService(“mesg-label”)</p>
+<p>Because overall we don’t need to list service from a database, but rather from current stat of docker containers.</p>
+        </div>
+
+        <meta itemprop='headline' content='Move logic of stopping core and services to api or daemon package'>
+          <meta itemprop='keywords' content='proposal'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="146.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2019-12-26T02:44:40Z'>
+              <time itemprop='dateModified' datetime='2019-12-26T02:44:42Z' class='post-time'>
+                December 26, 2019,  2:44am
+              </time>
+          <span itemprop='position'>#2</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>The engine is now responsible of shutting down all the services when we shutdown the daemon <a href="https://github.com/mesg-foundation/engine/blob/5fc8601c1de2edd06fd0549dc76f07aca91ef881/core/main.go#L209">https://github.com/mesg-foundation/engine/blob/5fc8601c1de2edd06fd0549dc76f07aca91ef881/core/main.go#L209</a></p>
+        </div>
+
+        <meta itemprop='headline' content='Move logic of stopping core and services to api or daemon package'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+
+
+
+
+
+
+    </div>
+    <footer class="container wrap">
+      <nav class='crawler-nav'>
+        <ul>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../index.html' itemprop="url">Home </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../categories.html' itemprop="url">Categories </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../guidelines.html' itemprop="url">FAQ/Guidelines </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../tos.html' itemprop="url">Terms of Service </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../privacy.html' itemprop="url">Privacy Policy </a>
+          </span>
+        </li>
+        </ul>
+      </nav>
+      <p class='powered-by-link'>Powered by <a href="https://www.discourse.org">Discourse</a>, best viewed with JavaScript enabled</p>
+    </footer>
+    
+    
+  </body>
+  
+</html>

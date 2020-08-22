@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>File organization</title>
+    <link>https://forum.mesg.com/t/file-organization/73</link>
+    <description>Here is the proposed file organisation: (package is the name of the package):
+
+```
+package/
+  package.go       // contains interface
+  package_test.go  // contains anything needed for test
+  errors.go        // contains struct of errors needed for the interface of the package
+  types.go         // contains struct of types needed for the interface of the package
+  featureA_test.go
+  featureB_test.go
+  ...
+  features/        // contains feature files (BDD)
+    featureA.feature
+    featureB.feature
+    ...
+  mocks/
+    package.go         // contains mock implementation
+  implementationA/
+    implementationA.go // contains one implementation
+    featureA.go
+    featureB.go
+    ...
+  implementationB/     // possible other implementation
+```</description>
+    
+    <lastBuildDate>Fri, 05 Oct 2018 03:43:20 +0000</lastBuildDate>
+    <category>Development</category>
+    <atom:link href="https://forum.mesg.com/t/file-organization/73.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>File organization</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Of course we need to keep flexibility to match the package requirements, this is only a guideline.</p>
+<p>My main proposition is to have required interface and tests that run against the function of this interface.<br>
+The goal is to separate the conception (creation of interface and tests) from the concrete implementation.</p>
+<p>For <code>errors.go</code> and <code>types.go</code> I would recommend to keep them, but again, this a guideline. The main argument for this files is because of the separation of concern between the interface and the implementation.</p>
+<p>I recommend to have the Errors of the package outside of the implementation. It is useful to know exactly what function return what error. We could put this information as comment of the function as I don’t see any other way.</p>
+<p>The <code>types.go</code> should  <strong>not</strong> be use for the implementation types but only for the complex type that the interface could use. This struct define there should be data only (no method). Docker has a similar package: <a href="https://github.com/docker/go-docker/blob/master/api/types/types.go">https://github.com/docker/go-docker/blob/master/api/types/types.go</a>.<br>
+To ensure that no methods are declared in those struct in the <code>types.go</code> file, we should force the implementation to be declare in another package (thus another folder). That’s why I suggest to put implementation in a sub- folder.</p>
+          <p><a href="https://forum.mesg.com/t/file-organization/73/5">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/file-organization/73/5</link>
+        <pubDate>Fri, 05 Oct 2018 03:43:20 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-73-5</guid>
+        <source url="https://forum.mesg.com/t/file-organization/73.rss">File organization</source>
+      </item>
+      <item>
+        <title>File organization</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>I think this file organisation is great for some complex packages of course, just some points:</p>
+<ul>
+<li>we shouldn’t have this for some small packages</li>
+<li>implementations can be in the same folder if we have only one implementation</li>
+<li>mock package is optional (it’s just another implementation) but if we have a concrete implementation for mock separated it make sense to have the other concrete implementation in it’s own package just not to have a big mess</li>
+<li>errors and types are of course optional (according to the need of them)</li>
+<li>package.go (for example container.go) is required (for complex ish use packages) and should only contains abstractions only interfaces or data structs that concrete implementation will not be able to surcharge</li>
+<li>package_test.go is required to describe the behavior of the package.</li>
+</ul>
+<p>The stuff that I like with that especially the part to have this interface and the tests associated. With that we don’t need any other tests in the implementation, we can do more tests if we want to tests some specific things that are relevant but the implementation will probably not have any test and rely on the test from the interface.</p>
+<p>With that we really have something where we first think about the api and make sure that we are doing something great to use and the implementation will be really easy to validate, basically test are green so the implementation is ok</p>
+          <p><a href="https://forum.mesg.com/t/file-organization/73/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/file-organization/73/4</link>
+        <pubDate>Thu, 04 Oct 2018 09:28:35 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-73-4</guid>
+        <source url="https://forum.mesg.com/t/file-organization/73.rss">File organization</source>
+      </item>
+      <item>
+        <title>File organization</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>I agree on this structure but with the margin for some flexibility.</p>
+<p>For example collecting errors in <em>error.go</em> is something that is used by the community as I explore but if the package is big, collecting all errors in one place might not make that much sense. Instead we can keep them in the place they are used like if it belongs to a feature then it can be placed into that feature file.</p>
+<p>I can say the same thing with errors for <em>types.go</em> file too. Collecting all the types in one place is a bit monolithic and you lose the scope what feature file it’s generated from. But if a type is not directly belong to a feature file, like if there is no a <em>New</em> function for it, I think it is valid to place it into <em>types.go</em> file.</p>
+<p>I agree on having the mocks folder when it is needed of course.</p>
+<p>For the implementation folder, I think it’s totally valid when you have some extra implementations and don’t want use default one defined in the root of the package folder. Let’s say we have an oauth2 middleware and there is lots of implementation of it for Google, Twitter, etc. In this case having an implementation(providers) folder does totally make sense. But having the implementation folder should not be strictly required, it depends on the needs.</p>
+          <p><a href="https://forum.mesg.com/t/file-organization/73/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/file-organization/73/3</link>
+        <pubDate>Thu, 04 Oct 2018 08:31:56 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-73-3</guid>
+        <source url="https://forum.mesg.com/t/file-organization/73.rss">File organization</source>
+      </item>
+      <item>
+        <title>File organization</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <p><img src="https://forum.mesg.com/images/emoji/twitter/-1.png?v=6" title=":-1:" class="emoji" alt=":-1:"></p>
+<p>File organization should be smart and readable in the first place (like classes/function/methods/variables in lang itself).</p>
+<p>Also, there are a variety of packages and only one file struct won’t cover it all. In fact, it will force us to stick to this layout which causes more chaos in my opinion.</p>
+<p>The last thing is lost of flexibility, which is great.</p>
+<p>So there are already some good resources for packages naming and layout like <a href="https://blog.golang.org/package-names">https://blog.golang.org/package-names</a>, but going further with such strictness causes more harm than good.</p>
+          <p><a href="https://forum.mesg.com/t/file-organization/73/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/file-organization/73/2</link>
+        <pubDate>Thu, 04 Oct 2018 06:54:35 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-73-2</guid>
+        <source url="https://forum.mesg.com/t/file-organization/73.rss">File organization</source>
+      </item>
+      <item>
+        <title>File organization</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Here is the proposed file organisation: (package is the name of the package):</p>
+<pre><code class="lang-auto">package/
+  package.go       // contains interface
+  package_test.go  // contains anything needed for test
+  errors.go        // contains struct of errors needed for the interface of the package
+  types.go         // contains struct of types needed for the interface of the package
+  featureA_test.go
+  featureB_test.go
+  ...
+  features/        // contains feature files (BDD)
+    featureA.feature
+    featureB.feature
+    ...
+  mocks/
+    package.go         // contains mock implementation
+  implementationA/
+    implementationA.go // contains one implementation
+    featureA.go
+    featureB.go
+    ...
+  implementationB/     // possible other implementation
+</code></pre>
+          <p><a href="https://forum.mesg.com/t/file-organization/73/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/file-organization/73/1</link>
+        <pubDate>Wed, 03 Oct 2018 05:16:22 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-73-1</guid>
+        <source url="https://forum.mesg.com/t/file-organization/73.rss">File organization</source>
+      </item>
+  </channel>
+</rss>

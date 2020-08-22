@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>MESG Core v0.6 Release Notes</title>
+    <link>https://forum.mesg.com/t/mesg-core-v0-6-release-notes/166</link>
+    <description># New features in Core v0.6
+
+## Env variable in Services
+
+Service&#39;s definition files now accept `env` variables!
+Service developers can set the `env` variable in `configuration` and in `dependencies`. Eg:
+
+```yaml
+name: &quot;Parity&quot;
+sid: &quot;com.mesg.ethereum.parity.dev&quot;
+configuration:
+  env:
+    - MESG_ETH_ENDPOINT=http://parity:8545
+dependencies:
+  parity:
+    image: parity/parity:v2.1.3
+    env:
+      - MESG_TEST=HELLO
+```
+
+Users can override the env variable&#39;s values when deploying a service. Eg:
+
+```txt
+mesg-core service deploy https://github.com/mesg-foundation/service-ethereum --env MESG_ETH_ENDPOINT=http://parity:8546
+```
+
+## Execution error
+
+Execution have a new state &quot;failed&quot; that is used when unexpected errors occurred on the service side. Application can now be notified when executions failed and the service didn&#39;t work as expected.
+
+----
+
+For the complete changelog, refer to [Github ](https://github.com/mesg-foundation/core/releases/tag/v0.6.0).
+
+To update to v0.6, follow the [installation process on the documentation ](https://docs.mesg.com/guide/start-here/installation.html#automatic-installation)</description>
+    
+    <lastBuildDate>Sat, 29 Dec 2018 08:14:43 +0000</lastBuildDate>
+    <category>News</category>
+    <atom:link href="https://forum.mesg.com/t/mesg-core-v0-6-release-notes/166.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>MESG Core v0.6 Release Notes</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <h1>New features in Core v0.6</h1>
+<h2>Env variable in Services</h2>
+<p>Service’s definition files now accept <code>env</code> variables!<br>
+Service developers can set the <code>env</code> variable in <code>configuration</code> and in <code>dependencies</code>. Eg:</p>
+<pre><code class="lang-auto">name: "Parity"
+sid: "com.mesg.ethereum.parity.dev"
+configuration:
+  env:
+    - MESG_ETH_ENDPOINT=http://parity:8545
+dependencies:
+  parity:
+    image: parity/parity:v2.1.3
+    env:
+      - MESG_TEST=HELLO
+</code></pre>
+<p>Users can override the env variable’s values when deploying a service. Eg:</p>
+<pre><code class="lang-auto">mesg-core service deploy https://github.com/mesg-foundation/service-ethereum --env MESG_ETH_ENDPOINT=http://parity:8546
+</code></pre>
+<h2>Execution error</h2>
+<p>Execution have a new state “failed” that is used when unexpected errors occurred on the service side. Application can now be notified when executions failed and the service didn’t work as expected.</p>
+<hr>
+<p>For the complete changelog, refer to <a href="https://github.com/mesg-foundation/core/releases/tag/v0.6.0" rel="nofollow noopener">Github </a>.</p>
+<p>To update to v0.6, follow the <a href="https://docs.mesg.com/guide/start-here/installation.html#automatic-installation" rel="nofollow noopener">installation process on the documentation </a></p>
+          <p><a href="https://forum.mesg.com/t/mesg-core-v0-6-release-notes/166/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mesg-core-v0-6-release-notes/166/1</link>
+        <pubDate>Sat, 29 Dec 2018 08:14:43 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-166-1</guid>
+        <source url="https://forum.mesg.com/t/mesg-core-v0-6-release-notes/166.rss">MESG Core v0.6 Release Notes</source>
+      </item>
+  </channel>
+</rss>

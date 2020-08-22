@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Aragon DAO / MESG Integration: Milestone 1</title>
+    <link>https://forum.mesg.com/t/aragon-dao-mesg-integration-milestone-1/639</link>
+    <description>&lt;p&gt;We&#39;ve just reached the first milestone of the &lt;a href=&quot;https://github.com/aragon/nest/issues/190&quot;&gt;MESG integration with Aragon DAOs&lt;/a&gt;, while also starting the first iteration of our &lt;a href=&quot;http://explorer.testnet.mesg.com/&quot;&gt;testnet&lt;/a&gt; running on Tendermint.&lt;/p&gt;
+&lt;hr&gt;
+&lt;small&gt;This is a companion discussion topic for the original entry at &lt;a href=&quot;https://blog.mesg.com/aragon-dao-integration/&quot;&gt;https://blog.mesg.com/aragon-dao-integration/&lt;/a&gt;&lt;/small&gt;</description>
+    
+    <lastBuildDate>Tue, 04 Feb 2020 07:24:04 +0000</lastBuildDate>
+    <category>Blog discussions</category>
+    <atom:link href="https://forum.mesg.com/t/aragon-dao-mesg-integration-milestone-1/639.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Aragon DAO / MESG Integration: Milestone 1</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>We've just reached the first milestone of the <a href="https://github.com/aragon/nest/issues/190">MESG integration with Aragon DAOs</a>, while also starting the first iteration of our <a href="http://explorer.testnet.mesg.com/">testnet</a> running on Tendermint.</p>
+<hr>
+<small>This is a companion discussion topic for the original entry at <a href="https://blog.mesg.com/aragon-dao-integration/">https://blog.mesg.com/aragon-dao-integration/</a></small>
+          <p><a href="https://forum.mesg.com/t/aragon-dao-mesg-integration-milestone-1/639/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/aragon-dao-mesg-integration-milestone-1/639/1</link>
+        <pubDate>Tue, 04 Feb 2020 07:24:04 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-639-1</guid>
+        <source url="https://forum.mesg.com/t/aragon-dao-mesg-integration-milestone-1/639.rss">Aragon DAO / MESG Integration: Milestone 1</source>
+      </item>
+  </channel>
+</rss>

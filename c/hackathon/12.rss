@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:discourse="http://www.discourse.org/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Hackathon - MESG Community</title>
+    <link>https://forum.mesg.com/c/hackathon</link>
+    <description>Topics in the &#39;Hackathon&#39; category This is where you can share your awesome applications or services with the community! You can also get info about MESG Hackathons.</description>
+    
+      <lastBuildDate>Sun, 26 Apr 2020 23:24:01 +0000</lastBuildDate>
+      <atom:link href="https://forum.mesg.com/c/hackathon.rss" rel="self" type="application/rss+xml" />
+        <item>
+          <title>gRPC issues when creating a service</title>
+          <dc:creator><![CDATA[fragment]]></dc:creator>
+          <category>Hackathon</category>
+          <description><![CDATA[
+            <p><code>npm link</code> does not work</p>
+<p>Error:</p>
+<pre><code>`Error: The gRPC binary module was not installed. This may be fixed by running "npm rebuild"
+</code></pre>
+<p>Original error: Cannot find module ‘/usr/lib/node_modules/<span class="mention">@mesg</span>/cli/node_modules/grpc/src/node/extension_binary/node-v64-linux-x64-glibc/grpc_node.node’<br>
+at Object. (/usr/lib/node_modules/<span class="mention">@mesg</span>/cli/node_modules/grpc/src/grpc_extension.js:43:17)<br>
+at Object. (/usr/lib/node_modules/<span class="mention">@mesg</span>/cli/node_modules/grpc/src/client_interceptors.js:144:12)<br>
+`</p>
+            <p><small>3 posts - 2 participants</small></p>
+            <p><a href="https://forum.mesg.com/t/grpc-issues-when-creating-a-service/723">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/grpc-issues-when-creating-a-service/723</link>
+          <pubDate>Sun, 26 Apr 2020 23:24:01 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-723</guid>
+          <source url="https://forum.mesg.com/t/grpc-issues-when-creating-a-service/723.rss">gRPC issues when creating a service</source>
+        </item>
+        <item>
+          <title>ChainWatcher -- track your ERC20 addresses, and broadcast using IPFS</title>
+          <dc:creator><![CDATA[DCPRevere]]></dc:creator>
+          <category>Hackathon</category>
+          <description><![CDATA[
+            <p>ChainWatcher is an application built using MESG services. It utilises the ethereum-erc20 service, as well as an <a href="https://github.com/dcprevere/service-ipfs" rel="nofollow noopener">IPFS</a> service written specifically for this project.</p>
+<p>It allows one to monitor the transfers that involve addresses one is interested in.</p>
+<p>For each relevant transfer, the application also finds the balance of that address and writes a record of the address, transfer and current balance to IPFS.</p>
+<p>The location of the IPFS files are then broadcast using IPFS pubsub, which allows the information to be received by multiple remote consumers.</p>
+<p>For more information, please see: <a href="https://github.com/DCPRevere/chain-watcher" rel="nofollow noopener">ChainWatcher</a></p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://forum.mesg.com/t/chainwatcher-track-your-erc20-addresses-and-broadcast-using-ipfs/258">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/chainwatcher-track-your-erc20-addresses-and-broadcast-using-ipfs/258</link>
+          <pubDate>Mon, 18 Feb 2019 06:02:29 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-258</guid>
+          <source url="https://forum.mesg.com/t/chainwatcher-track-your-erc20-addresses-and-broadcast-using-ipfs/258.rss">ChainWatcher -- track your ERC20 addresses, and broadcast using IPFS</source>
+        </item>
+        <item>
+          <title>User Management Application</title>
+          <dc:creator><![CDATA[Emre_Keskin]]></dc:creator>
+          <category>Hackathon</category>
+          <description><![CDATA[
+            <p>The user is creating, updating and verifying. I’ll make it available in production in a much more advanced way ahead</p>
+<p>I wrote all the details github repo</p>
+<p><strong>Services used in the application</strong><br>
+</p><aside class="onebox whitelistedgeneric">
+  <header class="source">
+      <img src="https://github.githubassets.com/favicons/favicon.svg" class="site-icon" width="32" height="32">
+      <a href="https://github.com/emrekeskinmac/mongodb-service" target="_blank" rel="nofollow noopener">GitHub</a>
+  </header>
+  <article class="onebox-body">
+    <img src="https://forum.mesg.com/uploads/default/original/1X/bf656975ecee4813506a6882625047d3a6b41334.jpeg" class="thumbnail" width="" height="">
+
+<h3><a href="https://github.com/emrekeskinmac/mongodb-service" target="_blank" rel="nofollow noopener">emrekeskinmac/mongodb-service</a></h3>
+
+<p>A MESG Core service to MongoDB . Contribute to emrekeskinmac/mongodb-service development by creating an account on GitHub.</p>
+
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+<br>
+<aside class="onebox whitelistedgeneric">
+  <header class="source">
+      <img src="https://github.githubassets.com/favicons/favicon.svg" class="site-icon" width="32" height="32">
+      <a href="https://github.com/ilgooz/service-http-server" target="_blank" rel="nofollow noopener">GitHub</a>
+  </header>
+  <article class="onebox-body">
+    <img src="https://forum.mesg.com/uploads/default/original/1X/539daf8f9e7d5ba9db32a09c758f90f3cdf19b54.jpeg" class="thumbnail" width="" height="">
+
+<h3><a href="https://github.com/ilgooz/service-http-server" target="_blank" rel="nofollow noopener">ilgooz/service-http-server</a></h3>
+
+<p>A MESG service to serve content over HTTP. Contribute to ilgooz/service-http-server development by creating an account on GitHub.</p>
+
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+<br>
+<aside class="onebox whitelistedgeneric">
+  <header class="source">
+      <img src="https://github.githubassets.com/favicons/favicon.svg" class="site-icon" width="32" height="32">
+      <a href="https://github.com/liteflow-services/sendgrid" target="_blank" rel="nofollow noopener">GitHub</a>
+  </header>
+  <article class="onebox-body">
+    <img src="https://forum.mesg.com/uploads/default/original/1X/998566016a65b7143210b683fcd4d23e14ce9ca8.png" class="thumbnail" width="" height="">
+
+<h3><a href="https://github.com/liteflow-services/sendgrid" target="_blank" rel="nofollow noopener">liteflow-services/sendgrid</a></h3>
+
+<p>MESG Service that sends emails through Sendgrid's API - liteflow-services/sendgrid</p>
+
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+
+<p><strong>Services I wrote myself</strong><br>
+</p><aside class="onebox whitelistedgeneric">
+  <header class="source">
+      <img src="https://github.githubassets.com/favicons/favicon.svg" class="site-icon" width="32" height="32">
+      <a href="https://github.com/emrekeskinmac/mongodb-service" target="_blank" rel="nofollow noopener">GitHub</a>
+  </header>
+  <article class="onebox-body">
+    <img src="https://forum.mesg.com/uploads/default/original/1X/bf656975ecee4813506a6882625047d3a6b41334.jpeg" class="thumbnail" width="" height="">
+
+<h3><a href="https://github.com/emrekeskinmac/mongodb-service" target="_blank" rel="nofollow noopener">emrekeskinmac/mongodb-service</a></h3>
+
+<p>A MESG Core service to MongoDB . Contribute to emrekeskinmac/mongodb-service development by creating an account on GitHub.</p>
+
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+<br>
+<aside class="onebox whitelistedgeneric">
+  <header class="source">
+      <img src="https://github.githubassets.com/favicons/favicon.svg" class="site-icon" width="32" height="32">
+      <a href="https://github.com/emrekeskinmac/service-sms-twilio" target="_blank" rel="nofollow noopener">GitHub</a>
+  </header>
+  <article class="onebox-body">
+    <img src="https://forum.mesg.com/uploads/default/original/1X/bf656975ecee4813506a6882625047d3a6b41334.jpeg" class="thumbnail" width="" height="">
+
+<h3><a href="https://github.com/emrekeskinmac/service-sms-twilio" target="_blank" rel="nofollow noopener">emrekeskinmac/service-sms-twilio</a></h3>
+
+<p>A MESG Core service to send sms by using Twillo . Contribute to emrekeskinmac/service-sms-twilio development by creating an account on GitHub.</p>
+
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+
+<p><strong>Application Repo</strong><br>
+</p><aside class="onebox whitelistedgeneric">
+  <header class="source">
+      <img src="https://github.githubassets.com/favicons/favicon.svg" class="site-icon" width="32" height="32">
+      <a href="https://github.com/emrekeskinmac/application-users" target="_blank" rel="nofollow noopener">GitHub</a>
+  </header>
+  <article class="onebox-body">
+    <img src="https://forum.mesg.com/uploads/default/original/1X/bf656975ecee4813506a6882625047d3a6b41334.jpeg" class="thumbnail" width="" height="">
+
+<h3><a href="https://github.com/emrekeskinmac/application-users" target="_blank" rel="nofollow noopener">emrekeskinmac/application-users</a></h3>
+
+<p>A MESG Core application to User Management . Contribute to emrekeskinmac/application-users development by creating an account on GitHub.</p>
+
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://forum.mesg.com/t/user-management-application/257">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/user-management-application/257</link>
+          <pubDate>Sun, 17 Feb 2019 23:01:31 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-257</guid>
+          <source url="https://forum.mesg.com/t/user-management-application/257.rss">User Management Application</source>
+        </item>
+        <item>
+          <title>Send a Message from Space with MESG!</title>
+          <dc:creator><![CDATA[Ryan_Milbourne]]></dc:creator>
+          <category>Hackathon</category>
+          <description><![CDATA[
+            <p><img src="https://forum.mesg.com/uploads/default/original/1X/f81697d568706212b1d49349f4394a87128764a5.png" alt="Screenshot%20from%202019-02-17%2022-49-14" width="367" height="500"></p>
+<p>Once you submit payment, a webhook is sent to the MESG app and is stored temporarily. When the payment is confirmed on Ethereum, the erc20 services alerts the MESG app and then will send the unsent message to the satellite service. Once the satellite service responds with an invoice to be paid, we forward that to our lightning service which is using <a href="http://opennode.co" rel="nofollow noopener">opennode.co</a>’s api.</p>
+<h2>Architecture</h2>
+<p>This app is broken up into 4 services, 1 MESG application, 1 front end react app.</p>
+<ul>
+<li>
+<p>ERC20 service - Standard MESG service that just tracks transfers for the MESG ERC20 Contract.</p>
+</li>
+<li>
+<p>Webhook service - Standard webhook service we use to send the message from the front end to the MESG app. If we could embed the message in the ERC20 transaction that would of been better.</p>
+</li>
+<li>
+<p>Satellite service - Wrapper for the [blockstream satellite api](https:// blockstream .com/)</p>
+</li>
+<li>
+<p>Lightning service - Wrapper for Opennode’s [lightning api](https:// opennode .co), a custodial service that allows you to send and receive bitcoin and lightning network transactions.</p>
+</li>
+<li>
+<p>React front end to interact with web3 and metamask</p>
+</li>
+<li>
+<p>One small MESG app</p>
+</li>
+</ul>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://forum.mesg.com/t/send-a-message-from-space-with-mesg/255">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/send-a-message-from-space-with-mesg/255</link>
+          <pubDate>Sun, 17 Feb 2019 15:51:04 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-255</guid>
+          <source url="https://forum.mesg.com/t/send-a-message-from-space-with-mesg/255.rss">Send a Message from Space with MESG!</source>
+        </item>
+        <item>
+          <title>List of theme</title>
+          <dc:creator><![CDATA[shojibur]]></dc:creator>
+          <category>Hackathon</category>
+          <description><![CDATA[
+            <p>Hi,<br>
+I am bit confused when you are mentioning about see the list of theme below from devpost rules tab. Not sure what are the theme.<br>
+Could you please clarify the list of theme which you mentioned.</p>
+<p>Thanks</p>
+            <p><small>2 posts - 2 participants</small></p>
+            <p><a href="https://forum.mesg.com/t/list-of-theme/235">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/list-of-theme/235</link>
+          <pubDate>Sun, 27 Jan 2019 02:55:46 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-235</guid>
+          <source url="https://forum.mesg.com/t/list-of-theme/235.rss">List of theme</source>
+        </item>
+        <item>
+          <title>MESG Online Hackathon, 18th January to 17th February 2019</title>
+          <dc:creator><![CDATA[Nicolas]]></dc:creator>
+          <category>Hackathon</category>
+          <description><![CDATA[
+            <p>Introducing the first MESG hackathon.<br>
+This online hackathon will be open for an entire month, from Jan 18th to Feb 17th, 2019.<br>
+Come and create the best and most useful Application using MESG.</p>
+<p><strong>Note</strong>:  A special prize will be awarded to an application which shows exceptional value or innovation, regardless of its final score or finishing place.</p>
+<h1>Total Prizes: $10,000</h1>
+<ul>
+<li>1st place: $5,000</li>
+<li>2nd place: $3,000</li>
+<li>3rd place; $1,000</li>
+<li>Special prize: $1,000</li>
+</ul>
+<p>The value of prizes is measured in USD, however, prizes will be paid with the equivalent value of MESG Tokens.</p>
+<h1>When</h1>
+<ul>
+<li>Start: 18th January</li>
+<li>End: 17th February at 23:59 UTC</li>
+</ul>
+<h1>Eligibility</h1>
+<p>Anyone and everyone of the age of majority is welcome to participate!</p>
+<h1>Rules</h1>
+<h2>We need you to</h2>
+<p>Create a MESG <strong>Application</strong> and at least one MESG <strong>Service</strong> that fits into one of the following themes.<br>
+Applications should connect the services you use by defining the data flow between them.<br>
+Application can re-use existing Services. Check out the <a href="https://github.com/mesg-foundation/awesome" rel="nofollow noopener">curated list of Awesome Services</a>.<br>
+Applications might contain additional business logic depending on what you’re building.<br>
+Keep in mind that it’s always a good practice to create generic services and put business logic inside the application.</p>
+<p><a href="https://mesg-hackathon.devpost.com/rules" rel="nofollow noopener">View full rules</a>.</p>
+<h1>Themes</h1>
+<h2>Computing</h2>
+<ul>
+<li>Cloud Computing
+<ul>
+<li>Connect existing cloud computing providers (e.g.: AWS, Azure, Google Cloud)</li>
+<li>Create easy-to-use MESG Services that delegate execution to the cloud provider</li>
+</ul>
+</li>
+<li>Local Computing
+<ul>
+<li>Execute a generic task in local virtual machine (e.g.: run JavaScript code in a secure JavaScript Virtual Machine)</li>
+<li>Execute a specific and resource-intensive task locally with dedicated and efficient software (eg: image processing)</li>
+</ul>
+</li>
+<li>Decentralized cloud computing
+<ul>
+<li>Execute a task on decentralized cloud computing platform (e.g.: iExec, Golem)</li>
+</ul>
+</li>
+</ul>
+<h2>Payments</h2>
+<ul>
+<li>Fiat currency
+<ul>
+<li>Receive and/or emit a fiat currency payment</li>
+<li>Connect existing fiat payment processor (eg: Stripe, MangoPay, PayPal)</li>
+</ul>
+</li>
+<li>Cryptocurrency
+<ul>
+<li>Receive and/or emit a cryptocurrency payment</li>
+<li>Using Blockchains directly and/or a scalability solution on top of Blockchain (e.g.: Lightning Network, Plasma Cash)</li>
+</ul>
+</li>
+</ul>
+<h2>File storage</h2>
+<ul>
+<li>Cloud
+<ul>
+<li>Connect an existing cloud file storage provider (eg: AWS S3, Azure, Google Cloud)</li>
+<li>Create easy-to-use MESG Services that delegate storage to a cloud provider</li>
+</ul>
+</li>
+<li>Local
+<ul>
+<li>Store files locally within a MESG Service</li>
+</ul>
+</li>
+<li>Decentralized
+<ul>
+<li>Connect a decentralized file storage network (eg: IPFS, Sia)</li>
+<li>Manage the cost of the storage (if applicable)</li>
+</ul>
+</li>
+</ul>
+<h2>Notifications</h2>
+<ul>
+<li>iOS / Android notifications</li>
+<li>Emails</li>
+<li>SMS notifications</li>
+<li>Webhook notifications</li>
+</ul>
+<h1>Judging Criteria</h1>
+<p>Equally weighted criteria:</p>
+<ul>
+<li>
+<strong>Quality of the Idea using MESG</strong>  (including originality of the idea and how creatively the developer integrated multiple MESG Services)</li>
+<li>
+<strong>Quality of the User Experience</strong>  (including the visual design, whether it performs as expected, works well across device types, and more)</li>
+<li>
+<strong>Potential Impact of the Idea</strong>  (including the extent to which the submission is widely useful, might be customizable, might be extended to other scenarios, and more)</li>
+<li>
+<strong>Quality of the Submission Package</strong>  (including quality of the description, video demo, and any other materials)</li>
+</ul>
+<h1>How to participate</h1>
+<ul>
+<li>Register on the <a href="https://mesg-hackathon.devpost.com/" rel="nofollow noopener">Devpost page</a>
+</li>
+<li>Register on the <a href="https://forum.mesg.com">Forum</a>
+</li>
+<li>Join the <a href="https://discord.gg/frtHJWb" rel="nofollow noopener">MESG Discord</a> and introduce yourself in <a href="https://discord.gg/frtHJWb" rel="nofollow noopener">#introduce-yourself</a>
+</li>
+<li>Post your project and your team in the <a href="https://forum.mesg.com/c/hackathon">“Hackathon” category on the Forum</a>
+</li>
+</ul>
+<h1>How to start</h1>
+<ul>
+<li>You can begin by reading the <a href="https://docs.mesg.com/" rel="nofollow noopener">get started guide</a>
+</li>
+<li>Read the <a href="https://docs.mesg.com/" rel="nofollow noopener">documentation</a>
+</li>
+<li>Ask question on the <a href="https://forum.mesg.com/c/support">support category</a>
+</li>
+</ul>
+            <p><small>4 posts - 1 participant</small></p>
+            <p><a href="https://forum.mesg.com/t/mesg-online-hackathon-18th-january-to-17th-february-2019/170">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/mesg-online-hackathon-18th-january-to-17th-february-2019/170</link>
+          <pubDate>Wed, 02 Jan 2019 10:04:39 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>Yes</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-170</guid>
+          <source url="https://forum.mesg.com/t/mesg-online-hackathon-18th-january-to-17th-february-2019/170.rss">MESG Online Hackathon, 18th January to 17th February 2019</source>
+        </item>
+        <item>
+          <title>About the Hackathon category</title>
+          <dc:creator><![CDATA[Nicolas]]></dc:creator>
+          <category>Hackathon</category>
+          <description><![CDATA[
+            <p>This is where you can share your awesome applications or services with the community! You can also get info about MESG Hackathons.</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://forum.mesg.com/t/about-the-hackathon-category/169">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/about-the-hackathon-category/169</link>
+          <pubDate>Wed, 02 Jan 2019 05:02:19 +0000</pubDate>
+          <discourse:topicPinned>Yes</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-169</guid>
+          <source url="https://forum.mesg.com/t/about-the-hackathon-category/169.rss">About the Hackathon category</source>
+        </item>
+  </channel>
+</rss>

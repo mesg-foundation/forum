@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Solved plugin not enabled on Support</title>
+    <link>https://forum.mesg.com/t/solved-plugin-not-enabled-on-support/50</link>
+    <description>This is probably one for @Nicolas, but I see that `discourse-solved` is installed, but I don&#39;t see the &quot;Allow users to accept answers&quot; option when editing a category. See [this](https://meta.discourse.org/t/discourse-solved-accepted-answer-plugin/30155) for more details.
+
+Would you mind taking a look into this, @Nicolas? Ideally we will only have this enabled on the `Support` category for now.</description>
+    
+    <lastBuildDate>Mon, 24 Sep 2018 18:14:57 +0000</lastBuildDate>
+    <category>General Discussion</category>
+    <atom:link href="https://forum.mesg.com/t/solved-plugin-not-enabled-on-support/50.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Solved plugin not enabled on Support</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            
+          <p><a href="https://forum.mesg.com/t/solved-plugin-not-enabled-on-support/50/6">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/solved-plugin-not-enabled-on-support/50/6</link>
+        <pubDate>Thu, 13 Dec 2018 11:44:10 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-50-6</guid>
+        <source url="https://forum.mesg.com/t/solved-plugin-not-enabled-on-support/50.rss">Solved plugin not enabled on Support</source>
+      </item>
+      <item>
+        <title>Solved plugin not enabled on Support</title>
+        <dc:creator><![CDATA[jonobacon]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote no-group" data-post="4" data-topic="50">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/nicolas/40/10_1.png" class="avatar"> Nicolas:</div>
+<blockquote>
+<p>I desactive the global setting and activate it in <a class="hashtag" href="/c/8-support">#<span>support</span></a> and <a class="hashtag" href="/c/5-development">#<span>development</span></a> categories <img src="https://forum.mesg.com/images/emoji/twitter/+1.png?v=6" title=":+1:" class="emoji" alt=":+1:"></p>
+</blockquote>
+</aside>
+<p>Great, thanks <a class="mention" href="/u/nicolas">@Nicolas</a>!</p>
+          <p><a href="https://forum.mesg.com/t/solved-plugin-not-enabled-on-support/50/5">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/solved-plugin-not-enabled-on-support/50/5</link>
+        <pubDate>Mon, 24 Sep 2018 18:14:57 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-50-5</guid>
+        <source url="https://forum.mesg.com/t/solved-plugin-not-enabled-on-support/50.rss">Solved plugin not enabled on Support</source>
+      </item>
+      <item>
+        <title>Solved plugin not enabled on Support</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>I desactive the global setting and activate it in <a class="hashtag" href="/c/8-support">#<span>support</span></a>  and <a class="hashtag" href="/c/5-development">#<span>development</span></a> categories <img src="https://forum.mesg.com/images/emoji/twitter/+1.png?v=6" title=":+1:" class="emoji" alt=":+1:"></p>
+          <p><a href="https://forum.mesg.com/t/solved-plugin-not-enabled-on-support/50/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/solved-plugin-not-enabled-on-support/50/4</link>
+        <pubDate>Mon, 24 Sep 2018 07:56:22 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-50-4</guid>
+        <source url="https://forum.mesg.com/t/solved-plugin-not-enabled-on-support/50.rss">Solved plugin not enabled on Support</source>
+      </item>
+      <item>
+        <title>Solved plugin not enabled on Support</title>
+        <dc:creator><![CDATA[jonobacon]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote no-group" data-post="2" data-topic="50">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/nicolas/40/10_1.png" class="avatar"> Nicolas:</div>
+<blockquote>
+<p>This option “Allow users to select solutions on all topics (by default you control this by editing categories)” is activated in the plugin configuration.</p>
+</blockquote>
+</aside>
+<p>Aha! That is the issue.</p>
+<aside class="quote no-group" data-post="2" data-topic="50">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/nicolas/40/10_1.png" class="avatar"> Nicolas:</div>
+<blockquote>
+<p>I like the idea that any topic could be solved. But maybe it doesn’t make sense for non development/issue topic?</p>
+</blockquote>
+</aside>
+<p>My personal take is that we only enable it for specific categories such as <code>Support</code> and <code>Development</code>. For example, it doesn’t make sense in <code>News</code> or <code>HOWTO</code>.</p>
+          <p><a href="https://forum.mesg.com/t/solved-plugin-not-enabled-on-support/50/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/solved-plugin-not-enabled-on-support/50/3</link>
+        <pubDate>Thu, 20 Sep 2018 10:15:07 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-50-3</guid>
+        <source url="https://forum.mesg.com/t/solved-plugin-not-enabled-on-support/50.rss">Solved plugin not enabled on Support</source>
+      </item>
+      <item>
+        <title>Solved plugin not enabled on Support</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>This option “Allow users to select solutions on all topics (by default you control this by editing categories)” is activated in the plugin configuration.</p>
+<p>I like the idea that any topic could be solved. But maybe it doesn’t make sense for non development/issue topic?</p>
+<p><a class="mention-group" href="/groups/staff">@staff</a> what do you think?</p>
+          <p><a href="https://forum.mesg.com/t/solved-plugin-not-enabled-on-support/50/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/solved-plugin-not-enabled-on-support/50/2</link>
+        <pubDate>Thu, 20 Sep 2018 09:15:57 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-50-2</guid>
+        <source url="https://forum.mesg.com/t/solved-plugin-not-enabled-on-support/50.rss">Solved plugin not enabled on Support</source>
+      </item>
+      <item>
+        <title>Solved plugin not enabled on Support</title>
+        <dc:creator><![CDATA[jonobacon]]></dc:creator>
+        <description><![CDATA[
+            <p>This is probably one for <a class="mention" href="/u/nicolas">@Nicolas</a>, but I see that <code>discourse-solved</code> is installed, but I don’t see the “Allow users to accept answers” option when editing a category. See <a href="https://meta.discourse.org/t/discourse-solved-accepted-answer-plugin/30155">this</a> for more details.</p>
+<p>Would you mind taking a look into this, <a class="mention" href="/u/nicolas">@Nicolas</a>? Ideally we will only have this enabled on the <code>Support</code> category for now.</p>
+          <p><a href="https://forum.mesg.com/t/solved-plugin-not-enabled-on-support/50/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/solved-plugin-not-enabled-on-support/50/1</link>
+        <pubDate>Wed, 19 Sep 2018 11:25:52 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-50-1</guid>
+        <source url="https://forum.mesg.com/t/solved-plugin-not-enabled-on-support/50.rss">Solved plugin not enabled on Support</source>
+      </item>
+  </channel>
+</rss>

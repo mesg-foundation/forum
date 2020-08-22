@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <title>Solution summary for Docker dropping connections after 15 min - Development - MESG Community</title>
+    <meta name="description" content="Hey guys, 
+I would like to summarize the problem we had with dropped TCP connection and the solution we implemented for other developers with the same problem. 
+Problem
+Most system, drop idle TCP connections after 2h, bu&amp;hellip;">
+    <meta name="generator" content="Discourse 2.5.0.beta5 - https://github.com/discourse/discourse version 00aab498297cba8f977c1e0eb17b7d38ff06cc68">
+<link rel="icon" type="image/png" href="../../uploads/default/optimized/1X/9f11b6ddfa02bffdbec79487592a0573a0236cb5_2_32x32.png">
+<link rel="apple-touch-icon" type="image/png" href="../../uploads/default/optimized/1X/53630361a40ad76e1733dd0b0f486e9ae2f4f4d6_2_180x180.png">
+<meta name="theme-color" content="#491e8c">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+<link rel="canonical" href="246.html" />
+<script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","url":"https://forum.mesg.com","potentialAction":{"@type":"SearchAction","target":"https://forum.mesg.com/search?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
+<link rel="search" type="application/opensearchdescription+xml" href="../../opensearch.xml" title="MESG Community Search">
+
+      <link href="../../stylesheets/desktop_3_52e3411e87658e862890db7bd06899cf49ad5f59.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop" data-theme-id="7"/>
+      <link href="../../stylesheets/desktop_theme_7_bf4f2d3d8a71e6ee907065be9a79df3d849bd29c.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop_theme" data-theme-id="7"/>
+    
+    <meta id="data-ga-universal-analytics" data-tracking-code="UA-117583862-1" data-json="{&quot;cookieDomain&quot;:&quot;auto&quot;}" data-auto-link-domains="">
+
+<link rel="preload" href="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js" as="script">
+<script src="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js"></script>
+
+
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of &#39;Solution summary for Docker dropping connections after 15 min&#39;" href="246.rss" />
+    <meta property="og:site_name" content="MESG Community" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:url" content="https://forum.mesg.com/t/solution-summary-for-docker-dropping-connections-after-15-min/246" />
+<meta name="twitter:url" content="https://forum.mesg.com/t/solution-summary-for-docker-dropping-connections-after-15-min/246" />
+<meta property="og:title" content="Solution summary for Docker dropping connections after 15 min" />
+<meta name="twitter:title" content="Solution summary for Docker dropping connections after 15 min" />
+<meta property="og:description" content="Hey guys,  I would like to summarize the problem we had with dropped TCP connection and the solution we implemented for other developers with the same problem.  Problem Most system, drop idle TCP connections after 2h, but Docker (maybe Swarm) actually drops them after only 15 min.  Services or Clients that open connection to Core without frequent activity get their connections dropped after 15 min.  The first issue we had was to know that the connection actually dropped. The server was getting a..." />
+<meta name="twitter:description" content="Hey guys,  I would like to summarize the problem we had with dropped TCP connection and the solution we implemented for other developers with the same problem.  Problem Most system, drop idle TCP connections after 2h, but Docker (maybe Swarm) actually drops them after only 15 min.  Services or Clients that open connection to Core without frequent activity get their connections dropped after 15 min.  The first issue we had was to know that the connection actually dropped. The server was getting a..." />
+<meta property="article:published_time" content="2019-02-05T04:46:02+00:00" />
+<meta property="og:ignore_canonical" content="true" />
+
+
+
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"QAPage","name":"Solution summary for Docker dropping connections after 15 min","mainEntity":{"@type":"Question","name":"Solution summary for Docker dropping connections after 15 min","text":"Hey guys,\n\nI would like to summarize the problem we had with dropped TCP connection and the solution we implemented for other developers with the same problem.\n\nProblem\n\nMost system, drop idle TCP connections after 2h, but Docker (maybe Swarm) actually <a href="https://forum.mesg.com/t/solution-summary-for-docker-dropping-connections-after-15-min/\&quot;https://success.docker.com/article/ipvs-connection-timeout-issue\&quot;" rel=\"nofollow noopener\">drops them after only 15 min<\/a>.\n\nServices or Clien&hellip;","upvoteCount":0,"answerCount":1,"dateCreated":"2019-02-05T04:46:02.222Z","author":{"@type":"Person","name":"Nicolas"},"acceptedAnswer":{"@type":"Answer","text":"Just a reply to mark this as solved","upvoteCount":0,"dateCreated":"2019-05-18T04:47:00.643Z","url":"https://forum.mesg.com/t/solution-summary-for-docker-dropping-connections-after-15-min/246/2","author":{"@type":"Person","name":"Anthony"}}}}</script>
+  </head>
+  <body class="crawler">
+    
+    <header>
+      <a href="../../index.html">
+          <img src="../../uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png" alt="MESG Community" id="site-logo" style="max-width: 150px;">
+      </a>
+    </header>
+    <div id="main-outlet" class="wrap">
+        <div id="topic-title">
+    <h1>
+      <a href="246.html">Solution summary for Docker dropping connections after 15 min</a>
+    </h1>
+
+      <div class="topic-category" itemscope itemtype="http://schema.org/BreadcrumbList">
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../c/development.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #AB9364'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Development</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="1" />
+          </span>
+      </div>
+
+      <div class="topic-category">
+        <div class='discourse-tags list-tags'>
+            <a href='../../tag/resolution.html' class='discourse-tag' rel="tag">resolution</a>
+        </div>
+      </div>
+  </div>
+
+  
+
+
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="246.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2019-02-05T04:46:02Z'>
+              <time itemprop='dateModified' datetime='2019-02-05T04:58:51Z' class='post-time'>
+                February 5, 2019,  4:58am
+              </time>
+          <span itemprop='position'>#1</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Hey guys,</p>
+<p>I would like to summarize the problem we had with dropped TCP connection and the solution we implemented for other developers with the same problem.</p>
+<h2>Problem</h2>
+<p>Most system, drop idle TCP connections after 2h, but Docker (maybe Swarm) actually <a href="https://success.docker.com/article/ipvs-connection-timeout-issue" rel="nofollow noopener">drops them after only 15 min</a>.<br>
+Services or Clients that open connection to Core without frequent activity get their connections dropped after 15 min.<br>
+The first issue we had was to know that the connection actually dropped. The server was getting an error around 2h after the drop but clients were never getting any errors except when clients wanted to use the connection. The error returned on the server was also not really explicit: <code>transport is closing</code>.</p>
+<h2>Solution</h2>
+<p>We then find out about keep alive gRPC options. The full config is available <a href="https://github.com/grpc/grpc-go/blob/master/keepalive/keepalive.go" rel="nofollow noopener">here</a>.</p>
+<pre><code class="lang-auto">type ServerParameters struct {
+	// After a duration of this time if the server doesn't see any activity it
+	// pings the client to see if the transport is still alive.
+	Time time.Duration // The current default value is 2 hours.
+</code></pre>
+<p>As you see, the default value for <code>ServerParameters.Time</code> is 2h, way higher than the Docker’s 15 min.</p>
+<p>Changing <code>ServerParameters.Time</code> to 1 min solves the problem by making the server pinging clients every minute and thus preventing Docker to drop the connection.</p>
+<p>In short: <code>ServerParameters.Time &lt; Docker idle connection config (15 min)</code></p>
+<h2>Going further</h2>
+<p>We also wanted Clients to continuously ping the server to get an error when the connection dropped instead of waiting for an actual use of the connection to get the error.</p>
+<p>The keep alive options that gRPC provides also have a configuration for Client:</p>
+<pre><code class="lang-auto">type ClientParameters struct {
+	// After a duration of this time if the client doesn't see any activity it
+	// pings the server to see if the transport is still alive.
+	Time time.Duration // The current default value is infinity.
+</code></pre>
+<p>By default  <code>ClientParameters.Time</code> is set to never ping the server, we started by setting it to also 1 min (same as server).</p>
+<p>Clients were actively pinging the Server every minute but also the Server was pinging the Clients every minute (one ping in each direction every minute). This is not a normal behavior. Only one should ping and the other respond, not both all the time.<br>
+Setting the config to 2 min resolves this problem. The server was pinging every minute, the client only reply to the pings. If the connection drop, then Clients ping the Server after 2 min and get an error.</p>
+<p>In short: <code>ClientParameters.Time &gt; ServerParameters.Time</code>.</p>
+<hr>
+<p>More problematic, after around 8 min, Clients were getting again the <code>transport is closing</code> error! After running the Clients with <code>GODEBUG=http2debug=2</code>, we saw that the actual HTTP2 error was <code>GOAWAY - ENHANCE_YOUR_CALM - too_many_pings</code>.</p>
+<p>This error was caused by <code>EnforcementPolicy.MinTime</code> gRPC configuration set by default to 5min:</p>
+<pre><code class="lang-auto"># EnforcementPolicy is used to set keepalive enforcement policy on the
+# server-side. Server will close connection with a client that violates this
+# policy.
+type EnforcementPolicy struct {
+	// MinTime is the minimum amount of time a client should wait before sending
+	// a keepalive ping.
+	MinTime time.Duration // The current default value is 5 minutes.
+</code></pre>
+<p>Clients should not ping the Server more often that this option. Setting <code>ClientParameters.Time</code> to same value as <code>EnforcementPolicy.MinTime</code> (5 min) solves the issue.</p>
+<p>In short: <code>ClientParameters.Time &gt;= EnforcementPolicy.MinTime</code></p>
+<h2>Summary</h2>
+<pre><code class="lang-auto">ServerParameters.Time &lt; Docker idle connection config (15 min)
+ClientParameters.Time &gt; ServerParameters.Time
+ClientParameters.Time &gt;= EnforcementPolicy.MinTime
+</code></pre>
+<p>Here is the properties and values used:</p>
+<div class="md-table">
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Default</th>
+<th>Value used for solution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ServerParameters.Time</code></td>
+<td>2h</td>
+<td>1 min</td>
+</tr>
+<tr>
+<td><code>EnforcementPolicy.MinTime</code></td>
+<td>5 min</td>
+<td>5 min</td>
+</tr>
+<tr>
+<td><code>ClientParameters.Time</code></td>
+<td>Infinity</td>
+<td>5 min</td>
+</tr>
+</tbody>
+</table>
+</div>
+        </div>
+
+        <meta itemprop='headline' content='Solution summary for Docker dropping connections after 15 min'>
+          <meta itemprop='keywords' content='resolution'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+            <div class='crawler-linkback-list' itemscope itemtype='http://schema.org/ItemList'>
+                  <div itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+                    <a href="../reduce-keepalive-values/247.html" itemprop='item'>
+                      <meta itemprop='url' content='https://forum.mesg.com/t/reduce-keepalive-values/247'>
+                      <meta itemprop='position' content='3'>
+                      <span itemprop='name'>Reduce KeepAlive values</span>
+                    </a>
+                  </div>
+            </div>
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="246.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2019-05-18T04:47:00Z'>
+              <time itemprop='dateModified' datetime='2019-05-18T04:47:03Z' class='post-time'>
+                May 18, 2019,  4:47am
+              </time>
+          <span itemprop='position'>#2</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Just a reply to mark this as solved</p>
+        </div>
+
+        <meta itemprop='headline' content='Solution summary for Docker dropping connections after 15 min'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+
+
+
+
+
+
+    </div>
+    <footer class="container wrap">
+      <nav class='crawler-nav'>
+        <ul>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../index.html' itemprop="url">Home </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../categories.html' itemprop="url">Categories </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../guidelines.html' itemprop="url">FAQ/Guidelines </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../tos.html' itemprop="url">Terms of Service </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../privacy.html' itemprop="url">Privacy Policy </a>
+          </span>
+        </li>
+        </ul>
+      </nav>
+      <p class='powered-by-link'>Powered by <a href="https://www.discourse.org">Discourse</a>, best viewed with JavaScript enabled</p>
+    </footer>
+    
+    
+  </body>
+  
+</html>

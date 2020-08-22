@@ -1,0 +1,932 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:discourse="http://www.discourse.org/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>News - MESG Community</title>
+    <link>https://forum.mesg.com/c/news</link>
+    <description>Topics in the &#39;News&#39; category Find out what’s new at MESG. Find out about new releases, events we are attending, new hires, and meet our growing community that make it all possible</description>
+    
+      <lastBuildDate>Wed, 30 Oct 2019 06:26:32 +0000</lastBuildDate>
+      <atom:link href="https://forum.mesg.com/c/news.rss" rel="self" type="application/rss+xml" />
+        <item>
+          <title>Release Notes of Engine v0.16, CLI v2, JS v5</title>
+          <dc:creator><![CDATA[Nicolas]]></dc:creator>
+          <category>News</category>
+          <description><![CDATA[
+            <p>We finally released v0.16 of the Engine! This version uses <a href="http://cosmos.network/" rel="nofollow noopener">Cosmos</a> and <a href="https://tendermint.com/" rel="nofollow noopener">Tendermint</a> to replicate the services across multiple Engines using a state machine built on a blockchain!</p>
+<h1>Services on the decentralized network</h1>
+<p>The decentralized network of Services functionality is now out of beta and is activated by default. Now when you start the Engine, it will create by default a local dev blockchain if no specific configuration is set.<br>
+As soon as the Engine starts, you should see in the logs a new block every second <img src="https://forum.mesg.com/images/emoji/twitter/confetti_ball.png?v=9" title=":confetti_ball:" class="emoji" alt=":confetti_ball:"><br>
+You can, of course, connect multiple Engines together. Check out the network section for more details.</p>
+<p><img src="https://forum.mesg.com/uploads/default/original/1X/efbdf221b00521ab5b0a67ac801df88c1e130e1e.gif" alt="2019-10-29%2017_44_35" data-base62-sha1="ycR4uFiM1XUPSNH3nxyo4HeIXkW" width="690" height="476"></p>
+<h1>Engine config file</h1>
+<p>The Engine is now reading most of the configs from a yaml file instead of environmental variables. This makes advanced configuration easier. This file is located by default in <code>~/.mesg/config.yml</code>.<br>
+Here is an example of a config file:</p>
+<pre><code class="lang-auto">log:
+  format: text
+  level: info
+  forcecolors: true
+tendermint:
+  config:
+    p2p:
+      persistentpeers: 9fbd3f7ac4f143d4ad63d94b0ea34c3b39dcf973@3.3.3.3:26656
+</code></pre>
+<p>The two remaining environmental variables are <code>MESG_NAME</code> and <code>MESG_PATH</code> to respectively set the Engine’s name (default to <code>engine</code>) and the path to the root folder in Docker (default to <code>~/.mesg</code>).</p>
+<h1>Deletion of the system services</h1>
+<p>The two system services, <code>ethwallet</code> and <code>marketplace</code> have been deleted and the functionality replaced by directly using Cosmos’ account and the decentralized network of services for the marketplace. The <code>account</code> commands of the CLI are still available but the <code>marketplace</code> commands have been removed to directly use the <code>service</code> commands.</p>
+<p>Now when you create services, they are automatically available on the network. As there is no official public network for now, the services will be available only on your Engine or the Engines that you manually configure to connect to each other (check the next part to learn how to do it).</p>
+<h1>Tuto: Create a network with multiple Engines</h1>
+<p>Now that the network functionality is available, you can connect multiple Engines running on different computers together on a network and share services.</p>
+<p><a href="https://medium.com/mesg/tutorial-create-a-network-with-multiple-engines-71a143b13ea5?sk=90e44f4ed9fd839969d2e545dad3ab46" rel="nofollow noopener">Follow this brief guide to learn how to do it.</a></p>
+<h1>Changelogs</h1>
+<p>Follow the links below to see the complete changelogs:</p>
+<ul>
+<li><a href="https://github.com/mesg-foundation/engine/blob/master/CHANGELOG.md" rel="nofollow noopener">Engine</a></li>
+<li><a href="https://github.com/mesg-foundation/mesg-js/blob/master/CHANGELOG.md" rel="nofollow noopener">mesg-js</a></li>
+<li><a href="https://github.com/mesg-foundation/cli/blob/master/CHANGELOG.md" rel="nofollow noopener">CLI</a></li>
+</ul>
+<p>To update the Engine and the CLI, follow the <a href="https://docs.mesg.com/guide/installation.html" rel="nofollow noopener">installation process on the documentation</a>.</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://forum.mesg.com/t/release-notes-of-engine-v0-16-cli-v2-js-v5/434">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/release-notes-of-engine-v0-16-cli-v2-js-v5/434</link>
+          <pubDate>Wed, 30 Oct 2019 06:26:32 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-434</guid>
+          <source url="https://forum.mesg.com/t/release-notes-of-engine-v0-16-cli-v2-js-v5/434.rss">Release Notes of Engine v0.16, CLI v2, JS v5</source>
+        </item>
+        <item>
+          <title>Release Notes of Engine v0.13, v0.14 &amp; v0.15 + CLI v1.3, v1.4</title>
+          <dc:creator><![CDATA[Nicolas]]></dc:creator>
+          <category>News</category>
+          <description><![CDATA[
+            <p>We’ve been very busy for the past two months working on two new major features of the Engine: Orchestrator and Network. That’s why these release notes group together MESG Engine v0.13 to v0.15!</p>
+<h1>Release of MESG Orchestrator to build apps using processes</h1>
+<p>We officially released the first public version of <a href="https://mesg.com/mesg-orchestrator" rel="nofollow noopener">Orchestrator</a> <img src="https://forum.mesg.com/images/emoji/twitter/confetti_ball.png?v=9" title=":confetti_ball:" class="emoji" alt=":confetti_ball:"> <img src="https://forum.mesg.com/images/emoji/twitter/champagne.png?v=9" title=":champagne:" class="emoji" alt=":champagne:"></p>
+<p>MESG Orchestrator is an event-driven task-orchestration system that manages the connections between the events and tasks of services by following the steps described by processes.</p>
+<p>It lets you build and run complex applications by describing their business logic, then the Engine executes them for you.</p>
+<p>Processes are an evolution of Applications, as they are managed by the Engine, and will be distributed on the upcoming decentralized network.</p>
+<p>You can read more about Orchestrator and Processes in the <a href="https://docs.mesg.com/guide/process/" rel="nofollow noopener">documentation</a>.</p>
+<h2>Process super quick start</h2>
+<p>Create a new file <code>process.yml</code> on your computer and copy the following content:</p>
+<pre><code class="lang-auto">key: erc20-notification
+steps:
+  - type: trigger
+    instance:
+      src: https://github.com/mesg-foundation/service-ethereum-erc20
+      env:
+        - PROVIDER_ENDPOINT=$(env:PROVIDER_ENDPOINT)
+    eventKey: transfer
+  - type: task
+    instance:
+      src: ./convert
+    taskKey: address
+  - type: filter
+    conditions:
+      contractAddress: "0x420167d87d35c3a249b32ef6225872fbd9ab85d2"
+  - type: task
+    instance: 
+      src: ./convert
+    taskKey: email
+  - type: task
+    instance:
+      src: https://github.com/mesg-foundation/service-email-sendgrid
+      env:
+        - SENDGRID_API_KEY=$(env:SENDGRID_API_KEY)
+    taskKey: send
+</code></pre>
+<p>Then, execute the following command to compile, start and log the activity of the process:</p>
+<pre><code class="lang-auto">mesg-cli process:dev PATH_TO_THE_PROCESS_FILE --env PROVIDER_ENDPOINT=YOUR_INFURA_URL --env SENDGRID_API_KEY=YOUR_SENDGRID_API_KEY
+</code></pre>
+<p><img src="https://forum.mesg.com/images/emoji/twitter/confetti_ball.png?v=9" title=":confetti_ball:" class="emoji" alt=":confetti_ball:"> Congrats! You created your first MESG Process! <img src="https://forum.mesg.com/images/emoji/twitter/confetti_ball.png?v=9" title=":confetti_ball:" class="emoji" alt=":confetti_ball:"></p>
+<h1>Beta version of the decentralized network</h1>
+<p>We are working hard on the decentralized network and are making good progress! The services are now decentralized by running on <a href="https://tendermint.com" rel="nofollow noopener">Tendermint</a> with ownership management features!</p>
+<p>In the next version of the Engine, we plan to release our first public testnet!</p>
+<p>To test it before the public release, clone the <a href="https://github.com/mesg-foundation/engine" rel="nofollow noopener">engine repo</a> and run the <code>dev</code> script with the flag <code>--validator</code> and <code>--genesis-account</code>:</p>
+<pre><code class="lang-bash">git clone https://github.com/mesg-foundation/engine
+cd engine
+./dev --validator --genesis_validator
+</code></pre>
+<p>After the Engine is started, you should see a new block every 10 seconds!</p>
+<h1>Switch to <a href="https://github.com/gogo/protobuf" rel="nofollow noopener">gogo protobuf</a>
+</h1>
+<p>The gRPC API is now using <a href="https://github.com/gogo/protobuf" rel="nofollow noopener">gogo protobuf</a> to compile the proto file to Go. The main reason is the customization of the proto that gogo proto offers over the official <a href="https://github.com/protocolbuffers/protobuf" rel="nofollow noopener">Google version</a>.<br>
+This has the side effect of breaking the reflection of the gRPC API. You now need to explicitly pass the proto files when using a gRPC client.<br>
+You may also need to download <a href="https://github.com/gogo/protobuf/blob/master/gogoproto/gogo.proto" rel="nofollow noopener"><code>gogo.proto</code></a> and save it locally in <code>./gogo/protobuf/gogoproto</code> to allow your gRPC client to access the new features that gogo offers.</p>
+<h1>Minor versioning</h1>
+<p>The CLI is now checking for the latest matching minor version of the Engine when running:</p>
+<pre><code class="lang-bash">mesg-cli daemon:start
+</code></pre>
+<p>Of course you can disable this system by using the <code>--no-pull</code> flag:</p>
+<pre><code class="lang-bash">mesg-cli daemon:start --no-pull
+</code></pre>
+<h1>Changelogs</h1>
+<p>Follow the links below to see the complete changelogs:</p>
+<ul>
+<li><a href="https://github.com/mesg-foundation/engine/blob/master/CHANGELOG.md" rel="nofollow noopener">Engine </a></li>
+<li><a href="https://github.com/mesg-foundation/mesg-js/blob/master/CHANGELOG.md" rel="nofollow noopener">mesg-js</a></li>
+<li><a href="https://github.com/mesg-foundation/cli/blob/master/CHANGELOG.md" rel="nofollow noopener">CLI</a></li>
+</ul>
+<p>To update the Engine and the CLI, follow the <a href="https://docs.mesg.com/guide/installation.html" rel="nofollow noopener">installation process on the documentation</a>.</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://forum.mesg.com/t/release-notes-of-engine-v0-13-v0-14-v0-15-cli-v1-3-v1-4/409">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/release-notes-of-engine-v0-13-v0-14-v0-15-cli-v1-3-v1-4/409</link>
+          <pubDate>Mon, 30 Sep 2019 08:04:45 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-409</guid>
+          <source url="https://forum.mesg.com/t/release-notes-of-engine-v0-13-v0-14-v0-15-cli-v1-3-v1-4/409.rss">Release Notes of Engine v0.13, v0.14 &amp; v0.15 + CLI v1.3, v1.4</source>
+        </item>
+        <item>
+          <title>Release Notes of Engine v0.12, CLI v1.2 and JS library v4.2</title>
+          <dc:creator><![CDATA[Nicolas]]></dc:creator>
+          <category>News</category>
+          <description><![CDATA[
+            <h1>Improved dynamically-typed data on the gRPC APIs!</h1>
+<p>The dynamically-typed data system used for event data and task inputs and outputs has been significantly improved.</p>
+<p>Before, it was using a JSON encoded string that wasn’t efficient or able to be typed. Now, it uses <a href="https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.Struct" rel="nofollow noopener">Google’s Protobuf Struct</a> and a modified JSON encoder that specifies types.</p>
+<h2>Proto</h2>
+<p>Here is the diff of the <a href="https://github.com/mesg-foundation/engine/pull/1192/files#diff-427929cecc38eb2b912e5e527342fb43" rel="nofollow noopener">Event’s proto file</a>:</p>
+<pre><code class="lang-diff">// Event represents a single event ran in Engine.
+message Event {
+  // Hash is a unique hash to identify an event.
+  string hash = 1;
+
+  // instanceHash is the hash of an instance that can precede an execution.
+  string instanceHash = 2;
+
+  // key is the key of the event.
+  string key = 3;
+
+  // data is the data for the event.
+-  string data = 4;
++  google.protobuf.Struct data = 4;
+}
+</code></pre>
+<h2>mesg-js</h2>
+<p>The <code>mesg-js</code> library has been updated to be compatible with these modifications.</p>
+<h3>Service</h3>
+<p>The service-side API remains the same. The modifications are internal but some TypeScripts have been renamed and/or modified.</p>
+<h3>Application</h3>
+<p>The application side now exposes new encode and decode helper functions (respectively <code>encodeData</code> and <code>decodeData</code>) to replace the <code>JSON.stringify</code> and <code>JSON.parse</code> functions.</p>
+<p><strong>Decode</strong></p>
+<pre><code class="lang-diff">mesg.listenEvent({
+  filter: {
+    instanceHash: 'EVENT_INSTANCE_HASH',
+    key: 'EVENT_KEY' // optional
+  }
+})
+.on('data', (event) =&gt; {
+- const data = JSON.parse(event.data) 
++ const data = mesg.decodeData(event.data)x
+  console.log('an event received:', event.key, data)
+})
+</code></pre>
+<p><strong>Encode</strong></p>
+<pre><code class="lang-diff">const execution = await mesg.executeTask({
+  instanceHash: 'TASK_INSTANCE_HASH',
+  taskKey: 'TASK_KEY',
+-  inputs: JSON.stringify({ key: 'INPUT_DATA' }),
++  inputs: mesg.encodeData({ key: 'INPUT_DATA' }),
+  tags: ['ASSOCIATE_TAG'] // optional
+})
+</code></pre>
+<h2>CLI</h2>
+<p>The CLI was also updated to be compatible with this breaking change. Various fixes and improvements have also been done, like the limitation of the source code’s service size to 10MB. Make sure to add to the <code>.mesgignore</code> file to the dependencies (like a <code>.dockerignore</code>) <img src="https://forum.mesg.com/images/emoji/twitter/wink.png?v=9" title=":wink:" class="emoji" alt=":wink:"></p>
+<h1>Experimental feature: Workflow engine</h1>
+<p>This release contains the first experimental version of the workflow engine <img src="https://forum.mesg.com/images/emoji/twitter/confetti_ball.png?v=9" title=":confetti_ball:" class="emoji" alt=":confetti_ball:"><br>
+The workflow engine can automatically execute any services’ tasks when it matches with any other services’ events or tasks. Check the following video:</p>
+<p><img src="https://forum.mesg.com/uploads/default/original/1X/4c85fd3e328055dfc28880dfb17250dd725e781d.gif" alt="workflow" data-base62-sha1="aUXmdwi9O3lp20ZryHYWRFHzmoZ" width="690" height="356"></p>
+<hr>
+<p>View the complete changelogs:</p>
+<ul>
+<li><a href="https://github.com/mesg-foundation/engine/blob/master/CHANGELOG.md" rel="nofollow noopener">Engine</a></li>
+<li><a href="https://github.com/mesg-foundation/mesg-js/blob/master/CHANGELOG.md" rel="nofollow noopener">mesg-js</a></li>
+<li><a href="https://github.com/mesg-foundation/cli/blob/master/CHANGELOG.md" rel="nofollow noopener">CLI</a></li>
+</ul>
+<p>To update the Engine and the CLI, follow the <a href="https://docs.mesg.com/guide/installation.html" rel="nofollow noopener">installation process on the documentation </a></p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://forum.mesg.com/t/release-notes-of-engine-v0-12-cli-v1-2-and-js-library-v4-2/367">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/release-notes-of-engine-v0-12-cli-v1-2-and-js-library-v4-2/367</link>
+          <pubDate>Thu, 08 Aug 2019 08:36:46 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-367</guid>
+          <source url="https://forum.mesg.com/t/release-notes-of-engine-v0-12-cli-v1-2-and-js-library-v4-2/367.rss">Release Notes of Engine v0.12, CLI v1.2 and JS library v4.2</source>
+        </item>
+        <item>
+          <title>Release Notes of Engine v0.11, CLI v1.1 and JS library v4</title>
+          <dc:creator><![CDATA[Nicolas]]></dc:creator>
+          <category>News</category>
+          <description><![CDATA[
+            <h1>New Engine gRPC APIs</h1>
+<p>This release introduces new gRPC APIs to replace the previous ones. These new APIs are resource oriented, follow the CRUD convention and identify each resource with a unique hash.</p>
+<p>Each group of APIs (one per resource) implement the same subset of the functions: <strong>get, list, update, delete</strong> and <strong>stream</strong>:</p>
+<ul>
+<li>
+<strong>Get</strong> returns one resource specified by its hash</li>
+<li>
+<strong>List</strong> returns an array of resources matching the specified filter</li>
+<li>
+<strong>Update</strong> modifies one resource specified by its hash</li>
+<li>
+<strong>Delete</strong> removes one resource specified by its hash</li>
+<li>
+<strong>Stream</strong> notifies any creation, update or deletion of the resources matching the specified filter</li>
+</ul>
+<p>It’s now easier to know exactly what is going inside the Engine and how resources interact with each other.</p>
+<h1>Update of mesg-js</h1>
+<p>The update of the Engine’s APIs have consequently broken the internal logic of the <code>mesg-js</code> library. But don’t worry, we’ve kept as much as possible of the public API of the lib for easy updating.</p>
+<p>To update, run:</p>
+<pre><code class="lang-bash">npm install mesg-js@4.1.0
+</code></pre>
+<h3>Service side</h3>
+<p>The functions on the service side haven’t changed. Only a few Typescript type names have been modified. In most cases, you should only update the library without changing the source code.</p>
+<h3>Application side</h3>
+<p>The functions on the application side have changed a little bit.</p>
+<p>The parameters of <code>listenEvent</code> and <code>listenResult</code> now require a object <code>filter</code> that contains the actual criteria. All <code>serviceHash</code> have been replaced by <code>instanceHash</code> as it’s the new way the Engine is starting services.</p>
+<pre><code class="lang-javascript">mesg.listenEvent({
+  filter: {
+    instanceHash: 'EVENT_INSTANCE_HASH',
+    key: 'EVENT_KEY' // optional
+  }
+})
+.on('data', (event) =&gt; {
+  console.log('an event received:', event.key, JSON.parse(event.data))
+})
+</code></pre>
+<p>The automatic resolution of <code>SID</code> has also been removed from the Engine and should now be done by the application. We added a helper function to do this easily:</p>
+<pre><code class="lang-javascript">const instanceHash = await mesg.resolve('SID_OF_THE_SERVICE')
+</code></pre>
+<h1>Updated mesg-cli</h1>
+<p>The same commands have been kept and the internal logic has been updated to make it work with the latest Engine version.<br>
+To update the CLI, run:</p>
+<pre><code class="lang-bash">npm install mesg-cli@1.1.0
+</code></pre>
+<h1>Internal changes in Engine</h1>
+<h3>New Instance database</h3>
+<p>A new resource has been introduced: Instance.</p>
+<p>An Instance is the living version of a Service. It makes it possible to start many Instances from the same Service as long as their environmental variables are different. Services are now only static definitions of events, tasks, configurations and dependencies. The service definition also contains the service’s source code as an IPFS hash.</p>
+<p>You can still create, delete, list and get Services. But service subcommands: start, stop, logs, and execute now require an Instance Hash.</p>
+<h3>Chain of Executions</h3>
+<p>The execution database has been transformed to prepare for the next big feature: Workflows.<br>
+Executions can now reference previous executions, have improved state and better event integrations. These changes are also reflected in the gRPC APIs.</p>
+<h3>Introduction of SDK package</h3>
+<p>The architecture of the Engine has been reorganized to implement an SDK package that should allow developers to integrate the Engine in a Go project on a much lower level than with the gRPC APIs. The package is divided into small packages per resource.</p>
+<hr>
+<p>The complete changelog of the Engine can be found <a href="https://github.com/mesg-foundation/engine/blob/dev/CHANGELOG.md#v0110" rel="nofollow noopener">on Github</a>.</p>
+<p>The complete changelog of mesg-js library can be found <a href="https://github.com/mesg-foundation/mesg-js/blob/master/CHANGELOG.md" rel="nofollow noopener">on Github</a>.</p>
+<p>To update to Engine v0.11, follow the <a href="https://docs.mesg.com/guide/installation.html" rel="nofollow noopener">installation process on the documentation </a></p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://forum.mesg.com/t/release-notes-of-engine-v0-11-cli-v1-1-and-js-library-v4/339">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/release-notes-of-engine-v0-11-cli-v1-1-and-js-library-v4/339</link>
+          <pubDate>Tue, 09 Jul 2019 05:39:39 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-339</guid>
+          <source url="https://forum.mesg.com/t/release-notes-of-engine-v0-11-cli-v1-1-and-js-library-v4/339.rss">Release Notes of Engine v0.11, CLI v1.1 and JS library v4</source>
+        </item>
+        <item>
+          <title>MESG Engine v0.10, JS CLI and JS library v3.0.0 Release Notes</title>
+          <dc:creator><![CDATA[Nicolas]]></dc:creator>
+          <category>News</category>
+          <description><![CDATA[
+            <h1>Renaming Core to Engine</h1>
+<p>Following the introduction of the <a href="https://mesg.com/mesg-sdk" rel="nofollow noopener">MESG SDK</a>, we are renaming MESG Core to MESG Engine to better describe what the software does and how it fits within the SDK.</p>
+<p>The CLI has also been extracted to a dedicated repository. See the New CLI section.</p>
+<h1>Service task output simplification</h1>
+<p>This newest version of the Engine includes a massive simplification for service development!</p>
+<p>Services can now define a single output per task (containing many parameters) rather than many outputs per task.</p>
+<p>We found that most services implemented one success output and one error output, with the success output returning the result of the execution and the error output returning the error message. Services implementing more than two outputs can be easily converted to two outputs by combining the outputs’ data into one payload.</p>
+<p>This improves the executions’ state machine by letting the Engine know which output is the expected one, and enables the retry system when executions fail. This is very important when the decentralized network is implemented so unexpected execution errors can be tolerated!</p>
+<p>I encourage you to check out our <a href="https://medium.com/mesg/mesg-product-update-c937a4f4f624" rel="nofollow noopener">latest Product Update</a> to learn more about the roadmap, and why this feature is so important.</p>
+<p>Here is a diff of a task definition:</p>
+<pre><code class="lang-diff">tasks:
+  send:
+    inputs:
+      from:
+        type: String
+      to:
+        type: String
+      subject:
+        type: String
+      text:
+        type: String
+    outputs:
+-     success:
+-       data:
+-         status:
+-           type: Number
+-     error:
+-       data:
+-         message:
+-           type: String
++     status:
++       type: Number
+</code></pre>
+<p>This simplification also makes the implementation of tasks much easier.</p>
+<p>We’ve updated the <a href="https://github.com/mesg-foundation/mesg-js" rel="nofollow noopener">mesg-js</a> library to catch errors and send outputs to the Engine so your services don’t have to. If the task throw any error, the lib will catch it and send it to the Engine.</p>
+<p>Let’s take a look at the implementation diff of this task in JavaScript using mesg-js:</p>
+<pre><code class="lang-diff">- const send = async (inputs, outputs) =&gt; {
++ const send = async (inputs) =&gt; {
+- try {
+  const result = await sendgrid.send(inputs)
+- return outputs.success({
+-   status: result[0].statusCode
+- })
++ return {
++   status: result[0].statusCode
++ }
+- } catch (error) {
+-   return outputs.failure({
+-     message: error.toString()
+-   })
+- }
+}
+</code></pre>
+<p><img src="https://forum.mesg.com/images/emoji/twitter/confetti_ball.png?v=9" title=":confetti_ball:" class="emoji" alt=":confetti_ball:"> That’s 50% fewer lines of code for this simple task! <img src="https://forum.mesg.com/images/emoji/twitter/confetti_ball.png?v=9" title=":confetti_ball:" class="emoji" alt=":confetti_ball:"></p>
+<h1>New CLI</h1>
+<p>We are also releasing v1 of a new CLI in Javascript.</p>
+<p>We’ve created a new CLI for two reasons:</p>
+<ul>
+<li>To separate the CLI from the Engine repository<br>
+We were struggling with keeping the cli and the engine implementation as separate as possible because both were developed in Go and used many packages in common.</li>
+<li>To use Javascript<br>
+Javascript is a massively-used language across many ecosystems and is known by almost every developer. We want to build tools that the community can easily contribute to and extend as they see fit. Also, we plan to create User Interfaces to manage MESG Engine with ease. There are a lot of tools to create powerful and flexible UIs using Javascript that can reuse the CLI source code.</li>
+</ul>
+<p>You can install it by running the following command:</p>
+<pre><code class="lang-bash">npm install -g mesg-cli
+</code></pre>
+<p>You can also checkout its github repo: <a href="https://github.com/mesg-foundation/cli" rel="nofollow noopener">mesg-foundation/cli</a>.</p>
+<p>We had some issues during the release process of the CLI and had to release it under v1.0.4. So don’t worry about missing any updates, because there weren’t any <img src="https://forum.mesg.com/images/emoji/twitter/upside_down_face.png?v=9" title=":upside_down_face:" class="emoji" alt=":upside_down_face:"></p>
+<p><iframe src="https://tenor.com/embed/4895737?playertype=card" width="498" height="277" scrolling="no" frameborder="0" seamless="seamless" sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-presentation"></iframe>
+</p>
+<hr>
+<p>For the complete changelog of the MESG Engine, refer to <a href="https://github.com/mesg-foundation/engine/blob/dev/CHANGELOG.md#v0101" rel="nofollow noopener">the changelog on Github</a>.</p>
+<p>For the complete changelog of mesg-js library, refer to <a href="https://github.com/mesg-foundation/mesg-js/blob/master/CHANGELOG.md" rel="nofollow noopener">the changelog on Github</a>.</p>
+<p>To update to v0.10, follow the <a href="https://docs.mesg.com/guide/installation.html" rel="nofollow noopener">installation process on the documentation </a></p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://forum.mesg.com/t/mesg-engine-v0-10-js-cli-and-js-library-v3-0-0-release-notes/317">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/mesg-engine-v0-10-js-cli-and-js-library-v3-0-0-release-notes/317</link>
+          <pubDate>Wed, 19 Jun 2019 03:57:56 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-317</guid>
+          <source url="https://forum.mesg.com/t/mesg-engine-v0-10-js-cli-and-js-library-v3-0-0-release-notes/317.rss">MESG Engine v0.10, JS CLI and JS library v3.0.0 Release Notes</source>
+        </item>
+        <item>
+          <title>MESG Core v0.9.1 Release Notes</title>
+          <dc:creator><![CDATA[Nicolas]]></dc:creator>
+          <category>News</category>
+          <description><![CDATA[
+            <p>This small release fixes a few bugs and is the last release of the current implementation of the CLI.</p>
+<ul>
+<li>Use dedicated IPFS node instead of IPFS gateway</li>
+<li>Improve generation of service’s readme file</li>
+<li>Better error when parsing service definition</li>
+<li>Fix links to docs</li>
+</ul>
+<p>The CLI is being redeveloped using JavaScript in order to be much more reusable for future application. You can follow its development by watching its <a href="https://github.com/mesg-foundation/cli" rel="nofollow noopener">GitHub repo mesg-foundation/cli</a>.</p>
+<hr>
+<p>For the complete changelog, refer to <a href="https://github.com/mesg-foundation/core/releases/tag/v0.9.1" rel="nofollow noopener">Github </a>.</p>
+<p>To update to v0.9.1, follow the <a href="https://docs.mesg.com/guide/installation.html#automatic-installation" rel="nofollow noopener">installation process on the documentation </a></p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://forum.mesg.com/t/mesg-core-v0-9-1-release-notes/293">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/mesg-core-v0-9-1-release-notes/293</link>
+          <pubDate>Wed, 29 May 2019 10:06:06 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-293</guid>
+          <source url="https://forum.mesg.com/t/mesg-core-v0-9-1-release-notes/293.rss">MESG Core v0.9.1 Release Notes</source>
+        </item>
+        <item>
+          <title>MESG Core v0.9 Release Notes</title>
+          <dc:creator><![CDATA[Nicolas]]></dc:creator>
+          <category>News</category>
+          <description><![CDATA[
+            <h1>New features in MESG Core v0.9</h1>
+<p>After three months of intense development, we are very proud to release the v0.9 of MESG Core!</p>
+<p>This version is a huge step towards the long-term vision with the release of the beta version of the decentralized marketplace.</p>
+<h2>Marketplace beta version</h2>
+<p>This beta version of the MESG Marketplace lets users buy and sell access to modular application components for a limited period of time.</p>
+<p>The Marketplace is fully decentralized as it runs on <a href="https://etherscan.io/address/0x0C6e8d0eC4770fDa8A56CD912392d2ff14822952" rel="nofollow noopener">Ethereum</a> with a <a href="https://github.com/mesg-foundation/marketplace" rel="nofollow noopener">custom smart contract</a> and uses the <a href="https://mesg.com/token/" rel="nofollow noopener">MESG Token</a> for purchasing access to services. The source code of the services are also decentralized as they are published on <a href="https://ipfs.io/" rel="nofollow noopener">IPFS</a>.</p>
+<p><a href="https://medium.com/mesg/mesg-marketplace-beta-now-live-on-the-mainnet-75c40cd70f4b" rel="nofollow noopener">Check the full article about the release of the Marketplace on Medium</a>.</p>
+<h3>Find and deploy services from the Marketplace website</h3>
+<p>Go to <a href="https://marketplace.mesg.com" rel="nofollow noopener">marketplace.mesg.com</a> to browse the available services. You can find services’ documentation, API, offers and versions.</p>
+<p><img src="https://forum.mesg.com/uploads/default/original/1X/e2aea745610ef6853df0c3f71ce870a1ea022cd8.png" alt="com_services_email-sendgrid" width="666" height="500"></p>
+<p>Now let’s deploy the service <a href="https://marketplace.mesg.com/services/email-sendgrid" rel="nofollow noopener">email-sengrid</a>.<br>
+Go to <a href="https://marketplace.mesg.com/services/email-sendgrid" rel="nofollow noopener">its dedicated page</a>, click on the button “Get this service”, copy the deploy command line, and execute it in a terminal on your local computer (that already runs MESG Core).</p>
+<p>Your terminal should look this:</p>
+<pre><code class="lang-bash">➜  ~ mesg-core service deploy mesg://marketplace/service/8mcRi836QZZmYAvt2o7RgHdUjsvGsdnPdSHVBq25jjyB
+✔ Image built with success
+✔ Service deployed with sid email-sendgrid and hash CGRuEJahcrEQoFNV6nywDAx22CPifyTi1CmaoLVVj6gk
+To start it, run the command:
+        mesg-core service start email-sendgrid
+</code></pre>
+<p>Et voila <img src="https://forum.mesg.com/images/emoji/twitter/champagne.png?v=9" title=":champagne:" class="emoji" alt=":champagne:"> You have deployed a service from the decentralized MESG Marketplace!</p>
+<h3>Publish your services and earn tokens</h3>
+<p>You can also publish any of your service on the Marketplace.</p>
+<h4>Setup the wallet</h4>
+<p>To publish a service, first you need to setup your wallet and transfer a few Ether into it to pay for transaction fee.</p>
+<ul>
+<li>To create your wallet, execute:</li>
+</ul>
+<pre><code class="lang-bash">mesg-core wallet create
+</code></pre>
+<p>Enter a desired passphrase and hit enter. You should get a new account with an address like <code>0x87a3e7de89881e2336c128d2b5c0f227885826d1</code>.</p>
+<ul>
+<li>Backup the passphrase and the account itself by running:</li>
+</ul>
+<pre><code class="lang-auto">mesg-core wallet export 0x87a3e7de89881e2336c128d2b5c0f227885826d1
+</code></pre>
+<p>Replace <code>0x87a3e7de89881e2336c128d2b5c0f227885826d1</code> by the account’s address created during the previous command. Enter the passphrase and hit enter.</p>
+<p>Save the outputted JSON in a secured place. You may need it later to import it and not lose access to your tokens.</p>
+<ul>
+<li>Transfer some Ether to your address to pay for transaction fees. I recommend to transfer 0.1 ETH.</li>
+</ul>
+<h4>Publish a service</h4>
+<p>Now that your wallet is ready, let’s publish a service.</p>
+<p>Simply execute the following command:</p>
+<pre><code class="lang-auto">mesg-core marketplace publish PATH_TO_THE_SERVICE
+</code></pre>
+<p>Answer the questions, wait for the source code to be published on IPFS, wait for the Ethereum transaction to get mined and it should be done!</p>
+<p>Click on the URL to display your service on the marketplace website.</p>
+<h4>Create an offer</h4>
+<p>Now that your service is published, you need to create an offer to authorize other users to purchase it. You need to specify a price in MESG Tokens and a duration in seconds. You can set the price to 0 if you want to share your service <strong>for free</strong>.</p>
+<p>Execute the following command to create an offer:</p>
+<pre><code class="lang-auto">mesg-core marketplace create-offer SERVICE_SID
+</code></pre>
+<p>Replace <code>SERVICE_SID</code> by the service’s sid returned by the command <code>publish</code>.</p>
+<p>Go back to the website or follow the link displayed by the command to see that your service has now an offer!</p>
+<p>Congratulations, you’ve fully published a service on the MESG Marketplace!</p>
+<h3>Guide</h3>
+<p>Of course, we also update the docs website to add <a href="https://docs.mesg.com/guide/marketplace" rel="nofollow noopener">a guide about the Marketplace</a>.</p>
+<h2>Deterministic service’s hash</h2>
+<p>Another big step towards the decentralized network is the calculation of a deterministic service’s hash. Now, any deployment of the same service will return the exact same hash! This was not an easy task as services are using Docker for containerization and Docker doesn’t provide a deterministic environment, thus a deterministic hash.</p>
+<p>The solution we implemented is to create an hash based on source files, with only the user’s file permissions as the header, and the overridden environment variables that could change the service’s behavior. The solution seems easy but took a lot of research as file headers contain a lot of required information that are specific to the host computer. If you want to learn more about this, you can read this forum post: <a href="https://forum.mesg.com/t/services-hash/261" class="inline-onebox">Service's hash</a>.</p>
+<hr>
+<p>For the complete changelog, refer to <a href="https://github.com/mesg-foundation/core/releases/tag/v0.9.0" rel="nofollow noopener">Github</a>.</p>
+<p>To update to v0.9, follow the <a href="https://docs.mesg.com/guide/installation.html#automatic-installation" rel="nofollow noopener">installation process on the documentation </a></p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://forum.mesg.com/t/mesg-core-v0-9-release-notes/273">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/mesg-core-v0-9-release-notes/273</link>
+          <pubDate>Wed, 08 May 2019 09:13:53 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-273</guid>
+          <source url="https://forum.mesg.com/t/mesg-core-v0-9-release-notes/273.rss">MESG Core v0.9 Release Notes</source>
+        </item>
+        <item>
+          <title>MESG Core v0.8.1 Release Notes</title>
+          <dc:creator><![CDATA[Nicolas]]></dc:creator>
+          <category>News</category>
+          <description><![CDATA[
+            <h1>Core v0.8.1 - Bug fix</h1>
+<h2>Fixed Go services and CLI connection to Core</h2>
+<p>v0.8 introduces a bug where services in Go and the CLI were pinging the Core too often in order to prevent the connection to be dropped by Docker. The time between pings was too short and was making the Core to kill the connection for spam reason.<br>
+This version fixes this bug by using a longer time between pings.</p>
+<hr>
+<p>For the complete changelog, refer to <a href="https://github.com/mesg-foundation/core/releases/tag/v0.8.1" rel="nofollow noopener">Github </a>.</p>
+<p>To update to v0.8.1, follow the <a href="https://docs.mesg.com/guide/start-here/installation.html" rel="nofollow noopener">installation process on the documentation </a></p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://forum.mesg.com/t/mesg-core-v0-8-1-release-notes/249">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/mesg-core-v0-8-1-release-notes/249</link>
+          <pubDate>Tue, 05 Feb 2019 11:21:45 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-249</guid>
+          <source url="https://forum.mesg.com/t/mesg-core-v0-8-1-release-notes/249.rss">MESG Core v0.8.1 Release Notes</source>
+        </item>
+        <item>
+          <title>MESG Core v0.8 Release Notes</title>
+          <dc:creator><![CDATA[Nicolas]]></dc:creator>
+          <category>News</category>
+          <description><![CDATA[
+            <h1>New features in Core v0.8</h1>
+<h2>Deploy services from tarball</h2>
+<p>Deployment from tarball is now possible. Enter the URL to the tarball in the commands <code>service dev</code> and <code>service deploy</code>.</p>
+<pre><code class="lang-auto">mesg-core service deploy https://api.github.com/repos/mesg-foundation/service-ethereum/tarball/master
+</code></pre>
+<h2>Start and stop multiple services</h2>
+<p>The commands <code>service start</code> and <code>service stop</code> now accept multiple SIDs or hashes as arguments</p>
+<pre><code class="lang-auto">mesg-core service start com.mesg.ethereum com.mesg.ethereum.erc20
+mesg-core service stop com.mesg.ethereum com.mesg.ethereum.erc20
+</code></pre>
+<h2>Color in Core logs</h2>
+<p>Core can be started with the flag <code>--log-force-colors</code> to force the colorization of its logs.</p>
+<pre><code class="lang-auto">mesg-core start --log-force-colors
+</code></pre>
+<p><img src="https://forum.mesg.com/uploads/default/original/1X/80cbcca279311e8cecb0e708f94419ceb1482218.png" alt="image" width="690" height="100"></p>
+<h2>Fixed stream disconnection after inactivity</h2>
+<p>We finally fixed the automatic disconnection of a stream after a period of inactivity!</p>
+<hr>
+<p>For the complete changelog, refer to <a href="https://github.com/mesg-foundation/core/releases/tag/v0.8.0" rel="nofollow noopener">Github </a>.</p>
+<p>To update to v0.8, follow the <a href="https://docs.mesg.com/guide/start-here/installation.html#automatic-installation" rel="nofollow noopener">installation process on the documentation </a></p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://forum.mesg.com/t/mesg-core-v0-8-release-notes/239">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/mesg-core-v0-8-release-notes/239</link>
+          <pubDate>Wed, 30 Jan 2019 07:53:39 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-239</guid>
+          <source url="https://forum.mesg.com/t/mesg-core-v0-8-release-notes/239.rss">MESG Core v0.8 Release Notes</source>
+        </item>
+        <item>
+          <title>MESG Core v0.7 Release Notes</title>
+          <dc:creator><![CDATA[Nicolas]]></dc:creator>
+          <category>News</category>
+          <description><![CDATA[
+            <h1>New features in Core v0.7</h1>
+<h2>Advance data definition in service definition</h2>
+<p>Service’s definition now accept 3 new ways to describe the service’s data.</p>
+<h3>Array</h3>
+<p>We introduce the parameter <code>repeated</code> to specify arrays.<br>
+Each element of the array has the type define with the parameter <code>type</code>.</p>
+<pre><code class="lang-auto">tasks:
+  list:
+    outputs:
+      success:
+        data:
+          addresses:
+            type: String
+            repeated: true
+</code></pre>
+<pre><code class="lang-json">{
+  "addresses": ["string1", "string2", "string3"]
+}
+</code></pre>
+<h3>Nested Object</h3>
+<p>Object definition can now be a lot more precise with the introduction of the parameter <code>object</code>.<br>
+<code>object</code> parameter accept a map of keys / parameters.</p>
+<pre><code class="lang-auto">tasks: 
+  sign:
+    inputs:
+      transaction:
+        type: Object
+        object:
+          nonce:
+            type: Number
+          to:
+            type: String
+          value:
+            type: Number
+          gasLimit:
+            type: Number
+          gasPrice:
+            type: Number
+</code></pre>
+<pre><code class="lang-json">{
+  "transaction": {
+    "nonce": 1,
+    "to": "0x1",
+    "value": 1000000000,
+    "gasLimit": 1000000,
+    "gasPrice": 21000000
+  }
+}
+</code></pre>
+<h3>Any</h3>
+<p>The type <code>Any</code> has been added to accept any type of data. No verification is done when using this type.</p>
+<pre><code class="lang-auto">tasks: 
+  exec:
+    inputs:
+      data:
+        type: Any
+</code></pre>
+<p>More info in the docs: <a href="https://docs.mesg.com/guide/service/service-file.html" rel="nofollow noopener">https://docs.mesg.com/guide/service/service-file.html</a></p>
+<hr>
+<p>For the complete changelog, refer to <a href="https://github.com/mesg-foundation/core/releases/tag/v0.7.0" rel="nofollow noopener">Github </a>.</p>
+<p>To update to v0.7, follow the <a href="https://docs.mesg.com/guide/start-here/installation.html#automatic-installation" rel="nofollow noopener">installation process on the documentation </a></p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://forum.mesg.com/t/mesg-core-v0-7-release-notes/197">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/mesg-core-v0-7-release-notes/197</link>
+          <pubDate>Wed, 16 Jan 2019 11:20:59 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-197</guid>
+          <source url="https://forum.mesg.com/t/mesg-core-v0-7-release-notes/197.rss">MESG Core v0.7 Release Notes</source>
+        </item>
+        <item>
+          <title>MESG-js v2.0.0 Release Notes</title>
+          <dc:creator><![CDATA[ilgooz]]></dc:creator>
+          <category>News</category>
+          <description><![CDATA[
+            <p>A new version of the  <code>mesg-js</code>  library has been released:  <code>v2.0.0</code>.<br>
+You can install it to your project with <code>npm i -S mesg-js@latest</code></p>
+<p>With this release we completely changed the high level application APIs. We removed the <em>When-Then</em> logic and now have much more flexible new 4 funcs.</p>
+<p>Added funcs are:</p>
+<ul>
+<li><code>listenEvent()</code></li>
+<li><code>listenResult()</code></li>
+<li><code>executeTask()</code></li>
+<li><code>executeTaskAndWaitResult()</code></li>
+</ul>
+<p>Please see the new application APIs <a href="https://github.com/mesg-foundation/mesg-js#application" rel="nofollow noopener">here</a>. And check the updated <a href="https://docs.mesg.com/guide/start-here/quick-start-guide.html#_4-create-the-application" rel="nofollow noopener">quick start tutorial</a> to see these new APIs in action.</p>
+<p>With this release we also updated TS types to be more precise, introduced options to <code>application()</code> constructor to configure Core’s endpoint and made some internal improvements.</p>
+<p>Happy coding… <img src="https://forum.mesg.com/images/emoji/twitter/slight_smile.png?v=6" title=":slight_smile:" class="emoji" alt=":slight_smile:"></p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://forum.mesg.com/t/mesg-js-v2-0-0-release-notes/196">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/mesg-js-v2-0-0-release-notes/196</link>
+          <pubDate>Wed, 16 Jan 2019 09:04:12 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-196</guid>
+          <source url="https://forum.mesg.com/t/mesg-js-v2-0-0-release-notes/196.rss">MESG-js v2.0.0 Release Notes</source>
+        </item>
+        <item>
+          <title>MESG Core v0.6 Release Notes</title>
+          <dc:creator><![CDATA[Nicolas]]></dc:creator>
+          <category>News</category>
+          <description><![CDATA[
+            <h1>New features in Core v0.6</h1>
+<h2>Env variable in Services</h2>
+<p>Service’s definition files now accept <code>env</code> variables!<br>
+Service developers can set the <code>env</code> variable in <code>configuration</code> and in <code>dependencies</code>. Eg:</p>
+<pre><code class="lang-auto">name: "Parity"
+sid: "com.mesg.ethereum.parity.dev"
+configuration:
+  env:
+    - MESG_ETH_ENDPOINT=http://parity:8545
+dependencies:
+  parity:
+    image: parity/parity:v2.1.3
+    env:
+      - MESG_TEST=HELLO
+</code></pre>
+<p>Users can override the env variable’s values when deploying a service. Eg:</p>
+<pre><code class="lang-auto">mesg-core service deploy https://github.com/mesg-foundation/service-ethereum --env MESG_ETH_ENDPOINT=http://parity:8546
+</code></pre>
+<h2>Execution error</h2>
+<p>Execution have a new state “failed” that is used when unexpected errors occurred on the service side. Application can now be notified when executions failed and the service didn’t work as expected.</p>
+<hr>
+<p>For the complete changelog, refer to <a href="https://github.com/mesg-foundation/core/releases/tag/v0.6.0" rel="nofollow noopener">Github </a>.</p>
+<p>To update to v0.6, follow the <a href="https://docs.mesg.com/guide/start-here/installation.html#automatic-installation" rel="nofollow noopener">installation process on the documentation </a></p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://forum.mesg.com/t/mesg-core-v0-6-release-notes/166">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/mesg-core-v0-6-release-notes/166</link>
+          <pubDate>Sat, 29 Dec 2018 08:14:43 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-166</guid>
+          <source url="https://forum.mesg.com/t/mesg-core-v0-6-release-notes/166.rss">MESG Core v0.6 Release Notes</source>
+        </item>
+        <item>
+          <title>MESG Core v0.5 Release Notes</title>
+          <dc:creator><![CDATA[Nicolas]]></dc:creator>
+          <category>News</category>
+          <description><![CDATA[
+            <h1>New features in Core v0.5</h1>
+<h2>Service ID</h2>
+<p>A new parameter <code>SID</code> has been introduced in the service definition file.<br>
+Developer can know specify a unique id to their services that will stay the same even if the service is deploy on another computer! No more nightmare of updating the Service’s ID after every deployment.</p>
+<p>Example:<br>
+In the service definition file (<code>mesg.yml</code>):</p>
+<pre><code class="lang-auto">name: "Ethereum"
+sid: "com.mesg.ethereum"
+description: "Ethereum Service to interact with any Smart Contract"
+</code></pre>
+<p>And then, use the <code>SID</code> in any command, API call or in the libraries. Eg:</p>
+<pre><code class="lang-auto">mesg-core service start com.mesg.ethereum
+</code></pre>
+<h2>Persistent volumes</h2>
+<p>Service’s volume are now persistent. It means that if you stop and start a service, it will still have access to its data before the stop.<br>
+Service’s developers have to set the persistent volume under the  <code>volumes</code> parameter in the service definition.</p>
+<p>Example:</p>
+<pre><code class="lang-auto">configuration:
+  volumes:
+    - /home/ethereum
+</code></pre>
+<hr>
+<p>For the complete changelog, refer to <a href="https://github.com/mesg-foundation/core/releases/tag/v0.5.0" rel="nofollow noopener">Github </a>.</p>
+<p>To update to v0.5, follow the <a href="https://docs.mesg.com/guide/start-here/installation.html#automatic-installation" rel="nofollow noopener">installation process on the documentation </a></p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://forum.mesg.com/t/mesg-core-v0-5-release-notes/136">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/mesg-core-v0-5-release-notes/136</link>
+          <pubDate>Wed, 12 Dec 2018 08:58:40 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-136</guid>
+          <source url="https://forum.mesg.com/t/mesg-core-v0-5-release-notes/136.rss">MESG Core v0.5 Release Notes</source>
+        </item>
+        <item>
+          <title>MESG Core v0.4.0 Release Notes</title>
+          <dc:creator><![CDATA[Anthony]]></dc:creator>
+          <category>News</category>
+          <description><![CDATA[
+            <h2>New features in Core v0.4.0</h2>
+<h3>Call dependency of a MESG Service</h3>
+<p>You can now access the dependencies of your service through the Network. This is really helpful if you want to integrate, for example, a database, a blockchain client or anything else you need to connect to that exposes a server.</p>
+<p>You can find an example in the <a href="https://docs.mesg.com/guide/service/dockerize-the-service.html#add-a-configuration-and-dependencies">documentation</a>.</p>
+<h3>Executions stored in a database</h3>
+<p>Each execution done by your application is now saved in a database. This considerably reduces the memory required by <strong>mesg-core</strong>, and is a step towards reaching decentralized functionality.</p>
+<p>For the complete changelog, refer to <a href="https://github.com/mesg-foundation/core/releases/tag/v0.4.0">Github </a>.</p>
+<p>To update to v0.4.0, follow the <a href="https://docs.mesg.com/guide/start-here/installation.html#automatic-installation">installation process on the documentation</a></p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://forum.mesg.com/t/mesg-core-v0-4-0-release-notes/116">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/mesg-core-v0-4-0-release-notes/116</link>
+          <pubDate>Mon, 12 Nov 2018 04:04:52 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-116</guid>
+          <source url="https://forum.mesg.com/t/mesg-core-v0-4-0-release-notes/116.rss">MESG Core v0.4.0 Release Notes</source>
+        </item>
+        <item>
+          <title>MESG-js v1.4.0 Release Notes</title>
+          <dc:creator><![CDATA[Anthony]]></dc:creator>
+          <category>News</category>
+          <description><![CDATA[
+            <h1>MESG-js v1.4.0</h1>
+<p>A new version of the <code>mesg-js</code> library has been released: <code>v1.4.0</code>.</p>
+<p>This version brings exciting new features to application developers, such as:</p>
+<ul>
+<li>Filtering data</li>
+<li>Execution tags</li>
+</ul>
+<h2>Filtering data</h2>
+<p>It’s now possible to filter any data being listened to from <strong>events</strong> and <strong>results</strong>.<br>
+This enables a more customized and granular flow in your applications.</p>
+<h4><code>whenEvent</code></h4>
+<pre><code class="lang-auto">MESG.whenEvent({
+  serviceID: 'xxx',
+  eventKey: 'xxx',
+  filter: function (eventKey, eventData) {
+    // Filter here is based on the eventKey (string)
+    // or the eventData (object) containing all the event's data
+    return true
+  }
+}, taskDefinition)
+</code></pre>
+<h4><code>whenResult</code></h4>
+<pre><code class="lang-auto">MESG.whenResult({
+  serviceID: 'xxx',
+  outputKey: 'xxx',
+  filter: function (outputKey, outputData, taskKey, tags) {
+    // Filter here is based
+    // on the result's outputKey (string)
+    // or the result's outputData (object) containing all the data from the result
+    // or the result's taskKey (string)
+    // or the result's tags ([]string) containing the execution's tags
+    returns true
+  }
+}, taskDefinition)
+</code></pre>
+<p>You may notice the introduction of execution tags, keep reading for more info <img src="https://forum.mesg.com/images/emoji/twitter/wink.png?v=6" title=":wink:" class="emoji" alt=":wink:"></p>
+<h2>Execution tags</h2>
+<p>A task’s executions can now accept tags.<br>
+You can attribute a list of tags to the task executions, then create task’s result filter based on them.<br>
+The tags system is powerful and customizable, as tags are not passed onto services.<br>
+You can create your own business-oriented logic without having to stick with the services’ logic.</p>
+<p>Tags can help you to:</p>
+<ul>
+<li>categorize a task’s executions</li>
+<li>add metadata to executions</li>
+<li>filter based on data which is not related to the task’s input and output data</li>
+</ul>
+<p>There are two different ways to attribute tags to task’s executions:</p>
+<h3>Static definition</h3>
+<pre><code class="lang-auto">MESG.whenEvent(eventDefinition, {
+  serviceID: 'yyy',
+  taskKey: 'yyy',
+  inputs: { foo: 'bar' },
+  tags: [
+    'metaX',
+    'metricsA',
+    ...
+  ]
+})
+</code></pre>
+<h3>Dynamic definition</h3>
+<h4>whenEvent</h4>
+<pre><code class="lang-auto">MESG.whenEvent(eventDefinition, {
+  serviceID: 'yyy',
+  taskKey: 'yyy',
+  inputs: { foo: 'bar' },
+  tags: function (eventKey, eventData) {
+    // Create the tags ([]string) here based
+    // on the eventKey (string)
+    // or the eventData (object) that contains all the event's data
+    return [
+      eventKey,
+      eventData.foo
+    ] 
+  }
+})
+</code></pre>
+<h4>whenResult</h4>
+<pre><code class="lang-auto">MESG.whenResult(resultDefinition, {
+  serviceID: 'yyy',
+  taskKey: 'yyy',
+  inputs: { foo: 'bar' },
+  tags: function (outputKey, outputData, taskKey, tags) {
+    // Create the tags ([]string) here based 
+    // on the result's outputKey (string)
+    // or the result's outputData (object) containing all the data from the result
+    // or the result's taskKey (string)
+    // or the result's tags ([]string)
+    return [
+      outputKey,
+      outputData.foo,
+      taskKey,
+      tags.foo
+    ] 
+  }
+})
+</code></pre>
+            <p><small>3 posts - 2 participants</small></p>
+            <p><a href="https://forum.mesg.com/t/mesg-js-v1-4-0-release-notes/99">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/mesg-js-v1-4-0-release-notes/99</link>
+          <pubDate>Fri, 19 Oct 2018 12:28:56 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-99</guid>
+          <source url="https://forum.mesg.com/t/mesg-js-v1-4-0-release-notes/99.rss">MESG-js v1.4.0 Release Notes</source>
+        </item>
+        <item>
+          <title>MESG Core V0.3.0 Release Notes</title>
+          <dc:creator><![CDATA[will]]></dc:creator>
+          <category>News</category>
+          <description><![CDATA[
+            <p>With this update, we are reverting Core’s version back to V0.3.0 in order to fall in line with traditional semantic versioning. Version 1 of MESG Core will not debut until we have ensured that the Core API does not require additional alterations.</p>
+<p>The V0.3.0 release will apply to MESG Core and will resolve bugs we’ve discovered in testing, in addition to the debut of new features.</p>
+<p><strong>New features in Core V0.3.0:</strong></p>
+<ul>
+<li>
+<p><strong>Multiple Cores running on the same computer.</strong><br>
+Allowing multiple copies of MESG Core to run on the same computer is the first step in the implementation of the network. It increases flexibility in implementation by allowing the testing of the network without requiring the involvement of multiple computers.</p>
+</li>
+<li>
+<p><strong>Configuration of the CLI’s output with --no-color and --no-spinner flags. Colorize JSON</strong><br>
+We’ve created a better general user experience while using the CLI. Once servers start, apps can now automatically execute MESG-related functionalities using a CLI.</p>
+</li>
+</ul>
+<p><img src="https://forum.mesg.com/uploads/default/original/1X/ac1eb10bbf7b85be3c849d515637a3619801fa49.png" alt="CLI%20Output" width="690" height="79"></p>
+<ul>
+<li>
+<p><strong>Added required validations on Services’ task, event and output data</strong><br>
+We’ve added more validations and tests for the development of Services. Each time you deploy a Service, you will receive feedback from Core, helping improve the development workflow of the Service.</p>
+</li>
+<li>
+<p><strong>BREAKING CHANGE. Added support for .dockerignore, and removed support of .mesgignore</strong><br>
+Please rename .mesgignore to .dockerignore as a solution to this breaking change. This was done in order to ensure easier adoption and increased compatibility between Docker and MESG.</p>
+</li>
+</ul>
+<p>For a complete list of new, updated and removed features, refer to <a href="https://github.com/mesg-foundation/core/releases/tag/v0.3.0" rel="nofollow noopener">Github</a>.</p>
+            <p><small>2 posts - 1 participant</small></p>
+            <p><a href="https://forum.mesg.com/t/mesg-core-v0-3-0-release-notes/88">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/mesg-core-v0-3-0-release-notes/88</link>
+          <pubDate>Tue, 09 Oct 2018 09:08:41 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-88</guid>
+          <source url="https://forum.mesg.com/t/mesg-core-v0-3-0-release-notes/88.rss">MESG Core V0.3.0 Release Notes</source>
+        </item>
+        <item>
+          <title>About the News category</title>
+          <dc:creator><![CDATA[Nicolas]]></dc:creator>
+          <category>News</category>
+          <description><![CDATA[
+            <p>Find out what’s new at MESG. Find out about new releases, events we are attending, new hires, and meet our growing community that make it all possible <img src="https://forum.mesg.com/images/emoji/twitter/clap.png?v=6" title=":clap:" class="emoji" alt=":clap:"><img src="https://forum.mesg.com/images/emoji/twitter/clap.png?v=6" title=":clap:" class="emoji" alt=":clap:"></p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://forum.mesg.com/t/about-the-news-category/26">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/about-the-news-category/26</link>
+          <pubDate>Thu, 30 Aug 2018 05:45:26 +0000</pubDate>
+          <discourse:topicPinned>Yes</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-26</guid>
+          <source url="https://forum.mesg.com/t/about-the-news-category/26.rss">About the News category</source>
+        </item>
+  </channel>
+</rss>

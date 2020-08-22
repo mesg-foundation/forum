@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>New gRPC NameService API</title>
+    <link>https://forum.mesg.com/t/new-grpc-nameservice-api/324</link>
+    <description>The PR https://github.com/mesg-foundation/engine/pull/1072 replaces hash type by `[]byte`.
+This is good but it removes the support of Service SID.
+It needs to be added back, but as a client side system that use a new and clean API to resolve the sid.
+
+I suggest to create a new gRPC service `NameService` that should be compatible with any resource identified by a unique `hash`. Of course, we will only implement sid on this new service for now. But it will prepare the foundation for a more general purpose name service.
+
+```
+service NameService {
+  rpc List(ListNameServiceRequest) returns (ListNameServiceResponse) {}
+}
+
+message ListNameServiceRequest {
+  string name = 1;
+}
+
+message ListNameServiceResponse {
+  []string hashes = 1;
+}
+```
+
+The List api should return a list of hashes&#39; resources that match `name == service.sid`.
+
+The current only way to add a new name will be by creating a new service with a sid.
+
+We will be able to add new APIs to this service to completely separate sid and name resolution.</description>
+    
+    <lastBuildDate>Mon, 24 Jun 2019 10:55:33 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/new-grpc-nameservice-api/324.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>New gRPC NameService API</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Conclusion after the meeting:</p>
+<ul>
+<li>The resolution will be done in the CLI and JS Lib using the service list or instance list APIs</li>
+<li>Add a filter based on sid to service.list and/or instance.list if <strong>really</strong> needed</li>
+<li>We will think about a new API later</li>
+</ul>
+          <p><a href="https://forum.mesg.com/t/new-grpc-nameservice-api/324/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/new-grpc-nameservice-api/324/3</link>
+        <pubDate>Mon, 24 Jun 2019 10:55:33 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-324-3</guid>
+        <source url="https://forum.mesg.com/t/new-grpc-nameservice-api/324.rss">New gRPC NameService API</source>
+      </item>
+      <item>
+        <title>New gRPC NameService API</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <p>I like the idea of NameService but we need to ask why we need such nameservice in the first place.</p>
+<p>Handle sid is for developer purpose only so why can’t someone just use a function in bashrc and use it?</p>
+<pre><code class="lang-auto">function mesg-sid {
+  mesg-cli service:list | grep $1 | akw '{print $3}'
+}
+</code></pre>
+<p>Why do we want to implement something for dev purpose only? Without version, sid can’t be used across the network because the results will be ambiguous</p>
+          <p><a href="https://forum.mesg.com/t/new-grpc-nameservice-api/324/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/new-grpc-nameservice-api/324/2</link>
+        <pubDate>Mon, 24 Jun 2019 08:01:46 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-324-2</guid>
+        <source url="https://forum.mesg.com/t/new-grpc-nameservice-api/324.rss">New gRPC NameService API</source>
+      </item>
+      <item>
+        <title>New gRPC NameService API</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>The PR <a href="https://github.com/mesg-foundation/engine/pull/1072" rel="nofollow noopener">https://github.com/mesg-foundation/engine/pull/1072</a> replaces hash type by <code>[]byte</code>.<br>
+This is good but it removes the support of Service SID.<br>
+It needs to be added back, but as a client side system that use a new and clean API to resolve the sid.</p>
+<p>I suggest to create a new gRPC service <code>NameService</code> that should be compatible with any resource identified by a unique <code>hash</code>. Of course, we will only implement sid on this new service for now. But it will prepare the foundation for a more general purpose name service.</p>
+<pre><code class="lang-auto">service NameService {
+  rpc List(ListNameServiceRequest) returns (ListNameServiceResponse) {}
+}
+
+message ListNameServiceRequest {
+  string name = 1;
+}
+
+message ListNameServiceResponse {
+  []string hashes = 1;
+}
+</code></pre>
+<p>The List api should return a list of hashes’ resources that match <code>name == service.sid</code>.</p>
+<p>The current only way to add a new name will be by creating a new service with a sid.</p>
+<p>We will be able to add new APIs to this service to completely separate sid and name resolution.</p>
+          <p><a href="https://forum.mesg.com/t/new-grpc-nameservice-api/324/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/new-grpc-nameservice-api/324/1</link>
+        <pubDate>Mon, 24 Jun 2019 04:23:51 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-324-1</guid>
+        <source url="https://forum.mesg.com/t/new-grpc-nameservice-api/324.rss">New gRPC NameService API</source>
+      </item>
+  </channel>
+</rss>

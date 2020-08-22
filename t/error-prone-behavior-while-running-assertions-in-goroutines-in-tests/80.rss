@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Error-prone behavior while running assertions in goroutines in tests</title>
+    <link>https://forum.mesg.com/t/error-prone-behavior-while-running-assertions-in-goroutines-in-tests/80</link>
+    <description>Let&#39;s check this example [1](https://github.com/mesg-foundation/core/blob/dcc0a58/service/service_test.go#L75-L78), [2](https://github.com/mesg-foundation/core/blob/dcc0a58/service/service_test.go#L99).
+
+1- Here there is an assertion made with _require.Equal()_. If this assertion is not positive [T.FailNow()](https://golang.org/pkg/testing/#T.FailNow) will be called inside which stops the execution of code in the goroutine.
+
+2- This code internally depends on all the status messages will be read from the status chan. But since the execution is stopped in the related goroutine there will be no reads and the actual test will block forever.
+
+In the doc of _T.FailNow()_ it is not recommended to call it in a separate goroutine. I think we should follow this rule as much as it&#39;s possible.</description>
+    
+    <lastBuildDate>Thu, 04 Oct 2018 11:36:22 +0000</lastBuildDate>
+    <category>Development</category>
+    <atom:link href="https://forum.mesg.com/t/error-prone-behavior-while-running-assertions-in-goroutines-in-tests/80.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Error-prone behavior while running assertions in goroutines in tests</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="3" data-topic="80">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/nicolas/40/10_1.png" class="avatar"> Nicolas:</div>
+<blockquote>
+<p>In the case of <a href="https://github.com/mesg-foundation/core/blob/dcc0a58/service/service_test.go#L75-L78">https://github.com/mesg-foundation/core/blob/dcc0a58/service/service_test.go#L75-L78</a>, I think you don’t even need the go routine.</p>
+</blockquote>
+</aside>
+<p>Yes, that is correct.</p>
+          <p><a href="https://forum.mesg.com/t/error-prone-behavior-while-running-assertions-in-goroutines-in-tests/80/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/error-prone-behavior-while-running-assertions-in-goroutines-in-tests/80/4</link>
+        <pubDate>Thu, 04 Oct 2018 11:36:22 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-80-4</guid>
+        <source url="https://forum.mesg.com/t/error-prone-behavior-while-running-assertions-in-goroutines-in-tests/80.rss">Error-prone behavior while running assertions in goroutines in tests</source>
+      </item>
+      <item>
+        <title>Error-prone behavior while running assertions in goroutines in tests</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>I agree with you.</p>
+<p>I would also recommend to make execute the assertion in the main thread and execution in a separate thread.</p>
+<p>In the case of <a href="https://github.com/mesg-foundation/core/blob/dcc0a58/service/service_test.go#L75-L78">https://github.com/mesg-foundation/core/blob/dcc0a58/service/service_test.go#L75-L78</a>, I think you don’t even need the go routine.<br>
+The chan statuses can be populated and then tested after New finish.<br>
+Eg:</p>
+<pre><code class="lang-auto">s, err = New(archive,
+	ContainerOption(mc),
+	DeployStatusOption(statuses),
+)
+
+require.Equal(t, DeployStatus{
+	Message: "Receiving service context...",
+	Type:    DRunning,
+}, &lt;-statuses)
+
+require.Equal(t, DeployStatus{
+	Message: "Service context received with success.",
+	Type:    DDonePositive,
+}, &lt;-statuses)
+
+require.Equal(t, DeployStatus{
+	Message: "Building Docker image...",
+	Type:    DRunning,
+}, &lt;-statuses)
+
+require.Equal(t, DeployStatus{
+	Message: "Image built with success.",
+	Type:    DDonePositive,
+}, &lt;-statuses)
+</code></pre>
+          <p><a href="https://forum.mesg.com/t/error-prone-behavior-while-running-assertions-in-goroutines-in-tests/80/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/error-prone-behavior-while-running-assertions-in-goroutines-in-tests/80/3</link>
+        <pubDate>Thu, 04 Oct 2018 10:58:35 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-80-3</guid>
+        <source url="https://forum.mesg.com/t/error-prone-behavior-while-running-assertions-in-goroutines-in-tests/80.rss">Error-prone behavior while running assertions in goroutines in tests</source>
+      </item>
+      <item>
+        <title>Error-prone behavior while running assertions in goroutines in tests</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="1" data-topic="80">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/ilgooz/40/8_1.png" class="avatar"> ilgooz:</div>
+<blockquote>
+<p>In the doc of <em>T.FailNow()</em> it is not recommended to call it in a separate goroutine. I think we should follow this rule as much as it’s possible.</p>
+</blockquote>
+</aside>
+<p>Good point, we should call t.Error/Fail (testing pkg) or testify assert pkg.</p>
+          <p><a href="https://forum.mesg.com/t/error-prone-behavior-while-running-assertions-in-goroutines-in-tests/80/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/error-prone-behavior-while-running-assertions-in-goroutines-in-tests/80/2</link>
+        <pubDate>Thu, 04 Oct 2018 06:35:29 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-80-2</guid>
+        <source url="https://forum.mesg.com/t/error-prone-behavior-while-running-assertions-in-goroutines-in-tests/80.rss">Error-prone behavior while running assertions in goroutines in tests</source>
+      </item>
+      <item>
+        <title>Error-prone behavior while running assertions in goroutines in tests</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>Let’s check this example <a href="https://github.com/mesg-foundation/core/blob/dcc0a58/service/service_test.go#L75-L78">1</a>, <a href="https://github.com/mesg-foundation/core/blob/dcc0a58/service/service_test.go#L99">2</a>.</p>
+<p>1- Here there is an assertion made with <em>require.Equal()</em>. If this assertion is not positive <a href="https://golang.org/pkg/testing/#T.FailNow">T.FailNow()</a> will be called inside which stops the execution of code in the goroutine.</p>
+<p>2- This code internally depends on all the status messages will be read from the status chan. But since the execution is stopped in the related goroutine there will be no reads and the actual test will block forever.</p>
+<p>In the doc of <em>T.FailNow()</em> it is not recommended to call it in a separate goroutine. I think we should follow this rule as much as it’s possible.</p>
+          <p><a href="https://forum.mesg.com/t/error-prone-behavior-while-running-assertions-in-goroutines-in-tests/80/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/error-prone-behavior-while-running-assertions-in-goroutines-in-tests/80/1</link>
+        <pubDate>Wed, 03 Oct 2018 17:14:39 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-80-1</guid>
+        <source url="https://forum.mesg.com/t/error-prone-behavior-while-running-assertions-in-goroutines-in-tests/80.rss">Error-prone behavior while running assertions in goroutines in tests</source>
+      </item>
+  </channel>
+</rss>

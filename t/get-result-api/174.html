@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <title>Get result api - Engine - MESG Community</title>
+    <meta name="description" content="We have a problem when we need to execute a task and listen for its result. 
+We solve it by adding a time.Sleep between listenResult and executeTask, eg: 
+
+ 
+The same pattern is used in the api package and also in a lot &amp;hellip;">
+    <meta name="generator" content="Discourse 2.5.0.beta5 - https://github.com/discourse/discourse version 00aab498297cba8f977c1e0eb17b7d38ff06cc68">
+<link rel="icon" type="image/png" href="../../uploads/default/optimized/1X/9f11b6ddfa02bffdbec79487592a0573a0236cb5_2_32x32.png">
+<link rel="apple-touch-icon" type="image/png" href="../../uploads/default/optimized/1X/53630361a40ad76e1733dd0b0f486e9ae2f4f4d6_2_180x180.png">
+<meta name="theme-color" content="#491e8c">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+<link rel="canonical" href="174.html" />
+<script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","url":"https://forum.mesg.com","potentialAction":{"@type":"SearchAction","target":"https://forum.mesg.com/search?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
+<link rel="search" type="application/opensearchdescription+xml" href="../../opensearch.xml" title="MESG Community Search">
+
+      <link href="../../stylesheets/desktop_3_52e3411e87658e862890db7bd06899cf49ad5f59.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop" data-theme-id="7"/>
+      <link href="../../stylesheets/desktop_theme_7_bf4f2d3d8a71e6ee907065be9a79df3d849bd29c.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop_theme" data-theme-id="7"/>
+    
+    <meta id="data-ga-universal-analytics" data-tracking-code="UA-117583862-1" data-json="{&quot;cookieDomain&quot;:&quot;auto&quot;}" data-auto-link-domains="">
+
+<link rel="preload" href="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js" as="script">
+<script src="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js"></script>
+
+
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of &#39;Get result api&#39;" href="174.rss" />
+    <meta property="og:site_name" content="MESG Community" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:url" content="https://forum.mesg.com/t/get-result-api/174" />
+<meta name="twitter:url" content="https://forum.mesg.com/t/get-result-api/174" />
+<meta property="og:title" content="Get result api" />
+<meta name="twitter:title" content="Get result api" />
+<meta property="og:description" content="We have a problem when we need to execute a task and listen for its result.  We solve it by adding a time.Sleep between listenResult and executeTask, eg:      The same pattern is used in the api package and also in a lot of simple application. We were also thinking to create an helper in the mesg-js lib to ease the use of this weird pattern.  Does it make sense to use the listenResult stream to get the result of only one execution? No.  Even more, what if we want to get the result of a past exec..." />
+<meta name="twitter:description" content="We have a problem when we need to execute a task and listen for its result.  We solve it by adding a time.Sleep between listenResult and executeTask, eg:      The same pattern is used in the api package and also in a lot of simple application. We were also thinking to create an helper in the mesg-js lib to ease the use of this weird pattern.  Does it make sense to use the listenResult stream to get the result of only one execution? No.  Even more, what if we want to get the result of a past exec..." />
+<meta name="twitter:label1" value="Reading time" />
+<meta name="twitter:data1" value="3 mins 🕑" />
+<meta name="twitter:label2" value="Likes" />
+<meta name="twitter:data2" value="1 ❤" />
+<meta property="article:published_time" content="2019-01-04T10:41:15+00:00" />
+<meta property="og:ignore_canonical" content="true" />
+
+
+
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"QAPage","name":"Get result api","mainEntity":{"@type":"Question","name":"Get result api","text":"We have a problem when we need to execute a task and listen for its result.\n\nWe solve it by adding a time.Sleep between listenResult and executeTask, eg:\n\n<a href="https://forum.mesg.com/t/get-result-api/\&quot;https://github.com/mesg-foundation/core/blob/85edf1fd53630682a93810154a7796154add575b/commands/service_execute.go#L82-L92\"" target=\"_blank\" rel=\"nofollow noopener\">mesg-foundation/core/blob/85edf1fd53630682a93810154a7796154add575b/commands/service_execute.go#L82-L92<\/a>\n\nlistenResultsC, resultsErrC, e&hellip;","upvoteCount":0,"answerCount":1,"dateCreated":"2019-01-04T10:41:15.241Z","author":{"@type":"Person","name":"Nicolas"},"acceptedAnswer":{"@type":"Answer","text":"Let’s close this topic for now and open a new one about implementing Execution APIs","upvoteCount":0,"dateCreated":"2019-01-08T05:13:51.670Z","url":"https://forum.mesg.com/t/get-result-api/174/11","author":{"@type":"Person","name":"Nicolas"}}}}</script>
+  </head>
+  <body class="crawler">
+    
+    <header>
+      <a href="../../index.html">
+          <img src="../../uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png" alt="MESG Community" id="site-logo" style="max-width: 150px;">
+      </a>
+    </header>
+    <div id="main-outlet" class="wrap">
+        <div id="topic-title">
+    <h1>
+      <a href="174.html">Get result api</a>
+    </h1>
+
+      <div class="topic-category" itemscope itemtype="http://schema.org/BreadcrumbList">
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../c/development.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #AB9364'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Development</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="1" />
+          </span>
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../c/development/engine.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #AB9364'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Engine</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="2" />
+          </span>
+      </div>
+
+      <div class="topic-category">
+        <div class='discourse-tags list-tags'>
+            <a href='../../tag/proposal.html' class='discourse-tag' rel="tag">proposal</a>
+        </div>
+      </div>
+  </div>
+
+  
+
+
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="174.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2019-01-04T10:41:15Z' class='post-time'>
+                January 4, 2019, 10:41am
+              </time>
+              <meta itemprop='dateModified' content='2019-01-04T10:41:15Z'>
+          <span itemprop='position'>#1</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>We have a problem when we need to execute a task and listen for its result.<br>
+We solve it by adding a <code>time.Sleep</code> between <code>listenResult</code> and <code>executeTask</code>, eg:<br>
+<aside class="onebox githubblob">
+  <header class="source">
+      <a href="https://github.com/mesg-foundation/core/blob/85edf1fd53630682a93810154a7796154add575b/commands/service_execute.go#L82-L92" target="_blank" rel="nofollow noopener">github.com</a>
+  </header>
+  <article class="onebox-body">
+    <h4><a href="https://github.com/mesg-foundation/core/blob/85edf1fd53630682a93810154a7796154add575b/commands/service_execute.go#L82-L92" target="_blank" rel="nofollow noopener">mesg-foundation/core/blob/85edf1fd53630682a93810154a7796154add575b/commands/service_execute.go#L82-L92</a></h4>
+<pre class="onebox"><code class="lang-go"><ol class="start lines" start="82" style="counter-reset: li-counter 81 ;">
+<li>		listenResultsC, resultsErrC, err = c.e.ServiceListenResults(args[0], c.taskKey, "", tags)</li>
+<li>		if err != nil {</li>
+<li>			return</li>
+<li>		}</li>
+<li>
+</li>
+<li>		// XXX: sleep because listen stream may not be ready to stream the data</li>
+<li>		// and execution will done before stream is ready. In that case the response</li>
+<li>		// wlll never come TODO: investigate</li>
+<li>		time.Sleep(1 * time.Second)</li>
+<li>
+</li>
+<li>		err = c.e.ServiceExecuteTask(args[0], c.taskKey, inputData, tags)</li>
+</ol></code></pre>
+
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+</p>
+<p>The same pattern is used in the <code>api</code> package and also in a lot of simple application. We were also thinking to create an helper in the mesg-js lib to ease the use of this weird pattern.</p>
+<p>Does it make sense to use the <code>listenResult</code> stream to get the result of only one execution? No.<br>
+Even more, what if we want to get the result of a past execution? We don’t have any api for it.</p>
+<p>That’s why I’m suggesting to add a new very simple api:</p>
+<pre><code class="lang-auto">service Core {
+  // Get the result of a specific execution.
+  // If the execution is still in progress, it waits until the execution finishes.
+  rpc GetResult(GetResultRequest) returns (ResultData) {}
+}
+
+message GetResultRequest {
+  string executionID = 1;             // The unique identifier of the execution.
+}
+</code></pre>
+<p><a class="mention" href="../../u/anthony.html">@Anthony</a> <a class="mention" href="../../u/krhubert.html">@krhubert</a> <a class="mention" href="../../u/ilgooz.html">@ilgooz</a> what do you think?</p>
+        </div>
+
+        <meta itemprop='headline' content='Get result api'>
+          <meta itemprop='keywords' content='proposal'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+            <div class='crawler-linkback-list' itemscope itemtype='http://schema.org/ItemList'>
+                  <div itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+                    <a href="../acknowledgement-system-on-stream/172/2.html" itemprop='item'>
+                      <meta itemprop='url' content='https://forum.mesg.com/t/acknowledgement-system-on-stream/172/2'>
+                      <meta itemprop='position' content='2'>
+                      <span itemprop='name'>Acknowledgement system on stream</span>
+                    </a>
+                  </div>
+            </div>
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="174.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2019-01-04T11:16:05Z' class='post-time'>
+                January 4, 2019, 11:16am
+              </time>
+              <meta itemprop='dateModified' content='2019-01-04T11:16:05Z'>
+          <span itemprop='position'>#2</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>I understand the problem we want to solve here. However adding a new api should be the last option specially when we already have a similar one.</p>
+<p>We shouldn’t be adding this new api to solve the need of adding <em>sleep</em>. Because if stream is not ready to serve results when call to <em>ListenResult</em> from client is returned, this is some kind of a bug that we need to solve.</p>
+<p>On the other hand, getting results from past is a new feature. Do we really want it? Is there a use case for getting past execution results from execution id or even with other filters? If so, we should maybe consider adding the same for events as well.</p>
+        </div>
+
+        <meta itemprop='headline' content='Get result api'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="2" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="174.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2019-01-04T11:31:49Z' class='post-time'>
+                January 4, 2019, 11:31am
+              </time>
+              <meta itemprop='dateModified' content='2019-01-04T11:31:49Z'>
+          <span itemprop='position'>#3</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Agree with <a class="mention" href="../../u/ilgooz.html">@ilgooz</a>, the problem with the <code>ListenResult</code> should be solved and adding a new API will not change anything (especially an unary call that needs to wait for a result this would lead to many timeouts).</p>
+<ul>
+<li>
+<code>getResult</code> API is interesting but I think a <code>GetExecution</code> would make a lot more sense</li>
+<li>
+<code>getExecution</code> would return the <strong>execution</strong> object (event, the state of the execution and the result)</li>
+<li>We could rename <code>listenResult</code> to <code>listenExecution</code>
+</li>
+<li>
+<code>listenExecution</code> would listen for every change of state from an execution (with potential filters) and return an <strong>execution</strong> object</li>
+<li>
+<code>execute</code> API should return the same <strong>execution</strong> object</li>
+</ul>
+<p>For me this would make sense but this is new feature (that will be required) but that shouldn’t be a way to fix the <code>listenResult</code> (even if a polling on the <code>getExecution</code> would solve that)</p>
+<p>Conclusion:</p>
+<p>Not a fix for the <code>listenResult</code><br>
+New interesting feature not about result but about executions (that are entries in the database)</p>
+        </div>
+
+        <meta itemprop='headline' content='Get result api'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/krhubert.html'><span itemprop='name'>krhubert</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="174.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2019-01-04T14:14:11Z'>
+              <time itemprop='dateModified' datetime='2019-01-04T14:17:05Z' class='post-time'>
+                January 4, 2019,  2:17pm
+              </time>
+          <span itemprop='position'>#4</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <aside class="quote group-team" data-post="2" data-topic="174">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/ilgooz/40/46_1.png" class="avatar"> ilgooz:</div>
+<blockquote>
+<p>However adding a new api should be the last option specially when we already have a similar one.</p>
+</blockquote>
+</aside>
+<p>Why last option? There is nothing wrong with adding new api - we don’t participate in a contest for the lowest method count in api. Also similar api doesn’t mean the same.</p>
+<p>Moreover, we don’t have very complicated api. Take a look at any popular services api - there are hundreds of entries.</p>
+<aside class="quote group-team" data-post="3" data-topic="174">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/anthony/40/7_1.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>Agree with <a class="mention" href="../../u/ilgooz.html">@ilgooz</a>, the problem with the <code>ListenResult</code> should be solved and adding a new API will not change anything (especially an unary call that needs to wait for a result this would lead to many timeouts).</p>
+</blockquote>
+</aside>
+<p>But here is the point, there is nothing wrong with the <code>ListenResult</code> and there is no bug. The way we were thinking of this api was simply wrong and this is the pbm. <code>ListenResult</code> is like stream for results and it should be used that way (not to get a single result) - like in dev command. While doing execution and getting results the “natural” flow is:</p>
+<ul>
+<li>execute the task</li>
+<li>get the task results</li>
+</ul>
+<p>What we do now is (with status ready “bug” fix):</p>
+<ul>
+<li>generate uuid</li>
+<li>Listen for task</li>
+<li>wait for status ready</li>
+<li>execute the task</li>
+<li>read from channel results</li>
+</ul>
+<ol>
+<li>we lost time while waiting for status readiness (execution could be fired first as probably it will take longer)</li>
+<li>there are 5 steps compared to 2 just to “fit to api”</li>
+<li>we’re gonna execute lots of task in system services and we don’t want to lose time for waiting for stream (but this is in the future) (btw, we don’t want to lost time in pkgs/libs as well)</li>
+<li>we use listen (aka stream) results to get just <strong>one</strong> response. We can say that we listen for only one specific results, but if you start saying what we are doing then you realize that we want to execute and get results. We’re generating the uuid to listen for specific task and this is how we “bullshit” ourself that liste results api is all we need. In fact we should be getting the results by exeuction ID and not “magicaly uuid”</li>
+</ol>
+<aside class="quote group-team" data-post="3" data-topic="174">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/anthony/40/7_1.png" class="avatar"> Anthony:</div>
+<blockquote>
+<ul>
+<li>
+<code>getResult</code> API is interesting but I think a <code>GetExecution</code> would make a lot more sense</li>
+<li>
+<code>getExecution</code>  would return the  <strong>execution</strong>  object (event, the state of the execution and the result)</li>
+</ul>
+</blockquote>
+</aside>
+<p>As you point out, the getExecution is diffrent api</p>
+<aside class="quote group-team" data-post="3" data-topic="174">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/anthony/40/7_1.png" class="avatar"> Anthony:</div>
+<blockquote>
+<ul>
+<li>We could rename <code>listenResult</code> to <code>listenExecution</code>
+</li>
+</ul>
+</blockquote>
+</aside>
+<p>We spoke about this but we want to keep current naming convention and do one thing at a time. We also speak about naming convention in general in the whole core but it’s diffrent topic.</p>
+<aside class="quote group-team" data-post="3" data-topic="174">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/anthony/40/7_1.png" class="avatar"> Anthony:</div>
+<blockquote>
+<ul>
+<li>
+<code>listenExecution</code> would listen for every change of state from an execution (with potential filters) and return an <strong>execution</strong> object</li>
+</ul>
+</blockquote>
+</aside>
+<p>It’s ok similar to listen results</p>
+<aside class="quote group-team" data-post="3" data-topic="174">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/anthony/40/7_1.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>For me this would make sense but this is new feature (that will be required) but that shouldn’t be a way to fix the <code>listenResult</code> (even if a polling on the <code>getExecution</code> would solve that)</p>
+</blockquote>
+</aside>
+<p>So listen results is totally fine <img src="../../images/emoji/twitter/slight_smile.png%3Fv=6" title=":slight_smile:" class="emoji" alt=":slight_smile:"> and don’t need to be fixed.<br>
+I also think that we could add some kind of stream readiness (as <a class="mention" href="../../u/nicolas.html">@Nicolas</a> did in POC), even we should, but the pbm with this is we join two “bugs” into one.</p>
+<ul>
+<li>one bug is lack of stream readiness info (it’s could be implemented but usage of it is optional)</li>
+<li>the other is wrong usage of listen results (like invalid thinking)</li>
+</ul>
+<p>They both deserve to be fixed <img src="../../images/emoji/twitter/smiley.png%3Fv=6" title=":smiley:" class="emoji" alt=":smiley:"> but we can’t add the readiness info and pretend that the second bug was solved by doing so and this thread is about the second bug.</p>
+        </div>
+
+        <meta itemprop='headline' content='Get result api'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="174.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2019-01-05T08:25:39Z'>
+              <time itemprop='dateModified' datetime='2019-01-05T10:51:52Z' class='post-time'>
+                January 5, 2019, 10:51am
+              </time>
+          <span itemprop='position'>#5</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>The problem I see with a <code>getResult</code> api is when the execution didn’t finish yet.</p>
+<ul>
+<li>
+<p>If the call wait for the execution to finish, then the client could receive connection timeout error because the execution didn’t return any result fast enough.<br>
+I don’t like this approach, a unary call should return “immediately”. Otherwise, it should be a stream.</p>
+</li>
+<li>
+<p>If the call doesn’t wait, then the client have to do polling in order to get the result if the execution didn’t finish on time.<br>
+The problem here is <code>ResultData</code> doesn’t contain any info about the status of the execution.<br>
+That’s why it make sense to implement this api by returning all the <code>Execution</code> data, thus renaming the api to <code>getExecution</code>. This way, the client can actually know the state of the execution (and its result if it finished).<br>
+Then we should also implement a stream <code>listenExecution</code> (and deprecate <code>listenResult</code>) that allows client to be notified of EVERY change of state of executions (and not just the completed and failed state with current <code>listenResult</code> stream).</p>
+</li>
+</ul>
+<p>So actually, <code>getResult</code> will not solve the problem is a nice way and we should implement:</p>
+<ul>
+<li>
+<p><code>getExecution(executionID) executionData</code><br>
+Returns all execution data from the execution database based on a specific execution id.</p>
+</li>
+<li>
+<p><code>listenExecution(filters) stream executionData</code><br>
+Be notified of state change of matching executions.</p>
+</li>
+<li>
+<p>deprecate <code>listenResult</code> in favor of <code>listenExecution</code> with a filter that match executions with status completed or failed.</p>
+</li>
+<li>
+<p>even more, we could also deprecate <code>listenTask</code> api on the service side. it can be done by using <code>listenExecution</code> with a filter that match executions with status created and the right service id.<br>
+Even better, the service could set the execution as in progress when it start to process it! (currently, the core set the execution as in progress when it send it to the service), but it requires to add another api <code>updateExecution</code> (that could actually also deprecate the current <code>submitResult</code> api!).</p>
+</li>
+</ul>
+<p>Yeah… we can improve our API a lot with an generic approach using <code>Execution</code>! <img src="../../images/emoji/twitter/sunglasses.png%3Fv=6" title=":sunglasses:" class="emoji" alt=":sunglasses:"><br>
+Also, having Execution apis will make the sync of Execution across multiple Core way easier.</p>
+        </div>
+
+        <meta itemprop='headline' content='Get result api'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="1" />
+           <span class='post-likes'>1 Like</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="2" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="174.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2019-01-05T11:33:56Z' class='post-time'>
+                January 5, 2019, 11:33am
+              </time>
+              <meta itemprop='dateModified' content='2019-01-05T11:33:56Z'>
+          <span itemprop='position'>#6</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <aside class="quote group-team" data-post="5" data-topic="174">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/nicolas/40/10_2.png" class="avatar"> Nicolas:</div>
+<blockquote>
+<p>even more, we could also deprecate <code>listenTask</code> api on the service side. it can be done by using <code>listenExecution</code></p>
+</blockquote>
+</aside>
+<p>I haven’t though about that, that’s a good point, I’m just afraid that it might be complicated for developers of services because they will always have to set the filter to <code>status=created</code> but definitely something to thing about as well as the <code>updateExecution</code> <img src="../../images/emoji/twitter/slight_smile.png%3Fv=6" title=":slight_smile:" class="emoji" alt=":slight_smile:"></p>
+<p>I really think we shouldn’t have any “result” in the api but only executions, now it’s weird because we have an executionID but there is no notion of execution in the API and result is just a subset of the execution.</p>
+<p>Do we really need to deprecate other apis, we could just replace/rename them because we are still in 0.x.</p>
+        </div>
+
+        <meta itemprop='headline' content='Get result api'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/krhubert.html'><span itemprop='name'>krhubert</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="174.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2019-01-05T15:27:44Z' class='post-time'>
+                January 5, 2019,  3:27pm
+              </time>
+              <meta itemprop='dateModified' content='2019-01-05T15:27:44Z'>
+          <span itemprop='position'>#7</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <aside class="quote group-team" data-post="5" data-topic="174">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/nicolas/40/10_2.png" class="avatar"> Nicolas:</div>
+<blockquote>
+<ul>
+<li>If the call wait for the execution to finish, then the client could receive connection timeout error because the execution didn’t return any result fast enough.<br>
+I don’t like this approach, a unary call should return “immediately”. Otherwise, it should be a stream.</li>
+<li>If the call doesn’t wait, then the client have to do polling in order to get the result if the execution didn’t finish on time.</li>
+</ul>
+</blockquote>
+</aside>
+<p>I don’t get the point here. The arguments are the same for getExecution/listenExecution:</p>
+<ul>
+<li>if get execution dosen’t wait then client have to do polling</li>
+<li>if execution dosne’t change it states, then we need to have some sort of timeout (for listening resuts it’s the same)</li>
+<li>listen execution should notify about readiness</li>
+</ul>
+<p>But of course, Execution API is what we should implement and relay on this. Because as <a class="mention" href="../../u/anthony.html">@Anthony</a> pointed out:</p>
+<aside class="quote group-team" data-post="6" data-topic="174">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/anthony/40/7_2.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>now it’s weird because we have an executionID but there is no notion of execution in the API</p>
+</blockquote>
+</aside>
+<p>And about deprecation - let’s not bother with this, we’re in alpha stage and let’s use benefits of being in it <img src="../../images/emoji/twitter/slight_smile.png%3Fv=6" title=":slight_smile:" class="emoji" alt=":slight_smile:"></p>
+<aside class="quote group-team" data-post="6" data-topic="174">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/anthony/40/7_2.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>Do we really need to deprecate other apis, we could just replace/rename them because we are still in 0.x.</p>
+</blockquote>
+</aside>
+<p><img src="../../images/emoji/twitter/+1.png%3Fv=6" title=":+1:" class="emoji" alt=":+1:"></p>
+        </div>
+
+        <meta itemprop='headline' content='Get result api'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="174.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2019-01-06T12:17:46Z' class='post-time'>
+                January 6, 2019, 12:17pm
+              </time>
+              <meta itemprop='dateModified' content='2019-01-06T12:17:46Z'>
+          <span itemprop='position'>#8</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Execution API is an another feature. For the issue with streams, I think it’s some kind of bug and we need ack system to solve it. <a href="../acknowledgement-system-on-stream/172/4%3Fu=ilgooz.html" class="inline-onebox">Acknowledgement system on stream</a></p>
+        </div>
+
+        <meta itemprop='headline' content='Get result api'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="174.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2019-01-07T16:25:53Z' class='post-time'>
+                January 7, 2019,  4:25pm
+              </time>
+              <meta itemprop='dateModified' content='2019-01-07T16:25:53Z'>
+          <span itemprop='position'>#9</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Agree with <a class="mention" href="../../u/ilgooz.html">@ilgooz</a> this one should be marked as solved when ack is done and a new proposal about the api using <code>Execution</code> instead of <code>Result</code> should be created</p>
+        </div>
+
+        <meta itemprop='headline' content='Get result api'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/krhubert.html'><span itemprop='name'>krhubert</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="174.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2019-01-07T16:48:50Z'>
+              <time itemprop='dateModified' datetime='2019-01-07T16:52:22Z' class='post-time'>
+                January 7, 2019,  4:52pm
+              </time>
+          <span itemprop='position'>#10</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Disagree, as I wrote, ack is a totally different issue it isn’t solution to this problem. Of course it will “fix the problem” but it’s rather workaround then solution. So in fact ack is what we should propose in new thread and here apply “real” solution</p>
+        </div>
+
+        <meta itemprop='headline' content='Get result api'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="174.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2019-01-08T05:13:51Z'>
+              <time itemprop='dateModified' datetime='2019-05-18T04:50:33Z' class='post-time'>
+                May 18, 2019,  4:50am
+              </time>
+          <span itemprop='position'>#11</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Let’s close this topic for now and open a new one about implementing <code>Execution</code> APIs</p>
+        </div>
+
+        <meta itemprop='headline' content='Get result api'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+
+
+
+
+
+
+    </div>
+    <footer class="container wrap">
+      <nav class='crawler-nav'>
+        <ul>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../index.html' itemprop="url">Home </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../categories.html' itemprop="url">Categories </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../guidelines.html' itemprop="url">FAQ/Guidelines </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../tos.html' itemprop="url">Terms of Service </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../privacy.html' itemprop="url">Privacy Policy </a>
+          </span>
+        </li>
+        </ul>
+      </nav>
+      <p class='powered-by-link'>Powered by <a href="https://www.discourse.org">Discourse</a>, best viewed with JavaScript enabled</p>
+    </footer>
+    
+    
+  </body>
+  
+</html>

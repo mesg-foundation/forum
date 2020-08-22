@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>BDD framework in Go</title>
+    <link>https://forum.mesg.com/t/bdd-framework-in-go/72</link>
+    <description>Here is possible BDD frameworks in Go to use:
+
+## Ginkgo
+2,000+ stars
+https://github.com/onsi/ginkgo
+
+## Godog
+400+ stars
+https://github.com/DATA-DOG/godog</description>
+    
+    <lastBuildDate>Wed, 03 Oct 2018 05:15:44 +0000</lastBuildDate>
+    <category>Development</category>
+    <atom:link href="https://forum.mesg.com/t/bdd-framework-in-go/72.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>BDD framework in Go</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Here is possible BDD frameworks in Go to use:</p>
+<h2>Ginkgo</h2>
+<p>2,000+ stars<br>
+</p><aside class="onebox whitelistedgeneric">
+  <header class="source">
+      <img src="https://github.githubassets.com/favicons/favicon.svg" class="site-icon" width="32" height="32">
+      <a href="https://github.com/onsi/ginkgo" target="_blank">GitHub</a>
+  </header>
+  <article class="onebox-body">
+    <img src="https://forum.mesg.com/uploads/default/original/1X/7d2ca64e42db59b27c2fc1eca07142c064f44b17.jpeg" class="thumbnail" width="" height="">
+
+<h3><a href="https://github.com/onsi/ginkgo" target="_blank">onsi/ginkgo</a></h3>
+
+<p>BDD Testing Framework for Go. Contribute to onsi/ginkgo development by creating an account on GitHub.</p>
+
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+
+<h2>Godog</h2>
+<p>400+ stars<br>
+</p><aside class="onebox whitelistedgeneric">
+  <header class="source">
+      <img src="https://github.githubassets.com/favicons/favicon.svg" class="site-icon" width="32" height="32">
+      <a href="https://github.com/cucumber/godog" target="_blank">GitHub</a>
+  </header>
+  <article class="onebox-body">
+    <img src="https://forum.mesg.com/uploads/default/original/1X/74a32cb4ae2b2cd5d2b920dce30e9485f6243f35.png" class="thumbnail" width="" height="">
+
+<h3><a href="https://github.com/cucumber/godog" target="_blank">cucumber/godog</a></h3>
+
+<p>Cucumber for golang. Contribute to cucumber/godog development by creating an account on GitHub.</p>
+
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+
+          <p><a href="https://forum.mesg.com/t/bdd-framework-in-go/72/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/bdd-framework-in-go/72/1</link>
+        <pubDate>Wed, 03 Oct 2018 05:15:44 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-72-1</guid>
+        <source url="https://forum.mesg.com/t/bdd-framework-in-go/72.rss">BDD framework in Go</source>
+      </item>
+  </channel>
+</rss>

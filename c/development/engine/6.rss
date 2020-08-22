@@ -1,0 +1,1527 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:discourse="http://www.discourse.org/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Engine - MESG Community</title>
+    <link>https://forum.mesg.com/c/development/engine</link>
+    <description>Topics in the &#39;Engine&#39; category This is the place where all the high level conversations about the Engine happen. We discuss about different features that might be implemented in MESG Engine or the way to architecture the code. Also related to the development of the API for the Services or Applications created with MESG.</description>
+    
+      <lastBuildDate>Sun, 29 Sep 2019 11:13:23 +0000</lastBuildDate>
+      <atom:link href="https://forum.mesg.com/c/development/engine.rss" rel="self" type="application/rss+xml" />
+        <item>
+          <title>Immutable data on Tendermint</title>
+          <dc:creator><![CDATA[Nicolas]]></dc:creator>
+          <category>Engine</category>
+          <description><![CDATA[
+            <p>Hey guys, I would like to discuss about implementing immutable data all across the decentralized databases.</p>
+<p>After some discussion with <a class="mention" href="/u/anthony">@Anthony</a>, we are thinking about implementing a more immutable system on all data that are on the decentralized databases. The data itself should never be updated or deleted but an other data that reference the first can change its behavior (the new data also cannot be updated).</p>
+<p>It will also make the calculation of hash simpler by remove exception. Basically, all the data of a resource should be used to calculate the hash. If one the data is updated, then the hash is different and the resource is broken!</p>
+<p>For example, the ownership system has been done this way to prevent the edition of service. Instead of having one owner in the service struct, the engine is using the ownership db to get the owner of this service. It will allow to change the owner without updating service. Moreover, it allow to implement a multi-owner system without having to change any data structure (this is a very important argument to not break the decentralized network)!</p>
+<p>In my opinion, one exception should be implemented. It’s concerning the “deletion” of resource.<br>
+I don’t think having to reference the resource in a “deletion” store is good and practical.<br>
+I suggest to add to any resource that can be delete/deprecated/disabled a boolean parameter that will flag the resource as deleted/deprecated/disabled/etc only when it can happen maximum once.<br>
+This “deleted” parameter is not used for the hash calculation.</p>
+<p><a class="mention-group" href="/groups/core">@core</a> what do you think about such a system?</p>
+<p>I would like to give a few case as example so we can agree on practical situation:</p>
+<ol>
+<li><a href="https://github.com/mesg-foundation/engine/issues/1377" rel="nofollow noopener">the service deprecation system</a></li>
+</ol>
+<p>This system will allow__only once__ a service to become deprecated and it will stay like this forever. In this case, is to simply add a parameter <code>deprecated</code> in the service struct that is omitted from hash calculation.</p>
+<ol start="2">
+<li><a href="https://forum.mesg.com/t/instance-on-the-network/406">list of nodes that run instances</a></li>
+</ol>
+<p>The current proposal suggests to use a new dedicated store where each entry is referencing the instance hash and the node address. I think if we already agree with the beginning of this proposal, this is ok.<br>
+But it doesn’t say how a node can unregister itself. Should it remove its entry from the store? Should it update it by setting a <code>removed</code> bool parameter to <code>true</code>? Should a new store act as removed node?</p>
+<p>For this case, I suggest the node unregisters itself by setting an <code>unregistered</code> param to true in this new store of nodes that runs instances.</p>
+<ol start="3">
+<li>Execution</li>
+</ol>
+<p>Execution is the resource that is and will be updated the most. It has many state: Created, InProgress, Executed, Validated, Failed and should implement a retry system.</p>
+<p>Currently, all those data are in one resource that is being updated when needed.</p>
+<p>By applying the immutable system, the execution should be splitted in many 3 resources: <code>Execution</code>, <code>ExecutionResult</code> and <code>ExecutionValidation</code>:</p>
+<ul>
+<li>
+<code>Execution</code>
+<ul>
+<li><code>ParentHash</code></li>
+<li><code>EventHash</code></li>
+<li><code>InstanceHash</code></li>
+<li><code>TaskKey</code></li>
+<li><code>Inputs</code></li>
+<li><code>Executor</code></li>
+<li>
+<code>Validators</code> (for the future task validation system)</li>
+<li><code>Tags</code></li>
+<li><code>ProcessHash</code></li>
+<li>
+<code>StepID</code><br>
+(almost all of current Execution except <code>Outputs</code>, <code>error</code> and <code>Status</code>).</li>
+</ul>
+</li>
+<li>
+<code>ExecutionResult</code>
+<ul>
+<li><code>ExecutionHash</code></li>
+<li><code>Outputs</code></li>
+<li><code>Error</code></li>
+</ul>
+</li>
+<li>
+<code>ExecutionValidation</code> (for the future task validation system)
+<ul>
+<li><code>ExecutionResultHash</code></li>
+<li><code>IsValid</code></li>
+<li><code>Validator</code></li>
+</ul>
+</li>
+</ul>
+<p>It will even be easier to check for write authorization and with the retry system, we will see that one <code>Execution</code> has many <code>ExecutionResult</code>. With the validation system, many <code>ExecutionValidation</code> for one <code>ExecutionResult</code>.</p>
+            <p><small>2 posts - 2 participants</small></p>
+            <p><a href="https://forum.mesg.com/t/immutable-data-on-tendermint/407">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/immutable-data-on-tendermint/407</link>
+          <pubDate>Sun, 29 Sep 2019 11:13:23 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-407</guid>
+          <source url="https://forum.mesg.com/t/immutable-data-on-tendermint/407.rss">Immutable data on Tendermint</source>
+        </item>
+        <item>
+          <title>Instance on the Network</title>
+          <dc:creator><![CDATA[Nicolas]]></dc:creator>
+          <category>Engine</category>
+          <description><![CDATA[
+            <p>Hey guys, I would like your feedbacks on how to implement the Instance on the Network.</p>
+<h2>1. Instance hash calculation needs to change.</h2>
+<p>Instance hash is calculated with the instances’ env variables. But for security reason, the env variables are not save in any database. This cause the problem of not being able to recalculate the instance hash without the original envs. Only the engine that start the instance knows the env and thus the instance hash. This is not something good in order to implement the decentralized network correctly.</p>
+<p>The solution is simply the calculate first the hash of the instance envs and to save it in the instance struct. Like this, anyone will be able to recalculate the instance hash without having to know the envs variable.</p>
+<p>I already created an issue about this as it’s simple:<br>
+<aside class="onebox githubissue">
+  <header class="source">
+      <a href="https://github.com/mesg-foundation/engine/issues/1279" target="_blank" rel="nofollow noopener">github.com/mesg-foundation/engine</a>
+  </header>
+  <article class="onebox-body">
+    <a href="https://github.com/NicolasMahe" rel="nofollow noopener">
+<img src="https://forum.mesg.com/uploads/default/original/1X/898d9206fbf04e195bccf6b3dbe0eee0e171ca3b.jpeg" class="thumbnail onebox-avatar" width="" height="">
+</a>
+
+<h4><a href="https://github.com/mesg-foundation/engine/issues/1279" target="_blank" rel="nofollow noopener">Issue: Change calculation of instance hash</a></h4>
+
+<div class="date" style="margin-top:10px;">
+	<div class="user" style="margin-top:10px;">
+	opened by <a href="https://github.com/NicolasMahe" target="_blank" rel="nofollow noopener">NicolasMahe</a>
+	on <a href="https://github.com/mesg-foundation/engine/issues/1279" target="_blank" rel="nofollow noopener">2019-08-31</a>
+	</div>
+	<div class="user">
+	</div>
+</div>
+
+<pre class="content" style="white-space: pre-wrap;">Instance hash is calculated with the instances' env variables. But for security reason, the env variables are not save in any...</pre>
+
+<div class="labels">
+ 	<span style="display:inline-block;margin-top:2px;background-color: #B8B8B8;padding: 2px;border-radius: 4px;color: #fff;margin-left: 3px;">enhancement</span>
+</div>
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+</p>
+<h2>2. Properly define client and validator role</h2>
+<p>Both instance sdk create and delete function are doing 2 things:</p>
+<ul>
+<li>Starting/stopping the docker services</li>
+<li>Create/delete the instance object in the database<br>
+To implement the decentralized network correctly, we need to separate better those 2 functions in 2 separate steps to define properly what the local engine have to do (client / instance sdk), and what the tendermint validator engine have to do (validator / instance backend).</li>
+</ul>
+<p>I suggest the following logic:</p>
+<h4>Instance creation</h4>
+<ol>
+<li>In <code>InstanceSDK.Create</code>:
+<ol>
+<li>Calculate instance hash to check if instance doesn’t already run locally. If yes, return error.</li>
+<li>Download source and start instance in docker. Wait for it to start.</li>
+<li>Create transaction with message <code>msgCreateInstance</code>. This message contain the data of the instance (service hash and env hash) and also the address of the account that start this instance, we we call it <code>node</code>.</li>
+</ol>
+</li>
+<li>In <code>InstanceBackend.Create</code>
+<ol>
+<li>Create the instance struct. Calculate its hash.</li>
+<li>Check if instance exist in db. If not, create it. If already exist, continue.</li>
+<li>Register <code>node</code> as running this instance</li>
+</ol>
+</li>
+</ol>
+<h4>Instance deletion</h4>
+<p>Basically the same as previous block but in reverse:</p>
+<ol>
+<li>unregister the node from the blockchain by executing a transaction.</li>
+<li>once tx confirmed, stop the local instance in docker</li>
+</ol>
+<h3>3. List of nodes that runs instances</h3>
+<p>Each node will have the responsibility to register and unregister itself from the instance, like this the whole network knows who is running what.<br>
+But what is the best way to store them?</p>
+<p>We could simply add an array of nodes in the instance struct, but it will require to update the instance object over and over.<br>
+I’m suggesting to create a new store where each entry is referencing the instance hash and the node address (similar to ownership sdk). Like this it’s very simple to check if the node is register or can unregister itself.<br>
+The big question is “who” is managing this new store? It is directly <code>instance sdk</code>? Is it a new instance runner sdk? See <a href="https://forum.mesg.com/t/immutable-data-on-tendermint/407" class="inline-onebox">Immutable data on Tendermint</a> to answer.</p>
+            <p><small>4 posts - 2 participants</small></p>
+            <p><a href="https://forum.mesg.com/t/instance-on-the-network/406">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/instance-on-the-network/406</link>
+          <pubDate>Sun, 29 Sep 2019 07:14:10 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-406</guid>
+          <source url="https://forum.mesg.com/t/instance-on-the-network/406.rss">Instance on the Network</source>
+        </item>
+        <item>
+          <title>New gRPC NameService API</title>
+          <dc:creator><![CDATA[Nicolas]]></dc:creator>
+          <category>Engine</category>
+          <description><![CDATA[
+            <p>The PR <a href="https://github.com/mesg-foundation/engine/pull/1072" rel="nofollow noopener">https://github.com/mesg-foundation/engine/pull/1072</a> replaces hash type by <code>[]byte</code>.<br>
+This is good but it removes the support of Service SID.<br>
+It needs to be added back, but as a client side system that use a new and clean API to resolve the sid.</p>
+<p>I suggest to create a new gRPC service <code>NameService</code> that should be compatible with any resource identified by a unique <code>hash</code>. Of course, we will only implement sid on this new service for now. But it will prepare the foundation for a more general purpose name service.</p>
+<pre><code class="lang-auto">service NameService {
+  rpc List(ListNameServiceRequest) returns (ListNameServiceResponse) {}
+}
+
+message ListNameServiceRequest {
+  string name = 1;
+}
+
+message ListNameServiceResponse {
+  []string hashes = 1;
+}
+</code></pre>
+<p>The List api should return a list of hashes’ resources that match <code>name == service.sid</code>.</p>
+<p>The current only way to add a new name will be by creating a new service with a sid.</p>
+<p>We will be able to add new APIs to this service to completely separate sid and name resolution.</p>
+            <p><small>3 posts - 2 participants</small></p>
+            <p><a href="https://forum.mesg.com/t/new-grpc-nameservice-api/324">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/new-grpc-nameservice-api/324</link>
+          <pubDate>Mon, 24 Jun 2019 04:23:51 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-324</guid>
+          <source url="https://forum.mesg.com/t/new-grpc-nameservice-api/324.rss">New gRPC NameService API</source>
+        </item>
+        <item>
+          <title>Standardisation of the gRPC apis</title>
+          <dc:creator><![CDATA[Nicolas]]></dc:creator>
+          <category>Engine</category>
+          <description><![CDATA[
+            <p>Hey guys, I would like to propose a standardisation of the definition of the gRPC apis.</p>
+<h1>Get</h1>
+<p>The request should contain the <code>hash</code> of the resource to get.<br>
+The response should be directly the resource definition.</p>
+<pre><code class="lang-auto">rpc Get(GetResourceRequest) returns (definition.Resource) {}
+
+message GetResourceRequest {
+  string hash = 1;
+}
+</code></pre>
+<p>Here is my pro and con to directly return the resource definition instead of a response message that contains it:</p>
+<h3>Pro</h3>
+<ol>
+<li>Less proto definition. No need to create a other proto message</li>
+<li>Force to only returns the resource without any other data. If any data needs to be returned it’s either because the api is not well designed or a new type of api and resource need to be created.</li>
+<li>Reusability. Having to create the resource definition in the package <code>protobuf/definition</code> push to reuse the same definition for many APIs.</li>
+</ol>
+<h3>Con</h3>
+<ol>
+<li>Less flexibility. Cannot add metadata on the returned ressource. But as said in point pro.2, it’s actually mean the api is poorly designed.</li>
+</ol>
+<h1>List</h1>
+<p>The request message should contained the possible and optional filter to apply. The request can be empty if no filter is implemented.<br>
+The response message should contain the resources as an array.</p>
+<pre><code class="lang-auto">rpc List (ListResourcesRequest) returns (ListResourcesResponse) {}
+
+message ListResourcesRequest {
+  string possibleAndOptionalFilter = 1;
+}
+
+ message ListResourcesResponse {
+  repeated definition.Resource resources = 1;
+}
+</code></pre>
+<h1>Create</h1>
+<p>The request should contain the necessary data to create the resource.<br>
+The response should only contain the calculated hash corresponding to the added resource.</p>
+<p>EDIT <span class="hashtag">#1:</span></p>
+<pre><code class="lang-auto">rpc Create (CreateResourceRequest) returns (CreateResourceResponse) {}
+
+message CreateResourceRequest {
+  string allNecessaryDataToCreateTheResource = 1;
+}
+
+message CreateResourceResponse {
+  string hash = 1;
+}
+</code></pre>
+<h1>Delete</h1>
+<p>I suggest that the delete API should be “send and forget”.<br>
+The request contains everything necessary but the response is empty.<br>
+Only the <code>hash</code> should be send in request.</p>
+<pre><code class="lang-auto">rpc Delete (DeleteResourceRequest) returns (DeleteResourceResponse) {}
+
+message DeleteResourceRequest {
+  string hash = 1;
+}
+
+message DeleteResourceResponse {}
+</code></pre>
+<h1>Update</h1>
+<p>I suggest that the update API should be “send and forget”.<br>
+The request contains everything necessary but the response is empty.<br>
+The <code>hash</code> and the data to update should be send in request.</p>
+<pre><code class="lang-auto">rpc Update (UpdateResourceRequest) returns (UpdateResourceResponse) {}
+
+message UpdateResourceRequest {
+  string hash = 1;
+  string dataToUpdate = 2;
+}
+
+message UpdateResourceResponse {}
+</code></pre>
+<h1>Merge identical message</h1>
+<p>As you see, there is a few identical messages that only contain the resource’s hash:</p>
+<ul>
+<li><code>GetResourceRequest</code></li>
+<li><code>CreateResourceResponse</code></li>
+<li>
+<code>DeleteResourceRequest</code>.</li>
+</ul>
+<p>We could merge those message into one:</p>
+<pre><code class="lang-auto">message ResourceIdentifier {
+  string hash = 1;
+}
+</code></pre>
+<p>I’m not sure it’s really necessary and actually useful. It will remove flexibility to add “flags” to the request (but do we actually want those?).</p>
+<hr>
+<p><a class="mention-group" href="/groups/core">@core</a> what do you think guys?</p>
+            <p><small>5 posts - 3 participants</small></p>
+            <p><a href="https://forum.mesg.com/t/standardisation-of-the-grpc-apis/320">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/standardisation-of-the-grpc-apis/320</link>
+          <pubDate>Thu, 20 Jun 2019 09:36:49 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-320</guid>
+          <source url="https://forum.mesg.com/t/standardisation-of-the-grpc-apis/320.rss">Standardisation of the gRPC apis</source>
+        </item>
+        <item>
+          <title>Network implementation with CosmosSDK</title>
+          <dc:creator><![CDATA[Anthony]]></dc:creator>
+          <category>Engine</category>
+          <description><![CDATA[
+            <h2>Goal</h2>
+<p>Decentralization of the different resources managed by the Engine:</p>
+<ul>
+<li>
+<strong>Services</strong> (to create this marketplace of services in our own network)</li>
+<li>
+<strong>Instances</strong> (to be able to delegate execution to specific nodes)</li>
+<li>
+<strong>Executions</strong> (to process executions on the network)</li>
+</ul>
+<p>In order to distribute these resources, we need to make sure that every change of state is replicated on the network and verified by each node of the network before broadcasting it.</p>
+<p>For that, we will use CosmosSDK &amp; Tendermint that already implement this distributed state machine with a lot of really cool stuff.</p>
+<h2>Implementation</h2>
+<p>Details about CosmosSDK <a href="https://cosmos.network/docs/concepts/baseapp.html#baseapp" rel="nofollow noopener">App concept</a>, <a href="https://cosmos.network/docs/intro/sdk-app-architecture.html#sdk-application-architecture" rel="nofollow noopener">Architecture</a>, <a href="https://cosmos.network/docs/intro/sdk-design.html#modules" rel="nofollow noopener">Design</a></p>
+<p>We will use what Cosmos provides:</p>
+<ul>
+<li>Keeper/Store</li>
+<li>Messages</li>
+<li>Handlers</li>
+<li>Querier</li>
+</ul>
+<h4>Keeper</h4>
+<p>The place to store the data. We actually have everything in the database package, this database package will disappear and the resource package (service, instance, and execution) will manage the storing based on these keepers.</p>
+<p>Keepers expose getter and setters of the data. We should only read/write the data based on these keepers</p>
+<h4>Messages</h4>
+<p>Type of messages that can trigger actions on the data. These are the messages that will transit in the network (or within the local instance). This message will validate the basic data (light validation).</p>
+<p>Messages are directly handled by Tendermint and will be propagated automatically (magic)</p>
+<h4>Handlers</h4>
+<p>Handlers are the actions that will update the Keeper based on Message received. This has most of the logic and could be delegated to the sdk package.</p>
+<p>Handlers are called either directly from the sdk or call based on the routing defined by the application.</p>
+<h4>Querier</h4>
+<p>Not sure exactly how this is useful in our case but it allows to read the data, we should probably only read data based on a querier and never try to read directly from the keeper</p>
+<hr>
+<p>We can implement all these objects directly in the resource packages:</p>
+<pre><code class="lang-auto">service
+   - type.go
+   - keeper.go # implement the keeper
+   - msgs.go # implement the messages
+   - handler.go # implement the handlers
+   - querier.go # implement the queries
+   - codec.go # needed codec to save the data
+instance
+   - type.go
+   - keeper.go # implement the keeper
+   - msgs.go # implement the messages
+   - handler.go # implement the handlers
+   - querier.go # implement the queries
+   - codec.go # needed codec to save the data
+execution
+   - type.go
+   - keeper.go # implement the keeper
+   - msgs.go # implement the messages
+   - handler.go # implement the handlers
+   - querier.go # implement the queries
+   - codec.go # needed codec to save the data
+</code></pre>
+            <p><small>15 posts - 3 participants</small></p>
+            <p><a href="https://forum.mesg.com/t/network-implementation-with-cosmossdk/304">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/network-implementation-with-cosmossdk/304</link>
+          <pubDate>Thu, 06 Jun 2019 10:48:26 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-304</guid>
+          <source url="https://forum.mesg.com/t/network-implementation-with-cosmossdk/304.rss">Network implementation with CosmosSDK</source>
+        </item>
+        <item>
+          <title>Server/grpc package organisation</title>
+          <dc:creator><![CDATA[Nicolas]]></dc:creator>
+          <category>Engine</category>
+          <description><![CDATA[
+            <p>Hey guys, I would like to suggest a simpler organisation of the <code>server/grpc</code> package.</p>
+<p>So currently, we have:</p>
+<pre><code class="lang-auto">- server
+  - grpc
+    - core
+    - service
+  - server.go
+</code></pre>
+<p><code>server.go</code> contains the initialization of the gRPC server and the register function that assign the different gRPC service implementation to the server itself.<br>
+<code>core</code> and <code>service</code> folders each contains one file with a struct that implement the corresponding generated gRPC interface.</p>
+<p>My suggestion is to add new grpc services in new files directly in the grpc folder/package.<br>
+Each grpc service will have a dedicated struct (like currently) with its own dependency (could be to sdk or to a sub package for sdk).<br>
+The filename will be the same as the gRPC service (eg: execution) and the struct will be suffixed by Server (like the generated gRPC interface to implement).</p>
+<p>So the folder will look like:</p>
+<pre><code class="lang-auto">- server
+  - grpc
+    execution.go
+    service.go
+    instance.go
+    server.go
+</code></pre>
+<p>and for example the content of <code>execution.go</code> will look like:</p>
+<pre><code class="lang-auto">package grpc
+
+type ExecutionServer struct {
+	sdk *sdk.SDK
+}
+
+func NewExecutionServer(sdk *sdk.SDK) *ExecutionServer {
+	return &amp;ExecutionServer{sdk: sdk}
+}
+
+func (s *ExecutionServer) Create(context context.Context, request ....) (*serviceapi.EmitEventReply, error) {
+	......
+}
+</code></pre>
+<p>The register function in server.go will look like:</p>
+<pre><code class="lang-auto">func (s *Server) register() error {
+	executionServer := NewExecutionServer(s.sdk)
+	// same for all grpc service
+
+	api.RegisterExecutionServer(s.instance, executionServer)
+	// same for all grpc service
+
+	reflection.Register(s.instance)
+	return nil
+}
+</code></pre>
+<p><a class="mention-group" href="/groups/core">@core</a> what are you feedbacks?</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://forum.mesg.com/t/server-grpc-package-organisation/300">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/server-grpc-package-organisation/300</link>
+          <pubDate>Mon, 03 Jun 2019 11:11:53 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-300</guid>
+          <source url="https://forum.mesg.com/t/server-grpc-package-organisation/300.rss">Server/grpc package organisation</source>
+        </item>
+        <item>
+          <title>SDK package organisation</title>
+          <dc:creator><![CDATA[Nicolas]]></dc:creator>
+          <category>Engine</category>
+          <description><![CDATA[
+            <p>This topic is about the organization of the package SDK and its consequences on the package service/grpc.</p>
+<p>I would like to propose the following rules:</p>
+<h3>Package SDK</h3>
+<ul>
+<li>helper init dependencies function</li>
+<li>initialize sub-package in New</li>
+<li>only expose publicly sub-package instance</li>
+</ul>
+<h3>SDK sub-packages (eg: sdk/execution)</h3>
+<ul>
+<li>initialized by SDK with all dependencies</li>
+<li>should read / write to only one specific data</li>
+<li>should call function from other sub-packages if need to read / write from other data</li>
+<li>dependency between sub-packages should respect the way the data are (eg: instance dependent on service, so sub-package instance can dependant on package service, but not the other way)</li>
+</ul>
+<h3>Package server/grpc</h3>
+<ul>
+<li>only dependant on SDK</li>
+<li>each api should call one write function of a SDK sub-package</li>
+<li>each api can call multiple read functions from SDK sub-packages for error verification (eg: check that instances doesn’t exist before deleting a service)</li>
+<li>if an api need to call multiple write functions from SDK, a new SDK sub-package should be created to handle it.</li>
+</ul>
+<p><a class="mention-group" href="/groups/core">@core</a> what do you think?</p>
+            <p><small>4 posts - 2 participants</small></p>
+            <p><a href="https://forum.mesg.com/t/sdk-package-organisation/299">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/sdk-package-organisation/299</link>
+          <pubDate>Mon, 03 Jun 2019 07:26:32 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-299</guid>
+          <source url="https://forum.mesg.com/t/sdk-package-organisation/299.rss">SDK package organisation</source>
+        </item>
+        <item>
+          <title>Protobuf folder structure</title>
+          <dc:creator><![CDATA[Nicolas]]></dc:creator>
+          <category>Engine</category>
+          <description><![CDATA[
+            <p>Hey guys, I would like to suggest a organisation for future protobuf and gRPC definition.</p>
+<p>Currently, we have a folder <code>definition</code> containing the definition of the Service and its data (and <a href="https://github.com/mesg-foundation/engine/pull/1006" rel="nofollow noopener">more will come like Execution</a>), but also <code>coreapi</code>, <code>serviceapi</code> that each contains some gRPC services.</p>
+<p>Then, I make some suggestion in <a href="https://forum.mesg.com/t/service-compilation-deploy/288" class="inline-onebox">Service compilation &amp; deploy</a> and <a href="https://forum.mesg.com/t/instance-db/295" class="inline-onebox">Instance DB</a> to create those new gRPC services in <code>/protobuf/service/service.proto</code> and <code>/protobuf/instance/instance.proto</code> but I’m actually not satisfied with this solution as there is only one file per folder and the name of the folder doesn’t say it only contains gRPC service.</p>
+<p>My proposal is use the same logic as the folder definition (one folder containing one file per data) for all gRPC services. Create one folder <code>protobuf/api</code> containing one file per gRPC service.</p>
+<p>The new file structure with the future execution, instance, service will look like:</p>
+<pre><code class="lang-auto">- protobuf
+  - acknowledgement // we don't touch this one
+  - api
+    - execution.proto
+    - instance.proto
+    - service.proto
+  - definition
+    - execution.proto
+    - instance.proto
+    - service.proto
+</code></pre>
+<p>As you see, we may end up with the same filenames in api and definition but I think it’s good for separation between data and gRPC services.</p>
+<p><a class="mention-group" href="/groups/core">@core</a> what do you think guys?</p>
+            <p><small>5 posts - 3 participants</small></p>
+            <p><a href="https://forum.mesg.com/t/protobuf-folder-structure/297">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/protobuf-folder-structure/297</link>
+          <pubDate>Sun, 02 Jun 2019 10:46:34 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-297</guid>
+          <source url="https://forum.mesg.com/t/protobuf-folder-structure/297.rss">Protobuf folder structure</source>
+        </item>
+        <item>
+          <title>Instance DB</title>
+          <dc:creator><![CDATA[Nicolas]]></dc:creator>
+          <category>Engine</category>
+          <description><![CDATA[
+            <p>The goal of this feature is to split the Service DB into Service DB and Instance DB.</p>
+<p>The Service DB will only store the service definitions. Its primary index is the hash of the service definition, calculated by the Engine, called Service Hash.</p>
+<p>The Instance DB will store the info of the actual running services (docker services / containers IDs, networks IDs, but also Service Definition Hash). Its primary index is the hash of the service definition + the custom env, calculated by the Engine, called Instance Hash.</p>
+<p><strong>Note on custom env</strong>: the custom env are NOT stored in any DB but are used for the calculation of the instance hash AND injected in the docker service on start.</p>
+<p>Let’s see the full start and stop processes:</p>
+<h2>Start (service hash, env) -&gt; instance hash</h2>
+<p>This api is similar to the current start api except that it will download and build the service, create and save in instance DB the container related info.</p>
+<p>The steps of this api are:</p>
+<ul>
+<li>Fetch service definition from service hash in Service DB</li>
+<li>Download the service source</li>
+<li>Build the docker image</li>
+<li>Merge custom user env</li>
+<li>Calculate Instance Hash (based on the service hash and the custom env)</li>
+<li>Check if Instance Hash already exist. If not, then:</li>
+<li>Save the Instance object in Instance DB</li>
+<li>Start the Service docker services</li>
+<li>Update Instance DB with the docker services / containers / networks IDs</li>
+<li>Return Instance Hash</li>
+</ul>
+<h2>Stop (instance hash)</h2>
+<p>This is basically the same as the current implementation except it’s using instance db.</p>
+<ul>
+<li>Check if Instance Hash already exist. If yes, then:</li>
+<li>Stop the docker services</li>
+<li>Wait for the docker containers to be removed / deleting the docker containers</li>
+<li>Delete the networks</li>
+<li>Delete the instance from Instance DB</li>
+</ul>
+<h2>Delete (service hash)</h2>
+<p>The only difference with current implementation is this api has to return an error if any instance referencing the service hash exist. The user have to stop the instances first.</p>
+<h1>Note</h1>
+<p>Now that Service DB only stores “static” data, it can be used to synchronise / publish Service Definition across the Network and can replace the current Marketplace running on Ethereum.</p>
+<p>Another very important modification is all APIs that are requiring a Service ID to use a running Service (listenEvent, listenTask, executeTask, StopService) will now use the instance hash instead of the service hash. Be careful, this is only for running service, for example, the API DeleteService should delete in ServiceDB thus using the Service Hash.</p>
+<h1>Schema</h1>
+<p><em>In orange, step that are different than current implementation.</em></p>
+<h2>Start schema</h2>
+<div class="mermaid">
+
+graph TD
+1[Fetch service definition from service hash in Service DB] --&gt; 2
+2[Download the service source] --&gt; 3
+3[Build the docker image] --&gt; 4
+4[Merge custom user env] --&gt; 5
+5[Calculate Instance Hash] --&gt; 6
+6{Check if Instance Hash already exist} -- if not --&gt; 7
+6 -- if yes --&gt; error
+7[Save the Instance object in Instance DB] --&gt; 8
+8[Start the Service docker services] --&gt; 9
+9[Update Instance DB with the docker services / containers / networks IDs] --&gt; 10
+10[Return Instance Hash]
+error[return error]
+classDef diff fill:orange;
+class 2,3,5,6,7,9,10 diff;
+
+</div>
+
+<h2>Stop schema</h2>
+<div class="mermaid">
+
+graph TD
+1{Check if Instance Hash already exist} -- if yes --&gt; 2
+1 -- if no --&gt; error
+error
+2[Stop the docker services] --&gt; 3
+3[Wait for the docker containers to be removed / deleting the docker containers] --&gt; 4
+4[Delete the networks] --&gt; 5
+5[Delete the instance from Instance DB]
+classDef diff fill:orange;
+class 1,5 diff;
+
+</div>
+
+<h1>gRPC definition, server &amp; sdk</h1>
+<p>As <a href="https://forum.mesg.com/t/service-compilation-deploy/288" class="inline-onebox">Service compilation &amp; deploy</a>, this feature should not modify any existing gRPC definition, server or sdk functions but rather create new ones to start from a fresh and clean mind even if code duplication is necessary <img src="https://forum.mesg.com/images/emoji/twitter/wink.png?v=9" title=":wink:" class="emoji" alt=":wink:"></p>
+<p>Edit <span class="hashtag">#1</span></p>
+<p>This new gRPC api should be created in  <code>/protobuf/api/instance.proto</code>  and contain the following protobuf def:</p>
+<pre><code class="lang-auto">syntax = "proto3";
+
+package api;
+
+service Instance {
+  rpc Create (CreateRequest) returns (string) {}
+  rpc Delete (string) returns (string) {}
+}
+
+message CreateRequest {
+  string serviceHash = 1;
+  repeated string env = 2;
+}
+</code></pre>
+<p>This api Instance will only manage resources in Instance DB and use a CRUD-like design.</p>
+            <p><small>7 posts - 4 participants</small></p>
+            <p><a href="https://forum.mesg.com/t/instance-db/295">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/instance-db/295</link>
+          <pubDate>Thu, 30 May 2019 07:41:50 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-295</guid>
+          <source url="https://forum.mesg.com/t/instance-db/295.rss">Instance DB</source>
+        </item>
+        <item>
+          <title>Service compilation &amp; deploy</title>
+          <dc:creator><![CDATA[Nicolas]]></dc:creator>
+          <category>Engine</category>
+          <description><![CDATA[
+            <p>The goal of this document is to explain the evolution of the deploy api and the introduction of the compilation of service.</p>
+<p>The idea is to have a single way to deploy / publish service to the Engine but also to the Marketplace.</p>
+<p>The Marketplace reveals that in order to deploy a service to another Engine, not only the source code but also the service definition are important and useful.</p>
+<p>Yes, the service definition is also (currently) contained in the source code as a mesg.yml file. But, in order to have a general purpose system and to fit in the long time vision of MESG, the source code should become optional (eg: pure workflow services), so services can be published / deployed / started with only a service definition.</p>
+<p>The current implementation of the Marketplace requires a JSON payload called manifest data containing:</p>
+<ul>
+<li>The service’s definition. Not the mesg.yml version but the protobuf version exposed by the GetService API:
+<ul>
+<li>The service’s hash is present (and not in the mesg.yml)</li>
+</ul>
+</li>
+<li>The service’s source code (as an IPFS hash)</li>
+<li>The service’s documentation (currently the content of README.md)</li>
+</ul>
+<p>By keeping only the service’s definition and the service’s source code, any Engine should be able to run the specified service without any other required data from the User.</p>
+<p>Currently, to start a service, 2 steps / api calls are needed:</p>
+<ul>
+<li>Deploy the service source code to the Engine by:
+<ul>
+<li>Generating the service definition from the mesg.yml</li>
+<li>Calculating the service’s hash</li>
+<li>Building the docker image</li>
+</ul>
+</li>
+<li>Start the actual service based on the service’s hash (or the service’s sid) by:
+<ul>
+<li>Creating the actual docker services and containers using the service definition, the hash and the build docker image</li>
+</ul>
+</li>
+</ul>
+<p>To publish on the marketplace, 5 steps / api calls are required that:</p>
+<ul>
+<li>Generates the service definition and hash from the mesg.yml (by calling the deploy api)</li>
+<li>Get the service definition (by calling the getService api)</li>
+<li>Publish the source on IPFS</li>
+<li>Create the manifest data from the service definition and the IPFS hash</li>
+<li>Finally, publish the manifest data to the marketplace</li>
+</ul>
+<h2>Service definition</h2>
+<p>The service definition is a protobuf structure containing all necessary information to start a service on any Engine.</p>
+<ul>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> The only modification to do on the service definition is to add a link to the service’s source.</li>
+</ul>
+<p>The service definition is the compiled version of the current mesg.yml. The Engine should be only compatible with service definition and not with mesg.yml anymore.</p>
+<p>This gives a lot of flexibility to improve or even replace the mesg.yml. The service definition could be compiled from anything: HCL, syntactic analysis to generate it directly from source code, source code comments, GUI, etc…</p>
+<h2>Compile (path to source) -&gt; service definition</h2>
+<p>The most different function is the compilation of a service.</p>
+<p>This function compiles a service definition from local folder containing the service source.</p>
+<p>This function is very similar to the compilation of an Ethereum Smart Contract: the source code is transformed to an ABI (in our case, service definition) and to bytecode (in our case, the link to the archive containing the source code).</p>
+<p>This function should run completely independently from the Engine. A light software without internet and connection to an Engine should be able to compile a service.</p>
+<p>The steps of this function are:</p>
+<ul>
+<li>Generates the service definition from the mesg.yml
+<ul>
+<li>Validate the mesg.yml</li>
+</ul>
+</li>
+<li>Upload the source to IPFS</li>
+<li>Injecting the source link to the service definition</li>
+<li>Returning the service definition
+<ul>
+<li>Could be returned as raw protobuf (byte / hex representation) or as JSON for readability</li>
+</ul>
+</li>
+</ul>
+<h2>Deploy (service definition) -&gt; service hash</h2>
+<p>This api is very similar to the current deploy api except that it takes as parameter directly the service definition (instead of the tar of the service source code ) and will returned the service hash.</p>
+<p>The steps of this api are:</p>
+<ul>
+<li>Parse the service definition</li>
+<li>Download the service source</li>
+<li>Calculate the service hash from the service definition AND the source code</li>
+<li>Save service definition in service DB (returns error if existing service definition)</li>
+<li>Return the service hash</li>
+</ul>
+<h2>Note</h2>
+<ul>
+<li>The service hash is not calculated from the custom env anymore. This will come back with the introduction of the <a href="https://forum.mesg.com/t/instance-db/295" class="inline-onebox">Instance DB</a>. This has the consequence to allow only 1 service (same service definition) to run at a specific time even with different custom env variable.</li>
+</ul>
+<h2>Publish</h2>
+<p>The current command <code>marketplace publish</code> will be drastically simplified by receiving directly the service definition containing most of the required information to publish on the current Marketplace running on Ethereum.</p>
+<p>The evolution of this function is that the future Marketplace will be directly integrated into the decentralized Service DB. I will not explain the details of this future function as we will implement it only when the decentralized Service DB is created. But basically, this future function will be able to publish on the whole network just based on the service definition generated by the Compile function.</p>
+<h1>Schema</h1>
+<p><em>In orange, step that are different than current implementation</em></p>
+<h2>Deploy</h2>
+<div class="mermaid">
+
+graph TD
+1[Parse the service definition] --&gt; 2
+2[Download the service source code] --&gt; 3
+3[Calculate the service hash] --&gt; 4
+4{Check existing hash in Service DB} -- if no exist --&gt; 5
+4 -- if exist --&gt; error
+5[Save service definition in service DB] --&gt; 6
+6[Return the service hash]
+error[return error]
+classDef diff fill:orange;
+class 1,2,3 diff;
+
+</div>
+
+<h1>gRPC definition, server &amp; sdk</h1>
+<p>This feature should not modify any existing gRPC definition, server or sdk functions but rather create new ones to start from a fresh and clean mind even if code duplication is necessary <img src="https://forum.mesg.com/images/emoji/twitter/wink.png?v=9" title=":wink:" class="emoji" alt=":wink:"></p>
+<h2>gRPC</h2>
+<p>A new gRPC api should be created to introduce the beginning of the separation of the gRPC api by ressources.</p>
+<p>EDIT <span class="hashtag">#1</span></p>
+<p>This new gRPC api should be created in <code>/protobuf/api/service.proto</code> and contain the following protobuf def:</p>
+<pre><code class="lang-auto">syntax = "proto3";
+
+import "protobuf/definition/service.proto";
+
+package api;
+
+service Service {
+  rpc Create (definition.Service) returns (string) {}
+}
+</code></pre>
+<p>This api Service will only manage resources in Service DB and use a CRUD-like design.</p>
+<p>The current apis <code>Core.DeployService</code>, <code>Core.DeleteService</code>, <code>Core.ListServices</code>, <code>Core.GetService</code> will be “duplicated” to this new <code>service.proto</code> file and rename to a more CRUD-like style (eg: Create, Delete, List, Get) in another feature / PR.</p>
+<hr>
+<p>EDIT of June 4th: I fix the service hash calculation. It should be calculated from the service definition and the source code.</p>
+            <p><small>2 posts - 1 participant</small></p>
+            <p><a href="https://forum.mesg.com/t/service-compilation-deploy/288">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/service-compilation-deploy/288</link>
+          <pubDate>Thu, 23 May 2019 11:32:09 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-288</guid>
+          <source url="https://forum.mesg.com/t/service-compilation-deploy/288.rss">Service compilation &amp; deploy</source>
+        </item>
+        <item>
+          <title>Integration of workflows in services (solves service composition)</title>
+          <dc:creator><![CDATA[Anthony]]></dc:creator>
+          <category>Engine</category>
+          <description><![CDATA[
+            <h1>Goal</h1>
+<p>Having the possibility to create and connect existing workflows/applications (already discussed here <a href="https://forum.mesg.com/t/reusable-workflows-workflow-marketplace/207" class="inline-onebox">Reusable Workflows &amp; Workflow Marketplace</a>).<br>
+Anything that an application is doing, a workflow should be able to do by providing a simple interface (and an advanced mode for the ones who want)</p>
+<p>In order to solve all that and even more (like <a href="https://forum.mesg.com/t/service-composition/22" class="inline-onebox">Service composition</a>) we can merge the concept of application and services. This way applications are managed by the engine and the user don’t have to do anything more to start its application.<br>
+Also now that the service and the application/workflow are the same they can share the exact same properties and be shared and validate on the network the same way, we don’t need to have two different kinds of data to synchronize.</p>
+<p>A service has at least one of the following properties:</p>
+<ul>
+<li>tasks: to expose tasks for other services to execute</li>
+<li>events: to expose events for other services to listen</li>
+<li>workflows: to link events to tasks</li>
+</ul>
+<p>Workflows can connect internal and external data. This fixes the <a href="https://forum.mesg.com/t/service-composition/22" class="inline-onebox">Service composition</a> problem.</p>
+<p>Here is the list of possible connections for the workflow:</p>
+<ul>
+<li>Listen to an <strong>external event</strong> and trigger an <strong>external task</strong> (pure application workflow)</li>
+<li>Listen to an <strong>external event</strong> and trigger an <strong>internal task</strong>
+</li>
+<li>Listen to an <strong>internal event</strong> and trigger an <strong>external task</strong>
+</li>
+<li>Listen to an <strong>internal event</strong> and trigger an <strong>internal task</strong> (possibility to create services based on workflows)</li>
+</ul>
+<p>With this in mind, users might want to define tasks and events for their internal use so we can introduce a new attribute <code>visibility</code> on the task and event that can be either <code>external/internal</code> or <code>public/private</code> (not decided yet but public/private makes more sense with “public” by default)</p>
+<p>When the engine receives a private event/task, this will not be propagated to anyone except the actual service.</p>
+<h1>Implementation</h1>
+<p>Based on the current definition of the <a href="https://forum.mesg.com/t/workflow-implementation/281" class="inline-onebox">Workflow implementation</a> we can use the exact same data structure for the service definition.</p>
+<pre><code class="lang-json">{
+  tasks: []
+  events: []
+  workflows: [{
+    name: "name of workflow",
+    description: "description",
+    trigger: {
+      service: "serviceHash",
+      eventKey: "xxx",
+      filter: { x: "y" }
+    },
+    tasks: [
+      { service: "serviceHash", taskKey: "xxx" },
+      { service: "serviceHash", taskKey: "xxx" },
+    ]
+  }]
+}
+</code></pre>
+<p>This implementation is limited to only the case “Listen to an <strong>external event</strong> and trigger an <strong>external task</strong>” as the serviceHash of the current service will not be defined. There are two ways to introduce internal events/tasks:</p>
+<ul>
+<li>omit the service (if there is no service then it’s the current service)</li>
+<li>introduce a keyword for the current service like <code>this</code> or <code>self</code> which is common in a programming language</li>
+</ul>
+<p>With all that, we can now create applications with a workflow and also do <a href="https://forum.mesg.com/t/service-composition/22" class="inline-onebox">Service composition</a> as we can listen or execute a task from external services.</p>
+<h3>Tasks</h3>
+<ul>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> Update service definition with a list of workflows</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> Start the workflow engine based on the workflows from all the services</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> When starting the workflow in the engine, make sure to replace the self/this with the actual service hash</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> (optional/to define) Deploy a workflow based on a definition in the mesg.yml file (other formats could be considered as long as they can “compile” to the format in the service definition)</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> Create a badass documentation to explain all that with nice schemas</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> Also explain the current limitation and the workarounds
+<ul>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> Create a tree of executions based on results of another branch from another workflow</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> Access data from another branch by having an “aggregator” task in the other branch</li>
+</ul>
+</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> Celebrate this feature <img src="https://forum.mesg.com/images/emoji/twitter/tada.png?v=9" title=":tada:" class="emoji" alt=":tada:">
+</li>
+</ul>
+            <p><small>2 posts - 2 participants</small></p>
+            <p><a href="https://forum.mesg.com/t/integration-of-workflows-in-services-solves-service-composition/283">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/integration-of-workflows-in-services-solves-service-composition/283</link>
+          <pubDate>Sun, 19 May 2019 07:35:05 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-283</guid>
+          <source url="https://forum.mesg.com/t/integration-of-workflows-in-services-solves-service-composition/283.rss">Integration of workflows in services (solves service composition)</source>
+        </item>
+        <item>
+          <title>Workflow implementation</title>
+          <dc:creator><![CDATA[Anthony]]></dc:creator>
+          <category>Engine</category>
+          <description><![CDATA[
+            <h1>Goal</h1>
+<p>Trigger tasks based on some constraints.</p>
+<p>We can implement these constraints in multiple steps:</p>
+<ul>
+<li>React to one event</li>
+<li>React to one result</li>
+<li>React to one event filtered based on its data</li>
+<li>React to one result filtered based on its data</li>
+<li>React to multiple events</li>
+<li>React to multiple results</li>
+</ul>
+<p>The current limit for this implementation:</p>
+<ul>
+<li>Execution graph</li>
+<li>React to one event only</li>
+<li>React to one result only</li>
+<li>No data transformation</li>
+</ul>
+<h2>Specifications</h2>
+<p>The initial workflow is a simplification of the final workflow, we will first implement a <a href="https://en.wikipedia.org/wiki/Tree_(graph_theory)" rel="nofollow noopener">Tree Graph</a> of execution instead of a <a href="https://en.wikipedia.org/wiki/Directed_acyclic_graph" rel="nofollow noopener">Directed Acyclic Graph</a> and later on maybe a <a href="https://en.wikipedia.org/wiki/Directed_graph" rel="nofollow noopener">Directed Graph</a>.</p>
+<p>The Tree implementation is possible thanks to the <code>parentHash</code> in the execution structure that references the previous execution.</p>
+<p>Every new execution will create a new execution data that points to the previous one (the result that permits to trigger this execution).</p>
+<p>For now, we limit the concept to <strong>one event start the workflow</strong> and the workflow can contain <strong>multiple chains of results</strong>.</p>
+<p>Here is an example:</p>
+<div class="mermaid">
+
+graph LR
+A[serviceA#eventX] --&gt;C(serviceB#task1)
+C --&gt; D[serviceC#task2]
+C --&gt; E[serviceD#task3]
+C --&gt; F[serviceE#task4]
+D --&gt; G[serviceF#task5]
+
+</div>
+
+<p>The workflow is responsible for creating this execution graph and have the following logic:<br>
+For every event/result, fetch the workflow definition that matches this event/result. Resolve the inputs (for now no processing just passing data into input), create the execution with the link of the previous execution if exists.</p>
+<h2>Implementation</h2>
+<p>The workflow engine will be its own package that runs as a job in its own thread and will listen to all events coming from the api.</p>
+<ul>
+<li>Listen to events</li>
+<li>Match workflows</li>
+<li>Fetch previous execution based on the event data</li>
+<li>Iterate on every</li>
+<li>Create a new execution with the data of the event and the previous executionHash</li>
+</ul>
+<p>The workflow <strong>only listens to events</strong>. It is not directly linked to the end of a task. In order to react from a result we need to create a system event that <code>SubmitResult</code> can emit and that the workflow will listen.</p>
+<p>The user will have the possibility to connect to a result of execution but this should be “compiled” into events.</p>
+<pre><code class="lang-auto">type Task struct {
+  serviceHash string // this needs to be the hash not sid, this will be resolved by the workflow importer when we have an importer
+  taskKey string
+}
+type Trigger struct {
+  serviceHash string
+  eventKey string // executionFinished to have a result of an execution
+  filter Predicate // we can start with a simple map eg: `{ taskKey: "xxx" }`
+}
+type Workflow struct {
+  trigger Trigger
+  tasks []Task
+}
+</code></pre>
+<p>Example of that based on the first graph:</p>
+<pre><code class="lang-auto">workflowA:
+  trigger:
+    serviceHash: serviceA
+    eventKey: "eventX"
+  tasks:
+      - serviceHash: serviceB
+        taskKey: "task1"
+      - serviceHash: serviceC
+        taskKey: "task2"
+      - serviceHash: serviceF
+        taskKey: "task5"
+workflowB:
+  trigger:
+    serviceHash: serviceB
+    eventKey: "executionFinished"
+    filter: { taskKey: "task1" }
+  tasks:
+    - serviceHash: serviceD
+      taskKey: task3
+workflowC:
+  trigger:
+    serviceHash: serviceB
+    eventKey: "executionFinished"
+    filter: { taskKey: "task1" }
+  tasks:
+    - serviceHash: serviceE
+      taskKey: task4
+</code></pre>
+<p>This way we create our tree which is composed of multiple workflows and will be correct by construction.</p>
+<p>One of the limitations here is that we cannot access the data of “eventX” from “workflowB” and “workflowC” but we have a workaround to create a task at the end of “workflowA” that aggregate all the data needed for “workflowB” and “workflowC”, this way the new workflow will have all the data.</p>
+<p>For now, workflows need to be hardcoded when the core starts (creating system workflow) and will be available for users on a different feature.</p>
+            <p><small>2 posts - 2 participants</small></p>
+            <p><a href="https://forum.mesg.com/t/workflow-implementation/281">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/workflow-implementation/281</link>
+          <pubDate>Thu, 16 May 2019 12:26:37 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-281</guid>
+          <source url="https://forum.mesg.com/t/workflow-implementation/281.rss">Workflow implementation</source>
+        </item>
+        <item>
+          <title>Execution DB and API</title>
+          <dc:creator><![CDATA[Anthony]]></dc:creator>
+          <category>Engine</category>
+          <description><![CDATA[
+            <h2>Goal</h2>
+<p>Provide the data and interfaces to focus on executions in the Engine.</p>
+<p>Right now events and task executions are two things quite separated. With the introduction of the workflow and with the goal to decentralize these executions we need to have an execution that links events and task executions together in a way that any node can have access to the same data and that these data should be sufficient to reach consensus, process and verify the execution.</p>
+<p><strong>Executions should not be possible without any workflow. Execution will be triggered because of an event or a result of a previous execution.</strong></p>
+<p>We need to make sure that we can trace any execution back to its beginning, an event and a list of result. more details <a href="https://mesg.com/documents/MESG-application-of-the-decentralized-network-of-services.pdf" rel="nofollow noopener">here</a>.</p>
+<h2>Execution Database</h2>
+<p>We need to remove/rename/add a bunch of attributes:</p>
+<ul>
+<li>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> ID to rename in hash (we calculate the hash so let’s call it hash)</li>
+<li>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> remove ExecutionDuration (calculated so don’t need to be in the data, can be transformed in function if we need to)</li>
+<li>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> remove Service and just put the service definition hash (we don’t need the full service definition)</li>
+<li>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> OutputData and OutputKey (<a href="https://forum.mesg.com/t/simplification-of-the-tasks-output/265/6" class="inline-onebox">Simplification of the task's output</a>)</li>
+<li>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> The previous execution that we can call <code>parentHash</code> (this will be helpful for data resolution of the workflow)</li>
+<li>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> Calculate the hash of the execution based on previous execution hash, inputs, service hash, task key</li>
+</ul>
+<p>When we will start the network we will add a few attributes for consensus of the event (emitters), execution (executor) and validation (validators).</p>
+<h2>API</h2>
+<p>With this focus on execution, we need proper API for that. The goal is on future versions to only use this API and deprecate and even delete the ExecuteTask, ListenEvent, ListenResult, SubmitResult.</p>
+<ul>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> Create a new proto <code>api</code> package under <code>/protobuf/api/</code>
+</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> Create a <code>executions.proto</code> in this package</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> Create a proto service <code>Execution</code>
+</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> Create the apis
+<ul>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> <code>Get(hash) -&gt; Execution</code>
+</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> <code>List() -&gt; Execution[]</code>
+</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> <code>Updates(filter) -&gt; Stream&lt;Execution&gt;</code>
+</li>
+</ul>
+</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> Create the <code>Execution</code> definition in <code>/protobuf/definition/execution.proto</code>
+</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> Create the api server in the <code>/api/ package (previously</code>interface`)</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> Create a manager/subpackage in the <code>sdk</code> package (previously <code>api</code>) called <code>execution</code> and create the functions
+<ul>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> <code>Get -&gt; Execution</code>
+</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> <code>List -&gt; Execution[]</code>
+</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> <code>Updates -&gt; Channel&lt;Execution&gt;</code>
+</li>
+</ul>
+</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> Link the api to the sdk functions</li>
+</ul>
+<p>In another step we will remove the ExecuteTask, ListenEvent, ListenResult and SubmitResult in order to use only the Execution’s APIs</p>
+            <p><small>5 posts - 2 participants</small></p>
+            <p><a href="https://forum.mesg.com/t/execution-db-and-api/280">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/execution-db-and-api/280</link>
+          <pubDate>Thu, 16 May 2019 08:00:07 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-280</guid>
+          <source url="https://forum.mesg.com/t/execution-db-and-api/280.rss">Execution DB and API</source>
+        </item>
+        <item>
+          <title>Simplification of the task&#39;s output</title>
+          <dc:creator><![CDATA[Anthony]]></dc:creator>
+          <category>Engine</category>
+          <description><![CDATA[
+            <p>After few months using MESG Core, I realize that create task’s outputs is a bit overcomplicated.<br>
+For now we have the following:</p>
+<p>One task has one payload of inputs and multiple possible outputs with their own payload.</p>
+<p>This is good to have multiple outputs in a function outputs are mostly (if not all the time) something like <code>success</code> or <code>error</code>.</p>
+<p>We could simplify this and just have one output from the task with its own payload. Of course the service could still raise an error.</p>
+<p><strong>PRO:</strong></p>
+<ul>
+<li>Simplification of the mesg.yml</li>
+</ul>
+<pre><code class="lang-auto">tasks:
+  xxx:
+    inputs: {...}
+    outputs:
+      foo: { type: String }
+</code></pre>
+<ul>
+<li>Simplification of the libraries</li>
+</ul>
+<pre><code class="lang-auto">// mesg lib catches empty result and do a big try catch on the function
+// also now the task don't have the responsibility to call the the submit result the lib can control only one submit result
+mesg.listenTask({
+  foo: (inputs: object): object =&gt; {}
+})
+</code></pre>
+<p><strong>CON:</strong></p>
+<ul>
+<li>A huge breaking change as all existing services will be broken</li>
+<li>Need update on the API</li>
+<li>Need update on the libraries</li>
+</ul>
+<p>We could have some way to minimize the impact with some conventions. If you are using success/error then we can automatically assign the success as output and catch the error but that will be ugly.</p>
+            <p><small>9 posts - 3 participants</small></p>
+            <p><a href="https://forum.mesg.com/t/simplification-of-the-tasks-output/265">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/simplification-of-the-tasks-output/265</link>
+          <pubDate>Thu, 28 Mar 2019 11:29:59 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-265</guid>
+          <source url="https://forum.mesg.com/t/simplification-of-the-tasks-output/265.rss">Simplification of the task&#39;s output</source>
+        </item>
+        <item>
+          <title>Output service hash as base58</title>
+          <dc:creator><![CDATA[Nicolas]]></dc:creator>
+          <category>Engine</category>
+          <description><![CDATA[
+            <p>Hey guys, I would like to propose to use base58 to output the service hash instead of the current base16 (hex).</p>
+<p>base58 is used by Bitcoin and IPFS.<br>
+base16 (with 0x prefix) is used by Ethereum.</p>
+<p>base58 is shorter than base16. 44 characters vs 64.<br>
+The same value represented in both way:</p>
+<pre><code class="lang-auto">e50b7d3bf80e522a59fd2a9b5f50b0f59062501f0ba98d29fdb30c094e806410
+GR6XPNNvBrUth247vLXZ686gk7hGdx33sW14vsWekiAT
+</code></pre>
+<p>The marketplace url will look like:</p>
+<pre><code class="lang-auto">mesg://marketplace/service/GR6XPNNvBrUth247vLXZ686gk7hGdx33sW14vsWekiAT
+// instead of
+mesg://marketplace/service/a07d866879f3c08676b8a7e2a86de5ddc21d0f53b0cecec62c4c04a86b017f39
+</code></pre>
+<p>In the core, <code>hash</code> is a string, so there is no difference to use a base58. (but actually <code>hash</code> should be of type <code>[]byte</code> and transformed to a string when outputted).<br>
+See: <a href="https://github.com/mesg-foundation/core/blob/b215cc4c091a1cf78fb423f5a7dfb8bca9a91a28/service/service.go#L123" rel="nofollow noopener">https://github.com/mesg-foundation/core/blob/b215cc4c091a1cf78fb423f5a7dfb8bca9a91a28/service/service.go#L123</a></p>
+<p>The only counterargument is in the marketplace smart contract, hash is represent as a bytes32 that is compatible with string that start with <code>0x</code> follow by the base16 value (eg: <code>0xe50b7d3bf80e522a59fd2a9b5f50b0f59062501f0ba98d29fdb30c094e806410</code>).<br>
+But as most of the data of the marketplace are already transformed to there base16 representation, it will follow the same pattern: sid, manifest url, manifest protocol (everything that’s not a number) are already encoded / decoded from ascii to hex in the service marketplace.<br>
+Base58 value can be super easily encoded to base16 for the marketplace smart contract on ethereum by the marketplace service.</p>
+<p>Let’s me know what you think <img src="https://forum.mesg.com/images/emoji/twitter/wink.png?v=6" title=":wink:" class="emoji" alt=":wink:"></p>
+            <p><small>6 posts - 3 participants</small></p>
+            <p><a href="https://forum.mesg.com/t/output-service-hash-as-base58/263">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/output-service-hash-as-base58/263</link>
+          <pubDate>Tue, 12 Mar 2019 13:39:12 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-263</guid>
+          <source url="https://forum.mesg.com/t/output-service-hash-as-base58/263.rss">Output service hash as base58</source>
+        </item>
+        <item>
+          <title>Graceful shutdown</title>
+          <dc:creator><![CDATA[ilgooz]]></dc:creator>
+          <category>Engine</category>
+          <description><![CDATA[
+            <p><a href="https://github.com/mesg-foundation/core/pull/790#discussion_r260682525" rel="nofollow noopener">original discussion</a></p>
+<h2>Flow</h2>
+<ul>
+<li>
+<p>Received <code>&lt;-xsignal.WaitForInterrupt()</code>.</p>
+</li>
+<li>
+<p>Close listener with <code>listener.Close()</code> to stop <em>Accepting</em> new application/service connections.</p>
+</li>
+<li>
+<p>Disable <code>ExecuteTask()</code> API by immediately returning every request with “shutting down” error. This way, already connected services cannot receive new execution requests with <code>ListenTask()</code>. (This error can be applied to incoming <code>ListenResult()</code>, <code>ListenEvent()</code> &amp; <code>ListenTask()</code> requests for convenience.)</p>
+</li>
+<li>
+<p>Call <code>stopRunningServices()</code> to send shutdown signals to running services. So, connected services will gracefully shutdown by finishing ongoing tasks and sending <code>SubmitResult()</code>s to Core.</p>
+</li>
+<li>
+<p>Drain <em>pubsub</em> queue by sending results for open <code>ListenResult()</code> streams. So, applications will receive their last results. Relevant <a href="https://github.com/mesg-foundation/core/blob/master/api/listen_result.go#L97-L122" rel="nofollow noopener">lines</a>.</p>
+</li>
+<li>
+<p>Call <code>service.Close()</code> afterwards to close all connections for all clients.</p>
+</li>
+</ul>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://forum.mesg.com/t/graceful-shutdown/262">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/graceful-shutdown/262</link>
+          <pubDate>Mon, 11 Mar 2019 07:25:51 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-262</guid>
+          <source url="https://forum.mesg.com/t/graceful-shutdown/262.rss">Graceful shutdown</source>
+        </item>
+        <item>
+          <title>Service&#39;s hash</title>
+          <dc:creator><![CDATA[Nicolas]]></dc:creator>
+          <category>Engine</category>
+          <description><![CDATA[
+            <p>Related to</p>
+<ul>
+<li><a href="https://forum.mesg.com/t/services-hash-are-different-from-downloaded-tarball-and-remote-git/211" class="inline-onebox">Service's hash are different from downloaded tarball and remote git</a></li>
+<li>
+<a href="https://github.com/mesg-foundation/core/pull/731" rel="nofollow noopener">PR #731</a>.</li>
+</ul>
+<p>In this topic, I would like to fix the different issues we have about the hash of a service and find solutions that can be implemented step-by-step.</p>
+<h2>The ultimate goal is to have:</h2>
+<p><strong>1. same hash across any computer</strong><br>
+This feature is really important for the future decentralized network. It will be the unique identifier used in order to dispatch executions across multiple Core. That’s how the network will be able to know which service is running, on which core, and select the right Core to execute and verify executions.</p>
+<p>Requested by <a class="mention" href="/u/krhubert">@krhubert</a>:<br>
+<strong>6. same hash even with different deployment method</strong><br>
+The hash should be the same even if the service is deploy from different method: local dir, git repo or tar archive (including compression).</p>
+<h2>But the hash should change when:</h2>
+<p><strong>2. source code change</strong><br>
+means a potentially completely different service.</p>
+<p><strong>3. service definition change</strong><br>
+means a potentially completely different service.</p>
+<p><strong>4. env variables change</strong><br>
+could drastically change the behavior of a service (eg Ethereum with the different networks. same source code, but the data are completely different, thus the behavior of the service is also different).</p>
+<p><strong>5. dependencies change (OS version, apt-get, npm i, go mod, etc…)</strong><br>
+this is more subtle but should also be taking into account: a different version of a dependency could also change drastically the behavior of the service.<br>
+For instance, a package manager using semver could break when installing a new version that actually break the dependency. (But it should be fine when locking version or using having a ‘lock’ file (eg: <code>package-lock.jso</code>)). Another example, running an <code>apt-get upgrade</code> can also install different version of system libraries.</p>
+<h2>Solutions</h2>
+<h4>- Docker image</h4>
+<p><img src="https://forum.mesg.com/images/emoji/twitter/x.png?v=9" title=":x:" class="emoji" alt=":x:"> <span class="hashtag">#1</span>, <span class="hashtag">#4</span>, <span class="hashtag">#6</span><br>
+<img src="https://forum.mesg.com/images/emoji/twitter/white_check_mark.png?v=9" title=":white_check_mark:" class="emoji" alt=":white_check_mark:"> <span class="hashtag">#2</span>, <span class="hashtag">#3</span>, <span class="hashtag">#5</span><br>
+Docker image hash are absolutely non-deterministic and change anytime a change type <span class="hashtag">#2</span>, <span class="hashtag">#3</span>, <span class="hashtag">#5</span> occur. Even more, rebuild from the same source without docker cache or on another computer will create a different image hash.</p>
+<h4>- Docker image + hash of env variables (current implementation)</h4>
+<p><img src="https://forum.mesg.com/images/emoji/twitter/x.png?v=9" title=":x:" class="emoji" alt=":x:"> <span class="hashtag">#1</span>, <span class="hashtag">#6</span><br>
+<img src="https://forum.mesg.com/images/emoji/twitter/white_check_mark.png?v=9" title=":white_check_mark:" class="emoji" alt=":white_check_mark:"> <span class="hashtag">#2</span>, <span class="hashtag">#3</span>, <span class="hashtag">#4</span>, <span class="hashtag">#5</span><br>
+In this improved version of the previous one, the env variables are taking into account so it solves <span class="hashtag">#4</span>. But goal <span class="hashtag">#1</span> is still not met.</p>
+<h4>- Checksum of source + hash of env variables</h4>
+<p><img src="https://forum.mesg.com/images/emoji/twitter/x.png?v=9" title=":x:" class="emoji" alt=":x:"> <span class="hashtag">#5</span><br>
+<img src="https://forum.mesg.com/images/emoji/twitter/white_check_mark.png?v=9" title=":white_check_mark:" class="emoji" alt=":white_check_mark:"> <span class="hashtag">#1</span>, <span class="hashtag">#2</span>, <span class="hashtag">#3</span>, <span class="hashtag">#4</span>, <span class="hashtag">#6</span><br>
+The <a href="https://github.com/mesg-foundation/core/pull/731" rel="nofollow noopener">PR #731</a> calculate the hash based on the source code, the env variables, and the service definition. It calculates the same hash across computer. BUT it doesn’t take into account the dependencies change.</p>
+<h4>Download already built docker image</h4>
+<p><img src="https://forum.mesg.com/images/emoji/twitter/x.png?v=9" title=":x:" class="emoji" alt=":x:"> <span class="hashtag">#2</span>, <span class="hashtag">#3</span><br>
+<img src="https://forum.mesg.com/images/emoji/twitter/white_check_mark.png?v=9" title=":white_check_mark:" class="emoji" alt=":white_check_mark:"> <span class="hashtag">#1</span>, <span class="hashtag">#4</span>, <span class="hashtag">#5</span>, <span class="hashtag">#6</span><br>
+Same way as Docker Hub is working, the developer build its image and publish it on a image repository.<br>
+From <a class="mention" href="/u/anthony">@Anthony</a>: Docker can also generate a tarball that is easy to distribute with the command <code>docker image save</code>. But the size of the image could be way higher than the source.<br>
+User can simply download the already build image.<br>
+The big problem is there is no way to guarantee the image is actually running the service’s source code. A developer can publish an image that is not build with the same source code.<br>
+One way to solve this will be to “control” the build process either by forcing to use the core or to use a public CI. In both case, there are many flaws and limitations.</p>
+<h4>Deterministic image build + hash of env variables</h4>
+<p><img src="https://forum.mesg.com/images/emoji/twitter/white_check_mark.png?v=9" title=":white_check_mark:" class="emoji" alt=":white_check_mark:"> <span class="hashtag">#1</span>, <span class="hashtag">#2</span>, <span class="hashtag">#3</span>, <span class="hashtag">#4</span>, <span class="hashtag">#5</span>, <span class="hashtag">#6</span><br>
+The ultimate solution could be fixed by using another tool than Docker build to create the image in a deterministic way.<br>
+I found out that it’s possible but may require to use “complicated” tools and could take weeks to actually implement.</p>
+<ul>
+<li><a href="https://blog.bazel.build/2015/07/28/docker_build.html" rel="nofollow noopener">https://blog.bazel.build/2015/07/28/docker_build.html</a></li>
+<li><a href="https://github.com/openshift/source-to-image" rel="nofollow noopener">https://github.com/openshift/source-to-image</a></li>
+</ul>
+<hr>
+<ul>
+<li>I would especially like to have your feedback on the prioritization of <span class="hashtag">#5</span>. I feel it’s important but make the calculation of the hash dramatically more complicated.</li>
+<li>Also please fix the proposed solutions if I made mistakes.</li>
+</ul>
+            <p><small>15 posts - 4 participants</small></p>
+            <p><a href="https://forum.mesg.com/t/services-hash/261">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/services-hash/261</link>
+          <pubDate>Tue, 05 Mar 2019 06:12:00 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-261</guid>
+          <source url="https://forum.mesg.com/t/services-hash/261.rss">Service&#39;s hash</source>
+        </item>
+        <item>
+          <title>Service definition: support recursive types</title>
+          <dc:creator><![CDATA[ilgooz]]></dc:creator>
+          <category>Engine</category>
+          <description><![CDATA[
+            <p>We need to support recursive types in order to have type definitions on child fields of an <code>object</code> type where child fields referring to its parental type.</p>
+<p>This is the current syntax that doesn’t support recursive types. Please see comments in the yml below:</p>
+<pre><code class="lang-auto">events:
+  query:
+    data:
+      fields:
+        repeated: true
+        type: Object
+        object: # field
+          name:
+            type: String
+          fields: # fields is actually type 'fields' *recursive*
+            type: Any
+          args:
+            type: Object
+            repeated: true
+            object:
+              name:
+                type: String
+              value:
+                type: String
+</code></pre>
+<p>I’m thinking about having a syntax like below to support recursive types:</p>
+<pre><code class="lang-auto">events:
+  query:
+    data:
+      fields:
+        name: fields
+        repeated: true
+        type: Object
+        object:
+          name:
+            type: String
+          fields: +fields
+          args:
+            type: Object
+            repeated: true
+            object:
+              name:
+                type: String
+              value:
+                type: String
+</code></pre>
+<p>So with the syntax above, we’re introducing a new key called <code>name</code> in the parameter type while also supporting special values in field values to identify <strong>named values</strong> by checking for <code>+</code> sign.</p>
+            <p><small>6 posts - 3 participants</small></p>
+            <p><a href="https://forum.mesg.com/t/service-definition-support-recursive-types/260">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/service-definition-support-recursive-types/260</link>
+          <pubDate>Tue, 19 Feb 2019 18:56:11 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-260</guid>
+          <source url="https://forum.mesg.com/t/service-definition-support-recursive-types/260.rss">Service definition: support recursive types</source>
+        </item>
+        <item>
+          <title>Service hash, sid, id naming</title>
+          <dc:creator><![CDATA[krhubert]]></dc:creator>
+          <category>Engine</category>
+          <description><![CDATA[
+            <p>As discuss with <a class="mention" href="/u/anthony">@Anthony</a> we need naming consistency for (service or id) variable. This will help us and other developers.</p>
+<p>we are using right now:</p>
+<ul>
+<li>serviceID in coreapi</li>
+<li>hashOrSid in database</li>
+</ul>
+<p>Moreover, we have <code>Name</code> variable in <code>api.proto.Service</code> struct - which probably was forgotten but is still displayed in cli.</p>
+<p>The idea is to:</p>
+<ul>
+<li>remove Name variable from Service struct</li>
+<li>rename serviceID/hashOrSid to … we have two options:</li>
+<li>
+<ul>
+<li>reference</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>service</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>source</li>
+</ul>
+</li>
+</ul>
+<p>For example docker is calling this variable <code>container</code></p>
+<p><a href="https://github.com/moby/moby/blob/master/client/interface.go#L62" rel="nofollow noopener">https://github.com/moby/moby/blob/master/client/interface.go#L62</a> .</p>
+<p>And this is how they display it in the docs:</p>
+<p><a href="https://docs.docker.com/engine/api/v1.24/" rel="nofollow noopener">https://docs.docker.com/engine/api/v1.24/</a> (search for GET CONTAINER LOGS)</p>
+<p>In cli:</p>
+<pre><code class="lang-auto">➜  core git:(dev) ✗ docker logs -h
+Flag shorthand -h has been deprecated, please use --help
+
+Usage:	docker logs [OPTIONS] CONTAINER
+</code></pre>
+<p>We are already using <code>service</code> in <code>cli</code>:</p>
+<pre><code class="lang-auto">➜  core git:(dev) ✗ ./dev-cli service logs -h
+Show logs of a service
+
+Usage:
+  mesg-core service logs [flags]
+
+Examples:
+mesg-core service logs SERVICE
+</code></pre>
+<p>So we should use this in API as well and in the source code.</p>
+            <p><small>5 posts - 4 participants</small></p>
+            <p><a href="https://forum.mesg.com/t/service-hash-sid-id-naming/240">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/service-hash-sid-id-naming/240</link>
+          <pubDate>Thu, 31 Jan 2019 09:17:32 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-240</guid>
+          <source url="https://forum.mesg.com/t/service-hash-sid-id-naming/240.rss">Service hash, sid, id naming</source>
+        </item>
+        <item>
+          <title>Use of config in the Core</title>
+          <dc:creator><![CDATA[Anthony]]></dc:creator>
+          <category>Engine</category>
+          <description><![CDATA[
+            <p>In the core we are using the package config in 2 different ways:</p>
+<h2>As a dependency injected in a package</h2>
+<p>Pro: We could mock it easily<br>
+Con: We need to pass it pretty much everywhere and that become a de-facto dependency</p>
+<h2>As a singleton</h2>
+<p>Pro: Ease of use<br>
+Con: Creates a string dependency</p>
+<hr>
+<p>Both solutions are valid but we need to make sure we choose only one to not have any confusion in the code with sometime dependencies and sometime singleton.</p>
+<p>Both solution needs some modifications in the code. If singleton, we need to have a <strong>real singleton</strong> the <strong>New</strong> function should not be exposed. If dependency we need to remove the <strong>Global</strong> function and do everything in the <strong>New</strong> method.</p>
+<p>Would like to have your feedbacks on that <img src="https://forum.mesg.com/images/emoji/twitter/slight_smile.png?v=6" title=":slight_smile:" class="emoji" alt=":slight_smile:"></p>
+<p>This subject came from this discussion on github <a href="https://github.com/mesg-foundation/core/pull/737#discussion_r251319159" rel="nofollow noopener">https://github.com/mesg-foundation/core/pull/737#discussion_r251319159</a></p>
+            <p><small>5 posts - 3 participants</small></p>
+            <p><a href="https://forum.mesg.com/t/use-of-config-in-the-core/238">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/use-of-config-in-the-core/238</link>
+          <pubDate>Tue, 29 Jan 2019 07:24:11 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-238</guid>
+          <source url="https://forum.mesg.com/t/use-of-config-in-the-core/238.rss">Use of config in the Core</source>
+        </item>
+        <item>
+          <title>Mesg-core: add version command</title>
+          <dc:creator><![CDATA[ilgooz]]></dc:creator>
+          <category>Engine</category>
+          <description><![CDATA[
+            <p>sample usage:<br>
+<code>mesg-core version</code></p>
+<p>sample output:<br>
+<code>v0.7 (commit 047d331)</code></p>
+<p>sample output:<br>
+<code>dev (commit 433fede)</code></p>
+            <p><small>4 posts - 2 participants</small></p>
+            <p><a href="https://forum.mesg.com/t/mesg-core-add-version-command/237">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/mesg-core-add-version-command/237</link>
+          <pubDate>Mon, 28 Jan 2019 12:09:43 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-237</guid>
+          <source url="https://forum.mesg.com/t/mesg-core-add-version-command/237.rss">Mesg-core: add version command</source>
+        </item>
+        <item>
+          <title>Accept multiple inputs for every commands</title>
+          <dc:creator><![CDATA[Anthony]]></dc:creator>
+          <category>Engine</category>
+          <description><![CDATA[
+            <p>The <code>service delete</code> command accept a list of services. This is really convenient and we should have this for the following commands:</p>
+<ul>
+<li>start</li>
+<li>stop</li>
+<li>deploy</li>
+</ul>
+<p>and maybe more if it make sense.</p>
+<p>With that and with a <code>quiet</code> mode on the <code>service list</code> command we could do some stuff like in docker.<br>
+<code>mesg-core service stop $(mesg-core service list -q)</code> to stop all the services.<br>
+This would be perfect for developer experience,</p>
+            <p><small>4 posts - 3 participants</small></p>
+            <p><a href="https://forum.mesg.com/t/accept-multiple-inputs-for-every-commands/227">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/accept-multiple-inputs-for-every-commands/227</link>
+          <pubDate>Thu, 24 Jan 2019 09:05:00 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-227</guid>
+          <source url="https://forum.mesg.com/t/accept-multiple-inputs-for-every-commands/227.rss">Accept multiple inputs for every commands</source>
+        </item>
+        <item>
+          <title>Aliases for the cli commands</title>
+          <dc:creator><![CDATA[Anthony]]></dc:creator>
+          <category>Engine</category>
+          <description><![CDATA[
+            <p>Every time I use the core I have some problems remembering some commands.<br>
+I think we should rename some commands or at least add aliases for them.</p>
+<ul>
+<li>service delete (remove, rm)</li>
+<li>service list (ls)</li>
+<li>service execute (exec)</li>
+<li>service detail (get)</li>
+</ul>
+<p>That’s the one I’m usually confused with (in order of use ish)</p>
+            <p><small>4 posts - 2 participants</small></p>
+            <p><a href="https://forum.mesg.com/t/aliases-for-the-cli-commands/226">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/aliases-for-the-cli-commands/226</link>
+          <pubDate>Thu, 24 Jan 2019 09:01:34 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-226</guid>
+          <source url="https://forum.mesg.com/t/aliases-for-the-cli-commands/226.rss">Aliases for the cli commands</source>
+        </item>
+        <item>
+          <title>Replace structhash with json encoding</title>
+          <dc:creator><![CDATA[krhubert]]></dc:creator>
+          <category>Engine</category>
+          <description><![CDATA[
+            <p>Based on discussion <a href="https://github.com/mesg-foundation/core/issues/718#issuecomment-455535167" rel="nofollow noopener">https://github.com/mesg-foundation/core/issues/718#issuecomment-455535167</a></p>
+<p>The structhash do not support <code>omitempty</code> flag. Moreover it dosen’t:</p>
+<ul>
+<li>panic on invalid tag (rather silently drop)</li>
+<li>
+<a href="https://github.com/cnf/structhash/blob/master/structhash.go#L180" rel="nofollow noopener">https://github.com/cnf/structhash/blob/master/structhash.go#L180</a> -  it serialize functions, channels etc … in our use case serializing channel/funcs don’t make any sens.</li>
+</ul>
+<p>So we need to fix it.</p>
+<p>Is there a reason why we using this package instead of simple json?</p>
+<p>we can use simply <code>sha1.Sum(josn.Marshal(service))</code>. End of story.</p>
+<p>In that case we have well tested stable package and we can easily extend service struct by adding <code>omitempty</code> tag to every new field.</p>
+<p>We just need to replace tag <code>hash</code> with <code>json</code> and get rid of dependency.</p>
+            <p><small>4 posts - 3 participants</small></p>
+            <p><a href="https://forum.mesg.com/t/replace-structhash-with-json-encoding/216">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/replace-structhash-with-json-encoding/216</link>
+          <pubDate>Mon, 21 Jan 2019 18:09:15 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-216</guid>
+          <source url="https://forum.mesg.com/t/replace-structhash-with-json-encoding/216.rss">Replace structhash with json encoding</source>
+        </item>
+        <item>
+          <title>Mesg.yml: possibility to define a logo url</title>
+          <dc:creator><![CDATA[ilgooz]]></dc:creator>
+          <category>Engine</category>
+          <description><![CDATA[
+            <p>Let’s have a new prop called <code>logo</code> or <code>icon</code> in the mesg.yml file which accepts service’s logo url. This way we can list services on the marketplace nicely with their logos.</p>
+            <p><small>5 posts - 4 participants</small></p>
+            <p><a href="https://forum.mesg.com/t/mesg-yml-possibility-to-define-a-logo-url/212">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/mesg-yml-possibility-to-define-a-logo-url/212</link>
+          <pubDate>Mon, 21 Jan 2019 11:09:07 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-212</guid>
+          <source url="https://forum.mesg.com/t/mesg-yml-possibility-to-define-a-logo-url/212.rss">Mesg.yml: possibility to define a logo url</source>
+        </item>
+  </channel>
+</rss>

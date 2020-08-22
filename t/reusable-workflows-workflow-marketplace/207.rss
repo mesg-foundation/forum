@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Reusable Workflows &amp; Workflow Marketplace</title>
+    <link>https://forum.mesg.com/t/reusable-workflows-workflow-marketplace/207</link>
+    <description>**Application = Workflow**
+
+## Problem
+
+Let&#39;s say that we have a [sendgrid](https://github.com/mesg-foundation/service-email-sendgrid) service in the service marketplace to send emails.
+
+And let&#39;s say that a part of our workflow needs to send a specific type of emails to send verification codes to users to make it possible for them to verify their accounts, and let them to reset their passwords and so on.
+
+Knowing that, think about a scenario that a user wants to reset its password. To do that we need to send a verification code to its email. After user receiving this email that contains the code, it should enter it in a mobile app or website and be able to set a new password for its account if the verification code is correct.
+
+To make this possible, devs need to generate a verification code in their workflows maybe with a help of another service, keep this code in a database by using a database service and send the code to user with an email by using the sendgrid service. And check the code entered by the user while password is being changed.
+
+As we see, to implement this feature we need these two sendgrind and mongodb services and introduce some business logic directly into the workflow.
+
+## Proposal In Short
+* Allow [workflows](https://forum.mesg.com/t/introducing-workflow-files) to be reusable.
+* Create a marketplace for reusable workflows.
+
+## Proposal In Long
+
+My proposal here is to allow devs to **create reusable workflows** so they&#39;ll not be required to duplicate same logic in their different workflows(projects).
+
+With this reusable workflows, we can simplify the code verification feature we talked about in the **Problem** section by creating a reusable workflow like below:
+
+**workflow id(wid)**: email-code-verification
+**workflow services (the services that workflow uses)**: sendgrid, mongodb
+**workflow tasks**:
+ * sendVerification ([ _inputs&gt;_ `email string`, `timeoutDuration string` ])
+ * verifyCode ([ _inputs&gt;_ `code string` ]) ([ _outputs&gt;_ `email string` ]) // returns email if code is exists and not expired
+
+Reusable workflows are just like reusable services. They have tasks, task results and events. They can be used by other workflows like how services are used inside workflows. They can also have deployment time configurations. They&#39;re easy to create with a GUI and can be deployed to workflow marketplace.
+
+This reusable workflows idea is very similar to [service composition](https://forum.mesg.com/t/service-composition/22) but there are some major differences:
+* It is possible to use multiple services in a reusable workflow and not just only one(this is the case in service compositions).
+* It&#39;s easier to create workflows rather than services. Because a GUI will be available to create workflows for non-programmers.
+* We&#39;ll have a service &amp; a workflow marketplace growing naturally and separately. Services will stay more generic because we&#39;ll have this strong separation between the services and workflows. On the other hand, service composition will result services to be **less generic(opinionated)** which is a very bad adoption and will create a noise in the service marketplace.
+
+We can also make this reusable workflows to be compatible with the current `service(listenTask, submitResult)` &amp; `core(listenResult, listenEvent, executeTask)` APIs so we don&#39;t need to create more gRPC APIs or logic in the Core.
+
+## Details About Reusable Workflows
+* Reusable workflows can be created over a GUI.
+* Reusable workflows can use other reusable workflows or services and listen for their results or events and execute their tasks.
+* Reusable workflows can be used by regular workflows just like how regular workflows uses services.
+* Reusable workflows can receive configurations in the deploy time.
+* Reusable workflows acts like services so they&#39;ll share the same `service(listenTask, submitResult)` &amp; `core(listenResult, listenEvent, executeTask)` APIs with services.
+* There is no much difference between regular workflows and reusable ones. They are deployed/started/stopped/deleted in the same way. The difference is, workflow syntax will let devs to  define some tasks and emit some results or events from a workflow. This way, they can be used just like services. Reusable workflows gives the possibility to combine multiple services together and create an opinionated one.</description>
+    
+    <lastBuildDate>Wed, 06 Mar 2019 02:47:53 +0000</lastBuildDate>
+    <category>Development</category>
+    <atom:link href="https://forum.mesg.com/t/reusable-workflows-workflow-marketplace/207.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Reusable Workflows &amp; Workflow Marketplace</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>That’s a good way to do service composition with the current version of Core <img src="https://forum.mesg.com/images/emoji/twitter/slight_smile.png?v=6" title=":slight_smile:" class="emoji" alt=":slight_smile:"></p>
+<p>The first problem I see here is currently there is no way to set the dependency between the composed service in the service definition. We could add a new field in the service dependency to specify the composed service and deploy / start them automatically.</p>
+<p>The second problem here is that the service is using the core api. That’s something we would like to remove in the future. This can be solved if the service could also have workflows that will connect the composed service to the main one. But in this case, the workflow will be executed by the Core itself. This will be much cleaner.</p>
+          <p><a href="https://forum.mesg.com/t/reusable-workflows-workflow-marketplace/207/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/reusable-workflows-workflow-marketplace/207/4</link>
+        <pubDate>Wed, 06 Mar 2019 02:47:53 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-207-4</guid>
+        <source url="https://forum.mesg.com/t/reusable-workflows-workflow-marketplace/207.rss">Reusable Workflows &amp; Workflow Marketplace</source>
+      </item>
+      <item>
+        <title>Reusable Workflows &amp; Workflow Marketplace</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>Here is a real world example of reusable applications, please check the <a href="https://github.com/ilgooz/service-graphql" rel="nofollow noopener">graphql</a> service.</p>
+<p>Note that, since we don’t officially support reusable workflows/service compositions yet, this is just an experimentation with what we have.</p>
+<p>Normally, a service only connects to <em>service</em> gRPC API but this service also connect to <em>core</em> gRPC API. In another means, this service can react to events, results and execute tasks from other services likewise an application.</p>
+<p>The service’s purpose is to run as a GraphQL server. To do that it depends on <a href="https://github.com/ilgooz/service-http-server" rel="nofollow noopener">http-server</a> to react GraphQL queries sent over http requests. When there is a new request on <em>http-server</em>, it receives the <em>request</em> event and checks the <em>path</em> and <em>method</em> of the http request to determine if it’s a GraphQL request.</p>
+<p>If so, it emits a <em>query</em> event that contains information about the corresponding GraphQL request. Applications should listen for this event and prepare the data for it and then execute <em>completeQuery</em> on the service to send back a response.</p>
+<p>After response received by the graphql service it forwards it to the <em>http-server</em> service by calling its <em>completeSession</em> task and then user gets its GraphQL query results.</p>
+<p>In addition to this, graphql service also depends on <a href="https://github.com/ilgooz/service-graphql-introspection" rel="nofollow noopener">graphql-introspection</a> service to automatically send responses to GraphQL’s Introspection queries by using the <em>SCHEMA</em> which is set as an environment variable to the graphql service.</p>
+<p>To check graphql service in action please check <a href="https://github.com/mesg-foundation/application-marketplace/pull/1/files" rel="nofollow noopener">this PR</a> on marketplace application.</p>
+          <p><a href="https://forum.mesg.com/t/reusable-workflows-workflow-marketplace/207/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/reusable-workflows-workflow-marketplace/207/3</link>
+        <pubDate>Tue, 05 Mar 2019 09:28:09 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-207-3</guid>
+        <source url="https://forum.mesg.com/t/reusable-workflows-workflow-marketplace/207.rss">Reusable Workflows &amp; Workflow Marketplace</source>
+      </item>
+      <item>
+        <title>Reusable Workflows &amp; Workflow Marketplace</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Great proposal! We wanted to implement a similar system once workflow and the marketplace are release.<br>
+Good that you came up with a similar idea <img src="https://forum.mesg.com/images/emoji/twitter/wink.png?v=6" title=":wink:" class="emoji" alt=":wink:"></p>
+          <p><a href="https://forum.mesg.com/t/reusable-workflows-workflow-marketplace/207/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/reusable-workflows-workflow-marketplace/207/2</link>
+        <pubDate>Mon, 21 Jan 2019 08:37:46 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-207-2</guid>
+        <source url="https://forum.mesg.com/t/reusable-workflows-workflow-marketplace/207.rss">Reusable Workflows &amp; Workflow Marketplace</source>
+      </item>
+      <item>
+        <title>Reusable Workflows &amp; Workflow Marketplace</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p><strong>Application = Workflow</strong></p>
+<h2>Problem</h2>
+<p>Let’s say that we have a <a href="https://github.com/mesg-foundation/service-email-sendgrid" rel="nofollow noopener">sendgrid</a> service in the service marketplace to send emails.</p>
+<p>And let’s say that a part of our workflow needs to send a specific type of emails to send verification codes to users to make it possible for them to verify their accounts, and let them to reset their passwords and so on.</p>
+<p>Knowing that, think about a scenario that a user wants to reset its password. To do that we need to send a verification code to its email. After user receiving this email that contains the code, it should enter it in a mobile app or website and be able to set a new password for its account if the verification code is correct.</p>
+<p>To make this possible, devs need to generate a verification code in their workflows maybe with a help of another service, keep this code in a database by using a database service and send the code to user with an email by using the sendgrid service. And check the code entered by the user while password is being changed.</p>
+<p>As we see, to implement this feature we need these two sendgrind and mongodb services and introduce some business logic directly into the workflow.</p>
+<h2>Proposal In Short</h2>
+<ul>
+<li>Allow <a href="https://forum.mesg.com/t/introducing-workflow-files">workflows</a> to be reusable.</li>
+<li>Create a marketplace for reusable workflows.</li>
+</ul>
+<h2>Proposal In Long</h2>
+<p>My proposal here is to allow devs to <strong>create reusable workflows</strong> so they’ll not be required to duplicate same logic in their different workflows(projects).</p>
+<p>With this reusable workflows, we can simplify the code verification feature we talked about in the <strong>Problem</strong> section by creating a reusable workflow like below:</p>
+<p><strong>workflow id(wid)</strong>: email-code-verification<br>
+<strong>workflow services (the services that workflow uses)</strong>: sendgrid, mongodb<br>
+<strong>workflow tasks</strong>:</p>
+<ul>
+<li>sendVerification ([ <em>inputs&gt;</em> <code>email string</code>, <code>timeoutDuration string</code> ])</li>
+<li>verifyCode ([ <em>inputs&gt;</em> <code>code string</code> ]) ([ <em>outputs&gt;</em> <code>email string</code> ]) // returns email if code is exists and not expired</li>
+</ul>
+<p>Reusable workflows are just like reusable services. They have tasks, task results and events. They can be used by other workflows like how services are used inside workflows. They can also have deployment time configurations. They’re easy to create with a GUI and can be deployed to workflow marketplace.</p>
+<p>This reusable workflows idea is very similar to <a href="https://forum.mesg.com/t/service-composition/22">service composition</a> but there are some major differences:</p>
+<ul>
+<li>It is possible to use multiple services in a reusable workflow and not just only one(this is the case in service compositions).</li>
+<li>It’s easier to create workflows rather than services. Because a GUI will be available to create workflows for non-programmers.</li>
+<li>We’ll have a service &amp; a workflow marketplace growing naturally and separately. Services will stay more generic because we’ll have this strong separation between the services and workflows. On the other hand, service composition will result services to be <strong>less generic(opinionated)</strong> which is a very bad adoption and will create a noise in the service marketplace.</li>
+</ul>
+<p>We can also make this reusable workflows to be compatible with the current <code>service(listenTask, submitResult)</code> &amp; <code>core(listenResult, listenEvent, executeTask)</code> APIs so we don’t need to create more gRPC APIs or logic in the Core.</p>
+<h2>Details About Reusable Workflows</h2>
+<ul>
+<li>Reusable workflows can be created over a GUI.</li>
+<li>Reusable workflows can use other reusable workflows or services and listen for their results or events and execute their tasks.</li>
+<li>Reusable workflows can be used by regular workflows just like how regular workflows uses services.</li>
+<li>Reusable workflows can receive configurations in the deploy time.</li>
+<li>Reusable workflows acts like services so they’ll share the same <code>service(listenTask, submitResult)</code> &amp; <code>core(listenResult, listenEvent, executeTask)</code> APIs with services.</li>
+<li>There is no much difference between regular workflows and reusable ones. They are deployed/started/stopped/deleted in the same way. The difference is, workflow syntax will let devs to  define some tasks and emit some results or events from a workflow. This way, they can be used just like services. Reusable workflows gives the possibility to combine multiple services together and create an opinionated one.</li>
+</ul>
+          <p><a href="https://forum.mesg.com/t/reusable-workflows-workflow-marketplace/207/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/reusable-workflows-workflow-marketplace/207/1</link>
+        <pubDate>Sun, 20 Jan 2019 15:37:20 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-207-1</guid>
+        <source url="https://forum.mesg.com/t/reusable-workflows-workflow-marketplace/207.rss">Reusable Workflows &amp; Workflow Marketplace</source>
+      </item>
+  </channel>
+</rss>

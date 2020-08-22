@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>GUI Features</title>
+    <link>https://forum.mesg.com/t/gui-features/213</link>
+    <description>Here are some features that we probably-definitely need in the GUI:
+
+[ ] have tray icon for mesg in the top bar.
+[ ] install Core, Docker &amp; configure Swarm after first install of gui.
+[ ] add status(running etc.) &amp; version info of Core to gui and notify users about Core&#39;s new versions and ask it to update.
+[ ] ask to user&#39;s to update gui when a new version is available.
+[ ] connect to marketplace service for marketplace page.
+[ ] recognize urls that starts with  `mesg://`  to show &amp;amp; deploy services etc.
+[ ] add deploy button to service repos to deploy services via gui via:  `mesg://deployService?SID=X`.
+[ ] have a button in GUI to optionally clean local mesg databases after Core is updated.
+[ ] provide ability to deploy services from local files (/with drag&amp;drop).</description>
+    
+    <lastBuildDate>Thu, 26 Dec 2019 02:28:16 +0000</lastBuildDate>
+    <category>Development</category>
+    <atom:link href="https://forum.mesg.com/t/gui-features/213.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>GUI Features</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>We are now moving to one single UI that will be the MESG Explorer <a href="https://github.com/mesg-foundation/explorer">https://github.com/mesg-foundation/explorer</a> that regroups the marketplace, the block explorer, debug tools and ways to deploy services and processes.</p>
+<p>This is a standalone website that will rely on the MESG daemon and will be accessible to <a href="http://explorer.mesg.com">explorer.mesg.com</a> or subdomains per networks eg: <a href="http://testnet.explorer.mesg.com">testnet.explorer.mesg.com</a>.</p>
+          <p><a href="https://forum.mesg.com/t/gui-features/213/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/gui-features/213/4</link>
+        <pubDate>Thu, 26 Dec 2019 02:28:16 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-213-4</guid>
+        <source url="https://forum.mesg.com/t/gui-features/213.rss">GUI Features</source>
+      </item>
+      <item>
+        <title>GUI Features</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            
+          <p><a href="https://forum.mesg.com/t/gui-features/213/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/gui-features/213/3</link>
+        <pubDate>Tue, 22 Jan 2019 06:27:04 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-213-3</guid>
+        <source url="https://forum.mesg.com/t/gui-features/213.rss">GUI Features</source>
+      </item>
+      <item>
+        <title>GUI Features</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>About the tray icon, I really like one tool, <a href="https://blockstack.org/" rel="nofollow noopener">blockstack</a> that have only a tray icon with some menus and it open a page in your browser, I really like this experience, it’s not too intrusive and like that it’s ok to let the application open all the time. Or the same like docker, just the tray icon that open new popups for specific features.</p>
+          <p><a href="https://forum.mesg.com/t/gui-features/213/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/gui-features/213/2</link>
+        <pubDate>Tue, 22 Jan 2019 05:26:27 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-213-2</guid>
+        <source url="https://forum.mesg.com/t/gui-features/213.rss">GUI Features</source>
+      </item>
+      <item>
+        <title>GUI Features</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>Here are some features that we probably-definitely need in the GUI:</p>
+<p><span class="chcklst-box fa fa-square-o fa-fw"></span> have tray icon for mesg in the top bar.<br>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> install Core, Docker &amp; configure Swarm after first install of gui.<br>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> add status(running etc.) &amp; version info of Core to gui and notify users about Core’s new versions and ask it to update.<br>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> ask to user’s to update gui when a new version is available.<br>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> connect to marketplace service for marketplace page.<br>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> recognize urls that starts with  <code>mesg://</code>  to show &amp; deploy services etc.<br>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> add deploy button to service repos to deploy services via gui via:  <code>mesg://deployService?SID=X</code>.<br>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> have a button in GUI to optionally clean local mesg databases after Core is updated.<br>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> provide ability to deploy services from local files (/with drag&amp;drop).</p>
+          <p><a href="https://forum.mesg.com/t/gui-features/213/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/gui-features/213/1</link>
+        <pubDate>Mon, 21 Jan 2019 11:19:09 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-213-1</guid>
+        <source url="https://forum.mesg.com/t/gui-features/213.rss">GUI Features</source>
+      </item>
+  </channel>
+</rss>

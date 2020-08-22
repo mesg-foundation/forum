@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Client/service: v2</title>
+    <link>https://forum.mesg.com/t/client-service-v2/195</link>
+    <description>## refactoring service pkg
+* Think about improving task handler by changing the return types. _Data_ type needs the conversions for constants. We may need to change it to just an _interface{}_
+* Consider using &#39;mesg&#39; tag name on struct fields because devs shouldn&#39;t be aware of json encoding in the higher level. And they may need to use &#39;json&#39; tag in their own business logic. https://github.com/mesg-foundation/core/issues/708
+
+## refactoring servicetest pkg
+* Think about getting rid of channels inside _LastX()_ funcs. They can block forever. https://github.com/mesg-foundation/core/issues/708
+* Consider mocking instead of creating a fake service</description>
+    
+    <lastBuildDate>Wed, 16 Jan 2019 11:23:23 +0000</lastBuildDate>
+    <category>Development</category>
+    <atom:link href="https://forum.mesg.com/t/client-service-v2/195.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Client/service: v2</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>The <a href="https://github.com/mesg-foundation/core/tree/master/client/service/examples/logger" rel="nofollow noopener">logger example</a> should be move somewhere more visible.</p>
+          <p><a href="https://forum.mesg.com/t/client-service-v2/195/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/client-service-v2/195/3</link>
+        <pubDate>Wed, 16 Jan 2019 11:23:23 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-195-3</guid>
+        <source url="https://forum.mesg.com/t/client-service-v2/195.rss">Client/service: v2</source>
+      </item>
+      <item>
+        <title>Client/service: v2</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Merged in Core with PR <a href="https://github.com/mesg-foundation/core/pull/704" rel="nofollow noopener">https://github.com/mesg-foundation/core/pull/704</a></p>
+          <p><a href="https://forum.mesg.com/t/client-service-v2/195/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/client-service-v2/195/2</link>
+        <pubDate>Wed, 16 Jan 2019 09:56:21 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-195-2</guid>
+        <source url="https://forum.mesg.com/t/client-service-v2/195.rss">Client/service: v2</source>
+      </item>
+      <item>
+        <title>Client/service: v2</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <h2>refactoring service pkg</h2>
+<ul>
+<li>Think about improving task handler by changing the return types. <em>Data</em> type needs the conversions for constants. We may need to change it to just an <em>interface{}</em>
+</li>
+<li>Consider using ‘mesg’ tag name on struct fields because devs shouldn’t be aware of json encoding in the higher level. And they may need to use ‘json’ tag in their own business logic. <a href="https://github.com/mesg-foundation/core/issues/708" rel="nofollow noopener">https://github.com/mesg-foundation/core/issues/708</a>
+</li>
+</ul>
+<h2>refactoring servicetest pkg</h2>
+<ul>
+<li>Think about getting rid of channels inside <em>LastX()</em> funcs. They can block forever. <a href="https://github.com/mesg-foundation/core/issues/708" rel="nofollow noopener">https://github.com/mesg-foundation/core/issues/708</a>
+</li>
+<li>Consider mocking instead of creating a fake service</li>
+</ul>
+          <p><a href="https://forum.mesg.com/t/client-service-v2/195/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/client-service-v2/195/1</link>
+        <pubDate>Tue, 15 Jan 2019 18:54:38 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-195-1</guid>
+        <source url="https://forum.mesg.com/t/client-service-v2/195.rss">Client/service: v2</source>
+      </item>
+  </channel>
+</rss>

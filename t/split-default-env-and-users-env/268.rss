@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Split default env and user&#39;s env</title>
+    <link>https://forum.mesg.com/t/split-default-env-and-users-env/268</link>
+    <description>Right now, user&#39;s env (passed with commands) are overriding default env (the one in the `mesg.yml`).
+The problem is user&#39;s env should be considered as sensitive data (cannot be exposed publicly). So, we cannot add them in the protobuf service definition.
+
+One solution will be to no override the default env but simply to have a dedicated arrays to store them outside the service definition (as &quot;metadata&quot;).
+Like this, the service definition will holds the default env defined by the mesg.yml that can be exposed to the network.
+
+Draft todo:
+
+- [ ] do not override default env with user&#39;s in `service.New`
+- [ ] store user&#39;s env somewhere
+https://github.com/mesg-foundation/core/blob/dev/service/service.go#L104
+- [ ] add envs to `definition.dependency`
+https://github.com/mesg-foundation/core/blob/dev/protobuf/definition/service.proto#L55
+- [ ] do the mapping from dependency proto to service
+https://github.com/mesg-foundation/core/blob/047d33101171a1e67b72a45137851c13976eec71/interface/grpc/core/core.go#L97
+- [ ] [dependant on [#860](https://github.com/mesg-foundation/core/pull/860)] add envs to `definition.configuration`
+- [ ] [dependant on [#860](https://github.com/mesg-foundation/core/pull/860)] do the mapping from dependency proto to service</description>
+    
+    <lastBuildDate>Thu, 26 Dec 2019 02:03:15 +0000</lastBuildDate>
+    <category>Development</category>
+    <atom:link href="https://forum.mesg.com/t/split-default-env-and-users-env/268.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Split default env and user&#39;s env</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>This has been implemented with the <code>instances</code>. A service has now multiple instances based on env variable that are hashed and stored. No env variables are saved, only the hash that combine them.</p>
+          <p><a href="https://forum.mesg.com/t/split-default-env-and-users-env/268/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/split-default-env-and-users-env/268/4</link>
+        <pubDate>Thu, 26 Dec 2019 02:03:15 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-268-4</guid>
+        <source url="https://forum.mesg.com/t/split-default-env-and-users-env/268.rss">Split default env and user&#39;s env</source>
+      </item>
+      <item>
+        <title>Split default env and user&#39;s env</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="1" data-topic="268">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/nicolas/40/10_2.png" class="avatar"> Nicolas:</div>
+<blockquote>
+<p>The problem is user’s env should be considered as sensitive data (cannot be exposed publicly). So, we cannot add them in the protobuf service definition.</p>
+</blockquote>
+</aside>
+<p>Can’t we just not display them?</p>
+          <p><a href="https://forum.mesg.com/t/split-default-env-and-users-env/268/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/split-default-env-and-users-env/268/3</link>
+        <pubDate>Mon, 15 Apr 2019 06:27:07 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-268-3</guid>
+        <source url="https://forum.mesg.com/t/split-default-env-and-users-env/268.rss">Split default env and user&#39;s env</source>
+      </item>
+      <item>
+        <title>Split default env and user&#39;s env</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>I shared my ideas about this before, I don’t think that we should keep env variables on deploy time. It should be moved to start time of services. These kind of configurations are specific to user of service, a service deployed with user’s configuration is unlikely to be used by others and cannot be published on marketplace because of our policies.</p>
+          <p><a href="https://forum.mesg.com/t/split-default-env-and-users-env/268/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/split-default-env-and-users-env/268/2</link>
+        <pubDate>Thu, 11 Apr 2019 07:11:39 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-268-2</guid>
+        <source url="https://forum.mesg.com/t/split-default-env-and-users-env/268.rss">Split default env and user&#39;s env</source>
+      </item>
+      <item>
+        <title>Split default env and user&#39;s env</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Right now, user’s env (passed with commands) are overriding default env (the one in the <code>mesg.yml</code>).<br>
+The problem is user’s env should be considered as sensitive data (cannot be exposed publicly). So, we cannot add them in the protobuf service definition.</p>
+<p>One solution will be to no override the default env but simply to have a dedicated arrays to store them outside the service definition (as “metadata”).<br>
+Like this, the service definition will holds the default env defined by the mesg.yml that can be exposed to the network.</p>
+<p>Draft todo:</p>
+<ul>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> do not override default env with user’s in <code>service.New</code>
+</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> store user’s env somewhere<br>
+<a href="https://github.com/mesg-foundation/core/blob/dev/service/service.go#L104" rel="nofollow noopener">https://github.com/mesg-foundation/core/blob/dev/service/service.go#L104</a>
+</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> add envs to <code>definition.dependency</code><br>
+<a href="https://github.com/mesg-foundation/core/blob/dev/protobuf/definition/service.proto#L55" rel="nofollow noopener">https://github.com/mesg-foundation/core/blob/dev/protobuf/definition/service.proto#L55</a>
+</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> do the mapping from dependency proto to service<br>
+<a href="https://github.com/mesg-foundation/core/blob/047d33101171a1e67b72a45137851c13976eec71/interface/grpc/core/core.go#L97" rel="nofollow noopener">https://github.com/mesg-foundation/core/blob/047d33101171a1e67b72a45137851c13976eec71/interface/grpc/core/core.go#L97</a>
+</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> [dependant on <a href="https://github.com/mesg-foundation/core/pull/860" rel="nofollow noopener">#860</a>] add envs to <code>definition.configuration</code>
+</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> [dependant on <a href="https://github.com/mesg-foundation/core/pull/860" rel="nofollow noopener">#860</a>] do the mapping from dependency proto to service</li>
+</ul>
+          <p><a href="https://forum.mesg.com/t/split-default-env-and-users-env/268/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/split-default-env-and-users-env/268/1</link>
+        <pubDate>Wed, 10 Apr 2019 00:29:36 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-268-1</guid>
+        <source url="https://forum.mesg.com/t/split-default-env-and-users-env/268.rss">Split default env and user&#39;s env</source>
+      </item>
+  </channel>
+</rss>

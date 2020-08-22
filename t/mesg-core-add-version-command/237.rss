@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Mesg-core: add version command</title>
+    <link>https://forum.mesg.com/t/mesg-core-add-version-command/237</link>
+    <description>sample usage:
+  `mesg-core version`
+
+sample output:
+  `v0.7 (commit 047d331)`
+
+sample output:
+  `dev (commit 433fede)`</description>
+    
+    <lastBuildDate>Fri, 01 Feb 2019 07:59:46 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/mesg-core-add-version-command/237.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Mesg-core: add version command</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="3" data-topic="237">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/ilgooz/40/46_2.png" class="avatar"> ilgooz:</div>
+<blockquote>
+<p>That’s good. I’d also like to have the commit hash next to the version, this is specially good for the dev release, this way we can know the exact version in Git system.</p>
+</blockquote>
+</aside>
+<p>It’s already the case for developer release. Check <a href="https://github.com/mesg-foundation/core/blob/master/.circleci/config.yml" rel="nofollow noopener">https://github.com/mesg-foundation/core/blob/master/.circleci/config.yml</a>.</p>
+<pre><code class="lang-auto">"publish_docker_dev":
+    &lt;&lt;: *runOnMachine
+    steps:
+      - checkout
+      - run: docker build -t mesg/core:dev --build-arg version="dev build `echo $CIRCLE_SHA1 | cut -c1-7`" .
+</code></pre>
+<pre><code class="lang-auto">"release_cli_dev":
+    &lt;&lt;: *runOnDocker
+    steps:
+      - checkout
+      - run: scripts/build-cli.sh "dev build `echo $CIRCLE_SHA1 | cut -c1-7`"
+</code></pre>
+<p>You can try by downloading a dev release: <a href="https://github.com/mesg-foundation/core/releases/tag/release-dev" rel="nofollow noopener">https://github.com/mesg-foundation/core/releases/tag/release-dev</a></p>
+<aside class="quote group-team" data-post="3" data-topic="237">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/ilgooz/40/46_2.png" class="avatar"> ilgooz:</div>
+<blockquote>
+<p>Maybe we can create an alias for <code>--version</code> to make it work as a command too like <code>mesg-core version</code> ? This seems a bit more convenient to me, easier to guess.</p>
+</blockquote>
+</aside>
+<p>I’m not sure we can create alias for this. It’s automatically done by <code>cobra</code>.</p>
+          <p><a href="https://forum.mesg.com/t/mesg-core-add-version-command/237/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mesg-core-add-version-command/237/4</link>
+        <pubDate>Fri, 01 Feb 2019 07:56:28 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-237-4</guid>
+        <source url="https://forum.mesg.com/t/mesg-core-add-version-command/237.rss">Mesg-core: add version command</source>
+      </item>
+      <item>
+        <title>Mesg-core: add version command</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="2" data-topic="237">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/nicolas/40/10_2.png" class="avatar"> Nicolas:</div>
+<blockquote>
+<pre><code class="lang-auto">mesg-core --version
+</code></pre>
+</blockquote>
+</aside>
+<p>That’s good. I’d also like to have the commit hash next to the version, this is specially good for the dev release, this way we can know the exact version in Git system.</p>
+<p>Maybe we can create an alias for <code>--version</code> to make it work as a command too like <code>mesg-core version</code>? This seems a bit more convenient to me, easier to guess.</p>
+          <p><a href="https://forum.mesg.com/t/mesg-core-add-version-command/237/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mesg-core-add-version-command/237/3</link>
+        <pubDate>Thu, 31 Jan 2019 09:22:39 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-237-3</guid>
+        <source url="https://forum.mesg.com/t/mesg-core-add-version-command/237.rss">Mesg-core: add version command</source>
+      </item>
+      <item>
+        <title>Mesg-core: add version command</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>already exist with:</p>
+<pre><code class="lang-auto">mesg-core --version
+</code></pre>
+<p>output is:</p>
+<pre><code class="lang-auto">mesg-core version v0.7.0
+</code></pre>
+          <p><a href="https://forum.mesg.com/t/mesg-core-add-version-command/237/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mesg-core-add-version-command/237/2</link>
+        <pubDate>Mon, 28 Jan 2019 12:20:44 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-237-2</guid>
+        <source url="https://forum.mesg.com/t/mesg-core-add-version-command/237.rss">Mesg-core: add version command</source>
+      </item>
+      <item>
+        <title>Mesg-core: add version command</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>sample usage:<br>
+<code>mesg-core version</code></p>
+<p>sample output:<br>
+<code>v0.7 (commit 047d331)</code></p>
+<p>sample output:<br>
+<code>dev (commit 433fede)</code></p>
+          <p><a href="https://forum.mesg.com/t/mesg-core-add-version-command/237/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mesg-core-add-version-command/237/1</link>
+        <pubDate>Mon, 28 Jan 2019 12:09:43 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-237-1</guid>
+        <source url="https://forum.mesg.com/t/mesg-core-add-version-command/237.rss">Mesg-core: add version command</source>
+      </item>
+  </channel>
+</rss>

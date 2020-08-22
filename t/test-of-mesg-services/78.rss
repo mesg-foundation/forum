@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Test of MESG Services</title>
+    <link>https://forum.mesg.com/t/test-of-mesg-services/78</link>
+    <description>It will be really useful to have an integrate way to execute test on MESG services.
+
+I was thinking about a command `mesg-core service test` that run tests against the service.
+
+I think we have two approaches on testing:
+
+# Integration test
+
+Advantage:
+
+- language agnostic. we provide a way test services in any language because of the design of MESG. It could be based on a `test.yml` file that describe the tests as a list of tasks with inputs and expected outputs.
+- test communication with core
+
+Disadvantage:
+
+- no way to force a service to emit an event without introducing some kind of hack
+- could introduce a `MESG_IS_TESTING` env variable
+  - tell the service to not really execute the task (**only valid in some special case, eg: Ethereum Transaction**)
+  - force to emit event
+  - the main problem is the service logic/behavior could completely change during test
+- slow
+- the coverage of test could be very limited because of the technology the service connect
+  - could not be sure all type of events will be emitted
+  - could possibly not execute all task because of security (private keys) and duplication of data, etc...
+
+# Unit test
+
+Advantage:
+
+- fast to execute
+- test written by the developer
+- can inject mock in service when testing
+
+Disadvantage:
+
+- language specific: so we cannot offer a way to unit test in every language
+  - but we could provide test helpers in `go-service` and `mesg-js` libraries (see end of post for `mesgtest` package)
+- no test communication with core
+
+---
+
+# `MESGTEST`
+
+@ilgooz already create a package `mesgtest` in the `go-service` library
+https://godoc.org/github.com/mesg-foundation/go-service/mesgtest
+
+Code for testing of the log task:
+```go
+_, execution, err := server.Execute(&quot;log&quot;, data)
+assert.Nil(t, err)
+assert.Equal(t, &quot;success&quot;, execution.Key()) 
+```
+[source](https://github.com/mesg-foundation/go-service/blob/master/examples/logger/logger/logger_test.go)
+
+
+@core I would like to have your feedback on:
+- Do we really want to offer an integrated way to do unit test if the service is using our library (`go-service` and `mesg-js`) ?
+- If so, how should we proceed in order to have the minimal logic to implement in order to accept unit test?
+  - Bypass gRPC or create a gRPC server?
+- How could we execute language specific unit test from the command `service test`?
+  - @Anthony was suggesting to accept a custom command in the `mesg.yml` to use for test instead of the default in the Dockerfile of the service( eg in `mesg.yml`: `test-command: &quot;go test ./...&quot;`)</description>
+    
+    <lastBuildDate>Thu, 26 Dec 2019 03:04:54 +0000</lastBuildDate>
+    <category>Development</category>
+    <atom:link href="https://forum.mesg.com/t/test-of-mesg-services/78.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Test of MESG Services</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>Let’s not do anything about tests.<br>
+If a developer of a service want to do unit tests on its service, (s)he choose how to do their unit test based on the framework they prefer.<br>
+If they want to do integration tests, they can also use the test framework they like and they will just need to communicate with the engine API.</p>
+<p>You can find an example of integration tests here <a href="https://github.com/Roms1383/mesg-pusher/">https://github.com/Roms1383/mesg-pusher/</a></p>
+<ul>
+<li>integration tests: <a href="https://github.com/Roms1383/mesg-pusher/blob/master/index.test.js">https://github.com/Roms1383/mesg-pusher/blob/master/index.test.js</a>
+</li>
+<li>unit tests: <a href="https://github.com/Roms1383/mesg-pusher/blob/master/tasks/trigger.spec.js">https://github.com/Roms1383/mesg-pusher/blob/master/tasks/trigger.spec.js</a>
+</li>
+</ul>
+<p>This way anyone can use the test frameworks they like with the CI/CD they want and without having to learn about another test framework</p>
+          <p><a href="https://forum.mesg.com/t/test-of-mesg-services/78/5">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/test-of-mesg-services/78/5</link>
+        <pubDate>Thu, 26 Dec 2019 03:04:54 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-78-5</guid>
+        <source url="https://forum.mesg.com/t/test-of-mesg-services/78.rss">Test of MESG Services</source>
+      </item>
+      <item>
+        <title>Test of MESG Services</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>I really like <a class="mention" href="/u/anthony">@Anthony</a> suggest about the Integration test: just create special task.</p>
+          <p><a href="https://forum.mesg.com/t/test-of-mesg-services/78/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/test-of-mesg-services/78/4</link>
+        <pubDate>Fri, 05 Oct 2018 03:44:51 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-78-4</guid>
+        <source url="https://forum.mesg.com/t/test-of-mesg-services/78.rss">Test of MESG Services</source>
+      </item>
+      <item>
+        <title>Test of MESG Services</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>I would definitely not do anything about the testing without a lot of feedbacks for that. For my part the only thing that we can do is let the user create their own tests and decide if they do unit/integration test.</p>
+<h2>For unit test</h2>
+<p>They use the framework they want and they is no link with MESG and we give the possibility in the <code>mesg.yml</code> to add your test command that can be executed by the CLI/Core.</p>
+<h2>For integration tests</h2>
+<p>The only thing that we could do is to create a test service that will emit some events that developers can connect to and some tasks like <strong>assertBool</strong>, <strong>assertContains</strong>…<br>
+With that developers can connect test events to trigger their task using MESG application (and later on workflow) and also assert their results using the MESG test service and the <strong>assert</strong>* tasks.</p>
+<p>The unit test part is quite easy and brings a lot of value and the integration is something additional that developers decide to use or not but the good point is that it’s something totally independent from the Core so we have a big flexibility.</p>
+          <p><a href="https://forum.mesg.com/t/test-of-mesg-services/78/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/test-of-mesg-services/78/3</link>
+        <pubDate>Thu, 04 Oct 2018 04:41:45 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-78-3</guid>
+        <source url="https://forum.mesg.com/t/test-of-mesg-services/78.rss">Test of MESG Services</source>
+      </item>
+      <item>
+        <title>Test of MESG Services</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <h1>Ideas About Unit Testing</h1>
+<p>In Nodejs it’s very easy &amp; natural to modify methods of imported packages by using stubs. Please check <a href="https://sinonjs.org/releases/v6.3.4/stubs/">sinon</a>. So, it’s not required to provide a testing package for Nodejs. But it’s nice to have because it’s a bit odd to force devs to stub our gRPC calls.</p>
+<p>Since Go is statically typed, it is not possible to modify methods of imported packages. So the same thing with the Nodejs case is not possible here.</p>
+<p>There are several options while unit testing a package that uses <em>go-service</em> or <em>go-application</em>.</p>
+<h2>Options</h2>
+<h3>not an option</h3>
+<p>Sample case:</p>
+<p>Providing a package level interface for mocking methods of <em>go-application</em> is not an option, here is why:</p>
+<pre><code class="lang-auto">func (a *Application) Close() error
+func (a *Application) WhenEvent(serviceID string, conditions ...EventCondition) *EventEmitter
+func (a *Application) WhenResult(serviceID string, conditions ...ResultCondition) *ResultEmitter
+</code></pre>
+<p>The methods above are the public api of <em>go-application</em> package and it’s not possible to have a <em>ApplicationInterface</em> for them like below:</p>
+<pre><code class="lang-auto">type ApplicationInterface interface {
+   Close() error
+   WhenEvent(serviceID string, conditions ...EventCondition) *EventEmitter
+   WhenResult(serviceID string, conditions ...ResultCondition) *ResultEmitter
+}
+</code></pre>
+<p>The reason why it’s not possible is because <em>EventEmitter</em> and <em>ResultEmitter</em> types has un-exported fields and they cannot be properly initialized from outside of the package context.</p>
+<p>One way to avoid this limitation is to make every public package api to return or accept an interface but I don’t like this approach because it’s not natural to have interfaces all the time just for testing.</p>
+<h3>network level option</h3>
+<p>Packages that deals with IO (like <em>go-application</em>) gets a custom <em>net.Conn</em> in the initialization time. And it can be used to fake an actual network connection in testing. <em>mesgtest</em> does the same thing and provides some extra functionalities for faking calls. Most network programs tested by this approach.</p>
+<h3>interface level option</h3>
+<p>Packages that deals with IO (like <em>go-application</em>) gets a custom interface to deal with network. This is very similar to <em>network level option</em> but as a difference, network methods are being mocked instead of faking in the network layer. <em>mesgtest</em> package can adopt both <em>network</em> and <em>interface</em> level options under the hood.</p>
+<h2>Which Option to Chose?</h2>
+<p>Regardless of which option we chose, I think it’s better to provide a package like <em>mesgtest</em> to devs. Otherwise we’ll require devs to create their own testing utilities <em>(just another implementation of <em>mesgtest</em>)</em> and this is not something that they should deal with.</p>
+<p>Because they’ll be required to create mocks for our gRPC calls which they even shouldn’t be aware of. Also if we don’t provide a testing package, community can end-up creating a bunch of different ones which is not good to me because not everybody going to provide the best solution and this will create a bad noise.</p>
+          <p><a href="https://forum.mesg.com/t/test-of-mesg-services/78/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/test-of-mesg-services/78/2</link>
+        <pubDate>Wed, 03 Oct 2018 12:42:20 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-78-2</guid>
+        <source url="https://forum.mesg.com/t/test-of-mesg-services/78.rss">Test of MESG Services</source>
+      </item>
+      <item>
+        <title>Test of MESG Services</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>It will be really useful to have an integrate way to execute test on MESG services.</p>
+<p>I was thinking about a command <code>mesg-core service test</code> that run tests against the service.</p>
+<p>I think we have two approaches on testing:</p>
+<h1>Integration test</h1>
+<p>Advantage:</p>
+<ul>
+<li>language agnostic. we provide a way test services in any language because of the design of MESG. It could be based on a <code>test.yml</code> file that describe the tests as a list of tasks with inputs and expected outputs.</li>
+<li>test communication with core</li>
+</ul>
+<p>Disadvantage:</p>
+<ul>
+<li>no way to force a service to emit an event without introducing some kind of hack</li>
+<li>could introduce a <code>MESG_IS_TESTING</code> env variable
+<ul>
+<li>tell the service to not really execute the task (<strong>only valid in some special case, eg: Ethereum Transaction</strong>)</li>
+<li>force to emit event</li>
+<li>the main problem is the service logic/behavior could completely change during test</li>
+</ul>
+</li>
+<li>slow</li>
+<li>the coverage of test could be very limited because of the technology the service connect
+<ul>
+<li>could not be sure all type of events will be emitted</li>
+<li>could possibly not execute all task because of security (private keys) and duplication of data, etc…</li>
+</ul>
+</li>
+</ul>
+<h1>Unit test</h1>
+<p>Advantage:</p>
+<ul>
+<li>fast to execute</li>
+<li>test written by the developer</li>
+<li>can inject mock in service when testing</li>
+</ul>
+<p>Disadvantage:</p>
+<ul>
+<li>language specific: so we cannot offer a way to unit test in every language
+<ul>
+<li>but we could provide test helpers in <code>go-service</code> and <code>mesg-js</code> libraries (see end of post for <code>mesgtest</code> package)</li>
+</ul>
+</li>
+<li>no test communication with core</li>
+</ul>
+<hr>
+<h1><code>MESGTEST</code></h1>
+<p><a class="mention" href="/u/ilgooz">@ilgooz</a> already create a package <code>mesgtest</code> in the <code>go-service</code> library<br>
+<aside class="onebox whitelistedgeneric">
+  <header class="source">
+      <a href="https://godoc.org/github.com/mesg-foundation/go-service/mesgtest" target="_blank">godoc.org</a>
+  </header>
+  <article class="onebox-body">
+    
+
+<h3><a href="https://godoc.org/github.com/mesg-foundation/go-service/mesgtest" target="_blank">Package mesgtest</a></h3>
+
+<p>Package mesgtest is a testing package for MESG service.</p>
+
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+</p>
+<p>Code for testing of the log task:</p>
+<pre><code class="lang-auto">_, execution, err := server.Execute("log", data)
+assert.Nil(t, err)
+assert.Equal(t, "success", execution.Key()) 
+</code></pre>
+<p><a href="https://github.com/mesg-foundation/go-service/blob/master/examples/logger/logger/logger_test.go">source</a></p>
+<p><a class="mention-group" href="/groups/core">@core</a> I would like to have your feedback on:</p>
+<ul>
+<li>Do we really want to offer an integrated way to do unit test if the service is using our library (<code>go-service</code> and <code>mesg-js</code>) ?</li>
+<li>If so, how should we proceed in order to have the minimal logic to implement in order to accept unit test?
+<ul>
+<li>Bypass gRPC or create a gRPC server?</li>
+</ul>
+</li>
+<li>How could we execute language specific unit test from the command <code>service test</code>?
+<ul>
+<li>
+<a class="mention" href="/u/anthony">@Anthony</a> was suggesting to accept a custom command in the <code>mesg.yml</code> to use for test instead of the default in the Dockerfile of the service( eg in <code>mesg.yml</code>: <code>test-command: "go test ./..."</code>)</li>
+</ul>
+</li>
+</ul>
+          <p><a href="https://forum.mesg.com/t/test-of-mesg-services/78/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/test-of-mesg-services/78/1</link>
+        <pubDate>Wed, 03 Oct 2018 10:44:42 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-78-1</guid>
+        <source url="https://forum.mesg.com/t/test-of-mesg-services/78.rss">Test of MESG Services</source>
+      </item>
+  </channel>
+</rss>

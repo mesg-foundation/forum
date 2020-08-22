@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <title>Introducing Workflow Files - Development - MESG Community</title>
+    <meta name="description" content="Abstract
+One of the goals of MESG is letting people to create applications without coding a single line of code! 
+Before digging into this idea, let’s go a little back in the history where computers and internet are just&amp;hellip;">
+    <meta name="generator" content="Discourse 2.5.0.beta5 - https://github.com/discourse/discourse version 00aab498297cba8f977c1e0eb17b7d38ff06cc68">
+<link rel="icon" type="image/png" href="../../uploads/default/optimized/1X/9f11b6ddfa02bffdbec79487592a0573a0236cb5_2_32x32.png">
+<link rel="apple-touch-icon" type="image/png" href="../../uploads/default/optimized/1X/53630361a40ad76e1733dd0b0f486e9ae2f4f4d6_2_180x180.png">
+<meta name="theme-color" content="#491e8c">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+<link rel="canonical" href="../introducing-workflow-files.html" />
+<script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","url":"https://forum.mesg.com","potentialAction":{"@type":"SearchAction","target":"https://forum.mesg.com/search?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
+<link rel="search" type="application/opensearchdescription+xml" href="../../opensearch.xml" title="MESG Community Search">
+
+      <link href="../../stylesheets/desktop_3_52e3411e87658e862890db7bd06899cf49ad5f59.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop" data-theme-id="7"/>
+      <link href="../../stylesheets/desktop_theme_7_bf4f2d3d8a71e6ee907065be9a79df3d849bd29c.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop_theme" data-theme-id="7"/>
+    
+    <meta id="data-ga-universal-analytics" data-tracking-code="UA-117583862-1" data-json="{&quot;cookieDomain&quot;:&quot;auto&quot;}" data-auto-link-domains="">
+
+<link rel="preload" href="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js" as="script">
+<script src="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js"></script>
+
+
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of &#39;Introducing Workflow Files&#39;" href="95.rss" />
+    <meta property="og:site_name" content="MESG Community" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:url" content="https://forum.mesg.com/t/introducing-workflow-files/95" />
+<meta name="twitter:url" content="https://forum.mesg.com/t/introducing-workflow-files/95" />
+<meta property="og:title" content="Introducing Workflow Files" />
+<meta name="twitter:title" content="Introducing Workflow Files" />
+<meta property="og:description" content="Abstract One of the goals of MESG is letting people to create applications without coding a single line of code!  Before digging into this idea, let’s go a little back in the history where computers and internet are just yet evolving. From the beginning of early times we never had a way of creating reusable services that communicates with each other with a standardized communication protocol. Because of this negative adoption from back, even if we use microservices in today’s world, they have to..." />
+<meta name="twitter:description" content="Abstract One of the goals of MESG is letting people to create applications without coding a single line of code!  Before digging into this idea, let’s go a little back in the history where computers and internet are just yet evolving. From the beginning of early times we never had a way of creating reusable services that communicates with each other with a standardized communication protocol. Because of this negative adoption from back, even if we use microservices in today’s world, they have to..." />
+<meta name="twitter:label1" value="Reading time" />
+<meta name="twitter:data1" value="10 mins 🕑" />
+<meta name="twitter:label2" value="Likes" />
+<meta name="twitter:data2" value="10 ❤" />
+<meta property="article:published_time" content="2018-10-17T17:56:25+00:00" />
+<meta property="og:ignore_canonical" content="true" />
+
+        <link rel="next" href="95%3Fpage=2.html">
+
+
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"QAPage","name":"Introducing Workflow Files","mainEntity":{"@type":"Question","name":"Introducing Workflow Files","text":"Abstract\n\nOne of the goals of MESG is letting people to create applications without coding a single line of code!\n\nBefore digging into this idea, let’s go a little back in the history where computers and internet are just yet evolving. From the beginning of early times we never had a way of creating &hellip;","upvoteCount":3,"answerCount":1,"dateCreated":"2018-10-17T17:56:25.650Z","author":{"@type":"Person","name":"İlker"},"acceptedAnswer":{"@type":"Answer","text":"This has been implemented and renamed process using a YML definition that compiles into a graph of executions.\n\nMore details:\n\n<a href="https://forum.mesg.com/t/introducing-workflow-files/\&quot;https://docs.mesg.com/guide/process/\&quot;">https://docs.mesg.com/guide/process/<\/a>\n\n<a href="https://forum.mesg.com/t/introducing-workflow-files/\&quot;https://mesg.com/mesg-orchestrator\&quot;">https://mesg.com/mesg-orchestrator<\/a>\n\nYou can find already implemented processes here:\n\n<a href="https://forum.mesg.com/t/introducing-workflow-files/\&quot;https://github.com/mesg-foundation/plasma-guard\&quot;">https://github.com/mesg-foundation/plasma-guard<\/a>\n\n<a href="https://forum.mesg.com/t/introducing-workflow-files/\&quot;https://github.com/mesg-foundation/application-stripe-to-erc20\&quot;">h&hellip;<\/a>","upvoteCount":0,"dateCreated":"2019-12-26T02:15:12.716Z","url":"https://forum.mesg.com/t/introducing-workflow-files/95/22","author":{"@type":"Person","name":"Anthony"}}}}</script>
+  </head>
+  <body class="crawler">
+    
+    <header>
+      <a href="../../index.html">
+          <img src="../../uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png" alt="MESG Community" id="site-logo" style="max-width: 150px;">
+      </a>
+    </header>
+    <div id="main-outlet" class="wrap">
+        <div id="topic-title">
+    <h1>
+      <a href="../introducing-workflow-files.html">Introducing Workflow Files</a>
+    </h1>
+
+      <div class="topic-category" itemscope itemtype="http://schema.org/BreadcrumbList">
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../c/development.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #AB9364'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Development</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="1" />
+          </span>
+      </div>
+
+      <div class="topic-category">
+        <div class='discourse-tags list-tags'>
+            <a href='../../tag/proposal.html' class='discourse-tag' rel="tag">proposal</a>
+        </div>
+      </div>
+  </div>
+
+  
+
+
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="../introducing-workflow-files.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-10-17T17:56:25Z'>
+              <time itemprop='dateModified' datetime='2018-10-22T05:36:14Z' class='post-time'>
+                October 22, 2018,  5:36am
+              </time>
+          <span itemprop='position'>#1</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <h1>Abstract</h1>
+<p>One of the goals of MESG is letting people to create applications without coding a single line of code!</p>
+<p>Before digging into this idea, let’s go a little back in the history where computers and internet are just yet evolving. From the beginning of early times we never had a way of creating reusable services that communicates with each other with a standardized communication protocol. Because of this negative adoption from back, even if we use microservices in today’s world, they have to be refactored each time to be compatible with just another service communication protocol used in new projects. And this a great waste on human resources!</p>
+<p>MESG solves this problem by defining a common communication protocol for services. This way, it’s now possible to use your existent services in totally different projects without a need of changing your source code.</p>
+<p>MESG is an event-oriented framework where applications only needs to react to various events and task results published by services to execute another chain of tasks from various services.</p>
+<p>We connect MESG services by creating applications which defines the way how data should flow between services. Currently, we do this by using application clients in any programming language. With the workflow files that’s now being introduced within this proposal, creating applications will be done in the most simplistic way just by creating a configuration file in yaml, without using an actual programming language!</p>
+<p>You can even create this workflow files via a user interface where you connect some data dots from various services that exists in the market and it can create a workflow.yaml for you!</p>
+<h1>Workflow Files</h1>
+<p>Workflow files is a place where we define our constants, secrets, service ids that we want to use and the way how event data and task results should be piped to execution of tasks in these services.</p>
+<p>As mentioned before, workflow files are all about describing how your data should flow between services. This is why we treat them as just configuration files. You don’t need an actual programming language to create your applications.</p>
+<h1>Proposal</h1>
+<p>In this proposal we need to discuss about the syntax of workflow files and how they should managed by core. As <a class="mention" href="../../u/anthony.html">@Anthony</a> suggested, workflow files doesn’t required to be run inside consumers’ computers. Instead they can directly run inside core <em>(actually now as a system service)</em>. Since core can be run in a decentralized way as multiple peers, applications also can benefit from this and get load balanced naturally.</p>
+<h2>Running Workflows</h2>
+<h3>Workflow System Service (WSS)</h3>
+<p>We’re going to create a new system service for core to manage and run workflows.</p>
+<p><a class="mention" href="../../u/anthony.html">@Anthony</a> suggested before to listen all events and results from all services that connected to core for once and then react to these data by following the rules defined inside workflow files to execute corresponding tasks. But doing it this way instead of figuring out service ids directly from workflows introduces unnecessary complexity. Because this requires to add more tasks to WSS and watch services connected to core to get live service id events which may require some code changes on core itself too. And I cannot see any pros of doing it that way.</p>
+<p>So instead, we can figure out the service ids directly from the workflow files when they’re created and listen events and results on those services to make task executions.</p>
+<p>For the running part part, I propose two different ways of running workflows:</p>
+<ul>
+<li>Create the WSS to manage and run all workflows.</li>
+<li>Create the WSS to manage all workflows but run them as different services like we do with MESG services. This is a good for isolation of workflows and better for scaling of different types of workflows.</li>
+</ul>
+<p>WSS will have following tasks &amp; events on itself:</p>
+<ul>
+<li>
+<em>task:</em> createWorkflow</li>
+<li>
+<em>task:</em> validateWorkflow</li>
+<li>
+<em>task:</em> removeWorkflow</li>
+<li>
+<em>task:</em> updateWorkflow</li>
+<li>
+<em>task:</em> inspectWorkflow</li>
+<li>
+<em>task:</em> listWorkflows</li>
+<li>
+<em>task:</em> watchWorkflowLogs
+<ul>
+<li>Activates <em>workflowLog</em> event for a workflow. All previous logs messages will be sent in the first <em>workflowLog</em> event.</li>
+</ul>
+</li>
+<li>
+<em>task:</em> unWatchWorkflowLogs
+<ul>
+<li>Deactivates <em>workflowLog</em> event for a workflow.</li>
+</ul>
+</li>
+<li>
+<em>event:</em> workflowLog</li>
+</ul>
+<h3>gRPC APIs</h3>
+<p>We’ll add new gRPC APIs to <em>coreapi</em> for validating, creating, updating, removing, logging, inspecting and listing workflows. Each workflow can get a unique name defined by dev and have a second unique id <em>(hash)</em> calculated from workflow file. This way we’ll be able to identify them while updating, logging, inspecting and removing.</p>
+<h3>CLI Commands</h3>
+<p>We’ll have new cli commands as:</p>
+<ul>
+<li>
+<p><code>$ mesg-core workflow create --name optional workflow.yml</code></p>
+<ul>
+<li>Saves and runs workflows.</li>
+<li>Optional name used as a unique id for workflow.</li>
+</ul>
+</li>
+<li>
+<p><code>$ mesg-core workflow validate workflow.yaml</code></p>
+<ul>
+<li>
+<p>Validates workflow file’s syntax, existence of service’s that defined with their ids, existence of events, results, tasks and validations of their inputs/outputs for these services.</p>
+</li>
+<li>
+<p>It’ll also analyze any potential infinite workflow cycles. For example a service’s task result executes the same task on the same service which ends up with an infinite loop. <em>(Maybe this check should also be made inside core when possible.)</em></p>
+</li>
+</ul>
+</li>
+<li>
+<p><code>$ mesg-core workflow dev workflow.yaml</code></p>
+<ul>
+<li>This is a development mode. It creates and logs the workflow outputs to std. It’ll run until it’s canceled and workflow will be removed when quitting the command.</li>
+</ul>
+</li>
+<li>
+<p><code>$ mesg-core workflow update id-or-name --file workflow.yml</code></p>
+<ul>
+<li>Update any content of workflow.</li>
+</ul>
+</li>
+<li>
+<p><code>$ mesg-core workflow inspect id-or-name</code></p>
+<ul>
+<li>See info about workflow like it’s name, description, services, configs, events, results, tasks etc.</li>
+<li>See the received event, result count and successful/failed execution counts.</li>
+</ul>
+</li>
+<li>
+<p><code>$ mesg-core workflow list</code></p>
+<ul>
+<li>List of workflows and their received event, result count and successful/failed execution counts.</li>
+</ul>
+</li>
+<li>
+<p><code>$ mesg-core workflow remove id-or-name</code></p>
+<ul>
+<li>Stop running workflow and completely remove it from core.</li>
+</ul>
+</li>
+<li>
+<p><code>$ mesg-core workflow logs id-or-name</code></p>
+<ul>
+<li>See the live log stream of workflow. Each workflow log will start with workflow name and description printed first. And all events, results and successful/unsuccessful task executions and their input datas will appear.</li>
+</ul>
+</li>
+<li>
+<p><code>$ mesg-core workflow init</code></p>
+<ul>
+<li>Creates an empty workflow file via a terminal dialog to get inputs from user for workflow name, description, service ids etc. or defaults will be used where it’s possible.</li>
+</ul>
+</li>
+</ul>
+<h2>Defining The Workflow Syntax</h2>
+<p>We can have a custom syntax to create workflow configurations but for now it’s too complicated to have and we currently don’t know if we really need it. So I think, we should stick with an already well know language like yml at first as proposed before.</p>
+<p>We currently have two types of <em>workflow.yml</em> syntaxes. <a href="https://github.com/mesg-foundation/core/blob/96a8fa19ea09830de131331db8f3910529eb8206/docs/guide/workflow_file_example.yml">One</a> is from <a class="mention" href="../../u/anthony.html">@Anthony</a> which I really like to hear the concept behind it and other one is like more close to <a href="https://github.com/mesg-foundation/core/wiki/Public-API-of-Application-Libraries">Application Client API Spec</a> that we have which brings us to something like below:</p>
+<h3>Sample Service</h3>
+<p>If you’d like to test this service please install <a href="https://github.com/ilgooz/workflow-application">prototype workflow cli</a> first and then deploy <a href="https://github.com/mesg-foundation/service-webhook">webhook</a> and <a href="https://github.com/mesg-foundation/service-discord-invitation">discord invite</a> services.</p>
+<p>Update the service ids, email &amp; SendGrid api key configuration.</p>
+<p>After that run your workflow with <code>$ mesg-workflow run discord-invites-workflow.yml</code> and watch the logs. You’ll receive an email when you run the curl command in the description!</p>
+<pre><code class="lang-auto">name: discord-invites
+
+description: |
+  Send discord invites to your fellows.
+
+  curl -d "email=your@email.com" -XPOST http://localhost:3000/webhook
+
+services:
+  webhook: 4f7891f77a6333787075e95b6d3d73ad50b5d1e9
+  discord: 1daf16ca98322024824f307a9e11c88e0aba55e2
+
+configs:
+  sendgridAPIKey: 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
+
+when:
+  webhook:
+    event:
+      request:
+        map:
+          email: $data.data.email
+          sendgridAPIKey: $configs.sendgridAPIKey
+        execute:
+          discord: send
+</code></pre>
+<p><strong>Logs will look like this:</strong></p>
+<pre><code class="lang-auto">✔ discord-invites workflow started
+Send discord invites to your fellows.
+
+curl -d "email=ilkergoktugozturk@gmail.com" -XPOST http://localhost:3000/webhook
+
+&gt;&gt; event request received on webhook service, execution data will be:  {
+  "email": "ilkergoktugozturk@gmail.com",
+  "sendgridAPIKey": "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"
+}
+&lt;&lt; execution successfully made for send task on discord service
+</code></pre>
+<h3>Schema</h3>
+<p>Note that schema can be slightly different from the sample service above because of the improvements.</p>
+<pre><code class="lang-auto">name: *display name of the workflow*
+
+description: |
+  *description of the workflow*
+
+# services are constants.
+# accessed via $services variable.
+#  e.g.: $services.*alias*
+services:
+  *a chosen unique service name alias*: *service id*
+
+# configs are constants.
+# accessed via $configs variable.
+#  e.g.: $configs.*value*.*can*.*be*.*nested*
+# they can be in any type.
+configs:
+  *configuration key*: *configuration value/can be a nested object*
+
+# start of workflow.
+when:
+  *service alias*:
+    event:
+      *event name*:
+        map:
+          # *data* can be set directly or it can be set from $services, $configs and $event.
+          # $event is a special run time variable where it is filled with event info.
+          # $event consists of $event.key and $event.data.    
+          # use dot notation to access individual fields of $event.data.
+          *task input data*: *data*
+        tags:
+          # associate tags with executions.
+          # tags can be set directly or it can be set from $services, $configs and $event.
+          # $event is a special run time variable where it is filled with event info.
+          # $event consists of $event.key and $event.data.    
+          # use dot notation to access individual fields of $event.data.
+          - *tag*
+        execute:
+          *service alias*: *service task key*
+    result:
+      *result name*:
+        tagFilters:
+          - *tag filter*
+        map:
+          # *data* can be set directly or it can be set from $services, $configs and $result.
+          # $result is a special run time variable where it is filled with result info.
+          # $result consists of $result.key, $result.data, $result.taskKey and $result.executionTags.    
+          # use dot notation to access individual fields of $result.data.
+          *task input data*: *data*
+        tags:
+          # associate tags with executions.
+          # tags can be set directly or it can be set from $services, $configs and $result.
+          # $result is a special run time variable where it is filled with result info.
+          # $result consists of $result.key, $result.data, $result.taskKey and $result.executionTags.    
+          # use dot notation to access individual fields of $result.data.
+          - *tag*
+        execute:
+          *service alias*: *service task key*
+</code></pre>
+<h2>Conclusion</h2>
+<p><a class="mention-group" href="../../groups/core.html">@core</a> team please give feedbacks about the following topics:</p>
+<ol>
+<li>
+<p>Which syntax we’re gonna pick? <a class="mention" href="../../u/anthony.html">@Anthony</a>’s or the other one we already have an example for or something else?</p>
+</li>
+<li>
+<p>How do you feel about these new gRPC APIs and CLI commands?</p>
+</li>
+<li>
+<p>Do we want to be able to execute multiple tasks on an event or result? We already have good syntax for this one, please check the <em>execute</em> attr in the yaml file, it can be naturally extended.</p>
+</li>
+<li>
+<p>How we should implement filters for events and results? Should we introduce comparison primitives like <em>eq</em>, <em>gte</em> for comparing values? Or should we avoid having a filtering syntax for a simpler use for non-programmers and create a special service that does these comparisations. For example, when an event or result arrived, it’s data can be forwarded to a special service to decide whether the actual task execution should be made or not. If it should, service can fire an event with the data for starting the task execution but this kinda use can add more complexity to event-oriented programming.</p>
+</li>
+<li>
+<p>How we should make it possible to compose multiple data together to create new values to be used as task inputs or execution tags. This is a similar question with having the <em>filters</em>. If we want to dynamically create new values from <em>$event</em>, <em>$result</em>, $services, $config or/and static values, what kind of primitives we should introduce to this syntax or do this kinda stuff with special services?</p>
+<ul>
+<li>e.g. syntax for multiplying:
+<ul>
+<li>
+<code>taskInputField: $event.data.x * $event.data.y</code>.</li>
+</ul>
+</li>
+<li>e.g. combine static value with dynamic:
+<ul>
+<li>
+<code>taskInputField: "string_prefix_" + $event.data.x</code>.</li>
+</ul>
+</li>
+<li>e.g. combine constant value with dynamic:
+<ul>
+<li>
+<code>taskInputField: $configs.xPrefix + $event.data.x</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>What do you think about the architecture/tasks/events of WSS? Should we watch events, results from all services in core for once or go more logicless and get service ids from workflows on creation and listen events &amp; results dynamically as described there. Other question is, should we make WSS to manage and run all workflows or just leave the managing part on WSS and run workflows as separate docker services. Which way to go?</p>
+</li>
+<li>
+<p>Any other thing in your mind, let’s share ideas. <img src="../../images/emoji/twitter/slight_smile.png%3Fv=6" title=":slight_smile:" class="emoji" alt=":slight_smile:"></p>
+</li>
+</ol>
+        </div>
+
+        <meta itemprop='headline' content='Introducing Workflow Files'>
+          <meta itemprop='keywords' content='proposal'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="3" />
+           <span class='post-likes'>3 Likes</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="../introducing-workflow-files.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-10-22T06:34:23Z' class='post-time'>
+                October 22, 2018,  6:34am
+              </time>
+              <meta itemprop='dateModified' content='2018-10-22T06:34:23Z'>
+          <span itemprop='position'>#2</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Thanks for this post it’s really nice <img src="../../images/emoji/twitter/slight_smile.png%3Fv=6" title=":slight_smile:" class="emoji" alt=":slight_smile:"></p>
+<h2>Syntax</h2>
+<p>I like your syntax, it’s really close to the api that we have right now and this is something nice. I have one concern though. We need in the future to be able to chain the executions. In my first proposition I was thinking to flat all the executions and resolve the dependencies. I’m afraid with your syntax it might be hard to chain executions.<br>
+It’s something we should think about. Maybe something like that:</p>
+<pre><code class="lang-auto">when:
+  serviceX:
+    event:
+      eventX:
+        execute:
+          nameofexecution:
+            serviceY: taskY
+            result:
+              resultY:
+                map:
+                  foo: $nameofexecution.resultY.outputY
+                  bar: $event.dataX
+                execute:
+                  nameofexecution2:
+                    serviceZ: taskZ
+                    ...
+</code></pre>
+<p>With something like that we could even flatten all the executions and resolve them based on the data they need. This might be too much to implement for now but I just want to have a syntax that we will easily be able to migrate to adopt that.</p>
+<h2>New APIs</h2>
+<p>All good for that, I would just remove the update part, let’s keep it simple for now, we delete and create a new one like the services. We can have an id system on top of that later on to mimic an update.<br>
+I would be careful to have a consistant naming between the service and workflow actions like remove vs delete</p>
+<h2>Multiple task executions</h2>
+<p>Totally necessary, it’s kind of related to my first point but I think here you are more talking about executing them all in parallel and not chained which is something that we should cover too but we will have the same problems. The execution can be extended but the mapping might be totally different and this is why I think we should group the mapping inside the execution part.</p>
+<h2>Filters</h2>
+<p>This one is tricky, especially if we want something simple. We definitely need a filter system, filters that for me should be done based on all the data from the execution (data, tag, outputKey) but also the one from the parent execution (in case of nested executions). For the kind of filters at least the equal is necessary and all the other primitives should be perfect but for now, like you propose we can use services for that. Let’s make sure that we have something where we will be able to add the filters but we can now have special services for that.</p>
+<h2>Data composition</h2>
+<p>I think this one is too much, I would recommend to go with a service for that, we will never be able to cover the different needs for that so let’s not try I think</p>
+<h2>Architecture</h2>
+<p>I think we should have something always reacting from event’s services. For now we can have something simple and listen for the api that we already have based on the workflow informations, basically what you’ve already did. But we should have all these workflow informations in a database and for every events request this database to see if we need to execute a task. This way we remove all “listening” part that is not really scalable and hard to manage.</p>
+<hr>
+<p>In conclusion, it’s really nice and for now we can use the system of listeners but we should keep in mind that this will evolve with a database (even distributed database) and also the syntax needs to be “future friendly”. I really think we should name the executions and do the processing inside these executions, that way we will be really flexible but I might be biased by my previous researches. Definitely open to rethink that.</p>
+        </div>
+
+        <meta itemprop='headline' content='Introducing Workflow Files'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="1" />
+           <span class='post-likes'>1 Like</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/krhubert.html'><span itemprop='name'>krhubert</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="../introducing-workflow-files.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-10-22T12:42:21Z' class='post-time'>
+                October 22, 2018, 12:42pm
+              </time>
+              <meta itemprop='dateModified' content='2018-10-22T12:42:21Z'>
+          <span itemprop='position'>#3</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <aside class="quote group-team" data-post="1" data-topic="95">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/ilgooz/40/8_1.png" class="avatar"> ilgooz:</div>
+<blockquote>
+<ul>
+<li>How do you feel about these new gRPC APIs and CLI commands?</li>
+</ul>
+</blockquote>
+</aside>
+<p>I would split inspect into two</p>
+<ul>
+<li>first for getting workflow definition <code>workflow get-def id-or-name</code>
+</li>
+<li>second for inspecting <code>workflow inspect id-or-name</code>
+</li>
+</ul>
+<p>Because definition of workflow is static resouces and everthing else is more dynamic one.</p>
+<p>Except that everything is ok.</p>
+<aside class="quote group-team" data-post="1" data-topic="95">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/ilgooz/40/8_1.png" class="avatar"> ilgooz:</div>
+<blockquote>
+<ul>
+<li>Do we want to be able to execute multiple tasks on an event or result? We already have good syntax for this one, please check the <em>execute</em> attr in the yaml file, it can be naturally extended.</li>
+</ul>
+</blockquote>
+</aside>
+<p>We should provide an option to execute multiple tasks</p>
+<aside class="quote group-team" data-post="1" data-topic="95">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/ilgooz/40/8_1.png" class="avatar"> ilgooz:</div>
+<blockquote>
+<p>How we should make it possible to compose multiple data together to create new values to be used as task inputs or execution tags.</p>
+</blockquote>
+</aside>
+<p>See new proposition (<code>triggers.when.outputs</code>). Also, we should avoid manipulate outputs because we will need to create kind of DML for json (I haven’t seen a successful project for it).</p>
+<aside class="quote group-team" data-post="1" data-topic="95">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="../../user_avatar/forum.mesg.com/ilgooz/40/8_1.png" class="avatar"> ilgooz:</div>
+<blockquote>
+<p>What do you think about the architecture/tasks/events of WSS?</p>
+</blockquote>
+</aside>
+<p>First let’s set up some proposition on workflow file, then we could talk about the arch of it.</p>
+<p>So I have such proposition:</p>
+<pre><code class="lang-auto"># name of the workflow
+name: email-notification
+
+# description of the workflow
+description: Workflow for notify when email is sent
+
+# services aliasas that cloud be accessible in the action
+services:
+  - email: 6b0884a06e169c095ed8c412c3afc398
+  - slack: 474cb31a6264142684d314d6f2ec650a
+  - forum: 174cd4d4ba541fda5cf46d0d74e1102a
+
+# triggers is a list of all services and its events mesg will listeing for.
+triggers:
+  # the name of trigger used in eventflows
+  public-email:
+    description: "email with topic and message"
+    # id or name of service
+    service: email # 6b0884a06e169c095ed8c412c3afc398
+    # when filters the service events.
+    when:
+      # events name from services mesg.yml
+      event: EmailSent
+      # events tags
+      tags:
+        - t1 # simple tag name
+        - /^\w+$/ # maybe regexp?
+
+      # events outputs (from services mesg.yml)
+      # NOTE: this is the core of workflow file
+      # required outputs will be passed to execution 
+      # of next service
+      outputs:
+        - topic
+        - message
+
+  # another service (here is the same but with diffrent outputs)
+  private-email:
+    description: "email with topic only"
+    service: email
+    when:
+      event: EmailSent
+      outputs:
+        - topic
+
+# list of services to execute
+actions:
+  # name of the action
+  send-to-slack:
+    description: "send to slack slack"
+    # id or name os service
+    service: slack 
+    # name of the task from service mesg.yml
+    task: send-to-channel
+    # provide inputs (they will be combine with triggers outputs)
+    inputs:
+      apikey: "80676bd37b0636dc11828d7f23cdafbb3889aba8"
+      channel: "notification"
+
+  post-on-forum:
+    description: "post on forum"
+    service: forum 
+    task: post
+    inputs:
+      user: "root"
+      pasowrd: "pass"
+
+# eventflows combines triggers with actions
+eventflows:
+  # trigger name
+  public:
+    # on has one trigger for actions
+    on: public-email
+    # execute contains action/list of actions to execute on given trigger
+    execute: send-to-slack
+  private:
+    on: private-email
+    execute:
+      - send-to-slack
+      - post-to-forum
+</code></pre>
+<p>The key features:</p>
+<ul>
+<li>the syntax is not so nested</li>
+<li>the triggers.outputs and actions.inputs correspond 1:1 with mesg.yml definitions</li>
+<li>it has 3 main part : triggers, actions and bindings between them</li>
+<li>you can chain triggers and actions (althouth you can’t create multiple chain - on <code>a</code> do <code>b</code> then <code>c</code> because such chain requires keeping the state).</li>
+</ul>
+        </div>
+
+        <meta itemprop='headline' content='Introducing Workflow Files'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="../introducing-workflow-files.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-10-22T17:17:35Z'>
+              <time itemprop='dateModified' datetime='2018-10-22T18:36:47Z' class='post-time'>
+                October 22, 2018,  6:36pm
+              </time>
+          <span itemprop='position'>#4</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>It’s good that if we can reduce nested executions for readability. In the functionality side, they all seem the same. We need be sure to have a nice syntax for serial(dependent) &amp; parallel task executions.</p>
+<p>I’m throwing an idea by extending the original syntax that I provided to cover both parallel and serial task executions without a nested syntax. I’m introducing the new <em>dependsOn</em> field and named executions pattern inspired from <a class="mention" href="../../u/anthony.html">@Anthony</a>’s.</p>
+<p><a class="mention" href="../../u/anthony.html">@Anthony</a> I think you mentioned about having <em>map</em> inside execution, this makes sense and it’s needed to make it possible doing multiple task executions with different input data. The below example also adopts that part.</p>
+<p>And there is an example in the bottom about wildcard use for listening all events or results that I forgot about mentioning in the first post.</p>
+<pre><code class="lang-auto">when:
+  serviceA:
+    event:
+      eventX:
+        execute:
+          # this execution runs in parallel because it doesn't depend
+          # on any other executions.
+          execution1:
+            map:
+              field1: $event.data.fieldX
+            serviceX: taskX
+          # this execution runs in parallel because it doesn't depend
+          # on any other executions.
+          execution2:
+            map:
+              field1: $event.data.fieldY
+            serviceY: taskY
+          # this execution waits execution1 to complete with resultX &amp;
+          # execution2 to complete with resultY.
+          execution3:
+            dependsOn:
+              execution1: resultX
+              execution2: resultY
+            map:
+              foo: $execution1.result.data.fieldX
+              bar: $execution2.result.data.fieldY
+              baz: $event.data.fieldY
+            serviceZ: taskZ
+          # this execution waits execution3 to complete with resultX.
+          execution4:
+            dependsOn:
+              execution3: resultX
+              ...
+  serviceB:
+    result:
+      # listens all results from serviceB.    
+      '*':
+        execute:
+          logExecution:
+            map:
+              message: $result.data
+              serviceName: serviceB
+            logger: log
+</code></pre>
+<p>And there can be multiple executions that waits for the same execution to complete with the same or different output keys. There is also a big range of possibilities for doing dependent executions with this kind of syntax.</p>
+<p>WSS will analyse all the dependent executions and run them in serial or parallel depending on how they’re defined and what executions that each execution depends on.</p>
+        </div>
+
+        <meta itemprop='headline' content='Introducing Workflow Files'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="../introducing-workflow-files.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-10-22T18:02:23Z'>
+              <time itemprop='dateModified' datetime='2018-10-22T18:02:47Z' class='post-time'>
+                October 22, 2018,  6:02pm
+              </time>
+          <span itemprop='position'>#5</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p><a class="mention" href="../../u/krhubert.html">@krhubert</a> Yes, I agree that we may need to provide a command to user for showing the underlying workflow.yml. It’d be nice <img src="../../images/emoji/twitter/slight_smile.png%3Fv=6" title=":slight_smile:" class="emoji" alt=":slight_smile:">.</p>
+<p>I think we can use one of the command names below for this:</p>
+<ul>
+<li><code>$ mesg-core workflow dump ID</code></li>
+<li><code>$ mesg-core workflow definition ID</code></li>
+</ul>
+        </div>
+
+        <meta itemprop='headline' content='Introducing Workflow Files'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="../introducing-workflow-files.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-10-24T08:02:05Z'>
+              <time itemprop='dateModified' datetime='2018-10-31T13:24:38Z' class='post-time'>
+                October 31, 2018,  1:24pm
+              </time>
+          <span itemprop='position'>#6</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>I’m thinking about adding mongodb as dependency to WSS so we can query workflows depending on incoming event and results to execute tasks. Note that, we may not need this at this time and only query saved workflows on startup and keep their definitions in memory. We’ll see this by time while experimenting.</p>
+<p>I’d like to see how a distributed database will work together with WSS. <a class="mention" href="../../u/anthony.html">@Anthony</a> already pointed that we’ll need a distributed database in future so mongodb can be good start and we can always change it in future if needed. I don’t want to use a simple key-value database like LevelDB for workflows because we’ll need some querying.</p>
+<p><a class="mention-group" href="../../groups/core.html">@core</a> team please give feedbacks <img src="../../images/emoji/twitter/slight_smile.png%3Fv=6" title=":slight_smile:" class="emoji" alt=":slight_smile:">.</p>
+<h3>This is my current TODO list:</h3>
+<p><span class="chcklst-box checked fa fa-check-square fa-fw"></span> create a base for workflow feature and add dummy create &amp; delete features. <a href="https://github.com/mesg-foundation/core/pull/541">#541</a><br>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> create the most simple VM implementation in WSS to run workflows. It should be able to run the sample workflow service in the first post. And use mongodb for saving and querying workflows. <a href="https://github.com/mesg-foundation/core/pull/559">#559</a><br>
+<span class="chcklst-box checked fa fa-check-square-o fa-fw"></span> implement <em>workflow logs</em> command so we can easily debug running workflows. <a href="https://github.com/mesg-foundation/core/pull/559">#559</a></p>
+<p>Later on, do improvements on syntax, VM that runs workflows and implement remaining cli commands / gRPC apis.</p>
+        </div>
+
+        <meta itemprop='headline' content='Introducing Workflow Files'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="../introducing-workflow-files.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-10-31T14:08:43Z'>
+              <time itemprop='dateModified' datetime='2018-10-31T14:11:14Z' class='post-time'>
+                October 31, 2018,  2:11pm
+              </time>
+          <span itemprop='position'>#7</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <h2>Workflow Running Policy</h2>
+<p>This is an another thing that we need to discuss. We need to decide how to deal with disconnected services in order to run workflows stably.</p>
+<h3>Scenario <span class="hashtag">#1</span>
+</h3>
+<p><strong>What to do if a service cannot be started that a workflow depends on, in the first creation time of the workflow?</strong></p>
+<p>Should <code>workflow create</code> feature return with an error or create the workflow and try starting and listening on the services within intervals until all of them are responsive? We can still log this process to workflows own log stream for devs to be aware of the life cycle of workflow.</p>
+<p>I prefer the second way by leaving this management to WSS so it can deal with services under the hood instead of failing on workflow creation.</p>
+<h3>Scenario <span class="hashtag">#2</span>
+</h3>
+<p><strong>What to do if a service is got disconnected that a workflow depends on?</strong></p>
+<p>This service could be the service that tasks are executed on or can be a service that listening results and events on it. There can be several services that a workflow depends on and some or all of them can be disconnected/unresponsive.</p>
+<p>In this case, workflow cycle will not proceed properly because of the disconnected services. For example a task may be able to get executed after an event received from a service but some other tasks may not be executed because their services are down or some results or events may not be listened for the same reason.</p>
+<p>Should we completely pause the execution of a workflow when at least one of the services it depends on is not responsive <em>(I think yes)</em>?  In this case workflow can continue after its services are fully responsive again. To make this possible, we need to make sure that we’re keeping workflow’s state <em>(unhandled events, results, inputs/outputs, executed/non-executed tasks etc.)</em> correctly otherwise we can miss some task executions on the way and this can introduce weird behaviours to application.</p>
+<p>I think WSS should manage all the services like this and have restarting and relistening policies on services. And log any info to workflow’s log stream about the status of services and listening/execution state of workflow.</p>
+        </div>
+
+        <meta itemprop='headline' content='Introducing Workflow Files'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="../introducing-workflow-files.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-11-19T11:19:03Z'>
+              <time itemprop='dateModified' datetime='2018-11-20T07:57:19Z' class='post-time'>
+                November 20, 2018,  7:57am
+              </time>
+          <span itemprop='position'>#8</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>For now we don’t have some kind of registry to map service ids with their Git URLs. Because of that, in workflows, we’re not able to automatically deploy depended services. So, we’re thinking about supporting repo urls and local paths next to service ids in the definition.</p>
+<p><em>e.g.</em></p>
+<pre><code class="lang-auto">name: ...
+description: ...
+
+services:
+  # with service id.
+  serviceA: 5baa5a2f1ecdda9a25a15e350f0a94730ca2ad3b
+  # with git host.
+  serviceB: https://github.com/mesg-foundation/service-influxdb#also-supports-branches
+  # with absolute path.
+  serviceC: /Users/ilgooz/Programs/go/src/github.com/ilgooz/vuejsapp
+  # with relative path.
+  serviceD: ./another/service
+...
+</code></pre>
+        </div>
+
+        <meta itemprop='headline' content='Introducing Workflow Files'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="2" />
+           <span class='post-likes'>2 Likes</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="../introducing-workflow-files.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-11-20T07:38:52Z' class='post-time'>
+                November 20, 2018,  7:38am
+              </time>
+              <meta itemprop='dateModified' content='2018-11-20T07:38:52Z'>
+          <span itemprop='position'>#9</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>I really love the idea to have this deployment part directly in the workflow, like that we can just provide the workflow and this install and start everything.<br>
+Let’s definitely keep this in mind, maybe not a priority for now but really good, we could have a kind of workflow service resolver that for now is database resolver but later can be git, path, tar, ipfs…</p>
+        </div>
+
+        <meta itemprop='headline' content='Introducing Workflow Files'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="../introducing-workflow-files.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-11-20T10:26:29Z' class='post-time'>
+                November 20, 2018, 10:26am
+              </time>
+              <meta itemprop='dateModified' content='2018-11-20T10:26:29Z'>
+          <span itemprop='position'>#10</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>We may support configuring services inside workflows as mentioned in another <a href="../configuring-services-with-deploy-time-or-run-time-arguments/124.html">proposal</a>.</p>
+        </div>
+
+        <meta itemprop='headline' content='Introducing Workflow Files'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="../introducing-workflow-files.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-11-27T05:12:59Z' class='post-time'>
+                November 27, 2018,  5:12am
+              </time>
+              <meta itemprop='dateModified' content='2018-11-27T05:12:59Z'>
+          <span itemprop='position'>#11</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Let’s keep the deployment idea but implement it later <img src="../../images/emoji/twitter/wink.png%3Fv=6" title=":wink:" class="emoji" alt=":wink:"></p>
+        </div>
+
+        <meta itemprop='headline' content='Introducing Workflow Files'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="1" />
+           <span class='post-likes'>1 Like</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="../introducing-workflow-files.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-12-13T09:34:09Z' class='post-time'>
+                December 13, 2018,  9:34am
+              </time>
+              <meta itemprop='dateModified' content='2018-12-13T09:34:09Z'>
+          <span itemprop='position'>#12</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>we can implement a lock file for locking service’s version. see: <a href="../improve-relation-between-sid-and-hashes/141/2%3Fu=ilgooz.html" class="inline-onebox">Improve relation between SID and Hashes</a></p>
+        </div>
+
+        <meta itemprop='headline' content='Introducing Workflow Files'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="../introducing-workflow-files.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-12-30T03:42:58Z' class='post-time'>
+                December 30, 2018,  3:42am
+              </time>
+              <meta itemprop='dateModified' content='2018-12-30T03:42:58Z'>
+          <span itemprop='position'>#13</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Here is a proposal for the workflow <a href="../ui-for-applications-workflows/167.html" class="inline-onebox">UI for applications/workflows</a> that will not surcharge the cli / core for now and let us experiment before adding this feature in the core.</p>
+        </div>
+
+        <meta itemprop='headline' content='Introducing Workflow Files'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="../introducing-workflow-files.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2019-01-03T16:43:43Z'>
+              <time itemprop='dateModified' datetime='2019-01-03T16:44:58Z' class='post-time'>
+                January 3, 2019,  4:44pm
+              </time>
+          <span itemprop='position'>#14</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>I remember that we had some ideas about executing tasks on pre-created applications like we do with MESG services. For example, an application can have some tasks/funcs that actually makes various task executions on services under the hood and produces a result.</p>
+<p>This way it’s possible to create reusable &amp; configurable applications as well.</p>
+<p><a class="mention" href="../../u/anthony.html">@Anthony</a> can you share your vision for this about how we should implement this feature in workflows?</p>
+        </div>
+
+        <meta itemprop='headline' content='Introducing Workflow Files'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="../introducing-workflow-files.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2019-01-04T06:00:21Z' class='post-time'>
+                January 4, 2019,  6:00am
+              </time>
+              <meta itemprop='dateModified' content='2019-01-04T06:00:21Z'>
+          <span itemprop='position'>#15</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>I’m not sure this is a really good thing to do, I think the best is to really keep it simple and if there is tasks for preprocessing or post processing we just put them before and after the task we want.</p>
+<p>If it’s tasks really independent of the application that needs that for the deploy, they can just create a app that execute a task and then use the deploy api with the result but in that case we still don’t need any pre/post processing.</p>
+        </div>
+
+        <meta itemprop='headline' content='Introducing Workflow Files'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="../introducing-workflow-files.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2019-01-20T15:38:18Z' class='post-time'>
+                January 20, 2019,  3:38pm
+              </time>
+              <meta itemprop='dateModified' content='2019-01-20T15:38:18Z'>
+          <span itemprop='position'>#16</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p><a class="mention" href="../../u/anthony.html">@Anthony</a> I created an another proposal for this and explained the idea a bit more. <a href="../reusable-workflows-workflow-marketplace/207.html" class="inline-onebox">Reusable Workflows &amp; Workflow Marketplace</a></p>
+        </div>
+
+        <meta itemprop='headline' content='Introducing Workflow Files'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="../introducing-workflow-files.html">
+
+            <link itemprop="image" href="../../uploads/default/original/1X/26361d706a8a255479f0cb328577f99ad8731275.png">
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2019-01-30T13:53:21Z' class='post-time'>
+                January 30, 2019,  1:53pm
+              </time>
+              <meta itemprop='dateModified' content='2019-01-30T13:53:21Z'>
+          <span itemprop='position'>#17</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>I’ve been looking at Github workflows, the config behind Github Actions.<br>
+You can actually create your own tasks based on docker with the connections you want, that might be a good source of inspiration.<br>
+<aside class="onebox whitelistedgeneric">
+  <header class="source">
+      <a href="https://developer.github.com/actions/creating-workflows/creating-a-new-workflow/" target="_blank" rel="nofollow noopener">GitHub Developer</a>
+  </header>
+  <article class="onebox-body">
+    <img src="../../uploads/default/original/1X/26361d706a8a255479f0cb328577f99ad8731275.png" class="thumbnail" width="" height="">
+
+<h3><a href="https://developer.github.com/actions/creating-workflows/creating-a-new-workflow/" target="_blank" rel="nofollow noopener">Creating a new workflow</a></h3>
+
+<p>Get started with one of our guides, or jump straight into the API documentation.</p>
+
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+</p>
+        </div>
+
+        <meta itemprop='headline' content='Introducing Workflow Files'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="1" />
+           <span class='post-likes'>1 Like</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/krhubert.html'><span itemprop='name'>krhubert</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="../introducing-workflow-files.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2019-01-30T16:11:32Z' class='post-time'>
+                January 30, 2019,  4:11pm
+              </time>
+              <meta itemprop='dateModified' content='2019-01-30T16:11:32Z'>
+          <span itemprop='position'>#18</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>To let you know it looks like <a href="https://github.com/hashicorp/hcl" rel="nofollow noopener">hcl</a> syntax.</p>
+<p>For syntax we need to first decide if we want to use <code>yaml</code> or <code>hcl</code> (<code>json</code> dosen’t have comment and it’s unreadable, <code>toml</code> has it’s own quirk). Other languages are not so popular.</p>
+        </div>
+
+        <meta itemprop='headline' content='Introducing Workflow Files'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="1" />
+           <span class='post-likes'>1 Like</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="../introducing-workflow-files.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2019-03-11T08:10:02Z'>
+              <time itemprop='dateModified' datetime='2019-03-11T08:25:26Z' class='post-time'>
+                March 11, 2019,  8:25am
+              </time>
+          <span itemprop='position'>#19</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>HCL seems to be a much more human readable format comparing to YML. It also supports arithmetics and registering custom funcs to work with data.</p>
+<p>Creating custom funcs is very useful for us. Specially, creating a func to handle data we get from events, task results and to create input data for task executions is very useful. We can create some useful funcs to easily work with service data inside workflows.</p>
+<p>And, of course, we can always use MESG services to work with data by using services like <a href="https://github.com/ilgooz/service-objects" rel="nofollow noopener">objects</a>, <a href="https://github.com/ilgooz/service-logic" rel="nofollow noopener">logic</a> but experimenting with HCL’s funcs and solving this problem without going to network might be nicer.</p>
+<p>Having arithmetics and dealing with data by using custom funcs directly inside HCL, might decrease the complexity of workflow which can make it much more readable. Because, we’ll not be making lots of additional task executions to just handle the data.</p>
+<p>Working with data in workflows is very essential and is a big part of workflow logic but if it becomes too hard to manage, it’ll distract developer’s focus while creating workflows. So, we should be providing the simplest solutions.</p>
+<p>See <a href="https://github.com/mesg-foundation/application-marketplace/pull/1/files#diff-168726dbe96b3ce427e7fedce31bb0bc" rel="nofollow noopener">index.js</a> of application-marketplace to get an idea about how <em>objects</em> &amp; <em>logic</em> services are used in the marketplace application.</p>
+<p>HCL also supports JSON. So converting it to JSON and YML is very easy but supporting these two next to HCL will require a bit more work because we need to create a small runtime to interpret arithmetics and custom funcs. But supporting JSON and YML can be discussed later. I think that they’re not necessary for now.</p>
+        </div>
+
+        <meta itemprop='headline' content='Introducing Workflow Files'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="1" />
+           <span class='post-likes'>1 Like</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="../introducing-workflow-files.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2019-03-13T05:06:35Z' class='post-time'>
+                March 13, 2019,  5:06am
+              </time>
+              <meta itemprop='dateModified' content='2019-03-13T05:06:35Z'>
+          <span itemprop='position'>#20</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>I’m excited by what you can came up with HCL <img src="../../images/emoji/twitter/wink.png%3Fv=6" title=":wink:" class="emoji" alt=":wink:"></p>
+        </div>
+
+        <meta itemprop='headline' content='Introducing Workflow Files'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+
+    <div role='navigation' itemscope itemtype='http://schema.org/SiteNavigationElement' class="topic-body crawler-post">
+        <span itemprop='name'><b><a rel="next" itemprop="url" href="95%3Fpage=2.html">next page →</a></b></span>
+    </div>
+
+
+
+
+
+    </div>
+    <footer class="container wrap">
+      <nav class='crawler-nav'>
+        <ul>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../index.html' itemprop="url">Home </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../categories.html' itemprop="url">Categories </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../guidelines.html' itemprop="url">FAQ/Guidelines </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../tos.html' itemprop="url">Terms of Service </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../privacy.html' itemprop="url">Privacy Policy </a>
+          </span>
+        </li>
+        </ul>
+      </nav>
+      <p class='powered-by-link'>Powered by <a href="https://www.discourse.org">Discourse</a>, best viewed with JavaScript enabled</p>
+    </footer>
+    
+    
+  </body>
+  
+</html>

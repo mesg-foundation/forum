@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Integrating the forum in GitHub</title>
+    <link>https://forum.mesg.com/t/integrating-the-forum-in-github/53</link>
+    <description>Hi, Everyone,
+
+I noticed that the forum is not linked to very much in the GitHub repos. @Anthony and @Nicolas, I recommend you go and add links in each of the repos in the `README.md` and `CONTRIBUTING.md` files.
+
+Thanks!</description>
+    
+    <lastBuildDate>Thu, 20 Sep 2018 08:35:14 +0000</lastBuildDate>
+    <category>General Discussion</category>
+    <atom:link href="https://forum.mesg.com/t/integrating-the-forum-in-github/53.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Integrating the forum in GitHub</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            
+          <p><a href="https://forum.mesg.com/t/integrating-the-forum-in-github/53/6">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/integrating-the-forum-in-github/53/6</link>
+        <pubDate>Thu, 13 Dec 2018 11:43:24 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-53-6</guid>
+        <source url="https://forum.mesg.com/t/integrating-the-forum-in-github/53.rss">Integrating the forum in GitHub</source>
+      </item>
+      <item>
+        <title>Integrating the forum in GitHub</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            
+          <p><a href="https://forum.mesg.com/t/integrating-the-forum-in-github/53/5">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/integrating-the-forum-in-github/53/5</link>
+        <pubDate>Thu, 13 Dec 2018 11:43:22 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-53-5</guid>
+        <source url="https://forum.mesg.com/t/integrating-the-forum-in-github/53.rss">Integrating the forum in GitHub</source>
+      </item>
+      <item>
+        <title>Integrating the forum in GitHub</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            
+          <p><a href="https://forum.mesg.com/t/integrating-the-forum-in-github/53/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/integrating-the-forum-in-github/53/4</link>
+        <pubDate>Thu, 20 Sep 2018 09:17:02 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-53-4</guid>
+        <source url="https://forum.mesg.com/t/integrating-the-forum-in-github/53.rss">Integrating the forum in GitHub</source>
+      </item>
+      <item>
+        <title>Integrating the forum in GitHub</title>
+        <dc:creator><![CDATA[jonobacon]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote no-group" data-post="2" data-topic="53">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/anthony/40/7_1.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>We added a plugin to sync the forum with Github using a bot like that we have links on Github on the different issues or PR eg: <a href="https://github.com/mesg-foundation/core/pull/470#issuecomment-422701190">https://github.com/mesg-foundation/core/pull/470#issuecomment-422701190 </a></p>
+</blockquote>
+</aside>
+<p>Very cool. Great idea! These kinds of integration points are always helpful.</p>
+          <p><a href="https://forum.mesg.com/t/integrating-the-forum-in-github/53/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/integrating-the-forum-in-github/53/3</link>
+        <pubDate>Thu, 20 Sep 2018 08:35:14 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-53-3</guid>
+        <source url="https://forum.mesg.com/t/integrating-the-forum-in-github/53.rss">Integrating the forum in GitHub</source>
+      </item>
+      <item>
+        <title>Integrating the forum in GitHub</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>Good point, will do.</p>
+<p>We added a plugin to sync the forum with Github using a bot like that we have links on Github on the different issues or PR eg: <a href="https://github.com/mesg-foundation/core/pull/470#issuecomment-422701190">https://github.com/mesg-foundation/core/pull/470#issuecomment-422701190</a></p>
+          <p><a href="https://forum.mesg.com/t/integrating-the-forum-in-github/53/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/integrating-the-forum-in-github/53/2</link>
+        <pubDate>Thu, 20 Sep 2018 07:25:18 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-53-2</guid>
+        <source url="https://forum.mesg.com/t/integrating-the-forum-in-github/53.rss">Integrating the forum in GitHub</source>
+      </item>
+      <item>
+        <title>Integrating the forum in GitHub</title>
+        <dc:creator><![CDATA[jonobacon]]></dc:creator>
+        <description><![CDATA[
+            <p>Hi, Everyone,</p>
+<p>I noticed that the forum is not linked to very much in the GitHub repos. <a class="mention" href="/u/anthony">@Anthony</a> and <a class="mention" href="/u/nicolas">@Nicolas</a>, I recommend you go and add links in each of the repos in the <code>README.md</code> and <code>CONTRIBUTING.md</code> files.</p>
+<p>Thanks!</p>
+          <p><a href="https://forum.mesg.com/t/integrating-the-forum-in-github/53/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/integrating-the-forum-in-github/53/1</link>
+        <pubDate>Wed, 19 Sep 2018 12:14:31 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-53-1</guid>
+        <source url="https://forum.mesg.com/t/integrating-the-forum-in-github/53.rss">Integrating the forum in GitHub</source>
+      </item>
+  </channel>
+</rss>

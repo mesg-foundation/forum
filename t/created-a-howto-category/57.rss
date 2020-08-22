@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Created a HOWTO category</title>
+    <link>https://forum.mesg.com/t/created-a-howto-category/57</link>
+    <description>Hi, Team,
+
+On some recent calls we had talked about having little HOWTO or &quot;Hacks&quot; posts on the forum. This is a great way of showcasing how to do interesting things with MESG.
+
+Well, I thought it would make sense to put these all in the same category. So, I have created a `HOWTO` sub-category under `Support` where only staff can post to, but everyone else can read.
+
+I think we should aim for one HOWTO or Hack a week posted to this category. I recommend it looks like this: https://meta.discourse.org/t/start-a-new-topic-via-email-e-mail/62977 - this is very instructional and concise in nature.
+
+This way, community members will be able to see all the HOWTOs and Hacks in one place.
+
+@Anthony @Nicolas - do you think you could write a HOWTO up and add it to get us started?</description>
+    
+    <lastBuildDate>Wed, 03 Oct 2018 08:48:07 +0000</lastBuildDate>
+    <category>General Discussion</category>
+    <atom:link href="https://forum.mesg.com/t/created-a-howto-category/57.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Created a HOWTO category</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            
+          <p><a href="https://forum.mesg.com/t/created-a-howto-category/57/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/created-a-howto-category/57/2</link>
+        <pubDate>Thu, 13 Dec 2018 11:44:29 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-57-2</guid>
+        <source url="https://forum.mesg.com/t/created-a-howto-category/57.rss">Created a HOWTO category</source>
+      </item>
+      <item>
+        <title>Created a HOWTO category</title>
+        <dc:creator><![CDATA[jonobacon]]></dc:creator>
+        <description><![CDATA[
+            <p>Hi, Team,</p>
+<p>On some recent calls we had talked about having little HOWTO or “Hacks” posts on the forum. This is a great way of showcasing how to do interesting things with MESG.</p>
+<p>Well, I thought it would make sense to put these all in the same category. So, I have created a <code>HOWTO</code> sub-category under <code>Support</code> where only staff can post to, but everyone else can read.</p>
+<p>I think we should aim for one HOWTO or Hack a week posted to this category. I recommend it looks like this: <a href="https://meta.discourse.org/t/start-a-new-topic-via-email-e-mail/62977">https://meta.discourse.org/t/start-a-new-topic-via-email-e-mail/62977</a> - this is very instructional and concise in nature.</p>
+<p>This way, community members will be able to see all the HOWTOs and Hacks in one place.</p>
+<p><a class="mention" href="/u/anthony">@Anthony</a> <a class="mention" href="/u/nicolas">@Nicolas</a> - do you think you could write a HOWTO up and add it to get us started?</p>
+          <p><a href="https://forum.mesg.com/t/created-a-howto-category/57/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/created-a-howto-category/57/1</link>
+        <pubDate>Thu, 20 Sep 2018 08:53:23 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-57-1</guid>
+        <source url="https://forum.mesg.com/t/created-a-howto-category/57.rss">Created a HOWTO category</source>
+      </item>
+  </channel>
+</rss>

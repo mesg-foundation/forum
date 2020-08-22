@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Instance DB</title>
+    <link>https://forum.mesg.com/t/instance-db/295</link>
+    <description>The goal of this feature is to split the Service DB into Service DB and Instance DB.
+
+The Service DB will only store the service definitions. Its primary index is the hash of the service definition, calculated by the Engine, called Service Hash.
+
+The Instance DB will store the info of the actual running services (docker services / containers IDs, networks IDs, but also Service Definition Hash). Its primary index is the hash of the service definition + the custom env, calculated by the Engine, called Instance Hash.
+
+**Note on custom env**: the custom env are NOT stored in any DB but are used for the calculation of the instance hash AND injected in the docker service on start.
+
+
+Let&amp;rsquo;s see the full start and stop processes:
+
+## Start (service hash, env) -&gt; instance hash
+
+This api is similar to the current start api except that it will download and build the service, create and save in instance DB the container related info.
+
+The steps of this api are:
+
+* Fetch service definition from service hash in Service DB
+* Download the service source
+* Build the docker image
+* Merge custom user env
+* Calculate Instance Hash (based on the service hash and the custom env)
+* Check if Instance Hash already exist. If not, then:
+* Save the Instance object in Instance DB
+* Start the Service docker services
+* Update Instance DB with the docker services / containers / networks IDs
+* Return Instance Hash
+
+## Stop (instance hash)
+
+This is basically the same as the current implementation except it&#39;s using instance db.
+
+* Check if Instance Hash already exist. If yes, then:
+* Stop the docker services
+* Wait for the docker containers to be removed / deleting the docker containers
+* Delete the networks
+* Delete the instance from Instance DB
+
+## Delete (service hash)
+
+The only difference with current implementation is this api has to return an error if any instance referencing the service hash exist. The user have to stop the instances first.
+
+# Note
+
+Now that Service DB only stores &amp;ldquo;static&amp;rdquo; data, it can be used to synchronise / publish Service Definition across the Network and can replace the current Marketplace running on Ethereum.
+
+Another very important modification is all APIs that are requiring a Service ID to use a running Service (listenEvent, listenTask, executeTask, StopService) will now use the instance hash instead of the service hash. Be careful, this is only for running service, for example, the API DeleteService should delete in ServiceDB thus using the Service Hash.
+
+# Schema
+
+_In orange, step that are different than current implementation._
+
+## Start schema
+
+[mermaid]
+graph TD
+1[Fetch service definition from service hash in Service DB] --&gt; 2
+2[Download the service source] --&gt; 3
+3[Build the docker image] --&gt; 4
+4[Merge custom user env] --&gt; 5
+5[Calculate Instance Hash] --&gt; 6
+6{Check if Instance Hash already exist} -- if not --&gt; 7
+6 -- if yes --&gt; error
+7[Save the Instance object in Instance DB] --&gt; 8
+8[Start the Service docker services] --&gt; 9
+9[Update Instance DB with the docker services / containers / networks IDs] --&gt; 10
+10[Return Instance Hash]
+error[return error]
+classDef diff fill:orange;
+class 2,3,5,6,7,9,10 diff;
+[/mermaid]
+
+## Stop schema
+
+[mermaid]
+graph TD
+1{Check if Instance Hash already exist} -- if yes --&gt; 2
+1 -- if no --&gt; error
+error
+2[Stop the docker services] --&gt; 3
+3[Wait for the docker containers to be removed / deleting the docker containers] --&gt; 4
+4[Delete the networks] --&gt; 5
+5[Delete the instance from Instance DB]
+classDef diff fill:orange;
+class 1,5 diff;
+[/mermaid]
+
+# gRPC definition, server &amp; sdk
+
+As https://forum.mesg.com/t/service-compilation-deploy/288, this feature should not modify any existing gRPC definition, server or sdk functions but rather create new ones to start from a fresh and clean mind even if code duplication is necessary :wink:
+
+Edit #1
+
+This new gRPC api should be created in  `/protobuf/api/instance.proto`  and contain the following protobuf def:
+
+```
+syntax = &quot;proto3&quot;;
+
+package api;
+
+service Instance {
+  rpc Create (CreateRequest) returns (string) {}
+  rpc Delete (string) returns (string) {}
+}
+
+message CreateRequest {
+  string serviceHash = 1;
+  repeated string env = 2;
+}
+```
+
+This api Instance will only manage resources in Instance DB and use a CRUD-like design.</description>
+    
+    <lastBuildDate>Thu, 06 Jun 2019 07:38:47 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/instance-db/295.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Instance DB</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>As requested by <a class="mention" href="/u/ilgooz">@ilgooz</a>, here is the explanation about service or instance status.</p>
+<ul>
+<li>Service status: simply remove it. A service is not directly related to any docker container. So it there is no logic that a service has a status.</li>
+<li>Instance status: very similar to the current service’s status. It needs to fetch the docker api to get the status of each related docker container, aggregate to one status (like it’s currently done for service’s status).</li>
+</ul>
+<p>So basically, service’s status is moved to instance’s status.</p>
+          <p><a href="https://forum.mesg.com/t/instance-db/295/7">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/instance-db/295/7</link>
+        <pubDate>Thu, 06 Jun 2019 07:38:47 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-295-7</guid>
+        <source url="https://forum.mesg.com/t/instance-db/295.rss">Instance DB</source>
+      </item>
+      <item>
+        <title>Instance DB</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="5" data-topic="295">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/anthony/40/7_2.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>for now <code>instance hash = hash(definition, env)</code></p>
+</blockquote>
+</aside>
+<p>small correction:<br>
+<code>service hash = hash(definition, source files)</code><br>
+<code>instance hash = hash(service hash, env)</code></p>
+          <p><a href="https://forum.mesg.com/t/instance-db/295/6">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/instance-db/295/6</link>
+        <pubDate>Tue, 04 Jun 2019 02:45:33 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-295-6</guid>
+        <source url="https://forum.mesg.com/t/instance-db/295.rss">Instance DB</source>
+      </item>
+      <item>
+        <title>Instance DB</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>env+docker image hash is not possible yet as docker doesn’t generate deterministic image hash.<br>
+This might be solved later on and when we can make sure that docker builds are deterministic then yes <code>instance hash = hash(definition, env, docker build)</code> but for now <code>instance hash = hash(definition, env)</code></p>
+          <p><a href="https://forum.mesg.com/t/instance-db/295/5">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/instance-db/295/5</link>
+        <pubDate>Tue, 04 Jun 2019 02:39:44 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-295-5</guid>
+        <source url="https://forum.mesg.com/t/instance-db/295.rss">Instance DB</source>
+      </item>
+      <item>
+        <title>Instance DB</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>Should we calc service hash from env+service def hash or env+docker image hash. The second seems more precise to me since the built image might actually contain different dependencies when their versions aren’t fixed by the dev in Dockerfile.</p>
+          <p><a href="https://forum.mesg.com/t/instance-db/295/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/instance-db/295/4</link>
+        <pubDate>Mon, 03 Jun 2019 20:38:08 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-295-4</guid>
+        <source url="https://forum.mesg.com/t/instance-db/295.rss">Instance DB</source>
+      </item>
+      <item>
+        <title>Instance DB</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="2" data-topic="295">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/krhubert/40/9_2.png" class="avatar"> krhubert:</div>
+<blockquote>
+<p>Why you can’t run two same SD with same custom env?</p>
+</blockquote>
+</aside>
+<p>This is because of future decentralized network and deterministic hash calculation.<br>
+Two node should create the same instance hash from the same service definition and the same env variables.</p>
+<aside class="quote group-team" data-post="2" data-topic="295">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/krhubert/40/9_2.png" class="avatar"> krhubert:</div>
+<blockquote>
+<p>What if I wan’t to delete all runnign instance of given service no metter what custom envs are?</p>
+</blockquote>
+</aside>
+<p>In this case, you will use a list instance api that returns the instance hash of each instance and pass them to the stop instance api</p>
+          <p><a href="https://forum.mesg.com/t/instance-db/295/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/instance-db/295/3</link>
+        <pubDate>Fri, 31 May 2019 07:08:40 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-295-3</guid>
+        <source url="https://forum.mesg.com/t/instance-db/295.rss">Instance DB</source>
+      </item>
+      <item>
+        <title>Instance DB</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="1" data-topic="295">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/nicolas/40/10_2.png" class="avatar"> Nicolas:</div>
+<blockquote>
+<p>Bob starts Service A by sending SDa to the Engine. The Engine is:</p>
+</blockquote>
+</aside>
+<p>Why? Shouldn’t be bob starts the service by sending <code>service hash</code>, why core needs to redeploy the service every time?</p>
+<p>What is the pros of passing SD to deploy? When we have decided to drop deploy api?</p>
+<p>Why you can’t run two same SD with same custom env?</p>
+<aside class="quote group-team" data-post="1" data-topic="295">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/nicolas/40/10_2.png" class="avatar"> Nicolas:</div>
+<blockquote>
+<p>Another very important modification is all APIs that are requiring a Service ID to use a running Service (listenEvent, listenTask, executeTask, StopService) will now use the instance hash instead of the service hash.</p>
+</blockquote>
+</aside>
+<p>What if I wan’t to delete all runnign instance of given service no metter what custom envs are?</p>
+          <p><a href="https://forum.mesg.com/t/instance-db/295/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/instance-db/295/2</link>
+        <pubDate>Thu, 30 May 2019 12:50:47 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-295-2</guid>
+        <source url="https://forum.mesg.com/t/instance-db/295.rss">Instance DB</source>
+      </item>
+      <item>
+        <title>Instance DB</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>The goal of this feature is to split the Service DB into Service DB and Instance DB.</p>
+<p>The Service DB will only store the service definitions. Its primary index is the hash of the service definition, calculated by the Engine, called Service Hash.</p>
+<p>The Instance DB will store the info of the actual running services (docker services / containers IDs, networks IDs, but also Service Definition Hash). Its primary index is the hash of the service definition + the custom env, calculated by the Engine, called Instance Hash.</p>
+<p><strong>Note on custom env</strong>: the custom env are NOT stored in any DB but are used for the calculation of the instance hash AND injected in the docker service on start.</p>
+<p>Let’s see the full start and stop processes:</p>
+<h2>Start (service hash, env) -&gt; instance hash</h2>
+<p>This api is similar to the current start api except that it will download and build the service, create and save in instance DB the container related info.</p>
+<p>The steps of this api are:</p>
+<ul>
+<li>Fetch service definition from service hash in Service DB</li>
+<li>Download the service source</li>
+<li>Build the docker image</li>
+<li>Merge custom user env</li>
+<li>Calculate Instance Hash (based on the service hash and the custom env)</li>
+<li>Check if Instance Hash already exist. If not, then:</li>
+<li>Save the Instance object in Instance DB</li>
+<li>Start the Service docker services</li>
+<li>Update Instance DB with the docker services / containers / networks IDs</li>
+<li>Return Instance Hash</li>
+</ul>
+<h2>Stop (instance hash)</h2>
+<p>This is basically the same as the current implementation except it’s using instance db.</p>
+<ul>
+<li>Check if Instance Hash already exist. If yes, then:</li>
+<li>Stop the docker services</li>
+<li>Wait for the docker containers to be removed / deleting the docker containers</li>
+<li>Delete the networks</li>
+<li>Delete the instance from Instance DB</li>
+</ul>
+<h2>Delete (service hash)</h2>
+<p>The only difference with current implementation is this api has to return an error if any instance referencing the service hash exist. The user have to stop the instances first.</p>
+<h1>Note</h1>
+<p>Now that Service DB only stores “static” data, it can be used to synchronise / publish Service Definition across the Network and can replace the current Marketplace running on Ethereum.</p>
+<p>Another very important modification is all APIs that are requiring a Service ID to use a running Service (listenEvent, listenTask, executeTask, StopService) will now use the instance hash instead of the service hash. Be careful, this is only for running service, for example, the API DeleteService should delete in ServiceDB thus using the Service Hash.</p>
+<h1>Schema</h1>
+<p><em>In orange, step that are different than current implementation.</em></p>
+<h2>Start schema</h2>
+<div class="mermaid">
+
+graph TD
+1[Fetch service definition from service hash in Service DB] --&gt; 2
+2[Download the service source] --&gt; 3
+3[Build the docker image] --&gt; 4
+4[Merge custom user env] --&gt; 5
+5[Calculate Instance Hash] --&gt; 6
+6{Check if Instance Hash already exist} -- if not --&gt; 7
+6 -- if yes --&gt; error
+7[Save the Instance object in Instance DB] --&gt; 8
+8[Start the Service docker services] --&gt; 9
+9[Update Instance DB with the docker services / containers / networks IDs] --&gt; 10
+10[Return Instance Hash]
+error[return error]
+classDef diff fill:orange;
+class 2,3,5,6,7,9,10 diff;
+
+</div>
+
+<h2>Stop schema</h2>
+<div class="mermaid">
+
+graph TD
+1{Check if Instance Hash already exist} -- if yes --&gt; 2
+1 -- if no --&gt; error
+error
+2[Stop the docker services] --&gt; 3
+3[Wait for the docker containers to be removed / deleting the docker containers] --&gt; 4
+4[Delete the networks] --&gt; 5
+5[Delete the instance from Instance DB]
+classDef diff fill:orange;
+class 1,5 diff;
+
+</div>
+
+<h1>gRPC definition, server &amp; sdk</h1>
+<p>As <a href="https://forum.mesg.com/t/service-compilation-deploy/288" class="inline-onebox">Service compilation &amp; deploy</a>, this feature should not modify any existing gRPC definition, server or sdk functions but rather create new ones to start from a fresh and clean mind even if code duplication is necessary <img src="https://forum.mesg.com/images/emoji/twitter/wink.png?v=9" title=":wink:" class="emoji" alt=":wink:"></p>
+<p>Edit <span class="hashtag">#1</span></p>
+<p>This new gRPC api should be created in  <code>/protobuf/api/instance.proto</code>  and contain the following protobuf def:</p>
+<pre><code class="lang-auto">syntax = "proto3";
+
+package api;
+
+service Instance {
+  rpc Create (CreateRequest) returns (string) {}
+  rpc Delete (string) returns (string) {}
+}
+
+message CreateRequest {
+  string serviceHash = 1;
+  repeated string env = 2;
+}
+</code></pre>
+<p>This api Instance will only manage resources in Instance DB and use a CRUD-like design.</p>
+          <p><a href="https://forum.mesg.com/t/instance-db/295/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/instance-db/295/1</link>
+        <pubDate>Thu, 30 May 2019 07:41:51 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-295-1</guid>
+        <source url="https://forum.mesg.com/t/instance-db/295.rss">Instance DB</source>
+      </item>
+  </channel>
+</rss>

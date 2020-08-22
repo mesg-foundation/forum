@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <title>MESG Engine v0.10, JS CLI and JS library v3.0.0 Release Notes - News - MESG Community</title>
+    <meta name="description" content="Renaming Core to Engine
+Following the introduction of the MESG SDK, we are renaming MESG Core to MESG Engine to better describe what the software does and how it fits within the SDK. 
+The CLI has also been extracted to a&amp;hellip;">
+    <meta name="generator" content="Discourse 2.5.0.beta5 - https://github.com/discourse/discourse version 00aab498297cba8f977c1e0eb17b7d38ff06cc68">
+<link rel="icon" type="image/png" href="../../uploads/default/optimized/1X/9f11b6ddfa02bffdbec79487592a0573a0236cb5_2_32x32.png">
+<link rel="apple-touch-icon" type="image/png" href="../../uploads/default/optimized/1X/53630361a40ad76e1733dd0b0f486e9ae2f4f4d6_2_180x180.png">
+<meta name="theme-color" content="#491e8c">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+<link rel="canonical" href="317.html" />
+<script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","url":"https://forum.mesg.com","potentialAction":{"@type":"SearchAction","target":"https://forum.mesg.com/search?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
+<link rel="search" type="application/opensearchdescription+xml" href="../../opensearch.xml" title="MESG Community Search">
+
+      <link href="../../stylesheets/desktop_3_52e3411e87658e862890db7bd06899cf49ad5f59.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop" data-theme-id="7"/>
+      <link href="../../stylesheets/desktop_theme_7_bf4f2d3d8a71e6ee907065be9a79df3d849bd29c.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop_theme" data-theme-id="7"/>
+    
+    <meta id="data-ga-universal-analytics" data-tracking-code="UA-117583862-1" data-json="{&quot;cookieDomain&quot;:&quot;auto&quot;}" data-auto-link-domains="">
+
+<link rel="preload" href="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js" as="script">
+<script src="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js"></script>
+
+
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of &#39;MESG Engine v0.10, JS CLI and JS library v3.0.0 Release Notes&#39;" href="317.rss" />
+    <meta property="og:site_name" content="MESG Community" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:url" content="https://forum.mesg.com/t/mesg-engine-v0-10-js-cli-and-js-library-v3-0-0-release-notes/317" />
+<meta name="twitter:url" content="https://forum.mesg.com/t/mesg-engine-v0-10-js-cli-and-js-library-v3-0-0-release-notes/317" />
+<meta property="og:title" content="MESG Engine v0.10, JS CLI and JS library v3.0.0 Release Notes" />
+<meta name="twitter:title" content="MESG Engine v0.10, JS CLI and JS library v3.0.0 Release Notes" />
+<meta property="og:description" content="Renaming Core to Engine Following the introduction of the MESG SDK, we are renaming MESG Core to MESG Engine to better describe what the software does and how it fits within the SDK.  The CLI has also been extracted to a dedicated repository. See the New CLI section.  Service task output simplification This newest version of the Engine includes a massive simplification for service development!  Services can now define a single output per task (containing many parameters) rather than many outputs..." />
+<meta name="twitter:description" content="Renaming Core to Engine Following the introduction of the MESG SDK, we are renaming MESG Core to MESG Engine to better describe what the software does and how it fits within the SDK.  The CLI has also been extracted to a dedicated repository. See the New CLI section.  Service task output simplification This newest version of the Engine includes a massive simplification for service development!  Services can now define a single output per task (containing many parameters) rather than many outputs..." />
+<meta name="twitter:label1" value="Reading time" />
+<meta name="twitter:data1" value="1 mins 🕑" />
+<meta name="twitter:label2" value="Likes" />
+<meta name="twitter:data2" value="1 ❤" />
+<meta property="article:published_time" content="2019-06-19T03:57:57+00:00" />
+<meta property="og:ignore_canonical" content="true" />
+
+
+
+    
+  </head>
+  <body class="crawler">
+    
+    <header>
+      <a href="../../index.html">
+          <img src="../../uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png" alt="MESG Community" id="site-logo" style="max-width: 150px;">
+      </a>
+    </header>
+    <div id="main-outlet" class="wrap">
+        <div id="topic-title">
+    <h1>
+      <a href="317.html">MESG Engine v0.10, JS CLI and JS library v3.0.0 Release Notes</a>
+    </h1>
+
+      <div class="topic-category" itemscope itemtype="http://schema.org/BreadcrumbList">
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../c/news.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #0088CC'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>News</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="1" />
+          </span>
+      </div>
+
+      <div class="topic-category">
+        <div class='discourse-tags list-tags'>
+            <a href='../../tag/v0-10.html' class='discourse-tag' rel="tag">v0-10</a>, 
+            <a href='../../tag/release.html' class='discourse-tag' rel="tag">release</a>
+        </div>
+      </div>
+  </div>
+
+  
+
+
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="317.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2019-06-19T03:57:57Z'>
+              <time itemprop='dateModified' datetime='2019-06-19T04:06:58Z' class='post-time'>
+                June 19, 2019,  4:06am
+              </time>
+          <span itemprop='position'>#1</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <h1>Renaming Core to Engine</h1>
+<p>Following the introduction of the <a href="https://mesg.com/mesg-sdk" rel="nofollow noopener">MESG SDK</a>, we are renaming MESG Core to MESG Engine to better describe what the software does and how it fits within the SDK.</p>
+<p>The CLI has also been extracted to a dedicated repository. See the New CLI section.</p>
+<h1>Service task output simplification</h1>
+<p>This newest version of the Engine includes a massive simplification for service development!</p>
+<p>Services can now define a single output per task (containing many parameters) rather than many outputs per task.</p>
+<p>We found that most services implemented one success output and one error output, with the success output returning the result of the execution and the error output returning the error message. Services implementing more than two outputs can be easily converted to two outputs by combining the outputs’ data into one payload.</p>
+<p>This improves the executions’ state machine by letting the Engine know which output is the expected one, and enables the retry system when executions fail. This is very important when the decentralized network is implemented so unexpected execution errors can be tolerated!</p>
+<p>I encourage you to check out our <a href="https://medium.com/mesg/mesg-product-update-c937a4f4f624" rel="nofollow noopener">latest Product Update</a> to learn more about the roadmap, and why this feature is so important.</p>
+<p>Here is a diff of a task definition:</p>
+<pre><code class="lang-diff">tasks:
+  send:
+    inputs:
+      from:
+        type: String
+      to:
+        type: String
+      subject:
+        type: String
+      text:
+        type: String
+    outputs:
+-     success:
+-       data:
+-         status:
+-           type: Number
+-     error:
+-       data:
+-         message:
+-           type: String
++     status:
++       type: Number
+</code></pre>
+<p>This simplification also makes the implementation of tasks much easier.</p>
+<p>We’ve updated the <a href="https://github.com/mesg-foundation/mesg-js" rel="nofollow noopener">mesg-js</a> library to catch errors and send outputs to the Engine so your services don’t have to. If the task throw any error, the lib will catch it and send it to the Engine.</p>
+<p>Let’s take a look at the implementation diff of this task in JavaScript using mesg-js:</p>
+<pre><code class="lang-diff">- const send = async (inputs, outputs) =&gt; {
++ const send = async (inputs) =&gt; {
+- try {
+  const result = await sendgrid.send(inputs)
+- return outputs.success({
+-   status: result[0].statusCode
+- })
++ return {
++   status: result[0].statusCode
++ }
+- } catch (error) {
+-   return outputs.failure({
+-     message: error.toString()
+-   })
+- }
+}
+</code></pre>
+<p><img src="../../images/emoji/twitter/confetti_ball.png%3Fv=9" title=":confetti_ball:" class="emoji" alt=":confetti_ball:"> That’s 50% fewer lines of code for this simple task! <img src="../../images/emoji/twitter/confetti_ball.png%3Fv=9" title=":confetti_ball:" class="emoji" alt=":confetti_ball:"></p>
+<h1>New CLI</h1>
+<p>We are also releasing v1 of a new CLI in Javascript.</p>
+<p>We’ve created a new CLI for two reasons:</p>
+<ul>
+<li>To separate the CLI from the Engine repository<br>
+We were struggling with keeping the cli and the engine implementation as separate as possible because both were developed in Go and used many packages in common.</li>
+<li>To use Javascript<br>
+Javascript is a massively-used language across many ecosystems and is known by almost every developer. We want to build tools that the community can easily contribute to and extend as they see fit. Also, we plan to create User Interfaces to manage MESG Engine with ease. There are a lot of tools to create powerful and flexible UIs using Javascript that can reuse the CLI source code.</li>
+</ul>
+<p>You can install it by running the following command:</p>
+<pre><code class="lang-bash">npm install -g mesg-cli
+</code></pre>
+<p>You can also checkout its github repo: <a href="https://github.com/mesg-foundation/cli" rel="nofollow noopener">mesg-foundation/cli</a>.</p>
+<p>We had some issues during the release process of the CLI and had to release it under v1.0.4. So don’t worry about missing any updates, because there weren’t any <img src="../../images/emoji/twitter/upside_down_face.png%3Fv=9" title=":upside_down_face:" class="emoji" alt=":upside_down_face:"></p>
+<p><iframe src="https://tenor.com/embed/4895737?playertype=card" width="498" height="277" scrolling="no" frameborder="0" seamless="seamless" sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-presentation"></iframe>
+</p>
+<hr>
+<p>For the complete changelog of the MESG Engine, refer to <a href="https://github.com/mesg-foundation/engine/blob/dev/CHANGELOG.md#v0101" rel="nofollow noopener">the changelog on Github</a>.</p>
+<p>For the complete changelog of mesg-js library, refer to <a href="https://github.com/mesg-foundation/mesg-js/blob/master/CHANGELOG.md" rel="nofollow noopener">the changelog on Github</a>.</p>
+<p>To update to v0.10, follow the <a href="https://docs.mesg.com/guide/installation.html" rel="nofollow noopener">installation process on the documentation </a></p>
+        </div>
+
+        <meta itemprop='headline' content='MESG Engine v0.10, JS CLI and JS library v3.0.0 Release Notes'>
+          <meta itemprop='keywords' content='v0-10, release'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="1" />
+           <span class='post-likes'>1 Like</span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+
+
+
+
+
+
+    </div>
+    <footer class="container wrap">
+      <nav class='crawler-nav'>
+        <ul>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../index.html' itemprop="url">Home </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../categories.html' itemprop="url">Categories </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../guidelines.html' itemprop="url">FAQ/Guidelines </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../tos.html' itemprop="url">Terms of Service </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../privacy.html' itemprop="url">Privacy Policy </a>
+          </span>
+        </li>
+        </ul>
+      </nav>
+      <p class='powered-by-link'>Powered by <a href="https://www.discourse.org">Discourse</a>, best viewed with JavaScript enabled</p>
+    </footer>
+    
+    
+  </body>
+  
+</html>

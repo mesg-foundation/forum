@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>MESG Economy</title>
+    <link>https://forum.mesg.com/t/mesg-economy/664</link>
+    <description>Hey guys, I want to create a unique topic that group everything anyone (developers and users) need to know about the token economy within the network.
+
+This is also the place for anyone to ask questions and give feedback so we can improve the explanations.
+
+First, read Anthony&#39;s article that explains the overview of the economy:
+https://blog.mesg.com/token-utility-in-the-mesg-economy/
+
+## Glossary
+
+I will start by explaining the different pieces that are needed to make the system works.
+
+### Node
+
+A node is a computer that is running a specific software and that connects to other nodes running the same software to create a network.
+
+### Transaction
+
+In a blockchain, transactions are created by users or software to ask the network to perform actions. Actions can be to transfer some token, to publish a service or to ask the network to execute an execution. A transaction requires to be cryptographically signed by a wallet that already has tokens to pay for gas fees (do not confuse transactions&#39; gas fees and execution&#39;s fees). A transaction is considered as valid ONLY when it has been included in a valid block.
+
+### Block
+
+A block is a list of transactions that have been validated by the creator(s) of the block.
+In [POS](https://en.wikipedia.org/wiki/Proof_of_stake) blockchains, blocks are created by a group of block producers. A block producer is a node that MUST verify every new transaction, agree with other block producers on which transactions will be part of the new block, and finally signed cryptographically the block. Then the block (containing the transactions) is sent to every node of the network so they can apply locally the actions contained in each transaction. That&#39;s how each node of the network synchronizes with the rest of the network.
+The network&#39;s node will only accept block produced by block producers they already know. So the reliability and the stability of block producers are super important.
+
+### Execution
+
+Executions are the centerpiece of the project. They are what &quot;connect&quot; the users, services, runners and bring the value to the project.
+Executions are composed of 3 resources.
+
+#### Execution&#39;s request
+
+An execution&#39;s request is a transaction from a user that requests a specific runner to execute a specific service&#39;s task with specific inputs, alongside a fee to pay the runner and the service developer.
+Users can select manually the runner that will execute the execution or let the engine auto-select based on the runners&#39; stake and how much fee the runner wants and the user is willing to pay.
+
+#### Execution&#39;s result
+
+Once the specified runner executes the execution, it submits the execution&#39;s result by creating a new transaction containing the result and the hash of the execution&#39;s request and submit it to the network.
+The block producers can only check that the result respects the structure of data defined by the service. That&#39;s why we need a third step to verify the execution&#39;s result.
+
+#### Execution&#39;s verification
+
+Once the execution&#39;s result is submitted and integrated into a block, the real execution&#39;s verification step can occur. 
+A group of runners that also run the same service is selected to verify if the result is valid.
+
+The verification process depends on the type of service and in some case is not possible.
+- In the case of a deterministic task, like a mathematical problem, they do this by either re-executing the same execution and checking the result is the same
+- In the case of an action against a public database, like a blockchain or twitter, they can check that the action happened
+- In the case of an action to a private service or an API that cannot be verified, then the verification step is not happening and we refer to the task as **trusted** as users will have to trust the runner to do the work correctly.
+
+**A question to discuss:** what name do you think is the best: validation/validator or verification/verifier? I like verification/verifier because it separates it from other existing validation (transaction validation, block validation, etc..) and also it seems to be less strong than validation and makes the user more aware of the importance of this step.
+
+### Service
+
+A service is a software that communicates with the Engine to emit events when needed and to execute tasks when the network needs to.
+The events and tasks of the service are defined in the service&#39;s definition.
+A service is published to the network by a developer by creating a bundle of the software and its definition. When the service is published, anyone can download it and run it on its node as a runner.
+A service cannot be deleted from the network.
+
+### Runner
+
+A runner is a node that downloads a service, runs it locally and registers itself to the network as a runner of this service. Runners will have to provide token as a stake when registering to prove their good willing and be slashed in case of malicious behavior.
+The runner will process executions the network is asking it to do and get paid for it.
+A runner can unregister itself from the network and get back the remaining of its stake.
+A single node can have many runners at the same time. The only issue by running too many services at the same time is computation resources. If the node is overloaded, it will not be able to keep synchronizing the network and runs the services in good condition, so it will be slashed.
+
+### Process
+
+A process is an application that defines which tasks to execute when a specific event occurs on behalf of a user. Processes are run by emitters across the network. Each process has a token balance that is used to pay to create executions. Users need to make sure their processes have enough balance if they want them to run correctly.
+
+### Emitter
+
+Emitters are responsible for creating executions by following the rules from processes.
+To reduce the charge of the network, each emitter is only running against its node&#39;s runners. It means that runners of a specific service will also be an emitter of the same service. That&#39;s why we group emitters inside runners.
+Emitters pay the transaction&#39;s fee (not the full execution fees) to create the execution request on behalf of the process and get reimbursed plus an incentive.
+
+---
+
+I&#39;m stopping here for today but I will continue with a very detailed explanation of the execution lifecycle.</description>
+    
+    <lastBuildDate>Sun, 23 Feb 2020 10:40:01 +0000</lastBuildDate>
+    <category>Development</category>
+    <atom:link href="https://forum.mesg.com/t/mesg-economy/664.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>MESG Economy</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Hey guys, I want to create a unique topic that group everything anyone (developers and users) need to know about the token economy within the network.</p>
+<p>This is also the place for anyone to ask questions and give feedback so we can improve the explanations.</p>
+<p>First, read Anthony’s article that explains the overview of the economy:<br>
+<aside class="onebox whitelistedgeneric">
+  <header class="source">
+      <img src="https://forum.mesg.com/uploads/default/original/1X/092bad48c2cf6eea80b04d60235188fb8d9c5af1.png" class="site-icon" width="" height="">
+      <a href="https://blog.mesg.com/token-utility-in-the-mesg-economy/" target="_blank" title="03:32AM - 19 February 2020">MESG – 19 Feb 20</a>
+  </header>
+  <article class="onebox-body">
+    <img src="https://forum.mesg.com/uploads/default/original/1X/f441ecbae6471eb65a08e8ce08a707468f8081bc.jpeg" class="thumbnail" width="" height="">
+
+<h3><a href="https://blog.mesg.com/token-utility-in-the-mesg-economy/" target="_blank">Token Utility in the MESG Economy</a></h3>
+
+<p>Explore the utility of the MESG Token, how it is used in the builders' open economy, and what it can mean for you.</p>
+
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+</p>
+<h2>Glossary</h2>
+<p>I will start by explaining the different pieces that are needed to make the system works.</p>
+<h3>Node</h3>
+<p>A node is a computer that is running a specific software and that connects to other nodes running the same software to create a network.</p>
+<h3>Transaction</h3>
+<p>In a blockchain, transactions are created by users or software to ask the network to perform actions. Actions can be to transfer some token, to publish a service or to ask the network to execute an execution. A transaction requires to be cryptographically signed by a wallet that already has tokens to pay for gas fees (do not confuse transactions’ gas fees and execution’s fees). A transaction is considered as valid ONLY when it has been included in a valid block.</p>
+<h3>Block</h3>
+<p>A block is a list of transactions that have been validated by the creator(s) of the block.<br>
+In <a href="https://en.wikipedia.org/wiki/Proof_of_stake">POS</a> blockchains, blocks are created by a group of block producers. A block producer is a node that MUST verify every new transaction, agree with other block producers on which transactions will be part of the new block, and finally signed cryptographically the block. Then the block (containing the transactions) is sent to every node of the network so they can apply locally the actions contained in each transaction. That’s how each node of the network synchronizes with the rest of the network.<br>
+The network’s node will only accept block produced by block producers they already know. So the reliability and the stability of block producers are super important.</p>
+<h3>Execution</h3>
+<p>Executions are the centerpiece of the project. They are what “connect” the users, services, runners and bring the value to the project.<br>
+Executions are composed of 3 resources.</p>
+<h4>Execution’s request</h4>
+<p>An execution’s request is a transaction from a user that requests a specific runner to execute a specific service’s task with specific inputs, alongside a fee to pay the runner and the service developer.<br>
+Users can select manually the runner that will execute the execution or let the engine auto-select based on the runners’ stake and how much fee the runner wants and the user is willing to pay.</p>
+<h4>Execution’s result</h4>
+<p>Once the specified runner executes the execution, it submits the execution’s result by creating a new transaction containing the result and the hash of the execution’s request and submit it to the network.<br>
+The block producers can only check that the result respects the structure of data defined by the service. That’s why we need a third step to verify the execution’s result.</p>
+<h4>Execution’s verification</h4>
+<p>Once the execution’s result is submitted and integrated into a block, the real execution’s verification step can occur.<br>
+A group of runners that also run the same service is selected to verify if the result is valid.</p>
+<p>The verification process depends on the type of service and in some case is not possible.</p>
+<ul>
+<li>In the case of a deterministic task, like a mathematical problem, they do this by either re-executing the same execution and checking the result is the same</li>
+<li>In the case of an action against a public database, like a blockchain or twitter, they can check that the action happened</li>
+<li>In the case of an action to a private service or an API that cannot be verified, then the verification step is not happening and we refer to the task as <strong>trusted</strong> as users will have to trust the runner to do the work correctly.</li>
+</ul>
+<p><strong>A question to discuss:</strong> what name do you think is the best: validation/validator or verification/verifier? I like verification/verifier because it separates it from other existing validation (transaction validation, block validation, etc…) and also it seems to be less strong than validation and makes the user more aware of the importance of this step.</p>
+<h3>Service</h3>
+<p>A service is a software that communicates with the Engine to emit events when needed and to execute tasks when the network needs to.<br>
+The events and tasks of the service are defined in the service’s definition.<br>
+A service is published to the network by a developer by creating a bundle of the software and its definition. When the service is published, anyone can download it and run it on its node as a runner.<br>
+A service cannot be deleted from the network.</p>
+<h3>Runner</h3>
+<p>A runner is a node that downloads a service, runs it locally and registers itself to the network as a runner of this service. Runners will have to provide token as a stake when registering to prove their good willing and be slashed in case of malicious behavior.<br>
+The runner will process executions the network is asking it to do and get paid for it.<br>
+A runner can unregister itself from the network and get back the remaining of its stake.<br>
+A single node can have many runners at the same time. The only issue by running too many services at the same time is computation resources. If the node is overloaded, it will not be able to keep synchronizing the network and runs the services in good condition, so it will be slashed.</p>
+<h3>Process</h3>
+<p>A process is an application that defines which tasks to execute when a specific event occurs on behalf of a user. Processes are run by emitters across the network. Each process has a token balance that is used to pay to create executions. Users need to make sure their processes have enough balance if they want them to run correctly.</p>
+<h3>Emitter</h3>
+<p>Emitters are responsible for creating executions by following the rules from processes.<br>
+To reduce the charge of the network, each emitter is only running against its node’s runners. It means that runners of a specific service will also be an emitter of the same service. That’s why we group emitters inside runners.<br>
+Emitters pay the transaction’s fee (not the full execution fees) to create the execution request on behalf of the process and get reimbursed plus an incentive.</p>
+<hr>
+<p>I’m stopping here for today but I will continue with a very detailed explanation of the execution lifecycle.</p>
+          <p><a href="https://forum.mesg.com/t/mesg-economy/664/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/mesg-economy/664/1</link>
+        <pubDate>Sun, 23 Feb 2020 10:17:57 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-664-1</guid>
+        <source url="https://forum.mesg.com/t/mesg-economy/664.rss">MESG Economy</source>
+      </item>
+  </channel>
+</rss>

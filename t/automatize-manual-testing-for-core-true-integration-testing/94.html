@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <title>Automatize Manual Testing for Core (True Integration Testing) - Development - MESG Community</title>
+    <meta name="description" content="Problem
+When we do add a new feature or do a small/big refactoring in the core, we always required to do some manual testing. Otherwise it’s really easy to miss newly introduced bugs to the system. Existent unit or integ&amp;hellip;">
+    <meta name="generator" content="Discourse 2.5.0.beta5 - https://github.com/discourse/discourse version 00aab498297cba8f977c1e0eb17b7d38ff06cc68">
+<link rel="icon" type="image/png" href="../../uploads/default/optimized/1X/9f11b6ddfa02bffdbec79487592a0573a0236cb5_2_32x32.png">
+<link rel="apple-touch-icon" type="image/png" href="../../uploads/default/optimized/1X/53630361a40ad76e1733dd0b0f486e9ae2f4f4d6_2_180x180.png">
+<meta name="theme-color" content="#491e8c">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+<link rel="canonical" href="94.html" />
+<script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","url":"https://forum.mesg.com","potentialAction":{"@type":"SearchAction","target":"https://forum.mesg.com/search?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
+<link rel="search" type="application/opensearchdescription+xml" href="../../opensearch.xml" title="MESG Community Search">
+
+      <link href="../../stylesheets/desktop_3_52e3411e87658e862890db7bd06899cf49ad5f59.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop" data-theme-id="7"/>
+      <link href="../../stylesheets/desktop_theme_7_bf4f2d3d8a71e6ee907065be9a79df3d849bd29c.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop_theme" data-theme-id="7"/>
+    
+    <meta id="data-ga-universal-analytics" data-tracking-code="UA-117583862-1" data-json="{&quot;cookieDomain&quot;:&quot;auto&quot;}" data-auto-link-domains="">
+
+<link rel="preload" href="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js" as="script">
+<script src="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js"></script>
+
+
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of &#39;Automatize Manual Testing for Core (True Integration Testing)&#39;" href="94.rss" />
+    <meta property="og:site_name" content="MESG Community" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:url" content="https://forum.mesg.com/t/automatize-manual-testing-for-core-true-integration-testing/94" />
+<meta name="twitter:url" content="https://forum.mesg.com/t/automatize-manual-testing-for-core-true-integration-testing/94" />
+<meta property="og:title" content="Automatize Manual Testing for Core (True Integration Testing)" />
+<meta name="twitter:title" content="Automatize Manual Testing for Core (True Integration Testing)" />
+<meta property="og:description" content="Problem When we do add a new feature or do a small/big refactoring in the core, we always required to do some manual testing. Otherwise it’s really easy to miss newly introduced bugs to the system. Existent unit or integration tests may not powerful enough to help us to catch these bugs. We need to integration test core from outside of the core to be aware of these kind of bugs which is what we do with manual testing by spinning up dev-core and using dev-cli to cross test the behaviours of these..." />
+<meta name="twitter:description" content="Problem When we do add a new feature or do a small/big refactoring in the core, we always required to do some manual testing. Otherwise it’s really easy to miss newly introduced bugs to the system. Existent unit or integration tests may not powerful enough to help us to catch these bugs. We need to integration test core from outside of the core to be aware of these kind of bugs which is what we do with manual testing by spinning up dev-core and using dev-cli to cross test the behaviours of these..." />
+<meta name="twitter:label1" value="Reading time" />
+<meta name="twitter:data1" value="2 mins 🕑" />
+<meta name="twitter:label2" value="Likes" />
+<meta name="twitter:data2" value="1 ❤" />
+<meta property="article:published_time" content="2018-10-15T15:40:39+00:00" />
+<meta property="og:ignore_canonical" content="true" />
+
+
+
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"QAPage","name":"Automatize Manual Testing for Core (True Integration Testing)","mainEntity":{"@type":"Question","name":"Automatize Manual Testing for Core (True Integration Testing)","text":"Problem\n\nWhen we do add a new feature or do a small/big refactoring in the core, we always required to do some manual testing. Otherwise it’s really easy to miss newly introduced bugs to the system. Existent unit or integration tests may not powerful enough to help us to catch these bugs. We need to &hellip;","upvoteCount":0,"answerCount":1,"dateCreated":"2018-10-15T15:40:39.455Z","author":{"@type":"Person","name":"İlker"},"acceptedAnswer":{"@type":"Answer","text":"We now have true e2e tests <a href="https://forum.mesg.com/t/automatize-manual-testing-for-core-true-integration-testing/\&quot;https://github.com/mesg-foundation/engine/tree/dev/e2e\&quot;">https://github.com/mesg-foundation/engine/tree/dev/e2e<\/a>","upvoteCount":0,"dateCreated":"2019-12-26T02:55:34.301Z","url":"https://forum.mesg.com/t/automatize-manual-testing-for-core-true-integration-testing/94/7","author":{"@type":"Person","name":"Anthony"}}}}</script>
+  </head>
+  <body class="crawler">
+    
+    <header>
+      <a href="../../index.html">
+          <img src="../../uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png" alt="MESG Community" id="site-logo" style="max-width: 150px;">
+      </a>
+    </header>
+    <div id="main-outlet" class="wrap">
+        <div id="topic-title">
+    <h1>
+      <a href="94.html">Automatize Manual Testing for Core (True Integration Testing)</a>
+    </h1>
+
+      <div class="topic-category" itemscope itemtype="http://schema.org/BreadcrumbList">
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../c/development.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #AB9364'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Development</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="1" />
+          </span>
+      </div>
+
+      <div class="topic-category">
+        <div class='discourse-tags list-tags'>
+            <a href='../../tag/proposal.html' class='discourse-tag' rel="tag">proposal</a>
+        </div>
+      </div>
+  </div>
+
+  
+
+
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="94.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-10-15T15:40:39Z'>
+              <time itemprop='dateModified' datetime='2018-10-17T06:19:18Z' class='post-time'>
+                October 17, 2018,  6:19am
+              </time>
+          <span itemprop='position'>#1</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <h1>Problem</h1>
+<p>When we do add a new feature or do a small/big refactoring in the core, we always required to do some manual testing. Otherwise it’s really easy to miss newly introduced bugs to the system. Existent unit or integration tests may not powerful enough to help us to catch these bugs. We need to integration test core from outside of the core to be aware of these kind of bugs which is what we do with manual testing by spinning up <em>dev-core</em> and using <em>dev-cli</em> to cross test the behaviours of these two and see if they act as expected.</p>
+<h2>Bad Adoptions</h2>
+<p>Currently, we have some integration tests that are actually <strong>not integration tests</strong>. They seem like they are but not fully. They don’t test the actual integration behaviour. The integration tests we have are running inside the core itself and they don’t directly interact with core through the <em>gRPC</em> server.</p>
+<p>Lets bring up a sample to examine:</p>
+<p><a href="https://github.com/mesg-foundation/core/blob/60f36ed33c1b85b7c21b9a53251e7172ad71ec54/interface/grpc/core/execute_test.go#L13-L36">TestExecute</a> is not a real integration test. Yes, the testing service is really started but it’s tasks never get executed. The actual reason of why the service is started here  is because there is a <em>RUNNING</em> status check on services and to not get failed by this, services must be exists on Docker.</p>
+<p>We’re only able to test a small portion of task execution process in this test by checking the generated <em>execution id</em>.</p>
+<p>Like within this example, all the other integration tests that starts services doesn’t really carry about them. And they can’t too because services are not able to connect to gRPC server to get task execution requests, get events and submit task results because our tests doesn’t run in a container and not in the same network with the containers that are running the services. Also for the same limitation, we don’t have any tests that requires listening results and listening events in <em>grpc/core</em> pkg.</p>
+<p><strong>Side note</strong>:<br>
+Other than previous example, the rest of the integration tests inside core are testing very simple cases like <a href="https://github.com/mesg-foundation/core/blob/dev/service/stop_integration_test.go#L12-L27">this one</a> does. Which they are not needed as integration tests because we only need to test the application logic. So unit tests are enough for testing all the internal packages except <em>container</em>.</p>
+<h2>Correct Way of Creating Integration Tests</h2>
+<p>I first thought creating integration tests by using yaml files for simplicity where we can have table tests for testing various scenarios. But using yaml files for testing can quickly get out of control and limit us because we might need to deploy and start a few services in a row and assert some service ids, input/output datas by executing tasks and so on. To accomplish these kind of stuff with yaml test files, we need to introduce comparison and variable primitives which is too much work and another thing that requires us to maintain. So, this is a no.</p>
+<p>We can use Go for integration testing and have a flexibility of a programming language. Still, it’s always better to have table tests as much us possible to not duplicate logic between similar tests and test lots of scenarios at once.</p>
+<p>We can place our integration test under a package called <em>integration</em>, inside core’s root. And we can have <em>integration/grpc</em> &amp; <em>integration/cli</em> subfolders for testing gRPC API and CLI separetely.</p>
+<p>Please see <a href="https://github.com/mesg-foundation/core/tree/feature/integration">feature/integration</a> branch to get insights from the first implementation of new integration tests. I think this is a good start, we can add more tests by time. Note that integration tests are living under the <em>integration</em> folder and they should be run by <em>./run-integration</em>. Also, it’s not required to have integration tests under the core repo because it only interacts with core through network and uses cli binary to test cli.</p>
+<p><strong>Side notes</strong>:</p>
+<ul>
+<li>We should be adding tests for each cli command including the ones about daemon.</li>
+<li>We don’t need to add tests for <strong>service gRPC API</strong> directly because we use real services and they use this API to interact with core. This way we also test if core is starting services correctly inside containers and giving the right service id as env variable to service’s containers. So having integration tests for <strong>core gRPC API</strong> is enough.</li>
+</ul>
+<h2>Proposal</h2>
+<ul>
+<li>
+<p>Lets get rid of all the integration tests inside the internal packages and create equivalent ones inside new <em>integration</em> folder.</p>
+</li>
+<li>
+<p>Lets have the integration tests in the most higher <em>(gRPC server, cli)</em> level and this way we’ll also eliminate doing manual tests after each change on core. Also inc integration tests coverage by adding more tests by time.</p>
+</li>
+<li>
+<p>Lets only keep the integration tests we currently have for container pkg and do unit testing for the rest of the core as suggested before. By having dedicated integration tests for container, we can easily keep track of bugs in container pkg in the low level, otherwise debugging bugs caught from the higher level integration tests can get time consuming.</p>
+</li>
+</ul>
+<h2>Links</h2>
+<ul>
+<li>related topic: <a href="../merge-logic-of-unit-and-integration-test/85.html">Merge logic of unit and integration test</a>
+</li>
+<li>see docker/docker example for integration testing. see the <em>integration</em> and <em>integration-cli</em> packages: <a href="https://github.com/moby/moby/">https://github.com/moby/moby/</a>
+</li>
+</ul>
+        </div>
+
+        <meta itemprop='headline' content='Automatize Manual Testing for Core (True Integration Testing)'>
+          <meta itemprop='keywords' content='proposal'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/krhubert.html'><span itemprop='name'>krhubert</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="94.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-10-16T13:56:50Z' class='post-time'>
+                October 16, 2018,  1:56pm
+              </time>
+              <meta itemprop='dateModified' content='2018-10-16T13:56:50Z'>
+          <span itemprop='position'>#3</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>About the tests.</p>
+<p>We should more focus on writing good unit test and refactor existing code, then create more integration tests which are slow (which will lead to refactoring tests because slow tests are bad).</p>
+<p>We can save a lot of time by refactoring the code rather than writing a ton of integration tests.</p>
+<p>Moreover, the project is in the early stage to come up with such a solution as it adds more complexity to the project. It may happen (sooner than later) then we will need it, but for now let’s focus on features. Having more features will help us understand the nature of the tests we will need.</p>
+<p>The code you pushed to GitHub (cli tests) seem to me like e2e tests (rather than integration). Also testing cli output could be done in <code>commands</code> package with unit tests.</p>
+<p>So to sum up - you took an effort and prepared this proposal which is great, but first, we need to focus on simplifying what we have and then the time will come for more integration tests.</p>
+        </div>
+
+        <meta itemprop='headline' content='Automatize Manual Testing for Core (True Integration Testing)'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="1" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="94.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-10-16T14:28:57Z'>
+              <time itemprop='dateModified' datetime='2018-10-17T14:39:17Z' class='post-time'>
+                October 17, 2018,  2:39pm
+              </time>
+          <span itemprop='position'>#4</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Thank you for the feedbacks! <a class="mention" href="../../u/krhubert.html">@krhubert</a></p>
+<p>Tests are not features that we need to discuss about having them or not, they are a requirement. They are not the goals but the tools that helps us to get more closer to our actual goals. And having them shouldn’t be delayed otherwise it’s a technical depth.  Having these tests also helps us for skipping manual tests that we do after each change we make in core. Manual testing and having uncaught bugs are more expensive than spending time while creating tests.</p>
+<p>Unit tests are in the bottom of testing pyramid, all testing methodologies has their own advantages. Non of them is a great solution alone but having all of them actually solves the testing problem of a product. For the same reason we cannot only have unit tests for <em>commands</em> package, it is not enough by itself. We have to test the binary to see everything works well together and make sure we cover everything that might be skipped by unit tests.</p>
+<p>I don’t understand why do you think that having these integration tests complicates things. I thought they help us to skip manual testing part and we can make sure that our product (gRPC API, cli) works as expected in the end users’ perspective.</p>
+<p>I also understand this part: <code>We can save a lot of time by refactoring the code rather than writing a ton of integration tests.</code> What is the link between having tests and refactoring core? They’re totally different subjects.</p>
+<p>Also these kind of integration tests are not something that will be updated very often because they’re in the top of testing pyramid and doesn’t test the implementation details that changes a lot. It applies in the most higher level, in other means we mostly only need to update these tests when we have breaking changes.</p>
+        </div>
+
+        <meta itemprop='headline' content='Automatize Manual Testing for Core (True Integration Testing)'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="94.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-10-31T11:18:50Z' class='post-time'>
+                October 31, 2018, 11:18am
+              </time>
+              <meta itemprop='dateModified' content='2018-10-31T11:18:50Z'>
+          <span itemprop='position'>#6</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p><a class="mention-group" href="../../groups/core.html">@core</a> team this discussion needs further feedbacks.</p>
+        </div>
+
+        <meta itemprop='headline' content='Automatize Manual Testing for Core (True Integration Testing)'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Anthony.html'><span itemprop='name'>Anthony</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="94.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2019-12-26T02:55:34Z'>
+              <time itemprop='dateModified' datetime='2019-12-26T02:55:36Z' class='post-time'>
+                December 26, 2019,  2:55am
+              </time>
+          <span itemprop='position'>#7</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>We now have true e2e tests <a href="https://github.com/mesg-foundation/engine/tree/dev/e2e">https://github.com/mesg-foundation/engine/tree/dev/e2e</a></p>
+        </div>
+
+        <meta itemprop='headline' content='Automatize Manual Testing for Core (True Integration Testing)'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+
+
+
+
+
+
+    </div>
+    <footer class="container wrap">
+      <nav class='crawler-nav'>
+        <ul>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../index.html' itemprop="url">Home </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../categories.html' itemprop="url">Categories </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../guidelines.html' itemprop="url">FAQ/Guidelines </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../tos.html' itemprop="url">Terms of Service </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../privacy.html' itemprop="url">Privacy Policy </a>
+          </span>
+        </li>
+        </ul>
+      </nav>
+      <p class='powered-by-link'>Powered by <a href="https://www.discourse.org">Discourse</a>, best viewed with JavaScript enabled</p>
+    </footer>
+    
+    
+  </body>
+  
+</html>

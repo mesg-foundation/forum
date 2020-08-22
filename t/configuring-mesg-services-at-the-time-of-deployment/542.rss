@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Configuring MESG services at the time of deployment</title>
+    <link>https://forum.mesg.com/t/configuring-mesg-services-at-the-time-of-deployment/542</link>
+    <description>&lt;p&gt;&lt;em&gt;&lt;em&gt;With the &lt;/em&gt;&lt;/em&gt;&lt;a href=&quot;https://forum.mesg.com/t/mesg-core-v0-6-release-notes/166&quot;&gt;&lt;em&gt;&lt;em&gt;v0.6&lt;/em&gt;&lt;/em&gt;&lt;/a&gt;&lt;em&gt;&lt;em&gt; release, it’s now possible to dynamically configure services at the time of deployment. You can check out the new releases on &lt;/em&gt;&lt;/em&gt;&lt;a href=&quot;https://github.com/mesg-foundation/core/releases&quot;&gt;&lt;em&gt;E&lt;/em&gt;&lt;/a&gt;&lt;em&gt;ngine&lt;/em&gt;&lt;a href=&quot;https://github.com/mesg-foundation/core/releases&quot;&gt;&lt;em&gt;&lt;em&gt;’s Github page&lt;/em&gt;&lt;/em&gt;&lt;/a&gt;&lt;em&gt;&lt;em&gt;.&lt;/em&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;small&gt;This is a companion discussion topic for the original entry at &lt;a href=&quot;https://blog.mesg.com/configuring-mesg-services-at-the-time-of-deployment/&quot;&gt;https://blog.mesg.com/configuring-mesg-services-at-the-time-of-deployment/&lt;/a&gt;&lt;/small&gt;</description>
+    
+    <lastBuildDate>Thu, 12 Dec 2019 11:41:28 +0000</lastBuildDate>
+    <category>Blog discussions</category>
+    <atom:link href="https://forum.mesg.com/t/configuring-mesg-services-at-the-time-of-deployment/542.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Configuring MESG services at the time of deployment</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p><em><em>With the </em></em><a href="https://forum.mesg.com/t/mesg-core-v0-6-release-notes/166"><em><em>v0.6</em></em></a><em><em> release, it’s now possible to dynamically configure services at the time of deployment. You can check out the new releases on </em></em><a href="https://github.com/mesg-foundation/core/releases"><em>E</em></a><em>ngine</em><a href="https://github.com/mesg-foundation/core/releases"><em><em>’s Github page</em></em></a><em><em>.</em></em></p>
+<hr>
+<small>This is a companion discussion topic for the original entry at <a href="https://blog.mesg.com/configuring-mesg-services-at-the-time-of-deployment/">https://blog.mesg.com/configuring-mesg-services-at-the-time-of-deployment/</a></small>
+          <p><a href="https://forum.mesg.com/t/configuring-mesg-services-at-the-time-of-deployment/542/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/configuring-mesg-services-at-the-time-of-deployment/542/1</link>
+        <pubDate>Thu, 12 Dec 2019 11:41:28 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-542-1</guid>
+        <source url="https://forum.mesg.com/t/configuring-mesg-services-at-the-time-of-deployment/542.rss">Configuring MESG services at the time of deployment</source>
+      </item>
+  </channel>
+</rss>

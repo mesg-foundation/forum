@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>The Import Cycle Between API &amp; SystemServices Packages</title>
+    <link>https://forum.mesg.com/t/the-import-cycle-between-api-systemservices-packages/105</link>
+    <description>As we experimented, we have this incoming import cycle issue* between _api_ and _systemservices_, _systemservices/*_ packages. We currently use methods from api package inside system services and because of this, we&#39;re not allowed to call methods of systemservices inside api pkg.
+
+I&#39;m not sure if this is an actual issue? It shows us that either we have a design issue or we don&#39;t have a design issue and calling system services inside api pkg is not right anyway.
+
+As I&#39;m experimenting, I think that this is not an issue and we shouldn&#39;t call methods of system services packages inside api package **at this point**.
+
+**Here is the reason why:**
+The idea behind of having api pkg is to have a single point of entry for accessing functionalities that core provides by combining low level internal packages. So it&#39;s the api package that where we should interact with core, not the other internal packages. The api package is meant to be a wrapper for functionalities of core with a high level api.
+
+To me, having the systemservices manager and its siblings _(systemservices/*)_ shares the same idea with the existence of api package. We should treat systemservices like how we treat api package. _systemservices/*_ packages are the wrappers around system services, like the api package being wrapper for internal pkgs of core. Remember when we talk about splitting parts of api pkg into smallar pkgs under _api/*_? It is the similar idea of having _systemservices/*_. So _api_ pkg and system services pkgs are in the same level.
+
+The idea of having system services is splitting core to smaller services in the first place. And this causes the same effect on api package. We required to move some methods of api package to different system services. Of course, splitting the whole core/api package into smaller system services may not be possible because at least for now we required keeping some logic like deploying services inside the core itself. 
+
+**I&#39;d like to give an example over _Workflow System Service_:**
+Let&#39;s say that we&#39;re not going to implement this workflow feature as a separate service but embed it in the core. In this case we were probably create an internal package called _core/workflow_, have some implementation there and expose this functionality with _core/api_ package. This way _intergace/grpc/core_ pkg can call methods like _CreateWorkflow()_ from api package and expose this feature to network.
+
+As a system service point of view, first, we&#39;re going to have a mesg service as equlivent of _core/workflow_. Second, we&#39;re going to have a high level wrapper for it under _systemservice/workflow_ and this is the equlivent of code that we put under _core/api_ for workflow. In this case, as third and last,  _intergace/grpc/core_ pkg will call the _CreateWorkflow()_ method from _systemservice/workflow_.
+
+Please note that it&#39;s totally ok for system services pkgs calling methods from _core/api_ because it&#39;s the native part of core that we do service deploying and listening tasks etc. So calling api pkg inside _systemservices_ is a valid approach. In future, if we can make it possible splitting all the parts from api package to different services then we can directly use the api package as a place where we connect all the system services together and expose them as high level features of core like we do today. But since we&#39;re not able to do it in once, I think, it&#39;s acceptable for now to have this two headed dragon. :)
+
+As a proposition, I think we can rename the _api_ package to something called like _native_ and create a new _api_ package to call methods from _native_ and _systemservices_. System services pkgs will call the methods from _native_ pkg anymore, not the api. By time, we&#39;ll move all the logic from _native_ pkg as system services and _native_ pkg will get deleted.
+
+This is just a perspective that we can think about it. Let&#39;s have a starting point from here to discuss and see how system services and core will evolve together.</description>
+    
+    <lastBuildDate>Thu, 01 Nov 2018 05:46:26 +0000</lastBuildDate>
+    <category>Development</category>
+    <atom:link href="https://forum.mesg.com/t/the-import-cycle-between-api-systemservices-packages/105.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>The Import Cycle Between API &amp; SystemServices Packages</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>Service composition is something really different. In that context, I agree that service dependency rules may differ.</p>
+<p>For the <em>core/api</em> pkg part, I think you’re in favor about composing system services inside the <em>core/api</em> pkg instead of doing this in the <em>intergace/grpc</em> pkg. That’s also ok to me. The original idea in the first post to rename the current <em>core/api</em> pkg as <em>core/api/native</em> and put any api that generated from system service’s composition under <em>core/api</em>. <a class="mention" href="/u/nicolas">@Nicolas</a> I’m not sure what do you think about that.</p>
+<p>Even with mapping, system services and <em>core/api</em> still are depending on each other but indirectly. I think this is a design issue. I’d rather to have the <em>native</em> pkg proposed in the first post to overcome this.</p>
+<p>Anyways, I’ll not push anymore on this. As a reminder, if you prefer to keep the current version of <em>core/api</em> pkg as it is and have all the system services composed there, there are other ways of solving this import cycle problem without going low level in syntax with mapping. We can still maintain the original high level syntax in the first proposal. One way of doing is to have an interface like below that each system service’s wrapper can accept it in their <em>New()</em> func:</p>
+<pre><code class="lang-auto">
+type Executor interface {
+   ExecuteAndListen(serviceID, task string, inputs map[string]interface{}) (*execution.Execution, error)
+}
+
+</code></pre>
+<p>I don’t like much this solution either, it’s just another hack but here it is.</p>
+<p>I think nobody likes having both <em>core/api/native</em> and <em>core/api</em> pkgs to solve import cycle problem except me so, I’m eliminating this idea. To finalize the discussion about having high/low level apis in the wrappers I’m putting a poll below so, we can proceed much master on open PRs.</p>
+<div class="poll" data-poll-status="open" data-poll-type="regular" data-poll-name="poll">
+<div>
+<div class="poll-container">
+<ul>
+<li data-poll-option-id="57fa11c610d877d40d73587bcb389926">Use mapping and have low level api in system service’s wrappers.</li>
+<li data-poll-option-id="bb3cf8b06b4d9b30efc39a4b0f29d146">Adopt another method, maybe interfaces <em>(Executor)</em> to be able to use methods of <em>core/api</em> still in the wrappers to provide a high level api without the import cycle problem.</li>
+</ul>
+</div>
+<div class="poll-info">
+<p>
+<span class="info-number">0</span>
+<span class="info-label">voters</span>
+</p>
+</div>
+</div>
+</div>
+          <p><a href="https://forum.mesg.com/t/the-import-cycle-between-api-systemservices-packages/105/10">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/the-import-cycle-between-api-systemservices-packages/105/10</link>
+        <pubDate>Thu, 01 Nov 2018 05:46:26 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-105-10</guid>
+        <source url="https://forum.mesg.com/t/the-import-cycle-between-api-systemservices-packages/105.rss">The Import Cycle Between API &amp; SystemServices Packages</source>
+      </item>
+      <item>
+        <title>The Import Cycle Between API &amp; SystemServices Packages</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>I also like the mapping of parameter proposed by <a class="mention" href="/u/krhubert">@krhubert</a>.</p>
+<p>One system service must <strong>not</strong> depend on another system service by its implementation <strong>in core</strong>. Eg <a class="mention" href="/u/ilgooz">@ilgooz</a>’s <a href="https://github.com/mesg-foundation/core/blob/9af696a/systemservices/workflow/workflow.go#L74">example</a></p>
+<p>If a system service needs to delegate to another system service (or any service), it should be done by the future <a href="https://forum.mesg.com/t/service-composition/22">service composition</a>.</p>
+<p>API package should delegate to system service a maximum of logic (not go package in the core, but the actual service itself).<br>
+But if API needs to <strong>always</strong> execute something from service A and then from service B, it’s also fine. But again, the Core’s implementation (in core’s go package) of a system service should not depend on another system service.</p>
+<p><a class="mention" href="/u/ilgooz">@ilgooz</a> you implementation is not wrong but not in accordance with the vision of the Core. We need to explain more so you guys can implement stuff faster <img src="https://forum.mesg.com/images/emoji/twitter/wink.png?v=6" title=":wink:" class="emoji" alt=":wink:"></p>
+          <p><a href="https://forum.mesg.com/t/the-import-cycle-between-api-systemservices-packages/105/9">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/the-import-cycle-between-api-systemservices-packages/105/9</link>
+        <pubDate>Wed, 31 Oct 2018 21:43:11 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-105-9</guid>
+        <source url="https://forum.mesg.com/t/the-import-cycle-between-api-systemservices-packages/105.rss">The Import Cycle Between API &amp; SystemServices Packages</source>
+      </item>
+      <item>
+        <title>The Import Cycle Between API &amp; SystemServices Packages</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>I don’t agree on using <em>systemservices</em> pkg just as a mapper for <em>core/api</em> pkg. To me, systemservices should provide a high level api like an application instead of tightly coupling with the <em>core/api</em> package. It should be a logicfull package for interacting with system services. To me, turning systemservices to a logicless mapper is just a workaround in favor of <em>core/api</em> pkg, not a solution. It’s hard to use it that way and it’s low level, doesn’t reflect the idea in the first system services proposal. We can have 10s of different ways of solving import cycle problem but doing it this way kills the philosophy of how we should compose system services together in core.</p>
+<p>The idea of having system services is to remove all the logic inside <em>core</em> as much as possible and split it to separate system services. In future, we want to use <em>core</em> only as a proxy for system services, as a place where they are all composed together. Like a mesg application that composes mesg services.</p>
+<p><em>core/api</em> pkg actually is just going to be an another system service by its own when we extract it from core. Even if we can’t completely remove it from core because of the possible complexity, it should be treated as one. At first, the purpose of having <em>core/api</em> pkg was to compose all the features of core in a single pkg with a high level api. But since we’re adopting system services now, <em>core/api</em> doesn’t need to wrap all the features. It has to have the <strong>most basic</strong> parts about services, other features should be splitted to different system services, like network, workflow and etc.</p>
+<p>I think all system services should have access <em>(able to import)</em> to <em>core/api</em> pkg because, it provides the <strong>most basic</strong> features for services but not vice versa. And if a system service wants use an another system service to complete it’s tasks, it shouldn’t call that system service inside itself. That can be handled in the parent caller. This is the way how we should compose system services. The only case where a system service can directly access to another one is, the case when a dependent system service provides some low level functionalities like <em>core/api</em> pkg does. In this case, <em>core/api</em> pkg doesn’t even need to make calls to other system services. Because it shouldn’t be aware of them, it’s just a dependency. I’ve explained the similar thing in the first post as well. If we need to call <em>systemservices</em> inside <em>core/api</em> pkg, this would lead to a bad design.</p>
+<p>Here is an another explanation about why we actually don’t need to call <em>(import)</em> system services inside <em>core/api</em>:</p>
+<p>See <a href="https://github.com/mesg-foundation/core/blob/feature/wss-vm/interface/grpc/core/create_workflow.go#L9-L16">CreateWorkflow</a> gRPC API. Normally all the gRPC APIs calls methods from <em>core/api</em>. But in this case, creating a workflow is made by a dedicated system service. So the only thing we need to do is calling the <em>Create</em> method from the workflow system service and it’s done. So actually, we don’t only need to use <em>core/api</em> as a high level api bus anymore, we split the logic to different services and we call their wrappers to have a high level api for using them. If we required to call multiple system system services to complete a task, we can do it as well. But as I explained above, we should do it in the parent caller, in this case a gRPC handler. We should compose the data we got from different services and response it to user. We can even flow data from different system services, compose it and response to user. And as I explained before, some system services need to be able to call other system services -like calling <em>core/api</em>- to use them like dependencies, like go packages but as a service. The system services being used as a dependency, shouldn’t be aware of caller system services. This would lead to a bad design and it’s cycling.</p>
+<p>My question is, what is the actual reason of calling <em>systemservices</em> inside <em>core/api</em> package? Can you provide a real world example? We can directly use system services apis from gRPC handlers like we do for <em>CreateWorkflow</em>.</p>
+<p>And if we adopt that method we required to do mapping for other apis that <em>core/api</em> provides. Like the one used <a href="https://github.com/mesg-foundation/core/blob/9af696a/systemservices/workflow/workflow.go#L74">here</a> by workflow system service. Which is not elegant to do.</p>
+<p>The import cycle problem shows us that we shouldn’t call system services from <em>core/api</em> pkg at all, because it’s not needed and not proper. Think <em>core/api</em> package as a monolithic system service where we expose the <strong>most basic</strong> functionalities like deploying, starting services and listening events, result and executing tasks. <em>core/api</em> pkg doesn’t need to call other system services, only the rest of the system services wants to call <em>core/api</em> to communicate with other system services. So actually, there is no an import cycle problem. This is just how the design it is. In future, we’re going to split api package to it’s own system services, or to a one system service or keep it in the core as the native functionality. But the rest of the system services will depend on it.</p>
+<p>My intention while starting this discussion was to show that to you guys. If this doesn’t make sense, I’ll be fine going with mapper idea but I don’t think it is the right way to go. If I’m missing something please lighten me. I’m giving this advices because I heavily worked on this feature and already implemented an actual system service.</p>
+          <p><a href="https://forum.mesg.com/t/the-import-cycle-between-api-systemservices-packages/105/8">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/the-import-cycle-between-api-systemservices-packages/105/8</link>
+        <pubDate>Sun, 28 Oct 2018 17:06:15 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-105-8</guid>
+        <source url="https://forum.mesg.com/t/the-import-cycle-between-api-systemservices-packages/105.rss">The Import Cycle Between API &amp; SystemServices Packages</source>
+      </item>
+      <item>
+        <title>The Import Cycle Between API &amp; SystemServices Packages</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>I like the idea of mapping just the parameters. I think this should solve the issue. Would like to have more feedbacks but this looks like the solution to go with.</p>
+          <p><a href="https://forum.mesg.com/t/the-import-cycle-between-api-systemservices-packages/105/7">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/the-import-cycle-between-api-systemservices-packages/105/7</link>
+        <pubDate>Thu, 25 Oct 2018 18:10:36 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-105-7</guid>
+        <source url="https://forum.mesg.com/t/the-import-cycle-between-api-systemservices-packages/105.rss">The Import Cycle Between API &amp; SystemServices Packages</source>
+      </item>
+      <item>
+        <title>The Import Cycle Between API &amp; SystemServices Packages</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="5" data-topic="105">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/anthony/40/7_1.png" class="avatar"> Anthony:</div>
+<blockquote>
+<ul>
+<li>Deploy the services</li>
+<li>Start the services</li>
+<li>Give the api to the different systemservices instances</li>
+</ul>
+</blockquote>
+</aside>
+<p>As you said, deployer is easy<br>
+Start - <a href="https://github.com/mesg-foundation/core/blob/dev/api/start.go">https://github.com/mesg-foundation/core/blob/dev/api/start.go</a> - it’s super easy to remove as well<br>
+About systemservices instances, I’ve already talked about it - “we can remove API package from resolver and keep it only for data mapping”</p>
+<aside class="quote group-team" data-post="5" data-topic="105">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/anthony/40/7_1.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>For the deployment AND starting of the services we can extract this to the <code>core/main</code> itself and the systemservices doesn’t have the responsibility anymore to “create” these system services. It is just a map/list of systemservices with their instances.</p>
+</blockquote>
+</aside>
+<p>In that case, it’s just slice of services and we don’t need a package for it (append should be enough :))<br>
+I don’t like the idea of moving it to the main package, because main func should be as small as possible.</p>
+<p>So</p>
+<pre><code class="lang-auto">ss, err := systemservices.Init(config.SystemServicesPath) // deploy &amp; start services
+r := ss.Resolver() // get resolve instance for data mapping (could be skipped if someone want to
+resp, err := api.ExecuteAndListen(r.AddPeersInput([]string{"8.8.8.8"})) // execute api call anywhere
+err := r.AddPeersOutput(resp) // map output data 
+
+// same as above but for Resolver
+resp, err := api.ExecuteAndListen(r.ResolveInput("serviceID...."))
+peerAddress, err := r.ReesolveOutput(resp)
+</code></pre>
+          <p><a href="https://forum.mesg.com/t/the-import-cycle-between-api-systemservices-packages/105/6">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/the-import-cycle-between-api-systemservices-packages/105/6</link>
+        <pubDate>Tue, 23 Oct 2018 06:33:02 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-105-6</guid>
+        <source url="https://forum.mesg.com/t/the-import-cycle-between-api-systemservices-packages/105.rss">The Import Cycle Between API &amp; SystemServices Packages</source>
+      </item>
+      <item>
+        <title>The Import Cycle Between API &amp; SystemServices Packages</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>I like the idea of removing the <code>api</code> from the <code>systemservices</code> package. If we want to do that there is more than the the deployer to change because we use the api for 3 things</p>
+<ul>
+<li>Deploy the services</li>
+<li>Start the services</li>
+<li>Give the api to the different systemservices instances</li>
+</ul>
+<p>The deployer is “easy” to fix but what about the start and the <code>listen</code> and <code>execute</code> that the services will do ?</p>
+<p>The approach of another layer of abstraction seems something doable but I can’t really understand the part with the workflow and if it’s hard to understand already it’s not really a good sign for clarity of the code <img src="https://forum.mesg.com/images/emoji/twitter/stuck_out_tongue.png?v=6" title=":stuck_out_tongue:" class="emoji" alt=":stuck_out_tongue:"><br>
+The part to have the <code>low level</code> api (I prefer over native) and <code>high level</code> api where the high level api will call the low level api AND the system services if needed and the system services will use only the low level api.<br>
+This might work but I think we will face the same problem. Let’s imagine that one systemservice wants to execute something that is done by another systemservice, then we have the same problem eg: calling a task through the network with the resolver.</p>
+<p>I will put one more idea.</p>
+<p>The idea is to totally remove the api from systemservices<br>
+For the deployment AND starting of the services we can extract this to the <code>core/main</code> itself and the systemservices doesn’t have the responsibility anymore to “create” these system services. It is just a map/list of systemservices with their instances.</p>
+<p>For the different system services instances (that needs the api to listen and execute tasks) we can try to use the low level packages that we already have and bypass the api for that. We will loose some checks from the api but these are more verifications for user’s mistakes so it might be ok inside the core to bypass this.</p>
+<ul>
+<li>tasks execution is handled by the <code>execution</code> package</li>
+<li>event/result listening is handled by the <code>pubsub</code> package</li>
+</ul>
+<p>With this we don’t use the <code>api</code> package anymore inside systemservices.</p>
+<p>What do you think about that guys? Is there some stuff I’m missing?</p>
+          <p><a href="https://forum.mesg.com/t/the-import-cycle-between-api-systemservices-packages/105/5">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/the-import-cycle-between-api-systemservices-packages/105/5</link>
+        <pubDate>Tue, 23 Oct 2018 04:50:20 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-105-5</guid>
+        <source url="https://forum.mesg.com/t/the-import-cycle-between-api-systemservices-packages/105.rss">The Import Cycle Between API &amp; SystemServices Packages</source>
+      </item>
+      <item>
+        <title>The Import Cycle Between API &amp; SystemServices Packages</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <p>It’s not workarounds, it is the solution.</p>
+<p>In that case, you will have</p>
+<p>API - which uses the deployer<br>
+system services - which uses the deployer</p>
+<p>and in that system services will be something to manage services (not to manage tasks on services). I wanted to split them from the beginning, but as for now, system services use API pbm as we have right now, occurred. With the usage of deployer, you don’t need to change anything in API and split them into two.</p>
+<p>And you propose to create abstract API on API, how many layers API of should be there? I think one API is enough and I have never seen API on API. It involves matters like open multiple sockets for listing for two APIs.</p>
+<p>Also if <code>native</code> package shouldn’t be exposed via port then it just a package with general purpose which doesn’t tell anything about its responsibility.</p>
+          <p><a href="https://forum.mesg.com/t/the-import-cycle-between-api-systemservices-packages/105/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/the-import-cycle-between-api-systemservices-packages/105/4</link>
+        <pubDate>Mon, 22 Oct 2018 15:28:48 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-105-4</guid>
+        <source url="https://forum.mesg.com/t/the-import-cycle-between-api-systemservices-packages/105.rss">The Import Cycle Between API &amp; SystemServices Packages</source>
+      </item>
+      <item>
+        <title>The Import Cycle Between API &amp; SystemServices Packages</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>Yes, yours is a really simple solution. But I’m actually not directly aiming to solve that problem. I’m more talking about in the architectural side about the direction of core and system services.</p>
+<p>We must have a solid philosophy between the composition of core, splitting core to system services and the area where we do this transition by time. Otherwise we can even more complicate stuff by doing small workarounds.</p>
+          <p><a href="https://forum.mesg.com/t/the-import-cycle-between-api-systemservices-packages/105/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/the-import-cycle-between-api-systemservices-packages/105/3</link>
+        <pubDate>Mon, 22 Oct 2018 15:17:06 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-105-3</guid>
+        <source url="https://forum.mesg.com/t/the-import-cycle-between-api-systemservices-packages/105.rss">The Import Cycle Between API &amp; SystemServices Packages</source>
+      </item>
+      <item>
+        <title>The Import Cycle Between API &amp; SystemServices Packages</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <p>Why not remove API from system service?</p>
+<p>I’ve previously written about removing API from system service (move deploy to separate package). In this solution, system service deploys &amp; start services.</p>
+<p>Also, we can remove API package from resolver and keep it only for data mapping.</p>
+<p>Simple and easy, no need to create 2 APIs.</p>
+          <p><a href="https://forum.mesg.com/t/the-import-cycle-between-api-systemservices-packages/105/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/the-import-cycle-between-api-systemservices-packages/105/2</link>
+        <pubDate>Mon, 22 Oct 2018 15:09:12 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-105-2</guid>
+        <source url="https://forum.mesg.com/t/the-import-cycle-between-api-systemservices-packages/105.rss">The Import Cycle Between API &amp; SystemServices Packages</source>
+      </item>
+      <item>
+        <title>The Import Cycle Between API &amp; SystemServices Packages</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>As we experimented, we have this incoming import cycle issue* between <em>api</em> and <em>systemservices</em>, <em>systemservices/*</em> packages. We currently use methods from api package inside system services and because of this, we’re not allowed to call methods of systemservices inside api pkg.</p>
+<p>I’m not sure if this is an actual issue? It shows us that either we have a design issue or we don’t have a design issue and calling system services inside api pkg is not right anyway.</p>
+<p>As I’m experimenting, I think that this is not an issue and we shouldn’t call methods of system services packages inside api package <strong>at this point</strong>.</p>
+<p><strong>Here is the reason why:</strong><br>
+The idea behind of having api pkg is to have a single point of entry for accessing functionalities that core provides by combining low level internal packages. So it’s the api package that where we should interact with core, not the other internal packages. The api package is meant to be a wrapper for functionalities of core with a high level api.</p>
+<p>To me, having the systemservices manager and its siblings <em>(systemservices/*)</em> shares the same idea with the existence of api package. We should treat systemservices like how we treat api package. <em>systemservices/*</em> packages are the wrappers around system services, like the api package being wrapper for internal pkgs of core. Remember when we talk about splitting parts of api pkg into smallar pkgs under <em>api/*</em>? It is the similar idea of having <em>systemservices/*</em>. So <em>api</em> pkg and system services pkgs are in the same level.</p>
+<p>The idea of having system services is splitting core to smaller services in the first place. And this causes the same effect on api package. We required to move some methods of api package to different system services. Of course, splitting the whole core/api package into smaller system services may not be possible because at least for now we required keeping some logic like deploying services inside the core itself.</p>
+<p><strong>I’d like to give an example over <em>Workflow System Service</em>:</strong><br>
+Let’s say that we’re not going to implement this workflow feature as a separate service but embed it in the core. In this case we were probably create an internal package called <em>core/workflow</em>, have some implementation there and expose this functionality with <em>core/api</em> package. This way <em>intergace/grpc/core</em> pkg can call methods like <em>CreateWorkflow()</em> from api package and expose this feature to network.</p>
+<p>As a system service point of view, first, we’re going to have a mesg service as equlivent of <em>core/workflow</em>. Second, we’re going to have a high level wrapper for it under <em>systemservice/workflow</em> and this is the equlivent of code that we put under <em>core/api</em> for workflow. In this case, as third and last,  <em>intergace/grpc/core</em> pkg will call the <em>CreateWorkflow()</em> method from <em>systemservice/workflow</em>.</p>
+<p>Please note that it’s totally ok for system services pkgs calling methods from <em>core/api</em> because it’s the native part of core that we do service deploying and listening tasks etc. So calling api pkg inside <em>systemservices</em> is a valid approach. In future, if we can make it possible splitting all the parts from api package to different services then we can directly use the api package as a place where we connect all the system services together and expose them as high level features of core like we do today. But since we’re not able to do it in once, I think, it’s acceptable for now to have this two headed dragon. <img src="https://forum.mesg.com/images/emoji/twitter/slight_smile.png?v=6" title=":slight_smile:" class="emoji" alt=":slight_smile:"></p>
+<p>As a proposition, I think we can rename the <em>api</em> package to something called like <em>native</em> and create a new <em>api</em> package to call methods from <em>native</em> and <em>systemservices</em>. System services pkgs will call the methods from <em>native</em> pkg anymore, not the api. By time, we’ll move all the logic from <em>native</em> pkg as system services and <em>native</em> pkg will get deleted.</p>
+<p>This is just a perspective that we can think about it. Let’s have a starting point from here to discuss and see how system services and core will evolve together.</p>
+          <p><a href="https://forum.mesg.com/t/the-import-cycle-between-api-systemservices-packages/105/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/the-import-cycle-between-api-systemservices-packages/105/1</link>
+        <pubDate>Mon, 22 Oct 2018 14:29:12 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-105-1</guid>
+        <source url="https://forum.mesg.com/t/the-import-cycle-between-api-systemservices-packages/105.rss">The Import Cycle Between API &amp; SystemServices Packages</source>
+      </item>
+  </channel>
+</rss>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Default behavior of the deletion of services&#39; volumes</title>
+    <link>https://forum.mesg.com/t/default-behavior-of-the-deletion-of-services-volumes/142</link>
+    <description>Hey guys, I would like to speak about the default behavior of the deletion of service&#39;s volumes in the command `service delete` and `service dev`.
+
+We introduced in v0.5 the persistence of volume across different service that have the same SID. It&#39;s a great functionality but now we have to think about its default behavior when deleting a service (and its volumes).
+
+# Command `service delete`
+
+The current implementation of the command `service delete` ask the user 2 confirmations, one for deleting the service and one for deleting the volumes:
+```
+➜  core git:(dev) ./dev-cli service delete com.mesg.ethereum.parity.dev
+? Are you sure to delete service(s)? Yes
+? Are you sure to remove service(s) persistent data as well? Yes
+✔ service &quot;com.mesg.ethereum.parity.dev&quot; deleted
+```
+The command `service delete` also offers the flag `--keep-data` to prevent the deletion of the volumes.
+
+## Suggestion
+
+I suggest to remove the second confirmation, but keep the flag `--keep-data`.
+So by default (without passing flag), the service and the volumes are removed. Eg:
+```
+➜  core git:(dev) ./dev-cli service delete com.mesg.ethereum.parity.dev
+? Are you sure to delete service(s) and its persistent data? Yes
+✔ service &quot;com.mesg.ethereum.parity.dev&quot; and its persistent data deleted
+```
+If the flag `--keep-data` is passed, then only the service is removed (not the volumes). Eg:
+```
+➜  core git:(dev) ./dev-cli service delete com.mesg.ethereum.parity.dev --keep-data
+The persistent data of the service(s) will not be deleted.
+? Are you sure to delete service(s)? Yes
+✔ service &quot;com.mesg.ethereum.parity.dev&quot; deleted
+```
+
+# Command `service dev`
+
+The command `service dev` doesn&#39;t delete volumes and there is no option to delete the volumes.
+This is quite annoying because the service is removed, so there is no way with the CLI to directly remove the volume (have to deploy the service and delete it).
+
+## Suggestion
+
+I suggest that the command `service dev` removes the volumes by default, and to add the flag `--keep-data` to prevent the deletion of volumes.
+
+----
+
+@krhubert @ilgooz @Anthony what do you think about this?</description>
+    
+    <lastBuildDate>Thu, 13 Dec 2018 10:02:42 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/default-behavior-of-the-deletion-of-services-volumes/142.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Default behavior of the deletion of services&#39; volumes</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>100% agree <img src="https://forum.mesg.com/images/emoji/twitter/slight_smile.png?v=6" title=":slight_smile:" class="emoji" alt=":slight_smile:"></p>
+          <p><a href="https://forum.mesg.com/t/default-behavior-of-the-deletion-of-services-volumes/142/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/default-behavior-of-the-deletion-of-services-volumes/142/3</link>
+        <pubDate>Thu, 13 Dec 2018 10:02:42 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-142-3</guid>
+        <source url="https://forum.mesg.com/t/default-behavior-of-the-deletion-of-services-volumes/142.rss">Default behavior of the deletion of services&#39; volumes</source>
+      </item>
+      <item>
+        <title>Default behavior of the deletion of services&#39; volumes</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>I like this, lgtm. <img src="https://forum.mesg.com/images/emoji/twitter/+1.png?v=6" title=":+1:" class="emoji" alt=":+1:"></p>
+          <p><a href="https://forum.mesg.com/t/default-behavior-of-the-deletion-of-services-volumes/142/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/default-behavior-of-the-deletion-of-services-volumes/142/2</link>
+        <pubDate>Thu, 13 Dec 2018 09:38:30 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-142-2</guid>
+        <source url="https://forum.mesg.com/t/default-behavior-of-the-deletion-of-services-volumes/142.rss">Default behavior of the deletion of services&#39; volumes</source>
+      </item>
+      <item>
+        <title>Default behavior of the deletion of services&#39; volumes</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Hey guys, I would like to speak about the default behavior of the deletion of service’s volumes in the command <code>service delete</code> and <code>service dev</code>.</p>
+<p>We introduced in v0.5 the persistence of volume across different service that have the same SID. It’s a great functionality but now we have to think about its default behavior when deleting a service (and its volumes).</p>
+<h1>Command <code>service delete</code>
+</h1>
+<p>The current implementation of the command <code>service delete</code> ask the user 2 confirmations, one for deleting the service and one for deleting the volumes:</p>
+<pre><code class="lang-auto">➜  core git:(dev) ./dev-cli service delete com.mesg.ethereum.parity.dev
+? Are you sure to delete service(s)? Yes
+? Are you sure to remove service(s) persistent data as well? Yes
+✔ service "com.mesg.ethereum.parity.dev" deleted
+</code></pre>
+<p>The command <code>service delete</code> also offers the flag <code>--keep-data</code> to prevent the deletion of the volumes.</p>
+<h2>Suggestion</h2>
+<p>I suggest to remove the second confirmation, but keep the flag <code>--keep-data</code>.<br>
+So by default (without passing flag), the service and the volumes are removed. Eg:</p>
+<pre><code class="lang-auto">➜  core git:(dev) ./dev-cli service delete com.mesg.ethereum.parity.dev
+? Are you sure to delete service(s) and its persistent data? Yes
+✔ service "com.mesg.ethereum.parity.dev" and its persistent data deleted
+</code></pre>
+<p>If the flag <code>--keep-data</code> is passed, then only the service is removed (not the volumes). Eg:</p>
+<pre><code class="lang-auto">➜  core git:(dev) ./dev-cli service delete com.mesg.ethereum.parity.dev --keep-data
+The persistent data of the service(s) will not be deleted.
+? Are you sure to delete service(s)? Yes
+✔ service "com.mesg.ethereum.parity.dev" deleted
+</code></pre>
+<h1>Command <code>service dev</code>
+</h1>
+<p>The command <code>service dev</code> doesn’t delete volumes and there is no option to delete the volumes.<br>
+This is quite annoying because the service is removed, so there is no way with the CLI to directly remove the volume (have to deploy the service and delete it).</p>
+<h2>Suggestion</h2>
+<p>I suggest that the command <code>service dev</code> removes the volumes by default, and to add the flag <code>--keep-data</code> to prevent the deletion of volumes.</p>
+<hr>
+<p><a class="mention" href="/u/krhubert">@krhubert</a> <a class="mention" href="/u/ilgooz">@ilgooz</a> <a class="mention" href="/u/anthony">@Anthony</a> what do you think about this?</p>
+          <p><a href="https://forum.mesg.com/t/default-behavior-of-the-deletion-of-services-volumes/142/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/default-behavior-of-the-deletion-of-services-volumes/142/1</link>
+        <pubDate>Thu, 13 Dec 2018 09:30:59 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-142-1</guid>
+        <source url="https://forum.mesg.com/t/default-behavior-of-the-deletion-of-services-volumes/142.rss">Default behavior of the deletion of services&#39; volumes</source>
+      </item>
+  </channel>
+</rss>

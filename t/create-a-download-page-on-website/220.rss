@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Create a Download Page on Website</title>
+    <link>https://forum.mesg.com/t/create-a-download-page-on-website/220</link>
+    <description>We need a page on website to put download links(button) for the [GUI](https://github.com/mesg-foundation/gui).
+
+GUI is a desktop application and we have different builds for Mac, Linux &amp; Windows for each release. We should be detecting user&#39;s OS from their Browser props and chose the appropriate build link automatically and have a button in the page to make it possible to download.
+
+GUI application has a GUI and it install everything that MESG needs to run under the hood. So this is an all-in-one application and very useful for everybody that uses and develops with MESG.
+
+I&#39;m thinking about having a URL like this `https://mesg.com/download`.
+
+/cc @Nicolas 
+/cc @emmanuel need some help for the design :)</description>
+    
+    <lastBuildDate>Thu, 24 Jan 2019 09:09:43 +0000</lastBuildDate>
+    <category>Development</category>
+    <atom:link href="https://forum.mesg.com/t/create-a-download-page-on-website/220.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Create a Download Page on Website</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Good initiative but we will wait a few weeks before starting to work on this page. We will start with the github release pages.</p>
+          <p><a href="https://forum.mesg.com/t/create-a-download-page-on-website/220/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/create-a-download-page-on-website/220/2</link>
+        <pubDate>Thu, 24 Jan 2019 09:09:43 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-220-2</guid>
+        <source url="https://forum.mesg.com/t/create-a-download-page-on-website/220.rss">Create a Download Page on Website</source>
+      </item>
+      <item>
+        <title>Create a Download Page on Website</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>We need a page on website to put download links(button) for the <a href="https://github.com/mesg-foundation/gui" rel="nofollow noopener">GUI</a>.</p>
+<p>GUI is a desktop application and we have different builds for Mac, Linux &amp; Windows for each release. We should be detecting user’s OS from their Browser props and chose the appropriate build link automatically and have a button in the page to make it possible to download.</p>
+<p>GUI application has a GUI and it install everything that MESG needs to run under the hood. So this is an all-in-one application and very useful for everybody that uses and develops with MESG.</p>
+<p>I’m thinking about having a URL like this <code>https://mesg.com/download</code>.</p>
+<p>/cc <a class="mention" href="/u/nicolas">@Nicolas</a><br>
+/cc <a class="mention" href="/u/emmanuel">@emmanuel</a> need some help for the design <img src="https://forum.mesg.com/images/emoji/twitter/slight_smile.png?v=6" title=":slight_smile:" class="emoji" alt=":slight_smile:"></p>
+          <p><a href="https://forum.mesg.com/t/create-a-download-page-on-website/220/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/create-a-download-page-on-website/220/1</link>
+        <pubDate>Tue, 22 Jan 2019 09:59:00 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-220-1</guid>
+        <source url="https://forum.mesg.com/t/create-a-download-page-on-website/220.rss">Create a Download Page on Website</source>
+      </item>
+  </channel>
+</rss>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>SDK package organisation</title>
+    <link>https://forum.mesg.com/t/sdk-package-organisation/299</link>
+    <description>This topic is about the organization of the package SDK and its consequences on the package service/grpc.
+
+I would like to propose the following rules:
+
+### Package SDK
+- helper init dependencies function
+- initialize sub-package in New
+- only expose publicly sub-package instance
+
+### SDK sub-packages (eg: sdk/execution)
+- initialized by SDK with all dependencies
+- should read / write to only one specific data
+- should call function from other sub-packages if need to read / write from other data
+- dependency between sub-packages should respect the way the data are (eg: instance dependent on service, so sub-package instance can dependant on package service, but not the other way)
+
+### Package server/grpc
+- only dependant on SDK
+- each api should call one write function of a SDK sub-package
+- each api can call multiple read functions from SDK sub-packages for error verification (eg: check that instances doesn&#39;t exist before deleting a service)
+- if an api need to call multiple write functions from SDK, a new SDK sub-package should be created to handle it.
+
+@core what do you think?</description>
+    
+    <lastBuildDate>Thu, 04 Jul 2019 04:58:02 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/sdk-package-organisation/299.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>SDK package organisation</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>This will be released in Engine v0.11</p>
+          <p><a href="https://forum.mesg.com/t/sdk-package-organisation/299/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/sdk-package-organisation/299/4</link>
+        <pubDate>Thu, 04 Jul 2019 04:58:02 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-299-4</guid>
+        <source url="https://forum.mesg.com/t/sdk-package-organisation/299.rss">SDK package organisation</source>
+      </item>
+      <item>
+        <title>SDK package organisation</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="2" data-topic="299">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/krhubert/40/9_2.png" class="avatar"> krhubert:</div>
+<blockquote>
+<p>Note: the same is with grpc package.</p>
+</blockquote>
+</aside>
+<p>Actually, grpc package doesn’t follow the same logic as sdk, see <a href="https://forum.mesg.com/t/server-grpc-package-organisation/300" class="inline-onebox">Server/grpc package organisation</a></p>
+<aside class="quote group-team" data-post="2" data-topic="299">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/krhubert/40/9_2.png" class="avatar"> krhubert:</div>
+<blockquote>
+<ul>
+<li>this split should come naturally when sdk growths and we will have problems with managing it and it will require normal refactoring.</li>
+</ul>
+</blockquote>
+</aside>
+<p>I agree with you that splitting in sub package will come naturally as the sdk package grows in size.<br>
+I don’t want to force but I want to give guidelines for long time development.</p>
+<p>Let’s implement stuff <img src="https://forum.mesg.com/images/emoji/twitter/wink.png?v=9" title=":wink:" class="emoji" alt=":wink:"></p>
+          <p><a href="https://forum.mesg.com/t/sdk-package-organisation/299/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/sdk-package-organisation/299/3</link>
+        <pubDate>Tue, 04 Jun 2019 07:49:30 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-299-3</guid>
+        <source url="https://forum.mesg.com/t/sdk-package-organisation/299.rss">SDK package organisation</source>
+      </item>
+      <item>
+        <title>SDK package organisation</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <p>I’m don’t like such split. I think sdk should remain in one direcotry as long as possible.</p>
+<p>reasons:</p>
+<ul>
+<li>the engine will have 3 or more execution package (sdk/execution, execution, grpc/api/execution?)</li>
+<li>there will be a mess while talking about each of execution</li>
+<li>it will be easy to create import cyclic (and it forcing to create helper package or similar)</li>
+</ul>
+<p>Also:</p>
+<ul>
+<li>this split should come naturally when sdk growths and we will have problems with managing it and it will require normal refactoring.</li>
+</ul>
+<p>What you are trying to do is refactor (organize too much) before even start coding.</p>
+<p>Note: the same is with grpc package.</p>
+          <p><a href="https://forum.mesg.com/t/sdk-package-organisation/299/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/sdk-package-organisation/299/2</link>
+        <pubDate>Tue, 04 Jun 2019 05:51:00 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-299-2</guid>
+        <source url="https://forum.mesg.com/t/sdk-package-organisation/299.rss">SDK package organisation</source>
+      </item>
+      <item>
+        <title>SDK package organisation</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>This topic is about the organization of the package SDK and its consequences on the package service/grpc.</p>
+<p>I would like to propose the following rules:</p>
+<h3>Package SDK</h3>
+<ul>
+<li>helper init dependencies function</li>
+<li>initialize sub-package in New</li>
+<li>only expose publicly sub-package instance</li>
+</ul>
+<h3>SDK sub-packages (eg: sdk/execution)</h3>
+<ul>
+<li>initialized by SDK with all dependencies</li>
+<li>should read / write to only one specific data</li>
+<li>should call function from other sub-packages if need to read / write from other data</li>
+<li>dependency between sub-packages should respect the way the data are (eg: instance dependent on service, so sub-package instance can dependant on package service, but not the other way)</li>
+</ul>
+<h3>Package server/grpc</h3>
+<ul>
+<li>only dependant on SDK</li>
+<li>each api should call one write function of a SDK sub-package</li>
+<li>each api can call multiple read functions from SDK sub-packages for error verification (eg: check that instances doesn’t exist before deleting a service)</li>
+<li>if an api need to call multiple write functions from SDK, a new SDK sub-package should be created to handle it.</li>
+</ul>
+<p><a class="mention-group" href="/groups/core">@core</a> what do you think?</p>
+          <p><a href="https://forum.mesg.com/t/sdk-package-organisation/299/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/sdk-package-organisation/299/1</link>
+        <pubDate>Mon, 03 Jun 2019 07:26:32 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-299-1</guid>
+        <source url="https://forum.mesg.com/t/sdk-package-organisation/299.rss">SDK package organisation</source>
+      </item>
+  </channel>
+</rss>

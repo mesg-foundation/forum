@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Create container for development scripts</title>
+    <link>https://forum.mesg.com/t/create-container-for-development-scripts/62</link>
+    <description>as discussed on weekly meeting, we need a docker container with pre installed dependencies needed by [scripts](https://github.com/mesg-foundation/core/tree/dev/scripts).
+
+we can provide current working core directly with the _-v_ flag to provide schema, proto files etc. and get the built go files.
+
+example usage:
+_docker run -v \`pwd\` mesg-gen **./scripts/generate-assets.sh**_</description>
+    
+    <lastBuildDate>Wed, 31 Oct 2018 15:07:26 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/create-container-for-development-scripts/62.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Create container for development scripts</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            
+          <p><a href="https://forum.mesg.com/t/create-container-for-development-scripts/62/14">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/create-container-for-development-scripts/62/14</link>
+        <pubDate>Tue, 11 Dec 2018 09:14:20 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-62-14</guid>
+        <source url="https://forum.mesg.com/t/create-container-for-development-scripts/62.rss">Create container for development scripts</source>
+      </item>
+      <item>
+        <title>Create container for development scripts</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>I agree that having a docker container for each service is ideal but for now I think having one that aggregate all is enough and we can always improve it later on.</p>
+          <p><a href="https://forum.mesg.com/t/create-container-for-development-scripts/62/12">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/create-container-for-development-scripts/62/12</link>
+        <pubDate>Wed, 31 Oct 2018 15:07:26 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-62-12</guid>
+        <source url="https://forum.mesg.com/t/create-container-for-development-scripts/62.rss">Create container for development scripts</source>
+      </item>
+      <item>
+        <title>Create container for development scripts</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>We only have <em>3 go tools</em> and the <em>protoc</em> binary used as a dependency at the moment.</p>
+<p>I think, for now, we don’t need to complicate things for a possibility of problem in versioning.<br>
+I think we’ll not have 10s of dependencies in future so to me a single <em>Dockerfile</em> is enough for now.<br>
+If we need to split them in future we can do it always.</p>
+<p>We can still use base Go image even if require some dependencies written in another languages. They’ll mostly be in binary anyway and if we face with some problems we can always split the containers.</p>
+<p>I think most go tools will be compatible with the latest version of Go, so we should be fine about that one.</p>
+<p>Yes there are versions defined in both <em>Dockerfile-dev</em> and <em>Gopkg.toml</em> file for dependencies. <em>Gopkg.toml</em> only keeps the versions for go tools. <em>Dockerfile-dev</em> keeps the versions about container itself and <em>protoc</em> dependency. And I agree that <em>protoc</em> and <em>protoc-gen-doc go tool</em> defined/downloaded in separete places. This looks a bit ambigous but it should be fine if we don’t have 10s of them. And it’s also possible to version go tools inside the Dockerfile too but it’ll require more lines in the code and I didn’t want to complicate things for now because we only have a few dependencies.</p>
+          <p><a href="https://forum.mesg.com/t/create-container-for-development-scripts/62/11">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/create-container-for-development-scripts/62/11</link>
+        <pubDate>Wed, 03 Oct 2018 10:33:14 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-62-11</guid>
+        <source url="https://forum.mesg.com/t/create-container-for-development-scripts/62.rss">Create container for development scripts</source>
+      </item>
+      <item>
+        <title>Create container for development scripts</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <p>We should build tools in seperate images, here are the resons:</p>
+<ul>
+<li>we might have tools from diffrent languages (therefore we can’t use go image)</li>
+<li>we might have tools that requires diffrent go version</li>
+<li>we can control version of go and tool itself from the container build process</li>
+</ul>
+<p>Now we have one container and some version (golang) are defined in dockerfile and some in main repo in dep file. I think we should keep them together</p>
+          <p><a href="https://forum.mesg.com/t/create-container-for-development-scripts/62/10">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/create-container-for-development-scripts/62/10</link>
+        <pubDate>Wed, 03 Oct 2018 10:10:03 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-62-10</guid>
+        <source url="https://forum.mesg.com/t/create-container-for-development-scripts/62.rss">Create container for development scripts</source>
+      </item>
+      <item>
+        <title>Create container for development scripts</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>will be implemented by <a href="https://github.com/mesg-foundation/core/issues/517">https://github.com/mesg-foundation/core/issues/517</a></p>
+          <p><a href="https://forum.mesg.com/t/create-container-for-development-scripts/62/9">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/create-container-for-development-scripts/62/9</link>
+        <pubDate>Tue, 02 Oct 2018 16:44:59 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-62-9</guid>
+        <source url="https://forum.mesg.com/t/create-container-for-development-scripts/62.rss">Create container for development scripts</source>
+      </item>
+      <item>
+        <title>Create container for development scripts</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>It’s ok to use the volume, the only “problem” with the volume is that we need to document it so it’s not that clear but we will probably have this in a script so it’s totally fine for me.</p>
+          <p><a href="https://forum.mesg.com/t/create-container-for-development-scripts/62/8">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/create-container-for-development-scripts/62/8</link>
+        <pubDate>Tue, 02 Oct 2018 09:15:30 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-62-8</guid>
+        <source url="https://forum.mesg.com/t/create-container-for-development-scripts/62.rss">Create container for development scripts</source>
+      </item>
+      <item>
+        <title>Create container for development scripts</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <p>If we really want to read from stdin we can create bash script and I think this might work and save docker image user some time to use it, eg:</p>
+<pre><code class="lang-bash">
+# build-proto.sh - this file would be run from CMD in dockerfile
+DONE=false
+until $DONE ;do
+read || DONE=true
+echo $REPLY &gt;&gt; /tmp/p.proto
+done
+
+protoc /tmp/p.proto --out /tmp/p.pb.go
+
+cat /tmp/p.pb.go
+</code></pre>
+<p>And this trick allow us to use stdin/out</p>
+          <p><a href="https://forum.mesg.com/t/create-container-for-development-scripts/62/7">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/create-container-for-development-scripts/62/7</link>
+        <pubDate>Tue, 02 Oct 2018 07:43:58 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-62-7</guid>
+        <source url="https://forum.mesg.com/t/create-container-for-development-scripts/62.rss">Create container for development scripts</source>
+      </item>
+      <item>
+        <title>Create container for development scripts</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p><a class="mention" href="/u/krhubert">@krhubert</a> what is the disadvantages of mounting dir with <em>-v</em> flag?</p>
+          <p><a href="https://forum.mesg.com/t/create-container-for-development-scripts/62/6">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/create-container-for-development-scripts/62/6</link>
+        <pubDate>Tue, 02 Oct 2018 07:40:43 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-62-6</guid>
+        <source url="https://forum.mesg.com/t/create-container-for-development-scripts/62.rss">Create container for development scripts</source>
+      </item>
+      <item>
+        <title>Create container for development scripts</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote no-group" data-post="2" data-topic="62">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/anthony/40/7_1.png" class="avatar"> Anthony:</div>
+<blockquote>
+<p>Thanks for putting that here, <a class="mention" href="/u/krhubert">@krhubert</a> was talking about an image that just exports the result in the terminal and like that we can put it in the file that we want and this docker image can be totally generic</p>
+</blockquote>
+</aside>
+<p>Yes, but unfortunately not every tool has an option to read/write from stdin/stdout.</p>
+<p>For protoc there is an issue <a href="https://github.com/protocolbuffers/protobuf/issues/4163">https://github.com/protocolbuffers/protobuf/issues/4163</a> to allow this.</p>
+<p>So read from stdin and write to stdout should be the first choice, mounting dir otherwhise</p>
+          <p><a href="https://forum.mesg.com/t/create-container-for-development-scripts/62/5">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/create-container-for-development-scripts/62/5</link>
+        <pubDate>Tue, 02 Oct 2018 07:39:21 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-62-5</guid>
+        <source url="https://forum.mesg.com/t/create-container-for-development-scripts/62.rss">Create container for development scripts</source>
+      </item>
+      <item>
+        <title>Create container for development scripts</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p><a class="mention" href="/u/krhubert">@krhubert</a> any feedback on this?</p>
+          <p><a href="https://forum.mesg.com/t/create-container-for-development-scripts/62/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/create-container-for-development-scripts/62/4</link>
+        <pubDate>Fri, 28 Sep 2018 11:23:40 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-62-4</guid>
+        <source url="https://forum.mesg.com/t/create-container-for-development-scripts/62.rss">Create container for development scripts</source>
+      </item>
+      <item>
+        <title>Create container for development scripts</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>please check the new <em>Makefle</em> &amp; <em>Dockerfile-gen</em> <a href="https://github.com/mesg-foundation/core/tree/feature/mesg-gen">here</a>.</p>
+<p>you can run <em>make build-gen</em> to build the <em>mesg-gen</em> image and then run <em>make build-proto</em> to create pb files with the container. i think this is a very simple way to solve the problem.</p>
+          <p><a href="https://forum.mesg.com/t/create-container-for-development-scripts/62/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/create-container-for-development-scripts/62/3</link>
+        <pubDate>Mon, 24 Sep 2018 19:45:44 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-62-3</guid>
+        <source url="https://forum.mesg.com/t/create-container-for-development-scripts/62.rss">Create container for development scripts</source>
+      </item>
+      <item>
+        <title>Create container for development scripts</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>Thanks for putting that here, <a class="mention" href="/u/krhubert">@krhubert</a> was talking about an image that just exports the result in the terminal and like that we can put it in the file that we want and this docker image can be totally generic</p>
+<p>I guess it will looks like something like that:</p>
+<p><code>cat fileToProcess | docker run mesg-asset &gt;&gt; pathToTheAssetFileWeWantToOutput</code><br>
+<code>cat protoToProcess | docker run mesg-proto &gt;&gt; pathToTheProtoFileWeWantToGenerate</code></p>
+<p>If we can do something like that it’s really nice but otherwise sharing the volume is enough <img src="https://forum.mesg.com/images/emoji/twitter/slight_smile.png?v=6" title=":slight_smile:" class="emoji" alt=":slight_smile:"></p>
+<p>The goal here is that everyone needs to have the exact same version so one way or the other will solve this problem</p>
+          <p><a href="https://forum.mesg.com/t/create-container-for-development-scripts/62/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/create-container-for-development-scripts/62/2</link>
+        <pubDate>Mon, 24 Sep 2018 16:10:22 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-62-2</guid>
+        <source url="https://forum.mesg.com/t/create-container-for-development-scripts/62.rss">Create container for development scripts</source>
+      </item>
+      <item>
+        <title>Create container for development scripts</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>as discussed on weekly meeting, we need a docker container with pre installed dependencies needed by <a href="https://github.com/mesg-foundation/core/tree/dev/scripts">scripts</a>.</p>
+<p>we can provide current working core directly with the <em>-v</em> flag to provide schema, proto files etc. and get the built go files.</p>
+<p>example usage:<br>
+<em>docker run -v `pwd` mesg-gen <strong>./scripts/generate-assets.sh</strong></em></p>
+          <p><a href="https://forum.mesg.com/t/create-container-for-development-scripts/62/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/create-container-for-development-scripts/62/1</link>
+        <pubDate>Mon, 24 Sep 2018 10:46:38 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-62-1</guid>
+        <source url="https://forum.mesg.com/t/create-container-for-development-scripts/62.rss">Create container for development scripts</source>
+      </item>
+  </channel>
+</rss>

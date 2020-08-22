@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:discourse="http://www.discourse.org/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>General Discussion - MESG Community</title>
+    <link>https://forum.mesg.com/c/general</link>
+    <description>Topics in the &#39;General Discussion&#39; category </description>
+    
+      <lastBuildDate>Tue, 09 Jul 2019 15:01:30 +0000</lastBuildDate>
+      <atom:link href="https://forum.mesg.com/c/general.rss" rel="self" type="application/rss+xml" />
+        <item>
+          <title>Add Docs About Creating Good Quality Services</title>
+          <dc:creator><![CDATA[ilgooz]]></dc:creator>
+          <category>General Discussion</category>
+          <description><![CDATA[
+            <p>Create docs about how to create “good quality” services and best practices to follow. These docs should cover both the implementation of service clients in other languages and the actual service logic.</p>
+<h1>Service Clients</h1>
+<p>MESG defines the protocol about how service clients should be implemented. For ex., each service client should listen for executions, emit results and events. Also they should start listening for executions after doing all other initialization. We can also add more rules that defines good quality service clients.</p>
+<h1>Service Logic</h1>
+<p>MESG services should use event system effectively. We need to figure out use case scenarios about events by time and put it into docs. Stateful services should provide direct data backups with an auth mechanism for different users of service. We can also add more rules that defines good quality services.</p>
+            <p><small>3 posts - 2 participants</small></p>
+            <p><a href="https://forum.mesg.com/t/add-docs-about-creating-good-quality-services/340">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/add-docs-about-creating-good-quality-services/340</link>
+          <pubDate>Tue, 09 Jul 2019 15:01:30 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-340</guid>
+          <source url="https://forum.mesg.com/t/add-docs-about-creating-good-quality-services/340.rss">Add Docs About Creating Good Quality Services</source>
+        </item>
+        <item>
+          <title>Introduction to MESG – Chapter 0/1</title>
+          <dc:creator><![CDATA[ilgooz]]></dc:creator>
+          <category>General Discussion</category>
+          <description><![CDATA[
+            <p><em>If you’re already familiar with MESG, you can jump into the Building a Blog tutorial (very soon), right away!</em></p>
+<p><img src="https://forum.mesg.com/uploads/default/original/1X/1afa8424e90e097150c3e399ce8bada2a586a3f2.jpeg" alt width="" height=""></p>
+<blockquote>
+<p>With MESG, you can build applications that easily connect any technologies together, including any blockchains or Web APIs. Imagine the possibilities of any technology connecting to anything else with data through a decentralized network.<br>
+There has never been a solution quite like this before.</p>
+</blockquote>
+<h3>Introduction to MESG</h3>
+<p>Since the early days of computers, we never had a fixed definition about how services should communicate with each other through the network.</p>
+<p>This negative adoption from the past even limits us with today’s microservices methodology. Microservices bring a great value to software ecosystem by proposing how services should be kept small and be dedicated. But it is still lacking on the reusability side because, it doesn’t bring a standard for how services should communicate with each other through the network.</p>
+<p>So far, we haven’t had a chance to create reusable services that doesn’t necessarily require some modifications on their network layers. A service needs to be refactored to be compatible with just an another communication protocol adopted in the product where it’s being used.</p>
+<p>Assume that you already have some functional services that you’ve created before for your previous products. Let’s say that some of these services expose their functionality to network via <em>http endpoints</em> and some others maybe use <em>gRPC</em> , <em>JSON-RPC</em> , <em>GraphQL</em> or even a custom communication protocol over <em>TCP</em> .</p>
+<p>To be able to use these services together in a new product, you must create an environment to support their <strong>varying</strong> network communication protocols or refactor them to force a single standard and build a messaging protocol on top of that.</p>
+<p>Meanwhile, you have to figure out how to solve service discovery, load balancing and security problems to run and scale your services seamlessly.</p>
+<p><em>Instead of just focusing on the features that actually matters for your product, dealing with things that aren’t related is a big waste of development hours!</em></p>
+<p><img src="https://forum.mesg.com/uploads/default/original/1X/653a655fc40f318e979700f4881099eac11fa31d.jpeg" alt width="" height=""></p>
+<p><em>Quoted from Morpheus</em></p>
+<p>So, why not to define a standardized communication protocol where it opens up the opportunity to create reusable services?</p>
+<p>MESG solves this problem by creating an emerging standard for services and introduces <strong>workflows</strong> for defining how data should flow between the services.</p>
+<p>Alongside creating a well-defined network communication protocol for services, MESG even lets your services to run in a decentralized way and manages network, service discovery, load balancing and security natively with the power of container technology.</p>
+<p>MESG’s <a href="https://github.com/mesg-foundation/core" rel="nofollow noopener"><em>Core</em></a> is responsible for running services &amp; workflows in a decentralized way. It runs as a daemon and it can be deployed to any peer in the network for enabling decentralization. Even Core itself consists of a bunch system <strong>services</strong> which enables the possibility of its own decentralization in the network.</p>
+<p><em>Reusable services aren’t a myth anymore thanks to MESG! You can check out the existing ones on service <a href="https://github.com/mesg-foundation/awesome" rel="nofollow noopener">market</a>, even create yours for other’s use and earn some MESG tokens on the way! Shh… We’ll talk about blockchains later…</em></p>
+<p><img src="https://forum.mesg.com/uploads/default/original/1X/699796f3b023d44d72029b6af992d12ba797b533.jpeg" alt="image" width="372" height="338"></p>
+<p><em>An amazed Doge</em></p>
+<p><em>If we had had this standardization and service market from the beginning of the internet, we wouldn’t have needed to create services from scratch. Reusing services that easy surely could’ve moved humanity forward for decades by preventing all development hours to be wasted!</em></p>
+<p><em>Check out</em> <a href="http://mesg.com" rel="nofollow noopener"><em>mesg.com</em></a> <em>and the</em> <a href="https://docs.mesg.com/" rel="nofollow noopener"><em>documentation</em></a> <em>on the website for getting to know more about MESG!</em></p>
+<h3>Services</h3>
+<p>Services are small, focused programs that implements target functionalities. To expose these functionalities to the network for other’s use, their capabilities needed to be defined in a standard format.</p>
+<p>MESG introduces <a href="https://docs.mesg.com/guide/service/service-file.html" rel="nofollow noopener"> <em>mesg.yml</em> </a> to exactly meet this need. In this configuration file, you can define the schema of tasks that your service is capable of executing and the type of events that your service may emit. You can also specify dependencies, data volumes, scalability properties, network configurations and other primitives that describe how your service should run.</p>
+<p>MESG adopts event-orientation from its roots. Services’ tasks and events are specially designed with asynchrony first in mind. This fits well with the asynchronous world of services. It lets you to easily create reactive applications that connect any services by using workflows.</p>
+<p>Think of tasks as a superset set of RPCs, but MESG is event-oriented, which means a task’s outputs emit asynchronously once its execution is finished.</p>
+<p>Events are a new concept that MESG introduces to the service world. They’re very handy to broadcast bits of data that can be useful for other services in the network depending on your application logic. Events can be emitted inside services as part of their business logic and handled by workflows. Task executions, on the other hand, are performed by workflows on services and their outputs again, are handled by workflows.<br>
+As you see, services can be only connected through workflows and they’re not aware of each other.</p>
+<p><em>Let’s examine the <em>webhook</em> and <em>discord</em> services to get some ideas:</em></p>
+<p>In the <em>webhook</em> service’s <em>mesg.yml</em> file, we have the <a href="https://github.com/mesg-foundation/service-webhook/blob/master/mesg.yml#L3-L12" rel="nofollow noopener"> <em>request</em> </a> <em>event</em> definition with <em>data</em> and <em>headers</em> payload.<br>
+The <em>request</em> event is emitted on every post call to the <em>/webhook</em> endpoint while the headers and body of each http request is used as its data. You can check the corresponding http <a href="https://github.com/mesg-foundation/service-webhook/blob/a807ebb/index.js#L21-L27" rel="nofollow noopener">handler</a> to see it in code.</p>
+<p>In the <em>discord</em> service’s <em>mesg.yml</em> file, we have the <a href="https://github.com/mesg-foundation/service-discord-invitation/blob/b043c95/mesg.yml#L3-L24" rel="nofollow noopener"> <em>send</em> </a> <em>task</em> that takes an <em>email</em> and a <em>sendgridAPIKey</em> as its input data. It has two different outputs as <em>success</em> and <em>error</em> . If sending invitation is successful it’ll emit the <em>success</em> output with <em>code</em> and <em>message</em> output data otherwise <em>error</em> output with an error <em>message</em> . You can see how easy its <a href="https://github.com/mesg-foundation/service-discord-invitation/blob/02f9894/index.js#L4-L9" rel="nofollow noopener">implementation</a> is in code.</p>
+<p>Check the <em>discord-invites</em> workflow shared in the <em>Workflow</em> section below to see these services in action.</p>
+<h3>Workflows</h3>
+<p>One of the visions of MESG is to allow people, even non-programmers to create applications without writing a single line of code. This is possible with workflows by connecting pre-created services in the market. It’s also possible to create workflows easily via a user interface where you connect data dots from various services to describe the flow in between them.</p>
+<p>Workflows can be considered as configurations that describe how data should flow between services.</p>
+<p>Basically, workflows are used to define conditions for executing some tasks. These conditions could depend on different task outputs and events from various services. Services are metaphorically connected with each other through workflows.</p>
+<p>You can define patterns to match with task outputs and events from various services that your application needs, manipulate their payload and meta-data and execute a chain of tasks from multiple services in the network by using this data as task inputs.</p>
+<p>Workflows supports advanced data manipulation, filtering and parallel/serial task executions.</p>
+<p><img src="https://forum.mesg.com/uploads/default/original/1X/725b0bf9740ec375916a5828006413ed7382a2f6.jpeg" alt="image" width="400" height="267"><br>
+<em>Workflows are like circuit lines that transfer data between circuit components but it’s for services</em></p>
+<p><em>Let’s see how a basic workflow looks like over <strong>discord-invites</strong> workflow:</em><br>
+<aside class="onebox githubgist">
+  <header class="source">
+      <a href="https://gist.github.com/ilgooz/a0e1e5802bf004f342fe9f25d26eb284" target="_blank" rel="nofollow noopener">gist.github.com</a>
+  </header>
+  <article class="onebox-body">
+    <h4><a href="https://gist.github.com/ilgooz/a0e1e5802bf004f342fe9f25d26eb284" target="_blank" rel="nofollow noopener">https://gist.github.com/ilgooz/a0e1e5802bf004f342fe9f25d26eb284</a></h4>
+<h5>discord-invites.yml</h5>
+<pre><code class="YAML">name: discord-invites
+
+description: |
+  Send discord invites to your fellows.
+
+  curl -d "email=your@email.com" -XPOST http://localhost:3000/webhook
+
+services:
+  webhook: 4f7891f77a6333787075e95b6d3d73ad50b5d1e9
+  discord: 1daf16ca98322024824f307a9e11c88e0aba55e2</code></pre>
+This file has been truncated. <a href="https://gist.github.com/ilgooz/a0e1e5802bf004f342fe9f25d26eb284" target="_blank" rel="nofollow noopener">show original</a>
+
+<p>
+</p>
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+</p>
+<p>This workflow shares discord invites to people by sending emails. We use <em>webhook</em> and <em>discord</em> services in this workflow. You can read about them in Services section above to know exactly how they work.</p>
+<p>Let’s see the <em>when</em> section of sample workflow. Every declaration about listening results, events and executing tasks should be made under <em>when</em> . On behalf of that, there are some other sections in workflow definition format to declare a name to workflow <em>(name)</em> , its description <em>(description)</em> , map of service names &amp; their ID <em>(services)</em> and some constants <em>(configuration)</em> .</p>
+<p>For this <em>discord-invites</em> workflow, there is a definition to listen for <a href="https://github.com/mesg-foundation/service-webhook/blob/641eb07/mesg.yml#L3-L12" rel="nofollow noopener"> <em>request</em> </a> <em>events</em> on the <em>webhook</em> service. So, when this event is received, we access its data with special <em>$event.data</em> variable and access to pre-defined configs in workflow with <em>$configs</em> variable to specify task inputs in the <em>map</em> section. Each field in map corresponds to a field of task’s inputs. In this case we’re mapping data to set email address and SendGrid API key as input data of the <a href="https://github.com/mesg-foundation/service-discord-invitation/blob/b043c95/mesg.yml#L3-L24" rel="nofollow noopener"> <em>send</em> </a> <em>task</em> on <em>discord</em> service.</p>
+<p>In conclusion, when a <em>request</em> event is received, <em>send</em> task will be executed with the dynamically-received email address from the <em>request</em> event’s data and statically defined SendGrid API key config. This flow will be circulated on every <em>request</em> event until workflow is deleted from Core.</p>
+<p>You can also execute multiple tasks in series or parallel by adding more named executions under the <a href="https://gist.github.com/ilgooz/a0e1e5802bf004f342fe9f25d26eb284#file-discord-invites-yml-L19" rel="nofollow noopener"> <em>execute</em> </a> <em>section</em> . It’s even possible to make executions which depend on each other by using the special <em>dependsOn (very soon) section</em> on each execution. Accessing the props of root event/result and inheriting task outputs from parent executions are also supported.</p>
+<p><em>Check out the</em> <a href="https://docs.mesg.com/guide/start-here/quick-start-guide.html" rel="nofollow noopener"> <em>Quick Start</em> </a> <em>guide to run Core on your machine, deploy &amp; start webhook and discord services and run discord-invites workflow just in seconds!</em></p>
+<p><em>Continue on Building a Blog tutorial (very soon) to see MESG in the real world!</em></p>
+<p><em>Please be aware that some features talked in this blog post may not be fully implemented yet. Stay tuned and follow the latest development via the</em> <a href="https://forum.mesg.com/"> <em>forum</em> </a> <em>.</em></p>
+            <p><small>4 posts - 3 participants</small></p>
+            <p><a href="https://forum.mesg.com/t/introduction-to-mesg-chapter-0-1/114">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/introduction-to-mesg-chapter-0-1/114</link>
+          <pubDate>Fri, 09 Nov 2018 15:15:48 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-114</guid>
+          <source url="https://forum.mesg.com/t/introduction-to-mesg-chapter-0-1/114.rss">Introduction to MESG – Chapter 0/1</source>
+        </item>
+        <item>
+          <title>Wiki Page for MESG</title>
+          <dc:creator><![CDATA[ilgooz]]></dc:creator>
+          <category>General Discussion</category>
+          <description><![CDATA[
+            <p>I’m thinking that we should start writing some documentation for core in the <a href="https://github.com/mesg-foundation/core/wiki">Wiki</a> page.</p>
+<p>It’ll be like a small book with 5-15 pages about how core, services, plugins and network and other features of MESG works.</p>
+<p>Wiki can get very technical and we can put things about our folder structure, what’s the job of each internal packages, a detailed view of gRPC apis and how all of this, services, applications, plugins and network composite together.</p>
+<p>We now have this lack of information about technical side of MESG and not having a good detailed wiki can block us to get contributions from the community. Because right now the only way of understanding MESG is reading lots of source code and some forum posts that might not make sense for devs because they are very specific and requires a lot of knowledge before digging in.</p>
+<p>Having a detailed Wiki about MESG is useful for our core team too. Coding is only the small part of the job. Thinking and proposing is a lot important but if we cannot put our thinking to words in an organized and detailed way not everybody can easily follow it. I suggested to put a detailed wiki first before a feature implementation.</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://forum.mesg.com/t/wiki-page-for-mesg/84">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/wiki-page-for-mesg/84</link>
+          <pubDate>Fri, 05 Oct 2018 08:11:26 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-84</guid>
+          <source url="https://forum.mesg.com/t/wiki-page-for-mesg/84.rss">Wiki Page for MESG</source>
+        </item>
+        <item>
+          <title>Add links in header</title>
+          <dc:creator><![CDATA[Nicolas]]></dc:creator>
+          <category>General Discussion</category>
+          <description><![CDATA[
+            <p>We have to add the same header links from <a href="http://mesg.com">mesg.com</a> to this forum and to the docs as well.</p>
+            <p><small>5 posts - 1 participant</small></p>
+            <p><a href="https://forum.mesg.com/t/add-links-in-header/67">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/add-links-in-header/67</link>
+          <pubDate>Thu, 27 Sep 2018 02:03:54 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>Yes</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-67</guid>
+          <source url="https://forum.mesg.com/t/add-links-in-header/67.rss">Add links in header</source>
+        </item>
+        <item>
+          <title>Sequence diagram</title>
+          <dc:creator><![CDATA[Nicolas]]></dc:creator>
+          <category>General Discussion</category>
+          <description><![CDATA[
+            <p>Look at the following diagram:</p>
+<h3>Sequence</h3>
+<div class="mermaid">
+
+sequenceDiagram
+    Alice-&gt;&gt;John: Hello John, how are you?
+    John--&gt;&gt;Alice: Great!
+
+</div>
+
+<pre><code class="lang-auto">[mermaid]
+sequenceDiagram
+    Alice-&gt;&gt;John: Hello John, how are you?
+    John--&gt;&gt;Alice: Great!
+[/mermaid]
+</code></pre>
+<h3>Flow</h3>
+<div class="mermaid">
+
+graph TD
+    Start --&gt; Stop
+
+</div>
+
+<pre><code class="lang-auto">[mermaid]
+graph TD
+    Start --&gt; Stop
+[/mermaid]
+</code></pre>
+            <p><small>6 posts - 3 participants</small></p>
+            <p><a href="https://forum.mesg.com/t/sequence-diagram/66">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/sequence-diagram/66</link>
+          <pubDate>Wed, 26 Sep 2018 04:00:38 +0000</pubDate>
+          <discourse:topicPinned>Yes</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-66</guid>
+          <source url="https://forum.mesg.com/t/sequence-diagram/66.rss">Sequence diagram</source>
+        </item>
+        <item>
+          <title>Best practice on Disourse</title>
+          <dc:creator><![CDATA[Nicolas]]></dc:creator>
+          <category>General Discussion</category>
+          <description><![CDATA[
+            <p>I would like to know what is the best practice for managing topic.<br>
+Should we close them? Archive? Solve?</p>
+<p>What are your recommandation <a class="mention" href="/u/jonobacon">@jonobacon</a>.</p>
+<p>Thanks <img src="https://forum.mesg.com/images/emoji/twitter/slight_smile.png?v=6" title=":slight_smile:" class="emoji" alt=":slight_smile:"></p>
+            <p><small>3 posts - 2 participants</small></p>
+            <p><a href="https://forum.mesg.com/t/best-practice-on-disourse/61">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/best-practice-on-disourse/61</link>
+          <pubDate>Mon, 24 Sep 2018 07:59:57 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>Yes</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-61</guid>
+          <source url="https://forum.mesg.com/t/best-practice-on-disourse/61.rss">Best practice on Disourse</source>
+        </item>
+        <item>
+          <title>FYI: Email issues</title>
+          <dc:creator><![CDATA[jonobacon]]></dc:creator>
+          <category>General Discussion</category>
+          <description><![CDATA[
+            <p><a class="mention" href="/u/anthony">@Anthony</a> / <a class="mention" href="/u/nicolas">@Nicolas</a> Just saw this in the admin:</p>
+<p><img src="https://forum.mesg.com/uploads/default/original/1X/8e59b96dea6450665cf328e0d6c6f1606b13be7e.png" alt="53%20AM" width="690" height="162"></p>
+            <p><small>3 posts - 2 participants</small></p>
+            <p><a href="https://forum.mesg.com/t/fyi-email-issues/58">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/fyi-email-issues/58</link>
+          <pubDate>Thu, 20 Sep 2018 08:57:53 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>Yes</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-58</guid>
+          <source url="https://forum.mesg.com/t/fyi-email-issues/58.rss">FYI: Email issues</source>
+        </item>
+        <item>
+          <title>Created a HOWTO category</title>
+          <dc:creator><![CDATA[jonobacon]]></dc:creator>
+          <category>General Discussion</category>
+          <description><![CDATA[
+            <p>Hi, Team,</p>
+<p>On some recent calls we had talked about having little HOWTO or “Hacks” posts on the forum. This is a great way of showcasing how to do interesting things with MESG.</p>
+<p>Well, I thought it would make sense to put these all in the same category. So, I have created a <code>HOWTO</code> sub-category under <code>Support</code> where only staff can post to, but everyone else can read.</p>
+<p>I think we should aim for one HOWTO or Hack a week posted to this category. I recommend it looks like this: <a href="https://meta.discourse.org/t/start-a-new-topic-via-email-e-mail/62977">https://meta.discourse.org/t/start-a-new-topic-via-email-e-mail/62977</a> - this is very instructional and concise in nature.</p>
+<p>This way, community members will be able to see all the HOWTOs and Hacks in one place.</p>
+<p><a class="mention" href="/u/anthony">@Anthony</a> <a class="mention" href="/u/nicolas">@Nicolas</a> - do you think you could write a HOWTO up and add it to get us started?</p>
+            <p><small>2 posts - 1 participant</small></p>
+            <p><a href="https://forum.mesg.com/t/created-a-howto-category/57">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/created-a-howto-category/57</link>
+          <pubDate>Thu, 20 Sep 2018 08:53:22 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>Yes</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-57</guid>
+          <source url="https://forum.mesg.com/t/created-a-howto-category/57.rss">Created a HOWTO category</source>
+        </item>
+        <item>
+          <title>Integrating the forum in GitHub</title>
+          <dc:creator><![CDATA[jonobacon]]></dc:creator>
+          <category>General Discussion</category>
+          <description><![CDATA[
+            <p>Hi, Everyone,</p>
+<p>I noticed that the forum is not linked to very much in the GitHub repos. <a class="mention" href="/u/anthony">@Anthony</a> and <a class="mention" href="/u/nicolas">@Nicolas</a>, I recommend you go and add links in each of the repos in the <code>README.md</code> and <code>CONTRIBUTING.md</code> files.</p>
+<p>Thanks!</p>
+            <p><small>6 posts - 3 participants</small></p>
+            <p><a href="https://forum.mesg.com/t/integrating-the-forum-in-github/53">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/integrating-the-forum-in-github/53</link>
+          <pubDate>Wed, 19 Sep 2018 12:14:31 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>Yes</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-53</guid>
+          <source url="https://forum.mesg.com/t/integrating-the-forum-in-github/53.rss">Integrating the forum in GitHub</source>
+        </item>
+        <item>
+          <title>Email in new topics</title>
+          <dc:creator><![CDATA[jonobacon]]></dc:creator>
+          <category>General Discussion</category>
+          <description><![CDATA[
+            <p>This one is probably for <a class="mention" href="/u/anthony">@Anthony</a> and <a class="mention" href="/u/nicolas">@Nicolas</a>. We might want to enable “email in” to allow devs to create new topics via email for the <code>Development</code> and <code>Core</code> categories. While there is a risk of this being abused in the future, we can always disable it if it becomes a problem.</p>
+<p>What do you think?</p>
+            <p><small>3 posts - 2 participants</small></p>
+            <p><a href="https://forum.mesg.com/t/email-in-new-topics/52">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/email-in-new-topics/52</link>
+          <pubDate>Wed, 19 Sep 2018 11:33:45 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-52</guid>
+          <source url="https://forum.mesg.com/t/email-in-new-topics/52.rss">Email in new topics</source>
+        </item>
+        <item>
+          <title>Solved plugin not enabled on Support</title>
+          <dc:creator><![CDATA[jonobacon]]></dc:creator>
+          <category>General Discussion</category>
+          <description><![CDATA[
+            <p>This is probably one for <a class="mention" href="/u/nicolas">@Nicolas</a>, but I see that <code>discourse-solved</code> is installed, but I don’t see the “Allow users to accept answers” option when editing a category. See <a href="https://meta.discourse.org/t/discourse-solved-accepted-answer-plugin/30155">this</a> for more details.</p>
+<p>Would you mind taking a look into this, <a class="mention" href="/u/nicolas">@Nicolas</a>? Ideally we will only have this enabled on the <code>Support</code> category for now.</p>
+            <p><small>6 posts - 2 participants</small></p>
+            <p><a href="https://forum.mesg.com/t/solved-plugin-not-enabled-on-support/50">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/solved-plugin-not-enabled-on-support/50</link>
+          <pubDate>Wed, 19 Sep 2018 11:25:52 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>Yes</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-50</guid>
+          <source url="https://forum.mesg.com/t/solved-plugin-not-enabled-on-support/50.rss">Solved plugin not enabled on Support</source>
+        </item>
+        <item>
+          <title>New User Introductions Thread!</title>
+          <dc:creator><![CDATA[jonobacon]]></dc:creator>
+          <category>General Discussion</category>
+          <description><![CDATA[
+            <p>Hi, Everyone,</p>
+<p>Now our community is just getting started, we want to encourage you to let us know a little bit about yourself. So, please <strong>reply to this topic</strong> and let us know:</p>
+<ul>
+<li>Who you are and where you are from</li>
+<li>What interests you about MESG</li>
+<li>What kind of apps you are interested in building</li>
+</ul>
+<p>To get us started, I am <a href="http://www.jonobacon.com">Jono Bacon</a>, based in California, and I am a consultant who works with the MESG team. I help companies build communities and I am excited to be working with the MESG team!</p>
+<p>Introduce away!</p>
+            <p><small>4 posts - 3 participants</small></p>
+            <p><a href="https://forum.mesg.com/t/new-user-introductions-thread/49">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/new-user-introductions-thread/49</link>
+          <pubDate>Wed, 19 Sep 2018 11:16:09 +0000</pubDate>
+          <discourse:topicPinned>Yes</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-49</guid>
+          <source url="https://forum.mesg.com/t/new-user-introductions-thread/49.rss">New User Introductions Thread!</source>
+        </item>
+        <item>
+          <title>Important: Watching core dev categories + plugin</title>
+          <dc:creator><![CDATA[jonobacon]]></dc:creator>
+          <category>General Discussion</category>
+          <description><![CDATA[
+            <p>Hi, All,</p>
+<p>As we are looking to get staff more and more used to using Discourse as the primary place for technical discussion, we want to ensure that call staff are <em>Watching</em> the <code>Development</code> and <code>Core</code> categories. This will ensure they receive notifications and emails for all topics posted there.</p>
+<p>This can be done by clicking on the category, and then clicking on (in the top-right):</p>
+<p><img src="https://forum.mesg.com/uploads/default/original/1X/f2d6d41e60812042abc48ba0c329d9a2b212555e.png" alt="29%20AM" width="51" height="45"></p>
+<p>and then clicking on:</p>
+<p><img src="https://forum.mesg.com/uploads/default/original/1X/b8e2b834a2c2a508b11af6a9d2dc13a35ac3104a.png" alt="34%20AM" width="574" height="85"></p>
+<p>This will mark them as watching.</p>
+<p>Also, you may want to install <a href="https://github.com/amical/discourse-watch-category" rel="nofollow noopener">this plugin</a> which allows us to create a group for specific people (e.g. staff and core devs) and it marks everyone in that groups is watching these categories automatically.</p>
+<p><a class="mention" href="/u/anthony">@Anthony</a> - can you ask all staff to watch these categories and install the plugin?</p>
+            <p><small>4 posts - 2 participants</small></p>
+            <p><a href="https://forum.mesg.com/t/important-watching-core-dev-categories-plugin/31">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/important-watching-core-dev-categories-plugin/31</link>
+          <pubDate>Tue, 04 Sep 2018 16:20:14 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>Yes</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-31</guid>
+          <source url="https://forum.mesg.com/t/important-watching-core-dev-categories-plugin/31.rss">Important: Watching core dev categories + plugin</source>
+        </item>
+        <item>
+          <title>Install discourse-canned-replies</title>
+          <dc:creator><![CDATA[jonobacon]]></dc:creator>
+          <category>General Discussion</category>
+          <description><![CDATA[
+            <p>Hi, All,</p>
+<p>As we start prepping the forum, we may want to install <a href="https://meta.discourse.org/t/discourse-canned-replies/48296">Canned Replies</a>. People are undoubtedly try to submit bugs to Discourse and we will want them submitted to the right GH project, and this will help a lot for moderators.</p>
+<p>Make sense?</p>
+            <p><small>6 posts - 3 participants</small></p>
+            <p><a href="https://forum.mesg.com/t/install-discourse-canned-replies/28">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/install-discourse-canned-replies/28</link>
+          <pubDate>Thu, 30 Aug 2018 16:12:33 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>Yes</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-28</guid>
+          <source url="https://forum.mesg.com/t/install-discourse-canned-replies/28.rss">Install discourse-canned-replies</source>
+        </item>
+        <item>
+          <title>Welcome to Discourse</title>
+          <dc:creator><![CDATA[system]]></dc:creator>
+          <category>General Discussion</category>
+          <description><![CDATA[
+            <p>Welcome to MESG Community forum!</p>
+<p>This forum is where our community and development team lives. This is where we discuss, build, support, and evolve MESG into a powerful platform that is enormously valuable for everyone.</p>
+<p>Out community is open. We want you to feel free to ask questions for how to use MESG, as well as share your ideas for what MESG should do, share your neat dApps, and let us know anything else you need. Also, we are <strong>always looking for contributors</strong>. If you would like to contribute to MESG core, write documentation, provide translations, organize events, or anything else, you can get started here.</p>
+<h2>Getting Started</h2>
+<p>Here is how to get started:</p>
+<ol>
+<li>We recommend you first go and full out your profile. Click on the icon in the top-right corner of the page and click the cog icon. Now go and add your profile picture and fill your profile out.</li>
+<li>Now go and introduce yourself by <strong><a>clicking here</a></strong> and replying to the topic.</li>
+</ol>
+<p>As always, let us know if you have any questions! Happy MESGing!</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://forum.mesg.com/t/welcome-to-discourse/8">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/welcome-to-discourse/8</link>
+          <pubDate>Fri, 24 Aug 2018 04:50:40 +0000</pubDate>
+          <discourse:topicPinned>Yes</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-8</guid>
+          <source url="https://forum.mesg.com/t/welcome-to-discourse/8.rss">Welcome to Discourse</source>
+        </item>
+  </channel>
+</rss>

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Integration of workflows in services (solves service composition)</title>
+    <link>https://forum.mesg.com/t/integration-of-workflows-in-services-solves-service-composition/283</link>
+    <description># Goal
+
+Having the possibility to create and connect existing workflows/applications (already discussed here https://forum.mesg.com/t/reusable-workflows-workflow-marketplace/207).
+Anything that an application is doing, a workflow should be able to do by providing a simple interface (and an advanced mode for the ones who want)
+
+In order to solve all that and even more (like https://forum.mesg.com/t/service-composition/22) we can merge the concept of application and services. This way applications are managed by the engine and the user don&#39;t have to do anything more to start its application.
+Also now that the service and the application/workflow are the same they can share the exact same properties and be shared and validate on the network the same way, we don&#39;t need to have two different kinds of data to synchronize.
+
+A service has at least one of the following properties:
+- tasks: to expose tasks for other services to execute
+- events: to expose events for other services to listen
+- workflows: to link events to tasks
+
+Workflows can connect internal and external data. This fixes the https://forum.mesg.com/t/service-composition/22 problem.
+
+Here is the list of possible connections for the workflow:
+- Listen to an **external event** and trigger an **external task** (pure application workflow)
+- Listen to an **external event** and trigger an **internal task**
+- Listen to an **internal event** and trigger an **external task**
+- Listen to an **internal event** and trigger an **internal task** (possibility to create services based on workflows)
+
+With this in mind, users might want to define tasks and events for their internal use so we can introduce a new attribute `visibility` on the task and event that can be either `external/internal` or `public/private` (not decided yet but public/private makes more sense with &quot;public&quot; by default)
+
+When the engine receives a private event/task, this will not be propagated to anyone except the actual service.
+
+# Implementation
+
+Based on the current definition of the https://forum.mesg.com/t/workflow-implementation/281 we can use the exact same data structure for the service definition.
+
+```json
+{
+  tasks: []
+  events: []
+  workflows: [{
+    name: &quot;name of workflow&quot;,
+    description: &quot;description&quot;,
+    trigger: {
+      service: &quot;serviceHash&quot;,
+      eventKey: &quot;xxx&quot;,
+      filter: { x: &quot;y&quot; }
+    },
+    tasks: [
+      { service: &quot;serviceHash&quot;, taskKey: &quot;xxx&quot; },
+      { service: &quot;serviceHash&quot;, taskKey: &quot;xxx&quot; },
+    ]
+  }]
+}
+```
+This implementation is limited to only the case &quot;Listen to an **external event** and trigger an **external task**&quot; as the serviceHash of the current service will not be defined. There are two ways to introduce internal events/tasks:
+- omit the service (if there is no service then it&#39;s the current service)
+- introduce a keyword for the current service like `this` or `self` which is common in a programming language
+
+With all that, we can now create applications with a workflow and also do https://forum.mesg.com/t/service-composition/22 as we can listen or execute a task from external services.
+
+### Tasks
+- [ ] Update service definition with a list of workflows
+- [ ] Start the workflow engine based on the workflows from all the services
+- [ ] When starting the workflow in the engine, make sure to replace the self/this with the actual service hash
+- [ ] (optional/to define) Deploy a workflow based on a definition in the mesg.yml file (other formats could be considered as long as they can &quot;compile&quot; to the format in the service definition)
+- [ ] Create a badass documentation to explain all that with nice schemas
+- [ ] Also explain the current limitation and the workarounds 
+  - [ ] Create a tree of executions based on results of another branch from another workflow
+  - [ ] Access data from another branch by having an &quot;aggregator&quot; task in the other branch
+- [ ] Celebrate this feature :tada:</description>
+    
+    <lastBuildDate>Tue, 24 Sep 2019 04:03:32 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/integration-of-workflows-in-services-solves-service-composition/283.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Integration of workflows in services (solves service composition)</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>We decided to not merge workflows and services but to keep them separated with a strong dependency from workflow to service. See <a href="https://forum.mesg.com/t/workflow-implementation/281" class="inline-onebox">Workflow implementation</a>.</p>
+<p>We can still imagine a similar feature than this one by deploying a new workflow that also deploy the services, and that connect the events and results from one service to the others.</p>
+          <p><a href="https://forum.mesg.com/t/integration-of-workflows-in-services-solves-service-composition/283/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/integration-of-workflows-in-services-solves-service-composition/283/2</link>
+        <pubDate>Tue, 24 Sep 2019 04:03:32 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-283-2</guid>
+        <source url="https://forum.mesg.com/t/integration-of-workflows-in-services-solves-service-composition/283.rss">Integration of workflows in services (solves service composition)</source>
+      </item>
+      <item>
+        <title>Integration of workflows in services (solves service composition)</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <h1>Goal</h1>
+<p>Having the possibility to create and connect existing workflows/applications (already discussed here <a href="https://forum.mesg.com/t/reusable-workflows-workflow-marketplace/207" class="inline-onebox">Reusable Workflows &amp; Workflow Marketplace</a>).<br>
+Anything that an application is doing, a workflow should be able to do by providing a simple interface (and an advanced mode for the ones who want)</p>
+<p>In order to solve all that and even more (like <a href="https://forum.mesg.com/t/service-composition/22" class="inline-onebox">Service composition</a>) we can merge the concept of application and services. This way applications are managed by the engine and the user don’t have to do anything more to start its application.<br>
+Also now that the service and the application/workflow are the same they can share the exact same properties and be shared and validate on the network the same way, we don’t need to have two different kinds of data to synchronize.</p>
+<p>A service has at least one of the following properties:</p>
+<ul>
+<li>tasks: to expose tasks for other services to execute</li>
+<li>events: to expose events for other services to listen</li>
+<li>workflows: to link events to tasks</li>
+</ul>
+<p>Workflows can connect internal and external data. This fixes the <a href="https://forum.mesg.com/t/service-composition/22" class="inline-onebox">Service composition</a> problem.</p>
+<p>Here is the list of possible connections for the workflow:</p>
+<ul>
+<li>Listen to an <strong>external event</strong> and trigger an <strong>external task</strong> (pure application workflow)</li>
+<li>Listen to an <strong>external event</strong> and trigger an <strong>internal task</strong>
+</li>
+<li>Listen to an <strong>internal event</strong> and trigger an <strong>external task</strong>
+</li>
+<li>Listen to an <strong>internal event</strong> and trigger an <strong>internal task</strong> (possibility to create services based on workflows)</li>
+</ul>
+<p>With this in mind, users might want to define tasks and events for their internal use so we can introduce a new attribute <code>visibility</code> on the task and event that can be either <code>external/internal</code> or <code>public/private</code> (not decided yet but public/private makes more sense with “public” by default)</p>
+<p>When the engine receives a private event/task, this will not be propagated to anyone except the actual service.</p>
+<h1>Implementation</h1>
+<p>Based on the current definition of the <a href="https://forum.mesg.com/t/workflow-implementation/281" class="inline-onebox">Workflow implementation</a> we can use the exact same data structure for the service definition.</p>
+<pre><code class="lang-json">{
+  tasks: []
+  events: []
+  workflows: [{
+    name: "name of workflow",
+    description: "description",
+    trigger: {
+      service: "serviceHash",
+      eventKey: "xxx",
+      filter: { x: "y" }
+    },
+    tasks: [
+      { service: "serviceHash", taskKey: "xxx" },
+      { service: "serviceHash", taskKey: "xxx" },
+    ]
+  }]
+}
+</code></pre>
+<p>This implementation is limited to only the case “Listen to an <strong>external event</strong> and trigger an <strong>external task</strong>” as the serviceHash of the current service will not be defined. There are two ways to introduce internal events/tasks:</p>
+<ul>
+<li>omit the service (if there is no service then it’s the current service)</li>
+<li>introduce a keyword for the current service like <code>this</code> or <code>self</code> which is common in a programming language</li>
+</ul>
+<p>With all that, we can now create applications with a workflow and also do <a href="https://forum.mesg.com/t/service-composition/22" class="inline-onebox">Service composition</a> as we can listen or execute a task from external services.</p>
+<h3>Tasks</h3>
+<ul>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> Update service definition with a list of workflows</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> Start the workflow engine based on the workflows from all the services</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> When starting the workflow in the engine, make sure to replace the self/this with the actual service hash</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> (optional/to define) Deploy a workflow based on a definition in the mesg.yml file (other formats could be considered as long as they can “compile” to the format in the service definition)</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> Create a badass documentation to explain all that with nice schemas</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> Also explain the current limitation and the workarounds
+<ul>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> Create a tree of executions based on results of another branch from another workflow</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> Access data from another branch by having an “aggregator” task in the other branch</li>
+</ul>
+</li>
+<li>
+<span class="chcklst-box fa fa-square-o fa-fw"></span> Celebrate this feature <img src="https://forum.mesg.com/images/emoji/twitter/tada.png?v=9" title=":tada:" class="emoji" alt=":tada:">
+</li>
+</ul>
+          <p><a href="https://forum.mesg.com/t/integration-of-workflows-in-services-solves-service-composition/283/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/integration-of-workflows-in-services-solves-service-composition/283/1</link>
+        <pubDate>Sun, 19 May 2019 07:35:05 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-283-1</guid>
+        <source url="https://forum.mesg.com/t/integration-of-workflows-in-services-solves-service-composition/283.rss">Integration of workflows in services (solves service composition)</source>
+      </item>
+  </channel>
+</rss>

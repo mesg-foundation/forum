@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <title>Acknowledgement system on stream - Engine - MESG Community</title>
+    <meta name="description" content="Opened streams don’t mean the core is actually ready to post message to them. That’s why sometimes clients expect to get message from streams but they are actually empty. 
+For example, in the following implementation of L&amp;hellip;">
+    <meta name="generator" content="Discourse 2.5.0.beta5 - https://github.com/discourse/discourse version 00aab498297cba8f977c1e0eb17b7d38ff06cc68">
+<link rel="icon" type="image/png" href="../../../uploads/default/optimized/1X/9f11b6ddfa02bffdbec79487592a0573a0236cb5_2_32x32.png">
+<link rel="apple-touch-icon" type="image/png" href="../../../uploads/default/optimized/1X/53630361a40ad76e1733dd0b0f486e9ae2f4f4d6_2_180x180.png">
+<meta name="theme-color" content="#491e8c">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+<link rel="canonical" href="../172.html" />
+<script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","url":"https://forum.mesg.com","potentialAction":{"@type":"SearchAction","target":"https://forum.mesg.com/search?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
+<link rel="search" type="application/opensearchdescription+xml" href="../../../opensearch.xml" title="MESG Community Search">
+
+      <link href="../../../stylesheets/desktop_3_52e3411e87658e862890db7bd06899cf49ad5f59.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop" data-theme-id="7"/>
+      <link href="../../../stylesheets/desktop_theme_7_bf4f2d3d8a71e6ee907065be9a79df3d849bd29c.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop_theme" data-theme-id="7"/>
+    
+    <meta id="data-ga-universal-analytics" data-tracking-code="UA-117583862-1" data-json="{&quot;cookieDomain&quot;:&quot;auto&quot;}" data-auto-link-domains="">
+
+<link rel="preload" href="../../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js" as="script">
+<script src="../../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js"></script>
+
+
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of &#39;Acknowledgement system on stream&#39;" href="../172.rss" />
+    <meta property="og:site_name" content="MESG Community" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://forum.mesg.com/uploads/default/original/1X/26944398294eb78d5fcd9c0ac79f47a8ba160661.jpeg" />
+<meta property="og:image" content="https://forum.mesg.com/uploads/default/original/1X/26944398294eb78d5fcd9c0ac79f47a8ba160661.jpeg" />
+<meta property="og:url" content="https://forum.mesg.com/t/acknowledgement-system-on-stream/172/2" />
+<meta name="twitter:url" content="https://forum.mesg.com/t/acknowledgement-system-on-stream/172/2" />
+<meta property="og:title" content="Acknowledgement system on stream" />
+<meta name="twitter:title" content="Acknowledgement system on stream" />
+<meta property="og:description" content="After speaking with @krhubert, the acknowledgement system is something good to implement but should not be used for fixing the issue of “when we need to execute a task and listen for its result”.  To solve this problem, we could introduce a new very simple gRPC API that return a result of a executionID, see Get result api" />
+<meta name="twitter:description" content="After speaking with @krhubert, the acknowledgement system is something good to implement but should not be used for fixing the issue of “when we need to execute a task and listen for its result”.  To solve this problem, we could introduce a new very simple gRPC API that return a result of a executionID, see Get result api" />
+<meta property="article:published_time" content="2019-01-04T10:21:10+00:00" />
+<meta property="og:ignore_canonical" content="true" />
+
+
+
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"QAPage","name":"Acknowledgement system on stream","mainEntity":{"@type":"Question","name":"Acknowledgement system on stream","text":"Opened streams don’t mean the core is actually ready to post message to them. That’s why sometimes clients expect to get message from streams but they are actually empty.\n\nFor example, in the following implementation of ListenResult, a lot of stuff is done before the listener (ln) is actually create&hellip;","upvoteCount":0,"answerCount":1,"dateCreated":"2019-01-04T07:58:05.506Z","author":{"@type":"Person","name":"Nicolas"},"acceptedAnswer":{"@type":"Answer","text":"Implemented here:\n\n<a href="https://forum.mesg.com/t/acknowledgement-system-on-stream/172/\&quot;https://github.com/NicolasMahe\&quot;" target=\"_blank\" rel=\"nofollow noopener\">\n\n[NicolasMahe]\n\n<\/a>\n\n<a href="https://forum.mesg.com/t/acknowledgement-system-on-stream/172/\&quot;https://github.com/mesg-foundation/core/pull/677\&quot;" target=\"_blank\" rel=\"nofollow noopener\">Stream acknowledgement<\/a>\n\nby <a href="https://forum.mesg.com/t/acknowledgement-system-on-stream/172/\&quot;https://github.com/NicolasMahe\&quot;" target=\"_blank\" rel=\"nofollow noopener\">NicolasMahe<\/a>\n\non <a href="https://forum.mesg.com/t/acknowledgement-system-on-stream/172/\&quot;https://github.com/mesg-foundation/core/pull/677\&quot;" target=\"_blank\" rel=\"nofollow noopener\">09:22AM - 05 Jan 19 UTC<\/a>\n\n4 commits\n\nchanged 7 files\n\nwith 47 additions\n\nand 6 deletions.","upvoteCount":0,"dateCreated":"2019-01-05T09:23:08.362Z","url":"https://forum.mesg.com/t/acknowledgement-system-on-stream/172/3","author":{"@type":"Person","name":"Nicolas"}}}}</script>
+  </head>
+  <body class="crawler">
+    
+    <header>
+      <a href="../../../index.html">
+          <img src="../../../uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png" alt="MESG Community" id="site-logo" style="max-width: 150px;">
+      </a>
+    </header>
+    <div id="main-outlet" class="wrap">
+        <div id="topic-title">
+    <h1>
+      <a href="../172.html">Acknowledgement system on stream</a>
+    </h1>
+
+      <div class="topic-category" itemscope itemtype="http://schema.org/BreadcrumbList">
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../../c/development.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #AB9364'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Development</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="1" />
+          </span>
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../../c/development/engine.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #AB9364'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Engine</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="2" />
+          </span>
+      </div>
+
+      <div class="topic-category">
+        <div class='discourse-tags list-tags'>
+            <a href='../../../tag/proposal.html' class='discourse-tag' rel="tag">proposal</a>
+        </div>
+      </div>
+  </div>
+
+  
+
+
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="../172.html">
+
+            <link itemprop="image" href="../../../uploads/default/original/1X/26944398294eb78d5fcd9c0ac79f47a8ba160661.jpeg">
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2019-01-04T07:58:05Z'>
+              <time itemprop='dateModified' datetime='2019-01-04T10:50:02Z' class='post-time'>
+                January 4, 2019, 10:50am
+              </time>
+          <span itemprop='position'>#1</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Opened streams don’t mean the core is actually ready to post message to them. That’s why sometimes clients expect to get message from streams but they are actually empty.</p>
+<p>For example, in the following implementation of <code>ListenResult</code>, a lot of stuff is done before the listener (<code>ln</code>) is actually created and ready to receive message.</p>
+<aside class="onebox githubblob">
+  <header class="source">
+      <a href="https://github.com/mesg-foundation/core/blob/85edf1fd53630682a93810154a7796154add575b/interface/grpc/core/listen_result.go#L11-L21" target="_blank" rel="nofollow noopener">github.com</a>
+  </header>
+  <article class="onebox-body">
+    <h4><a href="https://github.com/mesg-foundation/core/blob/85edf1fd53630682a93810154a7796154add575b/interface/grpc/core/listen_result.go#L11-L21" target="_blank" rel="nofollow noopener">mesg-foundation/core/blob/85edf1fd53630682a93810154a7796154add575b/interface/grpc/core/listen_result.go#L11-L21</a></h4>
+<pre class="onebox"><code class="lang-go"><ol class="start lines" start="11" style="counter-reset: li-counter 10 ;">
+<li>func (s *Server) ListenResult(request *coreapi.ListenResultRequest, stream coreapi.Core_ListenResultServer) error {</li>
+<li>	ln, err := s.api.ListenResult(request.ServiceID,</li>
+<li>		api.ListenResultTaskFilter(request.TaskFilter),</li>
+<li>		api.ListenResultOutputFilter(request.OutputFilter),</li>
+<li>		api.ListenResultTagFilters(request.TagFilters))</li>
+<li>	if err != nil {</li>
+<li>		return err</li>
+<li>	}</li>
+<li>	defer ln.Close()</li>
+<li>
+</li>
+<li>	ctx := stream.Context()</li>
+</ol></code></pre>
+
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+
+<p>One suggestion that could solve it is to add an acknowledgement system:</p>
+<ul>
+<li>core send a <code>ready</code> message when the client open a stream. client wait for this message to continue. if it doesn’t receive a message because a certain timeout, it should return an error.</li>
+<li>core send a <code>closed</code> message just before the core do a “graceful” close of the stream. if the client doesn’t receive this message and the stream has closed, it retries the connection.</li>
+</ul>
+<p>It seems that gRPC metadata is a perfect solutions for this system: <a href="https://github.com/grpc/grpc-go/blob/master/Documentation/grpc-metadata.md" rel="nofollow noopener">https://github.com/grpc/grpc-go/blob/master/Documentation/grpc-metadata.md</a></p>
+<p>I created a proof of concept that implement the <code>ready</code> message by using gRPC header in around 10 lines of code for both server and client implementation:<br>
+<aside class="onebox githubpullrequest">
+  <header class="source">
+      <a href="https://github.com/mesg-foundation/core/pull/674" target="_blank" rel="nofollow noopener">github.com/mesg-foundation/core</a>
+  </header>
+  <article class="onebox-body">
+      <a href="https://github.com/NicolasMahe" target="_blank" rel="nofollow noopener">
+    <img alt="NicolasMahe" src="../../../uploads/default/original/1X/26944398294eb78d5fcd9c0ac79f47a8ba160661.jpeg" class="thumbnail onebox-avatar" width="90" height="90">
+  </a>
+
+<h4>
+  <a href="https://github.com/mesg-foundation/core/pull/674" target="_blank" rel="nofollow noopener">[POC] grpc metadata</a>
+</h4>
+
+<div class="date">
+  by <a href="https://github.com/NicolasMahe" target="_blank" rel="nofollow noopener">NicolasMahe</a>
+  on <a href="https://github.com/mesg-foundation/core/pull/674" target="_blank" rel="nofollow noopener">06:12AM - 04 Jan 19 UTC</a>
+</div>
+
+<div class="github-commit-stats">
+  <strong>1 commits</strong>
+  changed <strong>4 files</strong>
+  with <strong>21 additions</strong>
+  and <strong>6 deletions</strong>.
+</div>
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+</p>
+<p>Server:</p>
+<pre><code class="lang-auto">func (s *Server) ListenResult(request *coreapi.ListenResultRequest, stream coreapi.Core_ListenResultServer) error {
+	// Do stuff
+
+ 	// send header to confirm to client that the server is ready
+	if err := stream.SendHeader(metadata.Pairs("status", "ready")); err != nil {
+		return err
+	}
+
+	// send message to stream
+}
+</code></pre>
+<p>Client:</p>
+<pre><code class="lang-auto">// ServiceListenResults returns a channel with event results streaming..
+func (p *ServiceProvider) ServiceListenResults(id, taskFilter, outputFilter string, tagFilters []string) (chan *coreapi.ResultData, chan error, error) {
+	// create stream
+
+	// wait for server to return its ready
+	meta, err := stream.Header()
+	if err != nil {
+		return nil, nil, err
+	}
+	statuses := meta.Get("status")
+	println("header status", statuses[len(statuses)-1])
+
+	// read stream
+}
+</code></pre>
+<p><a class="mention" href="../../../u/ilgooz.html">@ilgooz</a> <a class="mention" href="../../../u/anthony.html">@Anthony</a> <a class="mention" href="../../../u/krhubert.html">@krhubert</a> what do you think about it?</p>
+        </div>
+
+        <meta itemprop='headline' content='Acknowledgement system on stream'>
+          <meta itemprop='keywords' content='proposal'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="../172.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2019-01-04T10:21:10Z'>
+              <time itemprop='dateModified' datetime='2019-01-04T10:41:25Z' class='post-time'>
+                January 4, 2019, 10:41am
+              </time>
+          <span itemprop='position'>#2</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>After speaking with <a class="mention" href="../../../u/krhubert.html">@krhubert</a>, the acknowledgement system is something good to implement but should not be used for fixing the issue of “when we need to execute a task and listen for its result”.<br>
+To solve this problem, we could introduce a new very simple gRPC API that return a result of a <code>executionID</code>, see <a href="../../get-result-api/174.html" class="inline-onebox">Get result api</a></p>
+        </div>
+
+        <meta itemprop='headline' content='Acknowledgement system on stream'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="../172.html">
+
+            <link itemprop="image" href="../../../uploads/default/original/1X/26944398294eb78d5fcd9c0ac79f47a8ba160661.jpeg">
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2019-01-05T09:23:08Z'>
+              <time itemprop='dateModified' datetime='2019-01-08T04:28:12Z' class='post-time'>
+                January 8, 2019,  4:28am
+              </time>
+          <span itemprop='position'>#3</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Implemented here:<br>
+<aside class="onebox githubpullrequest">
+  <header class="source">
+      <a href="https://github.com/mesg-foundation/core/pull/677" target="_blank" rel="nofollow noopener">github.com/mesg-foundation/core</a>
+  </header>
+  <article class="onebox-body">
+      <a href="https://github.com/NicolasMahe" target="_blank" rel="nofollow noopener">
+    <img alt="NicolasMahe" src="../../../uploads/default/original/1X/26944398294eb78d5fcd9c0ac79f47a8ba160661.jpeg" class="thumbnail onebox-avatar" width="90" height="90">
+  </a>
+
+<h4>
+  <a href="https://github.com/mesg-foundation/core/pull/677" target="_blank" rel="nofollow noopener">Stream acknowledgement</a>
+</h4>
+
+<div class="date">
+  by <a href="https://github.com/NicolasMahe" target="_blank" rel="nofollow noopener">NicolasMahe</a>
+  on <a href="https://github.com/mesg-foundation/core/pull/677" target="_blank" rel="nofollow noopener">09:22AM - 05 Jan 19 UTC</a>
+</div>
+
+<div class="github-commit-stats">
+  <strong>4 commits</strong>
+  changed <strong>7 files</strong>
+  with <strong>47 additions</strong>
+  and <strong>6 deletions</strong>.
+</div>
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+</p>
+        </div>
+
+        <meta itemprop='headline' content='Acknowledgement system on stream'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../../u/ilgooz.html'><span itemprop='name'>ilgooz</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="../172.html">
+
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2019-01-06T12:06:25Z'>
+              <time itemprop='dateModified' datetime='2019-01-06T12:20:18Z' class='post-time'>
+                January 6, 2019, 12:20pm
+              </time>
+          <span itemprop='position'>#4</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>I’m in favor of ack system. Because in the client side, once the listening request is made, it’s an expected behavior to get stream (event/result/task) data being produced right after func is returned.</p>
+        </div>
+
+        <meta itemprop='headline' content='Acknowledgement system on stream'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+            <div class='crawler-linkback-list' itemscope itemtype='http://schema.org/ItemList'>
+                  <div itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+                    <a href="../../get-result-api/174/8.html" itemprop='item'>
+                      <meta itemprop='url' content='https://forum.mesg.com/t/get-result-api/174/8'>
+                      <meta itemprop='position' content='1'>
+                      <span itemprop='name'>Get result api</span>
+                    </a>
+                  </div>
+            </div>
+      </div>
+
+
+
+
+
+
+    </div>
+    <footer class="container wrap">
+      <nav class='crawler-nav'>
+        <ul>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../../index.html' itemprop="url">Home </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../../categories.html' itemprop="url">Categories </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../../guidelines.html' itemprop="url">FAQ/Guidelines </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../../tos.html' itemprop="url">Terms of Service </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../../privacy.html' itemprop="url">Privacy Policy </a>
+          </span>
+        </li>
+        </ul>
+      </nav>
+      <p class='powered-by-link'>Powered by <a href="https://www.discourse.org">Discourse</a>, best viewed with JavaScript enabled</p>
+    </footer>
+    
+    
+  </body>
+  
+</html>

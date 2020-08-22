@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Protobuf folder structure</title>
+    <link>https://forum.mesg.com/t/protobuf-folder-structure/297</link>
+    <description>Hey guys, I would like to suggest a organisation for future protobuf and gRPC definition.
+
+Currently, we have a folder `definition` containing the definition of the Service and its data (and [more will come like Execution](https://github.com/mesg-foundation/engine/pull/1006)), but also `coreapi`, `serviceapi` that each contains some gRPC services.
+
+Then, I make some suggestion in https://forum.mesg.com/t/service-compilation-deploy/288 and https://forum.mesg.com/t/instance-db/295 to create those new gRPC services in `/protobuf/service/service.proto` and `/protobuf/instance/instance.proto` but I&#39;m actually not satisfied with this solution as there is only one file per folder and the name of the folder doesn&#39;t say it only contains gRPC service.
+
+My proposal is use the same logic as the folder definition (one folder containing one file per data) for all gRPC services. Create one folder `protobuf/api` containing one file per gRPC service.
+
+The new file structure with the future execution, instance, service will look like:
+```
+- protobuf
+  - acknowledgement // we don&#39;t touch this one
+  - api
+    - execution.proto
+    - instance.proto
+    - service.proto
+  - definition
+    - execution.proto
+    - instance.proto
+    - service.proto
+```
+
+As you see, we may end up with the same filenames in api and definition but I think it&#39;s good for separation between data and gRPC services.
+
+@core what do you think guys?</description>
+    
+    <lastBuildDate>Mon, 03 Jun 2019 05:46:25 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/protobuf-folder-structure/297.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Protobuf folder structure</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="4" data-topic="297">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/nicolas/40/10_2.png" class="avatar"> Nicolas:</div>
+<blockquote>
+<p>I agree, <code>definition</code> doesn’t say it’s the data structure. What about <code>models</code> (like in MVC)?</p>
+<p><img src="https://forum.mesg.com/user_avatar/forum.mesg.com/krhubert/40/9_2.png" alt width="20" height="20"> krhubert:</p>
+</blockquote>
+</aside>
+<p><code>models</code> seems better, also i <code>types</code> might be good.</p>
+          <p><a href="https://forum.mesg.com/t/protobuf-folder-structure/297/5">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/protobuf-folder-structure/297/5</link>
+        <pubDate>Mon, 03 Jun 2019 05:46:25 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-297-5</guid>
+        <source url="https://forum.mesg.com/t/protobuf-folder-structure/297.rss">Protobuf folder structure</source>
+      </item>
+      <item>
+        <title>Protobuf folder structure</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="3" data-topic="297">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/krhubert/40/9_2.png" class="avatar"> krhubert:</div>
+<blockquote>
+<p>but I don’t like the <code>definition</code> directory as it doesn’t give you info why it’s for. Definition of what? I don’t have better name but we need to figure it out.</p>
+</blockquote>
+</aside>
+<p>I agree, <code>definition</code> doesn’t say it’s the data structure. What about <code>models</code> (like in MVC)?</p>
+<aside class="quote group-team" data-post="3" data-topic="297">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/krhubert/40/9_2.png" class="avatar"> krhubert:</div>
+<blockquote>
+<p>Also, the question is what will be go package names?</p>
+</blockquote>
+</aside>
+<p>the go package should be the same as the proto package, so <code>api</code> and <code>definition</code>. I think we can also remove the <code>option go_package = "github.com/mesg-foundation/core/protobuf/service";</code> as it’s the same as the proto themselve!</p>
+          <p><a href="https://forum.mesg.com/t/protobuf-folder-structure/297/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/protobuf-folder-structure/297/4</link>
+        <pubDate>Mon, 03 Jun 2019 03:47:23 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-297-4</guid>
+        <source url="https://forum.mesg.com/t/protobuf-folder-structure/297.rss">Protobuf folder structure</source>
+      </item>
+      <item>
+        <title>Protobuf folder structure</title>
+        <dc:creator><![CDATA[krhubert]]></dc:creator>
+        <description><![CDATA[
+            <p><img src="https://forum.mesg.com/images/emoji/twitter/+1.png?v=9" title=":+1:" class="emoji" alt=":+1:"></p>
+<p>but I don’t like the <code>definition</code> directory as it doesn’t give you info why it’s for. Definition of what? I don’t have better name but we need to figure it out.</p>
+<p>Also, the question is what will be go package names?</p>
+          <p><a href="https://forum.mesg.com/t/protobuf-folder-structure/297/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/protobuf-folder-structure/297/3</link>
+        <pubDate>Sun, 02 Jun 2019 18:05:24 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-297-3</guid>
+        <source url="https://forum.mesg.com/t/protobuf-folder-structure/297.rss">Protobuf folder structure</source>
+      </item>
+      <item>
+        <title>Protobuf folder structure</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>Agree, that’s what I already proposed for the <a href="https://forum.mesg.com/t/execution-db-and-api/280" class="inline-onebox">Execution DB and API</a></p>
+          <p><a href="https://forum.mesg.com/t/protobuf-folder-structure/297/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/protobuf-folder-structure/297/2</link>
+        <pubDate>Sun, 02 Jun 2019 11:06:31 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-297-2</guid>
+        <source url="https://forum.mesg.com/t/protobuf-folder-structure/297.rss">Protobuf folder structure</source>
+      </item>
+      <item>
+        <title>Protobuf folder structure</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Hey guys, I would like to suggest a organisation for future protobuf and gRPC definition.</p>
+<p>Currently, we have a folder <code>definition</code> containing the definition of the Service and its data (and <a href="https://github.com/mesg-foundation/engine/pull/1006" rel="nofollow noopener">more will come like Execution</a>), but also <code>coreapi</code>, <code>serviceapi</code> that each contains some gRPC services.</p>
+<p>Then, I make some suggestion in <a href="https://forum.mesg.com/t/service-compilation-deploy/288" class="inline-onebox">Service compilation &amp; deploy</a> and <a href="https://forum.mesg.com/t/instance-db/295" class="inline-onebox">Instance DB</a> to create those new gRPC services in <code>/protobuf/service/service.proto</code> and <code>/protobuf/instance/instance.proto</code> but I’m actually not satisfied with this solution as there is only one file per folder and the name of the folder doesn’t say it only contains gRPC service.</p>
+<p>My proposal is use the same logic as the folder definition (one folder containing one file per data) for all gRPC services. Create one folder <code>protobuf/api</code> containing one file per gRPC service.</p>
+<p>The new file structure with the future execution, instance, service will look like:</p>
+<pre><code class="lang-auto">- protobuf
+  - acknowledgement // we don't touch this one
+  - api
+    - execution.proto
+    - instance.proto
+    - service.proto
+  - definition
+    - execution.proto
+    - instance.proto
+    - service.proto
+</code></pre>
+<p>As you see, we may end up with the same filenames in api and definition but I think it’s good for separation between data and gRPC services.</p>
+<p><a class="mention-group" href="/groups/core">@core</a> what do you think guys?</p>
+          <p><a href="https://forum.mesg.com/t/protobuf-folder-structure/297/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/protobuf-folder-structure/297/1</link>
+        <pubDate>Sun, 02 Jun 2019 10:46:34 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-297-1</guid>
+        <source url="https://forum.mesg.com/t/protobuf-folder-structure/297.rss">Protobuf folder structure</source>
+      </item>
+  </channel>
+</rss>

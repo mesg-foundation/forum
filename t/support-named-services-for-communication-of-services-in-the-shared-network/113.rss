@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Support Named Services for Communication of Services in the Shared Network</title>
+    <link>https://forum.mesg.com/t/support-named-services-for-communication-of-services-in-the-shared-network/113</link>
+    <description>Lets think there are two mesg services called as _Service A_ and _Service B_ that created with their own _mesg.yml_ files.
+
+_Service A_ may want to communicate with _Service B_ over the private shared Docker network. But since there is no an option of setting human readable service names with the yml file or with the service starting api by using a _--name_ flag, it&#39;s required to use this kind of log names like `core-f6c5f0abefc66ddb6a80565238fa69e8340582af-service` which is hard to use and not static. We need static names otherwise it&#39;s required to update _Service B_ when source code of _Service A_ is changed.
+
+I propose to having the ability of setting static names to services inside _yml_ file or/and with the _--name_ flag on service starting/creation. 
+
+We also need to create a special network where all services are connected to each other but not their dependencies. Otherwise we can have conflicts in names because each dependencies has their own static names.</description>
+    
+    <lastBuildDate>Fri, 09 Nov 2018 04:25:53 +0000</lastBuildDate>
+    <category>Development</category>
+    <atom:link href="https://forum.mesg.com/t/support-named-services-for-communication-of-services-in-the-shared-network/113.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Support Named Services for Communication of Services in the Shared Network</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <aside class="quote group-team" data-post="4" data-topic="113">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt width="20" height="20" src="https://forum.mesg.com/user_avatar/forum.mesg.com/ilgooz/40/46_1.png" class="avatar"> ilgooz:</div>
+<blockquote>
+<p>For example, <em>Service A</em> might be a reverse proxy to proxy http endpoints of <em>Service B</em> . In this case it needs to be able access to <em>Service B</em> through http like: <code>http://unique-name-of-service-b</code> . Or it can access to <em>Service B</em> over <code>localhost</code> by opening ports in the <code>mesg.yaml</code> 's configuration section first but this will also expose <em>Service B</em> to outside network which may be an unwanted behavior in some cases.</p>
+</blockquote>
+</aside>
+<p>This is still possible inside a single mesg service using the dependencies. All dependencies run in a single network and can access other containers.</p>
+<p>If connections between mesg services is possible it means I can create a mesg service that tries to connect bruteforce the connection to all possible services and extract all the events from this service and maybe send it to a private database. Of course users have to verify the source code of the services they install but most of the time they don’t or don’t have the knowledge to do it correctly so we need to reduce this risk and sandbox the different services’s environments.</p>
+<p>We can always do that using <a href="https://forum.mesg.com/t/service-composition/22">Service composition</a> where the service will explicitly describe what services it belongs to and will have access only to that service (these services).</p>
+          <p><a href="https://forum.mesg.com/t/support-named-services-for-communication-of-services-in-the-shared-network/113/6">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/support-named-services-for-communication-of-services-in-the-shared-network/113/6</link>
+        <pubDate>Fri, 09 Nov 2018 04:25:53 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-113-6</guid>
+        <source url="https://forum.mesg.com/t/support-named-services-for-communication-of-services-in-the-shared-network/113.rss">Support Named Services for Communication of Services in the Shared Network</source>
+      </item>
+      <item>
+        <title>Support Named Services for Communication of Services in the Shared Network</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Maybe I was not clear enough:<br>
+Direct communication between services should NOT be allowed. But,<br>
+<strong>Indirect</strong> communication between services through Core is fine.</p>
+<p>We were brainstorming with Antho about this, and we could just provide the <code>ExecuteTask</code>, <code>ListenEvent</code>, and <code>ListenResult</code> api to the services. This with the <code>alias</code> on service, it will be easy and secure for a service to use another service.</p>
+          <p><a href="https://forum.mesg.com/t/support-named-services-for-communication-of-services-in-the-shared-network/113/5">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/support-named-services-for-communication-of-services-in-the-shared-network/113/5</link>
+        <pubDate>Thu, 08 Nov 2018 11:36:09 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-113-5</guid>
+        <source url="https://forum.mesg.com/t/support-named-services-for-communication-of-services-in-the-shared-network/113.rss">Support Named Services for Communication of Services in the Shared Network</source>
+      </item>
+      <item>
+        <title>Support Named Services for Communication of Services in the Shared Network</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <blockquote>
+<p><em>from <a class="mention" href="/u/nicolas">@Nicolas</a>:</em><br>
+Also, Services SHOULD not be able to connect any other services directly. Services should communicate only to the Core.</p>
+</blockquote>
+<p>I’m not sure about this one. There might be some valid reasons why we should not disallow this direct communication between services.</p>
+<p>For example, <em>Service A</em> might be a reverse proxy to proxy http endpoints of <em>Service B</em>. In this case it needs to be able access to <em>Service B</em> through http like: <code>http://unique-name-of-service-b</code>. Or it can access to <em>Service B</em> over <code>localhost</code> by opening ports in the <code>mesg.yaml</code>'s configuration section first but this will also expose <em>Service B</em> to outside network which may be an unwanted behavior in some cases.</p>
+          <p><a href="https://forum.mesg.com/t/support-named-services-for-communication-of-services-in-the-shared-network/113/4">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/support-named-services-for-communication-of-services-in-the-shared-network/113/4</link>
+        <pubDate>Thu, 08 Nov 2018 11:20:10 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-113-4</guid>
+        <source url="https://forum.mesg.com/t/support-named-services-for-communication-of-services-in-the-shared-network/113.rss">Support Named Services for Communication of Services in the Shared Network</source>
+      </item>
+      <item>
+        <title>Support Named Services for Communication of Services in the Shared Network</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>I agree with <a class="mention" href="/u/anthony">@Anthony</a> that it should be solve by “Fixed service ID” and “service composition”.</p>
+<p>Also, Services SHOULD not be able to connect any other services directly. Services should communicate only to the Core.<br>
+Currently, services are on the same “mesg-shared” Docker Network but this is not something that should stay. We did it this way only for ease of development. The current design is not sandboxed enough.<br>
+We should create one network per service that also include the Core. And also new networks for the service to communicate with each dependencies.</p>
+<p>I think we need to prioritize “Fixed service ID” and “service composition”.</p>
+          <p><a href="https://forum.mesg.com/t/support-named-services-for-communication-of-services-in-the-shared-network/113/3">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/support-named-services-for-communication-of-services-in-the-shared-network/113/3</link>
+        <pubDate>Thu, 08 Nov 2018 10:18:16 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-113-3</guid>
+        <source url="https://forum.mesg.com/t/support-named-services-for-communication-of-services-in-the-shared-network/113.rss">Support Named Services for Communication of Services in the Shared Network</source>
+      </item>
+      <item>
+        <title>Support Named Services for Communication of Services in the Shared Network</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>I think this one will be solved by either the service ID system <a href="https://forum.mesg.com/t/fixed-service-id-name-service-update-create-feature/110">Fixed Service ID/Name &amp; Service Update, Create Feature</a> and the service composition <a href="https://forum.mesg.com/t/service-composition/22">Service composition</a></p>
+          <p><a href="https://forum.mesg.com/t/support-named-services-for-communication-of-services-in-the-shared-network/113/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/support-named-services-for-communication-of-services-in-the-shared-network/113/2</link>
+        <pubDate>Wed, 07 Nov 2018 10:24:28 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-113-2</guid>
+        <source url="https://forum.mesg.com/t/support-named-services-for-communication-of-services-in-the-shared-network/113.rss">Support Named Services for Communication of Services in the Shared Network</source>
+      </item>
+      <item>
+        <title>Support Named Services for Communication of Services in the Shared Network</title>
+        <dc:creator><![CDATA[ilgooz]]></dc:creator>
+        <description><![CDATA[
+            <p>Lets think there are two mesg services called as <em>Service A</em> and <em>Service B</em> that created with their own <em>mesg.yml</em> files.</p>
+<p><em>Service A</em> may want to communicate with <em>Service B</em> over the private shared Docker network. But since there is no an option of setting human readable service names with the yml file or with the service starting api by using a <em>–name</em> flag, it’s required to use this kind of log names like <code>core-f6c5f0abefc66ddb6a80565238fa69e8340582af-service</code> which is hard to use and not static. We need static names otherwise it’s required to update <em>Service B</em> when source code of <em>Service A</em> is changed.</p>
+<p>I propose to having the ability of setting static names to services inside <em>yml</em> file or/and with the <em>–name</em> flag on service starting/creation.</p>
+<p>We also need to create a special network where all services are connected to each other but not their dependencies. Otherwise we can have conflicts in names because each dependencies has their own static names.</p>
+          <p><a href="https://forum.mesg.com/t/support-named-services-for-communication-of-services-in-the-shared-network/113/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/support-named-services-for-communication-of-services-in-the-shared-network/113/1</link>
+        <pubDate>Wed, 07 Nov 2018 08:02:10 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-113-1</guid>
+        <source url="https://forum.mesg.com/t/support-named-services-for-communication-of-services-in-the-shared-network/113.rss">Support Named Services for Communication of Services in the Shared Network</source>
+      </item>
+  </channel>
+</rss>

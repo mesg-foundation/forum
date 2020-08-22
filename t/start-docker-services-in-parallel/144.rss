@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Start docker services in parallel</title>
+    <link>https://forum.mesg.com/t/start-docker-services-in-parallel/144</link>
+    <description>From https://github.com/mesg-foundation/core/issues/599
+
+Because of https://github.com/mesg-foundation/core/issues/382, the docker services are created one by one (https://github.com/mesg-foundation/core/pull/598).
+
+We could find better and faster way to start the services in parallel but still get error from docker.
+The only thing that cannot be done in parallel is the creation of the services. The creation and start of the contains (that take most of the time), can be do in parallel.
+So, we need to find a way to only create the services one by one, and the rest in parallel.
+
+Here is my ideas to investigate:
+- Move / separate the logic from `service` package to `container` package. If `container` can handle the start of multiple services, then we can create the service one by one, but wait for the containers starting status in parallel
+- See if an &quot;create service&quot; event is emitted by docker
+
+----
+
+From @ilgooz 
+1- I think moving that logic to _container_ pkg makes sense because it&#39;s about Docker Swarm, so it should be in _container_ pkg. But it&#39;s not 100% relevant with this issue.
+2- We definitely need events for this one to create services atomically.</description>
+    
+    <lastBuildDate>Thu, 13 Dec 2018 10:53:53 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/start-docker-services-in-parallel/144.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Start docker services in parallel</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>From <a href="https://github.com/mesg-foundation/core/issues/599" rel="nofollow noopener">https://github.com/mesg-foundation/core/issues/599</a></p>
+<p>Because of <a href="https://github.com/mesg-foundation/core/issues/382" rel="nofollow noopener">https://github.com/mesg-foundation/core/issues/382</a>, the docker services are created one by one (<a href="https://github.com/mesg-foundation/core/pull/598" rel="nofollow noopener">https://github.com/mesg-foundation/core/pull/598</a>).</p>
+<p>We could find better and faster way to start the services in parallel but still get error from docker.<br>
+The only thing that cannot be done in parallel is the creation of the services. The creation and start of the contains (that take most of the time), can be do in parallel.<br>
+So, we need to find a way to only create the services one by one, and the rest in parallel.</p>
+<p>Here is my ideas to investigate:</p>
+<ul>
+<li>Move / separate the logic from <code>service</code> package to <code>container</code> package. If <code>container</code> can handle the start of multiple services, then we can create the service one by one, but wait for the containers starting status in parallel</li>
+<li>See if an “create service” event is emitted by docker</li>
+</ul>
+<hr>
+<p>From <a class="mention" href="/u/ilgooz">@ilgooz</a><br>
+1- I think moving that logic to <em>container</em> pkg makes sense because it’s about Docker Swarm, so it should be in <em>container</em> pkg. But it’s not 100% relevant with this issue.<br>
+2- We definitely need events for this one to create services atomically.</p>
+          <p><a href="https://forum.mesg.com/t/start-docker-services-in-parallel/144/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/start-docker-services-in-parallel/144/1</link>
+        <pubDate>Thu, 13 Dec 2018 10:53:53 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-144-1</guid>
+        <source url="https://forum.mesg.com/t/start-docker-services-in-parallel/144.rss">Start docker services in parallel</source>
+      </item>
+  </channel>
+</rss>

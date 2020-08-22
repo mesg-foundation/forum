@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:discourse="http://www.discourse.org/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Proof of Concept - MESG Community</title>
+    <link>https://forum.mesg.com/c/proof-of-concept</link>
+    <description>Topics in the &#39;Proof of Concept&#39; category </description>
+    
+      <lastBuildDate>Fri, 01 Feb 2019 05:47:44 +0000</lastBuildDate>
+      <atom:link href="https://forum.mesg.com/c/proof-of-concept.rss" rel="self" type="application/rss+xml" />
+        <item>
+          <title>Prepay for data storage</title>
+          <dc:creator><![CDATA[Anthony]]></dc:creator>
+          <category>Proof of Concept</category>
+          <description><![CDATA[
+            <h2>Concept</h2>
+<p>File hosting is an important part of a business and nowadays new solutions are emerging based on blockchain/decentralized technologies. One of the problem of these new technologies are the usability of it because it often requires to buy token in order to use the technology.<br>
+Few technologies can be used that way:</p>
+<ul>
+<li><a href="https://sia.tech" rel="nofollow noopener">Sia</a></li>
+<li><a href="https://storj.io" rel="nofollow noopener">Storj</a></li>
+<li><a href="https://filecoin.io" rel="nofollow noopener">Filecoin</a></li>
+</ul>
+<p>The goal is to help the adoption of these projects by providing a way to pay in fiat to store a file for a certain period of time or even having some subscription to make sure the file is always stored.</p>
+<p>We could connect a payment gateway like Stripe that accepts payment either direct payment or subscriptions and when the payment is marked as done on Stripe, only at this time the file is uploaded for a certain period of time (based on the price you paid). If a subscription model is in place we could have this workflow created every x period of time.</p>
+<h2>Business implication</h2>
+<ul>
+<li>Use new storage systems</li>
+<li>Easy adoption</li>
+<li>Cheaper price for hosting</li>
+<li>More reliable/secure hosting</li>
+<li>Censorship resistant hosting</li>
+</ul>
+<h2>Workflow</h2>
+<p><img src="https://forum.mesg.com/uploads/default/original/1X/2472dc5fad60d62441af79ba945cfe9e6887510f.png" alt="image" width="690" height="215"></p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://forum.mesg.com/t/prepay-for-data-storage/243">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/prepay-for-data-storage/243</link>
+          <pubDate>Fri, 01 Feb 2019 05:47:44 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-243</guid>
+          <source url="https://forum.mesg.com/t/prepay-for-data-storage/243.rss">Prepay for data storage</source>
+        </item>
+        <item>
+          <title>Monetizing API through Blockchain</title>
+          <dc:creator><![CDATA[Anthony]]></dc:creator>
+          <category>Proof of Concept</category>
+          <description><![CDATA[
+            <h2>Concept</h2>
+<p>The goal is to give the possibility to businesses to have a new way to monetize their APIs. Right now most of businesses like SaaS products uses recurrent billing and complex systems to accept payment for the features they deliver. Cryptocurrencies can be a good use here where instead of having to manage complex subscription systems they could set a price for every features they want to expose (eg: taking order, accessing data, creating resource…).</p>
+<h2>Examples</h2>
+<ul>
+<li>Email/SMS/push notifications providers that can have a real pay per use pricing</li>
+<li>Data storage, prepaid for hosting</li>
+<li>PaaS like Heroku, DigitalOcean… to deploy new server on demand</li>
+<li>Storage of data in a database (pay per Kb)<br>
+…</li>
+</ul>
+<h2>Business implications</h2>
+<ul>
+<li>New model of monetization that can open the competition</li>
+<li>Focus on the actual key values proposition of the business without the need to manage its monetization</li>
+<li>Creation of new innovative business models</li>
+<li>Reducing the complexity of products and increasing the potential reusability of them</li>
+<li>Human resources reductions (no need for an extra payment system developer team)</li>
+<li>Reducing friction for users (pay as you go instead of big packages)</li>
+</ul>
+<h2>Materials</h2>
+<p>We’ve created a proof of concept of that at the Pegasys hackathon <a href="https://devpost.com/software/pegasys-hackathon" rel="nofollow noopener">https://devpost.com/software/pegasys-hackathon</a> during the Devcon IV in Prague.<br>
+To show the concept we used an email provider (Sendgrid) that you can use through Ethereum Smart Contract where you can pay per email sent.<br>
+The source code is here <a href="https://github.com/antho1404/pegasys-hackathon" rel="nofollow noopener">https://github.com/antho1404/pegasys-hackathon</a></p>
+<p><a href="https://devpost.com/software/pegasys-hackathon" rel="nofollow noopener"><img src="https://forum.mesg.com/uploads/default/original/1X/b1c56391ac876b910262718c070822f6aeefd25b.jpeg" alt="gallery" width="690" height="490"> </a></p>
+<h2>Workflow</h2>
+<h4>Actual workflow</h4>
+<ul>
+<li>The client pay on the payment gateway</li>
+<li>The payment gateway notify the API that this client can now use the API</li>
+<li>The API need to store this information and synchronise it with the payment gateway</li>
+<li>The client can consume the API</li>
+</ul>
+<p>The client needs to know the payment gateway and the API<br>
+<img src="https://forum.mesg.com/uploads/default/original/1X/0ee1b36d4f895d1a680de73ade26d855e6a5f725.png" alt="actual-workflow" width="690" height="251"></p>
+<h4>New workflow</h4>
+<ul>
+<li>The client create a request on the smart contract / and pay for it</li>
+<li>The API react to the smart contract</li>
+<li>The API submit the result on the smart contract</li>
+<li>The client get the data from the smart contract</li>
+</ul>
+<p>The client doesn’t need to know the API<br>
+<img src="https://forum.mesg.com/uploads/default/original/1X/d1d2a4f16be4fa53e6b298eed2c33b110fd3b3ee.png" alt="new-workflow" width="690" height="210"></p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://forum.mesg.com/t/monetizing-api-through-blockchain/223">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/monetizing-api-through-blockchain/223</link>
+          <pubDate>Wed, 23 Jan 2019 08:38:05 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-223</guid>
+          <source url="https://forum.mesg.com/t/monetizing-api-through-blockchain/223.rss">Monetizing API through Blockchain</source>
+        </item>
+        <item>
+          <title>Analytics tool for ERC20 transfers</title>
+          <dc:creator><![CDATA[Anthony]]></dc:creator>
+          <category>Proof of Concept</category>
+          <description><![CDATA[
+            <h2>Concept</h2>
+<p>We need to have a tool to monitor the different transfers on ERC20 on Ethereum and provide some kind of graphs that display all the informations needed.</p>
+<h2>Business implication</h2>
+<ul>
+<li>For ICO they could be able to monitor the volume they are doing during their ICO</li>
+<li>Can extract patterns looking at the graphs, like when there is a high volume of transfer (meaning that it might be a bot)</li>
+<li>Connecting some AI system to be able to predict the future transfers and predict the price</li>
+<li>Expand to ERC721 and have a tool to monitor how your ERC721 is performing</li>
+</ul>
+<h2>Material</h2>
+<p>Here is a proof of concept using <code>Influxdb</code> and <code>Grafana</code>.<br>
+The MESG application that runs all that is present <a href="https://github.com/antho1404/application-erc20-analytics" rel="nofollow noopener">here</a><br>
+You can test it here <a href="http://erc20-analytics.demo.mesg.com:3000/" rel="nofollow noopener">http://erc20-analytics.demo.mesg.com:3000/</a> with the following credentials:<br>
+login: <code>test</code><br>
+password: <code>test</code></p>
+<p><img src="https://forum.mesg.com/uploads/default/original/1X/dd3e09715411d90152680d614d77abd9bce19a37.png" alt="26%20am" width="690" height="389"></p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://forum.mesg.com/t/analytics-tool-for-erc20-transfers/209">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/analytics-tool-for-erc20-transfers/209</link>
+          <pubDate>Mon, 21 Jan 2019 04:45:43 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-209</guid>
+          <source url="https://forum.mesg.com/t/analytics-tool-for-erc20-transfers/209.rss">Analytics tool for ERC20 transfers</source>
+        </item>
+        <item>
+          <title>Stripe to ERC20</title>
+          <dc:creator><![CDATA[Anthony]]></dc:creator>
+          <category>Proof of Concept</category>
+          <description><![CDATA[
+            <h2>Concept</h2>
+<p>The idea of this one is to be able to accept payment on <a href="https://stripe.com">Stripe</a> and send token to the buyer (kind of airdrop the token). This can be used in many cases, with <a href="https://theethereum.wiki/w/index.php/ERC20_Token_Standard">ERC20</a> simply to buy ERC20 without having to go to an exchange and the company that release the token can also sell it directly with the price they decide.</p>
+<p>One other implication is using <a href="http://erc721.org/">ERC71</a>, it allows to buy collectibles (cryptokitties, game skins, addons…) without having to even know about Ethereum.</p>
+<h2>Business implication</h2>
+<ul>
+<li>Every project could be now able to use the benefits of blockchain and tokenize everything without having the barrier to entry that blockchains has now.</li>
+<li>New way of ICO if legal</li>
+<li>Gaming industry could have their token in the game that is actual token based on ERC20 or the different objects to craft or whatever based on the ERC721.</li>
+<li>Shop could do their inventory on blockchain and still selling this with a simple credit cart system.</li>
+</ul>
+<h2>Materials</h2>
+<p>Demo video: <a href="https://drive.google.com/file/d/1WfZZ9tcNJAEdKms9LKynR1rlle4rS_Ix/view?usp=sharing">https://drive.google.com/file/d/1WfZZ9tcNJAEdKms9LKynR1rlle4rS_Ix/view?usp=sharing</a><br>
+<aside class="onebox whitelistedgeneric">
+  <header class="source">
+      <img src="https://github.githubassets.com/favicons/favicon.svg" class="site-icon" width="32" height="32">
+      <a href="https://github.com/mesg-foundation/application-stripe-to-erc20" target="_blank">GitHub</a>
+  </header>
+  <article class="onebox-body">
+    <img src="https://forum.mesg.com/uploads/default/original/1X/9a7d31725705dc0a66d95aa32a5ecc784f926ecf.png" class="thumbnail" width="" height="">
+
+<h3><a href="https://github.com/mesg-foundation/application-stripe-to-erc20" target="_blank">mesg-foundation/application-stripe-to-erc20</a></h3>
+
+<p>Example application using a payment with stripe to send erc20 tokens - mesg-foundation/application-stripe-to-erc20</p>
+
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+</p>
+<h2>Workflow</h2>
+<p><img src="https://forum.mesg.com/uploads/default/original/1X/6761f63f59f0eae2ea5880b007a22d7977c8f285.jpeg" alt="stripe-erc20-workflow" data-base62-sha1="eKz3PORJqy0cdKzHEFZSfnASyPP" width="690" height="244"></p>
+            <p><small>2 posts - 1 participant</small></p>
+            <p><a href="https://forum.mesg.com/t/stripe-to-erc20/206">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/stripe-to-erc20/206</link>
+          <pubDate>Sun, 20 Jan 2019 11:47:06 +0000</pubDate>
+          <discourse:topicPinned>No</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-206</guid>
+          <source url="https://forum.mesg.com/t/stripe-to-erc20/206.rss">Stripe to ERC20</source>
+        </item>
+        <item>
+          <title>About the Proof of Concept category</title>
+          <dc:creator><![CDATA[Anthony]]></dc:creator>
+          <category>Proof of Concept</category>
+          <description><![CDATA[
+            <p>(Replace this first paragraph with a brief description of your new category. This guidance will appear in the category selection area, so try to keep it below 200 characters. <strong>Until you edit this description or create topics, this category won’t appear on the categories page.</strong>)</p>
+<p>Use the following paragraphs for a longer description, or to establish category guidelines or rules:</p>
+<ul>
+<li>
+<p>Why should people use this category? What is it for?</p>
+</li>
+<li>
+<p>How exactly is this different than the other categories we already have?</p>
+</li>
+<li>
+<p>What should topics in this category generally contain?</p>
+</li>
+<li>
+<p>Do we need this category? Can we merge with another category, or subcategory?</p>
+</li>
+</ul>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://forum.mesg.com/t/about-the-proof-of-concept-category/182">Read full topic</a></p>
+          ]]></description>
+          <link>https://forum.mesg.com/t/about-the-proof-of-concept-category/182</link>
+          <pubDate>Thu, 10 Jan 2019 08:24:09 +0000</pubDate>
+          <discourse:topicPinned>Yes</discourse:topicPinned>
+          <discourse:topicClosed>No</discourse:topicClosed>
+          <discourse:topicArchived>No</discourse:topicArchived>
+          <guid isPermaLink="false">forum.mesg.com-topic-182</guid>
+          <source url="https://forum.mesg.com/t/about-the-proof-of-concept-category/182.rss">About the Proof of Concept category</source>
+        </item>
+  </channel>
+</rss>

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Service composition</title>
+    <link>https://forum.mesg.com/t/service-composition/22</link>
+    <description>## Proposal 
+
+The goal is to make application as DRY as possible and reusability is something important so why not apply this also for services and compose services based on other services to use an existing service and just build on top of that one to add extra tasks or extra events, create a proxy of this service.
+
+## Example
+
+Let&#39;s take the example of Ethereum:
+
+We could have one service Ethereum with the following events with the raw data from the ethereum node:
+- onBlock
+- onTransaction
+And the following tasks:
+- sendTransaction
+
+Based on that we could create a service ethereum contract that would listen for the `onTransaction` event and check the logs to emit the event:
+- onContractEvent
+and have the task:
+- callContract
+
+Also based on this one we could have another service CryptoKitty or whatever dApp service that would use the contract service for a specific contract and have specific events:
+- onKittyPregnent
+- onBirth
+...
+and tasks:
+- buyKitty
+- getKitty
+...
+
+## Solution
+
+I see 2 different ways to do that, let&#39;s take this service that we want to use
+```yml
+name: &quot;Ethereum&quot;
+events:
+  onTx: ...
+tasks:
+  sendTx: ....
+dependencies:
+  app:
+    image: mesg/ethereum
+  ethereum:
+    image: ethereum/geth
+```
+
+### Configuration inheritance
+
+When we describe the service we can inherit from another service. Inheritance is not always good but in this case the good point is that it will kind of duplicate the service we wants to inherit from in our service.
+
+**Kitty Service**
+```yml
+name: &quot;contact&quot;
+inherits: &quot;Ethereum&quot;
+event:
+  onKittyDead: ...
+dependencies:
+  contract:
+    image: mesg/contract
+```
+
+this will result of a service like that
+```yml
+name: &quot;Service B&quot;
+events:
+  onTx: ...
+  onKittyDead: ...
+tasks:
+  sendTx: ....
+dependencies:
+  app:
+    image: mesg/ethereum
+  ethereum:
+    image: ethereum/geth
+  contract:
+    image: mesg/contract
+```
+
+The good point is that we don&#39;t have to write write any extra code if we want also to propagate events/task from service A and our service really includes all the technologies inside it&#39;s own service (like it&#39;s own ethereum node for example) but the problem is that we don&#39;t really reuse and this service will need it&#39;s own network
+
+### Use another service
+
+In this case the service definition will only be the events and tasks that you want to expose and you will have as a developer in you service code to connect to the other service through MESG core apis and not directly. This adds an unnecessary communication layer and force us to expose for service some APIs like `listenEvent` or `executeTask` and maybe sone security issues with one service that call another one without any authorization. The good point in this case is that we really reuse a service and if this service and its network.
+
+We should also make sure to add it in the description and have the following mesg.yml file like that we can automatically start/stop the services that this service need to use.
+```yml
+name: &quot;contact&quot;
+use:
+  - &quot;Ethereum&quot;
+event:
+  onKittyDead: ...
+dependencies:
+  contract:
+    image: mesg/contract
+```</description>
+    
+    <lastBuildDate>Tue, 28 Aug 2018 03:12:03 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/service-composition/22.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Service composition</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <h2>Proposal</h2>
+<p>The goal is to make application as DRY as possible and reusability is something important so why not apply this also for services and compose services based on other services to use an existing service and just build on top of that one to add extra tasks or extra events, create a proxy of this service.</p>
+<h2>Example</h2>
+<p>Let’s take the example of Ethereum:</p>
+<p>We could have one service Ethereum with the following events with the raw data from the ethereum node:</p>
+<ul>
+<li>onBlock</li>
+<li>onTransaction<br>
+And the following tasks:</li>
+<li>sendTransaction</li>
+</ul>
+<p>Based on that we could create a service ethereum contract that would listen for the <code>onTransaction</code> event and check the logs to emit the event:</p>
+<ul>
+<li>onContractEvent<br>
+and have the task:</li>
+<li>callContract</li>
+</ul>
+<p>Also based on this one we could have another service CryptoKitty or whatever dApp service that would use the contract service for a specific contract and have specific events:</p>
+<ul>
+<li>onKittyPregnent</li>
+<li>onBirth<br>
+…<br>
+and tasks:</li>
+<li>buyKitty</li>
+<li>getKitty<br>
+…</li>
+</ul>
+<h2>Solution</h2>
+<p>I see 2 different ways to do that, let’s take this service that we want to use</p>
+<pre><code class="lang-auto">name: "Ethereum"
+events:
+  onTx: ...
+tasks:
+  sendTx: ....
+dependencies:
+  app:
+    image: mesg/ethereum
+  ethereum:
+    image: ethereum/geth
+</code></pre>
+<h3>Configuration inheritance</h3>
+<p>When we describe the service we can inherit from another service. Inheritance is not always good but in this case the good point is that it will kind of duplicate the service we wants to inherit from in our service.</p>
+<p><strong>Kitty Service</strong></p>
+<pre><code class="lang-auto">name: "contact"
+inherits: "Ethereum"
+event:
+  onKittyDead: ...
+dependencies:
+  contract:
+    image: mesg/contract
+</code></pre>
+<p>this will result of a service like that</p>
+<pre><code class="lang-auto">name: "Service B"
+events:
+  onTx: ...
+  onKittyDead: ...
+tasks:
+  sendTx: ....
+dependencies:
+  app:
+    image: mesg/ethereum
+  ethereum:
+    image: ethereum/geth
+  contract:
+    image: mesg/contract
+</code></pre>
+<p>The good point is that we don’t have to write write any extra code if we want also to propagate events/task from service A and our service really includes all the technologies inside it’s own service (like it’s own ethereum node for example) but the problem is that we don’t really reuse and this service will need it’s own network</p>
+<h3>Use another service</h3>
+<p>In this case the service definition will only be the events and tasks that you want to expose and you will have as a developer in you service code to connect to the other service through MESG core apis and not directly. This adds an unnecessary communication layer and force us to expose for service some APIs like <code>listenEvent</code> or <code>executeTask</code> and maybe sone security issues with one service that call another one without any authorization. The good point in this case is that we really reuse a service and if this service and its network.</p>
+<p>We should also make sure to add it in the description and have the following mesg.yml file like that we can automatically start/stop the services that this service need to use.</p>
+<pre><code class="lang-auto">name: "contact"
+use:
+  - "Ethereum"
+event:
+  onKittyDead: ...
+dependencies:
+  contract:
+    image: mesg/contract
+</code></pre>
+          <p><a href="https://forum.mesg.com/t/service-composition/22/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/service-composition/22/1</link>
+        <pubDate>Tue, 28 Aug 2018 03:12:03 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-22-1</guid>
+        <source url="https://forum.mesg.com/t/service-composition/22.rss">Service composition</source>
+      </item>
+  </channel>
+</rss>

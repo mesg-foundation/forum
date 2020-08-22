@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Service interface</title>
+    <link>https://forum.mesg.com/t/service-interface/24</link>
+    <description>## Proposal 
+
+The goal is to allow developer to change services without changing anything in their app (expect the service ids).
+Services should have the same events and tasks definition in the `mesg.yml`.
+
+## Solution
+
+### Explicitly declare a service interface
+Similar to class interface.
+The `mesg.yml` could have a new parameter `interface` containing the list of interface the service implements.
+
+```yml
+interfaces:
+  - erc20
+  - database
+```
+
+This interface could have their definition in a dedicated files: `erc20.yml`, `database.yml` or in a dedicated repository on github.
+
+#### Pro
+Easy to know a service implement a service interface.
+Easy for the developer of the service to know if its service implement the interface
+
+#### Con
+Have to create a new system of service definition with validation function and stuff...
+Have to either register the interface in the central database, or add the interface definition file to the service folder.
+
+### Implicitly implement a service interface
+Similar to interface and struct in golang, or ERC20 contract on Ethereum.
+No need to declare an interface in the code or in `mesg.yml`.
+
+#### Pro
+More flexible.
+No reference.
+
+#### Con
+Harder to know if the service is really implementing the same events and tasks.
+
+---
+
+Related in a way to https://forum.mesg.com/t/service-composition/22</description>
+    
+    <lastBuildDate>Tue, 28 Aug 2018 08:10:35 +0000</lastBuildDate>
+    <category>Engine</category>
+    <atom:link href="https://forum.mesg.com/t/service-interface/24.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Service interface</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>Really interesting, I see many use cases for that but i’m just worried how to share these interfaces and if it’s too complicated to share, it might not be used.</p>
+<p>Developers can “just” follow a guideline to be compatible and interchangeable.<br>
+We really need to think to a way to share these interfaces.</p>
+<div class="md-table">
+<table>
+<thead>
+<tr>
+<th>medium</th>
+<th>pro</th>
+<th>con</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>File</td>
+<td>easy to implement and clear link to the interface in the mesg.yml with <code>./my-interface.yml</code>
+</td>
+<td>really not easy to share and so might be really complicated to re-use</td>
+</tr>
+<tr>
+<td>GitHub (or similar)</td>
+<td>really easy to share and we could have the path in the mesg.yml file like <code>github.com/org/repo#interfaceA</code>
+</td>
+<td>centralized and hard to deal with versions or updates of the interfaces</td>
+</tr>
+<tr>
+<td>IPFS (or similar)</td>
+<td>easy to do versions and can choose a fixed version or latest with the IPNS</td>
+<td>bad to share and use because the interface would be a hash so not really user-friendly</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div><p>In the end if we have service composition, the interface system would just be useful only for the application developer (to be able to switch from one service to another) but this can be done without interface, just by comparing and matching the different services and we can also have a “similar services” features to help users to switch from one service to another</p>
+          <p><a href="https://forum.mesg.com/t/service-interface/24/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/service-interface/24/2</link>
+        <pubDate>Tue, 28 Aug 2018 08:10:35 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-24-2</guid>
+        <source url="https://forum.mesg.com/t/service-interface/24.rss">Service interface</source>
+      </item>
+      <item>
+        <title>Service interface</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <h2>Proposal</h2>
+<p>The goal is to allow developer to change services without changing anything in their app (expect the service ids).<br>
+Services should have the same events and tasks definition in the <code>mesg.yml</code>.</p>
+<h2>Solution</h2>
+<h3>Explicitly declare a service interface</h3>
+<p>Similar to class interface.<br>
+The <code>mesg.yml</code> could have a new parameter <code>interface</code> containing the list of interface the service implements.</p>
+<pre><code class="lang-auto">interfaces:
+  - erc20
+  - database
+</code></pre>
+<p>This interface could have their definition in a dedicated files: <code>erc20.yml</code>, <code>database.yml</code> or in a dedicated repository on github.</p>
+<h4>Pro</h4>
+<p>Easy to know a service implement a service interface.<br>
+Easy for the developer of the service to know if its service implement the interface</p>
+<h4>Con</h4>
+<p>Have to create a new system of service definition with validation function and stuff…<br>
+Have to either register the interface in the central database, or add the interface definition file to the service folder.</p>
+<h3>Implicitly implement a service interface</h3>
+<p>Similar to interface and struct in golang, or ERC20 contract on Ethereum.<br>
+No need to declare an interface in the code or in <code>mesg.yml</code>.</p>
+<h4>Pro</h4>
+<p>More flexible.<br>
+No reference.</p>
+<h4>Con</h4>
+<p>Harder to know if the service is really implementing the same events and tasks.</p>
+<hr>
+<p>Related in a way to <a href="https://forum.mesg.com/t/service-composition/22">Service composition</a></p>
+          <p><a href="https://forum.mesg.com/t/service-interface/24/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/service-interface/24/1</link>
+        <pubDate>Tue, 28 Aug 2018 08:09:10 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-24-1</guid>
+        <source url="https://forum.mesg.com/t/service-interface/24.rss">Service interface</source>
+      </item>
+  </channel>
+</rss>

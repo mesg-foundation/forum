@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Auto-generate gRPC APIs examples for documentation</title>
+    <link>https://forum.mesg.com/t/auto-generate-grpc-apis-examples-for-documentation/326</link>
+    <description>Following discussion on [PR engine #1092](https://github.com/mesg-foundation/engine/pull/1092#discussion_r296749345), we should auto-generated the responses of the gRPC APIs for documentation.
+
+The tool [grpcurl](https://github.com/fullstorydev/grpcurl) is really simple to use to interact with the API.
+We could save the requests payload in JSON files, write the grpcurl commands in a bash file, and save the responses to new JSON files:
+
+Example with the `ServiceX/Create` API:
+```
+grpcurl -plaintext -d &quot;$(cat ServiceX-Create-request.json)&quot; localhost:50052 api.ServiceX/Create &gt; ServiceX-Create-response.json
+```
+
+---
+
+This system could be very similar or even merged with a suite of integration tests!
+We will have anyway to define the request and the expect response in order to run the integration tests.</description>
+    
+    <lastBuildDate>Tue, 25 Jun 2019 06:06:23 +0000</lastBuildDate>
+    <category>Development</category>
+    <atom:link href="https://forum.mesg.com/t/auto-generate-grpc-apis-examples-for-documentation/326.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Auto-generate gRPC APIs examples for documentation</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>I drafted a script that use grpcurl and jq to execute all 4 apis of Service: <a href="https://github.com/mesg-foundation/engine/pull/1100" rel="nofollow noopener">https://github.com/mesg-foundation/engine/pull/1100</a>.</p>
+          <p><a href="https://forum.mesg.com/t/auto-generate-grpc-apis-examples-for-documentation/326/2">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/auto-generate-grpc-apis-examples-for-documentation/326/2</link>
+        <pubDate>Tue, 25 Jun 2019 06:06:23 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-326-2</guid>
+        <source url="https://forum.mesg.com/t/auto-generate-grpc-apis-examples-for-documentation/326.rss">Auto-generate gRPC APIs examples for documentation</source>
+      </item>
+      <item>
+        <title>Auto-generate gRPC APIs examples for documentation</title>
+        <dc:creator><![CDATA[Nicolas]]></dc:creator>
+        <description><![CDATA[
+            <p>Following discussion on <a href="https://github.com/mesg-foundation/engine/pull/1092#discussion_r296749345" rel="nofollow noopener">PR engine #1092</a>, we should auto-generated the responses of the gRPC APIs for documentation.</p>
+<p>The tool <a href="https://github.com/fullstorydev/grpcurl" rel="nofollow noopener">grpcurl</a> is really simple to use to interact with the API.<br>
+We could save the requests payload in JSON files, write the grpcurl commands in a bash file, and save the responses to new JSON files:</p>
+<p>Example with the <code>ServiceX/Create</code> API:</p>
+<pre><code class="lang-auto">grpcurl -plaintext -d "$(cat ServiceX-Create-request.json)" localhost:50052 api.ServiceX/Create &gt; ServiceX-Create-response.json
+</code></pre>
+<hr>
+<p>This system could be very similar or even merged with a suite of integration tests!<br>
+We will have anyway to define the request and the expect response in order to run the integration tests.</p>
+          <p><a href="https://forum.mesg.com/t/auto-generate-grpc-apis-examples-for-documentation/326/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/auto-generate-grpc-apis-examples-for-documentation/326/1</link>
+        <pubDate>Tue, 25 Jun 2019 05:12:35 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-326-1</guid>
+        <source url="https://forum.mesg.com/t/auto-generate-grpc-apis-examples-for-documentation/326.rss">Auto-generate gRPC APIs examples for documentation</source>
+      </item>
+  </channel>
+</rss>

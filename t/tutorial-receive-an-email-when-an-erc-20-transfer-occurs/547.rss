@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Tutorial: Receive an email when an ERC-20 transfer occurs</title>
+    <link>https://forum.mesg.com/t/tutorial-receive-an-email-when-an-erc-20-transfer-occurs/547</link>
+    <description>&lt;p&gt;Today we&#39;ll learn how to create a JavaScript application that send an email when an ERC-20 transfer occurs on Ethereum.&lt;/p&gt;
+&lt;hr&gt;
+&lt;small&gt;This is a companion discussion topic for the original entry at &lt;a href=&quot;https://blog.mesg.com/receive-email-when-there-is-an-erc20-transfer/&quot;&gt;https://blog.mesg.com/receive-email-when-there-is-an-erc20-transfer/&lt;/a&gt;&lt;/small&gt;</description>
+    
+    <lastBuildDate>Thu, 12 Dec 2019 11:41:48 +0000</lastBuildDate>
+    <category>Blog discussions</category>
+    <atom:link href="https://forum.mesg.com/t/tutorial-receive-an-email-when-an-erc-20-transfer-occurs/547.rss" rel="self" type="application/rss+xml" />
+      <item>
+        <title>Tutorial: Receive an email when an ERC-20 transfer occurs</title>
+        <dc:creator><![CDATA[Anthony]]></dc:creator>
+        <description><![CDATA[
+            <p>Today we'll learn how to create a JavaScript application that send an email when an ERC-20 transfer occurs on Ethereum.</p>
+<hr>
+<small>This is a companion discussion topic for the original entry at <a href="https://blog.mesg.com/receive-email-when-there-is-an-erc20-transfer/">https://blog.mesg.com/receive-email-when-there-is-an-erc20-transfer/</a></small>
+          <p><a href="https://forum.mesg.com/t/tutorial-receive-an-email-when-an-erc-20-transfer-occurs/547/1">Read full topic</a></p>
+        ]]></description>
+        <link>https://forum.mesg.com/t/tutorial-receive-an-email-when-an-erc-20-transfer-occurs/547/1</link>
+        <pubDate>Thu, 12 Dec 2019 11:41:48 +0000</pubDate>
+        <guid isPermaLink="false">forum.mesg.com-post-547-1</guid>
+        <source url="https://forum.mesg.com/t/tutorial-receive-an-email-when-an-erc-20-transfer-occurs/547.rss">Tutorial: Receive an email when an ERC-20 transfer occurs</source>
+      </item>
+  </channel>
+</rss>

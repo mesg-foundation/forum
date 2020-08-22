@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <title>Service.configuration is duplicated in Service.dependencies - Engine - MESG Community</title>
+    <meta name="description" content="Transferred from GitHub issue #624. 
+Why are we keeping service.configuration if it copied to service.dependencies? 
+Two solutions: 
+
+It could be move from configuration to dependencies in service.injectDefinition. Remov&amp;hellip;">
+    <meta name="generator" content="Discourse 2.5.0.beta5 - https://github.com/discourse/discourse version 00aab498297cba8f977c1e0eb17b7d38ff06cc68">
+<link rel="icon" type="image/png" href="../../uploads/default/optimized/1X/9f11b6ddfa02bffdbec79487592a0573a0236cb5_2_32x32.png">
+<link rel="apple-touch-icon" type="image/png" href="../../uploads/default/optimized/1X/53630361a40ad76e1733dd0b0f486e9ae2f4f4d6_2_180x180.png">
+<meta name="theme-color" content="#491e8c">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+<link rel="canonical" href="143.html" />
+<script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","url":"https://forum.mesg.com","potentialAction":{"@type":"SearchAction","target":"https://forum.mesg.com/search?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
+<link rel="search" type="application/opensearchdescription+xml" href="../../opensearch.xml" title="MESG Community Search">
+
+      <link href="../../stylesheets/desktop_3_52e3411e87658e862890db7bd06899cf49ad5f59.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop" data-theme-id="7"/>
+      <link href="../../stylesheets/desktop_theme_7_bf4f2d3d8a71e6ee907065be9a79df3d849bd29c.css%3F__ws=forum.mesg.com.css" media="all" rel="stylesheet" data-target="desktop_theme" data-theme-id="7"/>
+    
+    <meta id="data-ga-universal-analytics" data-tracking-code="UA-117583862-1" data-json="{&quot;cookieDomain&quot;:&quot;auto&quot;}" data-auto-link-domains="">
+
+<link rel="preload" href="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js" as="script">
+<script src="../../assets/google-universal-analytics-00f5cdf7dfd45cba1ae2d258c3366c371c5671023250abbd964a1f16fc2c11a7.js"></script>
+
+
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of &#39;Service.configuration is duplicated in Service.dependencies&#39;" href="143.rss" />
+    <meta property="og:site_name" content="MESG Community" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:image" content="https://forum.mesg.com/uploads/default/original/1X/55dc05831fcfbf2dd0677c9ae39099094e85cc07.png" />
+<meta property="og:url" content="https://forum.mesg.com/t/service-configuration-is-duplicated-in-service-dependencies/143" />
+<meta name="twitter:url" content="https://forum.mesg.com/t/service-configuration-is-duplicated-in-service-dependencies/143" />
+<meta property="og:title" content="Service.configuration is duplicated in Service.dependencies" />
+<meta name="twitter:title" content="Service.configuration is duplicated in Service.dependencies" />
+<meta property="og:description" content="Transferred from GitHub issue #624.  Why are we keeping service.configuration if it copied to service.dependencies?  Two solutions:   It could be move from configuration to dependencies in service.injectDefinition. Remove configuration from service struct. Remove the injection in dependencies. Update start / stop logic to also start the service." />
+<meta name="twitter:description" content="Transferred from GitHub issue #624.  Why are we keeping service.configuration if it copied to service.dependencies?  Two solutions:   It could be move from configuration to dependencies in service.injectDefinition. Remove configuration from service struct. Remove the injection in dependencies. Update start / stop logic to also start the service." />
+<meta property="article:published_time" content="2018-12-13T10:25:10+00:00" />
+<meta property="og:ignore_canonical" content="true" />
+
+
+
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"QAPage","name":"Service.configuration is duplicated in Service.dependencies","mainEntity":{"@type":"Question","name":"Service.configuration is duplicated in Service.dependencies","text":"Transferred from <a href="https://forum.mesg.com/t/service-configuration-is-duplicated-in-service-dependencies/\&quot;https://github.com/mesg-foundation/core/issues/624\&quot;" rel=\"nofollow noopener\">GitHub issue #624<\/a>.\n\nWhy are we keeping service.configuration if it copied to service.dependencies?\n\nTwo solutions:\n\nIt could be move from configuration to dependencies in service.injectDefinition. Remove configuration from service struct.\n\nRemove the injection in dependencies. Updat&hellip;","upvoteCount":0,"answerCount":1,"dateCreated":"2018-12-13T10:25:09.861Z","author":{"@type":"Person","name":"Nicolas"},"acceptedAnswer":{"@type":"Answer","text":"Done on PR\n\n<a href="https://forum.mesg.com/t/service-configuration-is-duplicated-in-service-dependencies/\&quot;https://github.com/NicolasMahe\&quot;" target=\"_blank\" rel=\"nofollow noopener\">\n\n[NicolasMahe]\n\n<\/a>\n\n<a href="https://forum.mesg.com/t/service-configuration-is-duplicated-in-service-dependencies/\&quot;https://github.com/mesg-foundation/core/pull/667\&quot;" target=\"_blank\" rel=\"nofollow noopener\">Remove service.configuration and inject directly the service definition configuration to service.dependencies<\/a>\n\nby <a href="https://forum.mesg.com/t/service-configuration-is-duplicated-in-service-dependencies/\&quot;https://github.com/NicolasMahe\&quot;" target=\"_blank\" rel=\"nofollow noopener\">NicolasMahe<\/a>\n\non <a href="https://forum.mesg.com/t/service-configuration-is-duplicated-in-service-dependencies/\&quot;https://github.com/mesg-foundation/core/pull/667\&quot;" target=\"_blank\" rel=\"nofollow noopener\">11:50AM - 27 Dec 18 UTC<\/a>\n\n10 commits\n\nchanged 11 files\n\nwith 183 additions\n\nand 167 deletions.\n\n&hellip;","upvoteCount":0,"dateCreated":"2018-12-27T11:50:14.031Z","url":"https://forum.mesg.com/t/service-configuration-is-duplicated-in-service-dependencies/143/2","author":{"@type":"Person","name":"Nicolas"}}}}</script>
+  </head>
+  <body class="crawler">
+    
+    <header>
+      <a href="../../index.html">
+          <img src="../../uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png" alt="MESG Community" id="site-logo" style="max-width: 150px;">
+      </a>
+    </header>
+    <div id="main-outlet" class="wrap">
+        <div id="topic-title">
+    <h1>
+      <a href="143.html">Service.configuration is duplicated in Service.dependencies</a>
+    </h1>
+
+      <div class="topic-category" itemscope itemtype="http://schema.org/BreadcrumbList">
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../c/development.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #AB9364'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Development</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="1" />
+          </span>
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="../../c/development/engine.html" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #AB9364'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Engine</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="2" />
+          </span>
+      </div>
+
+      <div class="topic-category">
+        <div class='discourse-tags list-tags'>
+            <a href='../../tag/proposal.html' class='discourse-tag' rel="tag">proposal</a>
+        </div>
+      </div>
+  </div>
+
+  
+
+
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="143.html">
+
+
+          <span class="crawler-post-infos">
+              <time itemprop='datePublished' datetime='2018-12-13T10:25:10Z' class='post-time'>
+                December 13, 2018, 10:25am
+              </time>
+              <meta itemprop='dateModified' content='2018-12-13T10:25:10Z'>
+          <span itemprop='position'>#1</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Transferred from <a href="https://github.com/mesg-foundation/core/issues/624" rel="nofollow noopener">GitHub issue #624</a>.</p>
+<p>Why are we keeping <code>service.configuration</code> if it copied to <code>service.dependencies</code>?<br>
+Two solutions:</p>
+<ul>
+<li>It could be move from <code>configuration</code> to <code>dependencies</code> in <code>service.injectDefinition</code>. Remove <code>configuration</code> from service struct.</li>
+<li>Remove the injection in <code>dependencies</code>. Update start / stop logic to also start the service.</li>
+</ul>
+<aside class="onebox githubblob">
+  <header class="source">
+      <a href="https://github.com/mesg-foundation/core/blob/fcea30b78145f1b27a3979555418560745a8186f/service/service.go#L203-L206" target="_blank" rel="nofollow noopener">github.com</a>
+  </header>
+  <article class="onebox-body">
+    <h4><a href="https://github.com/mesg-foundation/core/blob/fcea30b78145f1b27a3979555418560745a8186f/service/service.go#L203-L206" target="_blank" rel="nofollow noopener">mesg-foundation/core/blob/fcea30b78145f1b27a3979555418560745a8186f/service/service.go#L203-L206</a></h4>
+<pre class="onebox"><code class="lang-go"><ol class="start lines" start="203" style="counter-reset: li-counter 202 ;">
+<li>	s.configuration.Key = "service"</li>
+<li>	s.configuration.Image = imageHash</li>
+<li>	s.Dependencies = append(s.Dependencies, s.configuration)</li>
+<li>	return nil</li>
+</ol></code></pre>
+
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+
+<aside class="onebox githubblob">
+  <header class="source">
+      <a href="https://github.com/mesg-foundation/core/blob/fcea30b78145f1b27a3979555418560745a8186f/service/inject_definition.go#L11-L26" target="_blank" rel="nofollow noopener">github.com</a>
+  </header>
+  <article class="onebox-body">
+    <h4><a href="https://github.com/mesg-foundation/core/blob/fcea30b78145f1b27a3979555418560745a8186f/service/inject_definition.go#L11-L26" target="_blank" rel="nofollow noopener">mesg-foundation/core/blob/fcea30b78145f1b27a3979555418560745a8186f/service/inject_definition.go#L11-L26</a></h4>
+<pre class="onebox"><code class="lang-go"><ol class="start lines" start="11" style="counter-reset: li-counter 10 ;">
+<li>func (s *Service) injectDefinition(def *importer.ServiceDefinition) {</li>
+<li>	s.Name = def.Name</li>
+<li>	s.Description = def.Description</li>
+<li>	s.Repository = def.Repository</li>
+<li>	s.Events = s.defEventsToService(def.Events)</li>
+<li>	s.Tasks = s.defTasksToService(def.Tasks)</li>
+<li>	s.Dependencies = s.defDependenciesToService(def.Dependencies)</li>
+<li>
+</li>
+<li>	s.configuration = &amp;Dependency{}</li>
+<li>	if def.Configuration != nil {</li>
+<li>		s.configuration.Command = def.Configuration.Command</li>
+<li>		s.configuration.Ports = def.Configuration.Ports</li>
+<li>		s.configuration.Volumes = def.Configuration.Volumes</li>
+<li>		s.configuration.VolumesFrom = def.Configuration.VolumesFrom</li>
+<li>	}</li>
+<li>}</li>
+</ol></code></pre>
+
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+
+        </div>
+
+        <meta itemprop='headline' content='Service.configuration is duplicated in Service.dependencies'>
+          <meta itemprop='keywords' content='proposal'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+            <div class='crawler-linkback-list' itemscope itemtype='http://schema.org/ItemList'>
+                  <div itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+                    <a href="../milestone-v0-6/134.html" itemprop='item'>
+                      <meta itemprop='url' content='https://forum.mesg.com/t/milestone-v0-6/134'>
+                      <meta itemprop='position' content='4'>
+                      <span itemprop='name'>Milestone v0.6</span>
+                    </a>
+                  </div>
+            </div>
+      </div>
+      <div itemscope itemtype='http://schema.org/DiscussionForumPosting' class='topic-body crawler-post'>
+        <div class='crawler-post-meta'>
+          <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop='name' content='MESG Foundation'>
+              <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+                <meta itemprop='url' content='https://forum.mesg.com/uploads/default/original/1X/81100f444852fa77ae7cd5276c5683e9a8cfc9a2.png'>
+              </div>
+          </div>
+          <span class="creator" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <a itemprop="url" href='../../u/Nicolas.html'><span itemprop='name'>Nicolas</span></a>
+            
+          </span>
+
+          <link itemprop="mainEntityOfPage" href="143.html">
+
+            <link itemprop="image" href="../../uploads/default/original/1X/26944398294eb78d5fcd9c0ac79f47a8ba160661.jpeg">
+
+          <span class="crawler-post-infos">
+              <meta itemprop='datePublished' content='2018-12-27T11:50:14Z'>
+              <time itemprop='dateModified' datetime='2019-01-03T10:09:22Z' class='post-time'>
+                January 3, 2019, 10:09am
+              </time>
+          <span itemprop='position'>#2</span>
+          </span>
+        </div>
+        <div class='post' itemprop='articleBody'>
+          <p>Done on PR<br>
+<aside class="onebox githubpullrequest">
+  <header class="source">
+      <a href="https://github.com/mesg-foundation/core/pull/667" target="_blank" rel="nofollow noopener">github.com/mesg-foundation/core</a>
+  </header>
+  <article class="onebox-body">
+      <a href="https://github.com/NicolasMahe" target="_blank" rel="nofollow noopener">
+    <img alt="NicolasMahe" src="../../uploads/default/original/1X/26944398294eb78d5fcd9c0ac79f47a8ba160661.jpeg" class="thumbnail onebox-avatar" width="90" height="90">
+  </a>
+
+<h4>
+  <a href="https://github.com/mesg-foundation/core/pull/667" target="_blank" rel="nofollow noopener">Remove service.configuration and inject directly the service definition configuration to service.dependencies</a>
+</h4>
+
+<div class="date">
+  by <a href="https://github.com/NicolasMahe" target="_blank" rel="nofollow noopener">NicolasMahe</a>
+  on <a href="https://github.com/mesg-foundation/core/pull/667" target="_blank" rel="nofollow noopener">11:50AM - 27 Dec 18 UTC</a>
+</div>
+
+<div class="github-commit-stats">
+  <strong>10 commits</strong>
+  changed <strong>11 files</strong>
+  with <strong>183 additions</strong>
+  and <strong>167 deletions</strong>.
+</div>
+
+  </article>
+  <div class="onebox-metadata">
+    
+    
+  </div>
+  <div style="clear: both"></div>
+</aside>
+</p>
+        </div>
+
+        <meta itemprop='headline' content='Service.configuration is duplicated in Service.dependencies'>
+
+        <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+           <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+           <meta itemprop="userInteractionCount" content="0" />
+           <span class='post-likes'></span>
+         </div>
+
+         <div itemprop="interactionStatistic" itemscope itemtype="http://schema.org/InteractionCounter">
+            <meta itemprop="interactionType" content="http://schema.org/CommentAction"/>
+            <meta itemprop="userInteractionCount" content="0" />
+          </div>
+
+      </div>
+
+
+
+
+
+
+    </div>
+    <footer class="container wrap">
+      <nav class='crawler-nav'>
+        <ul>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../index.html' itemprop="url">Home </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../categories.html' itemprop="url">Categories </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../guidelines.html' itemprop="url">FAQ/Guidelines </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../tos.html' itemprop="url">Terms of Service </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='../../privacy.html' itemprop="url">Privacy Policy </a>
+          </span>
+        </li>
+        </ul>
+      </nav>
+      <p class='powered-by-link'>Powered by <a href="https://www.discourse.org">Discourse</a>, best viewed with JavaScript enabled</p>
+    </footer>
+    
+    
+  </body>
+  
+</html>
